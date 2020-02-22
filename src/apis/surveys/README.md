@@ -1,8 +1,8 @@
 <img src="https://avatars0.githubusercontent.com/u/1342004?v=3&s=96" alt="Google Inc. logo" title="Google" align="right" height="96" width="96"/>
 
-# chat
+# surveys
 
-> Create bots and extend the new Hangouts Chat.
+> Creates and conducts surveys, lists the surveys that an authenticated user owns, and retrieves survey results and information about specified surveys.
 
 ## Installation
 
@@ -19,39 +19,18 @@ This library can be used in a browser. To prepare a single file bundle, clone th
 [repository](https://github.com/googleapis/google-api-nodejs-client) and run
 
 ```sh
-$ cd src/apis/chat
+$ cd src/apis/surveys
 $ npm install
 $ npm run webpack
 ```
 
-The generated bundle will be written to `dist/chat.min.js`. Use it from your HTML file:
+The generated bundle will be written to `dist/surveys.min.js`. Use it from your HTML file:
 
 ```html
-<script src="/path/to/chat.min.js"></script>
+<script src="/path/to/surveys.min.js"></script>
 <script>
-const { chat, auth } = Chat;
+const { surveys, auth } = Surveys;
 </script>
-```
-
-## Using the client library
-
-```js
-// Assuming that `GOOGLE_APPLICATION_CREDENTIALS="/app/.data/chatbot.json"` is set as an environment variable with the path to the json key that you downloaded when creating a service account for your bot.
-
-const {google} = require("googleapis")
-const SCOPES = ["https://www.googleapis.com/auth/chat.bot"]
-
-async main() {
-    const auth = await google.auth.getClient({
-      scopes: SCOPES
-    })
-    const chat = google.chat({version: "v1", auth: auth})
-    console.log(chat)
-    const project = await google.auth.getProjectId()
-    const spaces = await chat.spaces.list()
-}
-
-main()
 ```
 
 ## License
