@@ -24,9 +24,9 @@ import {BodyResponseCallback, createAPIRequest, GlobalOptions, GoogleConfigurabl
 // tslint:disable: jsdoc-format
 // tslint:disable: no-namespace
 
-export namespace pagespeedonline_v4 {
+export namespace pagespeedonline_v5 {
   export interface Options extends GlobalOptions {
-    version: 'v4';
+    version: 'v5';
   }
 
   interface StandardParameters {
@@ -71,12 +71,12 @@ export namespace pagespeedonline_v4 {
    *
    * @example
    * const {google} = require('googleapis');
-   * const pagespeedonline = google.pagespeedonline('v4');
+   * const pagespeedonline = google.pagespeedonline('v5');
    *
    * @namespace pagespeedonline
    * @type {Function}
-   * @version v4
-   * @variation v4
+   * @version v5
+   * @variation v5
    * @param {object=} options Options for Pagespeedonline
    */
   export class Pagespeedonline {
@@ -99,157 +99,195 @@ export namespace pagespeedonline_v4 {
     }
   }
 
-  export interface Schema$PagespeedApiFormatStringV4 {
+  export interface Schema$GoogleprotobufValue {}
+  export interface Schema$LighthouseAuditResultV5 {
     /**
-     * List of arguments for the format string.
+     * The description of the audit.
      */
-    args?: Array<{
-      key?: string;
-      rects?: Array<
-          {height?: number; left?: number; top?: number; width?: number;}>;
-      secondary_rects?: Array<
-          {height?: number; left?: number; top?: number; width?: number;}>;
-      type?: string;
-      value?: string;
-    }>;
+    description?: string;
     /**
-     * A localized format string with {{FOO}} placeholders, where &#39;FOO&#39;
-     * is the key of the argument whose value should be substituted. For
-     * HYPERLINK arguments, the format string will instead contain {{BEGIN_FOO}}
-     * and {{END_FOO}} for the argument with key &#39;FOO&#39;.
+     * Freeform details section of the audit.
      */
-    format?: string;
+    details?: {[key: string]: any;};
+    /**
+     * The value that should be displayed on the UI for this audit.
+     */
+    displayValue?: string;
+    /**
+     * An error message from a thrown error inside the audit.
+     */
+    errorMessage?: string;
+    /**
+     * An explanation of the errors in the audit.
+     */
+    explanation?: string;
+    /**
+     * The audit&#39;s id.
+     */
+    id?: string;
+    score?: any;
+    /**
+     * The enumerated score display mode.
+     */
+    scoreDisplayMode?: string;
+    /**
+     * The human readable title.
+     */
+    title?: string;
+    warnings?: any;
   }
-  export interface Schema$PagespeedApiImageV4 {
+  export interface Schema$LighthouseCategoryV5 {
     /**
-     * Image data base64 encoded.
+     * An array of references to all the audit members of this category.
      */
-    data?: string;
+    auditRefs?: Array<{group?: string; id?: string; weight?: number;}>;
     /**
-     * Height of screenshot in pixels.
+     * A more detailed description of the category and its importance.
      */
-    height?: number;
+    description?: string;
     /**
-     * Unique string key, if any, identifying this image.
+     * The string identifier of the category.
      */
-    key?: string;
+    id?: string;
     /**
-     * Mime type of image data (e.g. &quot;image/jpeg&quot;).
+     * A description for the manual audits in the category.
      */
-    mime_type?: string;
-    page_rect?: {height?: number; left?: number; top?: number; width?: number;};
+    manualDescription?: string;
+    score?: any;
     /**
-     * Width of screenshot in pixels.
+     * The human-friendly name of the category.
      */
-    width?: number;
+    title?: string;
   }
-  export interface Schema$PagespeedApiPagespeedResponseV4 {
+  export interface Schema$LighthouseResultV5 {
+    /**
+     * Map of audits in the LHR.
+     */
+    audits?: {[key: string]: Schema$LighthouseAuditResultV5;};
+    /**
+     * Map of categories in the LHR.
+     */
+    categories?: {[key: string]: Schema$LighthouseCategoryV5;};
+    /**
+     * Map of category groups in the LHR.
+     */
+    categoryGroups?: {[key: string]: {description?: string; title?: string;};};
+    /**
+     * The configuration settings for this LHR.
+     */
+    configSettings?:
+        {emulatedFormFactor?: string; locale?: string; onlyCategories?: any;};
+    /**
+     * Environment settings that were used when making this LHR.
+     */
+    environment?: {
+      benchmarkIndex?: number;
+      hostUserAgent?: string;
+      networkUserAgent?: string;
+    };
+    /**
+     * The time that this run was fetched.
+     */
+    fetchTime?: string;
+    /**
+     * The final resolved url that was audited.
+     */
+    finalUrl?: string;
+    /**
+     * The internationalization strings that are required to render the LHR.
+     */
+    i18n?: {
+      rendererFormattedStrings?: {
+        auditGroupExpandTooltip?: string;
+        crcInitialNavigation?: string;
+        crcLongestDurationLabel?: string;
+        errorLabel?: string;
+        errorMissingAuditInfo?: string;
+        labDataTitle?: string;
+        lsPerformanceCategoryDescription?: string;
+        manualAuditsGroupTitle?: string;
+        notApplicableAuditsGroupTitle?: string;
+        opportunityResourceColumnLabel?: string;
+        opportunitySavingsColumnLabel?: string;
+        passedAuditsGroupTitle?: string;
+        scorescaleLabel?: string;
+        toplevelWarningsMessage?: string;
+        varianceDisclaimer?: string;
+        warningHeader?: string;
+      };
+    };
+    /**
+     * The lighthouse version that was used to generate this LHR.
+     */
+    lighthouseVersion?: string;
+    /**
+     * The original requested url.
+     */
+    requestedUrl?: string;
+    /**
+     * A top-level error message that, if present, indicates a serious enough
+     * problem that this Lighthouse result may need to be discarded.
+     */
+    runtimeError?: {code?: string; message?: string;};
+    /**
+     * List of all run warnings in the LHR. Will always output to at least `[]`.
+     */
+    runWarnings?: any[];
+    /**
+     * Timing information for this LHR.
+     */
+    timing?: {total?: number;};
+    /**
+     * The user agent that was used to run this LHR.
+     */
+    userAgent?: string;
+  }
+  export interface Schema$PagespeedApiLoadingExperienceV5 {
+    /**
+     * The url, pattern or origin which the metrics are on.
+     */
+    id?: string;
+    initial_url?: string;
+    metrics?: {
+      [key: string]: {
+        category?: string;
+        distributions?:
+            Array<{max?: number; min?: number; proportion?: number;}>;
+        percentile?: number;
+      };
+    };
+    overall_category?: string;
+  }
+  export interface Schema$PagespeedApiPagespeedResponseV5 {
+    /**
+     * The UTC timestamp of this analysis.
+     */
+    analysisUTCTimestamp?: string;
     /**
      * The captcha verify result
      */
     captchaResult?: string;
-    /**
-     * Localized PageSpeed results. Contains a ruleResults entry for each
-     * PageSpeed rule instantiated and run by the server.
-     */
-    formattedResults?: {
-      locale?: string;
-      ruleResults?: {
-        [key: string]: {
-          beta?: boolean;
-          groups?: string[];
-          localizedRuleName?: string;
-          ruleImpact?: number;
-          summary?: Schema$PagespeedApiFormatStringV4;
-          urlBlocks?: Array<{
-            header?: Schema$PagespeedApiFormatStringV4;
-            urls?: Array<{
-              details?: Schema$PagespeedApiFormatStringV4[];
-              result?: Schema$PagespeedApiFormatStringV4;
-            }>;
-          }>;
-        };
-      };
-    };
     /**
      * Canonicalized and final URL for the document, after following page
      * redirects (if any).
      */
     id?: string;
     /**
-     * List of rules that were specified in the request, but which the server
-     * did not know how to instantiate.
-     */
-    invalidRules?: string[];
-    /**
      * Kind of result.
      */
     kind?: string;
     /**
+     * Lighthouse response for the audit url as an object.
+     */
+    lighthouseResult?: Schema$LighthouseResultV5;
+    /**
      * Metrics of end users&#39; page loading experience.
      */
-    loadingExperience?: {
-      id?: string;
-      initial_url?: string;
-      metrics?: {
-        [key: string]: {
-          category?: string;
-          distributions?:
-              Array<{max?: number; min?: number; proportion?: number;}>;
-          median?: number;
-        };
-      };
-      overall_category?: string;
-    };
+    loadingExperience?: Schema$PagespeedApiLoadingExperienceV5;
     /**
-     * Summary statistics for the page, such as number of JavaScript bytes,
-     * number of HTML bytes, etc.
+     * Metrics of the aggregated page loading experience of the origin
      */
-    pageStats?: {
-      cms?: string;
-      cssResponseBytes?: string;
-      flashResponseBytes?: string;
-      htmlResponseBytes?: string;
-      imageResponseBytes?: string;
-      javascriptResponseBytes?: string;
-      numRenderBlockingRoundTrips?: number;
-      numTotalRoundTrips?: number;
-      numberCssResources?: number;
-      numberHosts?: number;
-      numberJsResources?: number;
-      numberResources?: number;
-      numberRobotedResources?: number;
-      numberStaticResources?: number;
-      numberTransientFetchFailureResources?: number;
-      otherResponseBytes?: string;
-      overTheWireResponseBytes?: string;
-      robotedUrls?: string[];
-      textResponseBytes?: string;
-      totalRequestBytes?: string;
-      transientFetchFailureUrls?: string[];
-    };
-    /**
-     * Response code for the document. 200 indicates a normal page load. 4xx/5xx
-     * indicates an error.
-     */
-    responseCode?: number;
-    /**
-     * A map with one entry for each rule group in these results.
-     */
-    ruleGroups?: {[key: string]: {pass?: boolean; score?: number;};};
-    /**
-     * Base64-encoded screenshot of the page that was analyzed.
-     */
-    screenshot?: Schema$PagespeedApiImageV4;
-    /**
-     * Additional base64-encoded screenshots of the page, in various partial
-     * render states.
-     */
-    snapshots?: Schema$PagespeedApiImageV4[];
-    /**
-     * Title of the page, as displayed in the browser&#39;s title bar.
-     */
-    title?: string;
+    originLoadingExperience?: Schema$PagespeedApiLoadingExperienceV5;
     /**
      * The version of PageSpeed used to generate these results.
      */
@@ -278,11 +316,8 @@ export namespace pagespeedonline_v4 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.filter_third_party_resources Indicates if third party resources should be filtered out before PageSpeed analysis.
+     * @param {string=} params.category A Lighthouse category to run; if none are given, only Performance category will be run
      * @param {string=} params.locale The locale used to localize formatted results
-     * @param {string=} params.rule A PageSpeed rule to run; if none are given, all rules are run
-     * @param {boolean=} params.screenshot Indicates if binary data containing a screenshot should be included
-     * @param {boolean=} params.snapshots Indicates if binary data containing snapshot images should be included
      * @param {string=} params.strategy The analysis strategy (desktop or mobile) to use, and desktop is the default
      * @param {string} params.url The URL to fetch and analyze
      * @param {string=} params.utm_campaign Campaign name for analytics.
@@ -294,28 +329,28 @@ export namespace pagespeedonline_v4 {
     runpagespeed(
         params?: Params$Resource$Pagespeedapi$Runpagespeed,
         options?: MethodOptions):
-        AxiosPromise<Schema$PagespeedApiPagespeedResponseV4>;
+        AxiosPromise<Schema$PagespeedApiPagespeedResponseV5>;
     runpagespeed(
         params: Params$Resource$Pagespeedapi$Runpagespeed,
         options: MethodOptions|
-        BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV4>,
-        callback: BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV4>):
+        BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV5>,
+        callback: BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV5>):
         void;
     runpagespeed(
         params: Params$Resource$Pagespeedapi$Runpagespeed,
-        callback: BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV4>):
+        callback: BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV5>):
         void;
     runpagespeed(
-        callback: BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV4>):
+        callback: BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV5>):
         void;
     runpagespeed(
         paramsOrCallback?: Params$Resource$Pagespeedapi$Runpagespeed|
-        BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV4>,
+        BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV5>,
         optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV4>,
+        BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV5>,
         callback?:
-            BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV4>):
-        void|AxiosPromise<Schema$PagespeedApiPagespeedResponseV4> {
+            BodyResponseCallback<Schema$PagespeedApiPagespeedResponseV5>):
+        void|AxiosPromise<Schema$PagespeedApiPagespeedResponseV5> {
       let params =
           (paramsOrCallback || {}) as Params$Resource$Pagespeedapi$Runpagespeed;
       let options = (optionsOrCallback || {}) as MethodOptions;
@@ -335,7 +370,7 @@ export namespace pagespeedonline_v4 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/pagespeedonline/v4/runPagespeed')
+              url: (rootUrl + '/pagespeedonline/v5/runPagespeed')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -346,10 +381,10 @@ export namespace pagespeedonline_v4 {
         context: this.getRoot()
       };
       if (callback) {
-        createAPIRequest<Schema$PagespeedApiPagespeedResponseV4>(
+        createAPIRequest<Schema$PagespeedApiPagespeedResponseV5>(
             parameters, callback);
       } else {
-        return createAPIRequest<Schema$PagespeedApiPagespeedResponseV4>(
+        return createAPIRequest<Schema$PagespeedApiPagespeedResponseV5>(
             parameters);
       }
     }
@@ -363,26 +398,14 @@ export namespace pagespeedonline_v4 {
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
     /**
-     * Indicates if third party resources should be filtered out before
-     * PageSpeed analysis.
+     * A Lighthouse category to run; if none are given, only Performance
+     * category will be run
      */
-    filter_third_party_resources?: boolean;
+    category?: string[];
     /**
      * The locale used to localize formatted results
      */
     locale?: string;
-    /**
-     * A PageSpeed rule to run; if none are given, all rules are run
-     */
-    rule?: string[];
-    /**
-     * Indicates if binary data containing a screenshot should be included
-     */
-    screenshot?: boolean;
-    /**
-     * Indicates if binary data containing snapshot images should be included
-     */
-    snapshots?: boolean;
     /**
      * The analysis strategy (desktop or mobile) to use, and desktop is the
      * default
