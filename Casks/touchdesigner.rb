@@ -1,11 +1,11 @@
 cask 'touchdesigner' do
-  version '2020.20020'
-  sha256 '5fa5d8dfbfd8592c6819bcc61bd01c372c8694eb309cc1208c854bc3903b97c5'
+  version '099.2019.20140'
+  sha256 '2c4075355fff965106269dc257c4ee9fe3bf783d7d31f1f0f7c4f5150c196c46'
 
-  url "https://download.derivative.ca/TouchDesigner.#{version}.dmg"
-  appcast 'https://www.derivative.ca/download/'
+  url "https://download.derivative.ca/TouchDesigner#{version}.dmg"
+  appcast "https://www.derivative.ca/#{version.major}/Downloads/Default.asp"
   name 'Derivative TouchDesigner'
   homepage 'https://www.derivative.ca/'
 
-  app 'TouchDesigner.app'
+  app "TouchDesigner#{version.major}.app"
 end
