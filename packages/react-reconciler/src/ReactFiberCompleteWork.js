@@ -662,12 +662,7 @@ function completeWork(
       if (current === null || current.child === null) {
         // If we hydrated, pop so that we can delete any remaining children
         // that weren't hydrated.
-        let wasHydrated = popHydrationState(workInProgress);
-        if (wasHydrated) {
-          // If we hydrated, then we'll need to schedule an update for
-          // the commit side-effects on the root.
-          markUpdate(workInProgress);
-        }
+        popHydrationState(workInProgress);
       }
       updateHostContainer(workInProgress);
       break;
