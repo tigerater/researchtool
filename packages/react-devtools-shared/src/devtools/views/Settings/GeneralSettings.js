@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useContext} from 'react';
+import React, {useContext} from 'react';
 import {SettingsContext} from './SettingsContext';
 import {StoreContext} from '../context';
 import {CHANGE_LOG_URL} from 'react-devtools-shared/src/constants';

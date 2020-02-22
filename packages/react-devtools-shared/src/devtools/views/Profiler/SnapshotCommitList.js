@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {FixedSizeList} from 'react-window';
 import SnapshotCommitListItem from './SnapshotCommitListItem';

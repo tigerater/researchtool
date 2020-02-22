@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useContext} from 'react';
+import React, {useContext} from 'react';
 import {RegistryContext} from './Contexts';
 
 import styles from './ContextMenuItem.css';

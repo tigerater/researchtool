@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, Suspense, SuspenseList, useState} from 'react';
+import React, {Fragment, Suspense, SuspenseList, useState} from 'react';
 
 function SuspenseTree() {
   return (

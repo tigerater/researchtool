@@ -11,7 +11,7 @@ import type {Fiber} from './ReactFiber';
 import type {ExpirationTime} from './ReactFiberExpirationTime';
 import type {UpdateQueue} from './ReactUpdateQueue';
 
-import * as React from 'react';
+import React from 'react';
 import {Update, Snapshot} from 'shared/ReactSideEffectTags';
 import {
   debugRenderPhaseSideEffectsForStrictMode,
@@ -262,15 +262,6 @@ function checkShouldComponentUpdate(
 ) {
   const instance = workInProgress.stateNode;
   if (typeof instance.shouldComponentUpdate === 'function') {
-    if (__DEV__) {
-      if (
-        debugRenderPhaseSideEffectsForStrictMode &&
-        workInProgress.mode & StrictMode
-      ) {
-        // Invoke the function an extra time to help detect side-effects.
-        instance.shouldComponentUpdate(newProps, newState, nextContext);
-      }
-    }
     startPhaseTimer(workInProgress, 'shouldComponentUpdate');
     const shouldUpdate = instance.shouldComponentUpdate(
       newProps,
@@ -535,6 +526,7 @@ function constructClassInstance(
   workInProgress: Fiber,
   ctor: any,
   props: any,
+  renderExpirationTime: ExpirationTime,
 ): any {
   let isLegacyContextConsumer = false;
   let unmaskedContext = emptyContextObject;

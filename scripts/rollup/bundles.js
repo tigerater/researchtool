@@ -104,34 +104,16 @@ const bundles = [
     externals: ['react', 'react-dom'],
   },
 
-  /******* React DOM - Testing *******/
+  /* React DOM internals required for react-native-web (e.g., to shim native events from react-dom) */
   {
-    moduleType: RENDERER,
     bundleTypes: [
       UMD_DEV,
       UMD_PROD,
-      UMD_PROFILING,
       NODE_DEV,
       NODE_PROD,
-      NODE_PROFILING,
+      FB_WWW_DEV,
+      FB_WWW_PROD,
     ],
-    entry: 'react-dom/testing',
-    global: 'ReactDOM',
-    externals: ['react'],
-  },
-
-  /******* React DOM - www - Testing *******/
-  {
-    moduleType: RENDERER,
-    bundleTypes: [FB_WWW_DEV, FB_WWW_PROD, FB_WWW_PROFILING],
-    entry: 'react-dom/testing',
-    global: 'ReactDOMTesting',
-    externals: ['react'],
-  },
-
-  /* React DOM internals required for react-native-web (e.g., to shim native events from react-dom) */
-  {
-    bundleTypes: [UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD],
     moduleType: RENDERER_UTILS,
     entry: 'react-dom/unstable-native-dependencies',
     global: 'ReactDOMUnstableNativeDependencies',
@@ -181,7 +163,7 @@ const bundles = [
     externals: ['react', 'react-dom/server'],
   },
   {
-    bundleTypes: [NODE_DEV, NODE_PROD],
+    bundleTypes: [NODE_DEV, NODE_PROD, FB_WWW_DEV, FB_WWW_PROD],
     moduleType: RENDERER,
     entry: 'react-dom/unstable-fizz.node',
     global: 'ReactDOMFizzServer',
@@ -197,7 +179,7 @@ const bundles = [
     externals: ['react', 'react-dom/server'],
   },
   {
-    bundleTypes: [NODE_DEV, NODE_PROD],
+    bundleTypes: [NODE_DEV, NODE_PROD, FB_WWW_DEV, FB_WWW_PROD],
     moduleType: RENDERER,
     entry: 'react-flight-dom-webpack/server.node',
     global: 'ReactFlightDOMServer',
@@ -206,7 +188,14 @@ const bundles = [
 
   /******* React DOM Flight Client Webpack *******/
   {
-    bundleTypes: [NODE_DEV, NODE_PROD, UMD_DEV, UMD_PROD],
+    bundleTypes: [
+      NODE_DEV,
+      NODE_PROD,
+      UMD_DEV,
+      UMD_PROD,
+      FB_WWW_DEV,
+      FB_WWW_PROD,
+    ],
     moduleType: RENDERER,
     entry: 'react-flight-dom-webpack',
     global: 'ReactFlightDOMClient',
@@ -521,14 +510,14 @@ const bundles = [
 
   /******* Jest React (experimental) *******/
   {
-    bundleTypes: [NODE_DEV, NODE_PROD],
+    bundleTypes: [NODE_DEV, NODE_PROD, FB_WWW_DEV, FB_WWW_PROD],
     moduleType: ISOMORPHIC,
     entry: 'jest-react',
     global: 'JestReact',
     externals: [],
   },
 
-  /******* ESLint Plugin for Hooks *******/
+  /******* ESLint Plugin for Hooks (proposal) *******/
   {
     // TODO: it's awkward to create a bundle for this but if we don't, the package
     // won't get copied. We also can't create just DEV bundle because it contains a
@@ -599,6 +588,21 @@ const bundles = [
       FB_WWW_PROD,
     ],
     moduleType: NON_FIBER_RENDERER,
+    entry: 'react-interactions/events/drag',
+    global: 'ReactEventsDrag',
+    externals: ['react'],
+  },
+
+  {
+    bundleTypes: [
+      UMD_DEV,
+      UMD_PROD,
+      NODE_DEV,
+      NODE_PROD,
+      FB_WWW_DEV,
+      FB_WWW_PROD,
+    ],
+    moduleType: NON_FIBER_RENDERER,
     entry: 'react-interactions/events/focus',
     global: 'ReactEventsFocus',
     externals: ['react'],
@@ -629,6 +633,21 @@ const bundles = [
       FB_WWW_PROD,
     ],
     moduleType: NON_FIBER_RENDERER,
+    entry: 'react-interactions/events/input',
+    global: 'ReactEventsInput',
+    externals: ['react'],
+  },
+
+  {
+    bundleTypes: [
+      UMD_DEV,
+      UMD_PROD,
+      NODE_DEV,
+      NODE_PROD,
+      FB_WWW_DEV,
+      FB_WWW_PROD,
+    ],
+    moduleType: NON_FIBER_RENDERER,
     entry: 'react-interactions/events/keyboard',
     global: 'ReactEventsKeyboard',
     externals: ['react'],
@@ -644,8 +663,72 @@ const bundles = [
       FB_WWW_PROD,
     ],
     moduleType: NON_FIBER_RENDERER,
+    entry: 'react-interactions/events/press',
+    global: 'ReactEventsPress',
+    externals: [
+      'react',
+      'react-interactions/events/tap',
+      'react-interactions/events/keyboard',
+    ],
+  },
+
+  {
+    bundleTypes: [
+      UMD_DEV,
+      UMD_PROD,
+      NODE_DEV,
+      NODE_PROD,
+      FB_WWW_DEV,
+      FB_WWW_PROD,
+    ],
+    moduleType: NON_FIBER_RENDERER,
     entry: 'react-interactions/events/press-legacy',
     global: 'ReactEventsPressLegacy',
+    externals: ['react'],
+  },
+
+  {
+    bundleTypes: [
+      UMD_DEV,
+      UMD_PROD,
+      NODE_DEV,
+      NODE_PROD,
+      FB_WWW_DEV,
+      FB_WWW_PROD,
+    ],
+    moduleType: NON_FIBER_RENDERER,
+    entry: 'react-interactions/events/scroll',
+    global: 'ReactEventsScroll',
+    externals: ['react'],
+  },
+
+  {
+    bundleTypes: [
+      UMD_DEV,
+      UMD_PROD,
+      NODE_DEV,
+      NODE_PROD,
+      FB_WWW_DEV,
+      FB_WWW_PROD,
+    ],
+    moduleType: NON_FIBER_RENDERER,
+    entry: 'react-interactions/events/swipe',
+    global: 'ReactEventsSwipe',
+    externals: ['react'],
+  },
+
+  {
+    bundleTypes: [
+      UMD_DEV,
+      UMD_PROD,
+      NODE_DEV,
+      NODE_PROD,
+      FB_WWW_DEV,
+      FB_WWW_PROD,
+    ],
+    moduleType: NON_FIBER_RENDERER,
+    entry: 'react-interactions/events/tap',
+    global: 'ReactEventsTap',
     externals: ['react'],
   },
 ];

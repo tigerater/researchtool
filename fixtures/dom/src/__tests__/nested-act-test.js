@@ -8,15 +8,10 @@
  */
 
 let React;
-let ReactDOM;
+let TestUtils;
 let TestRenderer;
 
 global.__DEV__ = process.env.NODE_ENV !== 'production';
-
-jest.mock('react-dom', () =>
-  require.requireActual('react-dom/cjs/react-dom-testing.development.js')
-);
-// we'll replace the above with react/testing and react-dom/testing right before the next minor
 
 expect.extend(require('../toWarnDev'));
 
@@ -24,7 +19,7 @@ describe('unmocked scheduler', () => {
   beforeEach(() => {
     jest.resetModules();
     React = require('react');
-    ReactDOM = require('react-dom');
+    TestUtils = require('react-dom/test-utils');
     TestRenderer = require('react-test-renderer');
   });
 
@@ -38,7 +33,7 @@ describe('unmocked scheduler', () => {
     }
     // in legacy mode, this tests whether an act only flushes its own effects
     TestRenderer.act(() => {
-      ReactDOM.act(() => {
+      TestUtils.act(() => {
         TestRenderer.create(<Effecty />);
       });
       expect(log).toEqual([]);
@@ -47,7 +42,7 @@ describe('unmocked scheduler', () => {
 
     log = [];
     // for doublechecking, we flip it inside out, and assert on the outermost
-    ReactDOM.act(() => {
+    TestUtils.act(() => {
       TestRenderer.act(() => {
         TestRenderer.create(<Effecty />);
       });
@@ -64,7 +59,7 @@ describe('mocked scheduler', () => {
       require.requireActual('scheduler/unstable_mock')
     );
     React = require('react');
-    ReactDOM = require('react-dom');
+    TestUtils = require('react-dom/test-utils');
     TestRenderer = require('react-test-renderer');
   });
 
@@ -82,7 +77,7 @@ describe('mocked scheduler', () => {
     }
     // with a mocked scheduler, this tests whether it flushes all work only on the outermost act
     TestRenderer.act(() => {
-      ReactDOM.act(() => {
+      TestUtils.act(() => {
         TestRenderer.create(<Effecty />);
       });
       expect(log).toEqual([]);
@@ -91,7 +86,7 @@ describe('mocked scheduler', () => {
 
     log = [];
     // for doublechecking, we flip it inside out, and assert on the outermost
-    ReactDOM.act(() => {
+    TestUtils.act(() => {
       TestRenderer.act(() => {
         TestRenderer.create(<Effecty />);
       });

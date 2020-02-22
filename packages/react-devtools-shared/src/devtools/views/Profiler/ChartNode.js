@@ -7,7 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
+import React from 'react';
 
 import styles from './ChartNode.css';
 
@@ -18,8 +18,6 @@ type Props = {|
   label: string,
   onClick: (event: SyntheticMouseEvent<*>) => mixed,
   onDoubleClick?: (event: SyntheticMouseEvent<*>) => mixed,
-  onMouseEnter: (event: SyntheticMouseEvent<*>) => mixed,
-  onMouseLeave: (event: SyntheticMouseEvent<*>) => mixed,
   placeLabelAboveNode?: boolean,
   textStyle?: Object,
   width: number,
@@ -35,8 +33,6 @@ export default function ChartNode({
   isDimmed = false,
   label,
   onClick,
-  onMouseEnter,
-  onMouseLeave,
   onDoubleClick,
   textStyle,
   width,
@@ -45,13 +41,12 @@ export default function ChartNode({
 }: Props) {
   return (
     <g className={styles.Group} transform={`translate(${x},${y})`}>
+      <title>{label}</title>
       <rect
         width={width}
         height={height}
         fill={color}
         onClick={onClick}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
         onDoubleClick={onDoubleClick}
         className={styles.Rect}
         style={{

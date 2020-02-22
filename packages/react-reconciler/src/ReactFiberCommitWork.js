@@ -26,7 +26,6 @@ import type {ReactPriorityLevel} from './SchedulerWithReactIntegration';
 
 import {unstable_wrap as Schedule_tracing_wrap} from 'scheduler/tracing';
 import {
-  deferPassiveEffectCleanupDuringUnmount,
   enableSchedulerTracing,
   enableProfilerTimer,
   enableSuspenseServerRenderer,
@@ -34,7 +33,6 @@ import {
   enableFundamentalAPI,
   enableSuspenseCallback,
   enableScopeAPI,
-  runAllPassiveEffectDestroysBeforeCreates,
 } from 'shared/ReactFeatureFlags';
 import {
   FunctionComponent,
@@ -53,7 +51,7 @@ import {
   SuspenseListComponent,
   FundamentalComponent,
   ScopeComponent,
-  Block,
+  Chunk,
 } from 'shared/ReactWorkTags';
 import {
   invokeGuardedCallback,
@@ -111,14 +109,16 @@ import {
   captureCommitPhaseError,
   resolveRetryThenable,
   markCommitTimeOfFallback,
-  enqueuePendingPassiveHookEffectMount,
-  enqueuePendingPassiveHookEffectUnmount,
 } from './ReactFiberWorkLoop';
 import {
   NoEffect as NoHookEffect,
-  HasEffect as HookHasEffect,
-  Layout as HookLayout,
-  Passive as HookPassive,
+  UnmountSnapshot,
+  UnmountMutation,
+  MountMutation,
+  UnmountLayout,
+  MountLayout,
+  UnmountPassive,
+  MountPassive,
 } from './ReactHookEffectTags';
 import {didWarnAboutReassigningProps} from './ReactFiberBeginWork';
 import {runWithPriority, NormalPriority} from './SchedulerWithReactIntegration';
@@ -249,7 +249,8 @@ function commitBeforeMutationLifeCycles(
     case FunctionComponent:
     case ForwardRef:
     case SimpleMemoComponent:
-    case Block: {
+    case Chunk: {
+      commitHookEffectList(UnmountSnapshot, NoHookEffect, finishedWork);
       return;
     }
     case ClassComponent: {
@@ -327,14 +328,18 @@ function commitBeforeMutationLifeCycles(
   );
 }
 
-function commitHookEffectListUnmount(tag: number, finishedWork: Fiber) {
+function commitHookEffectList(
+  unmountTag: number,
+  mountTag: number,
+  finishedWork: Fiber,
+) {
   const updateQueue: FunctionComponentUpdateQueue | null = (finishedWork.updateQueue: any);
   let lastEffect = updateQueue !== null ? updateQueue.lastEffect : null;
   if (lastEffect !== null) {
     const firstEffect = lastEffect.next;
     let effect = firstEffect;
     do {
-      if ((effect.tag & tag) === tag) {
+      if ((effect.tag & unmountTag) !== NoHookEffect) {
         // Unmount
         const destroy = effect.destroy;
         effect.destroy = undefined;
@@ -342,19 +347,7 @@ function commitHookEffectListUnmount(tag: number, finishedWork: Fiber) {
           destroy();
         }
       }
-      effect = effect.next;
-    } while (effect !== firstEffect);
-  }
-}
-
-function commitHookEffectListMount(tag: number, finishedWork: Fiber) {
-  const updateQueue: FunctionComponentUpdateQueue | null = (finishedWork.updateQueue: any);
-  let lastEffect = updateQueue !== null ? updateQueue.lastEffect : null;
-  if (lastEffect !== null) {
-    const firstEffect = lastEffect.next;
-    let effect = firstEffect;
-    do {
-      if ((effect.tag & tag) === tag) {
+      if ((effect.tag & mountTag) !== NoHookEffect) {
         // Mount
         const create = effect.create;
         effect.destroy = create();
@@ -398,40 +391,15 @@ function commitHookEffectListMount(tag: number, finishedWork: Fiber) {
   }
 }
 
-function schedulePassiveEffects(finishedWork: Fiber) {
-  if (runAllPassiveEffectDestroysBeforeCreates) {
-    const updateQueue: FunctionComponentUpdateQueue | null = (finishedWork.updateQueue: any);
-    let lastEffect = updateQueue !== null ? updateQueue.lastEffect : null;
-    if (lastEffect !== null) {
-      const firstEffect = lastEffect.next;
-      let effect = firstEffect;
-      do {
-        const {next, tag} = effect;
-        if (
-          (tag & HookPassive) !== NoHookEffect &&
-          (tag & HookHasEffect) !== NoHookEffect
-        ) {
-          enqueuePendingPassiveHookEffectUnmount(finishedWork, effect);
-          enqueuePendingPassiveHookEffectMount(finishedWork, effect);
-        }
-        effect = next;
-      } while (effect !== firstEffect);
-    }
-  }
-}
-
 export function commitPassiveHookEffects(finishedWork: Fiber): void {
   if ((finishedWork.effectTag & Passive) !== NoEffect) {
     switch (finishedWork.tag) {
       case FunctionComponent:
       case ForwardRef:
       case SimpleMemoComponent:
-      case Block: {
-        // TODO (#17945) We should call all passive destroy functions (for all fibers)
-        // before calling any create functions. The current approach only serializes
-        // these for a single fiber.
-        commitHookEffectListUnmount(HookPassive | HookHasEffect, finishedWork);
-        commitHookEffectListMount(HookPassive | HookHasEffect, finishedWork);
+      case Chunk: {
+        commitHookEffectList(UnmountPassive, NoHookEffect, finishedWork);
+        commitHookEffectList(NoHookEffect, MountPassive, finishedWork);
         break;
       }
       default:
@@ -450,16 +418,8 @@ function commitLifeCycles(
     case FunctionComponent:
     case ForwardRef:
     case SimpleMemoComponent:
-    case Block: {
-      // At this point layout effects have already been destroyed (during mutation phase).
-      // This is done to prevent sibling component effects from interfering with each other,
-      // e.g. a destroy function in one component should never override a ref set
-      // by a create function in another component during the same commit.
-      commitHookEffectListMount(HookLayout | HookHasEffect, finishedWork);
-
-      if (runAllPassiveEffectDestroysBeforeCreates) {
-        schedulePassiveEffects(finishedWork);
-      }
+    case Chunk: {
+      commitHookEffectList(UnmountLayout, MountLayout, finishedWork);
       return;
     }
     case ClassComponent: {
@@ -576,7 +536,12 @@ function commitLifeCycles(
         // We could update instance props and state here,
         // but instead we rely on them being set during last render.
         // TODO: revisit this when we implement resuming.
-        commitUpdateQueue(finishedWork, updateQueue, instance);
+        commitUpdateQueue(
+          finishedWork,
+          updateQueue,
+          instance,
+          committedExpirationTime,
+        );
       }
       return;
     }
@@ -594,7 +559,12 @@ function commitLifeCycles(
               break;
           }
         }
-        commitUpdateQueue(finishedWork, updateQueue, instance);
+        commitUpdateQueue(
+          finishedWork,
+          updateQueue,
+          instance,
+          committedExpirationTime,
+        );
       }
       return;
     }
@@ -779,57 +749,39 @@ function commitUnmount(
     case ForwardRef:
     case MemoComponent:
     case SimpleMemoComponent:
-    case Block: {
+    case Chunk: {
       const updateQueue: FunctionComponentUpdateQueue | null = (current.updateQueue: any);
       if (updateQueue !== null) {
         const lastEffect = updateQueue.lastEffect;
         if (lastEffect !== null) {
           const firstEffect = lastEffect.next;
 
-          if (
-            deferPassiveEffectCleanupDuringUnmount &&
-            runAllPassiveEffectDestroysBeforeCreates
-          ) {
+          // When the owner fiber is deleted, the destroy function of a passive
+          // effect hook is called during the synchronous commit phase. This is
+          // a concession to implementation complexity. Calling it in the
+          // passive effect phase (like they usually are, when dependencies
+          // change during an update) would require either traversing the
+          // children of the deleted fiber again, or including unmount effects
+          // as part of the fiber effect list.
+          //
+          // Because this is during the sync commit phase, we need to change
+          // the priority.
+          //
+          // TODO: Reconsider this implementation trade off.
+          const priorityLevel =
+            renderPriorityLevel > NormalPriority
+              ? NormalPriority
+              : renderPriorityLevel;
+          runWithPriority(priorityLevel, () => {
             let effect = firstEffect;
             do {
-              const {destroy, tag} = effect;
+              const destroy = effect.destroy;
               if (destroy !== undefined) {
-                if ((tag & HookPassive) !== NoHookEffect) {
-                  enqueuePendingPassiveHookEffectUnmount(current, effect);
-                } else {
-                  safelyCallDestroy(current, destroy);
-                }
+                safelyCallDestroy(current, destroy);
               }
               effect = effect.next;
             } while (effect !== firstEffect);
-          } else {
-            // When the owner fiber is deleted, the destroy function of a passive
-            // effect hook is called during the synchronous commit phase. This is
-            // a concession to implementation complexity. Calling it in the
-            // passive effect phase (like they usually are, when dependencies
-            // change during an update) would require either traversing the
-            // children of the deleted fiber again, or including unmount effects
-            // as part of the fiber effect list.
-            //
-            // Because this is during the sync commit phase, we need to change
-            // the priority.
-            //
-            // TODO: Reconsider this implementation trade off.
-            const priorityLevel =
-              renderPriorityLevel > NormalPriority
-                ? NormalPriority
-                : renderPriorityLevel;
-            runWithPriority(priorityLevel, () => {
-              let effect = firstEffect;
-              do {
-                const destroy = effect.destroy;
-                if (destroy !== undefined) {
-                  safelyCallDestroy(current, destroy);
-                }
-                effect = effect.next;
-              } while (effect !== firstEffect);
-            });
-          }
+          });
         }
       }
       return;
@@ -1120,72 +1072,44 @@ function commitPlacement(finishedWork: Fiber): void {
   const before = getHostSibling(finishedWork);
   // We only have the top Fiber that was inserted but we need to recurse down its
   // children to find all the terminal nodes.
-  if (isContainer) {
-    insertOrAppendPlacementNodeIntoContainer(finishedWork, before, parent);
-  } else {
-    insertOrAppendPlacementNode(finishedWork, before, parent);
-  }
-}
-
-function insertOrAppendPlacementNodeIntoContainer(
-  node: Fiber,
-  before: ?Instance,
-  parent: Container,
-): void {
-  const {tag} = node;
-  const isHost = tag === HostComponent || tag === HostText;
-  if (isHost || (enableFundamentalAPI && tag === FundamentalComponent)) {
-    const stateNode = isHost ? node.stateNode : node.stateNode.instance;
-    if (before) {
-      insertInContainerBefore(parent, stateNode, before);
-    } else {
-      appendChildToContainer(parent, stateNode);
-    }
-  } else if (tag === HostPortal) {
-    // If the insertion itself is a portal, then we don't want to traverse
-    // down its children. Instead, we'll get insertions from each child in
-    // the portal directly.
-  } else {
-    const child = node.child;
-    if (child !== null) {
-      insertOrAppendPlacementNodeIntoContainer(child, before, parent);
-      let sibling = child.sibling;
-      while (sibling !== null) {
-        insertOrAppendPlacementNodeIntoContainer(sibling, before, parent);
-        sibling = sibling.sibling;
+  let node: Fiber = finishedWork;
+  while (true) {
+    const isHost = node.tag === HostComponent || node.tag === HostText;
+    if (isHost || (enableFundamentalAPI && node.tag === FundamentalComponent)) {
+      const stateNode = isHost ? node.stateNode : node.stateNode.instance;
+      if (before) {
+        if (isContainer) {
+          insertInContainerBefore(parent, stateNode, before);
+        } else {
+          insertBefore(parent, stateNode, before);
+        }
+      } else {
+        if (isContainer) {
+          appendChildToContainer(parent, stateNode);
+        } else {
+          appendChild(parent, stateNode);
+        }
       }
+    } else if (node.tag === HostPortal) {
+      // If the insertion itself is a portal, then we don't want to traverse
+      // down its children. Instead, we'll get insertions from each child in
+      // the portal directly.
+    } else if (node.child !== null) {
+      node.child.return = node;
+      node = node.child;
+      continue;
     }
-  }
-}
-
-function insertOrAppendPlacementNode(
-  node: Fiber,
-  before: ?Instance,
-  parent: Instance,
-): void {
-  const {tag} = node;
-  const isHost = tag === HostComponent || tag === HostText;
-  if (isHost || (enableFundamentalAPI && tag === FundamentalComponent)) {
-    const stateNode = isHost ? node.stateNode : node.stateNode.instance;
-    if (before) {
-      insertBefore(parent, stateNode, before);
-    } else {
-      appendChild(parent, stateNode);
+    if (node === finishedWork) {
+      return;
     }
-  } else if (tag === HostPortal) {
-    // If the insertion itself is a portal, then we don't want to traverse
-    // down its children. Instead, we'll get insertions from each child in
-    // the portal directly.
-  } else {
-    const child = node.child;
-    if (child !== null) {
-      insertOrAppendPlacementNode(child, before, parent);
-      let sibling = child.sibling;
-      while (sibling !== null) {
-        insertOrAppendPlacementNode(sibling, before, parent);
-        sibling = sibling.sibling;
+    while (node.sibling === null) {
+      if (node.return === null || node.return === finishedWork) {
+        return;
       }
+      node = node.return;
     }
+    node.sibling.return = node.return;
+    node = node.sibling;
   }
 }
 
@@ -1360,13 +1284,10 @@ function commitWork(current: Fiber | null, finishedWork: Fiber): void {
       case ForwardRef:
       case MemoComponent:
       case SimpleMemoComponent:
-      case Block: {
-        // Layout effects are destroyed during the mutation phase so that all
-        // destroy functions for all fibers are called before any create functions.
-        // This prevents sibling component effects from interfering with each other,
-        // e.g. a destroy function in one component should never override a ref set
-        // by a create function in another component during the same commit.
-        commitHookEffectListUnmount(HookLayout | HookHasEffect, finishedWork);
+      case Chunk: {
+        // Note: We currently never use MountMutation, but useLayout uses
+        // UnmountMutation.
+        commitHookEffectList(UnmountMutation, MountMutation, finishedWork);
         return;
       }
       case Profiler: {
@@ -1403,13 +1324,10 @@ function commitWork(current: Fiber | null, finishedWork: Fiber): void {
     case ForwardRef:
     case MemoComponent:
     case SimpleMemoComponent:
-    case Block: {
-      // Layout effects are destroyed during the mutation phase so that all
-      // destroy functions for all fibers are called before any create functions.
-      // This prevents sibling component effects from interfering with each other,
-      // e.g. a destroy function in one component should never override a ref set
-      // by a create function in another component during the same commit.
-      commitHookEffectListUnmount(HookLayout | HookHasEffect, finishedWork);
+    case Chunk: {
+      // Note: We currently never use MountMutation, but useLayout uses
+      // UnmountMutation.
+      commitHookEffectList(UnmountMutation, MountMutation, finishedWork);
       return;
     }
     case ClassComponent: {

@@ -1085,10 +1085,7 @@ describe('ReactHooks', () => {
           <Cls />
         </>,
       ),
-    ).toErrorDev([
-      'Context can only be read while React is rendering',
-      'Cannot update a component from inside the function body of a different component.',
-    ]);
+    ).toErrorDev(['Context can only be read while React is rendering']);
   });
 
   it('warns when calling hooks inside useReducer', () => {
@@ -1752,9 +1749,8 @@ describe('ReactHooks', () => {
   });
 
   // Regression test for #14674
-  it('does not swallow original error when updating another component in render phase', async () => {
+  it('does not swallow original error when updating another component in render phase', () => {
     let {useState} = React;
-    spyOnDev(console, 'error');
 
     let _setState;
     function A() {
@@ -1764,29 +1760,22 @@ describe('ReactHooks', () => {
     }
 
     function B() {
-      _setState(() => {
-        throw new Error('Hello');
-      });
+      act(() =>
+        _setState(() => {
+          throw new Error('Hello');
+        }),
+      );
       return null;
     }
 
-    await act(async () => {
+    expect(() =>
       ReactTestRenderer.create(
         <>
           <A />
           <B />
         </>,
-      );
-      expect(() => Scheduler.unstable_flushAll()).toThrow('Hello');
-    });
-
-    if (__DEV__) {
-      expect(console.error).toHaveBeenCalledTimes(2);
-      expect(console.error.calls.argsFor(0)[0]).toContain(
-        'Warning: Cannot update a component from inside the function body ' +
-          'of a different component.%s',
-      );
-    }
+      ),
+    ).toThrow('Hello');
   });
 
   // Regression test for https://github.com/facebook/react/issues/15057

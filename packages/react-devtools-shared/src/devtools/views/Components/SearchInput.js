@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useCallback, useContext, useEffect, useRef} from 'react';
+import React, {useCallback, useContext, useEffect, useRef} from 'react';
 import {TreeDispatcherContext, TreeStateContext} from './TreeContext';
 import Button from '../Button';
 import ButtonIcon from '../ButtonIcon';

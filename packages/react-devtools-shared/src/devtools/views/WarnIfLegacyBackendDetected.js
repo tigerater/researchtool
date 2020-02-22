@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, useContext, useEffect} from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import {BridgeContext} from './context';
 import {ModalDialogContext} from './ModalDialog';
 

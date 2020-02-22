@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, useLayoutEffect, useRef} from 'react';
+import React, {Fragment, useLayoutEffect, useRef} from 'react';
 import styles from './AutoSizeInput.css';
 
 type Props = {

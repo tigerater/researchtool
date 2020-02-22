@@ -23,7 +23,6 @@ module.exports = {
     module: true,
     define: true,
     require: true,
-    globalThis: true,
     global: true,
     // Trusted Types
     trustedTypes: true,

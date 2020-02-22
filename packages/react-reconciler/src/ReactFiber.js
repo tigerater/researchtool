@@ -33,7 +33,7 @@ import {
   enableFundamentalAPI,
   enableUserTimingAPI,
   enableScopeAPI,
-  enableBlocksAPI,
+  enableChunksAPI,
 } from 'shared/ReactFeatureFlags';
 import {NoEffect, Placement} from 'shared/ReactSideEffectTags';
 import {ConcurrentRoot, BlockingRoot} from 'shared/ReactRootTags';
@@ -59,7 +59,7 @@ import {
   LazyComponent,
   FundamentalComponent,
   ScopeComponent,
-  Block,
+  Chunk,
 } from 'shared/ReactWorkTags';
 import getComponentName from 'shared/getComponentName';
 
@@ -91,7 +91,7 @@ import {
   REACT_LAZY_TYPE,
   REACT_FUNDAMENTAL_TYPE,
   REACT_SCOPE_TYPE,
-  REACT_BLOCK_TYPE,
+  REACT_CHUNK_TYPE,
 } from 'shared/ReactSymbols';
 
 let hasBadMapPolyfill;
@@ -391,9 +391,9 @@ export function resolveLazyComponentTag(Component: Function): WorkTag {
     if ($$typeof === REACT_MEMO_TYPE) {
       return MemoComponent;
     }
-    if (enableBlocksAPI) {
-      if ($$typeof === REACT_BLOCK_TYPE) {
-        return Block;
+    if (enableChunksAPI) {
+      if ($$typeof === REACT_CHUNK_TYPE) {
+        return Chunk;
       }
     }
   }
@@ -401,7 +401,11 @@ export function resolveLazyComponentTag(Component: Function): WorkTag {
 }
 
 // This is used to create an alternate fiber to do work on.
-export function createWorkInProgress(current: Fiber, pendingProps: any): Fiber {
+export function createWorkInProgress(
+  current: Fiber,
+  pendingProps: any,
+  expirationTime: ExpirationTime,
+): Fiber {
   let workInProgress = current.alternate;
   if (workInProgress === null) {
     // We use a double buffering pooling technique because we know that we'll
@@ -421,9 +425,7 @@ export function createWorkInProgress(current: Fiber, pendingProps: any): Fiber {
 
     if (__DEV__) {
       // DEV-only fields
-      if (enableUserTimingAPI) {
-        workInProgress._debugID = current._debugID;
-      }
+      workInProgress._debugID = current._debugID;
       workInProgress._debugSource = current._debugSource;
       workInProgress._debugOwner = current._debugOwner;
       workInProgress._debugHookTypes = current._debugHookTypes;
@@ -676,8 +678,8 @@ export function createFiberFromTypeAndProps(
               fiberTag = LazyComponent;
               resolvedType = null;
               break getTag;
-            case REACT_BLOCK_TYPE:
-              fiberTag = Block;
+            case REACT_CHUNK_TYPE:
+              fiberTag = Chunk;
               break getTag;
             case REACT_FUNDAMENTAL_TYPE:
               if (enableFundamentalAPI) {
@@ -956,9 +958,7 @@ export function assignFiberPropertiesInDEV(
     target.selfBaseDuration = source.selfBaseDuration;
     target.treeBaseDuration = source.treeBaseDuration;
   }
-  if (enableUserTimingAPI) {
-    target._debugID = source._debugID;
-  }
+  target._debugID = source._debugID;
   target._debugSource = source._debugSource;
   target._debugOwner = source._debugOwner;
   target._debugIsCurrentlyTiming = source._debugIsCurrentlyTiming;

@@ -7,8 +7,13 @@
  * @flow
  */
 
-import * as React from 'react';
-import {createContext, useCallback, useContext, useMemo, useState} from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 import {unstable_batchedUpdates as batchedUpdates} from 'react-dom';
 import {useLocalStorage, useSubscription} from '../hooks';
 import {

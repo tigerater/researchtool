@@ -8,8 +8,7 @@
  */
 
 import {copy} from 'clipboard-js';
-import * as React from 'react';
-import {useCallback, useContext, useRef, useState} from 'react';
+import React, {useCallback, useContext, useRef, useState} from 'react';
 import {BridgeContext, StoreContext} from '../context';
 import Button from '../Button';
 import ButtonIcon from '../ButtonIcon';

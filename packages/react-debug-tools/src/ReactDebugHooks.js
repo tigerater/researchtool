@@ -25,7 +25,7 @@ import {
   SimpleMemoComponent,
   ContextProvider,
   ForwardRef,
-  Block,
+  Chunk,
 } from 'shared/ReactWorkTags';
 
 type CurrentDispatcherRef = typeof ReactSharedInternals.ReactCurrentDispatcher;
@@ -117,8 +117,7 @@ function useState<S>(
     hook !== null
       ? hook.memoizedState
       : typeof initialState === 'function'
-      ? // $FlowFixMe: Flow doesn't like mixed types
-        initialState()
+      ? initialState()
       : initialState;
   hookLog.push({primitive: 'State', stackError: new Error(), value: state});
   return [state, (action: BasicStateAction<S>) => {}];
@@ -628,7 +627,7 @@ export function inspectHooksOfFiber(
     fiber.tag !== FunctionComponent &&
     fiber.tag !== SimpleMemoComponent &&
     fiber.tag !== ForwardRef &&
-    fiber.tag !== Block
+    fiber.tag !== Chunk
   ) {
     throw new Error(
       'Unknown Fiber. Needs to be a function component to inspect hooks.',

@@ -17,7 +17,7 @@ import type {
   ReactEventResponderListener,
 } from 'shared/ReactTypes';
 
-import * as React from 'react';
+import React from 'react';
 import {DiscreteEvent, UserBlockingEvent} from 'shared/ReactTypes';
 
 type PressProps = {|
@@ -777,7 +777,6 @@ const pressResponderImpl = {
 
           // Determine whether to call preventDefault on subsequent native events.
           if (
-            target !== null &&
             context.isTargetWithinResponder(target) &&
             context.isTargetWithinHostComponent(target, 'a')
           ) {
@@ -809,7 +808,6 @@ const pressResponderImpl = {
             if (
               !isKeyboardEvent &&
               pressTarget !== null &&
-              target !== null &&
               !targetIsDocument(pressTarget)
             ) {
               if (

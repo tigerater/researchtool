@@ -1579,13 +1579,25 @@ describe('ReactDOMInput', () => {
       container,
     );
 
-    expect(log).toEqual([
-      'set attribute type',
-      'set attribute min',
-      'set attribute max',
-      'set attribute step',
-      'set property value',
-    ]);
+    if (disableInputAttributeSyncing) {
+      expect(log).toEqual([
+        'set attribute type',
+        'set attribute min',
+        'set attribute max',
+        'set attribute step',
+        'set property value',
+      ]);
+    } else {
+      expect(log).toEqual([
+        'set attribute type',
+        'set attribute min',
+        'set attribute max',
+        'set attribute step',
+        'set property value',
+        'set attribute value',
+        'set attribute checked',
+      ]);
+    }
   });
 
   it('sets value properly with type coming later in props', () => {
@@ -1650,6 +1662,8 @@ describe('ReactDOMInput', () => {
       expect(log).toEqual([
         'node.setAttribute("type", "date")',
         'node.value = "1980-01-01"',
+        'node.setAttribute("value", "1980-01-01")',
+        'node.setAttribute("checked", "")',
       ]);
     }
   });

@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useContext, useMemo} from 'react';
+import React, {useContext, useMemo} from 'react';
 import {TreeStateContext} from './TreeContext';
 import {SettingsContext} from '../Settings/SettingsContext';
 import TreeFocusedContext from './TreeFocusedContext';

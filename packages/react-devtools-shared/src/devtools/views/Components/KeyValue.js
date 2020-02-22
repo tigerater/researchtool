@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import EditableValue from './EditableValue';
 import ExpandCollapseToggle from './ExpandCollapseToggle';
 import {alphaSortEntries, getMetaValueLabel} from '../utils';

@@ -445,17 +445,7 @@ describe('ReactElementValidator', () => {
         return <div />;
       }
 
-      let TestFactory;
-
-      expect(() => {
-        TestFactory = React.createFactory(TestComponent);
-      }).toWarnDev(
-        'Warning: React.createFactory() is deprecated and will be removed in a ' +
-          'future major release. Consider using JSX or use React.createElement() ' +
-          'directly instead.',
-        {withoutStack: true},
-      );
-
+      let TestFactory = React.createFactory(TestComponent);
       expect(
         () => TestFactory.type,
       ).toWarnDev(

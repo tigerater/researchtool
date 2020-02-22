@@ -528,6 +528,7 @@ export function commitUpdateQueue<State>(
   finishedWork: Fiber,
   finishedQueue: UpdateQueue<State>,
   instance: any,
+  renderExpirationTime: ExpirationTime,
 ): void {
   // Commit the effects
   const effects = finishedQueue.effects;

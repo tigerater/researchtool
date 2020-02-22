@@ -7,7 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
+import React from 'react';
 import Tooltip from '@reach/tooltip';
 
 import styles from './Button.css';

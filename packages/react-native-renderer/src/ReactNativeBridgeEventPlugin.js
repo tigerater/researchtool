@@ -28,6 +28,9 @@ const {
 const ReactNativeBridgeEventPlugin = {
   eventTypes: {},
 
+  /**
+   * @see {EventPluginHub.extractEvents}
+   */
   extractEvents: function(
     topLevelType: TopLevelType,
     targetInst: null | Object,

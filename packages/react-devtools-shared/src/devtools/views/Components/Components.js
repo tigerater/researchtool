@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Suspense} from 'react';
+import React, {Suspense} from 'react';
 import Tree from './Tree';
 import SelectedElement from './SelectedElement';
 import {InspectedElementContextController} from './InspectedElementContext';

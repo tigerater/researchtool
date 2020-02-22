@@ -16,11 +16,8 @@
 // Module provided by RN:
 import 'react-native/Libraries/ReactPrivate/ReactNativePrivateInitializeCore';
 
+import {injection as EventPluginHubInjection} from 'legacy-events/EventPluginHub';
 import ResponderEventPlugin from 'legacy-events/ResponderEventPlugin';
-import {
-  injectEventPluginOrder,
-  injectEventPluginsByName,
-} from 'legacy-events/EventPluginRegistry';
 
 import ReactNativeBridgeEventPlugin from './ReactNativeBridgeEventPlugin';
 import ReactNativeEventPluginOrder from './ReactNativeEventPluginOrder';
@@ -28,13 +25,13 @@ import ReactNativeEventPluginOrder from './ReactNativeEventPluginOrder';
 /**
  * Inject module for resolving DOM hierarchy and plugin ordering.
  */
-injectEventPluginOrder(ReactNativeEventPluginOrder);
+EventPluginHubInjection.injectEventPluginOrder(ReactNativeEventPluginOrder);
 
 /**
  * Some important event plugins included by default (without having to require
  * them).
  */
-injectEventPluginsByName({
+EventPluginHubInjection.injectEventPluginsByName({
   ResponderEventPlugin: ResponderEventPlugin,
   ReactNativeBridgeEventPlugin: ReactNativeBridgeEventPlugin,
 });

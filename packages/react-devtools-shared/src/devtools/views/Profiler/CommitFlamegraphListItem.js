@@ -7,15 +7,13 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, memo, useCallback, useContext} from 'react';
+import React, {Fragment, memo, useCallback, useContext} from 'react';
 import {areEqual} from 'react-window';
 import {barWidthThreshold} from './constants';
 import {getGradientColor} from './utils';
 import ChartNode from './ChartNode';
 import {SettingsContext} from '../Settings/SettingsContext';
 
-import type {ChartNode as ChartNodeType} from './FlamegraphChartBuilder';
 import type {ItemData} from './CommitFlamegraph';
 
 type Props = {
@@ -28,7 +26,6 @@ type Props = {
 function CommitFlamegraphListItem({data, index, style}: Props) {
   const {
     chartData,
-    hoverFiber,
     scaleX,
     selectedChartNode,
     selectedChartNodeIndex,
@@ -38,7 +35,6 @@ function CommitFlamegraphListItem({data, index, style}: Props) {
   const {renderPathNodes, maxSelfDuration, rows} = chartData;
 
   const {lineHeight} = useContext(SettingsContext);
-
   const handleClick = useCallback(
     (event: SyntheticMouseEvent<*>, id: number, name: string) => {
       event.stopPropagation();
@@ -46,15 +42,6 @@ function CommitFlamegraphListItem({data, index, style}: Props) {
     },
     [selectFiber],
   );
-
-  const handleMouseEnter = (nodeData: ChartNodeType) => {
-    const {id, name} = nodeData;
-    hoverFiber({id, name});
-  };
-
-  const handleMouseLeave = () => {
-    hoverFiber(null);
-  };
 
   // List items are absolutely positioned using the CSS "top" attribute.
   // The "left" value will always be 0.
@@ -117,8 +104,6 @@ function CommitFlamegraphListItem({data, index, style}: Props) {
             key={id}
             label={label}
             onClick={event => handleClick(event, id, name)}
-            onMouseEnter={() => handleMouseEnter(chartNode)}
-            onMouseLeave={handleMouseLeave}
             textStyle={{color: textColor}}
             width={nodeWidth}
             x={nodeOffset - selectedNodeOffset}

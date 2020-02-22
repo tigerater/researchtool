@@ -34,7 +34,7 @@ import {validateDOMNesting, updatedAncestorInfo} from './validateDOMNesting';
 import {
   isEnabled as ReactBrowserEventEmitterIsEnabled,
   setEnabled as ReactBrowserEventEmitterSetEnabled,
-} from '../events/ReactDOMEventListener';
+} from '../events/ReactBrowserEventEmitter';
 import {getChildNamespace} from '../shared/DOMNamespaces';
 import {
   ELEMENT_NODE,
@@ -57,17 +57,6 @@ import {
   DEPRECATED_dispatchEventForResponderEventSystem,
 } from '../events/DeprecatedDOMEventResponderSystem';
 import {retryIfBlockedOn} from '../events/ReactDOMEventReplaying';
-
-import {
-  enableSuspenseServerRenderer,
-  enableDeprecatedFlareAPI,
-  enableFundamentalAPI,
-} from 'shared/ReactFeatureFlags';
-import {HostComponent} from 'shared/ReactWorkTags';
-import {
-  RESPONDER_EVENT_SYSTEM,
-  IS_PASSIVE,
-} from 'legacy-events/EventSystemFlags';
 
 export type Type = string;
 export type Props = {
@@ -99,7 +88,7 @@ export type EventTargetChildElement = {
   },
   ...
 };
-export type Container = DOMContainer;
+export type Container = Element | Document;
 export type Instance = Element;
 export type TextInstance = Text;
 export type SuspenseInstance = Comment & {_reactRetry?: () => void, ...};
@@ -122,6 +111,16 @@ type SelectionInformation = {|
   focusedElem: null | HTMLElement,
   selectionRange: mixed,
 |};
+
+import {
+  enableSuspenseServerRenderer,
+  enableDeprecatedFlareAPI,
+  enableFundamentalAPI,
+} from 'shared/ReactFeatureFlags';
+import {
+  RESPONDER_EVENT_SYSTEM,
+  IS_PASSIVE,
+} from 'legacy-events/EventSystemFlags';
 
 let SUPPRESS_HYDRATION_WARNING;
 if (__DEV__) {
@@ -351,9 +350,9 @@ export const warnsIfNotActing = true;
 // This initialization code may run even on server environments
 // if a component just imports ReactDOM (e.g. for findDOMNode).
 // Some environments might not have setTimeout or clearTimeout.
-export const scheduleTimeout: any =
+export const scheduleTimeout =
   typeof setTimeout === 'function' ? setTimeout : (undefined: any);
-export const cancelTimeout: any =
+export const cancelTimeout =
   typeof clearTimeout === 'function' ? clearTimeout : (undefined: any);
 export const noTimeout = -1;
 
@@ -585,28 +584,7 @@ export function clearSuspenseBoundaryFromContainer(
   retryIfBlockedOn(container);
 }
 
-function instanceContainsElem(instance: Instance, element: HTMLElement) {
-  let fiber = getClosestInstanceFromNode(element);
-  while (fiber !== null) {
-    if (fiber.tag === HostComponent && fiber.stateNode === element) {
-      return true;
-    }
-    fiber = fiber.return;
-  }
-  return false;
-}
-
 export function hideInstance(instance: Instance): void {
-  // Ensure we trigger `onBeforeBlur` if the active focused elment
-  // is ether the instance of a child or the instance. We need
-  // to traverse the Fiber tree here rather than use node.contains()
-  // as the child node might be inside a Portal.
-  if (enableDeprecatedFlareAPI && selectionInformation) {
-    const focusedElem = selectionInformation.focusedElem;
-    if (focusedElem !== null && instanceContainsElem(instance, focusedElem)) {
-      dispatchBeforeDetachedBlur(((focusedElem: any): HTMLElement));
-    }
-  }
   // TODO: Does this work for all element types? What about MathML? Should we
   // pass host context to this method?
   instance = ((instance: any): HTMLElement);

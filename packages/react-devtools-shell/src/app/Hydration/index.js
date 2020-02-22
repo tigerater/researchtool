@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, useDebugValue, useState} from 'react';
+import React, {Fragment, useDebugValue, useState} from 'react';
 
 const div = document.createElement('div');
 const exmapleFunction = () => {};

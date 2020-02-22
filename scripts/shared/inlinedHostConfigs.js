@@ -11,7 +11,6 @@ module.exports = [
     shortName: 'dom',
     entryPoints: [
       'react-dom',
-      'react-dom/testing',
       'react-dom/unstable-fizz.node',
       'react-flight-dom-webpack/server.node',
       'react-flight-dom-webpack',

@@ -32,7 +32,6 @@ describe('ReactElement.jsx', () => {
 
     ReactFeatureFlags = require('shared/ReactFeatureFlags');
     ReactFeatureFlags.enableJSXTransformAPI = true;
-    ReactFeatureFlags.warnAboutSpreadingKeyToJSX = true;
 
     React = require('react');
     ReactDOM = require('react-dom');
@@ -70,16 +69,7 @@ describe('ReactElement.jsx', () => {
     expect(React.isValidElement({})).toEqual(false);
     expect(React.isValidElement('string')).toEqual(false);
     if (!ReactFeatureFlags.disableCreateFactory) {
-      let factory;
-      expect(() => {
-        factory = React.createFactory('div');
-      }).toWarnDev(
-        'Warning: React.createFactory() is deprecated and will be removed in a ' +
-          'future major release. Consider using JSX or use React.createElement() ' +
-          'directly instead.',
-        {withoutStack: true},
-      );
-      expect(React.isValidElement(factory)).toEqual(false);
+      expect(React.isValidElement(React.createFactory('div'))).toEqual(false);
     }
     expect(React.isValidElement(Component)).toEqual(false);
     expect(React.isValidElement({type: 'div', props: {}})).toEqual(false);
@@ -311,16 +301,7 @@ describe('ReactElement.jsx', () => {
     expect(React.isValidElement({})).toEqual(false);
     expect(React.isValidElement('string')).toEqual(false);
     if (!ReactFeatureFlags.disableCreateFactory) {
-      let factory;
-      expect(() => {
-        factory = React.createFactory('div');
-      }).toWarnDev(
-        'Warning: React.createFactory() is deprecated and will be removed in a ' +
-          'future major release. Consider using JSX or use React.createElement() ' +
-          'directly instead.',
-        {withoutStack: true},
-      );
-      expect(React.isValidElement(factory)).toEqual(false);
+      expect(React.isValidElement(React.createFactory('div'))).toEqual(false);
     }
     expect(React.isValidElement(Component)).toEqual(false);
     expect(React.isValidElement({type: 'div', props: {}})).toEqual(false);
@@ -372,7 +353,7 @@ describe('ReactElement.jsx', () => {
     expect(() => ReactDOM.render(React.jsx(Parent, {}), container)).toErrorDev(
       'Warning: React.jsx: Spreading a key to JSX is a deprecated pattern. ' +
         'Explicitly pass a key after spreading props in your JSX call. ' +
-        'E.g. <Child {...props} key={key} />',
+        'E.g. <ComponentName {...props} key={key} />',
     );
   });
 

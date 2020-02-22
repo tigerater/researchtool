@@ -324,11 +324,6 @@ if (__DEV__) {
   ReactStrictModeWarnings.flushLegacyContextWarning = () => {
     ((pendingLegacyContextWarning: any): FiberToFiberComponentsMap).forEach(
       (fiberArray: FiberArray, strictRoot) => {
-        if (fiberArray.length === 0) {
-          return;
-        }
-        const firstFiber = fiberArray[0];
-
         const uniqueNames = new Set();
         fiberArray.forEach(fiber => {
           uniqueNames.add(getComponentName(fiber.type) || 'Component');
@@ -336,7 +331,9 @@ if (__DEV__) {
         });
 
         const sortedNames = setToSortedString(uniqueNames);
-        const firstComponentStack = getStackByFiberInDevAndProd(firstFiber);
+        const strictRootComponentStack = getStackByFiberInDevAndProd(
+          strictRoot,
+        );
 
         console.error(
           'Legacy context API has been detected within a strict-mode tree.' +
@@ -346,7 +343,7 @@ if (__DEV__) {
             '\n\nLearn more about this warning here: https://fb.me/react-legacy-context' +
             '%s',
           sortedNames,
-          firstComponentStack,
+          strictRootComponentStack,
         );
       },
     );

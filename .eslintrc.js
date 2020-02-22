@@ -5,8 +5,6 @@ const {
   esNextPaths,
 } = require('./scripts/shared/pathsByLanguageVersion');
 
-const restrictedGlobals = require('confusing-browser-globals');
-
 const OFF = 0;
 const ERROR = 2;
 
@@ -47,7 +45,6 @@ module.exports = {
     'no-bitwise': OFF,
     'no-inner-declarations': [ERROR, 'functions'],
     'no-multi-spaces': ERROR,
-    'no-restricted-globals': [ERROR].concat(restrictedGlobals),
     'no-restricted-syntax': [ERROR, 'WithStatement'],
     'no-shadow': ERROR,
     'no-unused-expressions': ERROR,

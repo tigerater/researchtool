@@ -7,8 +7,9 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, useRef} from 'react';
+import React, {Fragment, useRef} from 'react';
+import Button from '../Button';
+import ButtonIcon from '../ButtonIcon';
 import styles from './EditableValue.css';
 import {useEditableValue} from '../hooks';
 
@@ -50,19 +51,15 @@ export default function EditableValue({
 
     switch (event.key) {
       case 'Enter':
-        applyChanges();
+        if (isValid && hasPendingChanges) {
+          overrideValueFn(path, parsedValue);
+        }
         break;
       case 'Escape':
         reset();
         break;
       default:
         break;
-    }
-  };
-
-  const applyChanges = () => {
-    if (isValid && hasPendingChanges) {
-      overrideValueFn(path, parsedValue);
     }
   };
 
@@ -78,7 +75,6 @@ export default function EditableValue({
       <input
         autoComplete="new-password"
         className={`${isValid ? styles.Input : styles.Invalid} ${className}`}
-        onBlur={applyChanges}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
@@ -86,6 +82,14 @@ export default function EditableValue({
         type="text"
         value={editableValue}
       />
+      {hasPendingChanges && (
+        <Button
+          className={styles.ResetButton}
+          onClick={reset}
+          title="Reset value">
+          <ButtonIcon type="undo" />
+        </Button>
+      )}
     </Fragment>
   );
 }

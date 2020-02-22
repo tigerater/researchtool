@@ -17,9 +17,6 @@ import {REACT_RESPONDER_TYPE} from 'shared/ReactSymbols';
 
 import ReactCurrentDispatcher from './ReactCurrentDispatcher';
 
-type BasicStateAction<S> = (S => S) | S;
-type Dispatch<A> = A => void;
-
 function resolveDispatcher() {
   const dispatcher = ReactCurrentDispatcher.current;
   invariant(
@@ -75,9 +72,7 @@ export function useContext<T>(
   return dispatcher.useContext(Context, unstable_observedBits);
 }
 
-export function useState<S>(
-  initialState: (() => S) | S,
-): [S, Dispatch<BasicStateAction<S>>] {
+export function useState<S>(initialState: (() => S) | S) {
   const dispatcher = resolveDispatcher();
   return dispatcher.useState(initialState);
 }
@@ -86,7 +81,7 @@ export function useReducer<S, I, A>(
   reducer: (S, A) => S,
   initialArg: I,
   init?: I => S,
-): [S, Dispatch<A>] {
+) {
   const dispatcher = resolveDispatcher();
   return dispatcher.useReducer(reducer, initialArg, init);
 }
@@ -98,49 +93,46 @@ export function useRef<T>(initialValue: T): {|current: T|} {
 
 export function useEffect(
   create: () => (() => void) | void,
-  deps: Array<mixed> | void | null,
-): void {
+  inputs: Array<mixed> | void | null,
+) {
   const dispatcher = resolveDispatcher();
-  return dispatcher.useEffect(create, deps);
+  return dispatcher.useEffect(create, inputs);
 }
 
 export function useLayoutEffect(
   create: () => (() => void) | void,
-  deps: Array<mixed> | void | null,
-): void {
+  inputs: Array<mixed> | void | null,
+) {
   const dispatcher = resolveDispatcher();
-  return dispatcher.useLayoutEffect(create, deps);
+  return dispatcher.useLayoutEffect(create, inputs);
 }
 
-export function useCallback<T>(
-  callback: T,
-  deps: Array<mixed> | void | null,
-): T {
+export function useCallback(
+  callback: () => mixed,
+  inputs: Array<mixed> | void | null,
+) {
   const dispatcher = resolveDispatcher();
-  return dispatcher.useCallback(callback, deps);
+  return dispatcher.useCallback(callback, inputs);
 }
 
-export function useMemo<T>(
-  create: () => T,
-  deps: Array<mixed> | void | null,
-): T {
+export function useMemo(
+  create: () => mixed,
+  inputs: Array<mixed> | void | null,
+) {
   const dispatcher = resolveDispatcher();
-  return dispatcher.useMemo(create, deps);
+  return dispatcher.useMemo(create, inputs);
 }
 
 export function useImperativeHandle<T>(
   ref: {|current: T | null|} | ((inst: T | null) => mixed) | null | void,
   create: () => T,
-  deps: Array<mixed> | void | null,
+  inputs: Array<mixed> | void | null,
 ): void {
   const dispatcher = resolveDispatcher();
-  return dispatcher.useImperativeHandle(ref, create, deps);
+  return dispatcher.useImperativeHandle(ref, create, inputs);
 }
 
-export function useDebugValue<T>(
-  value: T,
-  formatterFn: ?(value: T) => mixed,
-): void {
+export function useDebugValue(value: any, formatterFn: ?(value: any) => any) {
   if (__DEV__) {
     const dispatcher = resolveDispatcher();
     return dispatcher.useDebugValue(value, formatterFn);

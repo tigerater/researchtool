@@ -104,11 +104,11 @@ class ReactFabricHostComponent {
   }
 
   blur() {
-    TextInputState.blurTextInput(this);
+    TextInputState.blurTextInput(this._nativeTag);
   }
 
   focus() {
-    TextInputState.focusTextInput(this);
+    TextInputState.focusTextInput(this._nativeTag);
   }
 
   measure(callback: MeasureOnSuccessCallback) {
@@ -436,34 +436,34 @@ export function DEPRECATED_unmountResponderInstance(
   throw new Error('Not yet implemented.');
 }
 
-export function getFundamentalComponentInstance(fundamentalInstance: any) {
+export function getFundamentalComponentInstance(fundamentalInstance) {
   throw new Error('Not yet implemented.');
 }
 
-export function mountFundamentalComponent(fundamentalInstance: any) {
+export function mountFundamentalComponent(fundamentalInstance) {
   throw new Error('Not yet implemented.');
 }
 
-export function shouldUpdateFundamentalComponent(fundamentalInstance: any) {
+export function shouldUpdateFundamentalComponent(fundamentalInstance) {
   throw new Error('Not yet implemented.');
 }
 
-export function updateFundamentalComponent(fundamentalInstance: any) {
+export function updateFundamentalComponent(fundamentalInstance) {
   throw new Error('Not yet implemented.');
 }
 
-export function unmountFundamentalComponent(fundamentalInstance: any) {
+export function unmountFundamentalComponent(fundamentalInstance) {
   throw new Error('Not yet implemented.');
 }
 
-export function cloneFundamentalInstance(fundamentalInstance: any) {
+export function cloneFundamentalInstance(fundamentalInstance) {
   throw new Error('Not yet implemented.');
 }
 
-export function getInstanceFromNode(node: any) {
+export function getInstanceFromNode(node) {
   throw new Error('Not yet implemented.');
 }
 
-export function beforeRemoveInstance(instance: any) {
+export function beforeRemoveInstance(instance) {
   // noop
 }

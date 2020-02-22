@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {memo, useCallback} from 'react';
+import React, {memo, useCallback} from 'react';
 import {areEqual} from 'react-window';
 import {getGradientColor} from './utils';
 

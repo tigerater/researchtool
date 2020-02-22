@@ -28,9 +28,11 @@ import {
   Passive as PassiveEffect,
 } from 'shared/ReactSideEffectTags';
 import {
-  HasEffect as HookHasEffect,
-  Layout as HookLayout,
-  Passive as HookPassive,
+  NoEffect as NoHookEffect,
+  UnmountMutation,
+  MountLayout,
+  UnmountPassive,
+  MountPassive,
 } from './ReactHookEffectTags';
 import {
   scheduleWork,
@@ -144,7 +146,7 @@ export type Hook = {|
   next: Hook | null,
 |};
 
-export type Effect = {|
+type Effect = {|
   tag: HookEffectTag,
   create: () => (() => void) | void,
   destroy: (() => void) | void,
@@ -621,7 +623,6 @@ function createFunctionComponentUpdateQueue(): FunctionComponentUpdateQueue {
 }
 
 function basicStateReducer<S>(state: S, action: BasicStateAction<S>): S {
-  // $FlowFixMe: Flow doesn't like mixed types
   return typeof action === 'function' ? action(state) : action;
 }
 
@@ -842,7 +843,6 @@ function mountState<S>(
 ): [S, Dispatch<BasicStateAction<S>>] {
   const hook = mountWorkInProgressHook();
   if (typeof initialState === 'function') {
-    // $FlowFixMe: Flow doesn't like mixed types
     initialState = initialState();
   }
   hook.memoizedState = hook.baseState = initialState;
@@ -921,12 +921,7 @@ function mountEffectImpl(fiberEffectTag, hookEffectTag, create, deps): void {
   const hook = mountWorkInProgressHook();
   const nextDeps = deps === undefined ? null : deps;
   currentlyRenderingFiber.effectTag |= fiberEffectTag;
-  hook.memoizedState = pushEffect(
-    HookHasEffect | hookEffectTag,
-    create,
-    undefined,
-    nextDeps,
-  );
+  hook.memoizedState = pushEffect(hookEffectTag, create, undefined, nextDeps);
 }
 
 function updateEffectImpl(fiberEffectTag, hookEffectTag, create, deps): void {
@@ -940,7 +935,7 @@ function updateEffectImpl(fiberEffectTag, hookEffectTag, create, deps): void {
     if (nextDeps !== null) {
       const prevDeps = prevEffect.deps;
       if (areHookInputsEqual(nextDeps, prevDeps)) {
-        pushEffect(hookEffectTag, create, destroy, nextDeps);
+        pushEffect(NoHookEffect, create, destroy, nextDeps);
         return;
       }
     }
@@ -948,12 +943,7 @@ function updateEffectImpl(fiberEffectTag, hookEffectTag, create, deps): void {
 
   currentlyRenderingFiber.effectTag |= fiberEffectTag;
 
-  hook.memoizedState = pushEffect(
-    HookHasEffect | hookEffectTag,
-    create,
-    destroy,
-    nextDeps,
-  );
+  hook.memoizedState = pushEffect(hookEffectTag, create, destroy, nextDeps);
 }
 
 function mountEffect(
@@ -968,7 +958,7 @@ function mountEffect(
   }
   return mountEffectImpl(
     UpdateEffect | PassiveEffect,
-    HookPassive,
+    UnmountPassive | MountPassive,
     create,
     deps,
   );
@@ -986,7 +976,7 @@ function updateEffect(
   }
   return updateEffectImpl(
     UpdateEffect | PassiveEffect,
-    HookPassive,
+    UnmountPassive | MountPassive,
     create,
     deps,
   );
@@ -996,14 +986,24 @@ function mountLayoutEffect(
   create: () => (() => void) | void,
   deps: Array<mixed> | void | null,
 ): void {
-  return mountEffectImpl(UpdateEffect, HookLayout, create, deps);
+  return mountEffectImpl(
+    UpdateEffect,
+    UnmountMutation | MountLayout,
+    create,
+    deps,
+  );
 }
 
 function updateLayoutEffect(
   create: () => (() => void) | void,
   deps: Array<mixed> | void | null,
 ): void {
-  return updateEffectImpl(UpdateEffect, HookLayout, create, deps);
+  return updateEffectImpl(
+    UpdateEffect,
+    UnmountMutation | MountLayout,
+    create,
+    deps,
+  );
 }
 
 function imperativeHandleEffect<T>(
@@ -1057,7 +1057,7 @@ function mountImperativeHandle<T>(
 
   return mountEffectImpl(
     UpdateEffect,
-    HookLayout,
+    UnmountMutation | MountLayout,
     imperativeHandleEffect.bind(null, create, ref),
     effectDeps,
   );
@@ -1084,7 +1084,7 @@ function updateImperativeHandle<T>(
 
   return updateEffectImpl(
     UpdateEffect,
-    HookLayout,
+    UnmountMutation | MountLayout,
     imperativeHandleEffect.bind(null, create, ref),
     effectDeps,
   );

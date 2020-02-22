@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {createContext, Component, Fragment, useContext} from 'react';
+import React, {createContext, Component, Fragment, useContext} from 'react';
 import PropTypes from 'prop-types';
 
 function someNamedFunction() {}

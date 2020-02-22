@@ -410,16 +410,10 @@ function getPlugins(
     // Note that this plugin must be called after closure applies DCE.
     isProduction && stripUnusedImports(pureExternalModules),
     // Add the whitespace back if necessary.
-    shouldStayReadable &&
-      prettier({
-        parser: 'babel',
-        singleQuote: false,
-        trailingComma: 'none',
-        bracketSpacing: true,
-      }),
+    shouldStayReadable && prettier({parser: 'babylon'}),
     // License and haste headers, top-level `if` blocks.
     {
-      renderChunk(source) {
+      transformBundle(source) {
         return Wrappers.wrapBundle(
           source,
           bundleType,
@@ -547,12 +541,11 @@ async function createBundle(bundle, bundleType) {
       bundle.moduleType,
       pureExternalModules
     ),
-    output: {
-      externalLiveBindings: false,
-      freeze: false,
-      interop: false,
-      esModule: false,
-    },
+    // We can't use getters in www.
+    legacy:
+      bundleType === FB_WWW_DEV ||
+      bundleType === FB_WWW_PROD ||
+      bundleType === FB_WWW_PROFILING,
   };
   const [mainOutputPath, ...otherOutputPaths] = Packaging.getBundleOutputPaths(
     bundleType,
@@ -628,9 +621,7 @@ function handleRollupWarning(warning) {
     return;
   }
 
-  if (warning.code === 'CIRCULAR_DEPENDENCY') {
-    // Ignored
-  } else if (typeof warning.code === 'string') {
+  if (typeof warning.code === 'string') {
     // This is a warning coming from Rollup itself.
     // These tend to be important (e.g. clashes in namespaced exports)
     // so we'll fail the build on any of them.
@@ -693,17 +684,17 @@ async function buildEverything() {
       [bundle, NODE_DEV],
       [bundle, NODE_PROD],
       [bundle, NODE_PROFILING],
-      [bundle, FB_WWW_DEV],
-      [bundle, FB_WWW_PROD],
-      [bundle, FB_WWW_PROFILING],
       [bundle, RN_OSS_DEV],
       [bundle, RN_OSS_PROD],
       [bundle, RN_OSS_PROFILING]
     );
 
     if (__EXPERIMENTAL__) {
-      // FB-specific RN builds are experimental-only.
+      // FB specific builds are experimental-only.
       bundles.push(
+        [bundle, FB_WWW_DEV],
+        [bundle, FB_WWW_PROD],
+        [bundle, FB_WWW_PROFILING],
         [bundle, RN_FB_DEV],
         [bundle, RN_FB_PROD],
         [bundle, RN_FB_PROFILING]

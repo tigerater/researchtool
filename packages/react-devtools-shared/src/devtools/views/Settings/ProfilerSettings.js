@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useCallback, useContext, useMemo, useRef} from 'react';
+import React, {useCallback, useContext, useMemo, useRef} from 'react';
 import {useSubscription} from '../hooks';
 import {StoreContext} from '../context';
 import {ProfilerContext} from 'react-devtools-shared/src/devtools/views/Profiler/ProfilerContext';

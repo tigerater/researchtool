@@ -42,7 +42,7 @@ import {
   IncompleteClassComponent,
   FundamentalComponent,
   ScopeComponent,
-  Block,
+  Chunk,
 } from 'shared/ReactWorkTags';
 import {
   NoEffect,
@@ -65,7 +65,7 @@ import {
   enableFundamentalAPI,
   warnAboutDefaultPropsOnFunctionComponents,
   enableScopeAPI,
-  enableBlocksAPI,
+  enableChunksAPI,
 } from 'shared/ReactFeatureFlags';
 import invariant from 'shared/invariant';
 import shallowEqual from 'shared/shallowEqual';
@@ -466,7 +466,11 @@ function updateMemoComponent(
   }
   // React DevTools reads this flag.
   workInProgress.effectTag |= PerformedWork;
-  let newChild = createWorkInProgress(currentChild, nextProps);
+  let newChild = createWorkInProgress(
+    currentChild,
+    nextProps,
+    renderExpirationTime,
+  );
   newChild.ref = workInProgress.ref;
   newChild.return = workInProgress;
   workInProgress.child = newChild;
@@ -519,20 +523,6 @@ function updateSimpleMemoComponent(
     ) {
       didReceiveUpdate = false;
       if (updateExpirationTime < renderExpirationTime) {
-        // The pending update priority was cleared at the beginning of
-        // beginWork. We're about to bail out, but there might be additional
-        // updates at a lower priority. Usually, the priority level of the
-        // remaining updates is accumlated during the evaluation of the
-        // component (i.e. when processing the update queue). But since since
-        // we're bailing out early *without* evaluating the component, we need
-        // to account for it here, too. Reset to the value of the current fiber.
-        // NOTE: This only applies to SimpleMemoComponent, not MemoComponent,
-        // because a MemoComponent fiber does not have hooks or an update queue;
-        // rather, it wraps around an inner component, which may or may not
-        // contains hooks.
-        // TODO: Move the reset at in beginWork out of the common path so that
-        // this is no longer necessary.
-        workInProgress.expirationTime = current.expirationTime;
         return bailoutOnAlreadyFinishedWork(
           current,
           workInProgress,
@@ -701,10 +691,10 @@ function updateFunctionComponent(
   return workInProgress.child;
 }
 
-function updateBlock(
+function updateChunk(
   current: Fiber | null,
   workInProgress: Fiber,
-  block: any,
+  chunk: any,
   nextProps: any,
   renderExpirationTime: ExpirationTime,
 ) {
@@ -712,8 +702,8 @@ function updateBlock(
   // hasn't yet mounted. This happens after the first render suspends.
   // We'll need to figure out if this is fine or can cause issues.
 
-  const render = block.render;
-  const data = block.query();
+  const render = chunk.render;
+  const data = chunk.query();
 
   // The rest is a fork of updateFunctionComponent
   let nextChildren;
@@ -827,7 +817,12 @@ function updateClassComponent(
       workInProgress.effectTag |= Placement;
     }
     // In the initial pass we might need to construct the instance.
-    constructClassInstance(workInProgress, Component, nextProps);
+    constructClassInstance(
+      workInProgress,
+      Component,
+      nextProps,
+      renderExpirationTime,
+    );
     mountClassInstance(
       workInProgress,
       Component,
@@ -1215,10 +1210,10 @@ function mountLazyComponent(
       );
       return child;
     }
-    case Block: {
-      if (enableBlocksAPI) {
+    case Chunk: {
+      if (enableChunksAPI) {
         // TODO: Resolve for Hot Reloading.
-        child = updateBlock(
+        child = updateChunk(
           null,
           workInProgress,
           Component,
@@ -1287,7 +1282,12 @@ function mountIncompleteClassComponent(
   }
   prepareToReadContext(workInProgress, renderExpirationTime);
 
-  constructClassInstance(workInProgress, Component, nextProps);
+  constructClassInstance(
+    workInProgress,
+    Component,
+    nextProps,
+    renderExpirationTime,
+  );
   mountClassInstance(
     workInProgress,
     Component,
@@ -1857,6 +1857,7 @@ function updateSuspenseComponent(
         const primaryChildFragment = createWorkInProgress(
           currentPrimaryChildFragment,
           currentPrimaryChildFragment.pendingProps,
+          NoWork,
         );
         primaryChildFragment.return = workInProgress;
 
@@ -1896,6 +1897,7 @@ function updateSuspenseComponent(
         const fallbackChildFragment = createWorkInProgress(
           currentFallbackChildFragment,
           nextFallbackChildren,
+          currentFallbackChildFragment.expirationTime,
         );
         fallbackChildFragment.return = workInProgress;
         primaryChildFragment.sibling = fallbackChildFragment;
@@ -3101,11 +3103,7 @@ function beginWork(
     didReceiveUpdate = false;
   }
 
-  // Before entering the begin phase, clear pending update priority.
-  // TODO: This assumes that we're about to evaluate the component and process
-  // the update queue. However, there's an exception: SimpleMemoComponent
-  // sometimes bails out later in the begin phase. This indicates that we should
-  // move this assignment out of the common path and into each branch.
+  // Before entering the begin phase, clear the expiration time.
   workInProgress.expirationTime = NoWork;
 
   switch (workInProgress.tag) {
@@ -3289,14 +3287,14 @@ function beginWork(
       }
       break;
     }
-    case Block: {
-      if (enableBlocksAPI) {
-        const block = workInProgress.type;
+    case Chunk: {
+      if (enableChunksAPI) {
+        const chunk = workInProgress.type;
         const props = workInProgress.pendingProps;
-        return updateBlock(
+        return updateChunk(
           current,
           workInProgress,
-          block,
+          chunk,
           props,
           renderExpirationTime,
         );

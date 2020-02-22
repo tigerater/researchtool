@@ -32,6 +32,8 @@ import ReactVersion from 'shared/ReactVersion';
 // Module provided by RN:
 import {UIManager} from 'react-native/Libraries/ReactPrivate/ReactNativePrivateInterface';
 
+import NativeMethodsMixin from './NativeMethodsMixin';
+import ReactNativeComponent from './ReactNativeComponent';
 import {getClosestInstanceFromNode} from './ReactFabricComponentTree';
 import {getInspectorDataForViewTag} from './ReactNativeFiberInspector';
 
@@ -153,6 +155,8 @@ setBatchingImplementation(
 const roots = new Map();
 
 const ReactFabric: ReactFabricType = {
+  NativeComponent: ReactNativeComponent(findNodeHandle, findHostInstance),
+
   // This is needed for implementation details of TouchableNativeFeedback
   // Remove this once TouchableNativeFeedback doesn't use cloneElement
   findHostInstance_DEPRECATED,
@@ -219,7 +223,10 @@ const ReactFabric: ReactFabricType = {
     return createPortal(children, containerTag, null, key);
   },
 
-  __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: {},
+  __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: {
+    // Used as a mixin in many createClass-based components
+    NativeMethodsMixin: NativeMethodsMixin(findNodeHandle, findHostInstance),
+  },
 };
 
 injectIntoDevTools({

@@ -6,8 +6,7 @@
  *
  * @flow
  */
-import * as React from 'react';
-import {
+import React, {
   Fragment,
   useCallback,
   useContext,

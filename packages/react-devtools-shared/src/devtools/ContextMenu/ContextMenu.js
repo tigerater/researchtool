@@ -7,8 +7,13 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import {createPortal} from 'react-dom';
 import {RegistryContext} from './Contexts';
 

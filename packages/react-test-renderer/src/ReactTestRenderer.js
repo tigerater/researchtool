@@ -19,7 +19,6 @@ import {
   flushSync,
   injectIntoDevTools,
   batchedUpdates,
-  act,
 } from 'react-reconciler/inline.test';
 import {findCurrentFiberUsingSlowPath} from 'react-reconciler/reflection';
 import {
@@ -37,12 +36,13 @@ import {
   Profiler,
   MemoComponent,
   SimpleMemoComponent,
-  Block,
+  Chunk,
   IncompleteClassComponent,
   ScopeComponent,
 } from 'shared/ReactWorkTags';
 import invariant from 'shared/invariant';
 import ReactVersion from 'shared/ReactVersion';
+import act from './ReactTestRendererAct';
 
 import {getPublicInstance} from './ReactTestHostConfig';
 import {ConcurrentRoot, LegacyRoot} from 'shared/ReactRootTags';
@@ -188,9 +188,9 @@ function toTree(node: ?Fiber) {
         instance: null,
         rendered: childrenToTree(node.child),
       };
-    case Block:
+    case Chunk:
       return {
-        nodeType: 'block',
+        nodeType: 'chunk',
         type: node.type,
         props: {...node.memoizedProps},
         instance: null,
@@ -233,7 +233,7 @@ const validWrapperTypes = new Set([
   ForwardRef,
   MemoComponent,
   SimpleMemoComponent,
-  Block,
+  Chunk,
   // Normally skipped, but used when there's more than one root child.
   HostRoot,
 ]);

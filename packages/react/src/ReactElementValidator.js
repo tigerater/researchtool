@@ -21,7 +21,6 @@ import {
   REACT_FRAGMENT_TYPE,
   REACT_ELEMENT_TYPE,
 } from 'shared/ReactSymbols';
-import {warnAboutSpreadingKeyToJSX} from 'shared/ReactFeatureFlags';
 import checkPropTypes from 'prop-types/checkPropTypes';
 
 import ReactCurrentOwner from './ReactCurrentOwner';
@@ -366,16 +365,13 @@ export function jsxWithValidation(
     }
   }
 
-  if (__DEV__) {
-    if (warnAboutSpreadingKeyToJSX) {
-      if (hasOwnProperty.call(props, 'key')) {
-        console.error(
-          'React.jsx: Spreading a key to JSX is a deprecated pattern. ' +
-            'Explicitly pass a key after spreading props in your JSX call. ' +
-            'E.g. <%s {...props} key={key} />',
-          getComponentName(type) || 'ComponentName',
-        );
-      }
+  if (hasOwnProperty.call(props, 'key')) {
+    if (__DEV__) {
+      console.error(
+        'React.jsx: Spreading a key to JSX is a deprecated pattern. ' +
+          'Explicitly pass a key after spreading props in your JSX call. ' +
+          'E.g. <ComponentName {...props} key={key} />',
+      );
     }
   }
 
@@ -477,21 +473,11 @@ export function createElementWithValidation(type, props, children) {
   return element;
 }
 
-let didWarnAboutDeprecatedCreateFactory = false;
-
 export function createFactoryWithValidation(type) {
   const validatedFactory = createElementWithValidation.bind(null, type);
   validatedFactory.type = type;
+  // Legacy hook: remove it
   if (__DEV__) {
-    if (!didWarnAboutDeprecatedCreateFactory) {
-      didWarnAboutDeprecatedCreateFactory = true;
-      console.warn(
-        'React.createFactory() is deprecated and will be removed in ' +
-          'a future major release. Consider using JSX ' +
-          'or use React.createElement() directly instead.',
-      );
-    }
-    // Legacy hook: remove it
     Object.defineProperty(validatedFactory, 'type', {
       enumerable: false,
       get: function() {

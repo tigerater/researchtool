@@ -7,7 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
+import React from 'react';
 import {isForwardRef, isMemo, ForwardRef} from 'react-is';
 import describeComponentFrame from 'shared/describeComponentFrame';
 import getComponentName from 'shared/getComponentName';
@@ -173,7 +173,6 @@ function createHook(): Hook {
 }
 
 function basicStateReducer<S>(state: S, action: BasicStateAction<S>): S {
-  // $FlowFixMe: Flow doesn't like mixed types
   return typeof action === 'function' ? action(state) : action;
 }
 

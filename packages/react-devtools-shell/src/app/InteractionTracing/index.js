@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, useCallback, useEffect, useState} from 'react';
+import React, {Fragment, useCallback, useEffect, useState} from 'react';
 import {unstable_batchedUpdates as batchedUpdates} from 'react-dom';
 import {
   unstable_trace as trace,

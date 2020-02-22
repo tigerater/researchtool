@@ -12,16 +12,12 @@ let ReactDOM;
 let ReactART;
 let ARTSVGMode;
 let ARTCurrentMode;
+let TestUtils;
 let TestRenderer;
 let ARTTest;
 
 global.__DEV__ = process.env.NODE_ENV !== 'production';
 global.__EXPERIMENTAL__ = process.env.RELEASE_CHANNEL === 'experimental';
-
-jest.mock('react-dom', () =>
-  require.requireActual('react-dom/cjs/react-dom-testing.development.js')
-);
-// we'll replace the above with react/testing and react-dom/testing right before the next minor
 
 expect.extend(require('../toWarnDev'));
 
@@ -36,6 +32,7 @@ beforeEach(() => {
   ReactART = require('react-art');
   ARTSVGMode = require('art/modes/svg');
   ARTCurrentMode = require('art/modes/current');
+  TestUtils = require('react-dom/test-utils');
   TestRenderer = require('react-test-renderer');
 
   ARTCurrentMode.setCurrent(ARTSVGMode);
@@ -73,8 +70,8 @@ beforeEach(() => {
 });
 
 it("doesn't warn when you use the right act + renderer: dom", () => {
-  ReactDOM.act(() => {
-    ReactDOM.render(<App />, document.createElement('div'));
+  TestUtils.act(() => {
+    TestUtils.renderIntoDocument(<App />);
   });
 });
 
@@ -89,7 +86,7 @@ it('resets correctly across renderers', () => {
     React.useEffect(() => {}, []);
     return null;
   }
-  ReactDOM.act(() => {
+  TestUtils.act(() => {
     TestRenderer.act(() => {});
     expect(() => {
       TestRenderer.create(<Effecty />);
@@ -102,7 +99,7 @@ it('resets correctly across renderers', () => {
 it('warns when using the wrong act version - test + dom: render', () => {
   expect(() => {
     TestRenderer.act(() => {
-      ReactDOM.render(<App />, document.createElement('div'));
+      TestUtils.renderIntoDocument(<App />);
     });
   }).toWarnDev(["It looks like you're using the wrong act()"], {
     withoutStack: true,
@@ -116,7 +113,7 @@ it('warns when using the wrong act version - test + dom: updates', () => {
     setCtr = _setCtr;
     return ctr;
   }
-  ReactDOM.render(<Counter />, document.createElement('div'));
+  TestUtils.renderIntoDocument(<Counter />);
   expect(() => {
     TestRenderer.act(() => {
       setCtr(1);
@@ -126,7 +123,7 @@ it('warns when using the wrong act version - test + dom: updates', () => {
 
 it('warns when using the wrong act version - dom + test: .create()', () => {
   expect(() => {
-    ReactDOM.act(() => {
+    TestUtils.act(() => {
       TestRenderer.create(<App />);
     });
   }).toWarnDev(["It looks like you're using the wrong act()"], {
@@ -137,7 +134,7 @@ it('warns when using the wrong act version - dom + test: .create()', () => {
 it('warns when using the wrong act version - dom + test: .update()', () => {
   const root = TestRenderer.create(<App key="one" />);
   expect(() => {
-    ReactDOM.act(() => {
+    TestUtils.act(() => {
       root.update(<App key="two" />);
     });
   }).toWarnDev(["It looks like you're using the wrong act()"], {
@@ -154,15 +151,15 @@ it('warns when using the wrong act version - dom + test: updates', () => {
   }
   TestRenderer.create(<Counter />);
   expect(() => {
-    ReactDOM.act(() => {
+    TestUtils.act(() => {
       setCtr(1);
     });
   }).toWarnDev(["It looks like you're using the wrong act()"]);
 });
 
 it('does not warn when nesting react-act inside react-dom', () => {
-  ReactDOM.act(() => {
-    ReactDOM.render(<ARTTest />, document.createElement('div'));
+  TestUtils.act(() => {
+    TestUtils.renderIntoDocument(<ARTTest />);
   });
 });
 
@@ -174,7 +171,7 @@ it('does not warn when nesting react-act inside react-test-renderer', () => {
 
 it("doesn't warn if you use nested acts from different renderers", () => {
   TestRenderer.act(() => {
-    ReactDOM.act(() => {
+    TestUtils.act(() => {
       TestRenderer.create(<App />);
     });
   });

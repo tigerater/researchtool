@@ -24,8 +24,7 @@
 // For this reason, changes to the tree context are processed in sequence: tree -> search -> owners
 // This enables each section to potentially override (or mask) previous values.
 
-import * as React from 'react';
-import {
+import React, {
   createContext,
   useCallback,
   useContext,

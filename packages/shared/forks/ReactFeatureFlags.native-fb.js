@@ -10,7 +10,7 @@
 import invariant from 'shared/invariant';
 
 import typeof * as FeatureFlagsType from 'shared/ReactFeatureFlags';
-import typeof * as ExportsType from './ReactFeatureFlags.native-fb';
+import typeof * as FeatureFlagsShimType from './ReactFeatureFlags.native-fb';
 
 // Uncomment to re-export dynamic flags from the fbsource version.
 export const {
@@ -23,9 +23,9 @@ export const enableProfilerTimer = __PROFILE__;
 export const enableSchedulerTracing = __PROFILE__;
 export const enableSuspenseServerRenderer = false;
 export const enableSelectiveHydration = false;
-export const enableBlocksAPI = false;
+export const enableChunksAPI = false;
 export const exposeConcurrentModeAPIs = __EXPERIMENTAL__;
-export const warnAboutShorthandPropertyCollision = true;
+export const warnAboutShorthandPropertyCollision = false;
 export const enableSchedulerDebugging = false;
 export const debugRenderPhaseSideEffectsForStrictMode = true;
 export const disableJavaScriptURLs = false;
@@ -43,20 +43,10 @@ export const warnAboutDefaultPropsOnFunctionComponents = false;
 export const warnAboutStringRefs = false;
 export const disableLegacyContext = false;
 export const disableSchedulerTimeoutBasedOnReactExpirationTime = false;
-export const enableTrainModelFix = true;
+export const enableTrainModelFix = false;
 export const enableTrustedTypesIntegration = false;
 export const disableCreateFactory = false;
-export const disableLegacyReactDOMAPIs = false;
 export const disableTextareaChildren = false;
-export const disableMapsAsChildren = false;
-export const disableUnstableRenderSubtreeIntoContainer = false;
-export const warnUnstableRenderSubtreeIntoContainer = false;
-export const disableUnstableCreatePortal = false;
-export const deferPassiveEffectCleanupDuringUnmount = false;
-export const runAllPassiveEffectDestroysBeforeCreates = false;
-export const isTestEnvironment = false;
-export const enableModernEventSystem = false;
-export const warnAboutSpreadingKeyToJSX = false;
 
 // Only used in www builds.
 export function addUserTimingListener() {
@@ -67,4 +57,4 @@ export function addUserTimingListener() {
 // eslint-disable-next-line no-unused-vars
 type Check<_X, Y: _X, X: Y = _X> = null;
 // eslint-disable-next-line no-unused-expressions
-(null: Check<ExportsType, FeatureFlagsType>);
+(null: Check<FeatureFlagsShimType, FeatureFlagsType>);

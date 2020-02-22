@@ -7,28 +7,23 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useCallback, useContext, useMemo, useState} from 'react';
+import React, {useCallback, useContext, useMemo} from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {FixedSizeList} from 'react-window';
 import {ProfilerContext} from './ProfilerContext';
 import NoCommitData from './NoCommitData';
 import CommitRankedListItem from './CommitRankedListItem';
-import HoveredFiberInfo from './HoveredFiberInfo';
 import {scale} from './utils';
 import {StoreContext} from '../context';
 import {SettingsContext} from '../Settings/SettingsContext';
-import Tooltip from './Tooltip';
 
 import styles from './CommitRanked.css';
 
-import type {TooltipFiberData} from './HoveredFiberInfo';
 import type {ChartData} from './RankedChartBuilder';
 import type {CommitTree} from './types';
 
 export type ItemData = {|
   chartData: ChartData,
-  hoverFiber: (fiberData: TooltipFiberData | null) => void,
   scaleX: (value: number, fallbackValue: number) => number,
   selectedFiberID: number | null,
   selectedFiberIndex: number,
@@ -94,7 +89,6 @@ type Props = {|
 |};
 
 function CommitRanked({chartData, commitTree, height, width}: Props) {
-  const [hoveredFiberData, hoverFiber] = useState<number | null>(null);
   const {lineHeight} = useContext(SettingsContext);
   const {selectedFiberID, selectFiber} = useContext(ProfilerContext);
 
@@ -106,7 +100,6 @@ function CommitRanked({chartData, commitTree, height, width}: Props) {
   const itemData = useMemo<ItemData>(
     () => ({
       chartData,
-      hoverFiber,
       scaleX: scale(0, chartData.nodes[selectedFiberIndex].value, 0, width),
       selectedFiberID,
       selectedFiberIndex,
@@ -116,28 +109,16 @@ function CommitRanked({chartData, commitTree, height, width}: Props) {
     [chartData, selectedFiberID, selectedFiberIndex, selectFiber, width],
   );
 
-  // Tooltip used to show summary of fiber info on hover
-  const tooltipLabel = useMemo(
-    () =>
-      hoveredFiberData !== null ? (
-        <HoveredFiberInfo fiberData={hoveredFiberData} />
-      ) : null,
-    [hoveredFiberData],
-  );
-
   return (
-    <Tooltip label={tooltipLabel}>
-      <FixedSizeList
-        height={height}
-        innerElementType="svg"
-        itemCount={chartData.nodes.length}
-        itemData={itemData}
-        itemSize={lineHeight}
-        width={width}>
-        {CommitRankedListItem}
-      </FixedSizeList>
-      >
-    </Tooltip>
+    <FixedSizeList
+      height={height}
+      innerElementType="svg"
+      itemCount={chartData.nodes.length}
+      itemData={itemData}
+      itemSize={lineHeight}
+      width={width}>
+      {CommitRankedListItem}
+    </FixedSizeList>
   );
 }
 
