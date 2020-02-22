@@ -1,7 +1,0 @@
-class Phoenix < Cask
-  url 'https://raw.github.com/sdegutis/phoenix/master/Builds/Phoenix-LATEST.app.tar.gz'
-  homepage 'https://github.com/sdegutis/Phoenix'
-  version 'latest'
-  sha256 :no_check
-  link 'Phoenix.app'
-end

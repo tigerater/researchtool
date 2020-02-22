@@ -1,73 +1,75 @@
-# NOTICE: Homebrew-cask has moved!
+# [React](https://reactjs.org/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![CircleCI Status](https://circleci.com/gh/facebook/react.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/facebook/react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-The original repo at https://github.com/phinze/homebrew-cask has moved
-under the organizational umbrella at https://github.com/caskroom/homebrew-cask .
+React is a JavaScript library for building user interfaces.
 
-Web redirection happens automatically.
+* **Declarative:** React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable, simpler to understand, and easier to debug.
+* **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep state out of the DOM.
+* **Learn Once, Write Anywhere:** We don't make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code. React can also render on the server using Node and power mobile apps using [React Native](https://facebook.github.io/react-native/).
 
-The location of the Cask Tap on disk has also changed, which should be
-handled automatically upon upgrading.  If you have technical difficulties,
-please see [TAP_MIGRATION.md](doc/TAP_MIGRATION.md).
+[Learn how to use React in your own project](https://reactjs.org/docs/getting-started.html).
 
-# "To install, drag this icon..." no more!
+## Installation
 
-[![Build Status](https://travis-ci.org/caskroom/homebrew-cask.png?branch=master)](https://travis-ci.org/caskroom/homebrew-cask)
-[![Code Climate](https://codeclimate.com/github/caskroom/homebrew-cask.png)](https://codeclimate.com/github/caskroom/homebrew-cask)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/caskroom/homebrew-cask/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+React has been designed for gradual adoption from the start, and **you can use as little or as much React as you need**:
 
+* Use [Online Playgrounds](https://reactjs.org/docs/getting-started.html#online-playgrounds) to get a taste of React.
+* [Add React to a Website](https://reactjs.org/docs/add-react-to-a-website.html) as a `<script>` tag in one minute.
+* [Create a New React App](https://reactjs.org/docs/create-a-new-react-app.html) if you're looking for a powerful JavaScript toolchain.
 
-Let's see if we can get the elegance, simplicity, and speed of Homebrew for the
-installation and management of GUI Mac applications such as Google Chrome and Adium.
+You can use React as a `<script>` tag from a [CDN](https://reactjs.org/docs/cdn-links.html), or as a `react` package on [npm](https://www.npmjs.com/).
 
-Homebrew-cask provides a friendly homebrew-style CLI workflow for the
-administration of Mac applications distributed as binaries.
+## Documentation
 
-It's implemented as a `homebrew` "[external
-command](https://github.com/mxcl/homebrew/wiki/External-Commands)" called
-`cask`.
+You can find the React documentation [on the website](https://reactjs.org/docs).  
 
-## Let's try it!
-```sh
-$ brew tap caskroom/cask
-$ brew install brew-cask
-$ brew cask install google-chrome
-=> Downloading https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg
-=> Success! google-chrome installed to /opt/homebrew-cask/Caskroom/google-chrome/stable-channel
-=> Linking Google Chrome.app to /Users/phinze/Applications/Google Chrome.app
-```
-And there we have it. Google Chrome installed with a few quick commands: no clicking, no dragging, no dropping.
-```sh
-open ~/Applications/"Google Chrome.app"
-```
-## Learn More
+Check out the [Getting Started](https://reactjs.org/docs/getting-started.html) page for a quick overview.
 
- * Find basic documentation on using homebrew-cask in [USAGE.md](USAGE.md)
- * Want to contribute a Cask? Awesome! See [CONTRIBUTING.md](CONTRIBUTING.md)
- * Want to hack on our code? Also awesome! See [HACKING.md](doc/HACKING.md)
- * More project-related details and discussion are available in [FAQ.md](doc/FAQ.md) and [CASK_LANGUAGE_REFERENCE.md](doc/CASK_LANGUAGE_REFERENCE.md)
+The documentation is divided into several sections:
 
-## Questions? Wanna chat?
+* [Tutorial](https://reactjs.org/tutorial/tutorial.html)
+* [Main Concepts](https://reactjs.org/docs/hello-world.html)
+* [Advanced Guides](https://reactjs.org/docs/jsx-in-depth.html)
+* [API Reference](https://reactjs.org/docs/react-api.html)
+* [Where to Get Support](https://reactjs.org/community/support.html)
+* [Contributing Guide](https://reactjs.org/docs/how-to-contribute.html)
 
-We're really rather friendly! Here are the best places to talk about the project:
+You can improve it by sending pull requests to [this repository](https://github.com/reactjs/reactjs.org).
 
- * Start an [issue on GitHub](https://github.com/caskroom/homebrew-cask/issues/new)
- * Join us on IRC, we're at `#homebrew-cask` on Freenode
+## Examples
 
-## Reporting Bugs
+We have several examples [on the website](https://reactjs.org/). Here is the first one to get you started:
 
-We still have bugs -- and we are busy fixing them!  If you have a problem, don't
-be shy about reporting it on our [GitHub issues page](https://github.com/caskroom/homebrew-cask/issues?state=open).
+```jsx
+function HelloMessage({ name }) {
+  return <div>Hello {name}</div>;
+}
 
-When reporting bugs, remember that homebrew-cask is an independent project from
-Homebrew.  Do your best to direct bug reports to the appropriate project.  If
-your command-line started with `brew cask`, bring the bug to us first!
-
-Before reporting a bug, make sure you have the latest versions of Homebrew,
-homebrew-cask, and all Taps by running the following command:
-
-```bash
-$ brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
+ReactDOM.render(
+  <HelloMessage name="Taylor" />,
+  document.getElementById('container')
+);
 ```
 
-## License:
-Code is under the [BSD 2 Clause (NetBSD) license](LICENSE)
+This example will render "Hello Taylor" into a container on the page.
+
+You'll notice that we used an HTML-like syntax; [we call it JSX](https://reactjs.org/docs/introducing-jsx.html). JSX is not required to use React, but it makes code more readable, and writing it feels like writing HTML. If you're using React as a `<script>` tag, read [this section](https://reactjs.org/docs/add-react-to-a-website.html#optional-try-react-with-jsx) on integrating JSX; otherwise, the [recommended JavaScript toolchains](https://reactjs.org/docs/create-a-new-react-app.html) handle it automatically.
+
+## Contributing
+
+The main purpose of this repository is to continue to evolve React core, making it faster and easier to use. Development of React happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving React.
+
+### [Code of Conduct](https://code.fb.com/codeofconduct)
+
+Facebook has adopted a Code of Conduct that we expect project participants to adhere to. Please read [the full text](https://code.fb.com/codeofconduct) so that you can understand what actions will and will not be tolerated.
+
+### [Contributing Guide](https://reactjs.org/contributing/how-to-contribute.html)
+
+Read our [contributing guide](https://reactjs.org/contributing/how-to-contribute.html) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to React.
+
+### Good First Issues
+
+To help you get your feet wet and get you familiar with our contribution process, we have a list of [good first issues](https://github.com/facebook/react/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started.
+
+### License
+
+React is [MIT licensed](./LICENSE).
