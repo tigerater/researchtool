@@ -256,7 +256,7 @@ export namespace streetviewpublish_v1 {
      */
     downloadUrl?: string | null;
     /**
-     * Output only. Status in Google Maps, whether this photo was published or rejected. Not currently populated.
+     * Output only. Status in Google Maps, whether this photo was published or rejected.
      */
     mapsPublishStatus?: string | null;
     /**

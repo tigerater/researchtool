@@ -41,21 +41,9 @@ export namespace tagmanager_v2 {
 
   interface StandardParameters {
     /**
-     * V1 error format.
-     */
-    '$.xgafv'?: string;
-    /**
-     * OAuth access token.
-     */
-    access_token?: string;
-    /**
-     * Data format for response.
+     * Data format for the response.
      */
     alt?: string;
-    /**
-     * JSONP
-     */
-    callback?: string;
     /**
      * Selector specifying which fields to include in a partial response.
      */
@@ -73,23 +61,19 @@ export namespace tagmanager_v2 {
      */
     prettyPrint?: boolean;
     /**
-     * Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+     * An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
      */
     quotaUser?: string;
     /**
-     * Legacy upload protocol for media (e.g. "media", "multipart").
+     * Deprecated. Please use quotaUser instead.
      */
-    uploadType?: string;
-    /**
-     * Upload protocol for media (e.g. "raw", "multipart").
-     */
-    upload_protocol?: string;
+    userIp?: string;
   }
 
   /**
    * Tag Manager API
    *
-   * This API allows clients to access and modify container and tag      configuration.
+   * Accesses Tag Manager accounts and containers.
    *
    * @example
    * const {google} = require('googleapis');
@@ -128,7 +112,7 @@ export namespace tagmanager_v2 {
      */
     fingerprint?: string | null;
     /**
-     * Account display name. @mutable tagmanager.accounts.create @mutable tagmanager.accounts.update
+     * Account display name.
      */
     name?: string | null;
     /**
@@ -136,7 +120,7 @@ export namespace tagmanager_v2 {
      */
     path?: string | null;
     /**
-     * Whether the account shares data anonymously with Google and others. This flag enables benchmarking by sharing your data in an anonymous form. Google will remove all identifiable information about your website, combine the data with hundreds of other anonymous sites and report aggregate trends in the benchmarking service. @mutable tagmanager.accounts.create @mutable tagmanager.accounts.update
+     * Whether the account shares data anonymously with Google and others. This flag enables benchmarking by sharing your data in an anonymous form. Google will remove all identifiable information about your website, combine the data with hundreds of other anonymous sites and report aggregate trends in the benchmarking service.
      */
     shareData?: boolean | null;
     /**
@@ -149,7 +133,7 @@ export namespace tagmanager_v2 {
    */
   export interface Schema$AccountAccess {
     /**
-     * Whether the user has no access, user access, or admin access to an account. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
+     * Whether the user has no access, user access, or admin access to an account.
      */
     permission?: string | null;
   }
@@ -174,53 +158,7 @@ export namespace tagmanager_v2 {
      */
     path?: string | null;
     /**
-     * Type of built-in variable. @required.tagmanager.accounts.containers.workspaces.built_in_variable.update @mutable tagmanager.accounts.containers.workspaces.built_in_variable.update
-     */
-    type?: string | null;
-    /**
-     * GTM Workspace ID.
-     */
-    workspaceId?: string | null;
-  }
-  export interface Schema$Client {
-    /**
-     * GTM Account ID.
-     */
-    accountId?: string | null;
-    /**
-     * The Client ID uniquely identifies the GTM client.
-     */
-    clientId?: string | null;
-    /**
-     * GTM Container ID.
-     */
-    containerId?: string | null;
-    /**
-     * The fingerprint of the GTM Client as computed at storage time. This value is recomputed whenever the client is modified.
-     */
-    fingerprint?: string | null;
-    /**
-     * Client display name. @mutable tagmanager.accounts.containers.workspaces.clients.create @mutable tagmanager.accounts.containers.workspaces.clients.update
-     */
-    name?: string | null;
-    /**
-     * The client&#39;s parameters. @mutable tagmanager.accounts.containers.workspaces.clients.create @mutable tagmanager.accounts.containers.workspaces.clients.update
-     */
-    parameter?: Schema$Parameter[];
-    /**
-     * GTM client&#39;s API relative path.
-     */
-    path?: string | null;
-    /**
-     * Priority determines relative firing order. @mutable tagmanager.accounts.containers.workspaces.clients.create @mutable tagmanager.accounts.containers.workspaces.clients.update
-     */
-    priority?: number | null;
-    /**
-     * Auto generated link to the tag manager UI
-     */
-    tagManagerUrl?: string | null;
-    /**
-     * Client type. @mutable tagmanager.accounts.containers.workspaces.clients.create @mutable tagmanager.accounts.containers.workspaces.clients.update
+     * Type of built-in variable.
      */
     type?: string | null;
     /**
@@ -233,11 +171,11 @@ export namespace tagmanager_v2 {
    */
   export interface Schema$Condition {
     /**
-     * A list of named parameters (key/value), depending on the condition&#39;s type. Notes:&lt;ul&gt; &lt;li&gt;For binary operators, include parameters named &lt;code&gt;arg0&lt;/code&gt; and    &lt;code&gt;arg1&lt;/code&gt; for specifying the left and right operands,    respectively.&lt;/li&gt; &lt;li&gt;At this time, the left operand (&lt;code&gt;arg0&lt;/code&gt;) must be a reference     to a variable.&lt;/li&gt; &lt;li&gt;For case-insensitive Regex matching, include a boolean parameter named     &lt;code&gt;ignore_case&lt;/code&gt; that is set to &lt;code&gt;true&lt;/code&gt;.     If not specified or set to any other value, the matching will be case     sensitive.&lt;/li&gt; &lt;li&gt;To negate an operator, include a boolean parameter named     &lt;code&gt;negate&lt;/code&gt; boolean parameter that is set to &lt;code&gt;true&lt;/code&gt;.     &lt;/li&gt; &lt;/ul&gt; @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * A list of named parameters (key/value), depending on the condition&#39;s type. Notes:  - For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively.  - At this time, the left operand (arg0) must be a reference to a variable.  - For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive.  - To negate an operator, include a boolean parameter named negate boolean parameter that is set to true.
      */
     parameter?: Schema$Parameter[];
     /**
-     * The type of operator for this condition. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * The type of operator for this condition.
      */
     type?: string | null;
   }
@@ -254,19 +192,19 @@ export namespace tagmanager_v2 {
      */
     containerId?: string | null;
     /**
-     * List of domain names associated with the Container. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * List of domain names associated with the Container.
      */
     domainName?: string[] | null;
     /**
-     * The fingerprint of the GTM Container as computed at storage time.  This value is recomputed whenever the account is modified.
+     * The fingerprint of the GTM Container as computed at storage time. This value is recomputed whenever the account is modified.
      */
     fingerprint?: string | null;
     /**
-     * Container display name. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * Container display name.
      */
     name?: string | null;
     /**
-     * Container Notes. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * Container Notes.
      */
     notes?: string | null;
     /**
@@ -282,7 +220,7 @@ export namespace tagmanager_v2 {
      */
     tagManagerUrl?: string | null;
     /**
-     * List of Usage Contexts for the Container. Valid values include: &lt;code&gt;web, android, or ios&lt;/code&gt;. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * List of Usage Contexts for the Container. Valid values include: web, android, or ios.
      */
     usageContext?: string[] | null;
   }
@@ -291,11 +229,11 @@ export namespace tagmanager_v2 {
    */
   export interface Schema$ContainerAccess {
     /**
-     * GTM Container ID. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
+     * GTM Container ID.
      */
     containerId?: string | null;
     /**
-     * List of Container permissions. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
+     * List of Container permissions.
      */
     permission?: string | null;
   }
@@ -311,10 +249,6 @@ export namespace tagmanager_v2 {
      * The built-in variables in the container that this version was taken from.
      */
     builtInVariable?: Schema$BuiltInVariable[];
-    /**
-     * The clients in the container that this version was taken from.
-     */
-    client?: Schema$Client[];
     /**
      * The container that this version was taken from.
      */
@@ -336,7 +270,7 @@ export namespace tagmanager_v2 {
      */
     deleted?: boolean | null;
     /**
-     * Container version description. @mutable tagmanager.accounts.containers.versions.update
+     * Container version description.
      */
     description?: string | null;
     /**
@@ -348,7 +282,7 @@ export namespace tagmanager_v2 {
      */
     folder?: Schema$Folder[];
     /**
-     * Container version display name. @mutable tagmanager.accounts.containers.versions.update
+     * Container version display name.
      */
     name?: string | null;
     /**
@@ -490,10 +424,6 @@ export namespace tagmanager_v2 {
      */
     fingerprint?: string | null;
     /**
-     * A reference to the Community Template Gallery entry.
-     */
-    galleryReference?: Schema$GalleryReference;
-    /**
      * Custom Template display name.
      */
     name?: string | null;
@@ -558,7 +488,7 @@ export namespace tagmanager_v2 {
     /**
      * The last update time-stamp for the authorization code.
      */
-    authorizationTimestamp?: string | null;
+    authorizationTimestamp?: Schema$Timestamp;
     /**
      * GTM Container ID.
      */
@@ -568,11 +498,11 @@ export namespace tagmanager_v2 {
      */
     containerVersionId?: string | null;
     /**
-     * The environment description. Can be set or changed only on USER type environments. @mutable tagmanager.accounts.containers.environments.create @mutable tagmanager.accounts.containers.environments.update
+     * The environment description. Can be set or changed only on USER type environments.
      */
     description?: string | null;
     /**
-     * Whether or not to enable debug by default for the environment. @mutable tagmanager.accounts.containers.environments.create @mutable tagmanager.accounts.containers.environments.update
+     * Whether or not to enable debug by default for the environment.
      */
     enableDebug?: boolean | null;
     /**
@@ -584,7 +514,7 @@ export namespace tagmanager_v2 {
      */
     fingerprint?: string | null;
     /**
-     * The environment display name. Can be set or changed only on USER type environments. @mutable tagmanager.accounts.containers.environments.create @mutable tagmanager.accounts.containers.environments.update
+     * The environment display name. Can be set or changed only on USER type environments.
      */
     name?: string | null;
     /**
@@ -600,7 +530,7 @@ export namespace tagmanager_v2 {
      */
     type?: string | null;
     /**
-     * Default preview page url for the environment. @mutable tagmanager.accounts.containers.environments.create @mutable tagmanager.accounts.containers.environments.update
+     * Default preview page url for the environment.
      */
     url?: string | null;
     /**
@@ -629,11 +559,11 @@ export namespace tagmanager_v2 {
      */
     folderId?: string | null;
     /**
-     * Folder display name. @mutable tagmanager.accounts.containers.workspaces.folders.create @mutable tagmanager.accounts.containers.workspaces.folders.update
+     * Folder display name.
      */
     name?: string | null;
     /**
-     * User notes on how to apply this folder in the container. @mutable tagmanager.accounts.containers.workspaces.folders.create @mutable tagmanager.accounts.containers.workspaces.folders.update
+     * User notes on how to apply this folder in the container.
      */
     notes?: string | null;
     /**
@@ -669,35 +599,6 @@ export namespace tagmanager_v2 {
      * The list of variables inside the folder.
      */
     variable?: Schema$Variable[];
-  }
-  /**
-   * Represents the link between a custom template and an entry on the Community Template Gallery site.
-   */
-  export interface Schema$GalleryReference {
-    /**
-     * The name of the host for the community gallery template.
-     */
-    host?: string | null;
-    /**
-     * If a user has manually edited the community  gallery template.
-     */
-    isModified?: boolean | null;
-    /**
-     * The name of the owner for the community gallery template.
-     */
-    owner?: string | null;
-    /**
-     * The name of the repository for the community gallery template.
-     */
-    repository?: string | null;
-    /**
-     * The signature of the community gallery template as computed at import time. This value is recomputed whenever the template is updated from the gallery.
-     */
-    signature?: string | null;
-    /**
-     * The version of the community gallery template.
-     */
-    version?: string | null;
   }
   /**
    * The changes that have occurred in the workspace since the base container version.
@@ -893,23 +794,23 @@ export namespace tagmanager_v2 {
    */
   export interface Schema$Parameter {
     /**
-     * The named key that uniquely identifies a parameter.  Required for top-level parameters, as well as map values.  Ignored for list values. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
      */
     key?: string | null;
     /**
-     * This list parameter&#39;s parameters (keys will be ignored). @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * This list parameter&#39;s parameters (keys will be ignored).
      */
     list?: Schema$Parameter[];
     /**
-     * This map parameter&#39;s parameters (must have keys; keys must be unique). @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * This map parameter&#39;s parameters (must have keys; keys must be unique).
      */
     map?: Schema$Parameter[];
     /**
-     * The parameter type.  Valid values are:&lt;ul&gt; &lt;li&gt;&lt;code&gt;boolean&lt;/code&gt;: The value represents a boolean, represented as     &#39;true&#39; or &#39;false&#39;&lt;/li&gt; &lt;li&gt;&lt;code&gt;integer&lt;/code&gt;: The value represents a 64-bit signed integer     value, in base 10&lt;/li&gt; &lt;li&gt;&lt;code&gt;list&lt;/code&gt;: A list of parameters should be specified&lt;/li&gt; &lt;li&gt;&lt;code&gt;map&lt;/code&gt;: A map of parameters should be specified&lt;/li&gt; &lt;li&gt;&lt;code&gt;template&lt;/code&gt;: The value represents any text; this can include     variable references (even variable references that might return     non-string types)&lt;/li&gt; &lt;li&gt;&lt;code&gt;trigger_reference&lt;/code&gt;: The value represents a trigger,     represented as the trigger id&lt;/li&gt; &lt;li&gt;&lt;code&gt;tag_reference&lt;/code&gt;: The value represents a tag, represented as     the tag name&lt;/li&gt; &lt;/ul&gt; @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * The parameter type. Valid values are:  - boolean: The value represents a boolean, represented as &#39;true&#39; or &#39;false&#39;  - integer: The value represents a 64-bit signed integer value, in base 10  - list: A list of parameters should be specified  - map: A map of parameters should be specified  - template: The value represents any text; this can include variable references (even variable references that might return non-string types)  - trigger_reference: The value represents a trigger, represented as the trigger id
      */
     type?: string | null;
     /**
-     * A parameter&#39;s value (may contain variable references such as &quot;{{myVariable}}&quot;) as appropriate to the specified type. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * A parameter&#39;s value (may contain variable references such as &quot;{{myVariable}}&quot;) as appropriate to the specified type.
      */
     value?: string | null;
   }
@@ -1054,11 +955,11 @@ export namespace tagmanager_v2 {
      */
     accountId?: string | null;
     /**
-     * Blocking rule IDs. If any of the listed rules evaluate to true, the tag     will not fire. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * Blocking rule IDs. If any of the listed rules evaluate to true, the tag will not fire.
      */
     blockingRuleId?: string[] | null;
     /**
-     * Blocking trigger IDs. If any of the listed triggers evaluate to true, the tag will not fire. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * Blocking trigger IDs. If any of the listed triggers evaluate to true, the tag will not fire.
      */
     blockingTriggerId?: string[] | null;
     /**
@@ -1070,35 +971,27 @@ export namespace tagmanager_v2 {
      */
     fingerprint?: string | null;
     /**
-     * Firing rule IDs. A tag will fire when any of the listed rules are true and     all of its &lt;code&gt;blockingRuleIds&lt;/code&gt; (if any specified) are false. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * Firing rule IDs. A tag will fire when any of the listed rules are true and all of its blockingRuleIds (if any specified) are false.
      */
     firingRuleId?: string[] | null;
     /**
-     * Firing trigger IDs. A tag will fire when any of the listed triggers are true and all of its &lt;code&gt;blockingTriggerIds&lt;/code&gt; (if any specified) are false. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * Firing trigger IDs. A tag will fire when any of the listed triggers are true and all of its blockingTriggerIds (if any specified) are false.
      */
     firingTriggerId?: string[] | null;
     /**
-     * If set to true, this tag will only fire in the live environment (e.g. not in preview or debug mode). @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * If set to true, this tag will only fire in the live environment (e.g. not in preview or debug mode).
      */
     liveOnly?: boolean | null;
     /**
-     * A map of key-value pairs of tag metadata to be included in the event data for tag monitoring. Notes:&lt;ul&gt; &lt;li&gt;This parameter must be type &lt;code&gt;MAP&lt;/code&gt;.&lt;/li&gt; &lt;li&gt;Each parameter in the map are type &lt;code&gt;TEMPLATE&lt;/code&gt;, however cannot contain variable references.&lt;/li&gt; &lt;/ul&gt; @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
-     */
-    monitoringMetadata?: Schema$Parameter;
-    /**
-     * If non-empty, then the tag display name will be included in the monitoring metadata map using the key specified. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
-     */
-    monitoringMetadataTagNameKey?: string | null;
-    /**
-     * Tag display name. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * Tag display name.
      */
     name?: string | null;
     /**
-     * User notes on how to apply this tag in the container. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * User notes on how to apply this tag in the container.
      */
     notes?: string | null;
     /**
-     * The tag&#39;s parameters. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * The tag&#39;s parameters.
      */
     parameter?: Schema$Parameter[];
     /**
@@ -1110,19 +1003,19 @@ export namespace tagmanager_v2 {
      */
     path?: string | null;
     /**
-     * Indicates whether the tag is paused, which prevents the tag from firing. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * Indicates whether the tag is paused, which prevents the tag from firing.
      */
     paused?: boolean | null;
     /**
-     * User defined numeric priority of the tag. Tags are fired asynchronously in order of priority. Tags with higher numeric value fire first. A tag&#39;s priority can be a positive or negative value. The default value is 0. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * User defined numeric priority of the tag. Tags are fired asynchronously in order of priority. Tags with higher numeric value fire first. A tag&#39;s priority can be a positive or negative value. The default value is 0.
      */
     priority?: Schema$Parameter;
     /**
-     * The end timestamp in milliseconds to schedule a tag. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * The end timestamp in milliseconds to schedule a tag.
      */
     scheduleEndMs?: string | null;
     /**
-     * The start timestamp in milliseconds to schedule a tag. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * The start timestamp in milliseconds to schedule a tag.
      */
     scheduleStartMs?: string | null;
     /**
@@ -1146,7 +1039,7 @@ export namespace tagmanager_v2 {
      */
     teardownTag?: Schema$TeardownTag[];
     /**
-     * GTM Tag Type. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
+     * GTM Tag Type.
      */
     type?: string | null;
     /**
@@ -1168,6 +1061,19 @@ export namespace tagmanager_v2 {
     tagName?: string | null;
   }
   /**
+   * A Timestamp represents a point in time independent of any time zone or local calendar, encoded as a count of seconds and fractions of seconds at nanosecond resolution. The count is relative to an epoch at UTC midnight on January 1, 1970, in the proleptic Gregorian calendar which extends the Gregorian calendar backwards to year one.  All minutes are 60 seconds long. Leap seconds are &quot;smeared&quot; so that no leap second table is needed for interpretation, using a [24-hour linear smear](https://developers.google.com/time/smear).  The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure that we can convert to and from [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.  # Examples  Example 1: Compute Timestamp from POSIX `time()`.  Timestamp timestamp; timestamp.set_seconds(time(NULL)); timestamp.set_nanos(0);  Example 2: Compute Timestamp from POSIX `gettimeofday()`.  struct timeval tv; gettimeofday(&amp;tv, NULL);  Timestamp timestamp; timestamp.set_seconds(tv.tv_sec); timestamp.set_nanos(tv.tv_usec * 1000);  Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.  FILETIME ft; GetSystemTimeAsFileTime(&amp;ft); UINT64 ticks = (((UINT64)ft.dwHighDateTime) &lt;&lt; 32) | ft.dwLowDateTime;  // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z. Timestamp timestamp; timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL)); timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));  Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.  long millis = System.currentTimeMillis();  Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000) .setNanos((int) ((millis % 1000) * 1000000)).build();    Example 5: Compute Timestamp from current time in Python.  timestamp = Timestamp() timestamp.GetCurrentTime()  # JSON Mapping  In JSON format, the Timestamp type is encoded as a string in the [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the format is &quot;{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z&quot; where {year} is always expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution), are optional. The &quot;Z&quot; suffix indicates the timezone (&quot;UTC&quot;); the timezone is required. A proto3 JSON serializer should always use UTC (as indicated by &quot;Z&quot;) when printing the Timestamp type and a proto3 JSON parser should be able to accept both UTC and other timezones (as indicated by an offset).  For example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past 01:30 UTC on January 15, 2017.  In JavaScript, one can convert a Date object to this format using the standard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) method. In Python, a standard `datetime.datetime` object can be converted to this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with the time format spec &#39;%Y-%m-%dT%H:%M:%S.%fZ&#39;. Likewise, in Java, one can use the Joda Time&#39;s [`ISODateTimeFormat.dateTime()`]( http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D ) to obtain a formatter capable of generating timestamps in this format.
+   */
+  export interface Schema$Timestamp {
+    /**
+     * Non-negative fractions of a second at nanosecond resolution. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be from 0 to 999,999,999 inclusive.
+     */
+    nanos?: number | null;
+    /**
+     * Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.
+     */
+    seconds?: string | null;
+  }
+  /**
    * Represents a Google Tag Manager Trigger
    */
   export interface Schema$Trigger {
@@ -1176,11 +1082,11 @@ export namespace tagmanager_v2 {
      */
     accountId?: string | null;
     /**
-     * Used in the case of auto event tracking. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Used in the case of auto event tracking.
      */
     autoEventFilter?: Schema$Condition[];
     /**
-     * Whether or not we should only fire tags if the form submit or link click event is not cancelled by some other event handler (e.g. because of validation). Only valid for Form Submission and Link Click triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Whether or not we should only fire tags if the form submit or link click event is not cancelled by some other event handler (e.g. because of validation). Only valid for Form Submission and Link Click triggers.
      */
     checkValidation?: Schema$Parameter;
     /**
@@ -1188,19 +1094,19 @@ export namespace tagmanager_v2 {
      */
     containerId?: string | null;
     /**
-     * A visibility trigger minimum continuous visible time (in milliseconds). Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * A visibility trigger minimum continuous visible time (in milliseconds). Only valid for AMP Visibility trigger.
      */
     continuousTimeMinMilliseconds?: Schema$Parameter;
     /**
-     * Used in the case of custom event, which is fired iff all Conditions are true. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Used in the case of custom event, which is fired iff all Conditions are true.
      */
     customEventFilter?: Schema$Condition[];
     /**
-     * Name of the GTM event that is fired. Only valid for Timer triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Name of the GTM event that is fired. Only valid for Timer triggers.
      */
     eventName?: Schema$Parameter;
     /**
-     * The trigger will only fire iff all Conditions are true. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * The trigger will only fire iff all Conditions are true.
      */
     filter?: Schema$Condition[];
     /**
@@ -1208,35 +1114,35 @@ export namespace tagmanager_v2 {
      */
     fingerprint?: string | null;
     /**
-     * List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled horizontally. Only valid for AMP scroll triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled horizontally. Only valid for AMP scroll triggers.
      */
     horizontalScrollPercentageList?: Schema$Parameter;
     /**
-     * Time between triggering recurring Timer Events (in milliseconds). Only valid for Timer triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Time between triggering recurring Timer Events (in milliseconds). Only valid for Timer triggers.
      */
     interval?: Schema$Parameter;
     /**
-     * Time between Timer Events to fire (in seconds). Only valid for AMP Timer trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Time between Timer Events to fire (in seconds). Only valid for AMP Timer trigger.
      */
     intervalSeconds?: Schema$Parameter;
     /**
-     * Limit of the number of GTM events this Timer Trigger will fire. If no limit is set, we will continue to fire GTM events until the user leaves the page. Only valid for Timer triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Limit of the number of GTM events this Timer Trigger will fire. If no limit is set, we will continue to fire GTM events until the user leaves the page. Only valid for Timer triggers.
      */
     limit?: Schema$Parameter;
     /**
-     * Max time to fire Timer Events (in seconds). Only valid for AMP Timer trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Max time to fire Timer Events (in seconds). Only valid for AMP Timer trigger.
      */
     maxTimerLengthSeconds?: Schema$Parameter;
     /**
-     * Trigger display name. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Trigger display name.
      */
     name?: string | null;
     /**
-     * User notes on how to apply this trigger in the container. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * User notes on how to apply this trigger in the container.
      */
     notes?: string | null;
     /**
-     * Additional parameters. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Additional parameters.
      */
     parameter?: Schema$Parameter[];
     /**
@@ -1248,7 +1154,7 @@ export namespace tagmanager_v2 {
      */
     path?: string | null;
     /**
-     * A click trigger CSS selector (i.e. &quot;a&quot;, &quot;button&quot; etc.). Only valid for AMP Click trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * A click trigger CSS selector (i.e. &quot;a&quot;, &quot;button&quot; etc.). Only valid for AMP Click trigger.
      */
     selector?: Schema$Parameter;
     /**
@@ -1256,7 +1162,7 @@ export namespace tagmanager_v2 {
      */
     tagManagerUrl?: string | null;
     /**
-     * A visibility trigger minimum total visible time (in milliseconds). Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * A visibility trigger minimum total visible time (in milliseconds). Only valid for AMP Visibility trigger.
      */
     totalTimeMinMilliseconds?: Schema$Parameter;
     /**
@@ -1264,35 +1170,35 @@ export namespace tagmanager_v2 {
      */
     triggerId?: string | null;
     /**
-     * Defines the data layer event that causes this trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Defines the data layer event that causes this trigger.
      */
     type?: string | null;
     /**
-     * Globally unique id of the trigger that auto-generates this (a Form Submit, Link Click or Timer listener) if any. Used to make incompatible auto-events work together with trigger filtering based on trigger ids. This value is populated during output generation since the tags implied by triggers don&#39;t exist until then. Only valid for Form Submit, Link Click and Timer triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Globally unique id of the trigger that auto-generates this (a Form Submit, Link Click or Timer listener) if any. Used to make incompatible auto-events work together with trigger filtering based on trigger ids. This value is populated during output generation since the tags implied by triggers don&#39;t exist until then. Only valid for Form Submit, Link Click and Timer triggers.
      */
     uniqueTriggerId?: Schema$Parameter;
     /**
-     * List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled vertically. Only valid for AMP scroll triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled vertically. Only valid for AMP scroll triggers.
      */
     verticalScrollPercentageList?: Schema$Parameter;
     /**
-     * A visibility trigger CSS selector (i.e. &quot;#id&quot;). Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * A visibility trigger CSS selector (i.e. &quot;#id&quot;). Only valid for AMP Visibility trigger.
      */
     visibilitySelector?: Schema$Parameter;
     /**
-     * A visibility trigger maximum percent visibility. Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * A visibility trigger maximum percent visibility. Only valid for AMP Visibility trigger.
      */
     visiblePercentageMax?: Schema$Parameter;
     /**
-     * A visibility trigger minimum percent visibility. Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * A visibility trigger minimum percent visibility. Only valid for AMP Visibility trigger.
      */
     visiblePercentageMin?: Schema$Parameter;
     /**
-     * Whether or not we should delay the form submissions or link opening until all of the tags have fired (by preventing the default action and later simulating the default action). Only valid for Form Submission and Link Click triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Whether or not we should delay the form submissions or link opening until all of the tags have fired (by preventing the default action and later simulating the default action). Only valid for Form Submission and Link Click triggers.
      */
     waitForTags?: Schema$Parameter;
     /**
-     * How long to wait (in milliseconds) for tags to fire when &#39;waits_for_tags&#39; above evaluates to &lt;code&gt;true&lt;/code&gt;.  Only valid for Form Submission and Link Click triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * How long to wait (in milliseconds) for tags to fire when &#39;waits_for_tags&#39; above evaluates to true. Only valid for Form Submission and Link Click triggers.
      */
     waitForTagsTimeout?: Schema$Parameter;
     /**
@@ -1305,7 +1211,7 @@ export namespace tagmanager_v2 {
    */
   export interface Schema$UserPermission {
     /**
-     * GTM Account access permissions. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
+     * GTM Account access permissions.
      */
     accountAccess?: Schema$AccountAccess;
     /**
@@ -1313,11 +1219,11 @@ export namespace tagmanager_v2 {
      */
     accountId?: string | null;
     /**
-     * GTM Container access permissions. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
+     * GTM Container access permissions.
      */
     containerAccess?: Schema$ContainerAccess[];
     /**
-     * User&#39;s email address. @mutable tagmanager.accounts.permissions.create
+     * User&#39;s email address.
      */
     emailAddress?: string | null;
     /**
@@ -1338,11 +1244,11 @@ export namespace tagmanager_v2 {
      */
     containerId?: string | null;
     /**
-     * For mobile containers only: A list of trigger IDs for disabling conditional variables; the variable is enabled if one of the enabling trigger is true while all the disabling trigger are false. Treated as an unordered set. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update
+     * For mobile containers only: A list of trigger IDs for disabling conditional variables; the variable is enabled if one of the enabling trigger is true while all the disabling trigger are false. Treated as an unordered set.
      */
     disablingTriggerId?: string[] | null;
     /**
-     * For mobile containers only: A list of trigger IDs for enabling conditional variables; the variable is enabled if one of the enabling triggers is true while all the disabling triggers are false. Treated as an unordered set. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update
+     * For mobile containers only: A list of trigger IDs for enabling conditional variables; the variable is enabled if one of the enabling triggers is true while all the disabling triggers are false. Treated as an unordered set.
      */
     enablingTriggerId?: string[] | null;
     /**
@@ -1354,15 +1260,15 @@ export namespace tagmanager_v2 {
      */
     formatValue?: Schema$VariableFormatValue;
     /**
-     * Variable display name. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update
+     * Variable display name.
      */
     name?: string | null;
     /**
-     * User notes on how to apply this variable in the container. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update
+     * User notes on how to apply this variable in the container.
      */
     notes?: string | null;
     /**
-     * The variable&#39;s parameters. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update
+     * The variable&#39;s parameters.
      */
     parameter?: Schema$Parameter[];
     /**
@@ -1374,11 +1280,11 @@ export namespace tagmanager_v2 {
      */
     path?: string | null;
     /**
-     * The end timestamp in milliseconds to schedule a variable. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update
+     * The end timestamp in milliseconds to schedule a variable.
      */
     scheduleEndMs?: string | null;
     /**
-     * The start timestamp in milliseconds to schedule a variable. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update
+     * The start timestamp in milliseconds to schedule a variable.
      */
     scheduleStartMs?: string | null;
     /**
@@ -1386,7 +1292,7 @@ export namespace tagmanager_v2 {
      */
     tagManagerUrl?: string | null;
     /**
-     * GTM Variable Type. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update
+     * GTM Variable Type.
      */
     type?: string | null;
     /**
@@ -1433,7 +1339,7 @@ export namespace tagmanager_v2 {
      */
     containerId?: string | null;
     /**
-     * Workspace description. @mutable tagmanager.accounts.containers.workspaces.create @mutable tagmanager.accounts.containers.workspaces.update
+     * Workspace description.
      */
     description?: string | null;
     /**
@@ -1441,7 +1347,7 @@ export namespace tagmanager_v2 {
      */
     fingerprint?: string | null;
     /**
-     * Workspace display name. @mutable tagmanager.accounts.containers.workspaces.create @mutable tagmanager.accounts.containers.workspaces.update
+     * Workspace display name.
      */
     name?: string | null;
     /**
@@ -1639,7 +1545,7 @@ export namespace tagmanager_v2 {
      * @alias tagmanager.accounts.list
      * @memberOf! ()
      *
-     * @param {object} params Parameters for request
+     * @param {object=} params Parameters for request
      * @param {string=} params.pageToken Continuation token for fetching the next page of results.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -2936,7 +2842,7 @@ export namespace tagmanager_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.containerVersionId The GTM ContainerVersion ID. Specify <code>published</code> to retrieve the currently published version.
+     * @param {string=} params.containerVersionId The GTM ContainerVersion ID. Specify published to retrieve the currently published version.
      * @param {string} params.path GTM ContainerVersion's API relative path. Example: accounts/{account_id}/containers/{container_id}/versions/{version_id}
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -3407,7 +3313,7 @@ export namespace tagmanager_v2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The GTM ContainerVersion ID. Specify <code>published</code> to retrieve the currently published version.
+     * The GTM ContainerVersion ID. Specify published to retrieve the currently published version.
      */
     containerVersionId?: string;
     /**

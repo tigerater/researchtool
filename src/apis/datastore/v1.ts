@@ -120,7 +120,7 @@ export namespace datastore_v1 {
    */
   export interface Schema$AllocateIdsRequest {
     /**
-     * Required. A list of keys with incomplete key paths for which to allocate IDs. No key may be reserved/read-only.
+     * A list of keys with incomplete key paths for which to allocate IDs. No key may be reserved/read-only.
      */
     keys?: Schema$Key[];
   }
@@ -436,7 +436,7 @@ export namespace datastore_v1 {
      */
     labels?: {[key: string]: string} | null;
     /**
-     * Required. Location for the export metadata and data files.  The full resource URL of the external storage location. Currently, only Google Cloud Storage is supported. So output_url_prefix should be of the form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name of the Cloud Storage bucket and `NAMESPACE_PATH` is an optional Cloud Storage namespace path (this is not a Cloud Datastore namespace). For more information about Cloud Storage namespace paths, see [Object name considerations](https://cloud.google.com/storage/docs/naming#object-considerations).  The resulting files will be nested deeper than the specified URL prefix. The final output URL will be provided in the google.datastore.admin.v1.ExportEntitiesResponse.output_url field. That value should be used for subsequent ImportEntities operations.  By nesting the data files deeper, the same Cloud Storage bucket can be used in multiple ExportEntities operations without conflict.
+     * Location for the export metadata and data files.  The full resource URL of the external storage location. Currently, only Google Cloud Storage is supported. So output_url_prefix should be of the form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name of the Cloud Storage bucket and `NAMESPACE_PATH` is an optional Cloud Storage namespace path (this is not a Cloud Datastore namespace). For more information about Cloud Storage namespace paths, see [Object name considerations](https://cloud.google.com/storage/docs/naming#object-considerations).  The resulting files will be nested deeper than the specified URL prefix. The final output URL will be provided in the google.datastore.admin.v1.ExportEntitiesResponse.output_url field. That value should be used for subsequent ImportEntities operations.  By nesting the data files deeper, the same Cloud Storage bucket can be used in multiple ExportEntities operations without conflict.
      */
     outputUrlPrefix?: string | null;
   }
@@ -483,7 +483,7 @@ export namespace datastore_v1 {
      */
     entityFilter?: Schema$GoogleDatastoreAdminV1EntityFilter;
     /**
-     * Required. The full resource URL of the external storage location. Currently, only Google Cloud Storage is supported. So input_url should be of the form: `gs://BUCKET_NAME[/NAMESPACE_PATH]/OVERALL_EXPORT_METADATA_FILE`, where `BUCKET_NAME` is the name of the Cloud Storage bucket, `NAMESPACE_PATH` is an optional Cloud Storage namespace path (this is not a Cloud Datastore namespace), and `OVERALL_EXPORT_METADATA_FILE` is the metadata file written by the ExportEntities operation. For more information about Cloud Storage namespace paths, see [Object name considerations](https://cloud.google.com/storage/docs/naming#object-considerations).  For more information, see google.datastore.admin.v1.ExportEntitiesResponse.output_url.
+     * The full resource URL of the external storage location. Currently, only Google Cloud Storage is supported. So input_url should be of the form: `gs://BUCKET_NAME[/NAMESPACE_PATH]/OVERALL_EXPORT_METADATA_FILE`, where `BUCKET_NAME` is the name of the Cloud Storage bucket, `NAMESPACE_PATH` is an optional Cloud Storage namespace path (this is not a Cloud Datastore namespace), and `OVERALL_EXPORT_METADATA_FILE` is the metadata file written by the ExportEntities operation. For more information about Cloud Storage namespace paths, see [Object name considerations](https://cloud.google.com/storage/docs/naming#object-considerations).  For more information, see google.datastore.admin.v1.ExportEntitiesResponse.output_url.
      */
     inputUrl?: string | null;
     /**
@@ -496,27 +496,27 @@ export namespace datastore_v1 {
    */
   export interface Schema$GoogleDatastoreAdminV1Index {
     /**
-     * Required. The index&#39;s ancestor mode.  Must not be ANCESTOR_MODE_UNSPECIFIED.
+     * The index&#39;s ancestor mode.  Must not be ANCESTOR_MODE_UNSPECIFIED. Required.
      */
     ancestor?: string | null;
     /**
-     * Output only. The resource ID of the index.
+     * The resource ID of the index. Output only.
      */
     indexId?: string | null;
     /**
-     * Required. The entity kind to which this index applies.
+     * The entity kind to which this index applies. Required.
      */
     kind?: string | null;
     /**
-     * Output only. Project ID.
+     * Project ID. Output only.
      */
     projectId?: string | null;
     /**
-     * Required. An ordered sequence of property names and their index attributes.
+     * An ordered sequence of property names and their index attributes. Required.
      */
     properties?: Schema$GoogleDatastoreAdminV1IndexedProperty[];
     /**
-     * Output only. The state of the index.
+     * The state of the index. Output only.
      */
     state?: string | null;
   }
@@ -525,11 +525,11 @@ export namespace datastore_v1 {
    */
   export interface Schema$GoogleDatastoreAdminV1IndexedProperty {
     /**
-     * Required. The indexed property&#39;s direction.  Must not be DIRECTION_UNSPECIFIED.
+     * The indexed property&#39;s direction.  Must not be DIRECTION_UNSPECIFIED. Required.
      */
     direction?: string | null;
     /**
-     * Required. The property name to index.
+     * The property name to index. Required.
      */
     name?: string | null;
   }
@@ -688,7 +688,7 @@ export namespace datastore_v1 {
    */
   export interface Schema$LookupRequest {
     /**
-     * Required. Keys of entities to look up.
+     * Keys of entities to look up.
      */
     keys?: Schema$Key[];
     /**
@@ -942,7 +942,7 @@ export namespace datastore_v1 {
      */
     databaseId?: string | null;
     /**
-     * Required. A list of keys with complete key paths whose numeric IDs should not be auto-allocated.
+     * A list of keys with complete key paths whose numeric IDs should not be auto-allocated.
      */
     keys?: Schema$Key[];
   }
@@ -955,7 +955,7 @@ export namespace datastore_v1 {
    */
   export interface Schema$RollbackRequest {
     /**
-     * Required. The transaction identifier, returned by a call to Datastore.BeginTransaction.
+     * The transaction identifier, returned by a call to Datastore.BeginTransaction.
      */
     transaction?: string | null;
   }
@@ -1102,7 +1102,7 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
+     * @param {string} params.projectId The ID of the project against which to make the request.
      * @param {().AllocateIdsRequest} params.requestBody Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1179,7 +1179,7 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
+     * @param {string} params.projectId The ID of the project against which to make the request.
      * @param {().BeginTransactionRequest} params.requestBody Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1257,7 +1257,7 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
+     * @param {string} params.projectId The ID of the project against which to make the request.
      * @param {().CommitRequest} params.requestBody Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1331,7 +1331,7 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. Project ID against which to make the request.
+     * @param {string} params.projectId Project ID against which to make the request.
      * @param {().GoogleDatastoreAdminV1ExportEntitiesRequest} params.requestBody Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1412,7 +1412,7 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. Project ID against which to make the request.
+     * @param {string} params.projectId Project ID against which to make the request.
      * @param {().GoogleDatastoreAdminV1ImportEntitiesRequest} params.requestBody Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1493,7 +1493,7 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
+     * @param {string} params.projectId The ID of the project against which to make the request.
      * @param {().LookupRequest} params.requestBody Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1562,12 +1562,12 @@ export namespace datastore_v1 {
 
     /**
      * datastore.projects.reserveIds
-     * @desc Prevents the supplied keys' IDs from being auto-allocated by Cloud Datastore.
+     * @desc Prevents the supplied keys' IDs from being auto-allocated by Cloud Datastore. Used for imports only; other workloads are not supported.
      * @alias datastore.projects.reserveIds
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
+     * @param {string} params.projectId The ID of the project against which to make the request.
      * @param {().ReserveIdsRequest} params.requestBody Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1642,7 +1642,7 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
+     * @param {string} params.projectId The ID of the project against which to make the request.
      * @param {().RollbackRequest} params.requestBody Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1717,7 +1717,7 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
+     * @param {string} params.projectId The ID of the project against which to make the request.
      * @param {().RunQueryRequest} params.requestBody Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1794,7 +1794,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1811,7 +1811,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1827,7 +1827,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1843,7 +1843,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. Project ID against which to make the request.
+     * Project ID against which to make the request.
      */
     projectId?: string;
 
@@ -1859,7 +1859,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. Project ID against which to make the request.
+     * Project ID against which to make the request.
      */
     projectId?: string;
 
@@ -1875,7 +1875,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1892,7 +1892,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1909,7 +1909,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1926,7 +1926,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 

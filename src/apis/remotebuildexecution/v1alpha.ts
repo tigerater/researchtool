@@ -602,18 +602,6 @@ export namespace remotebuildexecution_v1alpha {
     message?: string | null;
   }
   /**
-   * ResourceUsage is the system resource usage of the host machine.
-   */
-  export interface Schema$GoogleDevtoolsRemotebuildbotResourceUsage {
-    cpuUsedPercent?: number | null;
-    diskUsage?: Schema$GoogleDevtoolsRemotebuildbotResourceUsageStat;
-    memoryUsage?: Schema$GoogleDevtoolsRemotebuildbotResourceUsageStat;
-  }
-  export interface Schema$GoogleDevtoolsRemotebuildbotResourceUsageStat {
-    total?: string | null;
-    used?: string | null;
-  }
-  /**
    * AcceleratorConfig defines the accelerator cards to attach to the VM.
    */
   export interface Schema$GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig {
@@ -788,7 +776,7 @@ export namespace remotebuildexecution_v1alpha {
      */
     diskSizeGb?: string | null;
     /**
-     * Required. Disk Type to use for the worker. See [Storage options](https://cloud.google.com/compute/docs/disks/#introduction). Currently only `pd-standard` and `pd-ssd` are supported.
+     * Required. Disk Type to use for the worker. See [Storage options](https://cloud.google.com/compute/docs/disks/#introduction). Currently only `pd-standard` is supported.
      */
     diskType?: string | null;
     /**

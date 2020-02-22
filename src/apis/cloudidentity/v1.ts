@@ -508,7 +508,7 @@ export namespace cloudidentity_v1 {
 
     /**
      * cloudidentity.groups.list
-     * @desc Lists groups within a customer or a domain.
+     * @desc List groups within a customer or a domain.
      * @alias cloudidentity.groups.list
      * @memberOf! ()
      *
@@ -1149,7 +1149,7 @@ export namespace cloudidentity_v1 {
 
     /**
      * cloudidentity.groups.memberships.list
-     * @desc Lists Memberships within a Group.
+     * @desc List Memberships within a Group.
      * @alias cloudidentity.groups.memberships.list
      * @memberOf! ()
      *

@@ -12,7 +12,6 @@
     "**/scripts",
     "**/protos",
     "**/test",
-    "**/*.d.ts",
     ".jsdoc.js",
     "**/.jsdoc.js",
     "karma.conf.js",
