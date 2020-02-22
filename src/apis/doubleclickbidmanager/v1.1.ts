@@ -34,9 +34,9 @@ import {GaxiosPromise} from 'gaxios';
 // tslint:disable: jsdoc-format
 // tslint:disable: no-namespace
 
-export namespace doubleclickbidmanager_v1 {
+export namespace doubleclickbidmanager_v1_1 {
   export interface Options extends GlobalOptions {
-    version: 'v1';
+    version: 'v1.1';
   }
 
   interface StandardParameters {
@@ -77,12 +77,12 @@ export namespace doubleclickbidmanager_v1 {
    *
    * @example
    * const {google} = require('googleapis');
-   * const doubleclickbidmanager = google.doubleclickbidmanager('v1');
+   * const doubleclickbidmanager = google.doubleclickbidmanager('v1.1');
    *
    * @namespace doubleclickbidmanager
    * @type {Function}
-   * @version v1
-   * @variation v1
+   * @version v1.1
+   * @variation v1.1
    * @param {object=} options Options for Doubleclickbidmanager
    */
   export class Doubleclickbidmanager {
@@ -204,6 +204,10 @@ export namespace doubleclickbidmanager_v1 {
      */
     kind?: string | null;
     /**
+     * Next page&#39;s pagination token if one exists.
+     */
+    nextPageToken?: string | null;
+    /**
      * Retrieved queries.
      */
     queries?: Schema$Query[];
@@ -216,6 +220,10 @@ export namespace doubleclickbidmanager_v1 {
      * Identifies what kind of resource this is. Value: the fixed string &quot;doubleclickbidmanager#listReportsResponse&quot;.
      */
     kind?: string | null;
+    /**
+     * Next page&#39;s pagination token if one exists.
+     */
+    nextPageToken?: string | null;
     /**
      * Retrieved reports.
      */
@@ -589,7 +597,8 @@ export namespace doubleclickbidmanager_v1 {
         options: Object.assign(
           {
             url: (
-              rootUrl + '/doubleclickbidmanager/v1/lineitems/downloadlineitems'
+              rootUrl +
+              '/doubleclickbidmanager/v1.1/lineitems/downloadlineitems'
             ).replace(/([^:]\/)\/+/g, '$1'),
             method: 'POST',
           },
@@ -669,7 +678,7 @@ export namespace doubleclickbidmanager_v1 {
         options: Object.assign(
           {
             url: (
-              rootUrl + '/doubleclickbidmanager/v1/lineitems/uploadlineitems'
+              rootUrl + '/doubleclickbidmanager/v1.1/lineitems/uploadlineitems'
             ).replace(/([^:]\/)\/+/g, '$1'),
             method: 'POST',
           },
@@ -771,7 +780,7 @@ export namespace doubleclickbidmanager_v1 {
       const parameters = {
         options: Object.assign(
           {
-            url: (rootUrl + '/doubleclickbidmanager/v1/query').replace(
+            url: (rootUrl + '/doubleclickbidmanager/v1.1/query').replace(
               /([^:]\/)\/+/g,
               '$1'
             ),
@@ -844,7 +853,7 @@ export namespace doubleclickbidmanager_v1 {
         options: Object.assign(
           {
             url: (
-              rootUrl + '/doubleclickbidmanager/v1/query/{queryId}'
+              rootUrl + '/doubleclickbidmanager/v1.1/query/{queryId}'
             ).replace(/([^:]\/)\/+/g, '$1'),
             method: 'DELETE',
           },
@@ -914,7 +923,7 @@ export namespace doubleclickbidmanager_v1 {
         options: Object.assign(
           {
             url: (
-              rootUrl + '/doubleclickbidmanager/v1/query/{queryId}'
+              rootUrl + '/doubleclickbidmanager/v1.1/query/{queryId}'
             ).replace(/([^:]\/)\/+/g, '$1'),
             method: 'GET',
           },
@@ -939,6 +948,8 @@ export namespace doubleclickbidmanager_v1 {
      * @memberOf! ()
      *
      * @param {object=} params Parameters for request
+     * @param {integer=} params.pageSize Maximum number of results per page. Must be between 1 and 100. Defaults to 100 if unspecified.
+     * @param {string=} params.pageToken Optional pagination token.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -987,7 +998,7 @@ export namespace doubleclickbidmanager_v1 {
       const parameters = {
         options: Object.assign(
           {
-            url: (rootUrl + '/doubleclickbidmanager/v1/queries').replace(
+            url: (rootUrl + '/doubleclickbidmanager/v1.1/queries').replace(
               /([^:]\/)\/+/g,
               '$1'
             ),
@@ -1060,7 +1071,7 @@ export namespace doubleclickbidmanager_v1 {
         options: Object.assign(
           {
             url: (
-              rootUrl + '/doubleclickbidmanager/v1/query/{queryId}'
+              rootUrl + '/doubleclickbidmanager/v1.1/query/{queryId}'
             ).replace(/([^:]\/)\/+/g, '$1'),
             method: 'POST',
           },
@@ -1120,6 +1131,15 @@ export namespace doubleclickbidmanager_v1 {
      * Auth client or API Key for the request
      */
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+
+    /**
+     * Maximum number of results per page. Must be between 1 and 100. Defaults to 100 if unspecified.
+     */
+    pageSize?: number;
+    /**
+     * Optional pagination token.
+     */
+    pageToken?: string;
   }
   export interface Params$Resource$Queries$Runquery extends StandardParameters {
     /**
@@ -1151,6 +1171,8 @@ export namespace doubleclickbidmanager_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
+     * @param {integer=} params.pageSize Maximum number of results per page. Must be between 1 and 100. Defaults to 100 if unspecified.
+     * @param {string=} params.pageToken Optional pagination token.
      * @param {string} params.queryId Query ID with which the reports are associated.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1201,7 +1223,7 @@ export namespace doubleclickbidmanager_v1 {
         options: Object.assign(
           {
             url: (
-              rootUrl + '/doubleclickbidmanager/v1/queries/{queryId}/reports'
+              rootUrl + '/doubleclickbidmanager/v1.1/queries/{queryId}/reports'
             ).replace(/([^:]\/)\/+/g, '$1'),
             method: 'GET',
           },
@@ -1227,6 +1249,14 @@ export namespace doubleclickbidmanager_v1 {
      */
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
+    /**
+     * Maximum number of results per page. Must be between 1 and 100. Defaults to 100 if unspecified.
+     */
+    pageSize?: number;
+    /**
+     * Optional pagination token.
+     */
+    pageToken?: string;
     /**
      * Query ID with which the reports are associated.
      */
@@ -1292,7 +1322,7 @@ export namespace doubleclickbidmanager_v1 {
       const parameters = {
         options: Object.assign(
           {
-            url: (rootUrl + '/doubleclickbidmanager/v1/sdf/download').replace(
+            url: (rootUrl + '/doubleclickbidmanager/v1.1/sdf/download').replace(
               /([^:]\/)\/+/g,
               '$1'
             ),
