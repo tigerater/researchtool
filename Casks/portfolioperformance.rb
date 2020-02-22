@@ -11,4 +11,8 @@ cask 'portfolioperformance' do
   auto_updates true
 
   app 'PortfolioPerformance.app'
+
+  caveats do
+    depends_on_java '8+'
+  end
 end

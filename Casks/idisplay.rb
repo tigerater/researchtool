@@ -2,9 +2,9 @@ cask 'idisplay' do
   version :latest
   sha256 :no_check
 
-  url 'http://getidisplay.com/downloads/iDisplayMac.dmg'
+  url 'https://getidisplay.com/downloads/iDisplayMac.dmg'
   name 'iDisplay'
-  homepage 'http://getidisplay.com/'
+  homepage 'https://getidisplay.com/'
 
   pkg 'iDisplay.pkg'
 
