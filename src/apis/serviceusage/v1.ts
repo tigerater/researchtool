@@ -25,9 +25,9 @@ import {BodyResponseCallback, createAPIRequest, GlobalOptions, GoogleConfigurabl
 // tslint:disable: jsdoc-format
 // tslint:disable: no-namespace
 
-export namespace serviceusage_v1beta1 {
+export namespace serviceusage_v1 {
   export interface Options extends GlobalOptions {
-    version: 'v1beta1';
+    version: 'v1';
   }
 
   /**
@@ -39,12 +39,12 @@ export namespace serviceusage_v1beta1 {
    *
    * @example
    * const {google} = require('googleapis');
-   * const serviceusage = google.serviceusage('v1beta1');
+   * const serviceusage = google.serviceusage('v1');
    *
    * @namespace serviceusage
    * @type {Function}
-   * @version v1beta1
-   * @variation v1beta1
+   * @version v1
+   * @variation v1
    * @param {object=} options Options for Serviceusage
    */
   export class Serviceusage {
@@ -391,6 +391,10 @@ export namespace serviceusage_v1beta1 {
     monitoredResource?: string;
   }
   /**
+   * The request message for Operations.CancelOperation.
+   */
+  export interface Schema$CancelOperationRequest {}
+  /**
    * `Context` defines which contexts an API requests.  Example:      context:
    * rules:       - selector: &quot;*&quot;         requested:         -
    * google.rpc.context.ProjectContext         -
@@ -507,7 +511,16 @@ export namespace serviceusage_v1beta1 {
   /**
    * Request message for the `DisableService` method.
    */
-  export interface Schema$DisableServiceRequest {}
+  export interface Schema$DisableServiceRequest {
+    /**
+     * Indicates if services that are enabled and which depend on this service
+     * should also be disabled. If not set, an error will be generated if any
+     * enabled services depend on the service to be disabled. When set, the
+     * service, and any enabled services that depend on it, will be disabled
+     * together.
+     */
+    disableDependentServices?: boolean;
+  }
   /**
    * Response message for the `DisableService` method. This response message is
    * assigned to the `response` field of the returned Operation when that
@@ -1294,7 +1307,7 @@ export namespace serviceusage_v1beta1 {
     /**
      * The available services for the requested project.
      */
-    services?: Schema$Service[];
+    services?: Schema$GoogleApiServiceusageV1Service[];
   }
   /**
    * A description of a log type. Example in YAML format:      - name:
@@ -2006,72 +2019,6 @@ export namespace serviceusage_v1beta1 {
     values?: any;
   }
   /**
-   * A service that is available for use by the consumer.
-   */
-  export interface Schema$Service {
-    /**
-     * The service configuration of the available service. Some fields may be
-     * filtered out of the configuration in responses to the `ListServices`
-     * method. These fields are present only in responses to the `GetService`
-     * method.
-     */
-    config?: Schema$ServiceConfig;
-    /**
-     * The resource name of the consumer and service.  A valid name would be: -
-     * projects/123/services/serviceusage.googleapis.com
-     */
-    name?: string;
-    /**
-     * The resource name of the consumer.  A valid name would be: - projects/123
-     */
-    parent?: string;
-    /**
-     * Whether or not the service has been enabled for use by the consumer.
-     */
-    state?: string;
-  }
-  /**
-   * The configuration of the service.
-   */
-  export interface Schema$ServiceConfig {
-    /**
-     * A list of API interfaces exported by this service. Contains only the
-     * names, versions, and method names of the interfaces.
-     */
-    apis?: Schema$Api[];
-    /**
-     * Auth configuration. Contains only the OAuth rules.
-     */
-    authentication?: Schema$Authentication;
-    /**
-     * Additional API documentation. Contains only the summary and the
-     * documentation URL.
-     */
-    documentation?: Schema$Documentation;
-    /**
-     * Configuration for network endpoints. Contains only the names and aliases
-     * of the endpoints.
-     */
-    endpoints?: Schema$Endpoint[];
-    /**
-     * The DNS address at which this service is available.  An example DNS
-     * address would be: `calendar.googleapis.com`.
-     */
-    name?: string;
-    /**
-     * Quota configuration.
-     */
-    quota?: Schema$Quota;
-    /**
-     * The product title for this service.
-     */
-    title?: string;
-    /**
-     * Configuration controlling usage of this service.
-     */
-    usage?: Schema$Usage;
-  }
-  /**
    * `SourceContext` represents information about the source of a protobuf
    * element, like the file in which it is defined.
    */
@@ -2312,6 +2259,147 @@ export namespace serviceusage_v1beta1 {
 
 
     /**
+     * serviceusage.operations.cancel
+     * @desc Starts asynchronous cancellation on a long-running operation.  The
+     * server makes a best effort to cancel the operation, but success is not
+     * guaranteed.  If the server doesn't support this method, it returns
+     * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use Operations.GetOperation
+     * or other methods to check whether the cancellation succeeded or whether
+     * the operation completed despite cancellation. On successful cancellation,
+     * the operation is not deleted; instead, it becomes an operation with an
+     * Operation.error value with a google.rpc.Status.code of 1, corresponding
+     * to `Code.CANCELLED`.
+     * @alias serviceusage.operations.cancel
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string} params.name The name of the operation resource to be cancelled.
+     * @param {().CancelOperationRequest} params.resource Request body data
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    cancel(params?: Params$Resource$Operations$Cancel, options?: MethodOptions):
+        AxiosPromise<Schema$Empty>;
+    cancel(
+        params: Params$Resource$Operations$Cancel,
+        options: MethodOptions|BodyResponseCallback<Schema$Empty>,
+        callback: BodyResponseCallback<Schema$Empty>): void;
+    cancel(
+        params: Params$Resource$Operations$Cancel,
+        callback: BodyResponseCallback<Schema$Empty>): void;
+    cancel(callback: BodyResponseCallback<Schema$Empty>): void;
+    cancel(
+        paramsOrCallback?: Params$Resource$Operations$Cancel|
+        BodyResponseCallback<Schema$Empty>,
+        optionsOrCallback?: MethodOptions|BodyResponseCallback<Schema$Empty>,
+        callback?: BodyResponseCallback<Schema$Empty>):
+        void|AxiosPromise<Schema$Empty> {
+      let params =
+          (paramsOrCallback || {}) as Params$Resource$Operations$Cancel;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Operations$Cancel;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://serviceusage.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+            {
+              url: (rootUrl + '/v1/{+name}:cancel')
+                       .replace(/([^:]\/)\/+/g, '$1'),
+              method: 'POST'
+            },
+            options),
+        params,
+        requiredParams: ['name'],
+        pathParams: ['name'],
+        context: this.getRoot()
+      };
+      if (callback) {
+        createAPIRequest<Schema$Empty>(parameters, callback);
+      } else {
+        return createAPIRequest<Schema$Empty>(parameters);
+      }
+    }
+
+
+    /**
+     * serviceusage.operations.delete
+     * @desc Deletes a long-running operation. This method indicates that the
+     * client is no longer interested in the operation result. It does not
+     * cancel the operation. If the server doesn't support this method, it
+     * returns `google.rpc.Code.UNIMPLEMENTED`.
+     * @alias serviceusage.operations.delete
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string} params.name The name of the operation resource to be deleted.
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    delete(params?: Params$Resource$Operations$Delete, options?: MethodOptions):
+        AxiosPromise<Schema$Empty>;
+    delete(
+        params: Params$Resource$Operations$Delete,
+        options: MethodOptions|BodyResponseCallback<Schema$Empty>,
+        callback: BodyResponseCallback<Schema$Empty>): void;
+    delete(
+        params: Params$Resource$Operations$Delete,
+        callback: BodyResponseCallback<Schema$Empty>): void;
+    delete(callback: BodyResponseCallback<Schema$Empty>): void;
+    delete(
+        paramsOrCallback?: Params$Resource$Operations$Delete|
+        BodyResponseCallback<Schema$Empty>,
+        optionsOrCallback?: MethodOptions|BodyResponseCallback<Schema$Empty>,
+        callback?: BodyResponseCallback<Schema$Empty>):
+        void|AxiosPromise<Schema$Empty> {
+      let params =
+          (paramsOrCallback || {}) as Params$Resource$Operations$Delete;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Operations$Delete;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://serviceusage.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+            {
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              method: 'DELETE'
+            },
+            options),
+        params,
+        requiredParams: ['name'],
+        pathParams: ['name'],
+        context: this.getRoot()
+      };
+      if (callback) {
+        createAPIRequest<Schema$Empty>(parameters, callback);
+      } else {
+        return createAPIRequest<Schema$Empty>(parameters);
+      }
+    }
+
+
+    /**
      * serviceusage.operations.get
      * @desc Gets the latest state of a long-running operation.  Clients can use
      * this method to poll the operation result at intervals as recommended by
@@ -2357,7 +2445,7 @@ export namespace serviceusage_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -2433,8 +2521,7 @@ export namespace serviceusage_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/operations')
-                       .replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/operations').replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -2451,6 +2538,33 @@ export namespace serviceusage_v1beta1 {
     }
   }
 
+  export interface Params$Resource$Operations$Cancel {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
+
+    /**
+     * The name of the operation resource to be cancelled.
+     */
+    name?: string;
+
+    /**
+     * Request body metadata
+     */
+    requestBody?: Schema$CancelOperationRequest;
+  }
+  export interface Params$Resource$Operations$Delete {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
+
+    /**
+     * The name of the operation resource to be deleted.
+     */
+    name?: string;
+  }
   export interface Params$Resource$Operations$Get {
     /**
      * Auth client or API Key for the request
@@ -2503,7 +2617,7 @@ export namespace serviceusage_v1beta1 {
      * serviceusage.services.batchEnable
      * @desc Enable multiple services on a project. The operation is atomic: if
      * enabling any service fails, then the entire batch fails, and no state
-     * changes occur.  Operation<response: google.protobuf.Empty>
+     * changes occur.  Operation<response: BatchEnableServicesResponse>
      * @alias serviceusage.services.batchEnable
      * @memberOf! ()
      *
@@ -2551,7 +2665,7 @@ export namespace serviceusage_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+parent}/services:batchEnable')
+              url: (rootUrl + '/v1/{+parent}/services:batchEnable')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -2576,7 +2690,7 @@ export namespace serviceusage_v1beta1 {
      * or security leaks.  It is not valid to call the disable method on a
      * service that is not currently enabled. Callers will receive a
      * `FAILED_PRECONDITION` status if the target service is not currently
-     * enabled.  Operation<response: google.protobuf.Empty>
+     * enabled.  Operation<response: DisableServiceResponse>
      * @alias serviceusage.services.disable
      * @memberOf! ()
      *
@@ -2622,7 +2736,7 @@ export namespace serviceusage_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+name}:disable')
+              url: (rootUrl + '/v1/{+name}:disable')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -2643,7 +2757,7 @@ export namespace serviceusage_v1beta1 {
     /**
      * serviceusage.services.enable
      * @desc Enable a service so that it can be used with a project.
-     * Operation<response: google.protobuf.Empty>
+     * Operation<response: EnableServiceResponse>
      * @alias serviceusage.services.enable
      * @memberOf! ()
      *
@@ -2689,7 +2803,7 @@ export namespace serviceusage_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+name}:enable')
+              url: (rootUrl + '/v1/{+name}:enable')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -2720,19 +2834,24 @@ export namespace serviceusage_v1beta1 {
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
      */
-    get(params?: Params$Resource$Services$Get,
-        options?: MethodOptions): AxiosPromise<Schema$Service>;
+    get(params?: Params$Resource$Services$Get, options?: MethodOptions):
+        AxiosPromise<Schema$GoogleApiServiceusageV1Service>;
     get(params: Params$Resource$Services$Get,
-        options: MethodOptions|BodyResponseCallback<Schema$Service>,
-        callback: BodyResponseCallback<Schema$Service>): void;
+        options: MethodOptions|
+        BodyResponseCallback<Schema$GoogleApiServiceusageV1Service>,
+        callback: BodyResponseCallback<Schema$GoogleApiServiceusageV1Service>):
+        void;
     get(params: Params$Resource$Services$Get,
-        callback: BodyResponseCallback<Schema$Service>): void;
-    get(callback: BodyResponseCallback<Schema$Service>): void;
+        callback: BodyResponseCallback<Schema$GoogleApiServiceusageV1Service>):
+        void;
+    get(callback: BodyResponseCallback<Schema$GoogleApiServiceusageV1Service>):
+        void;
     get(paramsOrCallback?: Params$Resource$Services$Get|
-        BodyResponseCallback<Schema$Service>,
-        optionsOrCallback?: MethodOptions|BodyResponseCallback<Schema$Service>,
-        callback?: BodyResponseCallback<Schema$Service>):
-        void|AxiosPromise<Schema$Service> {
+        BodyResponseCallback<Schema$GoogleApiServiceusageV1Service>,
+        optionsOrCallback?: MethodOptions|
+        BodyResponseCallback<Schema$GoogleApiServiceusageV1Service>,
+        callback?: BodyResponseCallback<Schema$GoogleApiServiceusageV1Service>):
+        void|AxiosPromise<Schema$GoogleApiServiceusageV1Service> {
       let params = (paramsOrCallback || {}) as Params$Resource$Services$Get;
       let options = (optionsOrCallback || {}) as MethodOptions;
 
@@ -2751,7 +2870,7 @@ export namespace serviceusage_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -2761,9 +2880,11 @@ export namespace serviceusage_v1beta1 {
         context: this.getRoot()
       };
       if (callback) {
-        createAPIRequest<Schema$Service>(parameters, callback);
+        createAPIRequest<Schema$GoogleApiServiceusageV1Service>(
+            parameters, callback);
       } else {
-        return createAPIRequest<Schema$Service>(parameters);
+        return createAPIRequest<Schema$GoogleApiServiceusageV1Service>(
+            parameters);
       }
     }
 
@@ -2825,7 +2946,7 @@ export namespace serviceusage_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+parent}/services')
+              url: (rootUrl + '/v1/{+parent}/services')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
