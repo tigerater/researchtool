@@ -24,21 +24,16 @@ let lastDetectionResult;
 // So instead, the hook will use postMessage() to pass message to us here.
 // And when this happens, we'll send a message to the "background page".
 window.addEventListener('message', function(evt) {
-  if (evt.source === window && evt.data) {
-    if (evt.data.source === 'react-devtools-detector') {
-      lastDetectionResult = {
-        hasDetectedReact: true,
-        reactBuildType: evt.data.reactBuildType,
-      };
-      chrome.runtime.sendMessage(lastDetectionResult);
-    } else if (evt.data.source === 'react-devtools-inject-backend') {
-      //Inject the specified script
-      var script = document.constructor.prototype.createElement.call(document, 'script');
-      script.src = chrome.runtime.getURL('build/backend.js');
-      script.charset = "utf-8";
-      document.documentElement.appendChild(script);
-      script.parentNode.removeChild(script);
-    }
+  if (
+    evt.source === window &&
+    evt.data &&
+    evt.data.source === 'react-devtools-detector'
+  ) {
+    lastDetectionResult = {
+      hasDetectedReact: true,
+      reactBuildType: evt.data.reactBuildType,
+    };
+    chrome.runtime.sendMessage(lastDetectionResult);
   }
 });
 
