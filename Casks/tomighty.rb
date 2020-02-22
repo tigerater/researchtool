@@ -1,7 +1,11 @@
-class Tomighty < Cask
-  url 'https://tomighty.googlecode.com/files/Tomighty-1.0.1.dmg'
-  homepage 'http://www.tomighty.org/'
-  version '1.0.1'
-  sha256 '14ba9d4bc6e910e1c5bc256de4136db1e3e8d0671318b20c78f586a136a78793'
-  link 'Tomighty.app'
+cask 'tomighty' do
+  version '1.2'
+  sha256 '0ebee4c2c913a75b15fed071d68c22c866a3d8436ad359eb2ee66e27d39b2214'
+
+  url "https://github.com/tomighty/tomighty-osx/releases/download/#{version}/Tomighty-#{version}.dmg"
+  appcast 'https://github.com/tomighty/tomighty-osx/releases.atom'
+  name 'Tomighty'
+  homepage 'https://github.com/tomighty/tomighty-osx'
+
+  app 'Tomighty.app'
 end

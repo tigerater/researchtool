@@ -1,9 +1,17 @@
-class DeliciousLibrary < Cask
-  version 'latest'
-  sha256 :no_check
+cask 'delicious-library' do
+  version '3.8.3'
+  sha256 '67e895f25b1c29515a860c08070cbb073c76cd3beb32cb3cd115b8e52d88f61e'
 
-  url 'http://delicious-monster.com/downloads/DeliciousLibrary3.zip'
-  homepage 'http://delicious-monster.com/'
+  url "https://delicious-monster.com/downloads/DeliciousLibrary#{version.major}/v#{version}/DeliciousLibrary#{version.major}.zip"
+  appcast "https://www.delicious-monster.com/downloads/DeliciousLibrary#{version.major}.xml"
+  name 'Delicious Library'
+  homepage 'https://delicious-monster.com/'
 
-  link 'Delicious Library 3.app'
+  app "Delicious Library #{version.major}.app"
+
+  zap trash: [
+               '~/Library/Application Scripts/com.delicious-monster.library*',
+               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.delicious-monster.library*.sfl2',
+               '~/Library/Containers/com.delicious-monster.library*',
+             ]
 end

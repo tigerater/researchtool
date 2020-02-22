@@ -1,8 +1,19 @@
-class Ripit < Cask
+cask 'ripit' do
+  version '1.6.9'
+  sha256 '76a3450016db2ba93a4b74271327b19246794813b8ad5916752eb9817c2ad0bc'
+
   url 'http://files.thelittleappfactory.com/ripit/RipIt.zip'
-  appcast 'https://files.thelittleappfactory.com/ripit/appcast.xml'
+  appcast 'http://files.thelittleappfactory.com/ripit/appcast.xml'
+  name 'RipIt'
   homepage 'http://thelittleappfactory.com/ripit/'
-  version 'latest'
-  sha256 :no_check
-  link 'RipIt.app'
+
+  auto_updates true
+
+  app 'RipIt.app'
+
+  zap trash: [
+               '~/Library/Caches/com.thelittleappfactory.RipIt',
+               '~/Library/Preferences/.RipIt',
+               '~/Library/Preferences/com.thelittleappfactory.RipIt.plist',
+             ]
 end

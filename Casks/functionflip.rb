@@ -1,7 +1,11 @@
-class Functionflip < Cask
-  url 'http://kevingessner.com/public/downloads/FunctionFlip/2.2.2/FunctionFlip.prefPane.zip'
+cask 'functionflip' do
+  version '2.2.4'
+  sha256 '429a07deef5767534dee2d99ab147242c41ef860c48d0dbf0c68f2687fbe9db4'
+
+  url "http://kevingessner.com/public/downloads/FunctionFlip/#{version}/FunctionFlip.prefPane.zip"
+  appcast 'http://kevingessner.com/update/functionflip/'
+  name 'FunctionFlip'
   homepage 'http://kevingessner.com/software/functionflip/'
-  version '2.2.2'
-  sha256 '66ac937e9ade979eca2d94881093ee5301bce660da1ace98e3c792da29b33c72'
+
   prefpane 'FunctionFlip.prefPane'
 end

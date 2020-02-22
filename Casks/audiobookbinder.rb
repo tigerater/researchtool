@@ -1,10 +1,11 @@
-class Audiobookbinder < Cask
-  version '1.18'
-  sha256 'b6b8ad12378710fb73c0db990f6fb471f0bba163ad83c84958992d62c106e588'
-  
-  url 'http://bluezbox.com/audiobookbinder/AudiobookBinder-1.18.dmg'
-  appcast 'http://bluezbox.com/audiobookbinder/appcast.xml'
-  homepage 'http://bluezbox.com/audiobookbinder.html'
+cask 'audiobookbinder' do
+  version '2.1'
+  sha256 'ed0e722cbbbcad8ea305faa10e1f5f08c7719991118d015af132bb9d41f84170'
 
-  link 'AudioBookBinder.app'
+  url "https://bluezbox.com/audiobookbinder/AudiobookBinder-#{version}.dmg"
+  appcast 'https://bluezbox.com/audiobookbinder/appcast.xml'
+  name 'Audiobook Binder'
+  homepage 'https://bluezbox.com/audiobookbinder.html'
+
+  app 'AudioBookBinder.app'
 end

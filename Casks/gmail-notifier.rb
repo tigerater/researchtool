@@ -1,7 +1,11 @@
-class GmailNotifier < Cask
-  url 'https://github.com/jashephe/Gmail-Notifier/releases/download/v2.0.1/Gmail.Notifier.v2.0.1.zip'
+cask 'gmail-notifier' do
+  version '2.1.0'
+  sha256 '562cad2fd5ea034ff778b4bc37d028b34d535888eac96674e9084afdc3f20092'
+
+  url "https://github.com/jashephe/Gmail-Notifier/releases/download/v#{version}/Gmail.Notifier.v#{version}.zip"
+  appcast 'https://github.com/jashephe/Gmail-Notifier/releases.atom'
+  name 'Gmail Notifier'
   homepage 'https://github.com/jashephe/Gmail-Notifier'
-  version '2.0.1'
-  sha256 '6d91b6b0e00041cde61a267c484f6f004330a96dfd608a61f7954f5b7abdd66e'
-  link 'Gmail Notifier.app'
+
+  app 'Gmail Notifier.app'
 end

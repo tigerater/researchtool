@@ -1,20 +1,27 @@
-class IntellijIdeaCe < Cask
-  url 'http://download-cf.jetbrains.com/idea/ideaIC-13.1.3.dmg'
-  homepage 'https://www.jetbrains.com/idea/index.html'
-  version '13.1.3'
-  sha256 '4b0e3cb665aa2e3523d3c90b0075292f5ba3eaaff2bfc4872e4438193e561067'
-  link 'IntelliJ IDEA 13 CE.app'
-  caveats do
-    <<-EOS.undent
-    #{@cask} may require Java 7 (an older version) available from the
-    caskroom-versions repo via
+cask 'intellij-idea-ce' do
+  version '2019.3.3,193.6494.35'
+  sha256 'c62ed2df891ccbb40d890e8a0074781801f086a3091a4a2a592a96afaba31270'
 
-        brew cask install caskroom/versions/java7
+  url "https://download.jetbrains.com/idea/ideaIC-#{version.before_comma}.dmg"
+  appcast 'https://data.services.jetbrains.com/products/releases?code=IIC&latest=true&type=release'
+  name 'IntelliJ IDEA Community Edition'
+  name 'IntelliJ IDEA CE'
+  homepage 'https://www.jetbrains.com/idea/'
 
-    Alternatively, #{@cask} can be modified to use Java 8 as described in
+  auto_updates true
 
-        https://github.com/caskroom/homebrew-cask/issues/4500#issuecomment-43955932
+  app 'IntelliJ IDEA CE.app'
 
-    EOS
+  uninstall_postflight do
+    ENV['PATH'].split(File::PATH_SEPARATOR).map { |path| File.join(path, 'idea') }.each { |path| File.delete(path) if File.exist?(path) && File.readlines(path).grep(%r{# see com.intellij.idea.SocketLock for the server side of this interface}).any? }
   end
+
+  zap trash: [
+               "~/Library/Application Support/IdeaIC#{version.major_minor}",
+               "~/Library/Caches/IdeaIC#{version.major_minor}",
+               "~/Library/Logs/IdeaIC#{version.major_minor}",
+               "~/Library/Preferences/IdeaIC#{version.major_minor}",
+               '~/Library/Preferences/com.jetbrains.intellij.ce.plist',
+               '~/Library/Saved Application State/com.jetbrains.intellij.ce.savedState',
+             ]
 end

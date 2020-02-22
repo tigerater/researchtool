@@ -1,8 +1,20 @@
-class Fluid < Cask
-  url 'http://www.fluidapp.com/dist/Fluid_1.8.2.zip'
-  appcast 'http://fluidapp.com/appcast/fluid1.rss'
-  homepage 'http://fluidapp.com/'
-  version '1.8.2'
-  sha256 '9f5d58e4049a0bfcca9f291fc097e0cec1f5df34986e9f9c0c1b385dc2a3cec8'
-  link 'Fluid.app'
+cask 'fluid' do
+  version '2.1.2'
+  sha256 'cf58c480f631d2adc050b423e65776e253f52989ade9c1aaf8d77b8ced63a653'
+
+  url "https://fluidapp.com/dist/Fluid_#{version}.zip"
+  appcast "https://fluidapp.com/appcast/fluid#{version.major}.rss"
+  name 'Fluid'
+  homepage 'https://fluidapp.com/'
+
+  depends_on macos: '>= :sierra'
+
+  app 'Fluid.app'
+
+  zap trash: [
+               '~/Library/Application Support/Fluid',
+               '~/Library/Caches/com.fluidapp.Fluid2',
+               '~/Library/Preferences/com.fluidapp.Fluid*',
+               '~/Library/Saved Application State/com.fluidapp.Fluid*',
+             ]
 end

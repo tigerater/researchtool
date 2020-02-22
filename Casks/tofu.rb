@@ -1,7 +1,10 @@
-class Tofu < Cask
-  url 'http://amarsagoo.info/tofu/Tofu.dmg'
-  homepage 'http://amarsagoo.info/tofu/'
-  version 'latest'
+cask 'tofu' do
+  version :latest
   sha256 :no_check
-  link 'Tofu.app'
+
+  url 'https://amarsagoo.info/tofu/Tofu.dmg'
+  name 'Tofu'
+  homepage 'https://amarsagoo.info/tofu/'
+
+  app 'Tofu.app'
 end

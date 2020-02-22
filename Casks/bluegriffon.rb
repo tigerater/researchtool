@@ -1,9 +1,13 @@
-class Bluegriffon < Cask
-  version '1.7.2'
-  sha256 'a54cfe176dbc67ffa4fdd20b41447fb4c4f2fbf1f80282d81e93e63b5d4b996f'
+cask 'bluegriffon' do
+  version '3.1'
+  sha256 'cf457ac89447c8a54e0fbc1c13b995286e9b9143cee104fe3f3777a80f540a35'
 
-  url 'http://bluegriffon.org/freshmeat/1.7.2/bluegriffon-1.7.2.mac.dmg'
-  homepage 'http://bluegriffon.org'
+  url "http://bluegriffon.org/freshmeat/#{version}/bluegriffon-#{version}.mac-x86_64.dmg"
+  appcast 'http://bluegriffon.org/freshmeat/?C=M;O=D'
+  name 'BlueGriffon'
+  homepage 'http://bluegriffon.org/'
 
-  link 'BlueGriffon.app'
+  depends_on macos: '>= :yosemite'
+
+  app 'BlueGriffon.app'
 end

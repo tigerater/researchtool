@@ -1,10 +1,12 @@
-class Chronoagent < Cask
-  version 'latest'
+cask 'chronoagent' do
+  version :latest
   sha256 :no_check
 
-  url 'http://downloads.econtechnologies.com/CA_Mac_Download.dmg'
-  homepage 'http://www.econtechnologies.com'
+  url 'https://downloads.econtechnologies.com/CA_Mac_Download.dmg'
+  name 'ChronoAgent'
+  homepage 'https://www.econtechnologies.com/'
 
-  install 'Install.pkg'
-  uninstall :pkgutil => 'com.econtechnologies.pkg.ChronoAgent'
+  pkg 'Install.pkg'
+
+  uninstall pkgutil: 'com.econtechnologies.pkg.ChronoAgent'
 end

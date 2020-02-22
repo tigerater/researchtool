@@ -1,9 +1,11 @@
-class Comictagger < Cask
-  version '1.1.9-beta'
-  sha256 'd940b9fc5878f7d1e05e1b4e343ecf3e8ec5a5352180fc6c9792d58bb4469b89'
+cask 'comictagger' do
+  version '1.2.3'
+  sha256 'c42168aa74167ea41c5ece2bd5001b091fab6a6878e7ccc6c988876bb1494d1c'
 
-  url 'https://comictagger.googlecode.com/files/ComicTagger-1.1.9-beta.dmg'
-  homepage 'http://code.google.com/p/comictagger/'
+  url "https://github.com/davide-romanini/comictagger/releases/download/#{version}/ComicTagger-#{version}-osx-10.12.6-x86_64.app.zip"
+  appcast 'https://github.com/davide-romanini/comictagger/releases.atom'
+  name 'ComicTagger'
+  homepage 'https://github.com/davide-romanini/comictagger'
 
-  link 'ComicTagger.app'
+  app 'ComicTagger.app'
 end

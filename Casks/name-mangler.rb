@@ -1,8 +1,13 @@
-class NameMangler < Cask
-  url 'http://manytricks.com/download/namemangler'
-  appcast 'http://manytricks.com/namemangler/appcast.xml'
-  version 'latest'
-  homepage 'http://manytricks.com/namemangler/'
-  sha256 :no_check
-  link 'Name Mangler.app'
+cask 'name-mangler' do
+  version '3.6'
+  sha256 '920089b29f13e7a2036898b7dd720367698e92c1bbbb2b417bdad06a0c3e2cfa'
+
+  url 'https://manytricks.com/download/namemangler'
+  appcast 'https://manytricks.com/namemangler/appcast/'
+  name 'Name Mangler'
+  homepage 'https://manytricks.com/namemangler/'
+
+  auto_updates true
+
+  app 'Name Mangler.app'
 end

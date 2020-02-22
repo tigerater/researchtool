@@ -1,7 +1,11 @@
-class Nocturne < Cask
-  url 'https://blacktree-nocturne.googlecode.com/files/Nocturne.2.0.0.zip'
-  homepage 'http://code.google.com/p/blacktree-nocturne/'
-  version '2.0.0'
-  sha256 '062ae6b4619ab518650b2f502aaeb7a864bf69e45ce08dec8b5a3f34a027a347'
-  link 'Nocturne.app'
+cask 'nocturne' do
+  version '3.0'
+  sha256 '895ac0c5493b3877cf1cc6d62dfb5c0fee3c6bd41d44bd3c87554e52a0cf1462'
+
+  url "https://github.com/Daij-Djan/nocturne/blob/master/Dist/#{version}.zip?raw=true"
+  appcast 'https://raw.githubusercontent.com/Daij-Djan/nocturne/master/README.md'
+  name 'Nocturne'
+  homepage 'https://github.com/Daij-Djan/nocturne'
+
+  app 'Nocturne.app'
 end

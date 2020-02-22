@@ -1,7 +1,12 @@
-class Twine < Cask
-  url 'http://twinery.org/downloads/twine_1.4.1_osx.zip'
-  homepage 'http://twinery.org/'
-  version '1.4.1'
-  sha256 '717e0f7849f8216a7bae68c66656cf0e3cd0496c8a9d95e3c61e175d56f010e4'
-  link 'Twine.app'
+cask 'twine' do
+  version '2.3.5'
+  sha256 '6230bccdc62c7fe844d511e47dcf30b49d490e307418fd0cc9426f578f68b9b8'
+
+  # github.com/klembot/twinejs was verified as official when first introduced to the cask
+  url "https://github.com/klembot/twinejs/releases/download/#{version}/twine_#{version}_macos.dmg"
+  appcast 'https://github.com/klembot/twinejs/releases.atom'
+  name 'Twine'
+  homepage 'https://twinery.org/'
+
+  app 'Twine.app'
 end

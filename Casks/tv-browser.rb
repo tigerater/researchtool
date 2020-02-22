@@ -1,7 +1,12 @@
-class TvBrowser < Cask
-  url 'https://downloads.sourceforge.net/sourceforge/tvbrowser/tvbrowser_3.3.3_mac.dmg'
-  homepage 'http://www.tvbrowser.org/index.php?setlang=en'
-  version '3.3.3'
-  sha256 '951fe8478fa2efa5f7784c23f153bcc8b0a6fcb8a7405c4990c44b3c967e73cc'
-  link 'TV-Browser.app'
+cask 'tv-browser' do
+  version '4.2.1'
+  sha256 'bc7ce87e1d27d1d40964bdcb5b9b5779a518567d1cd36a71d62deb8da73d4f7c'
+
+  # sourceforge.net/tvbrowser was verified as official when first introduced to the cask
+  url "https://downloads.sourceforge.net/tvbrowser/tvbrowser_#{version}_macjava.dmg"
+  appcast 'https://sourceforge.net/projects/tvbrowser/rss'
+  name 'TV-Browser'
+  homepage 'https://www.tvbrowser.org/'
+
+  app 'TV-Browser.app'
 end

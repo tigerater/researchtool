@@ -1,7 +1,11 @@
-class QuasselClient < Cask
-  url 'http://quassel-irc.org/pub/QuasselClient_MacOSX-x86_64_0.9.2.dmg'
-  homepage 'http://quassel-irc.org'
-  version '0.9.2'
-  sha256 'bdb91065020c56cdb60c252838795e57c8859bd916e29d9559aea47b48b100e8'
-  link 'Quassel Client.app'
+cask 'quassel-client' do
+  version '0.13.1'
+  sha256 '2ebfc69a0a5da2554080b6b3d6d27b577c8d5a591253549b5960788741d7aece'
+
+  url "https://quassel-irc.org/pub/QuasselClient_MacOSX-x86_64_#{version}.dmg"
+  appcast 'https://github.com/quassel/quassel/releases.atom'
+  name 'Quassel IRC'
+  homepage 'https://quassel-irc.org/'
+
+  app 'Quassel Client.app'
 end

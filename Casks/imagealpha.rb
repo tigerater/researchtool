@@ -1,8 +1,11 @@
-class Imagealpha < Cask
-  url 'http://pngmini.com/ImageAlpha1.3.5.tar.bz2'
-  appcast 'http://pngmini.com/appcast.xml'
-  homepage 'http://pngmini.com/'
-  version '1.3.5'
-  sha256 'ba1ca1f50fa5b2a3472e6c2dbe410ecc3a66f425975cf9e39380e5c3421cca49'
-  link 'ImageAlpha.app'
+cask 'imagealpha' do
+  version '1.5.1'
+  sha256 'be8a4544a2a855ba424e33819940b4b0ddb1221d1f46ca360181fd4ee2bef24b'
+
+  url "https://pngmini.com/ImageAlpha#{version}.tar.bz2"
+  appcast 'https://pngmini.com/appcast.xml'
+  name 'ImageAlpha'
+  homepage 'https://pngmini.com/'
+
+  app 'ImageAlpha.app'
 end

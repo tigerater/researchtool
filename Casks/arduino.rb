@@ -1,9 +1,17 @@
-class Arduino < Cask
-  version '1.0.5'
-  sha256 '12f2d649b2cfd537317f63d9cb102dc052647c32a5b07c76d344ed959319c05e'
+cask 'arduino' do
+  version '1.8.12'
+  sha256 '00832eb03db6e90c16637a8c3f2210adbce017d80f71a44f01035d147c693e7a'
 
-  url 'https://arduino.googlecode.com/files/arduino-1.0.5-macosx.zip'
-  homepage 'http://arduino.cc/'
+  url "https://downloads.arduino.cc/arduino-#{version}-macosx.zip"
+  appcast 'https://github.com/arduino/Arduino/releases.atom'
+  name 'Arduino'
+  homepage 'https://www.arduino.cc/'
 
-  link 'Arduino.app'
+  app 'Arduino.app'
+  binary "#{appdir}/Arduino.app/Contents/Java/arduino-builder"
+
+  zap trash: [
+               '~/Library/Arduino15',
+               '~/Library/Preferences/cc.arduino.Arduino.plist',
+             ]
 end

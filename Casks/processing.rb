@@ -1,7 +1,19 @@
-class Processing < Cask
-  url 'http://download.processing.org/processing-2.2.1-macosx.zip'
-  homepage 'http://processing.org/'
-  version '2.2.1'
-  sha256 '8c237b3eb50626e8ffc648bfdeddaa18ceffbd6a48f8fec77a8eab5b774971fc'
-  link 'Processing.app'
+cask 'processing' do
+  version '3.5.4'
+  sha256 '4d64fe42a6c5c0863cc82e93a036e73731999ee9448be45bc322f91b0010bb6b'
+
+  url "https://download.processing.org/processing-#{version}-macosx.zip"
+  appcast 'https://github.com/processing/processing/releases.atom'
+  name 'Processing'
+  homepage 'https://processing.org/'
+
+  app 'Processing.app'
+
+  uninstall quit: 'org.processing.app'
+
+  zap trash: [
+               '~/Library/Processing',
+               '~/Preferences/org.processing.app.plist',
+               '~/Preferences/processing.app.tools.plist',
+             ]
 end

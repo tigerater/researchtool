@@ -1,11 +1,24 @@
-class Sage < Cask
-  url 'http://boxen.math.washington.edu/home/sagemath/sage-mirror/osx/intel/sage-6.2-x86_64-Darwin-OSX_10.9_x86_64-app.dmg'
-  homepage 'http://www.sagemath.org/'
-  version '6.2'
-  sha256 'b17783df4967432c6545cb7fd8751f9d7d3e886063a5f51ef70e4dbef4311e22'
-  link 'Sage-6.2.app'
-  binary 'Sage-6.2.app/Contents/Resources/sage/sage'
-  caveats do
-    files_in_usr_local
-  end
+cask 'sage' do
+  version '9.0,10.15.2'
+  sha256 '79a2a150c1fe10b4b4b4c436fe2eaf27460a902670b0121529f7ccd3500b55d9'
+
+  # mirrors.mit.edu/sage/osx/intel was verified as official when first introduced to the cask
+  url "https://mirrors.mit.edu/sage/osx/intel/sage-#{version.before_comma}-OSX_#{version.after_comma}-x86_64.app.dmg"
+  appcast 'https://mirrors.mit.edu/sage/osx/intel/index.html'
+  name 'Sage'
+  homepage 'https://www.sagemath.org/'
+
+  depends_on macos: '>= :high_sierra'
+
+  app "SageMath-#{version.before_comma}.app"
+  binary "#{appdir}/SageMath-#{version.before_comma}.app/Contents/Resources/sage/sage"
+
+  uninstall quit: 'org.sagemath.Sage'
+
+  zap trash: [
+               '~/.sage',
+               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.sagemath.sage.sfl*',
+               '~/Library/Logs/sage.log',
+               '~/Library/Preferences/org.sagemath.Sage.plist',
+             ]
 end

@@ -1,7 +1,21 @@
-class Jumpshare < Cask
-  url 'https://jumpshare.com/desktop/mac/Jumpshare_1.0.25-3.dmg'
+cask 'jumpshare' do
+  version '2.5.7'
+  sha256 '6603d431205592a58344e27af1fc93fc5297357763eae0337c0a53651bd2e921'
+
+  url "https://apps.jumpshare.com/desktop/mac/updates/Jumpshare-#{version}.tar.bz2"
+  appcast 'https://apps.jumpshare.com/desktop/mac/updates/appcast.xml'
+  name 'Jumpshare'
   homepage 'https://jumpshare.com/'
-  version '1.0.25-3'
-  sha256 'a2a2d44d858616965c8271dcfc177ec299e9592fed3abb795ddb81b533f6d818'
-  link 'Jumpshare.app'
+
+  depends_on macos: '>= :high_sierra'
+
+  app 'Jumpshare.app'
+
+  zap trash: [
+               '~/Library/Application Scripts/com.jumpshare.JumpshareLoginHelper',
+               '~/Library/Application Support/com.jumpshare.Jumpshare',
+               '~/Library/Containers/com.jumpshare.JumpshareLoginHelper',
+               '~/Library/Cookies/com.jumpshare.Jumpshare.binarycookies',
+               '~/Library/Preferences/com.jumpshare.Jumpshare.plist',
+             ]
 end

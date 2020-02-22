@@ -1,7 +1,12 @@
-class Stella < Cask
-  url 'https://downloads.sourceforge.net/project/stella/stella/3.9.3/Stella-3.9.3_intel-macosx.dmg'
-  homepage 'http://stella.sourceforge.net'
-  version '3.9.3'
-  sha256 '83870088368be20224ed51f52e9babe53a75575495279adc596203f123e8477c'
-  link 'Stella.app'
+cask 'stella' do
+  version '6.0.2'
+  sha256 'a161d7ac4fa1b70d9029a401a35f900887217f686a51b1663b60d924f0f24439'
+
+  # github.com/stella-emu/stella was verified as official when first introduced to the cask
+  url "https://github.com/stella-emu/stella/releases/download/#{version}/Stella-#{version}-macos.dmg"
+  appcast 'https://github.com/stella-emu/stella/releases.atom'
+  name 'Stella'
+  homepage 'https://stella-emu.github.io/'
+
+  app 'Stella.app'
 end

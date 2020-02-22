@@ -1,7 +1,11 @@
-class Macwinzipper < Cask
-  url 'http://tidajapan.com/files/MacWinZipper-2.5.dmg?download'
-  homepage 'http://tidajapan.com/macwinzipper'
-  version '2.5'
-  sha256 'fc3afd92ecfbde16bbdd388285e16ef8f7aa5f5edf669496115823fef92a0186'
-  link 'MacWinZipper.app'
+cask 'macwinzipper' do
+  version '2.7'
+  sha256 '37ff612125d80acf39a873e087a301c524708bb0c4af64be55a335555af23d62'
+
+  url "https://tida.me/files/MacWinZipper-#{version}.dmg?download"
+  appcast 'https://tida.me/macwinzipper'
+  name 'MacWinZipper'
+  homepage 'https://tida.me/macwinzipper'
+
+  app 'MacWinZipper.app'
 end

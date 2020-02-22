@@ -1,8 +1,17 @@
-class Timings < Cask
-  url 'http://mediaatelier.com/Timings/Timings_1.0.4.zip'
-  appcast 'http://mediaatelier.com/Timings/feed.php'
-  homepage 'http://mediaatelier.com/Timings'
-  version '1.0.4'
-  sha256 'e7601405312bd6142514aef98154b2ebe8e06a3154c7afa7bcc03edf0090ddff'
-  link 'Timings.app'
+cask 'timings' do
+  version '3.2.8'
+  sha256 '6990c248e0d680ab1fe9fab257d8ed07bc1f2c170b2fc882d78d13c7f14a5f77'
+
+  url "https://mediaatelier.com/Timings#{version.major}/Timings_#{version}.zip"
+  appcast "https://mediaatelier.com/Timings#{version.major}/feed.php"
+  name 'Timings'
+  homepage 'https://www.mediaatelier.com/Timings3/'
+
+  app 'Timings.app'
+
+  zap trash: [
+               '~/Library/Preferences/com.mediaateller.Timings.plist',
+               '~/Library/Application Support/Timings',
+               '~/Library/Caches/com.mediaateller.timings',
+             ]
 end

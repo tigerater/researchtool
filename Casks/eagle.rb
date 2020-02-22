@@ -1,9 +1,13 @@
-class Eagle < Cask
-  url 'ftp://ftp.cadsoft.de/eagle/program/6.5/eagle-mac-6.5.0.zip'
-  homepage 'http://www.cadsoftusa.com/'
-  version '6.5.0'
-  sha256 '902e6f8ebdf0991a7b26a997e66540bf1e2b984b82a683be97fa469b95d35239'
-  install 'eagle-6.5.0.pkg'
-  uninstall :pkgutil => 'com.CadSoftComputerGmbH.EAGLE',
-            :files => '/Applications/EAGLE-6.5.0'
+cask 'eagle' do
+  version '9.5.2'
+  sha256 '499848f67b0930dfe21eccfd0f984ba3ffc74a793c625e7d45457e7d505fd2dc'
+
+  url "https://trial2.autodesk.com/NET17SWDLD/2017/EGLPRM/ESD/Autodesk_EAGLE_#{version}_English_Mac_64bit.pkg"
+  appcast 'https://macupdater.net/cgi-bin/check_urls/check_url_redirect.cgi?url=https://www.autodesk.com/eagle-download-mac'
+  name 'Autodesk EAGLE'
+  homepage 'https://www.autodesk.com/products/eagle/overview'
+
+  pkg "Autodesk_EAGLE_#{version}_English_Mac_64bit.pkg"
+
+  uninstall pkgutil: 'com.Autodesk.eagle'
 end

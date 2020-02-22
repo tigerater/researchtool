@@ -1,7 +1,10 @@
-class Hyperdock < Cask
-  url 'http://hyperdock.bahoom.com/HyperDock.dmg'
-  homepage 'http://hyperdock.bahoom.com/'
-  version 'latest'
+cask 'hyperdock' do
+  version :latest
   sha256 :no_check
+
+  url 'https://bahoom.com/hyperdock/HyperDock.dmg'
+  name 'HyperDock'
+  homepage 'https://bahoom.com/hyperdock/'
+
   prefpane 'HyperDock.prefpane'
 end

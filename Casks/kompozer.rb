@@ -1,7 +1,12 @@
-class Kompozer < Cask
-  url 'https://downloads.sourceforge.net/project/kompozer/current/0.8b3/macosx/kompozer-0.8b3.en-US.mac-universal.dmg'
-  homepage 'http://www.kompozer.net/'
+cask 'kompozer' do
   version '0.8b3'
   sha256 '415e019c9b3ec1c76465bf4f561fa515f403e57ac6f92c76365d902241dc14ed'
-  link 'KompoZer.app'
+
+  # sourceforge.net/kompozer was verified as official when first introduced to the cask
+  url "https://downloads.sourceforge.net/kompozer/current/#{version}/macosx/kompozer-#{version}.en-US.mac-universal.dmg"
+  appcast 'https://sourceforge.net/projects/kompozer/rss?path=/current'
+  name 'KompoZer'
+  homepage 'https://kompozer.net/'
+
+  app 'KompoZer.app'
 end

@@ -1,10 +1,14 @@
-class Controlplane < Cask
-  version '1.5.1'
-  sha256 '6815cef473b9404ab2b0e4c57e9610de0adaae80159eba597f28c44dacb14bf2'
-  
-  url 'http://www.controlplaneapp.com/download/1.5.1'
-  appcast 'http://www.controlplaneapp.com/appcast.xml'
-  homepage 'http://www.controlplaneapp.com/'
+cask 'controlplane' do
+  version '1.6.7'
+  sha256 'beb444b8117ed91898921a6babc384501dfd92679f5b718fceb6d3aa7a0bf651'
 
-  link 'ControlPlane.app'
+  # github.com/dustinrue/ControlPlane was verified as official when first introduced to the cask
+  url "https://github.com/dustinrue/ControlPlane/releases/download/#{version}/ControlPlane-#{version}.dmg"
+  appcast 'https://github.com/dustinrue/ControlPlane/releases.atom'
+  name 'ControlPlane'
+  homepage 'https://www.controlplaneapp.com/'
+
+  app 'ControlPlane.app'
+
+  zap trash: '~/Library/Preferences/com.dustinrue.ControlPlane.plist'
 end

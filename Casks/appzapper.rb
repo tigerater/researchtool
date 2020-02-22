@@ -1,10 +1,14 @@
-class Appzapper < Cask
-  version 'latest'
-  sha256 :no_check
-  
-  url 'http://www.appzapper.com/downloads/appzapper.dmg'
-  appcast 'http://www.appzapper.com/az2appcast.xml'
-  homepage 'http://www.appzapper.com/'
+cask 'appzapper' do
+  version '2.0.2'
+  sha256 'bc05e7b2290ffdbfba23fcb445d57237eef258fea679aff902aa135ee302d297'
 
-  link 'AppZapper.app'
+  url "https://appzapper.com/downloads/appzapper#{version.no_dots}.zip"
+  appcast "https://www.appzapper.com/az#{version.major}appcast.xml"
+  name 'AppZapper'
+  homepage 'https://www.appzapper.com/'
+
+  auto_updates true
+  depends_on macos: '>= :sierra'
+
+  app 'AppZapper.app'
 end

@@ -1,7 +1,14 @@
-class Makehuman < Cask
-  url 'http://download.tuxfamily.org/makehuman/releases/1.0.0/makehuman-1.0.0-osx.dmg'
+cask 'makehuman' do
+  version '1.1.1'
+  sha256 '0f5626b1878f8f4233be431917e740806b141522f9f4b3da7809e8e7798ee2d8'
+
+  # tuxfamily.org/makehuman was verified as official when first introduced to the cask
+  url "https://download.tuxfamily.org/makehuman/releases/#{version}/makehuman-#{version}-osx.dmg"
+  appcast 'https://download.tuxfamily.org/makehuman/releases/'
+  name 'MakeHuman'
   homepage 'http://www.makehuman.org/'
-  version '1.0.0'
-  sha256 'f104963fc5fcf627069324cc3d3b9dc7bae65608fd9b7354fb914a1f3c755e70'
-  link 'MakeHuman.app'
+
+  depends_on macos: '>= :sierra'
+
+  app 'MakeHuman.app'
 end

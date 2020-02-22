@@ -1,8 +1,18 @@
-class TexLiveUtility < Cask
-  url 'https://mactlmgr.googlecode.com/files/TeX%20Live%20Utility.app-1.17.tar.gz'
-  appcast 'http://mactlmgr.googlecode.com/svn/trunk/appcast/tlu_appcast.xml'
-  homepage 'https://code.google.com/p/mactlmgr/'
-  version '1.17'
-  sha256 '9a913cbf0e158258c513fc0905f65632b36d372d1b4b9afe6b6f08dd005ff232'
-  link 'TeX Live Utility.app'
+cask 'tex-live-utility' do
+  version '1.36'
+  sha256 '893ecc7d05b06e62a602399e59a4b433c787438e5921cf05c406efece057c7d4'
+
+  url "https://github.com/amaxwell/tlutility/releases/download/#{version}/TeX.Live.Utility.app-#{version}.dmg"
+  appcast 'https://github.com/amaxwell/tlutility/releases.atom'
+  name 'TeX Live Utility'
+  homepage 'https://github.com/amaxwell/tlutility'
+
+  auto_updates true
+
+  app 'TeX Live Utility.app'
+
+  zap trash: [
+               '~/Library/Application Support/TeX Live Utility',
+               '~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/TeX Live Utility Help*',
+             ]
 end

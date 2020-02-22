@@ -1,20 +1,26 @@
-class IntellijIdea < Cask
-  url 'http://download-cf.jetbrains.com/idea/ideaIU-13.1.3.dmg'
-  homepage 'https://www.jetbrains.com/idea/index.html'
-  version '13.1.3'
-  sha256 'ae5239e0a5670dec88c39a5157103084d0ddd2c0b8d732d6af07764f0b98b624'
-  link 'IntelliJ IDEA 13.app'
-  caveats do
-    <<-EOS.undent
-    #{@cask} may require Java 7 (an older version) available from the
-    caskroom-versions repo via
+cask 'intellij-idea' do
+  version '2019.3.3'
+  sha256 '4b8a204dc037498fe4603ad95459e703a5c715761c446c9dd6b1d233c0ba8f64'
 
-        brew cask install caskroom/versions/java7
+  url "https://download.jetbrains.com/idea/ideaIU-#{version}.dmg"
+  appcast 'https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=release'
+  name 'IntelliJ IDEA Ultimate'
+  homepage 'https://www.jetbrains.com/idea/'
 
-    Alternatively, #{@cask} can be modified to use Java 8 as described in
+  auto_updates true
 
-        https://github.com/caskroom/homebrew-cask/issues/4500#issuecomment-43955932
+  app 'IntelliJ IDEA.app'
 
-    EOS
+  uninstall_postflight do
+    ENV['PATH'].split(File::PATH_SEPARATOR).map { |path| File.join(path, 'idea') }.each { |path| File.delete(path) if File.exist?(path) && File.readlines(path).grep(%r{# see com.intellij.idea.SocketLock for the server side of this interface}).any? }
   end
+
+  zap trash: [
+               '~/Library/Preferences/com.jetbrains.intellij.plist',
+               "~/Library/Caches/IntelliJIdea#{version.major_minor}",
+               "~/Library/Logs/IntelliJIdea#{version.major_minor}",
+               "~/Library/Application Support/IntelliJIdea#{version.major_minor}",
+               "~/Library/Preferences/IntelliJIdea#{version.major_minor}",
+               '~/Library/Saved Application State/com.jetbrains.intellij.savedState',
+             ]
 end

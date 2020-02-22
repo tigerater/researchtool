@@ -1,8 +1,13 @@
-class Moneymoney < Cask
-  url 'http://moneymoney-app.com/download/MoneyMoney.zip'
-  appcast 'http://moneymoney-app.com/update/appcast.xml'
-  homepage 'http://moneymoney-app.com/'
-  version 'latest'
-  sha256 :no_check
-  link 'MoneyMoney.app'
+cask 'moneymoney' do
+  version '2.3.24'
+  sha256 'd20e74baba6c164ffd793c52d5b566a7fc134deb8e8e10aa1076fbd770b927d0'
+
+  url 'https://service.moneymoney-app.com/1/MoneyMoney.zip'
+  appcast 'https://service.moneymoney-app.com/1/Appcast.xml'
+  name 'MoneyMoney'
+  homepage 'https://moneymoney-app.com/'
+
+  auto_updates true
+
+  app 'MoneyMoney.app'
 end

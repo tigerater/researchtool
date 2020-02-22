@@ -1,8 +1,12 @@
-class Lightpaper < Cask
-  url 'http://cl.ly/3c370B2o0J2A/download/LightPaper_v0.8.7.dmg'
-  appcast 'http://links.clockworkengine.com/lp-mac-update-feed'
-  homepage 'http://clockworkengine.com/lightpaper-mac/'
-  version '0.8.7'
-  sha256 'e4ec5c87f8e35b9688f25808def9efa610923858d60c26917315422094f0108a'
-  link 'LightPaper.app'
+cask 'lightpaper' do
+  version '1.4.2'
+  sha256 '7e1f7f8304bd2b299e7973a34d55e9c5b6b57b9987f51c3e2200897150c06923'
+
+  # hockeyapp.net/api/2/apps/789cfa8846464727ae0fdb176ec8d3c8 was verified as official when first introduced to the cask
+  url 'https://rink.hockeyapp.net/api/2/apps/789cfa8846464727ae0fdb176ec8d3c8?format=zip'
+  appcast 'https://rink.hockeyapp.net/api/2/apps/789cfa8846464727ae0fdb176ec8d3c8'
+  name 'LightPaper'
+  homepage 'https://getlightpaper.com/'
+
+  app 'LightPaper.app'
 end

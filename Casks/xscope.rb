@@ -1,10 +1,18 @@
-class Xscope < Cask
-  version '4.0.0'
-  sha256 '0f84d50383c52ae010074067597c89a3f52b0993ac14170268982d9774780626'
+cask 'xscope' do
+  version '4.4.1'
+  sha256 'dbbc939eca01ac8dc9994f5bd81130fbf980bdd6c9e66f23cf51fa585c8c0729'
 
-  url 'http://iconfactory.com/assets/software/xscope/xScope-4.0.zip'
-  appcast 'http://iconfactory.com/appcasts/xScope/appcast.xml'
-  homepage 'http://iconfactory.com/software/xscope'
+  # iconfactory.com was verified as official when first introduced to the cask
+  url "https://iconfactory.com/assets/software/xscope/xScope-#{version}.zip"
+  appcast 'https://iconfactory.com/appcasts/xScope/appcast.xml'
+  name 'xScope'
+  homepage 'https://xscopeapp.com/'
 
-  link 'xScope.app'
+  app 'xScope.app'
+
+  zap trash: [
+               '~/Library/Caches/com.iconfactory.xScope',
+               '~/Library/Caches/com.iconfactory.xScope.cache',
+               '~/Library/Preferences/com.iconfactory.xScope.plist',
+             ]
 end

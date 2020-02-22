@@ -1,8 +1,11 @@
-class JenkinsMenu < Cask
-  url 'https://bitbucket.org/qvacua/qvacua/downloads/JenkinsMenu-0.1.0.zip'
-  appcast 'http://qvacua.com/jenkinsmenu/appcast.xml'
-  homepage 'http://qvacua.com'
-  version '0.1.0'
-  sha256 '8fd5c85a5615bd0470cb69bd8c28cfbfc7189f74c1abd490181bb74b166fce37'
-  link 'Jenkins Menu.app'
+cask 'jenkins-menu' do
+  version '0.2.0'
+  sha256 'dc2b69ab27b99ed0b0c165ade90b504b7c8201213b5334c6d927affd8cf106b4'
+
+  url "https://github.com/qvacua/jenkins-menu/releases/download/v#{version}/Jenkins.Menu-#{version}.zip"
+  appcast 'https://github.com/qvacua/jenkins-menu/releases.atom'
+  name 'Jenkins Menu'
+  homepage 'https://github.com/qvacua/jenkins-menu/'
+
+  app 'Jenkins Menu.app'
 end

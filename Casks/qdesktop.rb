@@ -1,8 +1,11 @@
-class Qdesktop < Cask
-  url 'https://bitbucket.org/qvacua/qvacua/downloads/Qdesktop-0.1.1.zip'
-  appcast 'http://qvacua.com/qdesktop/appcast.xml'
-  homepage 'http://qvacua.com'
-  version '0.1.1'
-  sha256 '1eddd3513cca892fb8e53452d79d4589ef5b1e3cd885a1f52748b6df64588094'
-  link 'Qdesktop.app'
+cask 'qdesktop' do
+  version '0.1.2,6'
+  sha256 '80091362a4350baf14aa0d78eae0078ee974f68b9fa440a75569a4e591d3813a'
+
+  url "https://github.com/qvacua/qdesktop/releases/download/v#{version.before_comma}-#{version.after_comma}/Qdesktop-#{version.before_comma}.zip"
+  appcast 'https://github.com/qvacua/qdesktop/releases.atom'
+  name 'Qdesktop'
+  homepage 'https://github.com/qvacua/qdesktop'
+
+  app 'Qdesktop.app'
 end

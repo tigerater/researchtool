@@ -1,9 +1,18 @@
-class Dogecoin < Cask
-  version '1.7.1'
-  sha256 '04fe6443e5541c9c1d5a94ebdf2418e8dfe91a013322229c93e91090bda822bb'
+cask 'dogecoin' do
+  version '1.14.2'
+  sha256 'd8cbb26ceeb5e395417ed5e8984fc3b1d8990f8d5866deb837a4d82a17dba62e'
 
-  url 'https://github.com/dogecoin/dogecoin/releases/download/v1.7.1/dogecoin-core-1.7.1-mac.zip'
-  homepage 'http://dogecoin.com/'
+  # github.com/dogecoin/dogecoin was verified as official when first introduced to the cask
+  url "https://github.com/dogecoin/dogecoin/releases/download/v#{version}/dogecoin-#{version}-osx.dmg"
+  appcast 'https://github.com/dogecoin/dogecoin/releases.atom'
+  name 'Dogecoin'
+  homepage 'https://dogecoin.com/'
 
-  link 'Dogecoin-Qt.app'
+  app 'Dogecoin-Qt.app'
+
+  preflight do
+    set_permissions "#{staged_path}/Dogecoin-Qt.app", '0755'
+  end
+
+  zap trash: '~/Library/com.dogecoin.Dogecoin-Qt.plist'
 end

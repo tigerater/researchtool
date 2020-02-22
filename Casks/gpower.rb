@@ -1,7 +1,11 @@
-class Gpower < Cask
-  url 'http://www.gpower.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Psychologie/AAP/gpower/GPowerMac_3.1.9.2.zip'
+cask 'gpower' do
+  version '3.1.9.5'
+  sha256 '0bfd4fe455258551d4d255f962d4a32eb374286bf3e72213fb7021bc881223f8'
+
+  url "http://www.gpower.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Psychologie/AAP/gpower/GPowerMac_#{version}.zip"
+  appcast 'http://www.gpower.hhu.de/'
+  name 'G*Power'
   homepage 'http://www.gpower.hhu.de/'
-  version '3.1.9.2'
-  sha256 'ee4eb27493959fc6614b6061829c6b7d2aee9edf0fe0c1bf3d143ee2fa74c3e6'
-  link 'G*Power.app'
+
+  app 'G*Power.app'
 end

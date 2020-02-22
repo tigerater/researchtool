@@ -1,7 +1,10 @@
-class Macterm < Cask
-  url 'http://www.macterm.net/updates/macterm-latest.dmg'
-  version 'latest'
+cask 'macterm' do
+  version :latest
   sha256 :no_check
-  homepage 'http://www.macterm.net/'
-  link 'MacTerm.app'
+
+  url 'https://www.macterm.net/updates/macterm-latest.dmg'
+  name 'MacTerm'
+  homepage 'https://www.macterm.net/'
+
+  app 'MacTerm.app'
 end

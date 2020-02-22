@@ -37,7 +37,7 @@ die () {
 
 xml_source_1 () {
     if /usr/bin/xattr -p "$attribute_1" "$file_arg" > /dev/null 2>&1; then
-        /usr/bin/xattr -p "$attribute_1" "$file_arg" | /usr/bin/xxd -r -p | /usr/bin/plutil -convert xml1 -o - -
+        /usr/bin/xattr -p "$attribute_1" "$file_arg" | /usr/bin/xxd -r -p | /usr/bin/plutil -convert xml1 -o - - 2> /dev/null
     fi
 }
 
@@ -61,7 +61,7 @@ _list_url_attributes_on_file () {
 if [[ $1 =~ ^-+h(elp)?$ || -z "$1" ]]; then
     printf "list_url_attributes_on_file <file>
 
-Given a downloaded file, extract possible sources from OS X extended
+Given a downloaded file, extract possible sources from macOS extended
 attributes, which may be useful in a Cask url stanza.
 
 Currently the only attribute examined is

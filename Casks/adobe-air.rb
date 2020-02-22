@@ -1,19 +1,32 @@
-class AdobeAir < Cask
-  version '14.0'
-  sha256 '73b7632958145bbd6f6312ad53611491220b30dac4123817b476872c8ba2d40e'
+cask 'adobe-air' do
+  version '32.0.0.125'
+  sha256 'd6abb9c4538f9dc9ca3d7f86629437fa52f5d7ee36ae2a3903adfb42d59fd4ad'
 
-  url "http://airdownload.adobe.com/air/mac/download/#{version}/AdobeAIR.dmg"
+  url "https://airdownload.adobe.com/air/mac/download/#{version.major_minor}/AdobeAIR.dmg"
+  appcast 'https://helpx.adobe.com/au/air/kb/archived-air-sdk-version.html'
+  name 'Adobe AIR'
   homepage 'https://get.adobe.com/air/'
 
-  caskroom_only true
+  installer script: {
+                      executable: 'Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer',
+                      args:       ['-silent'],
+                      sudo:       true,
+                    }
 
-  after_install do
-    system '/usr/bin/sudo', '-E', '--',
-      "#{destination_path}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer", '-silent'
-  end
+  uninstall script: {
+                      executable: 'Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer',
+                      args:       ['-uninstall'],
+                      sudo:       true,
+                    },
+            rmdir:  [
+                      '/Applications/Adobe/Flash Player/AddIns',
+                      '/Applications/Adobe/Flash Player',
+                      '/Applications/Adobe',
+                    ]
 
-  uninstall :script => {
-    :executable => 'Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer',
-    :args => %w[-uninstall]
-  }
+  zap trash: [
+               '~/Library/Application Support/Adobe/AIR',
+               '~/Library/Caches/com.adobe.air.ApplicationInstaller',
+             ],
+      rmdir: '~/Library/Application Support/Adobe/'
 end

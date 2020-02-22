@@ -1,10 +1,12 @@
-class Opensong < Cask
-  version '2.1.1'
-  sha256 '7663e04a1ae46aec948fad9e80cd8966c5a006744b9da42bc85cca4bb4dda4bc'
+cask 'opensong' do
+  version '3.0.1'
+  sha256 '7c8efb5b721a9eafccbe6832c9be93ddd1db6272c5ab94523a40464951045c85'
 
-  url "https://downloads.sourceforge.net/sourceforge/opensong/OpenSongOSX-V#{version}.dmg"
+  # sourceforge.net/opensong was verified as official when first introduced to the cask
+  url "https://downloads.sourceforge.net/opensong/OpenSong/V#{version}/OpenSongOSX-V#{version}.dmg"
+  appcast 'https://sourceforge.net/projects/opensong/rss'
+  name 'OpenSong'
   homepage 'http://www.opensong.org/'
 
-  link "OpenSong V#{version}/OpenSongOSX-Cocoa.app"
-  link "Opensong V#{version}/OpenSongOSX.app"
+  app 'OpenSongOSX.app'
 end

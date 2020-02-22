@@ -1,7 +1,10 @@
-class Tonido < Cask
-  url 'http://www.tonido.com/download.php?TonidoSetup.dmg'
-  homepage 'http://www.tonido.com/'
-  version 'latest'
+cask 'tonido' do
+  version :latest
   sha256 :no_check
-  link 'Tonido.app'
+
+  url 'https://www.tonido.com/download.php?TonidoSetup.dmg'
+  name 'Tonido'
+  homepage 'https://www.tonido.com/'
+
+  app 'Tonido.app'
 end

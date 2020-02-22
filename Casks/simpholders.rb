@@ -1,8 +1,13 @@
-class Simpholders < Cask
-  url 'http://simpholders.com/site/assets/files/1007/simpholders-1_5_0.dmg'
-  appcast 'http://kfi-apps.com/appcasts/simpholders/'
-  homepage 'http://simpholders.com/'
-  version '1.5.0'
-  sha256 '2f4fb58a20d94a858c4d53648ee37fd082e23f50ef3f367fbaef4d6cea840cd6'
-  link 'SimPholders.app'
+cask 'simpholders' do
+  version '3.0.10,2277'
+  sha256 'edcfb7b1c78873755487640615960980f2c13ae56a565f67c55d30ad1657f134'
+
+  url "https://simpholders.com/site/assets/files/#{version.after_comma}/simpholders_#{version.before_comma.dots_to_underscores}.dmg"
+  appcast 'https://simpholders.com/releases/'
+  name 'SimPholders'
+  homepage 'https://simpholders.com/'
+
+  depends_on macos: '>= :mojave'
+
+  app 'SimPholders.app'
 end

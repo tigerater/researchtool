@@ -1,7 +1,12 @@
-class Meteorologist < Cask
-  url 'https://downloads.sourceforge.net/heat-meteo/Meteorologist-1.6.1.dmg'
-  homepage 'http://heat-meteo.sourceforge.net/'
-  version '1.6.1'
-  sha256 '15243a845062d87bf67e6a26b8da011e00c50a5f24def460cc685532d7d720a4'
-  link 'Meteorologist.app'
+cask 'meteorologist' do
+  version '3.3.2'
+  sha256 '398a769772328eb66cc545724b8fa496e37969a34acb2ac510298740eed36e41'
+
+  # downloads.sourceforge.net/heat-meteo was verified as official when first introduced to the cask
+  url "https://downloads.sourceforge.net/heat-meteo/Meteorologist-#{version}.dmg"
+  appcast 'https://sourceforge.net/projects/heat-meteo/rss'
+  name 'Meteorologist'
+  homepage 'https://heat-meteo.sourceforge.io/'
+
+  app 'Meteorologist.app'
 end

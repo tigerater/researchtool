@@ -1,7 +1,12 @@
-class Ganttproject < Cask
-  url 'https://ganttproject.googlecode.com/files/ganttproject-2.6.2-r1544.dmg'
-  homepage 'http://www.ganttproject.biz'
-  version '2.6.2-r1544'
-  sha256 '8db9b2da23c581f4907ec091db07b7d19e784f4fcbc7fd7cea03d5ab0de23f70'
-  link 'GanttProject 2.6.2.app'
+cask 'ganttproject' do
+  version '2.8.10,r2363'
+  sha256 '7dbe2f3fe6ece186d781111fe91f77950a271c87ef3a0a6345d65541281e908d'
+
+  # github.com/bardsoftware/ganttproject was verified as official when first introduced to the cask
+  url "https://github.com/bardsoftware/ganttproject/releases/download/ganttproject-#{version.before_comma}/ganttproject-#{version.before_comma}-#{version.after_comma}.dmg"
+  appcast 'https://github.com/bardsoftware/ganttproject/releases.atom'
+  name 'GanttProject'
+  homepage 'https://www.ganttproject.biz/'
+
+  app 'GanttProject.app'
 end

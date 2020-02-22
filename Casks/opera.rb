@@ -1,7 +1,18 @@
-class Opera < Cask
-  url 'http://get.geo.opera.com/pub/opera/desktop/22.0.1471.50/mac/Opera_22.0.1471.50_Setup.dmg'
-  homepage 'http://www.opera.com/'
-  version '22.0.1471.50'
-  sha256 '33906fef881e3b6df5d750fe15ac1a90908122cc01d7bf25cb6f22ac347f3082'
-  link 'Opera.app'
+cask 'opera' do
+  version '66.0.3515.103'
+  sha256 'd9bbe6a7453462d9ffb48a8d8a1c2557a8480d3d4ec51b2fb7964493e710fc16'
+
+  url "https://get.geo.opera.com/pub/opera/desktop/#{version}/mac/Opera_#{version}_Setup.dmg"
+  appcast 'https://ftp.opera.com/pub/opera/desktop/'
+  name 'Opera'
+  homepage 'https://www.opera.com/'
+
+  auto_updates true
+
+  app 'Opera.app'
+
+  zap trash: [
+               '~/Library/Preferences/com.operasoftware.Opera.plist',
+               '~/Library/Application Support/com.operasoftware.Opera/',
+             ]
 end

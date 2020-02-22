@@ -1,7 +1,13 @@
-class Liteide < Cask
-  url 'https://downloads.sourceforge.net/project/liteide/X22/liteidex22.macosx.zip'
-  homepage 'https://code.google.com/p/golangide/'
-  version 'x22'
-  sha256 '994b2bf68bb7f99ef7ac8001546f437644e9751109e5bf207adee7fb6180c689'
-  link 'LiteIDE.app'
+cask 'liteide' do
+  version '36.3'
+  sha256 '61b028c893dcbabf2412d9c76d264208e1a29636b25dafeacb34f9fc73109b55'
+
+  url "https://github.com/visualfc/liteide/releases/download/x#{version}/liteidex#{version}.macos-qt5.12.5.zip"
+  appcast 'https://github.com/visualfc/liteide/releases.atom'
+  name 'LiteIDE'
+  homepage 'https://github.com/visualfc/liteide'
+
+  depends_on macos: '>= :sierra'
+
+  app 'liteide/LiteIDE.app'
 end

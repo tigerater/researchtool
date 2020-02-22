@@ -1,9 +1,11 @@
-class RawPhotoProcessor < Cask
-  url 'http://www.raw-photo-processor.com/RPP/RPP_64.zip'
-  appcast 'http://www.raw-photo-processor.com/rpp_updates.xml'
-  homepage 'http://www.raw-photo-processor.com/RPP/Overview.html'
-  version '4.7.2'
-  nested_container 'RPP472_1672_64.dmg'
-  sha256 'ce003b7c78916baaf51b39e26633f9ac069e78b7e5bf8904b966c4c409c06f39'
-  link 'Raw Photo Processor 64.app'
+cask 'raw-photo-processor' do
+  version '4.8.0,1879'
+  sha256 '767f0fce4dfb30bddfbe1eba487d91d27706480dff90cbc431d07c1964a7b485'
+
+  url 'https://www.raw-photo-processor.com/RPP/RPP_64.zip'
+  appcast 'https://www.raw-photo-processor.com/rpp_updates_64.xml'
+  name 'Raw Photo Processor'
+  homepage 'https://www.raw-photo-processor.com/RPP/Overview.html'
+
+  app 'Raw Photo Processor 64.app'
 end

@@ -1,7 +1,11 @@
-class PutioAdder < Cask
-  url 'https://github.com/nicoSWD/put.io-adder/releases/download/v2.6.1/put.io.adder.zip'
+cask 'putio-adder' do
+  version '3.0.4'
+  sha256 'de25d4b698118ce459794121e8a58279820c3872dba7021255097aac021b375f'
+
+  url "https://github.com/nicoSWD/put.io-adder/releases/download/v#{version}/put.io-adder-v#{version}.zip"
+  appcast 'https://github.com/nicoSWD/put.io-adder/releases.atom'
+  name 'Put.IO Adder'
   homepage 'https://github.com/nicoSWD/put.io-adder'
-  version '2.6.1'
-  sha256 'd89aed7a40de99ad3e75ca05995c088c5147282cb387beaaa5c496c5fc9b2307'
-  link 'put.io adder.app'
+
+  app 'put.io adder.app'
 end

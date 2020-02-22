@@ -1,7 +1,11 @@
-class Qlimagesize < Cask
-  url 'http://repo.whine.fr/qlImageSize.qlgenerator-10.8.zip'
+cask 'qlimagesize' do
+  version '2.6.1'
+  sha256 '466c18539653056ccf7eb09eb6c68689fd9a8280a3c2ade9f2d457de53504821'
+
+  url "https://github.com/Nyx0uf/qlImageSize/releases/download/#{version}/qlImageSize.qlgenerator.zip"
+  appcast 'https://github.com/Nyx0uf/qlimagesize/releases.atom'
+  name 'qlImageSize'
   homepage 'https://github.com/Nyx0uf/qlImageSize'
-  version 'latest'
-  sha256 :no_check
+
   qlplugin 'qlImageSize.qlgenerator'
 end

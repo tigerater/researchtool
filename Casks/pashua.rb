@@ -1,7 +1,10 @@
-class Pashua < Cask
-  url 'https://www.bluem.net/files/Pashua.dmg'
-  homepage 'http://www.bluem.net/en/mac/pashua/'
-  version 'latest'
+cask 'pashua' do
+  version :latest
   sha256 :no_check
-  link 'Pashua.app'
+
+  url 'https://www.bluem.net/files/Pashua.dmg'
+  name 'Pashua'
+  homepage 'https://www.bluem.net/en/mac/pashua/'
+
+  app 'Pashua.app'
 end

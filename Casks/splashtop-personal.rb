@@ -1,8 +1,14 @@
-class SplashtopPersonal < Cask
-  url 'https://d17kmd0va0f0mp.cloudfront.net/macclient/STP/Splashtop_Personal_v2.4.3.1.dmg'
-  homepage 'http://www.splashtop.com/personal'
-  version '2.4.3.1'
-  sha256 'a0167ad134b3134e9b3e5e0a26238aed04ef230f3cabcddd7fd0fef9d82687aa'
-  install 'Splashtop Personal.pkg'
-  uninstall :pkgutil => 'com.splashtop.stp.*'
+cask 'splashtop-personal' do
+  version '2.6.8.0'
+  sha256 '8c867a3969399db29b4f7aa6abb2f70f06535503f35db7eb5ff58358f3cb91dd'
+
+  # d17kmd0va0f0mp.cloudfront.net was verified as official when first introduced to the cask
+  url "https://d17kmd0va0f0mp.cloudfront.net/macclient/STP/Splashtop_Personal_v#{version}.dmg"
+  appcast 'https://www.splashtop.com/wp-content/themes/responsive/downloadx.php?product=stp&platform=mac-client'
+  name 'Splashtop Personal'
+  homepage 'https://www.splashtop.com/personal'
+
+  pkg 'Splashtop Personal.pkg'
+
+  uninstall pkgutil: 'com.splashtop.stp.*'
 end

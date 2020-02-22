@@ -1,7 +1,12 @@
-class Supertuxkart < Cask
-  url 'https://downloads.sourceforge.net/sourceforge/supertuxkart/supertuxkart-0.8.1-osx.dmg'
-  homepage 'http://supertuxkart.sourceforge.net'
-  version '0.8.1'
-  sha256 'e3205788a42dd830cc1fb2deb100e305bd247d730ddd53bbd9e6601ea0e2a0d0'
-  link 'Supertuxkart.app'
+cask 'supertuxkart' do
+  version '1.1'
+  sha256 'ed1783b2e3220ce3b69a88b39528c101154bdfdca10f4ff4a66d065e802334f3'
+
+  # sourceforge.net/supertuxkart was verified as official when first introduced to the cask
+  url "https://downloads.sourceforge.net/supertuxkart/SuperTuxKart-#{version}-mac.zip"
+  appcast 'https://supertuxkart.net/Download'
+  name 'SuperTuxKart'
+  homepage 'https://supertuxkart.net/Main_Page'
+
+  app 'SuperTuxKart.app'
 end

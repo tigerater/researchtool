@@ -1,8 +1,14 @@
-class Droplr < Cask
-  url 'http://files.droplr.com.s3.amazonaws.com/apps/mac/Droplr+34.zip'
-  appcast 'https://droplr.com/appcast/appcast.xml'
-  homepage 'https://www.droplr.com/'
-  version '4.1.1'
-  sha256 '60e45c4ea0e4658f78a0a78a36fd3f6e1c5d37efca1984f19f46e12ef6024f15'
-  link 'Droplr.app'
+cask 'droplr' do
+  version '5.6.2,235'
+  sha256 '20313d3b60a42fa94ef014ba09d0cc071bbae0022efc72f79be61fba93f088e6'
+
+  url "https://files.droplr.com/apps/mac/Droplr+#{version.after_comma}.zip"
+  appcast 'https://droplr.com/appcast/appcast-sandbox.xml'
+  name 'Droplr'
+  homepage 'https://droplr.com/'
+
+  auto_updates true
+  depends_on macos: '>= :sierra'
+
+  app 'Droplr.app'
 end

@@ -1,8 +1,12 @@
-class PreferenceManager < Cask
-  url 'http://download.digitalrebellion.com/Pref_Man.dmg'
-  appcast 'http://www.digitalrebellion.com/rss/appcasts/pref_man_appcast.xml'
-  homepage 'http://www.digitalrebellion.com/prefman'
-  version 'latest'
-  sha256 :no_check
-  link 'Preference Manager.app'
+cask 'preference-manager' do
+  version '4.4.4.0'
+  sha256 'cee73faea96e0a83666ec070c49d302d53c9a23010c6a3579c0ee8da3af35d30'
+
+  url "https://www.digitalrebellion.com/download/prefman?version=#{version.no_dots}"
+  appcast 'https://www.digitalrebellion.com/prefman/changelog',
+          configuration: version.major_minor_patch
+  name 'Preference Manager'
+  homepage 'https://www.digitalrebellion.com/prefman/'
+
+  app 'Preference Manager.app'
 end

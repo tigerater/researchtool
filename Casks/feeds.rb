@@ -1,8 +1,18 @@
-class Feeds < Cask
-  url 'https://feedswww.appspot.com/releases/Feeds-2.0.5.1.zip'
-  appcast 'https://feedswww.appspot.com/appcast.xml'
+cask 'feeds' do
+  version '2.1.2'
+  sha256 'a9b1476dae52fef2abc9f8427c106412ca726b873c469ae23553818660eb7fdc'
+
+  # storage.googleapis.com/feeds-releases was verified as official when first introduced to the cask
+  url "https://storage.googleapis.com/feeds-releases/Feeds-#{version}.zip"
+  appcast 'https://storage.googleapis.com/feeds-releases/appcast.xml'
+  name 'Feeds'
   homepage 'http://www.feedsapp.com/'
-  version '2.0.5.1'
-  sha256 'abc72e4ef77a0bef4ea89d62b570698d47b197f2d56b74a48a9f3da52c6cd71e'
-  link 'Feeds.app'
+
+  app 'Feeds.app'
+
+  zap trash: [
+               '~/Library/Caches/com.feedsapp.Feeds',
+               '~/Library/Logs/Feeds',
+               '~/Library/Preferences/com.feedsapp.Feeds.plist',
+             ]
 end

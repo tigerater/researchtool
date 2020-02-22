@@ -1,8 +1,11 @@
-class Wraparound < Cask
-  url 'http://www.digicowsoftware.com/downloads/Wraparound2.0b2-2010.zip'
-  appcast 'http://www.digicowsoftware.com/appcast/'
-  homepage 'http://www.digicowsoftware.com/detail?_app=Wraparound'
-  version '2.0b2'
-  sha256 'f156dfa65dad43d38cb3b0f8febd8de9711f4794bb166a293ced93860ebf7879'
-  link 'Wraparound.app'
+cask 'wraparound' do
+  version '2.0-2021'
+  sha256 '4efd0a5051b2ab0487e7d3d4f33093f0d6f23ff0d203d0fc3d66facd6e893474'
+
+  url "https://www.digicowsoftware.com/downloads/Wraparound#{version}.zip"
+  appcast 'https://www.digicowsoftware.com/detail?_app=Wraparound'
+  name 'Wraparound'
+  homepage 'https://www.digicowsoftware.com/detail?_app=Wraparound'
+
+  app 'Wraparound.app'
 end

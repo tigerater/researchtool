@@ -1,8 +1,13 @@
-class Fastscripts < Cask
-  url 'https://www.red-sweater.com/fastscripts/FastScripts2.6.5.zip'
-  appcast 'http://www.red-sweater.com/fastscripts/appcast2.php'
-  homepage 'http://www.red-sweater.com/fastscripts/'
-  version '2.6.5'
-  sha256 '76d8aa61d754f4c94ce53071d6afa2826d0a6390ba6ddae40c2f530475e2cb54'
-  link 'FastScripts.app'
+cask 'fastscripts' do
+  version '2.8.1'
+  sha256 '400b06282155a92e55b3cbe753e6b809bce4bd5f6e548776a2cbb3b617cb8d17'
+
+  url "https://red-sweater.com/fastscripts/FastScripts#{version}.zip"
+  appcast 'https://red-sweater.com/fastscripts/appcast2.php'
+  name 'FastScripts'
+  homepage 'https://red-sweater.com/fastscripts/'
+
+  depends_on macos: '>= :sierra'
+
+  app 'FastScripts.app'
 end

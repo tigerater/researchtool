@@ -1,9 +1,17 @@
-class Brackets < Cask
-  version '0.40.0'
-  sha256 '5960e8b2bde0c93539dfffc8c99d0949a00661e53bc566167a3ee88280efbcfd'
+cask 'brackets' do
+  version '1.14.1'
+  sha256 '9e95b89544796ef959b6acb36db77a712f1cf55d09294cff4b6dde648f055160'
 
-  url 'https://github.com/adobe/brackets/releases/download/sprint-40/Brackets.Sprint.40.dmg'
-  homepage 'http://brackets.io'
+  # github.com/adobe/brackets was verified as official when first introduced to the cask
+  url "https://github.com/adobe/brackets/releases/download/release-#{version}/Brackets.Release.#{version}.dmg"
+  appcast 'https://github.com/adobe/brackets/releases.atom'
+  name 'Brackets'
+  homepage 'http://brackets.io/'
 
-  link 'Brackets.app'
+  app 'Brackets.app'
+
+  zap trash: [
+               '~/Library/Application Support/Brackets',
+               '~/Library/Preferences/io.brackets.appshell.plist',
+             ]
 end

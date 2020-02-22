@@ -1,8 +1,21 @@
-class Handbrake < Cask
-  url 'https://downloads.sourceforge.net/sourceforge/handbrake/HandBrake-0.9.9-MacOSX.6_GUI_x86_64.dmg'
-  appcast 'http://handbrake.fr/appcast.x86_64.xml'
-  homepage 'http://handbrake.fr/'
-  version '0.9.9'
-  sha256 '050f9d0d3a126b25d24cb4971062d66f4f975317b6586f8c288795c17a0c05f9'
-  link 'HandBrake.app'
+cask 'handbrake' do
+  version '1.3.1'
+  sha256 'b713ebd6185a4836129fa520c94a2197325f5132d80056358b258ab5f471a26e'
+
+  url "https://download.handbrake.fr/handbrake/releases/#{version}/HandBrake-#{version}.dmg"
+  appcast 'https://github.com/HandBrake/HandBrake/releases.atom'
+  name 'HandBrake'
+  homepage 'https://handbrake.fr/'
+
+  auto_updates true
+
+  app 'HandBrake.app'
+
+  zap trash: [
+               '~/Library/Application Support/HandBrake',
+               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/fr.handbrake.handbrake.sfl*',
+               '~/Library/Caches/fr.handbrake.HandBrake',
+               '~/Library/Preferences/fr.handbrake.HandBrake.plist',
+               '~/Library/Saved Application State/fr.handbrake.HandBrake.savedState',
+             ]
 end

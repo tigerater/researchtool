@@ -1,7 +1,14 @@
-class Visit < Cask
-  url 'https://portal.nersc.gov/svn/visit/trunk/releases/2.7.2/VisIt-2.7.2.dmg'
-  homepage 'https://wci.llnl.gov/codes/visit/home.html'
-  version '2.7.2'
-  sha256 '3c1f1b201358876c1b23717a1b3a2c5a1777755e3fc7f242c08b53a033402fbc'
-  link 'VisIt.app'
+cask 'visit' do
+  version '3.1.0'
+  sha256 '5da96f81f82d680f7c510b41f80fb5030f32436a54f59f39371eb1464c021912'
+
+  # portal.nersc.gov/project/visit was verified as official when first introduced to the cask
+  url "https://portal.nersc.gov/project/visit/releases/#{version}/visit#{version}.darwin-x86_64-10_13.dmg"
+  appcast 'https://wci.llnl.gov/simulation/computer-codes/visit/executables'
+  name 'VisIt'
+  homepage 'https://wci.llnl.gov/simulation/computer-codes/visit'
+
+  depends_on macos: '>= :el_capitan'
+
+  app 'VisIt.app'
 end

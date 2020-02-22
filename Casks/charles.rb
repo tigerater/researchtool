@@ -1,9 +1,20 @@
-class Charles < Cask
-  version '3.9.2'
-  sha256 '89b017744181ccec18e8a5ff67b9728a2d2ded5de0620a100a98c8686d867b7b'
+cask 'charles' do
+  version '4.5.6'
+  sha256 'c00a002476b7a453ff1585288781081f71a81daacf0e39fa362e733a65f7258c'
 
-  url 'http://www.charlesproxy.com/assets/release/3.9.2/charles-proxy-3.9.2-applejava.dmg'
-  homepage 'http://www.charlesproxy.com/'
+  url "https://www.charlesproxy.com/assets/release/#{version}/charles-proxy-#{version}.dmg"
+  appcast 'https://www.charlesproxy.com/latest.do'
+  name 'Charles'
+  homepage 'https://www.charlesproxy.com/'
 
-  link 'Charles.app'
+  app 'Charles.app'
+
+  uninstall quit: 'com.xk72.Charles'
+
+  zap trash: [
+               '~/Library/Application Support/Charles',
+               '~/Library/Preferences/com.xk72.Charles.plist',
+               '~/Library/Preferences/com.xk72.charles.config',
+               '~/Library/Saved Application State/com.xk72.Charles.savedState',
+             ]
 end

@@ -1,8 +1,21 @@
-class Trailer < Cask
-  url 'http://dev.housetrip.com/trailer/trailer1026.zip'
-  appcast 'http://dev.housetrip.com/trailer/appcast.xml'
-  homepage 'http://dev.housetrip.com/trailer/'
-  version '1.0.26'
-  sha256 '2cad2a5af786429d6917b22cd131e7425054f3792a284620902dcb985308aab8'
-  link 'Trailer.app'
+cask 'trailer' do
+  version '1.6.17'
+  sha256 '6c4dce7eeacb42f64a3fdc1efb8b8d8af6b46564e2beca05622fed48b37fb699'
+
+  # github.com/ptsochantaris/trailer was verified as official when first introduced to the cask
+  url "https://github.com/ptsochantaris/trailer/releases/download/#{version}/trailer#{version.no_dots}.zip"
+  appcast 'https://github.com/ptsochantaris/trailer/releases.atom'
+  name 'Trailer'
+  homepage 'https://ptsochantaris.github.io/trailer/'
+
+  app 'Trailer.app'
+
+  uninstall quit: 'com.housetrip.Trailer'
+
+  zap trash: [
+               '~/Library/Application Support/com.housetrip.Trailer',
+               '~/Library/Caches/com.housetrip.Trailer',
+               '~/Library/Group Containers/group.Trailer',
+               '~/Library/Preferences/com.housetrip.Trailer.plist',
+             ]
 end

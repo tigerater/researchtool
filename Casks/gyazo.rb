@@ -1,8 +1,19 @@
-class Gyazo < Cask
-  url 'https://gyazo.s3.amazonaws.com/setup/Gyazo_2.0.dmg'
+cask 'gyazo' do
+  version '3.8.0'
+  sha256 '21f639c03526ac0e53e6c370530d1ddb5a96ec65a7ab00b80e11cf589036d85c'
+
+  url "https://files.gyazo.com/setup/Gyazo-#{version}.dmg"
+  appcast 'https://gyazo.com/api/gy_mac.xml'
+  name 'Nota Gyazo GIF'
   homepage 'https://gyazo.com/'
-  version '2.0'
-  sha256 '41242a421ee0c2b467ac0ff7fa1baa895c824e940bc5aee92a4ec2bf8e204eb3'
-  link 'Gyazo.app'
-  link 'Gyazo GIF.app'
+
+  app 'Gyazo.app'
+  app 'Gyazo GIF.app'
+
+  zap trash: [
+               '~/Library/Caches/com.gyazo.gif',
+               '~/Library/Caches/com.gyazo.mac',
+               '~/Library/Preferences/com.gyazo.gif.plist',
+               '~/Library/Preferences/com.gyazo.mac.plist',
+             ]
 end

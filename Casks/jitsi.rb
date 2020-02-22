@@ -1,8 +1,11 @@
-class Jitsi < Cask
-  url 'https://download.jitsi.org/jitsi/macosx/jitsi-2.4-latest.dmg'
+cask 'jitsi' do
+  version '2.10.5550'
+  sha256 'd902af9dde7b1fde6f76af5f97e4f27d6b853bd9d3e83b2fec5292dda787a0da'
+
+  url "https://download.jitsi.org/jitsi/macosx/jitsi-#{version}.dmg"
   appcast 'https://download.jitsi.org/jitsi/macosx/sparkle/updates.xml'
+  name 'Jitsi'
   homepage 'https://jitsi.org/'
-  version '2.4'
-  sha256 'ceb6b2ab04206a51faf1dbffb704a7a60ae2b7c47834b50f87da5557f543ad13'
-  link 'Jitsi.app'
+
+  app 'Jitsi.app'
 end

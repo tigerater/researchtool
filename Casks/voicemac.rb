@@ -1,11 +1,15 @@
-class Voicemac < Cask
-  url 'http://download.mrgeckosmedia.com/VoiceMac.zip'
+cask 'voicemac' do
+  version '0.4.1'
+  sha256 '527b3356c11d1ef94787445829769983e9ac5c99e9cea724ad829148c78bcd7a'
+
+  url 'https://download.mrgeckosmedia.com/VoiceMac.zip'
   appcast 'https://mrgeckosmedia.com/applications/appcast/VoiceMac'
+  name 'VoiceMac'
   homepage 'https://mrgeckosmedia.com/applications/info/VoiceMac'
-  version 'latest'
-  sha256 :no_check
-  link 'VoiceMac/VoiceMac.app'
-  after_install do
-    system '/bin/chmod', '--', 'a+r', "#{destination_path}/VoiceMac/VoiceMac.app/Contents/Info.plist"
+
+  app 'VoiceMac/VoiceMac.app'
+
+  postflight do
+    set_permissions "#{appdir}/VoiceMac.app/Contents/Info.plist", 'a+r'
   end
 end

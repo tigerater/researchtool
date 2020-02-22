@@ -1,7 +1,16 @@
-class Stellarium < Cask
-  url 'https://downloads.sourceforge.net/sourceforge/stellarium/Stellarium-0.12.4.dmg'
-  homepage 'http://stellarium.org'
-  version '0.12.4'
-  sha256 'fe4f3c58a64780888d6ca6e28ec948fa1d885c7f0dd0a85beb4b5ec7339398db'
-  link 'Stellarium.app'
+cask 'stellarium' do
+  version '0.19.3'
+  sha256 '58e649ddbefdf13cbb56af6a195a29620e15d2be3e1dc9431da541123b51c853'
+
+  # github.com/Stellarium/stellarium was verified as official when first introduced to the cask
+  url "https://github.com/Stellarium/stellarium/releases/download/v#{version}/Stellarium-#{version}.dmg"
+  appcast 'https://github.com/Stellarium/stellarium/releases.atom'
+  name 'Stellarium'
+  homepage 'https://stellarium.org/'
+
+  depends_on macos: '>= :sierra'
+
+  app 'Stellarium.app'
+
+  zap trash: '~/Library/Preferences/Stellarium'
 end

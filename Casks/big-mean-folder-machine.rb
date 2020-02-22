@@ -1,10 +1,11 @@
-class BigMeanFolderMachine < Cask
-  version 'latest'
-  sha256 :no_check
-  
-  url 'http://www.publicspace.net/download/BMFM.dmg'
-  appcast 'http://www.publicspace.net/app/bmfm2.xml'
-  homepage 'http://www.publicspace.net/BigMeanFolderMachine/'
+cask 'big-mean-folder-machine' do
+  version '2.41'
+  sha256 'd5ac6ccdc6dc01d518b69576b0d969a1d784f7170746ddccd343e8f2977204fa'
 
-  link 'Big Mean Folder Machine 2.app'
+  url 'https://www.publicspace.net/download/BMFM.dmg'
+  appcast "https://www.publicspace.net/app/bmfm#{version.major}.xml"
+  name 'Big Mean Folder Machine'
+  homepage 'https://www.publicspace.net/BigMeanFolderMachine/'
+
+  app "Big Mean Folder Machine #{version.major}.app"
 end

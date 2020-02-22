@@ -1,10 +1,13 @@
-class Basecamp < Cask
-  version '4.2.4'
-  sha256 '674e75cc54d4e87925f3b6d095bd09efd9551c2a622c790178cf70a28deb85d3'
+cask 'basecamp' do
+  version '3'
+  sha256 :no_check # required as upstream package is updated in-place
 
-  url 'http://download.garmin.com/software/BaseCampforMac_424.dmg'
-  homepage 'http://www.garmin.com/en-US/shop/downloads/basecamp'
+  # bc3-desktop.s3.amazonaws.com was verified as official when first introduced to the cask
+  url "https://bc3-desktop.s3.amazonaws.com/mac/basecamp#{version}.dmg"
+  name 'Basecamp'
+  homepage "https://basecamp.com/help/#{version}/guides/apps/mac"
 
-  install 'Install BaseCamp.pkg'
-  uninstall :pkgutil => 'com.garmin.BaseCamp'
+  auto_updates true
+
+  app "Basecamp #{version}.app"
 end

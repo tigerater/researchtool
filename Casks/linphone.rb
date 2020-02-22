@@ -1,7 +1,11 @@
-class Linphone < Cask
-  url 'http://download-mirror.savannah.gnu.org/releases/linphone/3.7.x/macos/linphone-3.7.0.dmg'
-  homepage 'http://www.linphone.org/'
-  version '3.7.0'
-  sha256 '4d4a01354a7b5cd011746d3477a93ffb6e531ff8e2afccd2b9bb031f06cc42cc'
-  link 'Linphone.app'
+cask 'linphone' do
+  version '4.1.1'
+  sha256 'b1a5e518c1c564d47f992adadb09ea8cdb51f35e1a0935d4e2060468f893328e'
+
+  url "https://www.linphone.org/releases/macosx/Linphone-#{version}-mac.dmg"
+  appcast 'https://www.linphone.org/releases/macosx/RELEASE'
+  name 'Linphone'
+  homepage 'https://www.linphone.org/'
+
+  app 'Linphone.app'
 end

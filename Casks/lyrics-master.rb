@@ -1,7 +1,12 @@
-class LyricsMaster < Cask
-  url 'http://www.kenichimaehashi.com/lyricsmaster/download/LyricsMaster2410.dmg'
+cask 'lyrics-master' do
+  version '2.5.3.0'
+  sha256 '2e590f3c506ccdd70113a827ff63bd996768bc145b69163cbaf22aa3dce6c396'
+
+  url "http://www.kenichimaehashi.com/lyricsmaster/download/LyricsMaster#{version.no_dots}.dmg"
+  appcast 'http://www.kenichimaehashi.com/lyricsmaster/',
+          configuration: version.major_minor_patch
+  name 'Lyrics Master'
   homepage 'http://www.kenichimaehashi.com/lyricsmaster/'
-  version '2.4.1'
-  sha256 '773cb3996b5f946b506214a0087afebdb7f7350ac17f477cc3f31bedf2a9be0c'
-  link 'Lyrics Master'
+
+  app 'Lyrics Master.app'
 end

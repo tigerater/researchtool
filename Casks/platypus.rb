@@ -1,9 +1,13 @@
-class Platypus < Cask
-  version '4.8'
-  sha256 '754d9153b92e32faf7e56a4e181de59c6f0b72b3208663042a22e1767d87cb05'
+cask 'platypus' do
+  version '5.3'
+  sha256 'efc66e943e6327896d0c1b82b0c1798c9ea17cffa03581e4949541c30d9833b0'
 
-  url 'http://sveinbjorn.org/files/software/platypus.zip'
-  homepage 'http://sveinbjorn.org/platypus'
+  url "https://sveinbjorn.org/files/software/platypus/platypus#{version}.zip"
+  appcast 'https://www.sveinbjorn.org/files/appcasts/PlatypusAppcast.xml'
+  name 'Platypus'
+  homepage 'https://sveinbjorn.org/platypus'
 
-  link "Platypus-#{version}/Platypus.app"
+  auto_updates true
+
+  app 'Platypus.app'
 end

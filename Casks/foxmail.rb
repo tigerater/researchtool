@@ -1,7 +1,10 @@
-class Foxmail < Cask
-  url 'http://www.foxmail.com/mac/download'
-  homepage 'http://www.foxmail.com'
-  version 'latest'
+cask 'foxmail' do
+  version :latest
   sha256 :no_check
-  link 'Foxmail.app'
+
+  url 'https://www.foxmail.com/mac/download'
+  name 'Foxmail'
+  homepage 'https://www.foxmail.com/'
+
+  app 'Foxmail.app'
 end

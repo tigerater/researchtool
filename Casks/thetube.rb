@@ -1,7 +1,10 @@
-class Thetube < Cask
-  url 'http://download2.equinux.com/files/other/TheTube_2.11.3_Web.zip'
-  homepage 'http://www.equinux.com/us/products/thetube/index.html'
-  version '2.11.3'
-  sha256 '8ca81ca68d5ddca04a9fa8d53e9b8ba542e1b3c9806b3cd500172abd316bf277'
-  link 'TheTube.app'
+cask 'thetube' do
+  version '2.11.4'
+  sha256 '08136c0408ba1453db8d0728a9afcbc45db73c52bcc8da7b871eddbeb0da73e1'
+
+  url "https://download2.equinux.com/files/other/TheTube_#{version}_Web.zip"
+  name 'TheTube'
+  homepage 'https://www.equinux.com/'
+
+  app 'TheTube.app'
 end

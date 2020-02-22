@@ -1,73 +1,51 @@
-language: objective-c
+language: c
 
-# todo
-#
-# test with Ruby 1.9, but allow failure
-# test with Ruby 2.1, but allow failure
-#
+os: osx
+osx_image:
+  - xcode10.1
+  - xcode10.3
 
-# "Current" is currently a duplicate of either 1.8 or 2.0, depending on OS version
-env:
-  matrix:
-    - CASK_RUBY_TEST_VERSION="1.8"
-    - CASK_RUBY_TEST_VERSION="2.0"
-    - CASK_RUBY_TEST_VERSION="Current"
+branches:
+  only:
+    - master
 
-# permit "Current" to fail without affecting our badge
-matrix:
-  allow_failures:
-    - env: CASK_RUBY_TEST_VERSION="Current"
-  fast_finish: true
+cache:
+  directories:
+    - /usr/local/Homebrew/Library/Homebrew/vendor/bundle
+    - /usr/local/Homebrew/Library/Homebrew/vendor/portable-ruby
 
-# before_install steps
-# * turn off RVM
-# * set PATH according to env matrix
-# * update Homebrew
-# * informational feedback
-before_install:
-  - rvm use system
-  - export PATH="/System/Library/Frameworks/Ruby.framework/Versions/${CASK_RUBY_TEST_VERSION}/usr/bin":"$PATH"
-  - brew update
-  - printenv PATH
-  - /usr/bin/which ruby
-  - ruby --version
-  - /usr/bin/which rake
-  - rake --version
-  - echo ls_ruby_bindir; ls "/System/Library/Frameworks/Ruby.framework/Versions/${CASK_RUBY_TEST_VERSION}/usr/bin"
-
-# install steps
-# * brew Formulae without which some tests will be skipped
-# * bundler gem
-# * Ruby gems required for brew-cask
 install:
-  - brew install cabextract
-  - brew install unar
-  - echo gem_install_bundler; sudo "/System/Library/Frameworks/Ruby.framework/Versions/${CASK_RUBY_TEST_VERSION}/usr/bin/gem" install bundler --bindir="/System/Library/Frameworks/Ruby.framework/Versions/${CASK_RUBY_TEST_VERSION}/usr/bin"
-  - echo bundle; sudo "/System/Library/Frameworks/Ruby.framework/Versions/${CASK_RUBY_TEST_VERSION}/usr/bin/bundle" --system
+  - |
+    # Force strict error checking.
+    set -o errexit
+    set -o pipefail
+  - |
+    # Update Travis commit range.
+    # This is not normally required but does prevent problems with outdated forks and
+    # deleted casks (see https://github.com/Homebrew/homebrew-cask/pull/43164).
+    BRANCH_COMMIT="${TRAVIS_COMMIT_RANGE##*.}"
+    TARGET_COMMIT="${TRAVIS_COMMIT_RANGE%%.*}"
+    if ! MERGE_BASE="$(git merge-base "${BRANCH_COMMIT}" "${TARGET_COMMIT}" 2>/dev/null)"; then
+      git fetch --unshallow
+      MERGE_BASE="$(git merge-base "${BRANCH_COMMIT}" "${TARGET_COMMIT}")"
+    fi
+    export TRAVIS_COMMIT_RANGE="${MERGE_BASE}...${BRANCH_COMMIT}"
+  - |
+    # Switch to master branch.
+    export HOMEBREW_COLOR=1
+    export HOMEBREW_DEVELOPER=1
+    export HOMEBREW_NO_AUTO_UPDATE=1
+    brew update-reset
+    HOMEBREW_INSTALL_BUNDLER_GEMS_FIRST=1 brew config
+  - |
+    # Mirror the repo as a tap.
+    TAP_DIR="$(brew --repository "${TRAVIS_REPO_SLUG}")"
+    mkdir -p "${TAP_DIR}"
+    rsync -az --delete "${TRAVIS_BUILD_DIR}/" "${TAP_DIR}/"
+    export TRAVIS_BUILD_DIR="${TAP_DIR}"
+    builtin cd "${TAP_DIR}"
 
-# informational feedback
-before_script:
-  - printenv PATH
-  - /usr/bin/which ruby
-  - ruby --version
-  - /usr/bin/which bundle
-  - bundle --version
-  - /usr/bin/which rake
-  - rake --version
-  - echo ls_ruby_bindir; ls "/System/Library/Frameworks/Ruby.framework/Versions/${CASK_RUBY_TEST_VERSION}/usr/bin"
-
-# the test itself
-# path-quoting is different here due to YAML constraints
-# @@@ todo: setting the --seed here is an ugly temporary hack, to remain only until test-suite glitches are fixed.
-script:
-  - /System/Library/Frameworks/Ruby.framework/Versions/"${CASK_RUBY_TEST_VERSION}"/usr/bin/bundle exec "/System/Library/Frameworks/Ruby.framework/Versions/${CASK_RUBY_TEST_VERSION}/usr/bin/rake" test TESTOPTS="--seed=14827"
+script: brew cask ci
 
 notifications:
-  irc:
-    channels:
-      - "chat.freenode.net#homebrew-cask"
-    template:
-      - "%{build_number}: %{branch}@%{commit} %{author} -> %{message} %{build_url}"
-    use_notice: true
-    skip_join: true
   email: false

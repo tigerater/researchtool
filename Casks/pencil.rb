@@ -1,7 +1,12 @@
-class Pencil < Cask
-  url 'https://evoluspencil.googlecode.com/files/Pencil-2.0.6-mac.tar.bz2'
-  homepage 'http://pencil.evolus.vn'
-  version '2.0.6'
-  sha256 'dacd76c658b12101457d17a4ade0b3f9c6a012f8eddacd379c41e372545ffac6'
-  link 'Pencil.app'
+cask 'pencil' do
+  version '3.1.0.ga'
+  sha256 '5369787a801a470179a86ba60407b33e647f826b1a8b001b62e4f81a6bb0629d'
+
+  url "https://pencil.evolus.vn/dl/V#{version}/Pencil-#{version}.dmg"
+  appcast 'https://github.com/evolus/pencil/releases.atom',
+          configuration: version.major_minor_patch
+  name 'Pencil'
+  homepage 'https://pencil.evolus.vn/'
+
+  app 'Pencil.app'
 end

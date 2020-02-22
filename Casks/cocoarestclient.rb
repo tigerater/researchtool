@@ -1,10 +1,14 @@
-class Cocoarestclient < Cask
-  version '1.3.7'
-  sha256 '78400a16afc4017a68b5506e7a6270d72ade48b3e77a802eaaaaae80a0f6319f'
-  
-  url 'https://github.com/mmattozzi/cocoa-rest-client/releases/download/1.3.7/CocoaRestClient-1.3.7.dmg'
-  appcast 'http://restlesscode.org/cocoa-rest-client/appcast.xml'
-  homepage 'http://mmattozzi.github.io/cocoa-rest-client/'
+cask 'cocoarestclient' do
+  version '1.4.5'
+  sha256 'dccc638d7b8e9f793055cb1c4fc49da9f0f35e24e89f3559e53810150c77a6b1'
 
-  link 'CocoaRestClient.app'
+  # github.com/mmattozzi/cocoa-rest-client was verified as official when first introduced to the cask
+  url "https://github.com/mmattozzi/cocoa-rest-client/releases/download/#{version}/CocoaRestClient-#{version}.dmg"
+  appcast 'https://github.com/mmattozzi/cocoa-rest-client/releases.atom'
+  name 'CocoaRestClient'
+  homepage 'https://mmattozzi.github.io/cocoa-rest-client/'
+
+  depends_on macos: '>= :sierra'
+
+  app 'CocoaRestClient.app'
 end

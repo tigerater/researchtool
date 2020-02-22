@@ -1,8 +1,11 @@
-class Ifunbox < Cask
-  url 'http://dl.i-funbox.com/mac/ifunboxmac.dmg'
+cask 'ifunbox' do
+  version '1.8'
+  sha256 '19bef7c6079cb3d13dc109478c473e420643e3164ed02b668f76220f60884a11'
+
+  url "http://dl.i-funbox.com/updates/ifunbox.mac/#{version}/ifunboxmac.dmg"
   appcast 'http://dl.i-funbox.com/updates/ifunbox.mac/update.xml'
+  name 'iFunBox'
   homepage 'http://www.i-funbox.com/'
-  version 'latest'
-  sha256 :no_check
-  link 'iFunBox.app'
+
+  app 'iFunBox.app'
 end

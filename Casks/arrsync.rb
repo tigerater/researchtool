@@ -1,9 +1,12 @@
-class Arrsync < Cask
-  version 'latest'
-  sha256 :no_check
+cask 'arrsync' do
+  version '0.4.1'
+  sha256 '8a254771065f90a9f9f882589eccaf7bc51ad5d0ac86faf15847381bcdbe64f0'
 
-  url 'https://sourceforge.net/projects/arrsync/files/latest/download'
-  homepage 'http://arrsync.sourceforge.net'
+  # downloads.sourceforge.net/arrsync was verified as official when first introduced to the cask
+  url "https://downloads.sourceforge.net/arrsync/arrsync-#{version}.dmg"
+  appcast 'https://sourceforge.net/projects/arrsync/rss'
+  name 'arRsync'
+  homepage 'https://arrsync.sourceforge.io/'
 
-  link 'arRsync.app'
+  app 'arRsync.app'
 end

@@ -1,10 +1,27 @@
-class Transmission < Cask
-  version '2.83'
-  sha256 '78c90b0cdc4a37064d66bba5976a4e46a778acfd4bf97d5bc18b9aeb21e36a64'
+cask 'transmission' do
+  version '2.94'
+  sha256 '2cae915ae0e37fc5983406ca7fbd53a054a7153d3bfd7a6cef117a8a28d8a78a'
 
-  url "https://transmission.cachefly.net/Transmission-#{version}.dmg"
-  appcast 'http://update.transmissionbt.com/appcast.xml'
-  homepage 'http://www.transmissionbt.com/'
+  # github.com/transmission/transmission-releases was verified as official when first introduced to the cask
+  url "https://github.com/transmission/transmission-releases/raw/master/Transmission-#{version}.dmg"
+  appcast 'https://github.com/transmission/transmission/releases.atom'
+  name 'Transmission'
+  homepage 'https://transmissionbt.com/'
 
-  link 'Transmission.app'
+  auto_updates true
+  conflicts_with cask: 'transmission-nightly'
+
+  app 'Transmission.app'
+
+  zap trash: [
+               '~/Library/Application Support/Transmission',
+               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.m0k.transmission.sfl*',
+               '~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/Transmission Help*',
+               '~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/org.m0k.transmission.help',
+               '~/Library/Caches/org.m0k.transmission',
+               '~/Library/Cookies/org.m0k.transmission.binarycookies',
+               '~/Library/Preferences/org.m0k.transmission.LSSharedFileList.plist',
+               '~/Library/Preferences/org.m0k.transmission.plist',
+               '~/Library/Saved Application State/org.m0k.transmission.savedState',
+             ]
 end

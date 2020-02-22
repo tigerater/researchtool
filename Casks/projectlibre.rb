@@ -1,7 +1,12 @@
-class Projectlibre < Cask
-  url 'https://downloads.sourceforge.net/project/projectlibre/ProjectLibre/1.5.8/projectlibre-1.5.8.dmg'
-  homepage 'http://www.projectlibre.org/'
-  version '1.5.8'
-  sha256 'efd7d228d2e71a2a5af185d2fe1ddcea4abc55af32188344e06e1871facd0c6b'
-  link 'ProjectLibre.app'
+cask 'projectlibre' do
+  version '1.9.1'
+  sha256 'a29e3158939a30b61fdfa6b205a6ee8cb767f28ad101e968186770440dc0b183'
+
+  # sourceforge.net/projectlibre was verified as official when first introduced to the cask
+  url "https://downloads.sourceforge.net/projectlibre/ProjectLibre/#{version.major_minor}/ProjectLibre-#{version}.dmg"
+  appcast 'https://sourceforge.net/projects/projectlibre/rss?path=/ProjectLibre'
+  name 'ProjectLibre'
+  homepage 'https://www.projectlibre.com/'
+
+  app 'ProjectLibre.app'
 end

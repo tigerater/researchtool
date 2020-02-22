@@ -1,12 +1,19 @@
-class Ridibooks < Cask
-  url 'http://ridibooks.com/getapp?os=mac'
-  homepage 'http://ridibooks.com/support/introduce_appdown'
-  version 'latest'
-  sha256 :no_check
-  container_type :naked
-  before_install do
-    system '/bin/mv', '--', destination_path.join('getapp'), destination_path.join('ridibooks.pkg')
-  end
-  install 'ridibooks.pkg'
-  uninstall :pkgutil => 'com.ridibooks.Ridibooks'
+cask 'ridibooks' do
+  version '0.7.6'
+  sha256 '8045f69cc7fbdd99a9e01cc40191f139369bb9f2740ce9a5fb46d6602f320c3d'
+
+  # viewer-ota.ridicdn.net/pc_electron was verified as official when first introduced to the cask
+  url "https://viewer-ota.ridicdn.net/pc_electron/Ridibooks-#{version}.dmg"
+  appcast 'https://s3-ap-northeast-2.amazonaws.com/viewer-ota.ridicdn.net/pc_electron/latest-mac.yml'
+  name 'Ridibooks'
+  homepage 'https://ridibooks.com/support/app/download'
+
+  depends_on macos: '>= :sierra'
+
+  app 'Ridibooks.app'
+
+  zap trash: [
+               '~/Library/Application Support/RIDI',
+               '~/Library/Preferences/com.ridibooks.Ridibooks.plist',
+             ]
 end

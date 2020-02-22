@@ -1,7 +1,14 @@
-class Insync < Cask
-  url 'http://s.insynchq.com/builds/Insync-1.0.29.31750.dmg'
-  homepage 'https://insynchq.com/'
-  version '1.0.29.31750'
-  sha256 '2b0000066f2941c59da4b2e9c2b2f6f7a63829d1d2743342f7e7ef658b13dd2c'
-  link 'Insync.app'
+cask 'insync' do
+  version '3.0.29.40727'
+  sha256 '82c87ed074b31772ca49b5c2841913c81f47f6e5283c9e79f7c8de0b485cc842'
+
+  url "http://s.insynchq.com/builds/Insync-#{version}.dmg"
+  appcast 'https://www.insynchq.com/downloads?start=true'
+  name 'Insync'
+  homepage 'https://www.insynchq.com/'
+
+  auto_updates true
+  conflicts_with cask: 'insync-beta'
+
+  app 'Insync.app'
 end

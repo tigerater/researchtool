@@ -1,8 +1,16 @@
-class ScrollReverser < Cask
-  url 'https://d20vhy8jiniubf.cloudfront.net/downloads/ScrollReverser-1.6.zip'
-  appcast 'http://softwareupdate.pilotmoon.com/update/scrollreverser/appcast.xml'
+cask 'scroll-reverser' do
+  version '1.7.6'
+  sha256 '0df563089470152d2cbf4cfd4e21f3be0dd45b0c334882bbf6dbbe2002afd4b8'
+
+  url "https://pilotmoon.com/downloads/ScrollReverser-#{version}.zip"
+  appcast 'https://softwareupdate.pilotmoon.com/update/scrollreverser/appcast.xml'
+  name 'Scroll Reverser'
   homepage 'https://pilotmoon.com/scrollreverser/'
-  version '1.6'
-  sha256 'ea928cdb59b773e97a7509b752365959556d23c7c294716f2992199ce5ecff9a'
-  link 'Scroll Reverser.app'
+
+  app 'Scroll Reverser.app'
+
+  zap trash: [
+               '~/Library/Caches/com.pilotmoon.scroll-reverser',
+               '~/Library/Preferences/com.pilotmoon.scroll-reverser.plist',
+             ]
 end

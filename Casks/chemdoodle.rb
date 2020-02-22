@@ -1,9 +1,13 @@
-class Chemdoodle < Cask
-  version '6.0.1'
-  sha256 '004c4d828230f4640678ba31ef07bf878e00ef3f225144fa088a81c4279c1776'
+cask 'chemdoodle' do
+  version '10.2.0'
+  sha256 'b188eede7ce3e98c4c1e49aa9a72bd008c62e298ac00f91220b6d9821758df79'
 
-  url 'http://www.chemdoodle.com/downloads/ChemDoodle-osx-6.0.1.dmg'
-  homepage 'http://www.chemdoodle.com'
+  url "https://www.ichemlabs.com/downloads/ChemDoodle-osx-#{version}.dmg"
+  appcast 'https://www.ichemlabs.com/download#chemdoodle/osx-installation-instructions/'
+  name 'ChemDoodle'
+  homepage 'https://www.ichemlabs.com/'
 
-  link 'ChemDoodle'
+  depends_on macos: '>= :yosemite'
+
+  suite 'ChemDoodle'
 end

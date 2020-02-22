@@ -1,10 +1,18 @@
-class Diffmerge < Cask
-  version '4.2.0.697'
-  sha256 '2c6368653af2440bb4460aef9bb1b2b5d8b84b5a3f47994c4abafc4d7ddbff9e'
+cask 'diffmerge' do
+  version '4.2.1.1013'
+  sha256 '59efeede7beb69a5b3bf3126787f73930984b3b423094500fe73623656f66d43'
 
-  url 'http://download-us.sourcegear.com/DiffMerge/4.2.0/DiffMerge.4.2.0.697.intel.stable.dmg'
-  homepage 'http://www.sourcegear.com/diffmerge'
+  url "http://download.sourcegear.com/DiffMerge/#{version.sub(%r{\.\d+$}, '')}/DiffMerge.#{version}.intel.stable.dmg"
+  name 'DiffMerge'
+  homepage 'https://www.sourcegear.com/diffmerge/'
 
-  link 'DiffMerge.app'
-  binary 'Extras/diffmerge.sh', :target => 'diffmerge'
+  app 'DiffMerge.app'
+  binary 'Extras/diffmerge.sh', target: 'diffmerge'
+  manpage 'Extras/diffmerge.1'
+
+  zap trash: [
+               '~/Library/Preferences/com.sourcegear.DiffMerge.plist',
+               '~/Library/Preferences/SourceGear DiffMerge Preferences',
+               '~/Library/Saved Application State/com.sourcegear.DiffMerge.savedState',
+             ]
 end

@@ -1,9 +1,12 @@
-class Avidemux < Cask
-  version '2.6.8'
-  sha256 '2478fbdf6e7bfc32dd98a53bb95e6a7d217d294d446910942c4904bf2094b90a'
+cask 'avidemux' do
+  version '2.7.4'
+  sha256 'a5c5028ecc954b6658b4c0e6b04c1c186c42a12530e66a5379f51fe7a3ebfcd8'
 
-  url 'https://downloads.sourceforge.net/avidemux/Avidemux_2.6.8_ml_64bits.dmg'
-  homepage 'http://www.avidemux.org/'
+  # sourceforge.net/avidemux was verified as official when first introduced to the cask
+  url "https://downloads.sourceforge.net/avidemux/avidemux/#{version}/Avidemux_#{version}_Mojava_64Bits_Qt5.dmg"
+  appcast 'https://sourceforge.net/projects/avidemux/rss?path=/avidemux'
+  name 'Avidemux'
+  homepage 'https://www.avidemux.org/'
 
-  link 'Avidemux2.6.app'
+  app "Avidemux_#{version}.app"
 end

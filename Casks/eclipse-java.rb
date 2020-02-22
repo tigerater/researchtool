@@ -1,12 +1,11 @@
-class EclipseJava < Cask
-  if Hardware::CPU.is_64_bit?
-    url 'http://download.eclipse.org/technology/epp/downloads/release/luna/R/eclipse-java-luna-R-macosx-cocoa-x86_64.tar.gz'
-    sha256 '4902bdb5eb64dbcef86b10838a3734c1148d3d85ae8454f71a6929292de43784'
-  else
-    url 'http://download.eclipse.org/technology/epp/downloads/release/luna/R/eclipse-java-luna-R-macosx-cocoa.tar.gz'
-    sha256 '11ebf6c2deb9d0f656ddf0ced4b65e340a2ec80426786440f687f164bd973b1e'
-  end
-  version '4.4.0'
-  homepage 'http://eclipse.org/'
-  link 'eclipse/Eclipse.app'
+cask 'eclipse-java' do
+  version '4.14.0,2019-12:R'
+  sha256 'c6eecdebfea42fc3801c842d107be28cf45ce894c9aa618bcdb60e08093c911b'
+
+  url "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/#{version.after_comma.before_colon}/#{version.after_colon}/eclipse-java-#{version.after_comma.before_colon}-#{version.after_colon}-macosx-cocoa-x86_64.dmg&r=1"
+  name 'Eclipse IDE for Java Developers'
+  homepage 'https://eclipse.org/'
+
+  # Renamed to avoid conflict with other Eclipse.
+  app 'Eclipse.app', target: 'Eclipse Java.app'
 end

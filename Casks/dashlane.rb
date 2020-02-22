@@ -1,9 +1,14 @@
-class Dashlane < Cask
-  version '2.4.1.62949'
-  sha256 '97bca51c71ba32e5fa13160a77b9a12824e2e44990958d9831263936ed3f1f40'
+cask 'dashlane' do
+  version '6.2004.0.32116'
+  sha256 '12636fe721c50c1e48d7f7179a573eb2a20127e897a90fcc3ce43b4d8c2f2dd3'
 
-  url 'https://d3mfqat9ni8wb5.cloudfront.net/releases/2.4.1/2.4.1.62949/Dashlane.dmg'
+  # d3mfqat9ni8wb5.cloudfront.net/releases was verified as official when first introduced to the cask
+  url "https://d3mfqat9ni8wb5.cloudfront.net/releases/#{version.major_minor_patch}/#{version}/release/Dashlane.dmg"
+  appcast 'https://ws1.dashlane.com/5/binaries/query?format=json&os=OS_X_10_14_5&target=archive&platform=launcher_macosx'
+  name 'Dashlane'
   homepage 'https://www.dashlane.com/'
 
-  link 'Dashlane.app'
+  depends_on macos: '>= :sierra'
+
+  app 'Dashlane.app'
 end

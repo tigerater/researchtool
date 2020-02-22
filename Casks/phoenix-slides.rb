@@ -1,7 +1,12 @@
-class PhoenixSlides < Cask
-  url 'http://blyt.net/phxslides/phoenix-slides-130.zip'
-  homepage 'http://blyt.net/phxslides'
-  version '1.3'
-  sha256 '1d1b0f7044ff80ad46dfaaf988a85c25ecf897f9cc4173d3b1b0c8a0d7413039'
-  link 'Phoenix Slides.app'
+cask 'phoenix-slides' do
+  version '1.4.5'
+  sha256 '78c491f543abaef0da62fc892433d9698f6f5badd98210d0ac4c4865d289cdd6'
+
+  # github.com/gobbledegook/creevey was verified as official when first introduced to the cask
+  url "https://github.com/gobbledegook/creevey/releases/download/v#{version}/phoenix-slides-#{version.no_dots}.dmg"
+  appcast 'https://github.com/gobbledegook/creevey/releases.atom'
+  name 'Phoenix Slides'
+  homepage 'https://blyt.net/phxslides/'
+
+  app 'Phoenix Slides.app'
 end

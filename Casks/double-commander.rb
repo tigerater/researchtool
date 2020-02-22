@@ -1,9 +1,12 @@
-class DoubleCommander < Cask
-  version '0.5.8'
-  sha256 'a4bf455f028783a4c14d600068d27556984bfc3357a80dc0715f047efbf6dbfe'
+cask 'double-commander' do
+  version '0.9.8-9296'
+  sha256 '4f80b2eb299c54bf83ff389c60f60d4381530f8631874897ec6e294ac2b83e84'
 
-  url 'https://downloads.sourceforge.net/sourceforge/doublecmd/doublecmd-0.5.8-5390.qt.x86_64.dmg'
-  homepage 'http://doublecmd.sourceforge.net/'
+  # downloads.sourceforge.net/doublecmd was verified as official when first introduced to the cask
+  url "https://downloads.sourceforge.net/doublecmd/doublecmd-#{version}.qt.x86_64.dmg"
+  appcast 'https://sourceforge.net/projects/doublecmd/rss'
+  name 'Double Commander'
+  homepage 'https://doublecmd.sourceforge.io/'
 
-  link 'Double Commander.app'
+  app 'Double Commander.app'
 end

@@ -1,7 +1,12 @@
-class Tagspaces < Cask
-  url 'https://github.com/uggrock/tagspaces/releases/download/v1.8.1/tagspaces-1.8.1-osx.zip'
-  homepage 'http://www.tagspaces.org'
-  version '1.8.1'
-  sha256 '1a6d63598b5689b7fee4cb0c469a5f87251f43008f208c08020ded64c8fbcf66'
-  link 'TagSpaces.app'
+cask 'tagspaces' do
+  version '3.4.0'
+  sha256 '4157cf316c4b57badd65ba4bf1845b553d726ebea57bf292f1f85cdf88f2cea9'
+
+  # github.com/tagspaces/tagspaces was verified as official when first introduced to the cask
+  url "https://github.com/tagspaces/tagspaces/releases/download/v#{version}/tagspaces-mac-#{version}.zip"
+  appcast 'https://github.com/tagspaces/tagspaces/releases.atom'
+  name 'TagSpaces'
+  homepage 'https://www.tagspaces.org/'
+
+  app 'TagSpaces.app'
 end

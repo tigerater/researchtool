@@ -1,8 +1,12 @@
-class GoogleHangouts < Cask
-  url 'https://dl.google.com/googletalk/googletalkplugin/GoogleVoiceAndVideoSetup.dmg'
-  homepage 'https://www.google.com/tools/dlpage/hangoutplugin'
-  version 'latest'
+cask 'google-hangouts' do
+  version :latest
   sha256 :no_check
-  install 'Google Voice and Video.pkg'
-  uninstall :pkgutil => 'com.google.pkg.GoogleVoiceAndVideo'
+
+  url 'https://dl.google.com/googletalk/googletalkplugin/GoogleVoiceAndVideoSetup.dmg'
+  name 'Google Hangouts'
+  homepage 'https://www.google.com/tools/dlpage/hangoutplugin'
+
+  pkg 'Google Voice and Video.pkg'
+
+  uninstall pkgutil: 'com.google.pkg.GoogleVoiceAndVideo'
 end

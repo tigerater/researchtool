@@ -1,7 +1,10 @@
-class UnifiedRemote < Cask
-  url 'http://www.unifiedremote.com/download/macosx-setup'
-  homepage 'http://www.unifiedremote.com'
-  version 'latest'
+cask 'unified-remote' do
+  version :latest
   sha256 :no_check
-  link 'Unified Remote.app'
+
+  url 'https://www.unifiedremote.com/download/mac'
+  name 'Unified Remote'
+  homepage 'https://www.unifiedremote.com/'
+
+  app 'Unified Remote.app'
 end

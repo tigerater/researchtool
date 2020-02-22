@@ -1,7 +1,11 @@
-class Nitroshare < Cask
-  url 'https://launchpad.net/nitroshare/0.2/0.2/+download/nitroshare_0.2.app.dmg'
-  homepage 'https://quickmediasolutions.com/apps/14/nitroshare'
-  version '0.2'
-  sha256 '9f208d4b86ca13c4136265fa4a4693c7ef9ba9f0d6a0a84966cfd5f9934abe12'
-  link 'NitroShare.app'
+cask 'nitroshare' do
+  version '0.3.4'
+  sha256 '64a3c62631ea8676ec2fc4f011aabf119ad5b4916de5c1ef969138096584b808'
+
+  url "https://launchpad.net/nitroshare/#{version.major_minor}/#{version}/+download/nitroshare-#{version}-osx.dmg"
+  appcast 'https://github.com/nitroshare/nitroshare-desktop/releases.atom'
+  name 'NitroShare'
+  homepage 'https://launchpad.net/nitroshare'
+
+  app 'nitroshare.app'
 end

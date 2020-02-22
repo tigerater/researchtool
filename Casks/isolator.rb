@@ -1,8 +1,11 @@
-class Isolator < Cask
-  url 'http://willmore.eu/software/download/Isolator-4.9beta.dmg'
-  appcast 'http://willmore.eu/software/isolator/releases.xml'
-  homepage 'http://willmore.eu/software/isolator'
-  version '4.9beta'
-  sha256 '0f77f1165223196af77df9565f0573bce4d42ac6c327c73bb01c6eaa74081d6c'
-  link 'Isolator.app'
+cask 'isolator' do
+  version '4.99beta'
+  sha256 '8ab9344efd503606c88dbd5a139e932f37d25ec9b8d7c574a6af9f6cf1d9bcaf'
+
+  url "https://willmore.eu/software/download/Isolator-#{version}.dmg"
+  appcast 'https://willmore.eu/software/isolator/allversions.xml'
+  name 'Isolator'
+  homepage 'https://www.willmore.eu/software/isolator/'
+
+  app 'Isolator.app'
 end

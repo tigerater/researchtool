@@ -1,10 +1,11 @@
-class Adventure < Cask
-  version 'latest'
-  sha256 :no_check
-  
-  url 'http://www.lobotomo.com/products/downloads/Adventure.dmg'
-  appcast 'http://www.lobotomo.com/products/Adventure/profileInfo.php'
-  homepage 'http://www.lobotomo.com/products/Adventure/index.html'
+cask 'adventure' do
+  version '2.1'
+  sha256 '743c6912a29cb225a4e44bdf59f65286fd00ada32e7747e83c8379bb532f9f5d'
 
-  link 'Adventure.app'
+  url 'https://www.lobotomo.com/products/downloads/Adventure.dmg'
+  appcast 'https://www.lobotomo.com/products/Adventure/profileInfo.php'
+  name 'Adventure'
+  homepage 'https://www.lobotomo.com/products/Adventure/'
+
+  app 'Adventure.app'
 end

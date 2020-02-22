@@ -1,9 +1,19 @@
-class Deltawalker < Cask
-  version '2.0.1'
-  sha256 'eae3127fb05d84885c91e7ce5da5277aaaf128fd53225d1721d66456719b82fa'
+cask 'deltawalker' do
+  version '2.5.5'
+  sha256 '664f74cf170fcce7427ae734c33c7366b71b6d594fb5e28bd28d0d4c0d360bf1'
 
-  url 'https://s3.amazonaws.com/deltawalker/DeltaWalker-2.0.1_64.dmg'
-  homepage 'http://www.deltopia.com/compare-merge-sync/macosx/'
+  # deltawalker.s3.amazonaws.com was verified as official when first introduced to the cask
+  url "https://deltawalker.s3.amazonaws.com/DeltaWalker-#{version}.dmg"
+  appcast 'https://www.deltawalker.com/assets/js/main.js'
+  name 'DeltaWalker'
+  homepage 'https://www.deltawalker.com/'
 
-  link 'DeltaWalker.app'
+  app 'DeltaWalker.app'
+
+  zap trash: [
+               '~/Library/Caches/com.deltopia.DeltaWalker',
+               '~/Library/Containers/com.deltopia.DeltaWalker',
+               '~/Library/Preferences/com.deltopia.DeltaWalker.plist',
+               '~/Library/Saved Application State/com.deltopia.DeltaWalker.savedState',
+             ]
 end

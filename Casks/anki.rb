@@ -1,9 +1,18 @@
-class Anki < Cask
-  version '2.0.26'
-  sha256 '2848127ef8ac30b922cd60f5e6b92632789d0c822723e96aa68aea246b9e4883'
+cask 'anki' do
+  version '2.1.20'
+  sha256 '37d37199d942fd7cf5ae681097ac33835e991f5a1557908e4cba26482aab8852'
 
-  url 'http://ankisrs.net/download/mirror/anki-2.0.26.dmg'
-  homepage 'http://ankisrs.net/'
+  url "https://apps.ankiweb.net/downloads/current/anki-#{version}-mac.dmg"
+  appcast 'https://apps.ankiweb.net/docs/changes.html'
+  name 'Anki'
+  homepage 'https://apps.ankiweb.net/'
 
-  link 'Anki.app'
+  depends_on macos: '>= :sierra'
+
+  app 'Anki.app'
+
+  zap trash: [
+               '~/Library/Application Support/Anki',
+               '~/Library/Application Support/Anki2',
+             ]
 end

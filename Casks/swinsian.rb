@@ -1,8 +1,13 @@
-class Swinsian < Cask
-  url 'https://swinsian.com/sparkle/Swinsian.zip'
-  appcast 'http://www.swinsian.com/sparkle/sparklecast.xml'
-  homepage 'http://swinsian.com'
-  version 'latest'
-  sha256 :no_check
-  link 'Swinsian.app'
+cask 'swinsian' do
+  version '2.2.3'
+  sha256 '684d831ff124f7766c8bef5dd42b8db99a35da7bf6691dd128b581bfd41fe172'
+
+  url "https://www.swinsian.com/sparkle/Swinsian_#{version}.zip"
+  appcast 'https://www.swinsian.com/sparkle/sparklecast.xml'
+  name 'Swinsian'
+  homepage 'https://swinsian.com/'
+
+  auto_updates true
+
+  app 'Swinsian.app'
 end

@@ -1,9 +1,11 @@
-class Brogue < Cask
-  version '1.7.3'
-  sha256 'a8b6cc384bc0d7a63c60c7675a43fc672d621d03d5eb400b11749a1b1b5ca78f'
+cask 'brogue' do
+  version '1.7.5'
+  sha256 '34987d3b2d3b763e02cc4ef32166fc212c07f403f9e15af2ce6e490b88cdcf2b'
 
-  url "https://sites.google.com/site/broguegame/Brogue%20OS%20X%2010.6%2B%20v#{version}.zip?attredirects=0&d=1"
+  url "https://sites.google.com/site/broguegame/Brogue-mac-v#{version}.zip?attredirects=0&d=1"
+  appcast 'https://sites.google.com/site/broguegame/'
+  name 'Brogue'
   homepage 'https://sites.google.com/site/broguegame/'
 
-  link "Brogue v#{version}/Brogue.app"
+  app "Brogue v#{version}/Brogue.app"
 end

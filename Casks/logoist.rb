@@ -1,7 +1,10 @@
-class Logoist < Cask
-  url 'http://www.syniumsoftware.com/download/logoist.dmg'
-  homepage 'http://www.syniumsoftware.com/logoist/'
-  version 'latest'
+cask 'logoist' do
+  version :latest
   sha256 :no_check
-  link 'Logoist.app'
+
+  url 'https://www.syniumsoftware.com/download/logoist.dmg'
+  name 'Logoist'
+  homepage 'https://www.syniumsoftware.com/logoist'
+
+  app 'Logoist 3 Demo.app'
 end

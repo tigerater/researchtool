@@ -1,9 +1,11 @@
-class Doxie < Cask
-  version '2.6'
-  sha256 '4d00f1aee0db17fb60859b0f81dd8dc17342d85988f1ada69a23ed69a0e00934'
+cask 'doxie' do
+  version '2.12.2'
+  sha256 '6f48066eca465fc17838ed9552eb5421472dcdc40757ee484014d6d9e256446b'
 
-  url 'http://cdn.getdoxie.com/resources/files/Doxie_2_6.dmg'
-  homepage 'http://www.getdoxie.com/'
+  url "https://download.getdoxie.com/Doxie-#{version}.dmg"
+  appcast 'https://r.getdoxie.com/app/sparkle/doxie-macos.xml'
+  name 'Doxie'
+  homepage 'https://www.getdoxie.com/'
 
-  link 'Doxie.app'
+  app 'Doxie.app'
 end

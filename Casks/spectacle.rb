@@ -1,8 +1,22 @@
-class Spectacle < Cask
-  url 'https://s3.amazonaws.com/spectacle/downloads/Spectacle+0.8.5.zip'
-  appcast 'http://spectacleapp.com/updates/appcast.xml'
-  homepage 'http://spectacleapp.com/'
-  version '0.8.5'
-  sha256 'f0d40b4c78c8b6509b8e42b8d8b03144b9ecb5ed6ff89d278a24ffd74bfe61b4'
-  link 'Spectacle.app'
+cask 'spectacle' do
+  version '1.2'
+  sha256 '766d5bf3b404ec567110a25de1d221290bc829302283b28ed0fbe73b9557f30c'
+
+  # spectacle.s3.amazonaws.com was verified as official when first introduced to the cask
+  url "https://spectacle.s3.amazonaws.com/downloads/Spectacle+#{version}.zip"
+  appcast 'https://www.spectacleapp.com/updates/appcast.xml'
+  name 'Spectacle'
+  homepage 'https://www.spectacleapp.com/'
+
+  auto_updates true
+
+  app 'Spectacle.app'
+
+  zap trash: [
+               '~/Library/Application Support/Spectacle',
+               '~/Library/Caches/com.divisiblebyzero.Spectacle',
+               '~/Library/Caches/com.plausiblelabs.crashreporter.data/com.divisiblebyzero.Spectacle',
+               '~/Library/Cookies/com.divisiblebyzero.Spectacle.binarycookies',
+               '~/Library/Preferences/com.divisiblebyzero.Spectacle.plist',
+             ]
 end

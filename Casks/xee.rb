@@ -1,8 +1,21 @@
-# encoding: UTF-8
-class Xee < Cask
-  url 'http://wakaba.c3.cx/releases/mac/Xee3.3.dmg'
-  homepage 'http://xee.c3.cx/'
-  version '3.3'
-  sha256 '8728d70c392b6da025a292ab62b47698c1e7f5a45b75eb797c9832b3a37d0062'
-  link 'Xee³.app'
+cask 'xee' do
+  version '3.5.3,45:1504018134'
+  sha256 '756719157ae7d9cd3a0153ca80b48b71a239691d3ff8aa0061fd529a825d7926'
+
+  # devmate.com/cx.c3.Xee3 was verified as official when first introduced to the cask
+  url "https://dl.devmate.com/cx.c3.Xee3/#{version.after_comma.before_colon}/#{version.after_colon}/Xee-#{version.after_comma.before_colon}.zip"
+  appcast 'https://updates.devmate.com/cx.c3.Xee3.xml'
+  name 'Xee³'
+  homepage 'https://theunarchiver.com/xee'
+
+  auto_updates true
+
+  app 'Xee³.app'
+
+  zap trash: [
+               '~/Library/Application Support/Xee³',
+               '~/Library/Caches/cx.c3.Xee3',
+               '~/Library/Cookies/cx.c3.Xee3.binarycookies',
+               '~/Library/Preferences/cx.c3.Xee3.plist',
+             ]
 end

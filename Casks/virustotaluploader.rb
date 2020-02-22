@@ -1,7 +1,16 @@
-class Virustotaluploader < Cask
-  url 'https://www.virustotal.com/static/bin/VirusTotalUploader_1.1.dmg'
+cask 'virustotaluploader' do
+  version '1.3'
+  sha256 '6009c81e0d87b64f56e64ff3137f37fe61ae3b9b792b3700b37e4c55473da5d4'
+
+  url "https://www.virustotal.com/static/bin/VirusTotalUploader_#{version}.dmg"
+  appcast 'https://www.virustotal.com/en/documentation/desktop-applications/mac-osx-uploader'
+  name 'VirusTotalUploader'
   homepage 'https://www.virustotal.com/'
-  version '1.1'
-  sha256 'e757f8eb49592dfe67169a5582bcc3cca01c8ecc6634853398813a2aa92f24a7'
-  link 'VirusTotalUploader.app'
+
+  app 'VirusTotalUploader.app'
+
+  zap trash: [
+               '~/Library/Preferences/com.virustotal.VirusTotal Uploader.plist',
+               '~/Library/Saved Application State/com.virustotal.VirusTotalUploader.savedState',
+             ]
 end

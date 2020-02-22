@@ -1,10 +1,20 @@
-class Cakebrew < Cask
-  version '1.0.7'
-  sha256 '647ce281fa3218e7d4531cac0e5b69d19136883d2b95d154b7a818c4d130cace'
-  
-  url 'https://www.cakebrew.com/files/cakebrew-1.0.7.dmg'
-  appcast 'http://www.cakebrew.com/appcast/profileInfo.php'
-  homepage 'http://www.cakebrew.com'
+cask 'cakebrew' do
+  version '1.2.5'
+  sha256 '2dc287acf04952a2b449a0d69cf1581915ef1e6c59d2ec1c83c3e37c263826ca'
 
-  link 'Cakebrew.app'
+  # cakebrew-377a.kxcdn.com was verified as official when first introduced to the cask
+  url "https://cakebrew-377a.kxcdn.com/cakebrew-#{version}.dmg"
+  appcast 'https://www.cakebrew.com/appcast/profileInfo.php'
+  name 'Cakebrew'
+  homepage 'https://www.cakebrew.com/'
+
+  auto_updates true
+
+  app 'Cakebrew.app'
+
+  zap trash: [
+               '~/Library/Caches/com.brunophilipe.Cakebrew',
+               '~/Library/Preferences/com.brunophilipe.Cakebrew.plist',
+               '~/Library/Saved Application State/com.brunophilipe.Cakebrew.savedState',
+             ]
 end
