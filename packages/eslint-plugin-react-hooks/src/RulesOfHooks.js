@@ -54,41 +54,6 @@ function isComponentName(node) {
   }
 }
 
-function isReactFunction(node, functionName) {
-  return (
-    node.name === functionName ||
-    (node.type === 'MemberExpression' &&
-      node.object.name === 'React' &&
-      node.property.name === functionName)
-  );
-}
-
-/**
- * Checks if the node is a callback argument of forwardRef. This render function
- * should follow the rules of hooks.
- */
-
-function isForwardRefCallback(node) {
-  return !!(
-    node.parent &&
-    node.parent.callee &&
-    isReactFunction(node.parent.callee, 'forwardRef')
-  );
-}
-
-/**
- * Checks if the node is a callback argument of React.memo. This anonymous
- * functional component should follow the rules of hooks.
- */
-
-function isMemoCallback(node) {
-  return !!(
-    node.parent &&
-    node.parent.callee &&
-    isReactFunction(node.parent.callee, 'memo')
-  );
-}
-
 function isInsideComponentOrHook(node) {
   while (node) {
     const functionName = getFunctionName(node);
@@ -96,9 +61,6 @@ function isInsideComponentOrHook(node) {
       if (isComponentName(functionName) || isHook(functionName)) {
         return true;
       }
-    }
-    if (isForwardRefCallback(node) || isMemoCallback(node)) {
-      return true;
     }
     node = node.parent;
   }
@@ -328,8 +290,7 @@ export default {
         // `undefined` then we know either that we have an anonymous function
         // expression or our code path is not in a function. In both cases we
         // will want to error since neither are React function components or
-        // hook functions - unless it is an anonymous function argument to
-        // forwardRef or memo.
+        // hook functions.
         const codePathFunctionName = getFunctionName(codePathNode);
 
         // This is a valid code path for React hooks if we are directly in a React
@@ -340,7 +301,7 @@ export default {
         const isDirectlyInsideComponentOrHook = codePathFunctionName
           ? isComponentName(codePathFunctionName) ||
             isHook(codePathFunctionName)
-          : isForwardRefCallback(codePathNode) || isMemoCallback(codePathNode);
+          : false;
 
         // Compute the earliest finalizer level using information from the
         // cache. We expect all reachable final segments to have a cache entry
@@ -467,7 +428,7 @@ export default {
               const message =
                 `React Hook "${context.getSource(hook)}" is called in ` +
                 `function "${context.getSource(codePathFunctionName)}" ` +
-                'that is neither a React function component nor a custom ' +
+                'which is neither a React function component or a custom ' +
                 'React Hook function.';
               context.report({node: hook, message});
             } else if (codePathNode.type === 'Program') {

@@ -19,10 +19,6 @@ export function initBackend(
   agent: Agent,
   global: Object,
 ): () => void {
-  if (hook == null) {
-    // DevTools didn't get injected into this page (maybe b'c of the contentType).
-    return () => {};
-  }
   const subs = [
     hook.sub(
       'renderer-attached',
@@ -34,7 +30,6 @@ export function initBackend(
         id: number,
         renderer: ReactRenderer,
         rendererInterface: RendererInterface,
-        ...
       }) => {
         agent.setRendererInterface(id, rendererInterface);
 
@@ -44,12 +39,7 @@ export function initBackend(
       },
     ),
 
-    hook.sub('unsupported-renderer-version', (id: number) => {
-      agent.onUnsupportedRenderer(id);
-    }),
-
     hook.sub('operations', agent.onHookOperations),
-    hook.sub('traceUpdates', agent.onTraceUpdates),
 
     // TODO Add additional subscriptions required for profiling mode
   ];
@@ -58,33 +48,23 @@ export function initBackend(
     let rendererInterface = hook.rendererInterfaces.get(id);
 
     // Inject any not-yet-injected renderers (if we didn't reload-and-profile)
-    if (rendererInterface == null) {
+    if (!rendererInterface) {
       if (typeof renderer.findFiberByHostInstance === 'function') {
-        // react-reconciler v16+
         rendererInterface = attach(hook, id, renderer, global);
-      } else if (renderer.ComponentTree) {
-        // react-dom v15
-        rendererInterface = attachLegacy(hook, id, renderer, global);
       } else {
-        // Older react-dom or other unsupported renderer version
+        rendererInterface = attachLegacy(hook, id, renderer, global);
       }
 
-      if (rendererInterface != null) {
-        hook.rendererInterfaces.set(id, rendererInterface);
-      }
+      hook.rendererInterfaces.set(id, rendererInterface);
     }
 
     // Notify the DevTools frontend about new renderers.
     // This includes any that were attached early (via __REACT_DEVTOOLS_ATTACH__).
-    if (rendererInterface != null) {
-      hook.emit('renderer-attached', {
-        id,
-        renderer,
-        rendererInterface,
-      });
-    } else {
-      hook.emit('unsupported-renderer-version', id);
-    }
+    hook.emit('renderer-attached', {
+      id,
+      renderer,
+      rendererInterface,
+    });
   };
 
   // Connect renderers that have already injected themselves.
@@ -96,7 +76,7 @@ export function initBackend(
   subs.push(
     hook.sub(
       'renderer',
-      ({id, renderer}: {id: number, renderer: ReactRenderer, ...}) => {
+      ({id, renderer}: {id: number, renderer: ReactRenderer}) => {
         attachRenderer(id, renderer);
       },
     ),

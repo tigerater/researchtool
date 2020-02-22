@@ -63,9 +63,7 @@ describe('Store (legacy)', () => {
       );
       const Parent = ({count}) => (
         <div>
-          {new Array(count).fill(true).map((_, index) => (
-            <Child key={index} />
-          ))}
+          {new Array(count).fill(true).map((_, index) => <Child key={index} />)}
         </div>
       );
       const Child = () => <div>Hi!</div>;
@@ -85,9 +83,7 @@ describe('Store (legacy)', () => {
     it('should support mount and update operations for multiple roots', () => {
       const Parent = ({count}) => (
         <div>
-          {new Array(count).fill(true).map((_, index) => (
-            <Child key={index} />
-          ))}
+          {new Array(count).fill(true).map((_, index) => <Child key={index} />)}
         </div>
       );
       const Child = () => <div>Hi!</div>;
@@ -159,9 +155,7 @@ describe('Store (legacy)', () => {
       );
       const Parent = ({count}) => (
         <div>
-          {new Array(count).fill(true).map((_, index) => (
-            <Child key={index} />
-          ))}
+          {new Array(count).fill(true).map((_, index) => <Child key={index} />)}
         </div>
       );
       const Child = () => <div>Hi!</div>;
@@ -267,9 +261,7 @@ describe('Store (legacy)', () => {
     it('should support mount and update operations', () => {
       const Parent = ({count}) => (
         <div>
-          {new Array(count).fill(true).map((_, index) => (
-            <Child key={index} />
-          ))}
+          {new Array(count).fill(true).map((_, index) => <Child key={index} />)}
         </div>
       );
       const Child = () => <div>Hi!</div>;
@@ -305,9 +297,7 @@ describe('Store (legacy)', () => {
     it('should support mount and update operations for multiple roots', () => {
       const Parent = ({count}) => (
         <div>
-          {new Array(count).fill(true).map((_, index) => (
-            <Child key={index} />
-          ))}
+          {new Array(count).fill(true).map((_, index) => <Child key={index} />)}
         </div>
       );
       const Child = () => <div>Hi!</div>;
@@ -385,9 +375,7 @@ describe('Store (legacy)', () => {
       );
       const Parent = ({count}) => (
         <div>
-          {new Array(count).fill(true).map((_, index) => (
-            <Child key={index} />
-          ))}
+          {new Array(count).fill(true).map((_, index) => <Child key={index} />)}
         </div>
       );
       const Child = () => <div>Hi!</div>;

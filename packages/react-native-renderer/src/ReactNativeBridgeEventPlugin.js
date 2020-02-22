@@ -8,7 +8,6 @@
  */
 
 import type {AnyNativeEvent} from 'legacy-events/PluginModuleType';
-import type {EventSystemFlags} from 'legacy-events/EventSystemFlags';
 import {
   accumulateTwoPhaseDispatches,
   accumulateDirectDispatches,
@@ -28,12 +27,14 @@ const {
 const ReactNativeBridgeEventPlugin = {
   eventTypes: {},
 
+  /**
+   * @see {EventPluginHub.extractEvents}
+   */
   extractEvents: function(
     topLevelType: TopLevelType,
     targetInst: null | Object,
     nativeEvent: AnyNativeEvent,
-    nativeEventTarget: null | Object,
-    eventSystemFlags: EventSystemFlags,
+    nativeEventTarget: Object,
   ): ?Object {
     if (targetInst == null) {
       // Probably a node belonging to another renderer's tree.

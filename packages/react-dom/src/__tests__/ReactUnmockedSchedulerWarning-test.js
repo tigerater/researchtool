@@ -21,36 +21,40 @@ beforeEach(() => {
   ReactDOM = require('react-dom');
 });
 
-it('does not warn when rendering in legacy mode', () => {
+it('does not warn when rendering in sync mode', () => {
   expect(() => {
     ReactDOM.render(<App />, document.createElement('div'));
-  }).toErrorDev([]);
+  }).toWarnDev([]);
 });
 
-it.experimental('should warn when rendering in concurrent mode', () => {
+it('should warn when rendering in concurrent mode', () => {
   expect(() => {
-    ReactDOM.createRoot(document.createElement('div')).render(<App />);
-  }).toErrorDev(
+    ReactDOM.unstable_createRoot(document.createElement('div')).render(<App />);
+  }).toWarnDev(
     'In Concurrent or Sync modes, the "scheduler" module needs to be mocked ' +
       'to guarantee consistent behaviour across tests and browsers.',
     {withoutStack: true},
   );
   // does not warn twice
   expect(() => {
-    ReactDOM.createRoot(document.createElement('div')).render(<App />);
-  }).toErrorDev([]);
+    ReactDOM.unstable_createRoot(document.createElement('div')).render(<App />);
+  }).toWarnDev([]);
 });
 
-it.experimental('should warn when rendering in blocking mode', () => {
+it('should warn when rendering in batched mode', () => {
   expect(() => {
-    ReactDOM.createBlockingRoot(document.createElement('div')).render(<App />);
-  }).toErrorDev(
+    ReactDOM.unstable_createSyncRoot(document.createElement('div')).render(
+      <App />,
+    );
+  }).toWarnDev(
     'In Concurrent or Sync modes, the "scheduler" module needs to be mocked ' +
       'to guarantee consistent behaviour across tests and browsers.',
     {withoutStack: true},
   );
   // does not warn twice
   expect(() => {
-    ReactDOM.createBlockingRoot(document.createElement('div')).render(<App />);
-  }).toErrorDev([]);
+    ReactDOM.unstable_createSyncRoot(document.createElement('div')).render(
+      <App />,
+    );
+  }).toWarnDev([]);
 });

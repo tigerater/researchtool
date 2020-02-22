@@ -1,7 +1,7 @@
 const {resolve} = require('path');
 const {DefinePlugin} = require('webpack');
 const {
-  GITHUB_URL,
+  getGitHubURL,
   getVersionString,
 } = require('react-devtools-extensions/utils');
 
@@ -21,6 +21,7 @@ const builtModulesDir = resolve(__dirname, '..', '..', 'build', 'node_modules');
 
 const __DEV__ = NODE_ENV === 'development';
 
+const GITHUB_URL = getGitHubURL();
 const DEVTOOLS_VERSION = getVersionString();
 
 const config = {

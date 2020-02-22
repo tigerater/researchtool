@@ -239,148 +239,142 @@ describe('SimpleEventPlugin', function() {
       Scheduler = require('scheduler');
     });
 
-    it.experimental(
-      'flushes pending interactive work before extracting event handler',
-      () => {
-        container = document.createElement('div');
-        const root = ReactDOM.createRoot(container);
-        document.body.appendChild(container);
+    it('flushes pending interactive work before extracting event handler', () => {
+      container = document.createElement('div');
+      const root = ReactDOM.unstable_createRoot(container);
+      document.body.appendChild(container);
 
-        let ops = [];
+      let ops = [];
 
-        let button;
-        class Button extends React.Component {
-          state = {disabled: false};
-          onClick = () => {
-            // Perform some side-effect
-            ops.push('Side-effect');
-            // Disable the button
-            this.setState({disabled: true});
-          };
-          render() {
-            ops.push(
-              `render button: ${this.state.disabled ? 'disabled' : 'enabled'}`,
-            );
-            return (
-              <button
-                ref={el => (button = el)}
-                // Handler is removed after the first click
-                onClick={this.state.disabled ? null : this.onClick}
-              />
-            );
-          }
-        }
-
-        // Initial mount
-        root.render(<Button />);
-        // Should not have flushed yet because it's async
-        expect(ops).toEqual([]);
-        expect(button).toBe(undefined);
-        // Flush async work
-        Scheduler.unstable_flushAll();
-        expect(ops).toEqual(['render button: enabled']);
-
-        ops = [];
-
-        function click() {
-          button.dispatchEvent(
-            new MouseEvent('click', {bubbles: true, cancelable: true}),
+      let button;
+      class Button extends React.Component {
+        state = {disabled: false};
+        onClick = () => {
+          // Perform some side-effect
+          ops.push('Side-effect');
+          // Disable the button
+          this.setState({disabled: true});
+        };
+        render() {
+          ops.push(
+            `render button: ${this.state.disabled ? 'disabled' : 'enabled'}`,
+          );
+          return (
+            <button
+              ref={el => (button = el)}
+              // Handler is removed after the first click
+              onClick={this.state.disabled ? null : this.onClick}
+            />
           );
         }
+      }
 
-        // Click the button to trigger the side-effect
-        click();
-        expect(ops).toEqual([
-          // The handler fired
-          'Side-effect',
-          // but the component did not re-render yet, because it's async
-        ]);
+      // Initial mount
+      root.render(<Button />);
+      // Should not have flushed yet because it's async
+      expect(ops).toEqual([]);
+      expect(button).toBe(undefined);
+      // Flush async work
+      Scheduler.unstable_flushAll();
+      expect(ops).toEqual(['render button: enabled']);
 
-        ops = [];
+      ops = [];
 
-        // Click the button again
-        click();
-        expect(ops).toEqual([
-          // Before handling this second click event, the previous interactive
-          // update is flushed
-          'render button: disabled',
-          // The event handler was removed from the button, so there's no second
-          // side-effect
-        ]);
+      function click() {
+        button.dispatchEvent(
+          new MouseEvent('click', {bubbles: true, cancelable: true}),
+        );
+      }
 
-        ops = [];
+      // Click the button to trigger the side-effect
+      click();
+      expect(ops).toEqual([
+        // The handler fired
+        'Side-effect',
+        // but the component did not re-render yet, because it's async
+      ]);
 
-        // The handler should not fire again no matter how many times we
-        // click the handler.
-        click();
-        click();
-        click();
-        click();
-        click();
-        Scheduler.unstable_flushAll();
-        expect(ops).toEqual([]);
-      },
-    );
+      ops = [];
 
-    it.experimental(
-      'end result of many interactive updates is deterministic',
-      () => {
-        container = document.createElement('div');
-        const root = ReactDOM.createRoot(container);
-        document.body.appendChild(container);
+      // Click the button again
+      click();
+      expect(ops).toEqual([
+        // Before handling this second click event, the previous interactive
+        // update is flushed
+        'render button: disabled',
+        // The event handler was removed from the button, so there's no second
+        // side-effect
+      ]);
 
-        let button;
-        class Button extends React.Component {
-          state = {count: 0};
-          render() {
-            return (
-              <button
-                ref={el => (button = el)}
-                onClick={() =>
-                  // Intentionally not using the updater form here
-                  this.setState({count: this.state.count + 1})
-                }>
-                Count: {this.state.count}
-              </button>
-            );
-          }
-        }
+      ops = [];
 
-        // Initial mount
-        root.render(<Button />);
-        // Should not have flushed yet because it's async
-        expect(button).toBe(undefined);
-        // Flush async work
-        Scheduler.unstable_flushAll();
-        expect(button.textContent).toEqual('Count: 0');
+      // The handler should not fire again no matter how many times we
+      // click the handler.
+      click();
+      click();
+      click();
+      click();
+      click();
+      Scheduler.unstable_flushAll();
+      expect(ops).toEqual([]);
+    });
 
-        function click() {
-          button.dispatchEvent(
-            new MouseEvent('click', {bubbles: true, cancelable: true}),
+    it('end result of many interactive updates is deterministic', () => {
+      container = document.createElement('div');
+      const root = ReactDOM.unstable_createRoot(container);
+      document.body.appendChild(container);
+
+      let button;
+      class Button extends React.Component {
+        state = {count: 0};
+        render() {
+          return (
+            <button
+              ref={el => (button = el)}
+              onClick={() =>
+                // Intentionally not using the updater form here
+                this.setState({count: this.state.count + 1})
+              }>
+              Count: {this.state.count}
+            </button>
           );
         }
+      }
 
-        // Click the button a single time
-        click();
-        // The counter should not have updated yet because it's async
-        expect(button.textContent).toEqual('Count: 0');
+      // Initial mount
+      root.render(<Button />);
+      // Should not have flushed yet because it's async
+      expect(button).toBe(undefined);
+      // Flush async work
+      Scheduler.unstable_flushAll();
+      expect(button.textContent).toEqual('Count: 0');
 
-        // Click the button many more times
-        click();
-        click();
-        click();
-        click();
-        click();
-        click();
+      function click() {
+        button.dispatchEvent(
+          new MouseEvent('click', {bubbles: true, cancelable: true}),
+        );
+      }
 
-        // Flush the remaining work
-        Scheduler.unstable_flushAll();
-        // The counter should equal the total number of clicks
-        expect(button.textContent).toEqual('Count: 7');
-      },
-    );
+      // Click the button a single time
+      click();
+      // The counter should not have updated yet because it's async
+      expect(button.textContent).toEqual('Count: 0');
 
-    it.experimental('flushes discrete updates in order', () => {
+      // Click the button many more times
+      click();
+      click();
+      click();
+      click();
+      click();
+      click();
+
+      // Flush the remaining work
+      Scheduler.unstable_flushAll();
+      // The counter should equal the total number of clicks
+      expect(button.textContent).toEqual('Count: 7');
+    });
+
+    it('flushes discrete updates in order', () => {
       container = document.createElement('div');
       document.body.appendChild(container);
 
@@ -388,7 +382,9 @@ describe('SimpleEventPlugin', function() {
       class Button extends React.Component {
         state = {lowPriCount: 0};
         render() {
-          const text = `High-pri count: ${this.props.highPriCount}, Low-pri count: ${this.state.lowPriCount}`;
+          const text = `High-pri count: ${
+            this.props.highPriCount
+          }, Low-pri count: ${this.state.lowPriCount}`;
           Scheduler.unstable_yieldValue(text);
           return (
             <button
@@ -425,7 +421,7 @@ describe('SimpleEventPlugin', function() {
       }
 
       // Initial mount
-      const root = ReactDOM.createRoot(container);
+      const root = ReactDOM.unstable_createRoot(container);
       root.render(<Wrapper />);
       expect(Scheduler).toFlushAndYield([
         'High-pri count: 0, Low-pri count: 0',

@@ -2,7 +2,7 @@
 
 const {resolve} = require('path');
 const {DefinePlugin} = require('webpack');
-const {GITHUB_URL, getVersionString} = require('./utils');
+const {getGitHubURL, getVersionString} = require('./utils');
 
 const NODE_ENV = process.env.NODE_ENV;
 if (!NODE_ENV) {
@@ -14,6 +14,7 @@ const builtModulesDir = resolve(__dirname, '..', '..', 'build', 'node_modules');
 
 const __DEV__ = NODE_ENV === 'development';
 
+const GITHUB_URL = getGitHubURL();
 const DEVTOOLS_VERSION = getVersionString();
 
 module.exports = {
@@ -24,7 +25,7 @@ module.exports = {
   },
   output: {
     path: __dirname + '/build',
-    filename: 'react_devtools_backend.js',
+    filename: '[name].js',
   },
   resolve: {
     alias: {

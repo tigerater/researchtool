@@ -46,7 +46,9 @@ if (enableSchedulerTracing) {
 export type ReactPriorityLevel = 99 | 98 | 97 | 96 | 95 | 90;
 export type SchedulerCallback = (isSync: boolean) => SchedulerCallback | null;
 
-type SchedulerCallbackOptions = {timeout?: number, ...};
+type SchedulerCallbackOptions = {
+  timeout?: number,
+};
 
 const fakeCallbackNode = {};
 

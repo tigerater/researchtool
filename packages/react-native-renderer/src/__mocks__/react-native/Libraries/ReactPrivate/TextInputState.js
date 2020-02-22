@@ -10,9 +10,6 @@
 // Mock of the Native Hooks
 // TODO: Should this move into the components themselves? E.g. focusable
 
-const TextInputState = {
-  blurTextInput: jest.fn(),
-  focusTextInput: jest.fn(),
-};
+const TextInputState = {};
 
 module.exports = TextInputState;

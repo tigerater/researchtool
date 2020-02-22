@@ -9,9 +9,7 @@ import {
   needsStateRestore,
   restoreStateIfNeeded,
 } from './ReactControlledComponent';
-
-import {enableDeprecatedFlareAPI} from 'shared/ReactFeatureFlags';
-import {invokeGuardedCallbackAndCatchFirstError} from 'shared/ReactErrorUtils';
+import {enableFlareAPI} from 'shared/ReactFeatureFlags';
 
 // Used as a way to call batchedUpdates when we don't have a reference to
 // the renderer. Such as when we're dispatching events or if third party
@@ -23,8 +21,8 @@ import {invokeGuardedCallbackAndCatchFirstError} from 'shared/ReactErrorUtils';
 let batchedUpdatesImpl = function(fn, bookkeeping) {
   return fn(bookkeeping);
 };
-let discreteUpdatesImpl = function(fn, a, b, c, d) {
-  return fn(a, b, c, d);
+let discreteUpdatesImpl = function(fn, a, b, c) {
+  return fn(a, b, c);
 };
 let flushDiscreteUpdatesImpl = function() {};
 let batchedEventUpdatesImpl = batchedUpdatesImpl;
@@ -78,22 +76,21 @@ export function batchedEventUpdates(fn, a, b) {
 }
 
 // This is for the React Flare event system
-export function executeUserEventHandler(fn: any => void, value: any): void {
+export function executeUserEventHandler(fn: any => void, value: any): any {
   const previouslyInEventHandler = isInsideEventHandler;
   try {
     isInsideEventHandler = true;
-    const type = typeof value === 'object' && value !== null ? value.type : '';
-    invokeGuardedCallbackAndCatchFirstError(type, fn, undefined, value);
+    return fn(value);
   } finally {
     isInsideEventHandler = previouslyInEventHandler;
   }
 }
 
-export function discreteUpdates(fn, a, b, c, d) {
+export function discreteUpdates(fn, a, b, c) {
   const prevIsInsideEventHandler = isInsideEventHandler;
   isInsideEventHandler = true;
   try {
-    return discreteUpdatesImpl(fn, a, b, c, d);
+    return discreteUpdatesImpl(fn, a, b, c);
   } finally {
     isInsideEventHandler = prevIsInsideEventHandler;
     if (!isInsideEventHandler) {
@@ -118,9 +115,8 @@ export function flushDiscreteUpdatesIfNeeded(timeStamp: number) {
   // behaviour as we had before this change, so the risks are low.
   if (
     !isInsideEventHandler &&
-    (!enableDeprecatedFlareAPI ||
-      timeStamp === 0 ||
-      lastFlushedEventTimeStamp !== timeStamp)
+    (!enableFlareAPI ||
+      (timeStamp === 0 || lastFlushedEventTimeStamp !== timeStamp))
   ) {
     lastFlushedEventTimeStamp = timeStamp;
     flushDiscreteUpdatesImpl();

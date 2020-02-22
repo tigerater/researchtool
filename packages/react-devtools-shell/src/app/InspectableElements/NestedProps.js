@@ -7,7 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
+import React from 'react';
 
 const object = {
   string: 'abc',

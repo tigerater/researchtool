@@ -13,7 +13,7 @@ import {
   createRequest,
   startWork,
   startFlowing,
-} from 'react-server/inline.dom-browser';
+} from 'react-stream/inline.dom-browser';
 
 function renderToReadableStream(children: ReactNodeList): ReadableStream {
   let request;
@@ -23,7 +23,7 @@ function renderToReadableStream(children: ReactNodeList): ReadableStream {
       startWork(request);
     },
     pull(controller) {
-      startFlowing(request);
+      startFlowing(request, controller.desiredSize);
     },
     cancel(reason) {},
   });

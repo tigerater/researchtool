@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import {findCurrentFiberUsingSlowPath} from 'react-reconciler/reflection';
 import {get as getInstance} from 'shared/ReactInstanceMap';
 import {
@@ -17,6 +17,7 @@ import {
 } from 'shared/ReactWorkTags';
 import SyntheticEvent from 'legacy-events/SyntheticEvent';
 import invariant from 'shared/invariant';
+import lowPriorityWarning from 'shared/lowPriorityWarning';
 import {ELEMENT_NODE} from '../shared/HTMLNodeType';
 import * as DOMTopLevelEventTypes from '../events/DOMTopLevelEventTypes';
 import {PLUGIN_EVENT_SYSTEM} from 'legacy-events/EventSystemFlags';
@@ -62,7 +63,7 @@ let hasWarnedAboutDeprecatedMockComponent = false;
  */
 function simulateNativeEventOnNode(topLevelType, node, fakeNativeEvent) {
   fakeNativeEvent.target = node;
-  dispatchEvent(topLevelType, PLUGIN_EVENT_SYSTEM, document, fakeNativeEvent);
+  dispatchEvent(topLevelType, PLUGIN_EVENT_SYSTEM, fakeNativeEvent);
 }
 
 /**
@@ -358,15 +359,14 @@ const ReactTestUtils = {
    * @return {object} the ReactTestUtils object (for chaining)
    */
   mockComponent: function(module, mockTagName) {
-    if (__DEV__) {
-      if (!hasWarnedAboutDeprecatedMockComponent) {
-        hasWarnedAboutDeprecatedMockComponent = true;
-        console.warn(
-          'ReactTestUtils.mockComponent() is deprecated. ' +
-            'Use shallow rendering or jest.mock() instead.\n\n' +
-            'See https://fb.me/test-utils-mock-component for more information.',
-        );
-      }
+    if (!hasWarnedAboutDeprecatedMockComponent) {
+      hasWarnedAboutDeprecatedMockComponent = true;
+      lowPriorityWarning(
+        false,
+        'ReactTestUtils.mockComponent() is deprecated. ' +
+          'Use shallow rendering or jest.mock() instead.\n\n' +
+          'See https://fb.me/test-utils-mock-component for more information.',
+      );
     }
 
     mockTagName = mockTagName || module.mockTagName || 'div';

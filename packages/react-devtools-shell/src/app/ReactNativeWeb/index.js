@@ -7,13 +7,11 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, useState} from 'react';
-// $FlowFixMe
+import React, {Fragment, useState} from 'react';
 import {Button, Text, View} from 'react-native-web';
 
 export default function ReactNativeWeb() {
-  const [backgroundColor, setBackgroundColor] = useState('purple');
+  const [backgroundColor, setBackgroundColor] = useState('blue');
   const toggleColor = () =>
     setBackgroundColor(backgroundColor === 'purple' ? 'green' : 'purple');
   return (
@@ -31,8 +29,8 @@ export default function ReactNativeWeb() {
           left
         </Text>
         <Button
-          color={backgroundColor}
           onPress={toggleColor}
+          style={{backgroundColor}}
           title={`Switch background color to "${
             backgroundColor === 'purple' ? 'green' : 'purple'
           }"`}

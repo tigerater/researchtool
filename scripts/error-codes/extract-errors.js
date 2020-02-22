@@ -6,7 +6,7 @@
  */
 'use strict';
 
-const parser = require('@babel/parser');
+const babylon = require('babylon');
 const fs = require('fs');
 const path = require('path');
 const traverse = require('@babel/traverse').default;
@@ -65,7 +65,7 @@ module.exports = function(opts) {
   existingErrorMap = invertObject(existingErrorMap);
 
   function transform(source) {
-    const ast = parser.parse(source, babylonOptions);
+    const ast = babylon.parse(source, babylonOptions);
 
     traverse(ast, {
       CallExpression: {

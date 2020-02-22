@@ -5,16 +5,11 @@ const {
   esNextPaths,
 } = require('./scripts/shared/pathsByLanguageVersion');
 
-const restrictedGlobals = require('confusing-browser-globals');
-
 const OFF = 0;
 const ERROR = 2;
 
 module.exports = {
-  extends: [
-    'fbjs',
-    'prettier'
-  ],
+  extends: 'fbjs',
 
   // Stop ESLint from looking for a configuration file in parent folders
   root: true,
@@ -35,10 +30,10 @@ module.exports = {
   rules: {
     'accessor-pairs': OFF,
     'brace-style': [ERROR, '1tbs'],
+    'comma-dangle': [ERROR, 'always-multiline'],
     'consistent-return': OFF,
     'dot-location': [ERROR, 'property'],
-    // We use console['error']() as a signal to not transform it:
-    'dot-notation': [ERROR, {allowPattern: '^(error|warn)$'}],
+    'dot-notation': ERROR,
     'eol-last': ERROR,
     eqeqeq: [ERROR, 'allow-null'],
     indent: OFF,
@@ -47,7 +42,6 @@ module.exports = {
     'no-bitwise': OFF,
     'no-inner-declarations': [ERROR, 'functions'],
     'no-multi-spaces': ERROR,
-    'no-restricted-globals': [ERROR].concat(restrictedGlobals),
     'no-restricted-syntax': [ERROR, 'WithStatement'],
     'no-shadow': ERROR,
     'no-unused-expressions': ERROR,
@@ -98,9 +92,7 @@ module.exports = {
     // the second argument of warning/invariant should be a literal string
     'react-internal/no-primitive-constructors': ERROR,
     'react-internal/no-to-warn-dev-within-to-throw': ERROR,
-    'react-internal/invariant-args': ERROR,
-    'react-internal/warning-args': ERROR,
-    'react-internal/no-production-logging': ERROR,
+    'react-internal/warning-and-invariant-args': ERROR,
   },
 
   overrides: [
@@ -142,19 +134,6 @@ module.exports = {
       },
     },
     {
-      files: [
-        '**/__tests__/**/*.js',
-        'scripts/**/*.js',
-        'packages/*/npm/**/*.js',
-        'packages/dom-event-testing-library/**/*.js',
-        'packages/react-devtools*/**/*.js'
-      ],
-      rules: {
-        'react-internal/no-production-logging': OFF,
-        'react-internal/warning-args': OFF,
-      },
-    },
-    {
       files: ['packages/react-native-renderer/**/*.js'],
       globals: {
         nativeFabricUIManager: true,
@@ -170,7 +149,5 @@ module.exports = {
     spyOnProd: true,
     __PROFILE__: true,
     __UMD__: true,
-    __EXPERIMENTAL__: true,
-    trustedTypes: true,
   },
 };

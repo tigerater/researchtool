@@ -324,7 +324,7 @@ describe('ReactDebugFiberPerf', () => {
       </Parent>,
     );
     addComment('Should not print a warning');
-    expect(() => expect(Scheduler).toFlushWithoutYielding()).toErrorDev(
+    expect(() => expect(Scheduler).toFlushWithoutYielding()).toWarnDev(
       [
         'Using UNSAFE_componentWillMount in strict mode is not recommended',
         'Using UNSAFE_componentWillReceiveProps in strict mode is not recommended',
@@ -364,14 +364,14 @@ describe('ReactDebugFiberPerf', () => {
     }
     ReactNoop.render(<AllLifecycles />);
     addComment('Mount');
-    expect(() => expect(Scheduler).toFlushWithoutYielding()).toErrorDev(
+    expect(() => expect(Scheduler).toFlushWithoutYielding()).toWarnDev(
       [
         'Using UNSAFE_componentWillMount in strict mode is not recommended',
         'Using UNSAFE_componentWillReceiveProps in strict mode is not recommended',
         'Using UNSAFE_componentWillUpdate in strict mode is not recommended',
         'Legacy context API has been detected within a strict-mode tree',
       ],
-      {withoutStack: 3},
+      {withoutStack: true},
     );
     ReactNoop.render(<AllLifecycles />);
     addComment('Update');

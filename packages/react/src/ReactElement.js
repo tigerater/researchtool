@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import getComponentName from 'shared/getComponentName';
 import invariant from 'shared/invariant';
+import warningWithoutStack from 'shared/warningWithoutStack';
 import {REACT_ELEMENT_TYPE} from 'shared/ReactSymbols';
 
 import ReactCurrentOwner from './ReactCurrentOwner';
@@ -20,13 +20,7 @@ const RESERVED_PROPS = {
   __source: true,
 };
 
-let specialPropKeyWarningShown,
-  specialPropRefWarningShown,
-  didWarnAboutStringRefs;
-
-if (__DEV__) {
-  didWarnAboutStringRefs = {};
-}
+let specialPropKeyWarningShown, specialPropRefWarningShown;
 
 function hasValidRef(config) {
   if (__DEV__) {
@@ -54,17 +48,16 @@ function hasValidKey(config) {
 
 function defineKeyPropWarningGetter(props, displayName) {
   const warnAboutAccessingKey = function() {
-    if (__DEV__) {
-      if (!specialPropKeyWarningShown) {
-        specialPropKeyWarningShown = true;
-        console.error(
-          '%s: `key` is not a prop. Trying to access it will result ' +
-            'in `undefined` being returned. If you need to access the same ' +
-            'value within the child component, you should pass it as a different ' +
-            'prop. (https://fb.me/react-special-props)',
-          displayName,
-        );
-      }
+    if (!specialPropKeyWarningShown) {
+      specialPropKeyWarningShown = true;
+      warningWithoutStack(
+        false,
+        '%s: `key` is not a prop. Trying to access it will result ' +
+          'in `undefined` being returned. If you need to access the same ' +
+          'value within the child component, you should pass it as a different ' +
+          'prop. (https://fb.me/react-special-props)',
+        displayName,
+      );
     }
   };
   warnAboutAccessingKey.isReactWarning = true;
@@ -76,17 +69,16 @@ function defineKeyPropWarningGetter(props, displayName) {
 
 function defineRefPropWarningGetter(props, displayName) {
   const warnAboutAccessingRef = function() {
-    if (__DEV__) {
-      if (!specialPropRefWarningShown) {
-        specialPropRefWarningShown = true;
-        console.error(
-          '%s: `ref` is not a prop. Trying to access it will result ' +
-            'in `undefined` being returned. If you need to access the same ' +
-            'value within the child component, you should pass it as a different ' +
-            'prop. (https://fb.me/react-special-props)',
-          displayName,
-        );
-      }
+    if (!specialPropRefWarningShown) {
+      specialPropRefWarningShown = true;
+      warningWithoutStack(
+        false,
+        '%s: `ref` is not a prop. Trying to access it will result ' +
+          'in `undefined` being returned. If you need to access the same ' +
+          'value within the child component, you should pass it as a different ' +
+          'prop. (https://fb.me/react-special-props)',
+        displayName,
+      );
     }
   };
   warnAboutAccessingRef.isReactWarning = true;
@@ -96,37 +88,10 @@ function defineRefPropWarningGetter(props, displayName) {
   });
 }
 
-function warnIfStringRefCannotBeAutoConverted(config) {
-  if (__DEV__) {
-    if (
-      typeof config.ref === 'string' &&
-      ReactCurrentOwner.current &&
-      config.__self &&
-      ReactCurrentOwner.current.stateNode !== config.__self
-    ) {
-      const componentName = getComponentName(ReactCurrentOwner.current.type);
-
-      if (!didWarnAboutStringRefs[componentName]) {
-        console.error(
-          'Component "%s" contains the string ref "%s". ' +
-            'Support for string refs will be removed in a future major release. ' +
-            'This case cannot be automatically converted to an arrow function. ' +
-            'We ask you to manually fix this case by using useRef() or createRef() instead. ' +
-            'Learn more about using refs safely here: ' +
-            'https://fb.me/react-strict-mode-string-ref',
-          getComponentName(ReactCurrentOwner.current.type),
-          config.ref,
-        );
-        didWarnAboutStringRefs[componentName] = true;
-      }
-    }
-  }
-}
-
 /**
  * Factory method to create a new React element. This no longer adheres to
- * the class pattern, so do not use new to call it. Also, instanceof check
- * will not work. Instead test $$typeof field against Symbol.for('react.element') to check
+ * the class pattern, so do not use new to call it. Also, no instanceof check
+ * will work. Instead test $$typeof field against Symbol.for('react.element') to check
  * if something is a React Element.
  *
  * @param {*} type
@@ -294,7 +259,6 @@ export function jsxDEV(type, config, maybeKey, source, self) {
 
   if (hasValidRef(config)) {
     ref = config.ref;
-    warnIfStringRefCannotBeAutoConverted(config);
   }
 
   // Remaining properties are added to a new props object
@@ -359,10 +323,6 @@ export function createElement(type, config, children) {
   if (config != null) {
     if (hasValidRef(config)) {
       ref = config.ref;
-
-      if (__DEV__) {
-        warnIfStringRefCannotBeAutoConverted(config);
-      }
     }
     if (hasValidKey(config)) {
       key = '' + config.key;

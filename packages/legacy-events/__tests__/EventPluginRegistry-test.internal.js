@@ -211,7 +211,7 @@ describe('EventPluginRegistry', () => {
     expect(function() {
       EventPluginRegistry.injectEventPluginOrder(['one', 'two']);
     }).toThrowError(
-      'EventPluginRegistry: More than one plugin attempted to publish the same ' +
+      'EventPluginHub: More than one plugin attempted to publish the same ' +
         'registration name, `onPhotoCapture`.',
     );
   });

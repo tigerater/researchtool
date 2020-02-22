@@ -50,7 +50,7 @@ describe('ReactTestRenderer.act()', () => {
 
     expect(() => {
       setCtr(1);
-    }).toErrorDev([
+    }).toWarnDev([
       'An update to App inside a test was not wrapped in act(...)',
     ]);
   });

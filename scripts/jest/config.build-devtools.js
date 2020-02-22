@@ -14,13 +14,7 @@ const packages = readdirSync(packagesRoot).filter(dir => {
     return false;
   }
   const packagePath = join(packagesRoot, dir, 'package.json');
-  let stat;
-  try {
-    stat = statSync(packagePath);
-  } catch (err) {
-    return false;
-  }
-  return stat.isFile();
+  return statSync(packagePath).isFile();
 });
 
 // Create a module map to point React packages to the build output
@@ -66,9 +60,8 @@ module.exports = Object.assign({}, baseConfig, {
       '../../packages/react-devtools-shared/src/__tests__/setupEnv.js'
     ),
   ],
-  setupFilesAfterEnv: [
-    require.resolve(
-      '../../packages/react-devtools-shared/src/__tests__/setupTests.js'
-    ),
-  ],
+  // TODO (Jest v24) Rename "setupFilesAfterEnv" after Jest upgrade
+  setupTestFrameworkScriptFile: require.resolve(
+    '../../packages/react-devtools-shared/src/__tests__/setupTests.js'
+  ),
 });

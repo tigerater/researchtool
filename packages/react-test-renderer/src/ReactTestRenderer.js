@@ -19,7 +19,6 @@ import {
   flushSync,
   injectIntoDevTools,
   batchedUpdates,
-  act,
 } from 'react-reconciler/inline.test';
 import {findCurrentFiberUsingSlowPath} from 'react-reconciler/reflection';
 import {
@@ -37,12 +36,12 @@ import {
   Profiler,
   MemoComponent,
   SimpleMemoComponent,
-  Block,
   IncompleteClassComponent,
   ScopeComponent,
 } from 'shared/ReactWorkTags';
 import invariant from 'shared/invariant';
 import ReactVersion from 'shared/ReactVersion';
+import act from './ReactTestRendererAct';
 
 import {getPublicInstance} from './ReactTestHostConfig';
 import {ConcurrentRoot, LegacyRoot} from 'shared/ReactRootTags';
@@ -50,12 +49,11 @@ import {ConcurrentRoot, LegacyRoot} from 'shared/ReactRootTags';
 type TestRendererOptions = {
   createNodeMock: (element: React$Element<any>) => any,
   unstable_isConcurrent: boolean,
-  ...
 };
 
 type ReactTestRendererJSON = {|
   type: string,
-  props: {[propName: string]: any, ...},
+  props: {[propName: string]: any},
   children: null | Array<ReactTestRendererNode>,
   $$typeof?: Symbol, // Optional because we add it with defineProperty().
 |};
@@ -65,7 +63,6 @@ type FindOptions = $Shape<{
   // performs a "greedy" search: if a matching node is found, will continue
   // to search within the matching node's children. (default: true)
   deep: boolean,
-  ...
 }>;
 
 export type Predicate = (node: ReactTestInstance) => ?boolean;
@@ -188,14 +185,6 @@ function toTree(node: ?Fiber) {
         instance: null,
         rendered: childrenToTree(node.child),
       };
-    case Block:
-      return {
-        nodeType: 'block',
-        type: node.type,
-        props: {...node.memoizedProps},
-        instance: null,
-        rendered: childrenToTree(node.child),
-      };
     case HostComponent: {
       return {
         nodeType: 'host',
@@ -233,7 +222,6 @@ const validWrapperTypes = new Set([
   ForwardRef,
   MemoComponent,
   SimpleMemoComponent,
-  Block,
   // Normally skipped, but used when there's more than one root child.
   HostRoot,
 ]);

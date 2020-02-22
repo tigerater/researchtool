@@ -33,12 +33,8 @@ function restoreStateOfTarget(target) {
     'setRestoreImplementation() needs to be called to handle a target for controlled ' +
       'events. This error is likely caused by a bug in React. Please file an issue.',
   );
-  const stateNode = internalInstance.stateNode;
-  // Guard against Fiber being unmounted.
-  if (stateNode) {
-    const props = getFiberCurrentPropsFromNode(stateNode);
-    restoreImpl(internalInstance.stateNode, internalInstance.type, props);
-  }
+  const props = getFiberCurrentPropsFromNode(internalInstance.stateNode);
+  restoreImpl(internalInstance.stateNode, internalInstance.type, props);
 }
 
 export function setRestoreImplementation(

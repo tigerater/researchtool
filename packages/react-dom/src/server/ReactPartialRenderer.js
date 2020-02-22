@@ -12,9 +12,12 @@ import type {ReactElement} from 'shared/ReactElementType';
 import type {LazyComponent} from 'shared/ReactLazyComponent';
 import type {ReactProvider, ReactContext} from 'shared/ReactTypes';
 
-import * as React from 'react';
+import React from 'react';
 import invariant from 'shared/invariant';
 import getComponentName from 'shared/getComponentName';
+import lowPriorityWarning from 'shared/lowPriorityWarning';
+import warning from 'shared/warning';
+import warningWithoutStack from 'shared/warningWithoutStack';
 import describeComponentFrame from 'shared/describeComponentFrame';
 import ReactSharedInternals from 'shared/ReactSharedInternals';
 import {
@@ -28,7 +31,7 @@ import {
   disableLegacyContext,
   enableSuspenseServerRenderer,
   enableFundamentalAPI,
-  enableDeprecatedFlareAPI,
+  enableFlareAPI,
   enableScopeAPI,
 } from 'shared/ReactFeatureFlags';
 
@@ -267,7 +270,8 @@ function warnNoop(
       return;
     }
 
-    console.error(
+    warningWithoutStack(
+      false,
       '%s(...): Can only update a mounting component. ' +
         'This usually means you called %s() outside componentWillMount() on the server. ' +
         'This is a no-op.\n\nPlease check the code for the %s component.',
@@ -333,7 +337,8 @@ function flattenOptionChildren(children: mixed): ?string {
         typeof child !== 'number'
       ) {
         didWarnInvalidOptionChildren = true;
-        console.error(
+        warning(
+          false,
           'Only strings and numbers are supported as <option> children.',
         );
       }
@@ -365,7 +370,7 @@ function createOpenTagMarkup(
     if (!hasOwnProperty.call(props, propKey)) {
       continue;
     }
-    if (enableDeprecatedFlareAPI && propKey === 'DEPRECATED_flareListeners') {
+    if (enableFlareAPI && propKey === 'listeners') {
       continue;
     }
     let propValue = props[propKey];
@@ -472,7 +477,8 @@ function resolve(
           if (inst.state === null || inst.state === undefined) {
             const componentName = getComponentName(Component) || 'Unknown';
             if (!didWarnAboutUninitializedState[componentName]) {
-              console.error(
+              warningWithoutStack(
+                false,
                 '`%s` uses `getDerivedStateFromProps` but its initial state is ' +
                   '%s. This is not recommended. Instead, define the initial state by ' +
                   'assigning an object to `this.state` in the constructor of `%s`. ' +
@@ -496,7 +502,8 @@ function resolve(
           if (partialState === undefined) {
             const componentName = getComponentName(Component) || 'Unknown';
             if (!didWarnAboutUndefinedDerivedState[componentName]) {
-              console.error(
+              warningWithoutStack(
+                false,
                 '%s.getDerivedStateFromProps(): A valid state object (or null) must be returned. ' +
                   'You have returned undefined.',
                 componentName,
@@ -519,7 +526,8 @@ function resolve(
           const componentName = getComponentName(Component) || 'Unknown';
 
           if (!didWarnAboutBadClass[componentName]) {
-            console.error(
+            warningWithoutStack(
+              false,
               "The <%s /> component appears to have a render method, but doesn't extend React.Component. " +
                 'This is likely to cause errors. Change %s to extend React.Component instead.',
               componentName,
@@ -543,7 +551,8 @@ function resolve(
       if (__DEV__) {
         const componentName = getComponentName(Component) || 'Unknown';
         if (!didWarnAboutModulePatternComponent[componentName]) {
-          console.error(
+          warningWithoutStack(
+            false,
             'The <%s /> component appears to be a function component that returns a class instance. ' +
               'Change %s to a class that extends React.Component instead. ' +
               "If you can't use a class try assigning the prototype on the function as a workaround. " +
@@ -579,7 +588,8 @@ function resolve(
             const componentName = getComponentName(Component) || 'Unknown';
 
             if (!didWarnAboutDeprecatedWillMount[componentName]) {
-              console.warn(
+              lowPriorityWarning(
+                false,
                 // keep this warning in sync with ReactStrictModeWarning.js
                 'componentWillMount has been renamed, and is not recommended for use. ' +
                   'See https://fb.me/react-unsafe-component-lifecycles for details.\n\n' +
@@ -655,7 +665,8 @@ function resolve(
       if (__DEV__) {
         let childContextTypes = Component.childContextTypes;
         if (childContextTypes !== undefined) {
-          console.error(
+          warningWithoutStack(
+            false,
             '%s uses the legacy childContextTypes API which is no longer supported. ' +
               'Use React.createContext() instead.',
             getComponentName(Component) || 'Unknown',
@@ -676,13 +687,12 @@ function resolve(
             );
           }
         } else {
-          if (__DEV__) {
-            console.error(
-              '%s.getChildContext(): childContextTypes must be defined in order to ' +
-                'use getChildContext().',
-              getComponentName(Component) || 'Unknown',
-            );
-          }
+          warningWithoutStack(
+            false,
+            '%s.getChildContext(): childContextTypes must be defined in order to ' +
+              'use getChildContext().',
+            getComponentName(Component) || 'Unknown',
+          );
         }
       }
       if (childContext) {
@@ -701,10 +711,11 @@ type Frame = {
   childIndex: number,
   context: Object,
   footer: string,
-  ...
 };
 
-type FrameDev = Frame & {|debugElementStack: Array<ReactElement>|};
+type FrameDev = Frame & {
+  debugElementStack: Array<ReactElement>,
+};
 
 class ReactDOMServerRenderer {
   threadID: ThreadID;
@@ -794,9 +805,10 @@ class ReactDOMServerRenderer {
   popProvider<T>(provider: ReactProvider<T>): void {
     const index = this.contextIndex;
     if (__DEV__) {
-      if (index < 0 || provider !== (this.contextProviderStack: any)[index]) {
-        console.error('Unexpected pop.');
-      }
+      warningWithoutStack(
+        index > -1 && provider === (this.contextProviderStack: any)[index],
+        'Unexpected pop.',
+      );
     }
 
     const context: ReactContext<any> = this.contextStack[index];
@@ -1167,7 +1179,8 @@ class ReactDOMServerRenderer {
                 if (reactContext !== reactContext.Consumer) {
                   if (!hasWarnedAboutUsingContextAsConsumer) {
                     hasWarnedAboutUsingContextAsConsumer = true;
-                    console.error(
+                    warning(
+                      false,
                       'Rendering <Context> directly is not supported and will be removed in ' +
                         'a future major release. Did you mean to render <Context.Consumer> instead?',
                     );
@@ -1348,14 +1361,13 @@ class ReactDOMServerRenderer {
       if (namespace === Namespaces.html) {
         // Should this check be gated by parent namespace? Not sure we want to
         // allow <SVG> or <mATH>.
-        if (tag !== element.type) {
-          console.error(
-            '<%s /> is using incorrect casing. ' +
-              'Use PascalCase for React components, ' +
-              'or lowercase for HTML elements.',
-            element.type,
-          );
-        }
+        warning(
+          tag === element.type,
+          '<%s /> is using incorrect casing. ' +
+            'Use PascalCase for React components, ' +
+            'or lowercase for HTML elements.',
+          element.type,
+        );
       }
     }
 
@@ -1371,7 +1383,8 @@ class ReactDOMServerRenderer {
           props.defaultChecked !== undefined &&
           !didWarnDefaultChecked
         ) {
-          console.error(
+          warning(
+            false,
             '%s contains an input of type %s with both checked and defaultChecked props. ' +
               'Input elements must be either controlled or uncontrolled ' +
               '(specify either the checked prop, or the defaultChecked prop, but not ' +
@@ -1388,7 +1401,8 @@ class ReactDOMServerRenderer {
           props.defaultValue !== undefined &&
           !didWarnDefaultInputValue
         ) {
-          console.error(
+          warning(
+            false,
             '%s contains an input of type %s with both value and defaultValue props. ' +
               'Input elements must be either controlled or uncontrolled ' +
               '(specify either the value prop, or the defaultValue prop, but not ' +
@@ -1422,7 +1436,8 @@ class ReactDOMServerRenderer {
           props.defaultValue !== undefined &&
           !didWarnDefaultTextareaValue
         ) {
-          console.error(
+          warning(
+            false,
             'Textarea elements must be either controlled or uncontrolled ' +
               '(specify either the value prop, or the defaultValue prop, but not ' +
               'both). Decide between using a controlled or uncontrolled textarea ' +
@@ -1440,7 +1455,8 @@ class ReactDOMServerRenderer {
         let textareaChildren = props.children;
         if (textareaChildren != null) {
           if (__DEV__) {
-            console.error(
+            warning(
+              false,
               'Use the `defaultValue` or `value` props instead of setting ' +
                 'children on <textarea>.',
             );
@@ -1480,13 +1496,15 @@ class ReactDOMServerRenderer {
           }
           const isArray = Array.isArray(props[propName]);
           if (props.multiple && !isArray) {
-            console.error(
+            warning(
+              false,
               'The `%s` prop supplied to <select> must be an array if ' +
                 '`multiple` is true.',
               propName,
             );
           } else if (!props.multiple && isArray) {
-            console.error(
+            warning(
+              false,
               'The `%s` prop supplied to <select> must be a scalar ' +
                 'value if `multiple` is false.',
               propName,
@@ -1499,7 +1517,8 @@ class ReactDOMServerRenderer {
           props.defaultValue !== undefined &&
           !didWarnDefaultSelectValue
         ) {
-          console.error(
+          warning(
+            false,
             'Select elements must be either controlled or uncontrolled ' +
               '(specify either the value prop, or the defaultValue prop, but not ' +
               'both). Decide between using a controlled or uncontrolled select ' +
@@ -1577,10 +1596,7 @@ class ReactDOMServerRenderer {
     const innerMarkup = getNonChildrenInnerMarkup(props);
     if (innerMarkup != null) {
       children = [];
-      if (
-        newlineEatingTags.hasOwnProperty(tag) &&
-        innerMarkup.charAt(0) === '\n'
-      ) {
+      if (newlineEatingTags[tag] && innerMarkup.charAt(0) === '\n') {
         // text/html ignores the first character in these tags if it's a newline
         // Prefer to break application/xml over text/html (for now) by adding
         // a newline specifically to get eaten by the parser. (Alternately for

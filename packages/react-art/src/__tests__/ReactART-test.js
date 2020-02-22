@@ -214,9 +214,7 @@ describe('ReactART', () => {
         const chars = this.props.chars.split('');
         return (
           <Surface>
-            {chars.map(text => (
-              <Shape key={text} title={text} />
-            ))}
+            {chars.map(text => <Shape key={text} title={text} />)}
           </Surface>
         );
       }
@@ -422,7 +420,7 @@ describe('ReactARTComponents', () => {
       ReactTestRenderer.create(
         <Circle stroke="green" strokeWidth={3} fill="blue" />,
       ),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: Failed prop type: The prop `radius` is marked as required in `Circle`, ' +
         'but its value is `undefined`.' +
         '\n    in Circle (at **)',
@@ -439,7 +437,7 @@ describe('ReactARTComponents', () => {
   it('should warn if width/height is missing on a Rectangle component', () => {
     expect(() =>
       ReactTestRenderer.create(<Rectangle stroke="green" fill="blue" />),
-    ).toErrorDev([
+    ).toWarnDev([
       'Warning: Failed prop type: The prop `width` is marked as required in `Rectangle`, ' +
         'but its value is `undefined`.' +
         '\n    in Rectangle (at **)',
@@ -464,7 +462,7 @@ describe('ReactARTComponents', () => {
   });
 
   it('should warn if outerRadius/startAngle/endAngle is missing on a Wedge component', () => {
-    expect(() => ReactTestRenderer.create(<Wedge fill="blue" />)).toErrorDev([
+    expect(() => ReactTestRenderer.create(<Wedge fill="blue" />)).toWarnDev([
       'Warning: Failed prop type: The prop `outerRadius` is marked as required in `Wedge`, ' +
         'but its value is `undefined`.' +
         '\n    in Wedge (at **)',

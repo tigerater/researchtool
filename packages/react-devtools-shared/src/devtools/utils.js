@@ -7,11 +7,6 @@
  * @flow
  */
 
-import {
-  ElementTypeForwardRef,
-  ElementTypeMemo,
-} from 'react-devtools-shared/src/types';
-
 import type {Element} from './views/Components/types';
 import type Store from './store';
 
@@ -26,25 +21,10 @@ export function printElement(element: Element, includeWeight: boolean = false) {
     key = ` key="${element.key}"`;
   }
 
-  let hocDisplayNames = null;
+  let hocs = '';
   if (element.hocDisplayNames !== null) {
-    hocDisplayNames = [...element.hocDisplayNames];
+    hocs = ` [${element.hocDisplayNames.join('][')}]`;
   }
-  if (element.type === ElementTypeMemo) {
-    if (hocDisplayNames === null) {
-      hocDisplayNames = ['Memo'];
-    } else {
-      hocDisplayNames.push('Memo');
-    }
-  } else if (element.type === ElementTypeForwardRef) {
-    if (hocDisplayNames === null) {
-      hocDisplayNames = ['ForwardRef'];
-    } else {
-      hocDisplayNames.push('ForwardRef');
-    }
-  }
-
-  let hocs = hocDisplayNames === null ? '' : ` [${hocDisplayNames.join('][')}]`;
 
   let suffix = '';
   if (includeWeight) {
@@ -90,7 +70,9 @@ export function printStore(store: Store, includeWeight: boolean = false) {
   // Make sure the pretty-printed test align with the Store's reported number of total rows.
   if (rootWeight !== store.numElements) {
     throw Error(
-      `Inconsistent Store state. Individual root weights (${rootWeight}) do not match total weight (${store.numElements})`,
+      `Inconsistent Store state. Individual root weights (${rootWeight}) do not match total weight (${
+        store.numElements
+      })`,
     );
   }
 
@@ -99,47 +81,4 @@ export function printStore(store: Store, includeWeight: boolean = false) {
   store.assertExpectedRootMapSizes();
 
   return snapshotLines.join('\n');
-}
-
-// We use JSON.parse to parse string values
-// e.g. 'foo' is not valid JSON but it is a valid string
-// so this method replaces e.g. 'foo' with "foo"
-export function sanitizeForParse(value: any) {
-  if (typeof value === 'string') {
-    if (
-      value.length >= 2 &&
-      value.charAt(0) === "'" &&
-      value.charAt(value.length - 1) === "'"
-    ) {
-      return '"' + value.substr(1, value.length - 2) + '"';
-    }
-  }
-  return value;
-}
-
-export function smartParse(value: any) {
-  switch (value) {
-    case 'Infinity':
-      return Infinity;
-    case 'NaN':
-      return NaN;
-    case 'undefined':
-      return undefined;
-    default:
-      return JSON.parse(sanitizeForParse(value));
-  }
-}
-
-export function smartStringify(value: any) {
-  if (typeof value === 'number') {
-    if (Number.isNaN(value)) {
-      return 'NaN';
-    } else if (!Number.isFinite(value)) {
-      return 'Infinity';
-    }
-  } else if (value === undefined) {
-    return 'undefined';
-  }
-
-  return JSON.stringify(value);
 }

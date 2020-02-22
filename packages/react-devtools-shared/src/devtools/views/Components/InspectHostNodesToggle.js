@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {BridgeContext} from '../context';
 import Toggle from '../Toggle';
 import ButtonIcon from '../ButtonIcon';
@@ -30,12 +29,15 @@ export default function InspectHostNodesToggle() {
     [bridge],
   );
 
-  useEffect(() => {
-    const onStopInspectingNative = () => setIsInspecting(false);
-    bridge.addListener('stopInspectingNative', onStopInspectingNative);
-    return () =>
-      bridge.removeListener('stopInspectingNative', onStopInspectingNative);
-  }, [bridge]);
+  useEffect(
+    () => {
+      const onStopInspectingNative = () => setIsInspecting(false);
+      bridge.addListener('stopInspectingNative', onStopInspectingNative);
+      return () =>
+        bridge.removeListener('stopInspectingNative', onStopInspectingNative);
+    },
+    [bridge],
+  );
 
   return (
     <Toggle

@@ -11,13 +11,7 @@ const packages = readdirSync(packagesRoot).filter(dir => {
     return false;
   }
   const packagePath = join(packagesRoot, dir, 'package.json');
-  let stat;
-  try {
-    stat = statSync(packagePath);
-  } catch (err) {
-    return false;
-  }
-  return stat.isFile();
+  return statSync(packagePath).isFile();
 });
 
 // Create a module map to point React packages to the build output

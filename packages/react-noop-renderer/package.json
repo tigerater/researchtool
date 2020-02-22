@@ -2,7 +2,7 @@
   "name": "react-noop-renderer",
   "version": "16.0.0",
   "private": true,
-  "description": "React package for testing the Fiber, Fizz and Flight reconcilers.",
+  "description": "React package for testing the Fiber reconciler.",
   "main": "index.js",
   "repository": {
     "type" : "git",
@@ -15,8 +15,7 @@
     "prop-types": "^15.6.2",
     "regenerator-runtime": "^0.11.0",
     "react-reconciler": "*",
-    "react-flight": "*",
-    "react-server": "*"
+    "react-stream": "*"
   },
   "peerDependencies": {
     "react": "^16.0.0"
@@ -28,8 +27,6 @@
     "index.js",
     "persistent.js",
     "server.js",
-    "flight-client.js",
-    "flight-server.js",
     "cjs/"
   ]
 }

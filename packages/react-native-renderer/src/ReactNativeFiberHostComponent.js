@@ -11,7 +11,7 @@ import type {
   MeasureInWindowOnSuccessCallback,
   MeasureLayoutOnSuccessCallback,
   MeasureOnSuccessCallback,
-  NativeMethods,
+  NativeMethodsMixinType,
   ReactNativeBaseComponentViewConfig,
 } from './ReactNativeTypes';
 import type {Instance} from './ReactNativeHostConfig';
@@ -28,6 +28,16 @@ import {
   warnForStyleProps,
 } from './NativeMethodsMixinUtils';
 
+import warningWithoutStack from 'shared/warningWithoutStack';
+import {warnAboutDeprecatedSetNativeProps} from 'shared/ReactFeatureFlags';
+
+/**
+ * This component defines the same methods as NativeMethodsMixin but without the
+ * findNodeHandle wrapper. This wrapper is unnecessary for HostComponent views
+ * and would also result in a circular require.js dependency (since
+ * ReactNativeFiber depends on this component and NativeMethodsMixin depends on
+ * ReactNativeFiber).
+ */
 class ReactNativeFiberHostComponent {
   _children: Array<Instance | number>;
   _nativeTag: number;
@@ -40,11 +50,11 @@ class ReactNativeFiberHostComponent {
   }
 
   blur() {
-    TextInputState.blurTextInput(this);
+    TextInputState.blurTextInput(this._nativeTag);
   }
 
   focus() {
-    TextInputState.focusTextInput(this);
+    TextInputState.focusTextInput(this._nativeTag);
   }
 
   measure(callback: MeasureOnSuccessCallback) {
@@ -62,25 +72,29 @@ class ReactNativeFiberHostComponent {
   }
 
   measureLayout(
-    relativeToNativeNode: number | ReactNativeFiberHostComponent,
+    relativeToNativeNode: number | Object,
     onSuccess: MeasureLayoutOnSuccessCallback,
-    onFail?: () => void /* currently unused */,
+    onFail: () => void /* currently unused */,
   ) {
-    let relativeNode: ?number;
+    let relativeNode;
 
     if (typeof relativeToNativeNode === 'number') {
       // Already a node handle
       relativeNode = relativeToNativeNode;
     } else if (relativeToNativeNode._nativeTag) {
       relativeNode = relativeToNativeNode._nativeTag;
+    } else if (
+      relativeToNativeNode.canonical &&
+      relativeToNativeNode.canonical._nativeTag
+    ) {
+      relativeNode = relativeToNativeNode.canonical._nativeTag;
     }
 
     if (relativeNode == null) {
-      if (__DEV__) {
-        console.error(
-          'Warning: ref.measureLayout must be called with a node handle or a ref to a native component.',
-        );
-      }
+      warningWithoutStack(
+        false,
+        'Warning: ref.measureLayout must be called with a node handle or a ref to a native component.',
+      );
 
       return;
     }
@@ -95,6 +109,15 @@ class ReactNativeFiberHostComponent {
 
   setNativeProps(nativeProps: Object) {
     if (__DEV__) {
+      if (warnAboutDeprecatedSetNativeProps) {
+        warningWithoutStack(
+          false,
+          'Warning: Calling ref.setNativeProps(nativeProps) ' +
+            'is deprecated and will be removed in a future release. ' +
+            'Use the setNativeProps export from the react-native package instead.' +
+            "\n\timport {setNativeProps} from 'react-native';\n\tsetNativeProps(ref, nativeProps);\n",
+        );
+      }
       warnForStyleProps(nativeProps, this.viewConfig.validAttributes);
     }
 
@@ -114,6 +137,6 @@ class ReactNativeFiberHostComponent {
 }
 
 // eslint-disable-next-line no-unused-expressions
-(ReactNativeFiberHostComponent.prototype: NativeMethods);
+(ReactNativeFiberHostComponent.prototype: NativeMethodsMixinType);
 
 export default ReactNativeFiberHostComponent;

@@ -8,7 +8,7 @@
  * @flow
  */
 
-import type {ElementRef, AbstractComponent} from 'react';
+import React from 'react';
 
 export type MeasureOnSuccessCallback = (
   x: number,
@@ -45,8 +45,9 @@ export type AttributeConfiguration<
   TStyleProps = string,
 > = $ReadOnly<{
   [propName: TProps]: AttributeType,
-  style: $ReadOnly<{[propName: TStyleProps]: AttributeType, ...}>,
-  ...
+  style: $ReadOnly<{
+    [propName: TStyleProps]: AttributeType,
+  }>,
 }>;
 
 export type ReactNativeBaseComponentViewConfig<
@@ -61,57 +62,77 @@ export type ReactNativeBaseComponentViewConfig<
         bubbled: string,
       |}>,
     |}>,
-    ...,
   }>,
-  Commands?: $ReadOnly<{[commandName: string]: number, ...}>,
+  Commands?: $ReadOnly<{
+    [commandName: string]: number,
+  }>,
   directEventTypes?: $ReadOnly<{
     [eventName: string]: $ReadOnly<{|
       registrationName: string,
     |}>,
-    ...,
   }>,
-  NativeProps?: $ReadOnly<{[propName: string]: string, ...}>,
+  NativeProps?: $ReadOnly<{
+    [propName: string]: string,
+  }>,
   uiViewClassName: string,
   validAttributes: AttributeConfiguration<TProps, TStyleProps>,
 |}>;
 
 export type ViewConfigGetter = () => ReactNativeBaseComponentViewConfig<>;
 
-export type NativeMethods = {
+/**
+ * Class only exists for its Flow type.
+ */
+class ReactNativeComponent<Props> extends React.Component<Props> {
+  blur(): void {}
+  focus(): void {}
+  measure(callback: MeasureOnSuccessCallback): void {}
+  measureInWindow(callback: MeasureInWindowOnSuccessCallback): void {}
+  measureLayout(
+    relativeToNativeNode: number | Object,
+    onSuccess: MeasureLayoutOnSuccessCallback,
+    onFail?: () => void,
+  ): void {}
+  setNativeProps(nativeProps: Object): void {}
+}
+
+/**
+ * This type keeps ReactNativeFiberHostComponent and NativeMethodsMixin in sync.
+ * It can also provide types for ReactNative applications that use NMM or refs.
+ */
+export type NativeMethodsMixinType = {
   blur(): void,
   focus(): void,
   measure(callback: MeasureOnSuccessCallback): void,
   measureInWindow(callback: MeasureInWindowOnSuccessCallback): void,
   measureLayout(
-    relativeToNativeNode: number | ElementRef<HostComponent<mixed>>,
+    relativeToNativeNode: number | Object,
     onSuccess: MeasureLayoutOnSuccessCallback,
-    onFail?: () => void,
+    onFail: () => void,
   ): void,
   setNativeProps(nativeProps: Object): void,
-  ...
 };
 
-export type HostComponent<T> = AbstractComponent<T, $ReadOnly<NativeMethods>>;
-
 type SecretInternalsType = {
+  NativeMethodsMixin: NativeMethodsMixinType,
   computeComponentStackForErrorReporting(tag: number): string,
   // TODO (bvaughn) Decide which additional types to expose here?
   // And how much information to fill in for the above types.
-  ...
 };
 
-type SecretInternalsFabricType = {...};
+type SecretInternalsFabricType = {
+  NativeMethodsMixin: NativeMethodsMixinType,
+};
 
 /**
  * Flat ReactNative renderer bundles are too big for Flow to parse efficiently.
  * Provide minimal Flow typing for the high-level RN API and call it a day.
  */
 export type ReactNativeType = {
-  findHostInstance_DEPRECATED(
-    componentOrHandle: any,
-  ): ?ElementRef<HostComponent<mixed>>,
+  NativeComponent: typeof ReactNativeComponent,
   findNodeHandle(componentOrHandle: any): ?number,
   dispatchCommand(handle: any, command: string, args: Array<any>): void,
+  setNativeProps(handle: any, nativeProps: Object): void,
   render(
     element: React$Element<any>,
     containerTag: any,
@@ -119,16 +140,16 @@ export type ReactNativeType = {
   ): any,
   unmountComponentAtNode(containerTag: number): any,
   unmountComponentAtNodeAndRemoveContainer(containerTag: number): any,
-  // TODO (bvaughn) Add types
-  unstable_batchedUpdates: any,
+  unstable_batchedUpdates: any, // TODO (bvaughn) Add types
+
   __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: SecretInternalsType,
-  ...
 };
 
 export type ReactFabricType = {
-  findHostInstance_DEPRECATED(componentOrHandle: any): ?HostComponent<mixed>,
+  NativeComponent: typeof ReactNativeComponent,
   findNodeHandle(componentOrHandle: any): ?number,
   dispatchCommand(handle: any, command: string, args: Array<any>): void,
+  setNativeProps(handle: any, nativeProps: Object): void,
   render(
     element: React$Element<any>,
     containerTag: any,
@@ -136,7 +157,6 @@ export type ReactFabricType = {
   ): any,
   unmountComponentAtNode(containerTag: number): any,
   __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: SecretInternalsFabricType,
-  ...
 };
 
 export type ReactNativeEventTarget = {
@@ -146,9 +166,7 @@ export type ReactNativeEventTarget = {
     viewConfig: ReactNativeBaseComponentViewConfig<>,
     currentProps: Object,
     _internalInstanceHandle: Object,
-    ...
   },
-  ...
 };
 
 export type ReactFaricEventTouch = {
@@ -162,7 +180,6 @@ export type ReactFaricEventTouch = {
   target: number,
   timestamp: number,
   force: number,
-  ...
 };
 
 export type ReactFaricEvent = {
@@ -170,5 +187,51 @@ export type ReactFaricEvent = {
   changedTouches: Array<ReactFaricEventTouch>,
   targetTouches: Array<ReactFaricEventTouch>,
   target: number,
-  ...
 };
+
+export type ReactNativeResponderEvent = {
+  nativeEvent: ReactFaricEvent,
+  target: null | ReactNativeEventTarget,
+  type: string,
+};
+
+export type ReactNativeResponderContext = {
+  dispatchEvent: (
+    eventValue: any,
+    listener: (any) => void,
+    eventPriority: EventPriority,
+  ) => void,
+  isTargetWithinNode: (
+    childTarget: ReactNativeEventTarget,
+    parentTarget: ReactNativeEventTarget,
+  ) => boolean,
+  getTargetBoundingRect(
+    target: ReactNativeEventTarget,
+    cb: ({
+      left: number,
+      right: number,
+      top: number,
+      bottom: number,
+    }) => void,
+  ): void,
+  addRootEventTypes: (rootEventTypes: Array<string>) => void,
+  removeRootEventTypes: (rootEventTypes: Array<string>) => void,
+  setTimeout: (func: () => void, timeout: number) => number,
+  clearTimeout: (timerId: number) => void,
+  getTimeStamp: () => number,
+  getCurrentTarget(): ReactNativeEventTarget | null,
+};
+
+export type PointerType =
+  | ''
+  | 'mouse'
+  | 'keyboard'
+  | 'pen'
+  | 'touch'
+  | 'trackpad';
+
+export type EventPriority = 0 | 1 | 2;
+
+export const DiscreteEvent: EventPriority = 0;
+export const UserBlockingEvent: EventPriority = 1;
+export const ContinuousEvent: EventPriority = 2;

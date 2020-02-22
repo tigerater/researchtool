@@ -10,13 +10,13 @@ const {exec} = require('child_process');
 const {join} = require('path');
 
 const run = async () => {
-  const {getBuildInfo, updateVersionsForNext} = require('./utils');
+  const {getBuildInfo, updateVersionsForCanary} = require('./utils');
 
   const cwd = join(__dirname, '..', '..');
 
   const {reactVersion, version} = await getBuildInfo();
 
-  await updateVersionsForNext(cwd, reactVersion, version);
+  await updateVersionsForCanary(cwd, reactVersion, version);
 };
 
 // Install (or update) release script dependencies before proceeding.

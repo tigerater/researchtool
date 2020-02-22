@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable react-internal/invariant-args */
+/* eslint-disable react-internal/warning-and-invariant-args */
 
 'use strict';
 

@@ -27,77 +27,68 @@ function sleep(period) {
 
 describe('ReactTestUtils.act()', () => {
   // first we run all the tests with concurrent mode
-  if (__EXPERIMENTAL__) {
-    let concurrentRoot = null;
-    const renderConcurrent = (el, dom) => {
-      concurrentRoot = ReactDOM.createRoot(dom);
-      concurrentRoot.render(el);
-    };
-
-    const unmountConcurrent = _dom => {
-      if (concurrentRoot !== null) {
-        concurrentRoot.unmount();
-        concurrentRoot = null;
-      }
-    };
-
-    const rerenderConcurrent = el => {
-      concurrentRoot.render(el);
-    };
-
-    runActTests(
-      'concurrent mode',
-      renderConcurrent,
-      unmountConcurrent,
-      rerenderConcurrent,
-    );
+  let concurrentRoot = null;
+  function renderConcurrent(el, dom) {
+    concurrentRoot = ReactDOM.unstable_createRoot(dom);
+    concurrentRoot.render(el);
   }
 
-  // and then in legacy mode
+  function unmountConcurrent(_dom) {
+    if (concurrentRoot !== null) {
+      concurrentRoot.unmount();
+      concurrentRoot = null;
+    }
+  }
 
-  let legacyDom = null;
-  function renderLegacy(el, dom) {
-    legacyDom = dom;
+  function rerenderConcurrent(el) {
+    concurrentRoot.render(el);
+  }
+
+  runActTests(
+    'concurrent mode',
+    renderConcurrent,
+    unmountConcurrent,
+    rerenderConcurrent,
+  );
+
+  // and then in sync mode
+
+  let syncDom = null;
+  function renderSync(el, dom) {
+    syncDom = dom;
     ReactDOM.render(el, dom);
   }
 
-  function unmountLegacy(dom) {
-    legacyDom = null;
+  function unmountSync(dom) {
+    syncDom = null;
     ReactDOM.unmountComponentAtNode(dom);
   }
 
-  function rerenderLegacy(el) {
-    ReactDOM.render(el, legacyDom);
+  function rerenderSync(el) {
+    ReactDOM.render(el, syncDom);
   }
 
-  runActTests('legacy mode', renderLegacy, unmountLegacy, rerenderLegacy);
+  runActTests('legacy sync mode', renderSync, unmountSync, rerenderSync);
 
-  // and then in blocking mode
-  if (__EXPERIMENTAL__) {
-    let blockingRoot = null;
-    const renderBatched = (el, dom) => {
-      blockingRoot = ReactDOM.createBlockingRoot(dom);
-      blockingRoot.render(el);
-    };
-
-    const unmountBatched = dom => {
-      if (blockingRoot !== null) {
-        blockingRoot.unmount();
-        blockingRoot = null;
-      }
-    };
-
-    const rerenderBatched = el => {
-      blockingRoot.render(el);
-    };
-
-    runActTests(
-      'blocking mode',
-      renderBatched,
-      unmountBatched,
-      rerenderBatched,
-    );
+  // and then in batched mode
+  let batchedRoot = null;
+  function renderBatched(el, dom) {
+    batchedRoot = ReactDOM.unstable_createSyncRoot(dom);
+    batchedRoot.render(el);
   }
+
+  function unmountBatched(dom) {
+    if (batchedRoot !== null) {
+      batchedRoot.unmount();
+      batchedRoot = null;
+    }
+  }
+
+  function rerenderBatched(el) {
+    batchedRoot.render(el);
+  }
+
+  runActTests('batched mode', renderBatched, unmountBatched, rerenderBatched);
 
   describe('unacted effects', () => {
     function App() {
@@ -105,10 +96,10 @@ describe('ReactTestUtils.act()', () => {
       return null;
     }
 
-    it('does not warn in legacy mode', () => {
+    it('does not warn in legacy sync mode', () => {
       expect(() => {
         ReactDOM.render(<App />, document.createElement('div'));
-      }).toErrorDev([]);
+      }).toWarnDev([]);
     });
 
     it('warns in strict mode', () => {
@@ -119,29 +110,33 @@ describe('ReactTestUtils.act()', () => {
           </React.StrictMode>,
           document.createElement('div'),
         );
-      }).toErrorDev([
+      }).toWarnDev([
         'An update to App ran an effect, but was not wrapped in act(...)',
         'An update to App ran an effect, but was not wrapped in act(...)',
       ]);
     });
 
-    it.experimental('warns in blocking mode', () => {
+    it('warns in batched mode', () => {
       expect(() => {
-        const root = ReactDOM.createBlockingRoot(document.createElement('div'));
+        const root = ReactDOM.unstable_createSyncRoot(
+          document.createElement('div'),
+        );
         root.render(<App />);
         Scheduler.unstable_flushAll();
-      }).toErrorDev([
+      }).toWarnDev([
         'An update to App ran an effect, but was not wrapped in act(...)',
         'An update to App ran an effect, but was not wrapped in act(...)',
       ]);
     });
 
-    it.experimental('warns in concurrent mode', () => {
+    it('warns in concurrent mode', () => {
       expect(() => {
-        const root = ReactDOM.createRoot(document.createElement('div'));
+        const root = ReactDOM.unstable_createRoot(
+          document.createElement('div'),
+        );
         root.render(<App />);
         Scheduler.unstable_flushAll();
-      }).toErrorDev([
+      }).toWarnDev([
         'An update to App ran an effect, but was not wrapped in act(...)',
         'An update to App ran an effect, but was not wrapped in act(...)',
       ]);
@@ -270,7 +265,7 @@ function runActTests(label, render, unmount, rerender) {
           render(<App />, container);
         });
 
-        expect(() => setValue(1)).toErrorDev([
+        expect(() => setValue(1)).toWarnDev([
           'An update to App inside a test was not wrapped in act(...).',
         ]);
       });
@@ -337,9 +332,12 @@ function runActTests(label, render, unmount, rerender) {
               await null;
               setState(x => x + 1);
             }
-            React.useEffect(() => {
-              ticker();
-            }, [Math.min(state, 4)]);
+            React.useEffect(
+              () => {
+                ticker();
+              },
+              [Math.min(state, 4)],
+            );
             return state;
           }
 
@@ -381,13 +379,13 @@ function runActTests(label, render, unmount, rerender) {
       });
 
       it('warns if you return a value inside act', () => {
-        expect(() => act(() => null)).toErrorDev(
+        expect(() => act(() => null)).toWarnDev(
           [
             'The callback passed to act(...) function must return undefined, or a Promise.',
           ],
           {withoutStack: true},
         );
-        expect(() => act(() => 123)).toErrorDev(
+        expect(() => act(() => 123)).toWarnDev(
           [
             'The callback passed to act(...) function must return undefined, or a Promise.',
           ],
@@ -396,7 +394,7 @@ function runActTests(label, render, unmount, rerender) {
       });
 
       it('warns if you try to await a sync .act call', () => {
-        expect(() => act(() => {}).then(() => {})).toErrorDev(
+        expect(() => act(() => {}).then(() => {})).toWarnDev(
           [
             'Do not await the result of calling act(...) with sync logic, it is not a Promise.',
           ],
@@ -518,10 +516,13 @@ function runActTests(label, render, unmount, rerender) {
             await null;
             setState(x => x + 1);
           }
-          React.useEffect(() => {
-            Scheduler.unstable_yieldValue(state);
-            ticker();
-          }, [Math.min(state, 4)]);
+          React.useEffect(
+            () => {
+              Scheduler.unstable_yieldValue(state);
+              ticker();
+            },
+            [Math.min(state, 4)],
+          );
           return state;
         }
 
@@ -721,8 +722,7 @@ function runActTests(label, render, unmount, rerender) {
     });
 
     describe('suspense', () => {
-      if (__DEV__ && __EXPERIMENTAL__) {
-        // todo - remove __DEV__ check once we start using testing builds
+      if (__DEV__) {
         it('triggers fallbacks if available', async () => {
           let resolved = false;
           let resolve;

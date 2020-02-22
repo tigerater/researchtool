@@ -160,7 +160,7 @@ describe('ReactTestRendererAsync', () => {
 
       expect(() =>
         expect(Scheduler).toFlushAndYieldThrough(['foo', 'baz']),
-      ).toThrow('// deep equality');
+      ).toThrow('Expected value to equal:');
     });
 
     it('toFlushAndYield', () => {
@@ -181,7 +181,7 @@ describe('ReactTestRendererAsync', () => {
       );
 
       expect(() => expect(Scheduler).toFlushWithoutYielding()).toThrowError(
-        '// deep equality',
+        'Expected value to equal:',
       );
 
       renderer.update(
@@ -193,7 +193,7 @@ describe('ReactTestRendererAsync', () => {
       );
 
       expect(() => expect(Scheduler).toFlushAndYield(['foo', 'baz'])).toThrow(
-        '// deep equality',
+        'Expected value to equal:',
       );
     });
 
@@ -254,7 +254,7 @@ describe('ReactTestRendererAsync', () => {
 
     ReactTestRenderer.create(<App />);
     expect(() => expect(Scheduler).toHaveYielded(['A', 'B'])).toThrow(
-      '// deep equality',
+      'Expected value to equal:',
     );
   });
 

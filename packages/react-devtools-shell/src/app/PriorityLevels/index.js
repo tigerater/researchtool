@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, useCallback, useState} from 'react';
+import React, {Fragment, useCallback, useState} from 'react';
 import {
   unstable_IdlePriority as IdlePriority,
   unstable_LowPriority as LowPriority,

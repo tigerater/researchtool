@@ -21,10 +21,6 @@ import {
   sessionStorageSetItem,
 } from 'react-devtools-shared/src/storage';
 import setupHighlighter from './views/Highlighter';
-import {
-  initialize as setupTraceUpdates,
-  toggleEnabled as setTraceUpdatesEnabled,
-} from './views/TraceUpdates';
 import {patch as patchConsole, unpatch as unpatchConsole} from './console';
 
 import type {BackendBridge} from 'react-devtools-shared/src/bridge';
@@ -52,19 +48,6 @@ const debug = (methodName, ...args) => {
 
 type ElementAndRendererID = {|
   id: number,
-  rendererID: number,
-|};
-
-type StoreAsGlobalParams = {|
-  count: number,
-  id: number,
-  path: Array<string | number>,
-  rendererID: number,
-|};
-
-type CopyElementParams = {|
-  id: number,
-  path: Array<string | number>,
   rendererID: number,
 |};
 
@@ -104,15 +87,13 @@ export default class Agent extends EventEmitter<{|
   hideNativeHighlight: [],
   showNativeHighlight: [NativeType],
   shutdown: [],
-  traceUpdates: [Set<NativeType>],
 |}> {
   _bridge: BackendBridge;
   _isProfiling: boolean = false;
   _recordChangeDescriptions: boolean = false;
-  _rendererInterfaces: {[key: RendererID]: RendererInterface, ...} = {};
+  _rendererInterfaces: {[key: RendererID]: RendererInterface} = {};
   _persistedSelection: PersistedSelection | null = null;
   _persistedSelectionMatch: PathMatch | null = null;
-  _traceUpdatesEnabled: boolean = false;
 
   constructor(bridge: BackendBridge) {
     super();
@@ -139,7 +120,6 @@ export default class Agent extends EventEmitter<{|
 
     this._bridge = bridge;
 
-    bridge.addListener('copyElementPath', this.copyElementPath);
     bridge.addListener('getProfilingData', this.getProfilingData);
     bridge.addListener('getProfilingStatus', this.getProfilingStatus);
     bridge.addListener('getOwnersList', this.getOwnersList);
@@ -151,10 +131,8 @@ export default class Agent extends EventEmitter<{|
     bridge.addListener('overrideState', this.overrideState);
     bridge.addListener('overrideSuspense', this.overrideSuspense);
     bridge.addListener('reloadAndProfile', this.reloadAndProfile);
-    bridge.addListener('setTraceUpdatesEnabled', this.setTraceUpdatesEnabled);
     bridge.addListener('startProfiling', this.startProfiling);
     bridge.addListener('stopProfiling', this.stopProfiling);
-    bridge.addListener('storeAsGlobal', this.storeAsGlobal);
     bridge.addListener(
       'syncSelectionFromNativeElementsPanel',
       this.syncSelectionFromNativeElementsPanel,
@@ -165,7 +143,6 @@ export default class Agent extends EventEmitter<{|
       this.updateAppendComponentStack,
     );
     bridge.addListener('updateComponentFilters', this.updateComponentFilters);
-    bridge.addListener('viewAttributeSource', this.viewAttributeSource);
     bridge.addListener('viewElementSource', this.viewElementSource);
 
     if (this._isProfiling) {
@@ -182,21 +159,11 @@ export default class Agent extends EventEmitter<{|
     bridge.send('isBackendStorageAPISupported', isBackendStorageAPISupported);
 
     setupHighlighter(bridge, this);
-    setupTraceUpdates(this);
   }
 
-  get rendererInterfaces(): {[key: RendererID]: RendererInterface, ...} {
+  get rendererInterfaces(): {[key: RendererID]: RendererInterface} {
     return this._rendererInterfaces;
   }
-
-  copyElementPath = ({id, path, rendererID}: CopyElementParams) => {
-    const renderer = this._rendererInterfaces[rendererID];
-    if (renderer == null) {
-      console.warn(`Invalid renderer id "${rendererID}" for element "${id}"`);
-    } else {
-      renderer.copyElementPath(id, path);
-    }
-  };
 
   getInstanceAndStyle({
     id,
@@ -373,8 +340,6 @@ export default class Agent extends EventEmitter<{|
       rendererInterface.startProfiling(this._recordChangeDescriptions);
     }
 
-    rendererInterface.setTraceUpdatesEnabled(this._traceUpdatesEnabled);
-
     // When the renderer is attached, we need to tell it whether
     // we remember the previous selection that we'd like to restore.
     // It'll start tracking mounts for matches to the last selection path.
@@ -383,19 +348,6 @@ export default class Agent extends EventEmitter<{|
       rendererInterface.setTrackedPath(selection.path);
     }
   }
-
-  setTraceUpdatesEnabled = (traceUpdatesEnabled: boolean) => {
-    this._traceUpdatesEnabled = traceUpdatesEnabled;
-
-    setTraceUpdatesEnabled(traceUpdatesEnabled);
-
-    for (let rendererID in this._rendererInterfaces) {
-      const renderer = ((this._rendererInterfaces[
-        (rendererID: any)
-      ]: any): RendererInterface);
-      renderer.setTraceUpdatesEnabled(traceUpdatesEnabled);
-    }
-  };
 
   syncSelectionFromNativeElementsPanel = () => {
     const target = window.__REACT_DEVTOOLS_GLOBAL_HOOK__.$0;
@@ -434,15 +386,6 @@ export default class Agent extends EventEmitter<{|
     this._bridge.send('profilingStatus', this._isProfiling);
   };
 
-  storeAsGlobal = ({count, id, path, rendererID}: StoreAsGlobalParams) => {
-    const renderer = this._rendererInterfaces[rendererID];
-    if (renderer == null) {
-      console.warn(`Invalid renderer id "${rendererID}" for element "${id}"`);
-    } else {
-      renderer.storeAsGlobal(id, path, count);
-    }
-  };
-
   updateAppendComponentStack = (appendComponentStack: boolean) => {
     // If the frontend preference has change,
     // or in the case of React Native- if the backend is just finding out the preference-
@@ -464,15 +407,6 @@ export default class Agent extends EventEmitter<{|
     }
   };
 
-  viewAttributeSource = ({id, path, rendererID}: CopyElementParams) => {
-    const renderer = this._rendererInterfaces[rendererID];
-    if (renderer == null) {
-      console.warn(`Invalid renderer id "${rendererID}" for element "${id}"`);
-    } else {
-      renderer.prepareViewAttributeSource(id, path);
-    }
-  };
-
   viewElementSource = ({id, rendererID}: ElementAndRendererID) => {
     const renderer = this._rendererInterfaces[rendererID];
     if (renderer == null) {
@@ -480,10 +414,6 @@ export default class Agent extends EventEmitter<{|
     } else {
       renderer.prepareViewElementSource(id);
     }
-  };
-
-  onTraceUpdates = (nodes: Set<NativeType>) => {
-    this.emit('traceUpdates', nodes);
   };
 
   onHookOperations = (operations: Array<number>) => {
@@ -543,10 +473,6 @@ export default class Agent extends EventEmitter<{|
       }
     }
   };
-
-  onUnsupportedRenderer(rendererID: number) {
-    this._bridge.send('unsupportedRendererVersion', rendererID);
-  }
 
   _throttledPersistSelection = throttle((rendererID: number, id: number) => {
     // This is throttled, so both renderer and selected ID

@@ -91,7 +91,7 @@ function advanceTimers(currentTime) {
       timer.sortIndex = timer.expirationTime;
       push(taskQueue, timer);
       if (enableProfiling) {
-        markTaskStart(timer, currentTime);
+        markTaskStart(timer);
         timer.isQueued = true;
       }
     } else {

@@ -204,7 +204,7 @@ describe('ReactMultiChild', () => {
           <Parent>{[<div key="1" />, <div key="1" />]}</Parent>,
           container,
         ),
-      ).toErrorDev(
+      ).toWarnDev(
         'Encountered two children with the same key, `1`. ' +
           'Keys should be unique so that components maintain their identity ' +
           'across updates. Non-unique keys may cause children to be ' +
@@ -264,7 +264,7 @@ describe('ReactMultiChild', () => {
           <Parent>{createIterable([<div key="1" />, <div key="1" />])}</Parent>,
           container,
         ),
-      ).toErrorDev(
+      ).toWarnDev(
         'Encountered two children with the same key, `1`. ' +
           'Keys should be unique so that components maintain their identity ' +
           'across updates. Non-unique keys may cause children to be ' +
@@ -281,20 +281,11 @@ describe('ReactMultiChild', () => {
   it('should warn for using maps as children with owner info', () => {
     class Parent extends React.Component {
       render() {
-        return (
-          <div>
-            {
-              new Map([
-                ['foo', 0],
-                ['bar', 1],
-              ])
-            }
-          </div>
-        );
+        return <div>{new Map([['foo', 0], ['bar', 1]])}</div>;
       }
     }
     const container = document.createElement('div');
-    expect(() => ReactDOM.render(<Parent />, container)).toErrorDev(
+    expect(() => ReactDOM.render(<Parent />, container)).toWarnDev(
       'Warning: Using Maps as children is unsupported and will likely yield ' +
         'unexpected results. Convert it to a sequence/iterable of keyed ' +
         'ReactElements instead.\n' +
@@ -305,14 +296,14 @@ describe('ReactMultiChild', () => {
 
   it('should warn for using generators as children', () => {
     function* Foo() {
-      yield (<h1 key="1">Hello</h1>);
-      yield (<h1 key="2">World</h1>);
+      yield <h1 key="1">Hello</h1>;
+      yield <h1 key="2">World</h1>;
     }
 
     const div = document.createElement('div');
     expect(() => {
       ReactDOM.render(<Foo />, div);
-    }).toErrorDev(
+    }).toWarnDev(
       'Using Generators as children is unsupported and will likely yield ' +
         'unexpected results because enumerating a generator mutates it. You may ' +
         'convert it to an array with `Array.from()` or the `[...spread]` operator ' +
@@ -327,8 +318,8 @@ describe('ReactMultiChild', () => {
   it('should not warn for using generators in legacy iterables', () => {
     const fooIterable = {
       '@@iterator': function*() {
-        yield (<h1 key="1">Hello</h1>);
-        yield (<h1 key="2">World</h1>);
+        yield <h1 key="1">Hello</h1>;
+        yield <h1 key="2">World</h1>;
       },
     };
 
@@ -347,8 +338,8 @@ describe('ReactMultiChild', () => {
   it('should not warn for using generators in modern iterables', () => {
     const fooIterable = {
       [Symbol.iterator]: function*() {
-        yield (<h1 key="1">Hello</h1>);
-        yield (<h1 key="2">World</h1>);
+        yield <h1 key="1">Hello</h1>;
+        yield <h1 key="2">World</h1>;
       },
     };
 
@@ -383,13 +374,7 @@ describe('ReactMultiChild', () => {
     class Letters extends React.Component {
       render() {
         const letters = this.props.letters.split('');
-        return (
-          <div>
-            {letters.map(c => (
-              <Letter key={c} char={c} />
-            ))}
-          </div>
-        );
+        return <div>{letters.map(c => <Letter key={c} char={c} />)}</div>;
       }
     }
 

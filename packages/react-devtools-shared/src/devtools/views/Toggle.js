@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useCallback} from 'react';
+import React, {useCallback} from 'react';
 import Tooltip from '@reach/tooltip';
 
 import styles from './Toggle.css';
@@ -21,7 +20,6 @@ type Props = {
   isDisabled?: boolean,
   onChange: (isChecked: boolean) => void,
   title?: string,
-  ...
 };
 
 export default function Toggle({

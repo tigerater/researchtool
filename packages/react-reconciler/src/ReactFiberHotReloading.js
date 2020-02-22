@@ -18,7 +18,7 @@ import {
   scheduleWork,
   flushPassiveEffects,
 } from './ReactFiberWorkLoop';
-import {updateContainer, syncUpdates} from './ReactFiberReconciler';
+import {updateContainerAtExpirationTime} from './ReactFiberReconciler';
 import {emptyContextObject} from './ReactFiberContext';
 import {Sync} from './ReactFiberExpirationTime';
 import {
@@ -258,9 +258,7 @@ export let scheduleRoot: ScheduleRoot = (
       return;
     }
     flushPassiveEffects();
-    syncUpdates(() => {
-      updateContainer(element, root, null, null);
-    });
+    updateContainerAtExpirationTime(element, root, null, Sync, null);
   }
 };
 
@@ -298,11 +296,7 @@ function scheduleFibersWithFamiliesRecursively(
         if (staleFamilies.has(family)) {
           needsRemount = true;
         } else if (updatedFamilies.has(family)) {
-          if (tag === ClassComponent) {
-            needsRemount = true;
-          } else {
-            needsRender = true;
-          }
+          needsRender = true;
         }
       }
     }

@@ -147,10 +147,13 @@ it('can handle cascading promises', async () => {
       await null;
       setState(x => x + 1);
     }
-    React.useEffect(() => {
-      yields.push(state);
-      ticker();
-    }, [Math.min(state, 4)]);
+    React.useEffect(
+      () => {
+        yields.push(state);
+        ticker();
+      },
+      [Math.min(state, 4)],
+    );
     return state;
   }
 

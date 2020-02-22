@@ -9,6 +9,7 @@
 
 import type {LazyComponent} from 'shared/ReactLazyComponent';
 
+import warningWithoutStack from 'shared/warningWithoutStack';
 import {
   REACT_CONTEXT_TYPE,
   REACT_FORWARD_REF_TYPE,
@@ -21,7 +22,6 @@ import {
   REACT_SUSPENSE_TYPE,
   REACT_SUSPENSE_LIST_TYPE,
   REACT_LAZY_TYPE,
-  REACT_BLOCK_TYPE,
 } from 'shared/ReactSymbols';
 import {refineResolvedLazyComponent} from 'shared/ReactLazyComponent';
 
@@ -44,14 +44,15 @@ function getComponentName(type: mixed): string | null {
   }
   if (__DEV__) {
     if (typeof (type: any).tag === 'number') {
-      console.error(
+      warningWithoutStack(
+        false,
         'Received an unexpected object in getComponentName(). ' +
           'This is likely a bug in React. Please file an issue.',
       );
     }
   }
   if (typeof type === 'function') {
-    return (type: any).displayName || type.name || null;
+    return type.displayName || type.name || null;
   }
   if (typeof type === 'string') {
     return type;
@@ -80,8 +81,6 @@ function getComponentName(type: mixed): string | null {
         return getWrappedName(type, type.render, 'ForwardRef');
       case REACT_MEMO_TYPE:
         return getComponentName(type.type);
-      case REACT_BLOCK_TYPE:
-        return getComponentName(type.render);
       case REACT_LAZY_TYPE: {
         const thenable: LazyComponent<mixed> = (type: any);
         const resolvedThenable = refineResolvedLazyComponent(thenable);

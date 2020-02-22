@@ -13,6 +13,7 @@ let React;
 let ReactDOM;
 let ReactDOMServer;
 let Scheduler;
+let act;
 
 // These tests rely both on ReactDOMServer and ReactDOM.
 // If a test only needs ReactDOMServer, put it in ReactServerRendering-test instead.
@@ -23,6 +24,7 @@ describe('ReactDOMServerHydration', () => {
     ReactDOM = require('react-dom');
     ReactDOMServer = require('react-dom/server');
     Scheduler = require('scheduler');
+    act = require('react-dom/test-utils').act;
   });
 
   it('should have the correct mounting behavior (old hydrate API)', () => {
@@ -81,7 +83,7 @@ describe('ReactDOMServerHydration', () => {
 
       expect(() => {
         instance = ReactDOM.render(<TestComponent name="x" />, element);
-      }).toWarnDev(
+      }).toLowPriorityWarnDev(
         'render(): Calling ReactDOM.render() to hydrate server-rendered markup ' +
           'will stop working in React v17. Replace the ReactDOM.render() call ' +
           'with ReactDOM.hydrate() if you want React to attach to the server HTML.',
@@ -104,7 +106,9 @@ describe('ReactDOMServerHydration', () => {
       element.innerHTML = lastMarkup;
       expect(() => {
         instance = ReactDOM.render(<TestComponent name="y" />, element);
-      }).toErrorDev('Text content did not match. Server: "x" Client: "y"');
+      }).toWarnDev('Text content did not match. Server: "x" Client: "y"', {
+        withoutStack: true,
+      });
       expect(mountCount).toEqual(4);
       expect(element.innerHTML.length > 0).toBe(true);
       expect(element.innerHTML).not.toEqual(lastMarkup);
@@ -187,7 +191,9 @@ describe('ReactDOMServerHydration', () => {
       element.innerHTML = lastMarkup;
       expect(() => {
         instance = ReactDOM.hydrate(<TestComponent name="y" />, element);
-      }).toErrorDev('Text content did not match. Server: "x" Client: "y"');
+      }).toWarnDev('Text content did not match. Server: "x" Client: "y"', {
+        withoutStack: true,
+      });
       expect(mountCount).toEqual(4);
       expect(element.innerHTML.length > 0).toBe(true);
       expect(element.innerHTML).not.toEqual(lastMarkup);
@@ -248,8 +254,9 @@ describe('ReactDOMServerHydration', () => {
 
     expect(() =>
       ReactDOM.hydrate(<button autoFocus={false}>client</button>, element),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: Text content did not match. Server: "server" Client: "client"',
+      {withoutStack: true},
     );
 
     expect(element.firstChild.focus).not.toHaveBeenCalled();
@@ -270,10 +277,11 @@ describe('ReactDOMServerHydration', () => {
         />,
         element,
       ),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: Prop `style` did not match. Server: ' +
         '"text-decoration:none;color:black;height:10px" Client: ' +
         '"text-decoration:none;color:white;height:10px"',
+      {withoutStack: true},
     );
   });
 
@@ -317,10 +325,11 @@ describe('ReactDOMServerHydration', () => {
         />,
         element,
       ),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: Prop `style` did not match. Server: ' +
         '"text-decoration: none; color: black; height: 10px;" Client: ' +
         '"text-decoration:none;color:black;height:10px"',
+      {withoutStack: true},
     );
   });
 
@@ -355,12 +364,14 @@ describe('ReactDOMServerHydration', () => {
     const element = document.createElement('div');
     expect(() => {
       element.innerHTML = ReactDOMServer.renderToString(markup);
-    }).toWarnDev('componentWillMount has been renamed');
+    }).toLowPriorityWarnDev(['componentWillMount has been renamed'], {
+      withoutStack: true,
+    });
     expect(element.textContent).toBe('Hi');
 
     expect(() => {
       ReactDOM.hydrate(markup, element);
-    }).toWarnDev('componentWillMount has been renamed', {
+    }).toLowPriorityWarnDev(['componentWillMount has been renamed'], {
       withoutStack: true,
     });
     expect(element.textContent).toBe('Hi');
@@ -491,63 +502,88 @@ describe('ReactDOMServerHydration', () => {
     expect(element.textContent).toBe('Hello world');
   });
 
-  it.experimental(
-    'does not re-enter hydration after committing the first one',
-    () => {
-      let finalHTML = ReactDOMServer.renderToString(<div />);
-      let container = document.createElement('div');
-      container.innerHTML = finalHTML;
-      let root = ReactDOM.createRoot(container, {hydrate: true});
-      root.render(<div />);
-      Scheduler.unstable_flushAll();
-      root.render(null);
-      Scheduler.unstable_flushAll();
-      // This should not reenter hydration state and therefore not trigger hydration
-      // warnings.
-      root.render(<div />);
-      Scheduler.unstable_flushAll();
-    },
-  );
+  it('does not invoke an event on a concurrent hydrating node until it commits', () => {
+    function Sibling({text}) {
+      Scheduler.unstable_yieldValue('Sibling');
+      return <span>Sibling</span>;
+    }
 
-  it('Suspense + hydration in legacy mode', () => {
-    const element = document.createElement('div');
-    element.innerHTML = '<div>Hello World</div>';
-    let div = element.firstChild;
-    let ref = React.createRef();
-    expect(() =>
-      ReactDOM.hydrate(
-        <React.Suspense fallback={null}>
-          <div ref={ref}>Hello World</div>
-        </React.Suspense>,
-        element,
-      ),
-    ).toErrorDev(
-      'Warning: Did not expect server HTML to contain a <div> in <div>.',
-      {withoutStack: true},
-    );
+    function Sibling2({text}) {
+      Scheduler.unstable_yieldValue('Sibling2');
+      return null;
+    }
 
-    // The content should've been client rendered and replaced the
-    // existing div.
-    expect(ref.current).not.toBe(div);
-    // The HTML should be the same though.
-    expect(element.innerHTML).toBe('<div>Hello World</div>');
-  });
+    let clicks = 0;
 
-  it('Suspense + hydration in legacy mode with no fallback', () => {
-    const element = document.createElement('div');
-    element.innerHTML = '<div>Hello World</div>';
-    let div = element.firstChild;
-    let ref = React.createRef();
-    ReactDOM.hydrate(
-      <React.Suspense>
-        <div ref={ref}>Hello World</div>
-      </React.Suspense>,
-      element,
-    );
+    function Button() {
+      Scheduler.unstable_yieldValue('Button');
+      let [clicked, setClicked] = React.useState(false);
+      if (clicked) {
+        return null;
+      }
+      return (
+        <a
+          onClick={() => {
+            setClicked(true);
+            clicks++;
+          }}>
+          Click me
+        </a>
+      );
+    }
 
-    // Because this didn't have a fallback, it was hydrated as if it's
-    // not a Suspense boundary.
-    expect(ref.current).toBe(div);
-    expect(element.innerHTML).toBe('<div>Hello World</div>');
+    function App() {
+      return (
+        <div>
+          <Button />
+          <Sibling />
+          <Sibling2 />
+        </div>
+      );
+    }
+
+    let finalHTML = ReactDOMServer.renderToString(<App />);
+    let container = document.createElement('div');
+    container.innerHTML = finalHTML;
+    expect(Scheduler).toHaveYielded(['Button', 'Sibling', 'Sibling2']);
+
+    // We need this to be in the document since we'll dispatch events on it.
+    document.body.appendChild(container);
+
+    let a = container.getElementsByTagName('a')[0];
+
+    // Hydrate asynchronously.
+    let root = ReactDOM.unstable_createRoot(container, {hydrate: true});
+    root.render(<App />);
+    // Flush part way through the render.
+    if (__DEV__) {
+      // In DEV effects gets double invoked.
+      expect(Scheduler).toFlushAndYieldThrough(['Button', 'Button', 'Sibling']);
+    } else {
+      expect(Scheduler).toFlushAndYieldThrough(['Button', 'Sibling']);
+    }
+
+    expect(container.textContent).toBe('Click meSibling');
+
+    // We're now partially hydrated.
+    a.click();
+    // Clicking should not invoke the event yet because we haven't committed
+    // the hydration yet.
+    expect(clicks).toBe(0);
+
+    // Finish the rest of the hydration.
+    expect(Scheduler).toFlushAndYield(['Sibling2']);
+
+    // TODO: With selective hydration the event should've been replayed
+    // but for now we'll have to issue it again.
+    act(() => {
+      a.click();
+    });
+
+    expect(clicks).toBe(1);
+
+    expect(container.textContent).toBe('Sibling');
+
+    document.body.removeChild(container);
   });
 });

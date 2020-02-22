@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -112,11 +111,14 @@ function ModalDialogImpl(_: {||}) {
   const {canBeDismissed, content, dispatch, title} = useContext(
     ModalDialogContext,
   );
-  const dismissModal = useCallback(() => {
-    if (canBeDismissed) {
-      dispatch({type: 'HIDE'});
-    }
-  }, [canBeDismissed, dispatch]);
+  const dismissModal = useCallback(
+    () => {
+      if (canBeDismissed) {
+        dispatch({type: 'HIDE'});
+      }
+    },
+    [canBeDismissed, dispatch],
+  );
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
   // It's important to trap click events within the dialog,

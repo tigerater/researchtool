@@ -25,6 +25,7 @@ import {
   REACT_SUSPENSE_TYPE,
 } from 'shared/ReactSymbols';
 import isValidElementType from 'shared/isValidElementType';
+import lowPriorityWarning from 'shared/lowPriorityWarning';
 
 export function typeOf(object: any) {
   if (typeof object === 'object' && object !== null) {
@@ -47,14 +48,14 @@ export function typeOf(object: any) {
             switch ($$typeofType) {
               case REACT_CONTEXT_TYPE:
               case REACT_FORWARD_REF_TYPE:
-              case REACT_LAZY_TYPE:
-              case REACT_MEMO_TYPE:
               case REACT_PROVIDER_TYPE:
                 return $$typeofType;
               default:
                 return $$typeof;
             }
         }
+      case REACT_LAZY_TYPE:
+      case REACT_MEMO_TYPE:
       case REACT_PORTAL_TYPE:
         return $$typeof;
     }
@@ -87,8 +88,8 @@ export function isAsyncMode(object: any) {
   if (__DEV__) {
     if (!hasWarnedAboutDeprecatedIsAsyncMode) {
       hasWarnedAboutDeprecatedIsAsyncMode = true;
-      // Using console['warn'] to evade Babel and ESLint
-      console['warn'](
+      lowPriorityWarning(
+        false,
         'The ReactIs.isAsyncMode() alias has been deprecated, ' +
           'and will be removed in React 17+. Update your code to use ' +
           'ReactIs.isConcurrentMode() instead. It has the exact same API.',

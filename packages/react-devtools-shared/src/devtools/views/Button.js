@@ -7,7 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
+import React from 'react';
 import Tooltip from '@reach/tooltip';
 
 import styles from './Button.css';
@@ -17,7 +17,6 @@ type Props = {
   children: React$Node,
   className?: string,
   title?: string,
-  ...
 };
 
 export default function Button({

@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {createContext} from 'react';
+import React, {createContext} from 'react';
 
 // Cache implementation was forked from the React repo:
 // https://github.com/facebook/react/blob/master/packages/react-cache/src/ReactCache.js
@@ -22,10 +21,11 @@ import {createContext} from 'react';
 
 export type Thenable<T> = {
   then(resolve: (T) => mixed, reject: (mixed) => mixed): mixed,
-  ...
 };
 
-type Suspender = {then(resolve: () => mixed, reject: () => mixed): mixed, ...};
+type Suspender = {
+  then(resolve: () => mixed, reject: () => mixed): mixed,
+};
 
 type PendingResult = {|
   status: 0,
@@ -50,7 +50,6 @@ export type Resource<Input, Key, Value> = {
   read(Input): Value,
   preload(Input): void,
   write(Key, Value): void,
-  ...
 };
 
 const Pending = 0;
@@ -74,7 +73,9 @@ function readContext(Context, observedBits) {
 
 const CacheContext = createContext(null);
 
-type Config = {useWeakMap?: boolean, ...};
+type Config = {
+  useWeakMap?: boolean,
+};
 
 const entries: Map<
   Resource<any, any, any>,

@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {createContext, useMemo, useState} from 'react';
+import React, {createContext, useMemo, useState} from 'react';
 
 export type DisplayDensity = 'comfortable' | 'compact';
 export type Theme = 'auto' | 'light' | 'dark';
@@ -16,7 +15,6 @@ export type Theme = 'auto' | 'light' | 'dark';
 type Context = {
   isModalShowing: boolean,
   setIsModalShowing: (value: boolean) => void,
-  ...
 };
 
 const SettingsModalContext = createContext<Context>(((null: any): Context));

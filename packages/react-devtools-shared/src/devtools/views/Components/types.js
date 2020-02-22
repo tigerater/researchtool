@@ -71,9 +71,6 @@ export type InspectedElement = {|
   // Can view component source location.
   canViewSource: boolean,
 
-  // Does the component have legacy context attached to it.
-  hasLegacyContext: boolean,
-
   // Inspectable properties.
   context: Object | null,
   hooks: Object | null,
@@ -83,7 +80,7 @@ export type InspectedElement = {|
   // List of owners
   owners: Array<Owner> | null,
 
-  // Location of component in source code.
+  // Location of component in source coude.
   source: Source | null,
 
   type: ElementType,
@@ -99,6 +96,6 @@ export type DehydratedData = {|
     | Unserializable
     | Array<Dehydrated>
     | Array<Unserializable>
-    | {[key: string]: string | Dehydrated | Unserializable, ...},
+    | {[key: string]: string | Dehydrated | Unserializable},
   unserializable: Array<Array<string | number>>,
 |};

@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, useCallback} from 'react';
+import React, {Fragment, useCallback} from 'react';
 import Tooltip from '@reach/tooltip';
 import Icon from './Icon';
 

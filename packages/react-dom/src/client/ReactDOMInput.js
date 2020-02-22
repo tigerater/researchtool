@@ -10,6 +10,7 @@
 // TODO: direct imports like some-package/src/* are bad. Fix me.
 import {getCurrentFiberOwnerNameInDevOrNull} from 'react-reconciler/src/ReactCurrentFiber';
 import invariant from 'shared/invariant';
+import warning from 'shared/warning';
 
 import {setValueForProperty} from './DOMPropertyOperations';
 import {getFiberCurrentPropsFromNode} from './ReactDOMComponentTree';
@@ -25,9 +26,7 @@ type InputWithWrapperState = HTMLInputElement & {
     initialValue: ToStringValue,
     initialChecked: ?boolean,
     controlled?: boolean,
-    ...
   },
-  ...
 };
 
 let didWarnValueDefaultValue = false;
@@ -80,7 +79,8 @@ export function initWrapperState(element: Element, props: Object) {
       props.defaultChecked !== undefined &&
       !didWarnCheckedDefaultChecked
     ) {
-      console.error(
+      warning(
+        false,
         '%s contains an input of type %s with both checked and defaultChecked props. ' +
           'Input elements must be either controlled or uncontrolled ' +
           '(specify either the checked prop, or the defaultChecked prop, but not ' +
@@ -97,7 +97,8 @@ export function initWrapperState(element: Element, props: Object) {
       props.defaultValue !== undefined &&
       !didWarnValueDefaultValue
     ) {
-      console.error(
+      warning(
+        false,
         '%s contains an input of type %s with both value and defaultValue props. ' +
           'Input elements must be either controlled or uncontrolled ' +
           '(specify either the value prop, or the defaultValue prop, but not ' +
@@ -142,7 +143,8 @@ export function updateWrapper(element: Element, props: Object) {
       controlled &&
       !didWarnUncontrolledToControlled
     ) {
-      console.error(
+      warning(
+        false,
         'A component is changing an uncontrolled input of type %s to be controlled. ' +
           'Input elements should not switch from uncontrolled to controlled (or vice versa). ' +
           'Decide between using a controlled or uncontrolled input ' +
@@ -156,7 +158,8 @@ export function updateWrapper(element: Element, props: Object) {
       !controlled &&
       !didWarnControlledToUncontrolled
     ) {
-      console.error(
+      warning(
+        false,
         'A component is changing a controlled input of type %s to be uncontrolled. ' +
           'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
           'Decide between using a controlled or uncontrolled input ' +
@@ -180,10 +183,10 @@ export function updateWrapper(element: Element, props: Object) {
         // eslint-disable-next-line
         node.value != (value: any)
       ) {
-        node.value = toString((value: any));
+        node.value = toString(value);
       }
-    } else if (node.value !== toString((value: any))) {
-      node.value = toString((value: any));
+    } else if (node.value !== toString(value)) {
+      node.value = toString(value);
     }
   } else if (type === 'submit' || type === 'reset') {
     // Submit/reset inputs need the attribute removed completely to avoid

@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {Fragment, useContext} from 'react';
+import React, {Fragment, useContext} from 'react';
 import {ProfilerContext} from './ProfilerContext';
 import {formatDuration, formatTime} from './utils';
 import {StoreContext} from '../context';
@@ -87,9 +86,7 @@ export default function SidebarInteractions(_: Props) {
   return (
     <Fragment>
       <div className={styles.Toolbar}>
-        <div className={styles.Name} title={interaction.name}>
-          {interaction.name}
-        </div>
+        <div className={styles.Name}>{interaction.name}</div>
       </div>
       <div className={styles.Content}>
         <div className={styles.Commits}>Commits:</div>

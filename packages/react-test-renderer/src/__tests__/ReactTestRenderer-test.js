@@ -34,7 +34,7 @@ describe('ReactTestRenderer', () => {
       expect(() => {
         ReactTestRenderer.create(ReactDOM.createPortal('foo', container));
       }).toThrow();
-    }).toErrorDev('An invalid container has been provided.', {
+    }).toWarnDev('An invalid container has been provided.', {
       withoutStack: true,
     });
   });

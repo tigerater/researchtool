@@ -377,7 +377,14 @@ describe('ReactDOMSelect', () => {
     expect(select.options[1].selected).toBe(false);
     expect(select.options[2].selected).toBe(false);
 
-    expect(select.value).toBe('');
+    // Note: There is an inconsistency between JSDOM and Chrome where
+    // Chrome reports an empty string when no value is selected for a
+    // single-select with a size greater than 0. JSDOM reports the first
+    // value
+    //
+    // This assertion exists only for clarity of JSDOM behavior:
+    expect(select.value).toBe('monkey'); // "" in Chrome
+    // Despite this, the selection index is correct:
     expect(select.selectedIndex).toBe(-1);
   });
 
@@ -603,7 +610,7 @@ describe('ReactDOMSelect', () => {
           <option value="test" />
         </select>,
       ),
-    ).toErrorDev(
+    ).toWarnDev(
       '`value` prop on `select` should not be null. ' +
         'Consider using an empty string to clear the component or `undefined` ' +
         'for uncontrolled components.',
@@ -626,7 +633,7 @@ describe('ReactDOMSelect', () => {
       );
     }
 
-    expect(() => ReactTestUtils.renderIntoDocument(<App />)).toErrorDev(
+    expect(() => ReactTestUtils.renderIntoDocument(<App />)).toWarnDev(
       'Use the `defaultValue` or `value` props on <select> instead of ' +
         'setting `selected` on <option>.',
     );
@@ -641,7 +648,7 @@ describe('ReactDOMSelect', () => {
           <option value="test" />
         </select>,
       ),
-    ).toErrorDev(
+    ).toWarnDev(
       '`value` prop on `select` should not be null. ' +
         'Consider using an empty array when `multiple` is ' +
         'set to `true` to clear the component or `undefined` ' +
@@ -688,7 +695,7 @@ describe('ReactDOMSelect', () => {
           <option value="gorilla">A gorilla!</option>
         </select>,
       ),
-    ).toErrorDev(
+    ).toWarnDev(
       'Select elements must be either controlled or uncontrolled ' +
         '(specify either the value prop, or the defaultValue prop, but not ' +
         'both). Decide between using a controlled or uncontrolled select ' +
@@ -840,7 +847,7 @@ describe('ReactDOMSelect', () => {
             <option value="giraffe">A giraffe!</option>
           </select>,
         );
-      }).toErrorDev('Invalid value for prop `value`');
+      }).toWarnDev('Invalid value for prop `value`');
 
       expect(node.value).toBe('');
     });
@@ -856,7 +863,7 @@ describe('ReactDOMSelect', () => {
             <option value="giraffe">A giraffe!</option>
           </select>,
         );
-      }).toErrorDev('Invalid value for prop `value`');
+      }).toWarnDev('Invalid value for prop `value`');
 
       expect(node.value).toBe('monkey');
 
@@ -882,7 +889,7 @@ describe('ReactDOMSelect', () => {
             <option value="giraffe">A giraffe!</option>
           </select>,
         );
-      }).toErrorDev('Invalid value for prop `value`');
+      }).toWarnDev('Invalid value for prop `value`');
 
       expect(node.value).toBe('');
     });
@@ -898,7 +905,7 @@ describe('ReactDOMSelect', () => {
             <option value="giraffe">A giraffe!</option>
           </select>,
         );
-      }).toErrorDev('Invalid value for prop `value`');
+      }).toWarnDev('Invalid value for prop `value`');
 
       expect(node.value).toBe('monkey');
 
@@ -926,7 +933,7 @@ describe('ReactDOMSelect', () => {
             <option value="giraffe">A giraffe!</option>
           </select>,
         );
-      }).toErrorDev('Invalid value for prop `value`');
+      }).toWarnDev('Invalid value for prop `value`');
 
       expect(node.value).toBe('');
     });
@@ -942,7 +949,7 @@ describe('ReactDOMSelect', () => {
             <option value="giraffe">A giraffe!</option>
           </select>,
         );
-      }).toErrorDev('Invalid value for prop `value`');
+      }).toWarnDev('Invalid value for prop `value`');
 
       expect(node.value).toBe('');
     });
@@ -958,7 +965,7 @@ describe('ReactDOMSelect', () => {
             <option value="giraffe">A giraffe!</option>
           </select>,
         );
-      }).toErrorDev('Invalid value for prop `value`');
+      }).toWarnDev('Invalid value for prop `value`');
 
       expect(node.value).toBe('monkey');
 
@@ -984,7 +991,7 @@ describe('ReactDOMSelect', () => {
             <option value="giraffe">A giraffe!</option>
           </select>,
         );
-      }).toErrorDev('Invalid value for prop `value`');
+      }).toWarnDev('Invalid value for prop `value`');
 
       expect(node.value).toBe('monkey');
 

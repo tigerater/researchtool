@@ -13,6 +13,8 @@ import {getStackByFiberInDevAndProd} from './ReactCurrentFiber';
 
 import getComponentName from 'shared/getComponentName';
 import {StrictMode} from './ReactTypeOfMode';
+import lowPriorityWarning from 'shared/lowPriorityWarning';
+import warningWithoutStack from 'shared/warningWithoutStack';
 
 type FiberArray = Array<Fiber>;
 type FiberToFiberComponentsMap = Map<Fiber, FiberArray>;
@@ -189,7 +191,8 @@ if (__DEV__) {
       const sortedNames = setToSortedString(
         UNSAFE_componentWillMountUniqueNames,
       );
-      console.error(
+      warningWithoutStack(
+        false,
         'Using UNSAFE_componentWillMount in strict mode is not recommended and may indicate bugs in your code. ' +
           'See https://fb.me/react-unsafe-component-lifecycles for details.\n\n' +
           '* Move code with side effects to componentDidMount, and set initial state in the constructor.\n' +
@@ -202,7 +205,8 @@ if (__DEV__) {
       const sortedNames = setToSortedString(
         UNSAFE_componentWillReceivePropsUniqueNames,
       );
-      console.error(
+      warningWithoutStack(
+        false,
         'Using UNSAFE_componentWillReceiveProps in strict mode is not recommended ' +
           'and may indicate bugs in your code. ' +
           'See https://fb.me/react-unsafe-component-lifecycles for details.\n\n' +
@@ -219,7 +223,8 @@ if (__DEV__) {
       const sortedNames = setToSortedString(
         UNSAFE_componentWillUpdateUniqueNames,
       );
-      console.error(
+      warningWithoutStack(
+        false,
         'Using UNSAFE_componentWillUpdate in strict mode is not recommended ' +
           'and may indicate bugs in your code. ' +
           'See https://fb.me/react-unsafe-component-lifecycles for details.\n\n' +
@@ -232,7 +237,8 @@ if (__DEV__) {
     if (componentWillMountUniqueNames.size > 0) {
       const sortedNames = setToSortedString(componentWillMountUniqueNames);
 
-      console.warn(
+      lowPriorityWarning(
+        false,
         'componentWillMount has been renamed, and is not recommended for use. ' +
           'See https://fb.me/react-unsafe-component-lifecycles for details.\n\n' +
           '* Move code with side effects to componentDidMount, and set initial state in the constructor.\n' +
@@ -250,7 +256,8 @@ if (__DEV__) {
         componentWillReceivePropsUniqueNames,
       );
 
-      console.warn(
+      lowPriorityWarning(
+        false,
         'componentWillReceiveProps has been renamed, and is not recommended for use. ' +
           'See https://fb.me/react-unsafe-component-lifecycles for details.\n\n' +
           '* Move data fetching code or side effects to componentDidUpdate.\n' +
@@ -269,7 +276,8 @@ if (__DEV__) {
     if (componentWillUpdateUniqueNames.size > 0) {
       const sortedNames = setToSortedString(componentWillUpdateUniqueNames);
 
-      console.warn(
+      lowPriorityWarning(
+        false,
         'componentWillUpdate has been renamed, and is not recommended for use. ' +
           'See https://fb.me/react-unsafe-component-lifecycles for details.\n\n' +
           '* Move data fetching code or side effects to componentDidUpdate.\n' +
@@ -294,7 +302,8 @@ if (__DEV__) {
   ) => {
     const strictRoot = findStrictRoot(fiber);
     if (strictRoot === null) {
-      console.error(
+      warningWithoutStack(
+        false,
         'Expected to find a StrictMode component in a strict mode tree. ' +
           'This error is likely caused by a bug in React. Please file an issue.',
       );
@@ -324,11 +333,6 @@ if (__DEV__) {
   ReactStrictModeWarnings.flushLegacyContextWarning = () => {
     ((pendingLegacyContextWarning: any): FiberToFiberComponentsMap).forEach(
       (fiberArray: FiberArray, strictRoot) => {
-        if (fiberArray.length === 0) {
-          return;
-        }
-        const firstFiber = fiberArray[0];
-
         const uniqueNames = new Set();
         fiberArray.forEach(fiber => {
           uniqueNames.add(getComponentName(fiber.type) || 'Component');
@@ -336,9 +340,12 @@ if (__DEV__) {
         });
 
         const sortedNames = setToSortedString(uniqueNames);
-        const firstComponentStack = getStackByFiberInDevAndProd(firstFiber);
+        const strictRootComponentStack = getStackByFiberInDevAndProd(
+          strictRoot,
+        );
 
-        console.error(
+        warningWithoutStack(
+          false,
           'Legacy context API has been detected within a strict-mode tree.' +
             '\n\nThe old API will be supported in all 16.x releases, but applications ' +
             'using it should migrate to the new version.' +
@@ -346,7 +353,7 @@ if (__DEV__) {
             '\n\nLearn more about this warning here: https://fb.me/react-legacy-context' +
             '%s',
           sortedNames,
-          firstComponentStack,
+          strictRootComponentStack,
         );
       },
     );

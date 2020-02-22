@@ -7,23 +7,18 @@
  * @flow
  */
 
-import type {AnyNativeEvent} from 'legacy-events/PluginModuleType';
-import type {EventSystemFlags} from 'legacy-events/EventSystemFlags';
-import type {Fiber} from 'react-reconciler/src/ReactFiber';
-import type {PluginModule} from 'legacy-events/PluginModuleType';
-import type {ReactSyntheticEvent} from 'legacy-events/ReactSyntheticEventType';
-import type {TopLevelType} from 'legacy-events/TopLevelEventTypes';
-
-import {PLUGIN_EVENT_SYSTEM} from 'legacy-events/EventSystemFlags';
+import {
+  getListener,
+  runExtractedPluginEventsInBatch,
+} from 'legacy-events/EventPluginHub';
 import {registrationNameModules} from 'legacy-events/EventPluginRegistry';
 import {batchedUpdates} from 'legacy-events/ReactGenericBatching';
-import {runEventsInBatch} from 'legacy-events/EventBatching';
-import {enableNativeTargetAsInstance} from 'shared/ReactFeatureFlags';
-import {plugins} from 'legacy-events/EventPluginRegistry';
-import getListener from 'legacy-events/getListener';
-import accumulateInto from 'legacy-events/accumulateInto';
+import warningWithoutStack from 'shared/warningWithoutStack';
 
 import {getInstanceFromNode} from './ReactNativeComponentTree';
+
+import type {AnyNativeEvent} from 'legacy-events/PluginModuleType';
+import type {TopLevelType} from 'legacy-events/TopLevelEventTypes';
 
 export {getListener, registrationNameModules as registrationNames};
 
@@ -102,78 +97,16 @@ function _receiveRootNodeIDEvent(
 ) {
   const nativeEvent = nativeEventParam || EMPTY_NATIVE_EVENT;
   const inst = getInstanceFromNode(rootNodeID);
-
-  let target = null;
-  if (enableNativeTargetAsInstance) {
-    if (inst != null) {
-      target = inst.stateNode;
-    }
-  } else {
-    target = nativeEvent.target;
-  }
-
   batchedUpdates(function() {
     runExtractedPluginEventsInBatch(
       topLevelType,
       inst,
       nativeEvent,
-      target,
-      PLUGIN_EVENT_SYSTEM,
+      nativeEvent.target,
     );
   });
   // React Native doesn't use ReactControlledComponent but if it did, here's
   // where it would do it.
-}
-
-/**
- * Allows registered plugins an opportunity to extract events from top-level
- * native browser events.
- *
- * @return {*} An accumulation of synthetic events.
- * @internal
- */
-function extractPluginEvents(
-  topLevelType: TopLevelType,
-  targetInst: null | Fiber,
-  nativeEvent: AnyNativeEvent,
-  nativeEventTarget: null | EventTarget,
-  eventSystemFlags: EventSystemFlags,
-): Array<ReactSyntheticEvent> | ReactSyntheticEvent | null {
-  let events = null;
-  for (let i = 0; i < plugins.length; i++) {
-    // Not every plugin in the ordering may be loaded at runtime.
-    const possiblePlugin: PluginModule<AnyNativeEvent> = plugins[i];
-    if (possiblePlugin) {
-      const extractedEvents = possiblePlugin.extractEvents(
-        topLevelType,
-        targetInst,
-        nativeEvent,
-        nativeEventTarget,
-        eventSystemFlags,
-      );
-      if (extractedEvents) {
-        events = accumulateInto(events, extractedEvents);
-      }
-    }
-  }
-  return events;
-}
-
-function runExtractedPluginEventsInBatch(
-  topLevelType: TopLevelType,
-  targetInst: null | Fiber,
-  nativeEvent: AnyNativeEvent,
-  nativeEventTarget: null | EventTarget,
-  eventSystemFlags: EventSystemFlags,
-) {
-  const events = extractPluginEvents(
-    topLevelType,
-    targetInst,
-    nativeEvent,
-    nativeEventTarget,
-    eventSystemFlags,
-  );
-  runEventsInBatch(events);
 }
 
 /**
@@ -238,7 +171,8 @@ export function receiveTouches(
     if (target !== null && target !== undefined) {
       if (target < 1) {
         if (__DEV__) {
-          console.error(
+          warningWithoutStack(
+            false,
             'A view is reporting that a touch occurred on tag zero.',
           );
         }

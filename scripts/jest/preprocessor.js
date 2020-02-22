@@ -16,14 +16,11 @@ const pathToBabel = path.join(
 const pathToBabelPluginDevWithCode = require.resolve(
   '../error-codes/transform-error-messages'
 );
-const pathToBabelPluginReplaceConsoleCalls = require.resolve(
-  '../babel/transform-replace-console-calls'
+const pathToBabelPluginWrapWarning = require.resolve(
+  '../babel/wrap-warning-with-env-check'
 );
 const pathToBabelPluginAsyncToGenerator = require.resolve(
   '@babel/plugin-transform-async-to-generator'
-);
-const pathToTransformInfiniteLoops = require.resolve(
-  '../babel/transform-prevent-infinite-loops'
 );
 const pathToBabelrc = path.join(__dirname, '..', '..', 'babel.config.js');
 const pathToErrorCodes = require.resolve('../error-codes/codes.json');
@@ -34,6 +31,7 @@ const babelOptions = {
     require.resolve('@babel/plugin-transform-modules-commonjs'),
 
     pathToBabelPluginDevWithCode,
+    pathToBabelPluginWrapWarning,
 
     // Keep stacks detailed in tests.
     // Don't put this in .babelrc so that we don't embed filenames
@@ -41,7 +39,7 @@ const babelOptions = {
     // TODO: I have not verified that this actually works.
     require.resolve('@babel/plugin-transform-react-jsx-source'),
 
-    pathToTransformInfiniteLoops,
+    require.resolve('../babel/transform-prevent-infinite-loops'),
 
     // This optimization is important for extremely performance-sensitive (e.g. React source).
     // It's okay to disable it for tests.
@@ -61,32 +59,22 @@ module.exports = {
     if (filePath.match(/\.ts$/) && !filePath.match(/\.d\.ts$/)) {
       return tsPreprocessor.compile(src, filePath);
     }
-    if (filePath.match(/\.json$/)) {
-      return src;
-    }
     if (!filePath.match(/\/third_party\//)) {
       // for test files, we also apply the async-await transform, but we want to
       // make sure we don't accidentally apply that transform to product code.
       const isTestFile = !!filePath.match(/\/__tests__\//);
-      const isInDevToolsPackages = !!filePath.match(
-        /\/packages\/react-devtools.*\//
-      );
-      const testOnlyPlugins = [pathToBabelPluginAsyncToGenerator];
-      const sourceOnlyPlugins = [];
-      if (process.env.NODE_ENV === 'development' && !isInDevToolsPackages) {
-        sourceOnlyPlugins.push(pathToBabelPluginReplaceConsoleCalls);
-      }
-      const plugins = (isTestFile ? testOnlyPlugins : sourceOnlyPlugins).concat(
-        babelOptions.plugins
-      );
       return babel.transform(
         src,
         Object.assign(
           {filename: path.relative(process.cwd(), filePath)},
           babelOptions,
-          {
-            plugins,
-          }
+          isTestFile
+            ? {
+                plugins: [pathToBabelPluginAsyncToGenerator].concat(
+                  babelOptions.plugins
+                ),
+              }
+            : {}
         )
       );
     }
@@ -98,7 +86,7 @@ module.exports = {
     pathToBabel,
     pathToBabelrc,
     pathToBabelPluginDevWithCode,
-    pathToTransformInfiniteLoops,
+    pathToBabelPluginWrapWarning,
     pathToErrorCodes,
   ]),
 };

@@ -8,14 +8,13 @@
  */
 
 // Reach styles need to come before any component styles.
-// This makes overriding the styles simpler.
+// This makes overridding the styles simpler.
 import '@reach/menu-button/styles.css';
 import '@reach/tooltip/styles.css';
 
-import * as React from 'react';
-import {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import Store from '../store';
-import {BridgeContext, ContextMenuContext, StoreContext} from './context';
+import {BridgeContext, StoreContext} from './context';
 import Components from './Components/Components';
 import Profiler from './Profiler/Profiler';
 import TabBar from './TabBar';
@@ -25,8 +24,8 @@ import ViewElementSourceContext from './Components/ViewElementSourceContext';
 import {ProfilerContextController} from './Profiler/ProfilerContext';
 import {ModalDialogContextController} from './ModalDialog';
 import ReactLogo from './ReactLogo';
-import UnsupportedVersionDialog from './UnsupportedVersionDialog';
 import WarnIfLegacyBackendDetected from './WarnIfLegacyBackendDetected';
+import ShowWelcomeToTheNewDevToolsDialog from './ShowWelcomeToTheNewDevToolsDialog';
 
 import styles from './DevTools.css';
 
@@ -41,10 +40,6 @@ export type ViewElementSource = (
   id: number,
   inspectedElement: InspectedElement,
 ) => void;
-export type ViewAttributeSource = (
-  id: number,
-  path: Array<string | number>,
-) => void;
 export type CanViewElementSource = (
   inspectedElement: InspectedElement,
 ) => boolean;
@@ -54,12 +49,10 @@ export type Props = {|
   browserTheme?: BrowserTheme,
   canViewElementSourceFunction?: ?CanViewElementSource,
   defaultTab?: TabID,
-  enabledInspectedElementContextMenu?: boolean,
   showTabBar?: boolean,
+  showWelcomeToTheNewDevToolsDialog?: boolean,
   store: Store,
   warnIfLegacyBackendDetected?: boolean,
-  warnIfUnsupportedVersionDetected?: boolean,
-  viewAttributeSourceFunction?: ?ViewAttributeSource,
   viewElementSourceFunction?: ?ViewElementSource,
 
   // This property is used only by the web extension target.
@@ -94,16 +87,14 @@ export default function DevTools({
   bridge,
   browserTheme = 'light',
   canViewElementSourceFunction,
-  componentsPortalContainer,
   defaultTab = 'components',
-  enabledInspectedElementContextMenu = false,
+  componentsPortalContainer,
   overrideTab,
   profilerPortalContainer,
   showTabBar = false,
+  showWelcomeToTheNewDevToolsDialog = false,
   store,
   warnIfLegacyBackendDetected = false,
-  warnIfUnsupportedVersionDetected = false,
-  viewAttributeSourceFunction,
   viewElementSourceFunction,
 }: Props) {
   const [tab, setTab] = useState(defaultTab);
@@ -119,74 +110,67 @@ export default function DevTools({
     [canViewElementSourceFunction, viewElementSourceFunction],
   );
 
-  const contextMenu = useMemo(
-    () => ({
-      isEnabledForInspectedElement: enabledInspectedElementContextMenu,
-      viewAttributeSourceFunction: viewAttributeSourceFunction || null,
-    }),
-    [enabledInspectedElementContextMenu, viewAttributeSourceFunction],
+  useEffect(
+    () => {
+      return () => {
+        try {
+          bridge.shutdown();
+        } catch (error) {
+          // Attempting to use a disconnected port.
+        }
+      };
+    },
+    [bridge],
   );
-
-  useEffect(() => {
-    return () => {
-      try {
-        bridge.shutdown();
-      } catch (error) {
-        // Attempting to use a disconnected port.
-      }
-    };
-  }, [bridge]);
 
   return (
     <BridgeContext.Provider value={bridge}>
       <StoreContext.Provider value={store}>
-        <ContextMenuContext.Provider value={contextMenu}>
-          <ModalDialogContextController>
-            <SettingsContextController
-              browserTheme={browserTheme}
-              componentsPortalContainer={componentsPortalContainer}
-              profilerPortalContainer={profilerPortalContainer}>
-              <ViewElementSourceContext.Provider value={viewElementSource}>
-                <TreeContextController>
-                  <ProfilerContextController>
-                    <div className={styles.DevTools}>
-                      {showTabBar && (
-                        <div className={styles.TabBar}>
-                          <ReactLogo />
-                          <span className={styles.DevToolsVersion}>
-                            {process.env.DEVTOOLS_VERSION}
-                          </span>
-                          <div className={styles.Spacer} />
-                          <TabBar
-                            currentTab={tab}
-                            id="DevTools"
-                            selectTab={setTab}
-                            tabs={tabs}
-                            type="navigation"
-                          />
-                        </div>
-                      )}
-                      <div
-                        className={styles.TabContent}
-                        hidden={tab !== 'components'}>
-                        <Components
-                          portalContainer={componentsPortalContainer}
+        <ModalDialogContextController>
+          <SettingsContextController
+            browserTheme={browserTheme}
+            componentsPortalContainer={componentsPortalContainer}
+            profilerPortalContainer={profilerPortalContainer}>
+            <ViewElementSourceContext.Provider value={viewElementSource}>
+              <TreeContextController>
+                <ProfilerContextController>
+                  <div className={styles.DevTools}>
+                    {showTabBar && (
+                      <div className={styles.TabBar}>
+                        <ReactLogo />
+                        <span className={styles.DevToolsVersion}>
+                          {process.env.DEVTOOLS_VERSION}
+                        </span>
+                        <div className={styles.Spacer} />
+                        <TabBar
+                          currentTab={tab}
+                          id="DevTools"
+                          selectTab={setTab}
+                          tabs={tabs}
+                          type="navigation"
                         />
                       </div>
-                      <div
-                        className={styles.TabContent}
-                        hidden={tab !== 'profiler'}>
-                        <Profiler portalContainer={profilerPortalContainer} />
-                      </div>
+                    )}
+                    <div
+                      className={styles.TabContent}
+                      hidden={tab !== 'components'}>
+                      <Components portalContainer={componentsPortalContainer} />
                     </div>
-                  </ProfilerContextController>
-                </TreeContextController>
-              </ViewElementSourceContext.Provider>
-            </SettingsContextController>
-            {warnIfLegacyBackendDetected && <WarnIfLegacyBackendDetected />}
-            {warnIfUnsupportedVersionDetected && <UnsupportedVersionDialog />}
-          </ModalDialogContextController>
-        </ContextMenuContext.Provider>
+                    <div
+                      className={styles.TabContent}
+                      hidden={tab !== 'profiler'}>
+                      <Profiler portalContainer={profilerPortalContainer} />
+                    </div>
+                  </div>
+                </ProfilerContextController>
+              </TreeContextController>
+            </ViewElementSourceContext.Provider>
+          </SettingsContextController>
+          {warnIfLegacyBackendDetected && <WarnIfLegacyBackendDetected />}
+          {showWelcomeToTheNewDevToolsDialog && (
+            <ShowWelcomeToTheNewDevToolsDialog />
+          )}
+        </ModalDialogContextController>
       </StoreContext.Provider>
     </BridgeContext.Provider>
   );

@@ -17,19 +17,19 @@ describe('ReactHooksInspection', () => {
   beforeEach(() => {
     jest.resetModules();
     const ReactFeatureFlags = require('shared/ReactFeatureFlags');
-    ReactFeatureFlags.enableDeprecatedFlareAPI = true;
+    ReactFeatureFlags.enableFlareAPI = true;
     React = require('react');
     ReactDebugTools = require('react-debug-tools');
   });
 
   it('should inspect a simple useResponder hook', () => {
-    const TestResponder = React.DEPRECATED_createResponder('TestResponder', {});
+    const TestResponder = React.unstable_createResponder('TestResponder', {});
 
     function Foo(props) {
-      const listener = React.DEPRECATED_useResponder(TestResponder, {
+      const listener = React.unstable_useResponder(TestResponder, {
         preventDefault: false,
       });
-      return <div DEPRECATED_flareListeners={listener}>Hello world</div>;
+      return <div listeners={listener}>Hello world</div>;
     }
     let tree = ReactDebugTools.inspectHooks(Foo, {});
     expect(tree).toEqual([

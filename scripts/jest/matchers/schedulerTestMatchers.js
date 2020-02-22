@@ -44,15 +44,6 @@ function toFlushAndYieldThrough(Scheduler, expectedYields) {
   });
 }
 
-function toFlushUntilNextPaint(Scheduler, expectedYields) {
-  assertYieldsWereCleared(Scheduler);
-  Scheduler.unstable_flushUntilNextPaint();
-  const actualYields = Scheduler.unstable_clearYields();
-  return captureAssertion(() => {
-    expect(actualYields).toEqual(expectedYields);
-  });
-}
-
 function toFlushWithoutYielding(Scheduler) {
   return toFlushAndYield(Scheduler, []);
 }
@@ -85,7 +76,6 @@ function toFlushAndThrow(Scheduler, ...rest) {
 module.exports = {
   toFlushAndYield,
   toFlushAndYieldThrough,
-  toFlushUntilNextPaint,
   toFlushWithoutYielding,
   toFlushExpired,
   toHaveYielded,

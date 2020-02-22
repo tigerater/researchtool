@@ -10,6 +10,6 @@
 
 'use strict';
 
-const {findDOMNode} = require('ReactDOM');
+const {findDOMNode} = require('ReactDOM-fb');
 
 module.exports = findDOMNode;

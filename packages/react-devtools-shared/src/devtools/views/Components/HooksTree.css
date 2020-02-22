@@ -27,7 +27,7 @@
 .Name,
 .NameAnonymous {
   flex: 0 0 auto;
-  cursor: default;
+  user-select: none;
 }
 .Name {
   color: var(--color-dim);
@@ -39,7 +39,7 @@
 .EditableName {
   color: var(--color-attribute-name);
   flex: 0 0 auto;
-  cursor: default;
+  user-select: none;
 }
 .EditableName:after,
 .Name:after {
@@ -52,7 +52,6 @@
   color: var(--color-attribute-value);
   overflow: hidden;
   text-overflow: ellipsis;
-  cursor: default;
 }
 
 .None {

@@ -31,15 +31,12 @@ export type ReactProvider<T> = {
   props: {
     value: T,
     children?: ReactNodeList,
-    ...
   },
-  ...
 };
 
 export type ReactProviderType<T> = {
   $$typeof: Symbol | number,
   _context: ReactContext<T>,
-  ...
 };
 
 export type ReactConsumer<T> = {
@@ -50,23 +47,23 @@ export type ReactConsumer<T> = {
   props: {
     children: (value: T) => ReactNodeList,
     unstable_observedBits?: number,
-    ...
   },
-  ...
 };
 
 export type ReactContext<T> = {
   $$typeof: Symbol | number,
   Consumer: ReactContext<T>,
   Provider: ReactProviderType<T>,
+
   _calculateChangedBits: ((a: T, b: T) => number) | null,
+
   _currentValue: T,
   _currentValue2: T,
   _threadCount: number,
+
   // DEV only
   _currentRenderer?: Object | null,
   _currentRenderer2?: Object | null,
-  ...
 };
 
 export type ReactPortal = {
@@ -76,7 +73,6 @@ export type ReactPortal = {
   children: ReactNodeList,
   // TODO: figure out the API for cross-renderer implementation.
   implementation: any,
-  ...
 };
 
 export type RefObject = {|
@@ -100,7 +96,6 @@ export type ReactEventResponder<E, C> = {
   $$typeof: Symbol | number,
   displayName: string,
   targetEventTypes: null | Array<string>,
-  targetPortalPropagation: boolean,
   rootEventTypes: null | Array<string>,
   getInitialState: null | ((props: Object) => Object),
   onEvent:
@@ -111,7 +106,6 @@ export type ReactEventResponder<E, C> = {
     | ((event: E, context: C, props: Object, state: Object) => void),
   onMount: null | ((context: C, props: Object, state: Object) => void),
   onUnmount: null | ((context: C, props: Object, state: Object) => void),
-  ...
 };
 
 export type EventPriority = 0 | 1 | 2;
@@ -158,7 +152,6 @@ export type ReactFundamentalImpl<C, H> = {
   ) => void,
   onHydrate?: (context: C, props: Object, state: Object) => boolean,
   onFocus?: (context: C, props: Object, state: Object) => boolean,
-  ...
 };
 
 export type ReactFundamentalComponent<C, H> = {|
@@ -168,19 +161,13 @@ export type ReactFundamentalComponent<C, H> = {|
 
 export type ReactScope = {|
   $$typeof: Symbol | number,
+  fn: (type: string | Object, props: Object) => boolean,
 |};
 
-export type ReactScopeQuery = (
-  type: string,
-  props: {[string]: mixed, ...},
-  instance: mixed,
-) => boolean;
-
 export type ReactScopeMethods = {|
-  DO_NOT_USE_queryAllNodes(ReactScopeQuery): null | Array<Object>,
-  DO_NOT_USE_queryFirstNode(ReactScopeQuery): null | Object,
-  containsNode(Object): boolean,
-  getChildContextValues: <T>(context: ReactContext<T>) => Array<T>,
+  getChildren(): null | Array<ReactScopeMethods>,
+  getParent(): null | ReactScopeMethods,
+  getScopedNodes(): null | Array<Object>,
 |};
 
 export type ReactScopeInstance = {|

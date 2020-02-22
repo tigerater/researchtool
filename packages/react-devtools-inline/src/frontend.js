@@ -1,7 +1,6 @@
 /** @flow */
 
-import * as React from 'react';
-import {forwardRef} from 'react';
+import React, {forwardRef} from 'react';
 import Bridge from 'react-devtools-shared/src/bridge';
 import Store from 'react-devtools-shared/src/devtools/store';
 import DevTools from 'react-devtools-shared/src/devtools/views/DevTools';
@@ -65,7 +64,7 @@ export function initialize(
     },
   });
 
-  const store: Store = new Store(bridge, {supportsTraceUpdates: true});
+  const store: Store = new Store(bridge);
 
   const ForwardRef = forwardRef<Props, mixed>((props, ref) => (
     <DevTools ref={ref} bridge={bridge} store={store} {...props} />

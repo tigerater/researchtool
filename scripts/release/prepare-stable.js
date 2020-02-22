@@ -7,14 +7,13 @@ const {getPublicPackages, handleError} = require('./utils');
 
 const checkOutPackages = require('./prepare-stable-commands/check-out-packages');
 const confirmStableVersionNumbers = require('./prepare-stable-commands/confirm-stable-version-numbers');
-const getLatestNextVersion = require('./prepare-stable-commands/get-latest-next-version');
+const getLatestCanaryVersion = require('./prepare-stable-commands/get-latest-canary-version');
 const guessStableVersionNumbers = require('./prepare-stable-commands/guess-stable-version-numbers');
 const parseParams = require('./prepare-stable-commands/parse-params');
 const printPrereleaseSummary = require('./shared-commands/print-prerelease-summary');
 const testPackagingFixture = require('./shared-commands/test-packaging-fixture');
 const testTracingFixture = require('./shared-commands/test-tracing-fixture');
 const updateStableVersionNumbers = require('./prepare-stable-commands/update-stable-version-numbers');
-const theme = require('./theme');
 
 const run = async () => {
   try {
@@ -28,14 +27,7 @@ const run = async () => {
     const versionsMap = new Map();
 
     if (!params.version) {
-      params.version = await getLatestNextVersion();
-    }
-
-    if (params.version.includes('experimental')) {
-      console.error(
-        theme.error`Cannot promote an experimental build to stable.`
-      );
-      process.exit(1);
+      params.version = await getLatestCanaryVersion();
     }
 
     await checkOutPackages(params);

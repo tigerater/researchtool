@@ -154,7 +154,7 @@ describe('ReactContextValidator', () => {
       foo: PropTypes.string.isRequired,
     };
 
-    expect(() => ReactTestUtils.renderIntoDocument(<Component />)).toErrorDev(
+    expect(() => ReactTestUtils.renderIntoDocument(<Component />)).toWarnDev(
       'Warning: Failed context type: ' +
         'The context `foo` is marked as required in `Component`, but its value ' +
         'is `undefined`.\n' +
@@ -200,7 +200,7 @@ describe('ReactContextValidator', () => {
       ReactTestUtils.renderIntoDocument(
         <ComponentInFooNumberContext fooValue={123} />,
       ),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: Failed context type: ' +
         'Invalid context `foo` of type `number` supplied ' +
         'to `Component`, expected `string`.\n' +
@@ -226,7 +226,7 @@ describe('ReactContextValidator', () => {
 
     expect(() =>
       ReactTestUtils.renderIntoDocument(<Component testContext={{bar: 123}} />),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: Failed child context type: ' +
         'The child context `foo` is marked as required in `Component`, but its ' +
         'value is `undefined`.\n' +
@@ -235,7 +235,7 @@ describe('ReactContextValidator', () => {
 
     expect(() =>
       ReactTestUtils.renderIntoDocument(<Component testContext={{foo: 123}} />),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: Failed child context type: ' +
         'Invalid child context `foo` of type `number` ' +
         'supplied to `Component`, expected `string`.\n' +
@@ -265,7 +265,7 @@ describe('ReactContextValidator', () => {
       }
     }
 
-    expect(() => ReactTestUtils.renderIntoDocument(<Component />)).toErrorDev(
+    expect(() => ReactTestUtils.renderIntoDocument(<Component />)).toWarnDev(
       'Warning: Failed prop type: The prop `value` is marked as required in ' +
         '`Context.Provider`, but its value is `undefined`.\n' +
         '    in Component (at **)',
@@ -292,19 +292,21 @@ describe('ReactContextValidator', () => {
       }
     }
 
-    expect(() => ReactTestUtils.renderIntoDocument(<ComponentA />)).toErrorDev(
+    expect(() => ReactTestUtils.renderIntoDocument(<ComponentA />)).toWarnDev(
       'Warning: ComponentA.childContextTypes is specified but there is no ' +
         'getChildContext() method on the instance. You can either define ' +
         'getChildContext() on ComponentA or remove childContextTypes from it.',
+      {withoutStack: true},
     );
 
     // Warnings should be deduped by component type
     ReactTestUtils.renderIntoDocument(<ComponentA />);
 
-    expect(() => ReactTestUtils.renderIntoDocument(<ComponentB />)).toErrorDev(
+    expect(() => ReactTestUtils.renderIntoDocument(<ComponentB />)).toWarnDev(
       'Warning: ComponentB.childContextTypes is specified but there is no ' +
         'getChildContext() method on the instance. You can either define ' +
         'getChildContext() on ComponentB or remove childContextTypes from it.',
+      {withoutStack: true},
     );
   });
 
@@ -348,13 +350,16 @@ describe('ReactContextValidator', () => {
 
     expect(() =>
       ReactTestUtils.renderIntoDocument(<ParentContextProvider />),
-    ).toErrorDev([
-      'Warning: MiddleMissingContext.childContextTypes is specified but there is no ' +
-        'getChildContext() method on the instance. You can either define getChildContext() ' +
-        'on MiddleMissingContext or remove childContextTypes from it.',
-      'Warning: Failed context type: The context `bar` is marked as required ' +
-        'in `ChildContextConsumer`, but its value is `undefined`.',
-    ]);
+    ).toWarnDev(
+      [
+        'Warning: MiddleMissingContext.childContextTypes is specified but there is no ' +
+          'getChildContext() method on the instance. You can either define getChildContext() ' +
+          'on MiddleMissingContext or remove childContextTypes from it.',
+        'Warning: Failed context type: The context `bar` is marked as required ' +
+          'in `ChildContextConsumer`, but its value is `undefined`.',
+      ],
+      {withoutStack: 1},
+    );
     expect(childContext.bar).toBeUndefined();
     expect(childContext.foo).toBe('FOO');
   });
@@ -508,9 +513,10 @@ describe('ReactContextValidator', () => {
           <ComponentA />
         </ParentContextProvider>,
       ),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: ComponentA declares both contextTypes and contextType static properties. ' +
         'The legacy contextTypes property will be ignored.',
+      {withoutStack: true},
     );
 
     // Warnings should be deduped by component type
@@ -526,9 +532,10 @@ describe('ReactContextValidator', () => {
           <ComponentB />
         </ParentContextProvider>,
       ),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: ComponentB declares both contextTypes and contextType static properties. ' +
         'The legacy contextTypes property will be ignored.',
+      {withoutStack: true},
     );
   });
 
@@ -551,10 +558,11 @@ describe('ReactContextValidator', () => {
 
     expect(() => {
       ReactTestUtils.renderIntoDocument(<ComponentA />);
-    }).toErrorDev(
+    }).toWarnDev(
       'Warning: ComponentA defines an invalid contextType. ' +
         'contextType should point to the Context object returned by React.createContext(). ' +
         'Did you accidentally pass the Context.Consumer instead?',
+      {withoutStack: true},
     );
 
     // Warnings should be deduped by component type
@@ -562,10 +570,11 @@ describe('ReactContextValidator', () => {
 
     expect(() => {
       ReactTestUtils.renderIntoDocument(<ComponentB />);
-    }).toErrorDev(
+    }).toWarnDev(
       'Warning: ComponentB defines an invalid contextType. ' +
         'contextType should point to the Context object returned by React.createContext(). ' +
         'Did you accidentally pass the Context.Provider instead?',
+      {withoutStack: true},
     );
   });
 
@@ -595,13 +604,14 @@ describe('ReactContextValidator', () => {
       expect(() => {
         ReactTestUtils.renderIntoDocument(<Foo />);
       }).toThrow("Cannot read property 'world' of undefined");
-    }).toErrorDev(
+    }).toWarnDev(
       'Foo defines an invalid contextType. ' +
         'contextType should point to the Context object returned by React.createContext(). ' +
         'However, it is set to undefined. ' +
         'This can be caused by a typo or by mixing up named and default imports. ' +
         'This can also happen due to a circular dependency, ' +
         'so try moving the createContext() call to a separate file.',
+      {withoutStack: true},
     );
   });
 
@@ -621,10 +631,11 @@ describe('ReactContextValidator', () => {
       expect(() => {
         ReactTestUtils.renderIntoDocument(<Foo />);
       }).toThrow("Cannot read property 'hello' of undefined");
-    }).toErrorDev(
+    }).toWarnDev(
       'Foo defines an invalid contextType. ' +
         'contextType should point to the Context object returned by React.createContext(). ' +
         'However, it is set to an object with keys {x, y}.',
+      {withoutStack: true},
     );
   });
 
@@ -640,10 +651,11 @@ describe('ReactContextValidator', () => {
       expect(() => {
         ReactTestUtils.renderIntoDocument(<Foo />);
       }).toThrow("Cannot read property 'world' of undefined");
-    }).toErrorDev(
+    }).toWarnDev(
       'Foo defines an invalid contextType. ' +
         'contextType should point to the Context object returned by React.createContext(). ' +
         'However, it is set to a string.',
+      {withoutStack: true},
     );
   });
 
@@ -660,15 +672,17 @@ describe('ReactContextValidator', () => {
     }
     ComponentB.contextType = Context;
 
-    expect(() => ReactTestUtils.renderIntoDocument(<ComponentA />)).toErrorDev(
+    expect(() => ReactTestUtils.renderIntoDocument(<ComponentA />)).toWarnDev(
       'Warning: ComponentA: Function components do not support contextType.',
+      {withoutStack: true},
     );
 
     // Warnings should be deduped by component type
     ReactTestUtils.renderIntoDocument(<ComponentA />);
 
-    expect(() => ReactTestUtils.renderIntoDocument(<ComponentB />)).toErrorDev(
+    expect(() => ReactTestUtils.renderIntoDocument(<ComponentB />)).toWarnDev(
       'Warning: ComponentB: Function components do not support contextType.',
+      {withoutStack: true},
     );
   });
 });

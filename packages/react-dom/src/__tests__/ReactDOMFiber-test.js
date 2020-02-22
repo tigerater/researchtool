@@ -13,8 +13,6 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const PropTypes = require('prop-types');
 
-const ReactFeatureFlags = require('shared/ReactFeatureFlags');
-
 describe('ReactDOMFiber', () => {
   let container;
 
@@ -249,32 +247,30 @@ describe('ReactDOMFiber', () => {
   });
 
   // TODO: remove in React 17
-  if (!ReactFeatureFlags.disableUnstableCreatePortal) {
-    it('should support unstable_createPortal alias', () => {
-      const portalContainer = document.createElement('div');
+  it('should support unstable_createPortal alias', () => {
+    const portalContainer = document.createElement('div');
 
-      expect(() =>
-        ReactDOM.render(
-          <div>
-            {ReactDOM.unstable_createPortal(<div>portal</div>, portalContainer)}
-          </div>,
-          container,
-        ),
-      ).toWarnDev(
-        'The ReactDOM.unstable_createPortal() alias has been deprecated, ' +
-          'and will be removed in React 17+. Update your code to use ' +
-          'ReactDOM.createPortal() instead. It has the exact same API, ' +
-          'but without the "unstable_" prefix.',
-        {withoutStack: true},
-      );
-      expect(portalContainer.innerHTML).toBe('<div>portal</div>');
-      expect(container.innerHTML).toBe('<div></div>');
+    expect(() =>
+      ReactDOM.render(
+        <div>
+          {ReactDOM.unstable_createPortal(<div>portal</div>, portalContainer)}
+        </div>,
+        container,
+      ),
+    ).toLowPriorityWarnDev(
+      'The ReactDOM.unstable_createPortal() alias has been deprecated, ' +
+        'and will be removed in React 17+. Update your code to use ' +
+        'ReactDOM.createPortal() instead. It has the exact same API, ' +
+        'but without the "unstable_" prefix.',
+      {withoutStack: true},
+    );
+    expect(portalContainer.innerHTML).toBe('<div>portal</div>');
+    expect(container.innerHTML).toBe('<div></div>');
 
-      ReactDOM.unmountComponentAtNode(container);
-      expect(portalContainer.innerHTML).toBe('');
-      expect(container.innerHTML).toBe('');
-    });
-  }
+    ReactDOM.unmountComponentAtNode(container);
+    expect(portalContainer.innerHTML).toBe('');
+    expect(container.innerHTML).toBe('');
+  });
 
   it('should render many portals', () => {
     const portalContainer1 = document.createElement('div');
@@ -1006,7 +1002,7 @@ describe('ReactDOMFiber', () => {
         return <div onClick="woops" />;
       }
     }
-    expect(() => ReactDOM.render(<Example />, container)).toErrorDev(
+    expect(() => ReactDOM.render(<Example />, container)).toWarnDev(
       'Expected `onClick` listener to be a function, instead got a value of `string` type.\n' +
         '    in div (at **)\n' +
         '    in Example (at **)',
@@ -1019,7 +1015,7 @@ describe('ReactDOMFiber', () => {
         return <div onClick={false} />;
       }
     }
-    expect(() => ReactDOM.render(<Example />, container)).toErrorDev(
+    expect(() => ReactDOM.render(<Example />, container)).toWarnDev(
       'Expected `onClick` listener to be a function, instead got `false`.\n\n' +
         'If you used to conditionally omit it with onClick={condition && value}, ' +
         'pass onClick={condition ? value : undefined} instead.\n' +
@@ -1052,7 +1048,7 @@ describe('ReactDOMFiber', () => {
         super();
         expect(() => {
           node.click();
-        }).toErrorDev(
+        }).toWarnDev(
           'Warning: unstable_flushDiscreteUpdates: Cannot flush updates when React is already rendering.',
         );
       }
@@ -1137,7 +1133,7 @@ describe('ReactDOMFiber', () => {
     expect(() => {
       expect(() =>
         ReactDOM.render(<div key="2">baz</div>, container),
-      ).toErrorDev(
+      ).toWarnDev(
         'render(...): ' +
           'It looks like the React-rendered content of this container was ' +
           'removed without using React. This is not supported and will ' +
@@ -1155,9 +1151,7 @@ describe('ReactDOMFiber', () => {
     expect(container.innerHTML).toBe('<div>bar</div>');
     // then we mess with the DOM before an update
     container.innerHTML = '<div>MEOW.</div>';
-    expect(() =>
-      ReactDOM.render(<div>baz</div>, container),
-    ).toErrorDev(
+    expect(() => ReactDOM.render(<div>baz</div>, container)).toWarnDev(
       'render(...): ' +
         'It looks like the React-rendered content of this container was ' +
         'removed without using React. This is not supported and will ' +
@@ -1174,9 +1168,7 @@ describe('ReactDOMFiber', () => {
     expect(container.innerHTML).toBe('<div>bar</div>');
     // then we mess with the DOM before an update
     container.innerHTML = '';
-    expect(() =>
-      ReactDOM.render(<div>baz</div>, container),
-    ).toErrorDev(
+    expect(() => ReactDOM.render(<div>baz</div>, container)).toWarnDev(
       'render(...): ' +
         'It looks like the React-rendered content of this container was ' +
         'removed without using React. This is not supported and will ' +

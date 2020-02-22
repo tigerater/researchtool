@@ -24,7 +24,7 @@ import {
   HostRoot,
   SuspenseComponent,
 } from 'shared/ReactWorkTags';
-import {Deletion, Placement, Hydrating} from 'shared/ReactSideEffectTags';
+import {Deletion, Placement} from 'shared/ReactSideEffectTags';
 import invariant from 'shared/invariant';
 
 import {
@@ -41,7 +41,6 @@ import {
   getFirstHydratableChild,
   hydrateInstance,
   hydrateTextInstance,
-  hydrateSuspenseInstance,
   getNextHydratableInstanceAfterSuspenseInstance,
   didNotMatchHydratedContainerTextInstance,
   didNotMatchHydratedTextInstance,
@@ -55,6 +54,7 @@ import {
   didNotFindHydratableSuspenseInstance,
 } from './ReactFiberHostConfig';
 import {enableSuspenseServerRenderer} from 'shared/ReactFeatureFlags';
+import warning from 'shared/warning';
 import {Never} from './ReactFiberExpirationTime';
 
 // The deepest Fiber on the stack involved in a hydration context.
@@ -65,11 +65,10 @@ let isHydrating: boolean = false;
 
 function warnIfHydrating() {
   if (__DEV__) {
-    if (isHydrating) {
-      console.error(
-        'We should not be hydrating here. This is a bug in React. Please file a bug.',
-      );
-    }
+    warning(
+      !isHydrating,
+      'We should not be hydrating here. This is a bug in React. Please file a bug.',
+    );
   }
 }
 
@@ -140,7 +139,7 @@ function deleteHydratableInstance(
 }
 
 function insertNonHydratedInstance(returnFiber: Fiber, fiber: Fiber) {
-  fiber.effectTag = (fiber.effectTag & ~Hydrating) | Placement;
+  fiber.effectTag |= Placement;
   if (__DEV__) {
     switch (returnFiber.tag) {
       case HostRoot: {
@@ -371,26 +370,6 @@ function prepareToHydrateHostTextInstance(fiber: Fiber): boolean {
   return shouldUpdate;
 }
 
-function prepareToHydrateHostSuspenseInstance(fiber: Fiber): void {
-  if (!supportsHydration) {
-    invariant(
-      false,
-      'Expected prepareToHydrateHostSuspenseInstance() to never be called. ' +
-        'This error is likely caused by a bug in React. Please file an issue.',
-    );
-  }
-
-  let suspenseState: null | SuspenseState = fiber.memoizedState;
-  let suspenseInstance: null | SuspenseInstance =
-    suspenseState !== null ? suspenseState.dehydrated : null;
-  invariant(
-    suspenseInstance,
-    'Expected to have a hydrated suspense instance. ' +
-      'This error is likely caused by a bug in React. Please file an issue.',
-  );
-  hydrateSuspenseInstance(suspenseInstance, fiber);
-}
-
 function skipPastDehydratedSuspenseInstance(
   fiber: Fiber,
 ): null | HydratableInstance {
@@ -492,6 +471,5 @@ export {
   tryToClaimNextHydratableInstance,
   prepareToHydrateHostInstance,
   prepareToHydrateHostTextInstance,
-  prepareToHydrateHostSuspenseInstance,
   popHydrationState,
 };

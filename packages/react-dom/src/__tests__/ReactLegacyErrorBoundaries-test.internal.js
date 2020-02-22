@@ -675,7 +675,7 @@ describe('ReactLegacyErrorBoundaries', () => {
         </BothErrorBoundaries>,
         container,
       ),
-    ).toErrorDev('The above error occurred in the <BrokenRender> component', {
+    ).toWarnDev('The above error occurred in the <BrokenRender> component', {
       logAllErrors: true,
     });
 
@@ -840,13 +840,14 @@ describe('ReactLegacyErrorBoundaries', () => {
         </ErrorBoundary>,
         container,
       ),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: The <BrokenComponentWillMountWithContext /> component appears to be a function component that ' +
         'returns a class instance. ' +
         'Change BrokenComponentWillMountWithContext to a class that extends React.Component instead. ' +
         "If you can't use a class try assigning the prototype on the function as a workaround. " +
         '`BrokenComponentWillMountWithContext.prototype = React.Component.prototype`. ' +
         "Don't use an arrow function since it cannot be called with `new` by React.",
+      {withoutStack: true},
     );
     expect(container.firstChild.textContent).toBe('Caught an error: Hello.');
   });
@@ -2079,7 +2080,7 @@ describe('ReactLegacyErrorBoundaries', () => {
 
     try {
       let container = document.createElement('div');
-      expect(() => ReactDOM.render(<X />, container)).toErrorDev(
+      expect(() => ReactDOM.render(<X />, container)).toWarnDev(
         'React.createElement: type is invalid -- expected a string ' +
           '(for built-in components) or a class/function ' +
           '(for composite components) but got: null.',
@@ -2089,7 +2090,7 @@ describe('ReactLegacyErrorBoundaries', () => {
     }
     try {
       let container = document.createElement('div');
-      expect(() => ReactDOM.render(<Y />, container)).toErrorDev(
+      expect(() => ReactDOM.render(<Y />, container)).toWarnDev(
         'React.createElement: type is invalid -- expected a string ' +
           '(for built-in components) or a class/function ' +
           '(for composite components) but got: undefined.',
@@ -2114,8 +2115,9 @@ describe('ReactLegacyErrorBoundaries', () => {
         </div>,
         container,
       );
-    }).toErrorDev(
+    }).toWarnDev(
       'ErrorBoundary: Error boundaries should implement getDerivedStateFromError()',
+      {withoutStack: true},
     );
     expect(container.firstChild.textContent).toBe('Sibling');
     expect(log).toEqual([

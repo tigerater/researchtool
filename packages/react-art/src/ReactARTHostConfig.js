@@ -426,7 +426,7 @@ export function unhideTextInstance(textInstance, text): void {
   // Noop
 }
 
-export function DEPRECATED_mountResponderInstance(
+export function mountResponderInstance(
   responder: ReactEventResponder<any, any>,
   responderInstance: ReactEventResponderInstance<any, any>,
   props: Object,
@@ -436,7 +436,7 @@ export function DEPRECATED_mountResponderInstance(
   throw new Error('Not yet implemented.');
 }
 
-export function DEPRECATED_unmountResponderInstance(
+export function unmountResponderInstance(
   responderInstance: ReactEventResponderInstance<any, any>,
 ): void {
   throw new Error('Not yet implemented.');
@@ -460,12 +460,4 @@ export function updateFundamentalComponent(fundamentalInstance) {
 
 export function unmountFundamentalComponent(fundamentalInstance) {
   throw new Error('Not yet implemented.');
-}
-
-export function getInstanceFromNode(node) {
-  throw new Error('Not yet implemented.');
-}
-
-export function beforeRemoveInstance(instance) {
-  // noop
 }

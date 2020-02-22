@@ -7,7 +7,7 @@
  * @flow
  */
 
-import {enableDeprecatedFlareAPI} from 'shared/ReactFeatureFlags';
+import warning from 'shared/warning';
 
 type PropertyType = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -84,7 +84,7 @@ export function isAttributeNameSafe(attributeName: string): boolean {
   }
   illegalAttributeNameCache[attributeName] = true;
   if (__DEV__) {
-    console.error('Invalid attribute name: `%s`', attributeName);
+    warning(false, 'Invalid attribute name: `%s`', attributeName);
   }
   return false;
 }
@@ -207,7 +207,7 @@ function PropertyInfoRecord(
 const properties = {};
 
 // These props are reserved by React. They shouldn't be written to the DOM.
-const reservedProps = [
+[
   'children',
   'dangerouslySetInnerHTML',
   // TODO: This prevents the assignment of defaultValue to regular
@@ -219,12 +219,7 @@ const reservedProps = [
   'suppressContentEditableWarning',
   'suppressHydrationWarning',
   'style',
-];
-if (enableDeprecatedFlareAPI) {
-  reservedProps.push('DEPRECATED_flareListeners');
-}
-
-reservedProps.forEach(name => {
+].forEach(name => {
   properties[name] = new PropertyInfoRecord(
     name,
     RESERVED,

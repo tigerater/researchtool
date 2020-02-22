@@ -197,7 +197,7 @@ describe('ReactIncrementalErrorHandling', () => {
     expect(Scheduler).toFlushAndYieldThrough([
       'Indirection',
       // Now that the tree is complete, and there's no remaining work, React
-      // reverts to legacy mode to retry one more time before handling the error.
+      // reverts to sync mode to retry one more time before handling the error.
 
       'ErrorBoundary (try)',
       'Indirection',
@@ -243,20 +243,11 @@ describe('ReactIncrementalErrorHandling', () => {
     // This update is in a separate batch
     ReactNoop.render(<App isBroken={false} />, onCommit);
 
-    expect(Scheduler).toFlushAndYieldThrough([
+    expect(Scheduler).toFlushAndYield([
       // The first render fails. But because there's a lower priority pending
       // update, it doesn't throw.
       'error',
-    ]);
-
-    // React will try to recover by rendering all the pending updates in a
-    // single batch, synchronously. This time it succeeds.
-    //
-    // This tells Scheduler to render a single unit of work. Because the render
-    // to recover from the error is synchronous, this should be enough to
-    // finish the rest of the work.
-    Scheduler.unstable_flushNumberOfYields(1);
-    expect(Scheduler).toHaveYielded([
+      // Now we retry at the lower priority. This time it succeeds.
       'success',
       // Nothing commits until the second update completes.
       'commit',
@@ -265,80 +256,54 @@ describe('ReactIncrementalErrorHandling', () => {
     expect(ReactNoop.getChildren()).toEqual([span('Everything is fine.')]);
   });
 
-  it('does not include offscreen work when retrying after an error', () => {
-    function App(props) {
-      if (props.isBroken) {
-        Scheduler.unstable_yieldValue('error');
-        throw new Error('Oops!');
+  it('on error, retries at a lower priority using the expiration of higher priority', () => {
+    class Parent extends React.Component {
+      state = {hideChild: false};
+      componentDidUpdate() {
+        Scheduler.unstable_yieldValue('commit: ' + this.state.hideChild);
       }
-      Scheduler.unstable_yieldValue('success');
-      return (
-        <>
-          Everything is fine
-          <div hidden={true}>
-            <div>Offscreen content</div>
-          </div>
-        </>
-      );
+      render() {
+        if (this.state.hideChild) {
+          Scheduler.unstable_yieldValue('(empty)');
+          return <span prop="(empty)" />;
+        }
+        return <Child isBroken={this.props.childIsBroken} />;
+      }
     }
 
-    function onCommit() {
-      Scheduler.unstable_yieldValue('commit');
+    function Child(props) {
+      if (props.isBroken) {
+        Scheduler.unstable_yieldValue('Error!');
+        throw new Error('Error!');
+      }
+      Scheduler.unstable_yieldValue('Child');
+      return <span prop="Child" />;
     }
 
-    function interrupt() {
-      ReactNoop.flushSync(() => {
-        ReactNoop.renderToRootWithID(null, 'other-root');
-      });
-    }
+    // Initial mount
+    const parent = React.createRef(null);
+    ReactNoop.render(<Parent ref={parent} childIsBroken={false} />);
+    expect(Scheduler).toFlushAndYield(['Child']);
+    expect(ReactNoop.getChildren()).toEqual([span('Child')]);
 
-    ReactNoop.render(<App isBroken={true} />, onCommit);
-    Scheduler.unstable_advanceTime(1000);
-    expect(Scheduler).toFlushAndYieldThrough(['error']);
-    interrupt();
+    // Schedule a low priority update to hide the child
+    parent.current.setState({hideChild: true});
 
-    expect(ReactNoop).toMatchRenderedOutput(null);
-
-    // This update is in a separate batch
-    ReactNoop.render(<App isBroken={false} />, onCommit);
-
-    expect(Scheduler).toFlushAndYieldThrough([
-      // The first render fails. But because there's a lower priority pending
-      // update, it doesn't throw.
-      'error',
-    ]);
-
-    // React will try to recover by rendering all the pending updates in a
-    // single batch, synchronously. This time it succeeds.
-    //
-    // This tells Scheduler to render a single unit of work. Because the render
-    // to recover from the error is synchronous, this should be enough to
-    // finish the rest of the work.
-    Scheduler.unstable_flushNumberOfYields(1);
+    // Before the low priority update is flushed, synchronously trigger an
+    // error in the child.
+    ReactNoop.flushSync(() => {
+      ReactNoop.render(<Parent ref={parent} childIsBroken={true} />);
+    });
     expect(Scheduler).toHaveYielded([
-      'success',
-      // Nothing commits until the second update completes.
-      'commit',
-      'commit',
+      // First the sync update triggers an error
+      'Error!',
+      // Because there's a pending low priority update, we restart at the
+      // lower priority. This hides the children, suppressing the error.
+      '(empty)',
+      // Now the tree can commit.
+      'commit: true',
     ]);
-    // This should not include the offscreen content
-    expect(ReactNoop).toMatchRenderedOutput(
-      <>
-        Everything is fine
-        <div hidden={true} />
-      </>,
-    );
-
-    // The offscreen content finishes in a subsequent render
-    expect(Scheduler).toFlushAndYield([]);
-    expect(ReactNoop).toMatchRenderedOutput(
-      <>
-        Everything is fine
-        <div hidden={true}>
-          <div>Offscreen content</div>
-        </div>
-      </>,
-    );
+    expect(ReactNoop.getChildren()).toEqual([span('(empty)')]);
   });
 
   it('retries one more time before handling error', () => {
@@ -380,6 +345,10 @@ describe('ReactIncrementalErrorHandling', () => {
     ]);
     expect(ReactNoop.getChildren()).toEqual([]);
   });
+
+  // TODO: This is currently unobservable, but will be once we lift renderRoot
+  // and commitRoot into the renderer.
+  // it("does not retry synchronously if there's an update between complete and commit");
 
   it('calls componentDidCatch multiple times for multiple errors', () => {
     let id = 0;
@@ -1148,11 +1117,12 @@ describe('ReactIncrementalErrorHandling', () => {
         <Connector />
       </Provider>,
     );
-    expect(() => expect(Scheduler).toFlushWithoutYielding()).toErrorDev(
+    expect(() => expect(Scheduler).toFlushWithoutYielding()).toWarnDev(
       'Legacy context API has been detected within a strict-mode tree.\n\n' +
         'The old API will be supported in all 16.x releases, but ' +
         'applications using it should migrate to the new version.\n\n' +
         'Please update the following components: Connector, Provider',
+      {withoutStack: true},
     );
 
     // If the context stack does not unwind, span will get 'abcde'
@@ -1182,7 +1152,7 @@ describe('ReactIncrementalErrorHandling', () => {
         <BrokenRender />
       </ErrorBoundary>,
     );
-    expect(() => expect(Scheduler).toFlushWithoutYielding()).toErrorDev([
+    expect(() => expect(Scheduler).toFlushWithoutYielding()).toWarnDev([
       'Warning: React.createElement: type is invalid -- expected a string',
       // React retries once on error
       'Warning: React.createElement: type is invalid -- expected a string',
@@ -1231,7 +1201,7 @@ describe('ReactIncrementalErrorHandling', () => {
         <BrokenRender fail={true} />
       </ErrorBoundary>,
     );
-    expect(() => expect(Scheduler).toFlushWithoutYielding()).toErrorDev([
+    expect(() => expect(Scheduler).toFlushWithoutYielding()).toWarnDev([
       'Warning: React.createElement: type is invalid -- expected a string',
       // React retries once on error
       'Warning: React.createElement: type is invalid -- expected a string',
@@ -1251,9 +1221,7 @@ describe('ReactIncrementalErrorHandling', () => {
 
   it('recovers from uncaught reconciler errors', () => {
     const InvalidType = undefined;
-    expect(() =>
-      ReactNoop.render(<InvalidType />),
-    ).toErrorDev(
+    expect(() => ReactNoop.render(<InvalidType />)).toWarnDev(
       'Warning: React.createElement: type is invalid -- expected a string',
       {withoutStack: true},
     );
@@ -1646,28 +1614,19 @@ describe('ReactIncrementalErrorHandling', () => {
     ReactNoop.render(<Provider />);
     expect(() => {
       expect(Scheduler).toFlushAndThrow('Oops!');
-    }).toErrorDev([
-      'Warning: The <Provider /> component appears to be a function component that returns a class instance. ' +
-        'Change Provider to a class that extends React.Component instead. ' +
-        "If you can't use a class try assigning the prototype on the function as a workaround. " +
-        '`Provider.prototype = React.Component.prototype`. ' +
-        "Don't use an arrow function since it cannot be called with `new` by React.",
-      'Legacy context API has been detected within a strict-mode tree.\n\n' +
-        'The old API will be supported in all 16.x releases, but ' +
-        'applications using it should migrate to the new version.\n\n' +
-        'Please update the following components: Provider',
-    ]);
+    }).toWarnDev(
+      [
+        'Warning: The <Provider /> component appears to be a function component that returns a class instance. ' +
+          'Change Provider to a class that extends React.Component instead. ' +
+          "If you can't use a class try assigning the prototype on the function as a workaround. " +
+          '`Provider.prototype = React.Component.prototype`. ' +
+          "Don't use an arrow function since it cannot be called with `new` by React.",
+        'Legacy context API has been detected within a strict-mode tree.\n\n' +
+          'The old API will be supported in all 16.x releases, but ' +
+          'applications using it should migrate to the new version.\n\n' +
+          'Please update the following components: Provider',
+      ],
+      {withoutStack: true},
+    );
   });
-
-  if (global.__PERSISTENT__) {
-    it('regression test: should fatal if error is thrown at the root', () => {
-      const root = ReactNoop.createRoot();
-      root.render('Error when completing root');
-      expect(Scheduler).toFlushAndThrow('Error when completing root');
-
-      const blockingRoot = ReactNoop.createBlockingRoot();
-      blockingRoot.render('Error when completing root');
-      expect(Scheduler).toFlushAndThrow('Error when completing root');
-    });
-  }
 });

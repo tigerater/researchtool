@@ -118,10 +118,7 @@ describe('createSubscription', () => {
       const Subscription = createSubscription({
         getCurrentValue: source => undefined,
         subscribe: (source, callback) => {
-          source.then(
-            value => callback(value),
-            value => callback(value),
-          );
+          source.then(value => callback(value), value => callback(value));
           // (Can't unsubscribe from a Promise)
           return () => {};
         },
@@ -199,10 +196,7 @@ describe('createSubscription', () => {
       const Subscription = createSubscription({
         getCurrentValue: source => undefined,
         subscribe: (source, callback) => {
-          source.then(
-            value => callback(value),
-            value => callback(value),
-          );
+          source.then(value => callback(value), value => callback(value));
           // (Can't unsubscribe from a Promise)
           return () => {};
         },
@@ -458,7 +452,7 @@ describe('createSubscription', () => {
           },
           () => null,
         );
-      }).toErrorDev('Subscription must specify a getCurrentValue function', {
+      }).toWarnDev('Subscription must specify a getCurrentValue function', {
         withoutStack: true,
       });
     });
@@ -471,7 +465,7 @@ describe('createSubscription', () => {
           },
           () => null,
         );
-      }).toErrorDev('Subscription must specify a subscribe function', {
+      }).toWarnDev('Subscription must specify a subscribe function', {
         withoutStack: true,
       });
     });

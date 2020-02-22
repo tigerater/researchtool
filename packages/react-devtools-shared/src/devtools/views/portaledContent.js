@@ -7,11 +7,13 @@
  * @flow
  */
 
-import * as React from 'react';
+import React from 'react';
 import {createPortal} from 'react-dom';
 import ErrorBoundary from './ErrorBoundary';
 
-export type Props = {portalContainer?: Element, ...};
+export type Props = {
+  portalContainer?: Element,
+};
 
 export default function portaledContent(
   Component: React$StatelessFunctionalComponent<any>,

@@ -56,10 +56,10 @@ describe('ReactNewContext', () => {
         let contextValue;
         expect(() => {
           contextValue = useContext(Context, observedBits);
-        }).toErrorDev(
+        }).toWarnDev(
           observedBits !== undefined
             ? 'useContext() second argument is reserved for future use in React. ' +
-                `Passing it is not supported. You passed: ${observedBits}.`
+              `Passing it is not supported. You passed: ${observedBits}.`
             : [],
         );
         const render = props.children;
@@ -72,10 +72,10 @@ describe('ReactNewContext', () => {
       let contextValue;
       expect(() => {
         contextValue = useContext(Context, observedBits);
-      }).toErrorDev(
+      }).toWarnDev(
         observedBits !== undefined
           ? 'useContext() second argument is reserved for future use in React. ' +
-              `Passing it is not supported. You passed: ${observedBits}.`
+            `Passing it is not supported. You passed: ${observedBits}.`
           : [],
       );
       const render = props.children;
@@ -88,10 +88,10 @@ describe('ReactNewContext', () => {
       let contextValue;
       expect(() => {
         contextValue = useContext(Context, observedBits);
-      }).toErrorDev(
+      }).toWarnDev(
         observedBits !== undefined
           ? 'useContext() second argument is reserved for future use in React. ' +
-              `Passing it is not supported. You passed: ${observedBits}.`
+            `Passing it is not supported. You passed: ${observedBits}.`
           : [],
       );
       const render = props.children;
@@ -811,7 +811,9 @@ describe('ReactNewContext', () => {
             Scheduler.unstable_yieldValue('Child');
             return (
               <span
-                prop={`Context: ${this.props.context}, Step: ${this.state.step}`}
+                prop={`Context: ${this.props.context}, Step: ${
+                  this.state.step
+                }`}
               />
             );
           }
@@ -1066,7 +1068,7 @@ describe('ReactNewContext', () => {
 
       // Update
       ReactNoop.render(<App value={2} />);
-      expect(() => expect(Scheduler).toFlushWithoutYielding()).toErrorDev(
+      expect(() => expect(Scheduler).toFlushWithoutYielding()).toWarnDev(
         'calculateChangedBits: Expected the return value to be a 31-bit ' +
           'integer. Instead received: 4294967295',
       );
@@ -1193,11 +1195,12 @@ describe('ReactNewContext', () => {
       );
       expect(() => {
         expect(Scheduler).toFlushAndYield(['LegacyProvider', 'App', 'Child']);
-      }).toErrorDev(
+      }).toWarnDev(
         'Legacy context API has been detected within a strict-mode tree.\n\n' +
           'The old API will be supported in all 16.x releases, but applications ' +
           'using it should migrate to the new version.\n\n' +
           'Please update the following components: LegacyProvider',
+        {withoutStack: true},
       );
       expect(ReactNoop.getChildren()).toEqual([span('Child')]);
 
@@ -1478,10 +1481,15 @@ describe('ReactNewContext', () => {
       }
 
       ReactNoop.render(<Cls />);
-      expect(() => expect(Scheduler).toFlushWithoutYielding()).toErrorDev([
-        'Context can only be read while React is rendering',
-        'Cannot update during an existing state transition',
-      ]);
+      expect(() => expect(Scheduler).toFlushWithoutYielding()).toWarnDev(
+        [
+          'Context can only be read while React is rendering',
+          'Cannot update during an existing state transition',
+        ],
+        {
+          withoutStack: 1,
+        },
+      );
     });
   });
 
@@ -1492,7 +1500,7 @@ describe('ReactNewContext', () => {
         return [Context].map(useContext);
       }
       ReactNoop.render(<Foo />);
-      expect(() => expect(Scheduler).toFlushWithoutYielding()).toErrorDev(
+      expect(() => expect(Scheduler).toFlushWithoutYielding()).toWarnDev(
         'useContext() second argument is reserved for future ' +
           'use in React. Passing it is not supported. ' +
           'You passed: 0.\n\n' +
@@ -1526,7 +1534,7 @@ describe('ReactNewContext', () => {
         return useContext(Context.Consumer);
       }
       ReactNoop.render(<Foo />);
-      expect(() => expect(Scheduler).toFlushWithoutYielding()).toErrorDev(
+      expect(() => expect(Scheduler).toFlushWithoutYielding()).toWarnDev(
         'Calling useContext(Context.Consumer) is not supported, may cause bugs, ' +
           'and will be removed in a future major release. ' +
           'Did you mean to call useContext(Context) instead?',
@@ -1540,7 +1548,7 @@ describe('ReactNewContext', () => {
         return null;
       }
       ReactNoop.render(<Foo />);
-      expect(() => expect(Scheduler).toFlushWithoutYielding()).toErrorDev(
+      expect(() => expect(Scheduler).toFlushWithoutYielding()).toWarnDev(
         'Calling useContext(Context.Provider) is not supported. ' +
           'Did you mean to call useContext(Context) instead?',
       );
@@ -1841,7 +1849,7 @@ Context fuzz tester error! Copy and paste the following line into the test suite
     expect(() => {
       ReactNoop.render(<Component />);
       expect(Scheduler).toFlushWithoutYielding();
-    }).toErrorDev(
+    }).toWarnDev(
       'Rendering <Context> directly is not supported and will be removed in ' +
         'a future major release. Did you mean to render <Context.Consumer> instead?',
     );
@@ -1888,7 +1896,7 @@ Context fuzz tester error! Copy and paste the following line into the test suite
     expect(() => {
       ReactNoop.render(<Component />);
       expect(Scheduler).toFlushWithoutYielding();
-    }).toErrorDev(
+    }).toWarnDev(
       'Rendering <Context.Consumer.Consumer> is not supported and will be removed in ' +
         'a future major release. Did you mean to render <Context.Consumer> instead?',
     );
@@ -1912,7 +1920,7 @@ Context fuzz tester error! Copy and paste the following line into the test suite
     expect(() => {
       ReactNoop.render(<Component />);
       expect(Scheduler).toFlushWithoutYielding();
-    }).toErrorDev(
+    }).toWarnDev(
       'Rendering <Context.Consumer.Provider> is not supported and will be removed in ' +
         'a future major release. Did you mean to render <Context.Provider> instead?',
     );

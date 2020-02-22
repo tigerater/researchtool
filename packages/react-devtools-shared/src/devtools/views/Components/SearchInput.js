@@ -7,8 +7,7 @@
  * @flow
  */
 
-import * as React from 'react';
-import {useCallback, useContext, useEffect, useRef} from 'react';
+import React, {useCallback, useContext, useEffect, useRef} from 'react';
 import {TreeDispatcherContext, TreeStateContext} from './TreeContext';
 import Button from '../Button';
 import ButtonIcon from '../ButtonIcon';
@@ -54,43 +53,43 @@ export default function SearchInput(props: Props) {
   );
 
   const handleInputKeyPress = useCallback(
-    ({key, shiftKey}) => {
+    ({key}) => {
       if (key === 'Enter') {
-        if (shiftKey) {
-          dispatch({type: 'GO_TO_PREVIOUS_SEARCH_RESULT'});
-        } else {
-          dispatch({type: 'GO_TO_NEXT_SEARCH_RESULT'});
-        }
+        dispatch({type: 'GO_TO_NEXT_SEARCH_RESULT'});
       }
     },
     [dispatch],
   );
 
   // Auto-focus search input
-  useEffect(() => {
-    if (inputRef.current === null) {
-      return () => {};
-    }
-
-    const handleWindowKey = (event: KeyboardEvent) => {
-      const {key, metaKey} = event;
-      if (key === 'f' && metaKey) {
-        if (inputRef.current !== null) {
-          inputRef.current.focus();
-          event.preventDefault();
-          event.stopPropagation();
-        }
+  useEffect(
+    () => {
+      if (inputRef.current === null) {
+        return () => {};
       }
-    };
 
-    // It's important to listen to the ownerDocument to support the browser extension.
-    // Here we use portals to render individual tabs (e.g. Profiler),
-    // and the root document might belong to a different window.
-    const ownerDocument = inputRef.current.ownerDocument;
-    ownerDocument.addEventListener('keydown', handleWindowKey);
+      const handleWindowKey = (event: KeyboardEvent) => {
+        const {key, metaKey} = event;
+        if (key === 'f' && metaKey) {
+          if (inputRef.current !== null) {
+            inputRef.current.focus();
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }
+      };
 
-    return () => ownerDocument.removeEventListener('keydown', handleWindowKey);
-  }, [inputRef]);
+      // It's important to listen to the ownerDocument to support the browser extension.
+      // Here we use portals to render individual tabs (e.g. Profiler),
+      // and the root document might belong to a different window.
+      const ownerDocument = inputRef.current.ownerDocument;
+      ownerDocument.addEventListener('keydown', handleWindowKey);
+
+      return () =>
+        ownerDocument.removeEventListener('keydown', handleWindowKey);
+    },
+    [inputRef],
+  );
 
   return (
     <div className={styles.SearchInput}>

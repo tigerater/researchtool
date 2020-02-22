@@ -7,6 +7,6 @@
 
 'use strict';
 
-const ReactDOM = require('ReactDOM');
+const ReactDOM = require('ReactDOM-fb');
 
 module.exports = ReactDOM.unstable_renderSubtreeIntoContainer;

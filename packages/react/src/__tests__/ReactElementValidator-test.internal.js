@@ -13,11 +13,10 @@
 // classic JS without JSX.
 
 let PropTypes;
+let ReactFeatureFlags;
 let React;
 let ReactDOM;
 let ReactTestUtils;
-
-let ReactFeatureFlags = require('shared/ReactFeatureFlags');
 
 describe('ReactElementValidator', () => {
   let ComponentClass;
@@ -39,35 +38,33 @@ describe('ReactElementValidator', () => {
   });
 
   it('warns for keys for arrays of elements in rest args', () => {
+    const Component = React.createFactory(ComponentClass);
+
     expect(() => {
-      React.createElement(ComponentClass, null, [
-        React.createElement(ComponentClass),
-        React.createElement(ComponentClass),
-      ]);
-    }).toErrorDev('Each child in a list should have a unique "key" prop.');
+      Component(null, [Component(), Component()]);
+    }).toWarnDev('Each child in a list should have a unique "key" prop.');
   });
 
   it('warns for keys for arrays of elements with owner info', () => {
+    const Component = React.createFactory(ComponentClass);
+
     class InnerClass extends React.Component {
       render() {
-        return React.createElement(ComponentClass, null, this.props.childSet);
+        return Component(null, this.props.childSet);
       }
     }
 
+    const InnerComponent = React.createFactory(InnerClass);
+
     class ComponentWrapper extends React.Component {
       render() {
-        return React.createElement(InnerClass, {
-          childSet: [
-            React.createElement(ComponentClass),
-            React.createElement(ComponentClass),
-          ],
-        });
+        return InnerComponent({childSet: [Component(), Component()]});
       }
     }
 
     expect(() => {
       ReactTestUtils.renderIntoDocument(React.createElement(ComponentWrapper));
-    }).toErrorDev(
+    }).toWarnDev(
       'Each child in a list should have a unique "key" prop.' +
         '\n\nCheck the render method of `InnerClass`. ' +
         'It was passed a child from ComponentWrapper. ',
@@ -84,7 +81,7 @@ describe('ReactElementValidator', () => {
 
     expect(() => {
       ReactTestUtils.renderIntoDocument(<Anonymous>{divs}</Anonymous>);
-    }).toErrorDev(
+    }).toWarnDev(
       'Warning: Each child in a list should have a unique ' +
         '"key" prop. See https://fb.me/react-warning-keys for more information.\n' +
         '    in div (at **)',
@@ -96,7 +93,7 @@ describe('ReactElementValidator', () => {
 
     expect(() => {
       ReactTestUtils.renderIntoDocument(<div>{divs}</div>);
-    }).toErrorDev(
+    }).toWarnDev(
       'Warning: Each child in a list should have a unique ' +
         '"key" prop.\n\nCheck the top-level render call using <div>. See ' +
         'https://fb.me/react-warning-keys for more information.\n' +
@@ -117,7 +114,7 @@ describe('ReactElementValidator', () => {
       return <Parent child={<Component />} />;
     }
 
-    expect(() => ReactTestUtils.renderIntoDocument(<GrandParent />)).toErrorDev(
+    expect(() => ReactTestUtils.renderIntoDocument(<GrandParent />)).toWarnDev(
       'Warning: Each child in a list should have a unique ' +
         '"key" prop.\n\nCheck the render method of `Component`. See ' +
         'https://fb.me/react-warning-keys for more information.\n' +
@@ -147,65 +144,62 @@ describe('ReactElementValidator', () => {
   });
 
   it('warns for keys for iterables of elements in rest args', () => {
+    const Component = React.createFactory(ComponentClass);
+
     const iterable = {
       '@@iterator': function() {
         let i = 0;
         return {
           next: function() {
             const done = ++i > 2;
-            return {
-              value: done ? undefined : React.createElement(ComponentClass),
-              done: done,
-            };
+            return {value: done ? undefined : Component(), done: done};
           },
         };
       },
     };
 
-    expect(() =>
-      React.createElement(ComponentClass, null, iterable),
-    ).toErrorDev('Each child in a list should have a unique "key" prop.');
-  });
-
-  it('does not warns for arrays of elements with keys', () => {
-    React.createElement(ComponentClass, null, [
-      React.createElement(ComponentClass, {key: '#1'}),
-      React.createElement(ComponentClass, {key: '#2'}),
-    ]);
-  });
-
-  it('does not warns for iterable elements with keys', () => {
-    const iterable = {
-      '@@iterator': function() {
-        let i = 0;
-        return {
-          next: function() {
-            const done = ++i > 2;
-            return {
-              value: done
-                ? undefined
-                : React.createElement(ComponentClass, {key: '#' + i}),
-              done: done,
-            };
-          },
-        };
-      },
-    };
-
-    React.createElement(ComponentClass, null, iterable);
-  });
-
-  it('does not warn when the element is directly in rest args', () => {
-    React.createElement(
-      ComponentClass,
-      null,
-      React.createElement(ComponentClass),
-      React.createElement(ComponentClass),
+    expect(() => Component(null, iterable)).toWarnDev(
+      'Each child in a list should have a unique "key" prop.',
     );
   });
 
+  it('does not warns for arrays of elements with keys', () => {
+    const Component = React.createFactory(ComponentClass);
+
+    Component(null, [Component({key: '#1'}), Component({key: '#2'})]);
+  });
+
+  it('does not warns for iterable elements with keys', () => {
+    const Component = React.createFactory(ComponentClass);
+
+    const iterable = {
+      '@@iterator': function() {
+        let i = 0;
+        return {
+          next: function() {
+            const done = ++i > 2;
+            return {
+              value: done ? undefined : Component({key: '#' + i}),
+              done: done,
+            };
+          },
+        };
+      },
+    };
+
+    Component(null, iterable);
+  });
+
+  it('does not warn when the element is directly in rest args', () => {
+    const Component = React.createFactory(ComponentClass);
+
+    Component(null, Component(), Component());
+  });
+
   it('does not warn when the array contains a non-element', () => {
-    React.createElement(ComponentClass, null, [{}, {}]);
+    const Component = React.createFactory(ComponentClass);
+
+    Component(null, [{}, {}]);
   });
 
   it('should give context for PropType errors in nested components.', () => {
@@ -223,7 +217,7 @@ describe('ReactElementValidator', () => {
     }
     expect(() => {
       ReactTestUtils.renderIntoDocument(React.createElement(ParentComp));
-    }).toErrorDev(
+    }).toWarnDev(
       'Warning: Failed prop type: ' +
         'Invalid prop `color` of type `number` supplied to `MyComp`, ' +
         'expected `string`.\n' +
@@ -244,7 +238,7 @@ describe('ReactElementValidator', () => {
       React.createElement(React.createElement(Foo));
       React.createElement(React.createElement(React.createContext().Consumer));
       React.createElement({$$typeof: 'non-react-thing'});
-    }).toErrorDev(
+    }).toWarnDev(
       [
         'Warning: React.createElement: type is invalid -- expected a string ' +
           '(for built-in components) or a class/function (for composite ' +
@@ -301,7 +295,7 @@ describe('ReactElementValidator', () => {
           'or a class/function (for composite components) but got: null.' +
           (__DEV__ ? '\n\nCheck the render method of `ParentComp`.' : ''),
       );
-    }).toErrorDev(
+    }).toWarnDev(
       'Warning: React.createElement: type is invalid -- expected a string ' +
         '(for built-in components) or a class/function (for composite ' +
         'components) but got: null.' +
@@ -320,7 +314,7 @@ describe('ReactElementValidator', () => {
 
     expect(() =>
       ReactTestUtils.renderIntoDocument(React.createElement(Component)),
-    ).toErrorDev(
+    ).toWarnDev(
       'Warning: Failed prop type: The prop `prop` is marked as required in ' +
         '`Component`, but its value is `null`.\n' +
         '    in Component',
@@ -340,7 +334,7 @@ describe('ReactElementValidator', () => {
       ReactTestUtils.renderIntoDocument(
         React.createElement(Component, {prop: null}),
       );
-    }).toErrorDev(
+    }).toWarnDev(
       'Warning: Failed prop type: The prop `prop` is marked as required in ' +
         '`Component`, but its value is `null`.\n' +
         '    in Component',
@@ -362,7 +356,7 @@ describe('ReactElementValidator', () => {
       ReactTestUtils.renderIntoDocument(
         React.createElement(Component, {prop: 42}),
       );
-    }).toErrorDev([
+    }).toWarnDev([
       'Warning: Failed prop type: ' +
         'The prop `prop` is marked as required in `Component`, but its value ' +
         'is `undefined`.\n' +
@@ -393,7 +387,7 @@ describe('ReactElementValidator', () => {
       ReactTestUtils.renderIntoDocument(
         React.createElement(Component, {myProp: {value: 'hi'}}),
       );
-    }).toErrorDev(
+    }).toWarnDev(
       'Warning: Component: type specification of prop `myProp` is invalid; ' +
         'the type checker function must return `null` or an `Error` but ' +
         'returned a function. You may have forgotten to pass an argument to ' +
@@ -417,7 +411,7 @@ describe('ReactElementValidator', () => {
       ReactTestUtils.renderIntoDocument(
         React.createElement(MisspelledPropTypesComponent, {prop: 'Hi'}),
       );
-    }).toErrorDev(
+    }).toWarnDev(
       'Warning: Component MisspelledPropTypesComponent declared `PropTypes` ' +
         'instead of `propTypes`. Did you misspell the property assignment?',
       {withoutStack: true},
@@ -433,41 +427,27 @@ describe('ReactElementValidator', () => {
 
     expect(() => {
       ReactTestUtils.renderIntoDocument(React.createElement(Foo));
-    }).toErrorDev(
+    }).toWarnDev(
       'Invalid prop `a` supplied to `React.Fragment`. React.Fragment ' +
         'can only have `key` and `children` props.',
     );
   });
 
-  if (!ReactFeatureFlags.disableCreateFactory) {
-    it('should warn when accessing .type on an element factory', () => {
-      function TestComponent() {
-        return <div />;
-      }
+  it('should warn when accessing .type on an element factory', () => {
+    function TestComponent() {
+      return <div />;
+    }
 
-      let TestFactory;
+    let TestFactory = React.createFactory(TestComponent);
+    expect(() => TestFactory.type).toLowPriorityWarnDev(
+      'Warning: Factory.type is deprecated. Access the class directly before ' +
+        'passing it to createFactory.',
+      {withoutStack: true},
+    );
 
-      expect(() => {
-        TestFactory = React.createFactory(TestComponent);
-      }).toWarnDev(
-        'Warning: React.createFactory() is deprecated and will be removed in a ' +
-          'future major release. Consider using JSX or use React.createElement() ' +
-          'directly instead.',
-        {withoutStack: true},
-      );
-
-      expect(
-        () => TestFactory.type,
-      ).toWarnDev(
-        'Warning: Factory.type is deprecated. Access the class directly before ' +
-          'passing it to createFactory.',
-        {withoutStack: true},
-      );
-
-      // Warn once, not again
-      expect(TestFactory.type).toBe(TestComponent);
-    });
-  }
+    // Warn once, not again
+    expect(TestFactory.type).toBe(TestComponent);
+  });
 
   it('does not warn when using DOM node as children', () => {
     class DOMContainer extends React.Component {
@@ -509,7 +489,7 @@ describe('ReactElementValidator', () => {
     // shouldn't blow up either.
 
     const child = {
-      $$typeof: (<div />).$$typeof,
+      $$typeof: <div />.$$typeof,
       type: 'span',
       key: null,
       ref: null,
@@ -517,14 +497,14 @@ describe('ReactElementValidator', () => {
       _owner: null,
     };
 
-    void (<div>{[child]}</div>);
+    void <div>{[child]}</div>;
   });
 
   it('does not blow up on key warning with undefined type', () => {
     const Foo = undefined;
     expect(() => {
-      void (<Foo>{[<div />]}</Foo>);
-    }).toErrorDev(
+      void <Foo>{[<div />]}</Foo>;
+    }).toWarnDev(
       'Warning: React.createElement: type is invalid -- expected a string ' +
         '(for built-in components) or a class/function (for composite ' +
         'components) but got: undefined. You likely forgot to export your ' +

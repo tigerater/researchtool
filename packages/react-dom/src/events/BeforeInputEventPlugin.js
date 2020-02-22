@@ -467,7 +467,6 @@ const BeforeInputEventPlugin = {
     targetInst,
     nativeEvent,
     nativeEventTarget,
-    eventSystemFlags,
   ) {
     const composition = extractCompositionEvent(
       topLevelType,

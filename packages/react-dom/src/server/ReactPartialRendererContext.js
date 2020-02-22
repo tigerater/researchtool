@@ -14,6 +14,7 @@ import {disableLegacyContext} from 'shared/ReactFeatureFlags';
 import {REACT_CONTEXT_TYPE, REACT_PROVIDER_TYPE} from 'shared/ReactSymbols';
 import ReactSharedInternals from 'shared/ReactSharedInternals';
 import getComponentName from 'shared/getComponentName';
+import warningWithoutStack from 'shared/warningWithoutStack';
 import checkPropTypes from 'prop-types/checkPropTypes';
 
 let ReactDebugCurrentFrame;
@@ -111,7 +112,8 @@ export function processContext(
               Object.keys(contextType).join(', ') +
               '}.';
           }
-          console.error(
+          warningWithoutStack(
+            false,
             '%s defines an invalid contextType. ' +
               'contextType should point to the Context object returned by React.createContext().%s',
             getComponentName(type) || 'Component',
@@ -127,7 +129,8 @@ export function processContext(
     if (disableLegacyContext) {
       if (__DEV__) {
         if (type.contextTypes) {
-          console.error(
+          warningWithoutStack(
+            false,
             '%s uses the legacy contextTypes API which is no longer supported. ' +
               'Use React.createContext() with static contextType instead.',
             getComponentName(type) || 'Unknown',
@@ -148,7 +151,8 @@ export function processContext(
     if (disableLegacyContext) {
       if (__DEV__) {
         if (type.contextTypes) {
-          console.error(
+          warningWithoutStack(
+            false,
             '%s uses the legacy contextTypes API which is no longer supported. ' +
               'Use React.createContext() with React.useContext() instead.',
             getComponentName(type) || 'Unknown',

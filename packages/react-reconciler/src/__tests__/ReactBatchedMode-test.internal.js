@@ -6,7 +6,7 @@ let ReactCache;
 let Suspense;
 let TextResource;
 
-describe('ReactBlockingMode', () => {
+describe('ReactBatchedMode', () => {
   beforeEach(() => {
     jest.resetModules();
     ReactFeatureFlags = require('shared/ReactFeatureFlags');
@@ -18,17 +18,14 @@ describe('ReactBlockingMode', () => {
     ReactCache = require('react-cache');
     Suspense = React.Suspense;
 
-    TextResource = ReactCache.unstable_createResource(
-      ([text, ms = 0]) => {
-        return new Promise((resolve, reject) =>
-          setTimeout(() => {
-            Scheduler.unstable_yieldValue(`Promise resolved [${text}]`);
-            resolve(text);
-          }, ms),
-        );
-      },
-      ([text, ms]) => text,
-    );
+    TextResource = ReactCache.unstable_createResource(([text, ms = 0]) => {
+      return new Promise((resolve, reject) =>
+        setTimeout(() => {
+          Scheduler.unstable_yieldValue(`Promise resolved [${text}]`);
+          resolve(text);
+        }, ms),
+      );
+    }, ([text, ms]) => text);
   });
 
   function Text(props) {
@@ -53,7 +50,7 @@ describe('ReactBlockingMode', () => {
   }
 
   it('updates flush without yielding in the next event', () => {
-    const root = ReactNoop.createBlockingRoot();
+    const root = ReactNoop.createSyncRoot();
 
     root.render(
       <>
@@ -81,7 +78,7 @@ describe('ReactBlockingMode', () => {
       return <Text text="Hi" />;
     }
 
-    const root = ReactNoop.createBlockingRoot();
+    const root = ReactNoop.createSyncRoot();
     root.render(<App />);
     expect(root).toMatchRenderedOutput(null);
 
@@ -90,7 +87,7 @@ describe('ReactBlockingMode', () => {
   });
 
   it('uses proper Suspense semantics, not legacy ones', async () => {
-    const root = ReactNoop.createBlockingRoot();
+    const root = ReactNoop.createSyncRoot();
     root.render(
       <Suspense fallback={<Text text="Loading..." />}>
         <span>
@@ -125,7 +122,7 @@ describe('ReactBlockingMode', () => {
 
   it('flushSync does not flush batched work', () => {
     const {useState, forwardRef, useImperativeHandle} = React;
-    const root = ReactNoop.createBlockingRoot();
+    const root = ReactNoop.createSyncRoot();
 
     const Foo = forwardRef(({label}, ref) => {
       const [step, setStep] = useState(0);

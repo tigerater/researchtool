@@ -33,53 +33,46 @@ describe('ReactCache', () => {
     ReactTestRenderer = require('react-test-renderer');
     Scheduler = require('scheduler');
 
-    TextResource = createResource(
-      ([text, ms = 0]) => {
-        let listeners = null;
-        let status = 'pending';
-        let value = null;
-        return {
-          then(resolve, reject) {
-            switch (status) {
-              case 'pending': {
-                if (listeners === null) {
-                  listeners = [{resolve, reject}];
-                  setTimeout(() => {
-                    if (textResourceShouldFail) {
-                      Scheduler.unstable_yieldValue(
-                        `Promise rejected [${text}]`,
-                      );
-                      status = 'rejected';
-                      value = new Error('Failed to load: ' + text);
-                      listeners.forEach(listener => listener.reject(value));
-                    } else {
-                      Scheduler.unstable_yieldValue(
-                        `Promise resolved [${text}]`,
-                      );
-                      status = 'resolved';
-                      value = text;
-                      listeners.forEach(listener => listener.resolve(value));
-                    }
-                  }, ms);
-                } else {
-                  listeners.push({resolve, reject});
-                }
-                break;
+    TextResource = createResource(([text, ms = 0]) => {
+      let listeners = null;
+      let status = 'pending';
+      let value = null;
+      return {
+        then(resolve, reject) {
+          switch (status) {
+            case 'pending': {
+              if (listeners === null) {
+                listeners = [{resolve, reject}];
+                setTimeout(() => {
+                  if (textResourceShouldFail) {
+                    Scheduler.unstable_yieldValue(`Promise rejected [${text}]`);
+                    status = 'rejected';
+                    value = new Error('Failed to load: ' + text);
+                    listeners.forEach(listener => listener.reject(value));
+                  } else {
+                    Scheduler.unstable_yieldValue(`Promise resolved [${text}]`);
+                    status = 'resolved';
+                    value = text;
+                    listeners.forEach(listener => listener.resolve(value));
+                  }
+                }, ms);
+              } else {
+                listeners.push({resolve, reject});
               }
-              case 'resolved': {
-                resolve(value);
-                break;
-              }
-              case 'rejected': {
-                reject(value);
-                break;
-              }
+              break;
             }
-          },
-        };
-      },
-      ([text, ms]) => text,
-    );
+            case 'resolved': {
+              resolve(value);
+              break;
+            }
+            case 'rejected': {
+              reject(value);
+              break;
+            }
+          }
+        },
+      };
+    }, ([text, ms]) => text);
 
     textResourceShouldFail = false;
   });
@@ -179,12 +172,15 @@ describe('ReactCache', () => {
     if (__DEV__) {
       expect(() => {
         expect(Scheduler).toFlushAndYield(['App', 'Loading...']);
-      }).toErrorDev([
-        'Invalid key type. Expected a string, number, symbol, or ' +
-          'boolean, but instead received: Hi,100\n\n' +
-          'To use non-primitive values as keys, you must pass a hash ' +
-          'function as the second argument to createResource().',
-      ]);
+      }).toWarnDev(
+        [
+          'Invalid key type. Expected a string, number, symbol, or ' +
+            'boolean, but instead received: Hi,100\n\n' +
+            'To use non-primitive values as keys, you must pass a hash ' +
+            'function as the second argument to createResource().',
+        ],
+        {withoutStack: true},
+      );
     } else {
       expect(Scheduler).toFlushAndYield(['App', 'Loading...']);
     }
@@ -300,29 +296,26 @@ describe('ReactCache', () => {
 
   it('if a thenable resolves multiple times, does not update the first cached value', () => {
     let resolveThenable;
-    const BadTextResource = createResource(
-      ([text, ms = 0]) => {
-        let listeners = null;
-        let value = null;
-        return {
-          then(resolve, reject) {
-            if (value !== null) {
-              resolve(value);
+    const BadTextResource = createResource(([text, ms = 0]) => {
+      let listeners = null;
+      let value = null;
+      return {
+        then(resolve, reject) {
+          if (value !== null) {
+            resolve(value);
+          } else {
+            if (listeners === null) {
+              listeners = [resolve];
+              resolveThenable = v => {
+                listeners.forEach(listener => listener(v));
+              };
             } else {
-              if (listeners === null) {
-                listeners = [resolve];
-                resolveThenable = v => {
-                  listeners.forEach(listener => listener(v));
-                };
-              } else {
-                listeners.push(resolve);
-              }
+              listeners.push(resolve);
             }
-          },
-        };
-      },
-      ([text, ms]) => text,
-    );
+          }
+        },
+      };
+    }, ([text, ms]) => text);
 
     function BadAsyncText(props) {
       const text = props.text;
