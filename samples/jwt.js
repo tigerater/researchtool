@@ -1,4 +1,4 @@
-// Copyright 2014 Google LLC
+// Copyright 2014-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,8 +13,8 @@
 
 'use strict';
 
-const {google} = require('googleapis');
-const path = require('path');
+var google = require('../lib/googleapis.js');
+var drive = google.drive('v2');
 
 /**
  * The JWT authorization is ideal for performing server-to-server
@@ -23,32 +23,36 @@ const path = require('path');
  * Suggested reading for Admin SDK users using service accounts:
  * https://developers.google.com/admin-sdk/directory/v1/guides/delegation
  *
+ * Note on the private_key.pem:
+ * Node.js currently does not support direct access to the keys stored within
+ * PKCS12 file (see issue comment
+ * https://github.com/joyent/node/issues/4050#issuecomment-8816304)
+ * so the private key must be extracted and converted to a passphrase-less
+ * RSA key: openssl pkcs12 -in key.p12 -nodes -nocerts > key.pem
+ *
  * See the defaultauth.js sample for an alternate way of fetching compute credentials.
  */
-async function runSample() {
-  // Create a new JWT client using the key file downloaded from the Google Developer Console
-  const auth = new google.auth.GoogleAuth({
-    keyFile: path.join(__dirname, 'jwt.keys.json'),
-    scopes: 'https://www.googleapis.com/auth/drive.readonly',
-  });
-  const client = await auth.getClient();
+var authClient = new google.auth.JWT(
+    'service-account-email@developer.gserviceaccount.com',
+    'path/to/key.pem',
+    // Contents of private_key.pem if you want to load the pem file yourself
+    // (do not use the path parameter above if using this param)
+    'key',
+    // Scopes can be specified either as an array or as a single, space-delimited string
+    ['https://www.googleapis.com/auth/drive.readonly'],
+    // User to impersonate (leave empty if no impersonation needed)
+    'subject-account-email@example.com');
 
-  // Obtain a new drive client, making sure you pass along the auth client
-  const drive = google.drive({
-    version: 'v2',
-    auth: client,
-  });
+authClient.authorize(function (err, tokens) {
+  if (err) {
+    return console.log(err);
+  }
 
   // Make an authorized request to list Drive files.
-  const res = await drive.files.list();
-  console.log(res.data);
-
-  return res.data;
-}
-
-if (module === require.main) {
-  runSample().catch(console.error);
-}
-
-// Exports for unit testing purposes
-module.exports = {runSample};
+  drive.files.list({ auth: authClient }, function (err, resp) {
+    // handle err and response
+    if (err) {
+      return console.log(err);
+    }
+  });
+});

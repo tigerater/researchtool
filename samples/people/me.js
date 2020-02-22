@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,32 +13,40 @@
 
 'use strict';
 
-const {google} = require('googleapis');
-const sampleClient = require('../sampleclient');
+var google = require('../../');
+var sampleClient = require('../sampleclient');
 
-const people = google.people({
+var auth = sampleClient.oAuth2Client;
+
+var plus = google.plus({
   version: 'v1',
-  auth: sampleClient.oAuth2Client,
+  auth: auth
 });
 
-async function runSample() {
-  // See documentation of personFields at
-  // https://developers.google.com/people/api/rest/v1/people/get
-  const res = await people.people.get({
-    resourceName: 'people/me',
-    personFields: 'emailAddresses,names,photos',
+function me (tokens) {
+  plus.people.get({
+    userId: 'me'
+  }, function (err, me) {
+    if (err) {
+      console.error(err);
+      process.exit();
+      return;
+    }
+
+    console.log(me);
+    process.exit();
   });
-  console.log(res.data);
 }
 
-const scopes = [
+var scopes = [
+  'https://www.googleapis.com/auth/plus.login',
+  'https://www.googleapis.com/auth/plus.me',
   'https://www.googleapis.com/auth/userinfo.email',
-  'https://www.googleapis.com/auth/userinfo.profile',
+  'https://www.googleapis.com/auth/userinfo.profile'
 ];
 
 if (module === require.main) {
-  sampleClient
-    .authenticate(scopes)
-    .then(runSample)
-    .catch(console.error);
+  sampleClient.execute(scopes, function (tokens) {
+    me(tokens);
+  });
 }

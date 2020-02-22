@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,44 +11,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {GaxiosResponse} from 'gaxios';
-import * as url from 'url';
-import {GoogleApis} from '../src';
-
-export abstract class Utils {
-  static getQs(res: GaxiosResponse) {
-    const query = url.parse(res.config.url!).query;
-    return query ? query.toString() : null;
+abstract class utils {
+  public static getDiscoveryUrl (name, version) {
+    return 'https://www.googleapis.com/discovery/v1/apis/' + name +
+      '/' + version + '/rest';
   }
 
-  static getPath(res: GaxiosResponse) {
-    return url.parse(res.config.url!).path!;
+  public static loadApi (google, name, version, options, cb) {
+    if (typeof options === 'function') {
+      cb = options;
+      options = {};
+    }
+    return google.discoverAPI(utils.getDiscoveryUrl(name, version), options, cb);
   }
 
-  static getDiscoveryUrl(name: string, version: string) {
-    return (
-      'https://www.googleapis.com/discovery/v1/apis/' +
-      name +
-      '/' +
-      version +
-      '/rest'
-    );
-  }
-
-  // tslint:disable-next-line no-any
-  static loadApi<T = any>(
-    google: GoogleApis,
-    name: string,
-    version: string,
-    options = {}
-  ) {
-    return (google.discoverAPI(
-      Utils.getDiscoveryUrl(name, version),
-      options
-      // tslint:disable-next-line no-any
-    ) as any) as T;
-  }
-
-  static readonly noop = () => undefined;
-  static readonly baseUrl = 'https://www.googleapis.com';
+  public static readonly noop = () => {};
 }
+export default utils;
+

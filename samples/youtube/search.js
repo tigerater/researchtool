@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,27 +13,34 @@
 
 'use strict';
 
-const {google} = require('googleapis');
-const sampleClient = require('../sampleclient');
+var google = require('../../lib/googleapis');
+var sampleClient = require('../sampleclient');
+var util = require('util');
 
 // initialize the Youtube API library
-const youtube = google.youtube({
+var youtube = google.youtube({
   version: 'v3',
-  auth: sampleClient.oAuth2Client,
+  auth: sampleClient.oAuth2Client
 });
 
 // a very simple example of searching for youtube videos
-async function runSample() {
-  const res = await youtube.search.list({
+function runSamples () {
+  youtube.search.list({
     part: 'id,snippet',
-    q: 'Node.js on Google Cloud',
+    q: 'Node.js on Google Cloud'
+  }, function (err, data) {
+    if (err) {
+      console.error('Error: ' + err);
+    }
+    if (data) {
+      console.log(util.inspect(data, false, null));
+    }
+    process.exit();
   });
-  console.log(res.data);
 }
 
-const scopes = ['https://www.googleapis.com/auth/youtube'];
+var scopes = [
+  'https://www.googleapis.com/auth/youtube'
+];
 
-sampleClient
-  .authenticate(scopes)
-  .then(runSample)
-  .catch(console.error);
+sampleClient.execute(scopes, runSamples);

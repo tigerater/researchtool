@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,31 +13,47 @@
 
 'use strict';
 
-const {google} = require('googleapis');
-const sampleClient = require('../sampleclient');
+var google = require('../../');
+var sampleClient = require('../sampleclient');
 
-const drive = google.drive({
+var auth = sampleClient.oAuth2Client;
+
+var drive = google.drive({
   version: 'v3',
-  auth: sampleClient.oAuth2Client,
+  auth: auth
 });
 
-async function runSample(query) {
-  const params = {pageSize: 3};
-  params.q = query;
-  const res = await drive.files.list(params);
-  console.log(res.data);
-  return res.data;
+function list (query, tokens) {
+  var params = {
+    pageSize: 3
+  };
+  if (query) {
+    params.q = query;
+  }
+  drive.files.list(params, function (err, result) {
+    if (err) {
+      console.error(err);
+      process.exit();
+      return;
+    }
+
+    console.log(result.files);
+    process.exit();
+  });
 }
+
+var scopes = [
+  'https://www.googleapis.com/auth/drive',
+  'https://www.googleapis.com/auth/drive.appdata',
+  'https://www.googleapis.com/auth/drive.file',
+  'https://www.googleapis.com/auth/drive.metadata',
+  'https://www.googleapis.com/auth/drive.metadata.readonly',
+  'https://www.googleapis.com/auth/drive.photos.readonly',
+  'https://www.googleapis.com/auth/drive.readonly'
+];
 
 if (module === require.main) {
-  const scopes = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
-  sampleClient
-    .authenticate(scopes)
-    .then(runSample)
-    .catch(console.error);
+  sampleClient.execute(scopes, function (tokens) {
+    list(process.argv.slice(2)[0], tokens);
+  });
 }
-
-module.exports = {
-  runSample,
-  client: sampleClient.oAuth2Client,
-};

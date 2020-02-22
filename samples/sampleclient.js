@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -14,99 +14,83 @@
 'use strict';
 
 /**
- * This is used by several samples to easily provide an oauth2 workflow.
+ * This is used by several samples to easily provide
+ * an oauth2 workflow.
  */
 
-// [START auth_oauth2_workflow]
-const {google} = require('googleapis');
-const http = require('http');
-const url = require('url');
-const opn = require('open');
-const destroyer = require('server-destroy');
-const fs = require('fs');
-const path = require('path');
+var google = require('../lib/googleapis');
+var OAuth2Client = google.auth.OAuth2;
+var http = require('http');
+var spawn = require('child_process').spawn;
+var url = require('url');
+var querystring = require('querystring');
+var secrets = require('./secrets.json');
 
-const keyPath = path.join(__dirname, 'oauth2.keys.json');
-let keys = {
-  redirect_uris: ['http://localhost:3000/oauth2callback'],
-};
-if (fs.existsSync(keyPath)) {
-  const keyFile = require(keyPath);
-  keys = keyFile.installed || keyFile.web;
+var called = false;
+
+function callOnce (callback) {
+  if (!called) {
+    called = true;
+    callback();
+  }
 }
 
-const invalidRedirectUri = `The provided keyfile does not define a valid
-redirect URI. There must be at least one redirect URI defined, and this sample
-assumes it redirects to 'http://localhost:3000/oauth2callback'.  Please edit
-your keyfile, and add a 'redirect_uris' section.  For example:
-
-"redirect_uris": [
-  "http://localhost:3000/oauth2callback"
-]
-`;
-
-class SampleClient {
-  constructor(options) {
-    this._options = options || {scopes: []};
-
-    // validate the redirectUri.  This is a frequent cause of confusion.
-    if (!keys.redirect_uris || keys.redirect_uris.length === 0) {
-      throw new Error(invalidRedirectUri);
+function handler (request, response, server, callback) {
+  var self = this;
+  var qs = querystring.parse(url.parse(request.url).query);
+  self.oAuth2Client.getToken(qs.code, function (err, tokens) {
+    if (err) {
+      console.error('Error getting oAuth tokens: ' + err);
     }
-    const redirectUri = keys.redirect_uris[keys.redirect_uris.length - 1];
-    const parts = new url.URL(redirectUri);
-    if (
-      redirectUri.length === 0 ||
-      parts.port !== '3000' ||
-      parts.hostname !== 'localhost' ||
-      parts.pathname !== '/oauth2callback'
-    ) {
-      throw new Error(invalidRedirectUri);
-    }
+    self.oAuth2Client.setCredentials(tokens);
+    self.isAuthenticated = true;
+    response.end('Authentication successful! Please return to the console.');
+    callback(tokens);
+    server.close();
+  });
+}
 
-    // create an oAuth client to authorize the API call
-    this.oAuth2Client = new google.auth.OAuth2(
-      keys.client_id,
-      keys.client_secret,
-      redirectUri
-    );
-  }
+function SampleClient (options) {
+  var self = this;
+  self.isAuthenticated = false;
+  this._options = options || { scopes: [] };
+
+  // create an oAuth client to authorize the API call
+  this.oAuth2Client = new OAuth2Client(
+    secrets.web.client_id,
+    secrets.web.client_secret,
+    secrets.web.redirect_uris[0]
+  );
 
   // Open an http server to accept the oauth callback. In this
   // simple example, the only request to our webserver is to
-  // /oauth2callback?code=<code>
-  async authenticate(scopes) {
-    return new Promise((resolve, reject) => {
-      // grab the url that will be used for authorization
-      this.authorizeUrl = this.oAuth2Client.generateAuthUrl({
-        access_type: 'offline',
-        scope: scopes.join(' '),
-      });
-      const server = http
-        .createServer(async (req, res) => {
-          try {
-            if (req.url.indexOf('/oauth2callback') > -1) {
-              const qs = new url.URL(req.url, 'http://localhost:3000')
-                .searchParams;
-              res.end(
-                'Authentication successful! Please return to the console.'
-              );
-              server.destroy();
-              const {tokens} = await this.oAuth2Client.getToken(qs.get('code'));
-              this.oAuth2Client.credentials = tokens;
-              resolve(this.oAuth2Client);
-            }
-          } catch (e) {
-            reject(e);
-          }
-        })
-        .listen(3000, () => {
-          // open the browser to the authorize url to start the workflow
-          opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref());
-        });
-      destroyer(server);
+  // /callback?code=<code>
+  this._authenticate = function (scopes, callback) {
+    // grab the url that will be used for authorization
+    self.authorizeUrl = self.oAuth2Client.generateAuthUrl({
+      access_type: 'offline',
+      scope: scopes.join(' ')
     });
-  }
+    var server = http.createServer(function (request, response) {
+      callOnce(function () {
+        handler.call(self, request, response, server, callback);
+      });
+    }).listen(8080, function () {
+      // open the browser to the authorize url to start the workflow
+      spawn('open', [self.authorizeUrl]);
+    });
+  };
+
+  self.execute = function (scopes, callback) {
+    self._callback = callback;
+    if (self.isAuthenticated) {
+      callback.apply();
+    } else {
+      self._authenticate(scopes, callback);
+    }
+  };
+
+  return self;
 }
-// [END auth_oauth2_workflow]
+
 module.exports = new SampleClient();

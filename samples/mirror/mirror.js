@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,27 +13,29 @@
 
 'use strict';
 
-const {google} = require('googleapis');
-const sampleClient = require('../sampleclient');
+var google = require('../../lib/googleapis');
+var sampleClient = require('../sampleclient');
+var util = require('util');
 
 // initialize the Google Mirror API library
-const mirror = google.mirror({
-  version: 'v1',
-  auth: sampleClient.oAuth2Client,
-});
+var mirror = google.mirror({ version: 'v1', auth: sampleClient.oAuth2Client });
 
 // a very simple example of listing locations from the mirror API
-async function runSample() {
-  const res = await mirror.locations.list({});
-  console.log(res.data);
+function runSamples () {
+  mirror.locations.list({}, function (err, data) {
+    if (err) {
+      console.error(err);
+    }
+    if (data) {
+      console.log('locations list data: ' + util.inspect(data));
+    }
+    process.exit();
+  });
 }
 
-const scopes = [
+var scopes = [
   'https://www.googleapis.com/auth/glass.timeline',
-  'https://www.googleapis.com/auth/glass.location',
+  'https://www.googleapis.com/auth/glass.location'
 ];
 
-sampleClient
-  .authenticate(scopes)
-  .then(runSample)
-  .catch(console.error);
+sampleClient.execute(scopes, runSamples);

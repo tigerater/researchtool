@@ -1,4 +1,4 @@
-// Copyright 2014 Google LLC
+// Copyright 2014-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,15 +13,15 @@
 
 'use strict';
 
-const {google} = require('googleapis');
-const compute = google.compute('v1');
+var google = require('../lib/googleapis.js');
+var compute = google.compute('v1');
 
 /**
- * The google.auth.getClient method creates the appropriate type of credential client for you,
+ * The getApplicationDefault method creates the appropriate type of credential client for you,
  * depending upon whether the client is running in Google App Engine, Google Compute Engine, a
  * Managed VM, or on a local developer machine. This allows you to write one set of auth code that
- * will work in all cases. It most situations, it is advisable to use the getClient method rather
- * than creating your own JWT or Compute client directly.
+ * will work in all cases. It most situations, it is advisable to use the getApplicationDefault
+ * method rather than creating your own JWT or Compute client directly.
  *
  * Note: In order to run on a local developer machine, it is necessary to download a private key
  * file to your machine, and to set a local environment variable pointing to the location of the
@@ -34,19 +34,22 @@ const compute = google.compute('v1');
  */
 
 // Get the appropriate type of credential client, depending upon the runtime environment.
-async function main() {
-  // The `getClient` method will choose a service based authentication model
-  const auth = new google.auth.GoogleAuth({
+google.auth.getApplicationDefault(function (err, authClient) {
+  if (err) {
+    return console.log('Failed to get the default credentials: ' + String(err));
+  }
+  // The createScopedRequired method returns true when running on GAE or a local developer
+  // machine. In that case, the desired scopes must be passed in manually. When the code is
+  // running in GCE or a Managed VM, the scopes are pulled from the GCE metadata server.
+  // See https://cloud.google.com/compute/docs/authentication for more information.
+  if (authClient.createScopedRequired && authClient.createScopedRequired()) {
     // Scopes can be specified either as an array or as a single, space-delimited string.
-    scopes: ['https://www.googleapis.com/auth/compute'],
+    authClient = authClient.createScoped(['https://www.googleapis.com/auth/compute']);
+  }
+  // Fetch the list of GCE zones within a project.
+  // NOTE: You must fill in your valid project ID before running this sample!
+  var projectId = 'fill in your project id here!';
+  compute.zones.list({ project: projectId, auth: authClient }, function (err, result) {
+    console.log(err, result);
   });
-
-  // Obtain the current project Id
-  const project = await auth.getProjectId();
-
-  // Get the list of available compute zones for your project
-  const res = await compute.zones.list({project, auth});
-  console.log(res.data);
-}
-
-main().catch(console.error);
+});

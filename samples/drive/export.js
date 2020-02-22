@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,47 +13,67 @@
 
 'use strict';
 
-const {google} = require('googleapis');
-const sampleClient = require('../sampleclient');
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
+var google = require('../../');
+var sampleClient = require('../sampleclient');
+var fs = require('fs');
 
-const drive = google.drive({
+var auth = sampleClient.oAuth2Client;
+
+var drive = google.drive({
   version: 'v3',
-  auth: sampleClient.oAuth2Client,
+  auth: auth
 });
 
-async function runSample() {
-  // [START main_body]
-  const fileId = '1EkgdLY3T-_9hWml0VssdDWQZLEc8qqpMB77Nvsx6khA';
-  const destPath = path.join(os.tmpdir(), 'important.pdf');
-  const dest = fs.createWriteStream(destPath);
-  const res = await drive.files.export(
-    {fileId, mimeType: 'application/pdf'},
-    {responseType: 'stream'}
-  );
-  await new Promise((resolve, reject) => {
-    res.data
-      .on('error', reject)
-      .pipe(dest)
-      .on('error', reject)
-      .on('finish', resolve);
+function download (fileId, tokens) {
+  drive.files.get({
+    fileId: fileId
+  }, function (err, metadata) {
+    if (err) {
+      console.error(err);
+      return process.exit();
+    }
+
+    console.log('Downloading %s...', metadata.name);
+
+    auth.setCredentials(tokens);
+
+    var dest = fs.createWriteStream(metadata.name + '.pdf');
+
+    drive.files.export({
+      fileId: fileId,
+      mimeType: 'application/pdf'
+    })
+    .on('error', function (err) {
+      console.log('Error downloading file', err);
+      process.exit();
+    })
+    .pipe(dest);
+
+    dest
+      .on('finish', function () {
+        console.log('Downloaded %s!', metadata.name);
+        process.exit();
+      })
+      .on('error', function (err) {
+        console.log('Error writing file', err);
+        process.exit();
+      });
   });
-  // [END main_body]
 }
 
-// if invoked directly (not tests), authenticate and run the samples
+var scopes = [
+  'https://www.googleapis.com/auth/drive.metadata.readonly',
+  'https://www.googleapis.com/auth/drive.photos.readonly',
+  'https://www.googleapis.com/auth/drive.readonly'
+];
+
 if (module === require.main) {
-  const scopes = ['https://www.googleapis.com/auth/drive.readonly'];
-  sampleClient
-    .authenticate(scopes)
-    .then(runSample)
-    .catch(console.error);
+  var args = process.argv.slice(2);
+  if (!args[0]) {
+    throw new Error('fileId required!');
+  } else {
+    sampleClient.execute(scopes, function (tokens) {
+      download(args[0], tokens);
+    });
+  }
 }
-
-// export functions for testing purposes
-module.exports = {
-  runSample,
-  client: sampleClient.oAuth2Client,
-};

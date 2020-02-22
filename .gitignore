@@ -1,14 +1,13 @@
-node_modules/
-build/
-/docs/
-.coverage/
-npm-debug.log
-.nyc_output
-.vscode
+node_modules/*
 .idea
-.DS_Store
-samples/*.keys.json
-samples/**/credentials.json
-package-lock.json
-yarn.lock
-__pycache__
+doc/
+npm-debug.log
+coverage
+.secrets.json
+# Empty API
+apis/iam/v1alpha1.js
+.nyc_output
+**/*.js
+**/*.js.map
+!samples/**/*.js
+.vscode

@@ -1,4 +1,4 @@
-// Copyright 2014 Google LLC
+// Copyright 2014-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,33 +13,36 @@
 
 'use strict';
 
-const {google} = require('googleapis');
-const path = require('path');
+// Dependencies
+var googleapis = require('googleapis');
+var authData = require('./authData');
 
-async function runSample() {
-  // acquire an authentication client using a service account
-  const auth = await google.auth.getClient({
-    keyFile: path.join(__dirname, '../jwt.keys.json'),
-    scopes: [
-      'https://www.googleapis.com/auth/admin.directory.group',
-      'https://www.googleapis.com/auth/admin.directory.group.member',
-    ],
-  });
+console.log('Auth data is: ', authData);
 
-  // obtain the admin client
-  const admin = google.admin({
-    version: 'directory_v1',
-    auth,
-  });
+// Create JWT auth object
+var jwt = new googleapis.auth.JWT(
+  authData.email,
+  authData.keyFile,
+  authData.key,
+  authData.scopes,
+  authData.subject
+);
+
+// Authorize
+jwt.authorize(function (err, data) {
+  if (err) {
+    throw err;
+  }
+  console.log('You have been successfully authenticated: ', data);
+
+  // Get Google Admin API
+  var admin = googleapis.admin('directory_v1');
 
   // Insert group
-  const res = await admin.groups.insert({
-    requestBody: {
-      email: 'some_group@example.com',
-    },
+  admin.groups.insert({
+    resource: { email: 'some_group@example.com' },
+    auth: jwt
+  }, function (err, data) {
+    console.log(err || data);
   });
-
-  console.log(res.data);
-}
-
-runSample().catch(console.error);
+});

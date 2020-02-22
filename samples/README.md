@@ -1,140 +1,103 @@
-[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
-<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
+# Samples by API
 
-# [Google APIs Node.js Client: Node.js Samples](https://github.com/googleapis/google-api-nodejs-client)
+The following samples show basic usage of various APIs.
 
-[![Open in Cloud Shell][shell_img]][shell_link]
+## ![](http://www.google.com/images/icons/product/analytics-32.png) Google Analytics API
 
+View and manage your Google Analytics data.
 
+Documentation for the Google Analytics API in
+[JSDoc](http://google.github.io/google-api-nodejs-client/2.1.7/analytics.html).
 
-## Table of Contents
+<table>
+  <tr>
+    <td><a href="analytics">samples/analytics</a></td>
+    <td>Command-line samples for producing reports with the Analytics API</td>
+  </tr>
+</table>
 
-* [Before you begin](#before-you-begin)
-* [Samples](#samples)
-  * [Defaultauth](#defaultauth)
-  * [Jwt](#jwt)
-  * [Mediaupload](#mediaupload)
-  * [Multiple](#multiple)
-  * [Oauth2](#oauth2)
-  * [Sampleclient](#sampleclient)
+## ![](http://www.google.com/images/icons/product/blogger-32.png) Blogger API
 
-## Before you begin
+View and manage Blogger data.
 
-Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/google-api-nodejs-client#using-the-client-library).
+Documentation for the Blogger API in
+[JSDoc](http://google.github.io/google-api-nodejs-client/2.1.7/blogger.html).
 
-`cd samples`
+<table>
+  <tr>
+    <td><a href="blogger">samples/blogger</a></td>
+    <td>Command-line samples for reading data with the Blogger API</td>
+  </tr>
+</table>
 
-`npm install`
+## ![](https://www.google.com/images/icons/product/compute_engine-32.png) Google Compute Engine Metadata API
 
-`cd ..`
+Lets you set key/value pairs using the GCE metadata service.
 
-## Samples
+Documentation for the Google Compute Engine Metadata API in
+[JSDoc](http://google.github.io/google-api-nodejs-client/2.1.7/compute.html).
 
+<table>
+  <tr>
+    <td><a href="coordinate">samples/compute</a></td>
+    <td>Demonstrates how to use the Google Compute Engine Metadata API</td>
+  </tr>
+</table>
 
+## ![](http://www.google.com/images/icons/product/customsearch-32.png) CustomSearch API
 
-### Defaultauth
+Lets you search over a website or collection of websites.
 
-View the [source code](https://github.com/googleapis/google-api-nodejs-client/blob/master/samples/defaultauth.js).
+Documentation for the CustomSearch API in
+[JSDoc](http://google.github.io/google-api-nodejs-client/2.1.7/customsearch.html).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-api-nodejs-client&page=editor&open_in_editor=samples/defaultauth.js,samples/README.md)
+<table>
+  <tr>
+    <td><a href="customsearch">samples/customsearch</a></td>
+    <td>Search from the command-line</td>
+  </tr>
+</table>
 
-__Usage:__
 
+## ![](http://www.google.com/images/icons/product/search-32.png) Glass Mirror API
 
-`node samples/defaultauth.js`
+The Google Mirror API allows you to build web-based services that interact with Google Glass. It provides this functionality over a cloud-based API and does not require running code on Glass.
 
+Documentation for the Glass Mirror API in
+[JSDoc](http://google.github.io/google-api-nodejs-client/2.1.7/mirror.html).
 
------
+<table>
+  <tr>
+    <td><a href="mirror">samples/mirror</a></td>
+    <td>Obtains a list of locations from glass data</td>
+  </tr>
+</table>
 
+## ![](http://www.google.com/images/icons/product/shortlinks-32.png) URL Shortener API
 
+Lets you create, inspect, and manage `goo.gl` short URLs.
 
+Documentation for the URL Shortener API in
+[JSDoc](http://google.github.io/google-api-nodejs-client/2.1.7/urlshortener.html).
 
-### Jwt
+<table>
+  <tr>
+    <td><a href="urlshortener">samples/urlshortener</a></td>
+    <td>Shortens a URL with the URL Shortener API</td>
+  </tr>
+</table>
 
-View the [source code](https://github.com/googleapis/google-api-nodejs-client/blob/master/samples/jwt.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-api-nodejs-client&page=editor&open_in_editor=samples/jwt.js,samples/README.md)
+## ![](http://www.google.com/images/icons/product/youtube-32.png) YouTube API
 
-__Usage:__
+With the YouTube Data API, you can add a variety of YouTube features to your application. Use the API to upload videos, manage playlists and subscriptions, update channel settings, and more.
 
+Documentation for the YouTube Data API in
+[JSDoc](http://google.github.io/google-api-nodejs-client/2.1.7/youtube.html).
 
-`node samples/jwt.js`
-
-
------
-
-
-
-
-### Mediaupload
-
-View the [source code](https://github.com/googleapis/google-api-nodejs-client/blob/master/samples/mediaupload.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-api-nodejs-client&page=editor&open_in_editor=samples/mediaupload.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/mediaupload.js`
-
-
------
-
-
-
-
-### Multiple
-
-View the [source code](https://github.com/googleapis/google-api-nodejs-client/blob/master/samples/multiple.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-api-nodejs-client&page=editor&open_in_editor=samples/multiple.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/multiple.js`
-
-
------
-
-
-
-
-### Oauth2
-
-View the [source code](https://github.com/googleapis/google-api-nodejs-client/blob/master/samples/oauth2.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-api-nodejs-client&page=editor&open_in_editor=samples/oauth2.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/oauth2.js`
-
-
------
-
-
-
-
-### Sampleclient
-
-View the [source code](https://github.com/googleapis/google-api-nodejs-client/blob/master/samples/sampleclient.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-api-nodejs-client&page=editor&open_in_editor=samples/sampleclient.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/sampleclient.js`
-
-
-
-
-
-
-[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-api-nodejs-client&page=editor&open_in_editor=samples/README.md
-[product-docs]: 
+<table>
+  <tr>
+    <td><a href="youtube">samples/youtube</a></td>
+    <td>Samples for working with playlists, search and videos.</td>
+  </tr>
+</table>

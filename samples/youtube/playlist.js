@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,47 +13,63 @@
 
 'use strict';
 
-const {google} = require('googleapis');
-const sampleClient = require('../sampleclient');
+var google = require('../../lib/googleapis');
+var sampleClient = require('../sampleclient');
+var util = require('util');
 
 // initialize the Youtube API library
-const youtube = google.youtube({
+var youtube = google.youtube({
   version: 'v3',
-  auth: sampleClient.oAuth2Client,
+  auth: sampleClient.oAuth2Client
 });
 
 // a very simple example of getting data from a playlist
-async function runSample() {
+function runSamples () {
   // the first query will return data with an etag
-  const res = await getPlaylistData(null);
-  const etag = res.data.etag;
-  console.log(`etag: ${etag}`);
+  getPlaylistData(null, function (err, data, response) {
+    if (err) {
+      return console.log(err);
+    }
+    var etag = data.etag;
 
-  // the second query will (likely) return no data, and an HTTP 304
-  // since the If-None-Match header was set with a matching eTag
-  const res2 = await getPlaylistData(etag);
-  console.log(res2.status);
+    // the second query will (likely) return no data, and an HTTP 304
+    // since the If-None-Match header was set with a matching eTag
+    getPlaylistData(etag, function (err, data, response) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log(response.status);
+    });
+  });
 }
 
-async function getPlaylistData(etag) {
-  // Create custom HTTP headers for the request to enable use of eTags
-  const headers = {};
+function getPlaylistData (etag, callback) {
+  // Create custom HTTP headers for the request to enable
+  // use of eTags
+  var headers = {};
   if (etag) {
     headers['If-None-Match'] = etag;
   }
-  const res = await youtube.playlists.list({
+  youtube.playlists.list({
     part: 'id,snippet',
     id: 'PLIivdWyY5sqIij_cgINUHZDMnGjVx3rxi',
-    headers: headers,
+    headers: headers
+  }, function (err, data, response) {
+    if (err) {
+      console.error('Error: ' + err);
+    }
+    if (data) {
+      console.log(util.inspect(data, false, null));
+    }
+    if (response) {
+      console.log('Status code: ' + response.statusCode);
+    }
+    callback(err, data, response);
   });
-  console.log('Status code: ' + res.status);
-  console.log(res.data);
-  return res;
 }
 
-const scopes = ['https://www.googleapis.com/auth/youtube'];
+var scopes = [
+  'https://www.googleapis.com/auth/youtube'
+];
 
-sampleClient
-  .authenticate(scopes)
-  .then(runSample)
-  .catch(console.error);
+sampleClient.execute(scopes, runSamples);

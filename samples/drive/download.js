@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,76 +13,67 @@
 
 'use strict';
 
-const {google} = require('googleapis');
-const sampleClient = require('../sampleclient');
-const fs = require('fs');
-const os = require('os');
-const uuid = require('uuid');
-const path = require('path');
+var google = require('../../');
+var sampleClient = require('../sampleclient');
+var fs = require('fs');
 
-const drive = google.drive({
+var auth = sampleClient.oAuth2Client;
+
+var drive = google.drive({
   version: 'v3',
-  auth: sampleClient.oAuth2Client,
+  auth: auth
 });
 
-async function runSample(fileId) {
-  // For converting document formats, and for downloading template
-  // documents, see the method drive.files.export():
-  // https://developers.google.com/drive/api/v3/manage-downloads
-  return drive.files
-    .get({fileId, alt: 'media'}, {responseType: 'stream'})
-    .then(res => {
-      return new Promise((resolve, reject) => {
-        const filePath = path.join(os.tmpdir(), uuid.v4());
-        console.log(`writing to ${filePath}`);
-        const dest = fs.createWriteStream(filePath);
-        let progress = 0;
+function download (fileId, tokens) {
+  drive.files.get({
+    fileId: fileId
+  }, function (err, metadata) {
+    if (err) {
+      console.error(err);
+      return process.exit();
+    }
 
-        res.data
-          .on('end', () => {
-            console.log('Done downloading file.');
-            resolve(filePath);
-          })
-          .on('error', err => {
-            console.error('Error downloading file.');
-            reject(err);
-          })
-          .on('data', d => {
-            progress += d.length;
-            if (process.stdout.isTTY) {
-              process.stdout.clearLine();
-              process.stdout.cursorTo(0);
-              process.stdout.write(`Downloaded ${progress} bytes`);
-            }
-          })
-          .pipe(dest);
+    console.log('Downloading %s...', metadata.name);
+
+    auth.setCredentials(tokens);
+
+    var dest = fs.createWriteStream(metadata.name);
+
+    drive.files.get({
+      fileId: fileId,
+      alt: 'media'
+    })
+    .on('error', function (err) {
+      console.log('Error downloading file', err);
+      process.exit();
+    })
+    .pipe(dest);
+
+    dest
+      .on('finish', function () {
+        console.log('Downloaded %s!', metadata.name);
+        process.exit();
+      })
+      .on('error', function (err) {
+        console.log('Error writing file', err);
+        process.exit();
       });
-    });
+  });
 }
 
-// if invoked directly (not tests), authenticate and run the samples
+var scopes = [
+  'https://www.googleapis.com/auth/drive.metadata.readonly',
+  'https://www.googleapis.com/auth/drive.photos.readonly',
+  'https://www.googleapis.com/auth/drive.readonly'
+];
+
 if (module === require.main) {
-  if (process.argv.length !== 3) {
-    throw new Error('Usage: node samples/drive/download.js $FILE_ID');
+  var args = process.argv.slice(2);
+  if (!args[0]) {
+    throw new Error('fileId required!');
+  } else {
+    sampleClient.execute(scopes, function (tokens) {
+      download(args[0], tokens);
+    });
   }
-  const fileId = process.argv[2];
-  const scopes = [
-    'https://www.googleapis.com/auth/drive',
-    'https://www.googleapis.com/auth/drive.appdata',
-    'https://www.googleapis.com/auth/drive.file',
-    'https://www.googleapis.com/auth/drive.metadata',
-    'https://www.googleapis.com/auth/drive.metadata.readonly',
-    'https://www.googleapis.com/auth/drive.photos.readonly',
-    'https://www.googleapis.com/auth/drive.readonly',
-  ];
-  sampleClient
-    .authenticate(scopes)
-    .then(() => runSample(fileId))
-    .catch(console.error);
 }
-
-// export functions for testing purposes
-module.exports = {
-  runSample,
-  client: sampleClient.oAuth2Client,
-};

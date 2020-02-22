@@ -1,4 +1,4 @@
-// Copyright 2014 Google LLC
+// Copyright 2014-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,118 +11,165 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as assert from 'assert';
-import {describe, it} from 'mocha';
-import {APIEndpoint} from 'googleapis-common';
+import * as assert from 'power-assert';
 import * as nock from 'nock';
-import {drive_v2, GoogleApis} from '../src';
-import {Utils} from './utils';
-
-const googleapis = new GoogleApis();
+import utils from './utils';
+let googleapis = require('../');
 
 describe('drive:v2', () => {
-  let localDrive: drive_v2.Drive, remoteDrive: APIEndpoint;
+  let localDrive, remoteDrive;
 
-  before(async () => {
+  before((done) => {
     nock.cleanAll();
-    const google = new GoogleApis();
+    const google = new googleapis.GoogleApis();
     nock.enableNetConnect();
-    remoteDrive = await Utils.loadApi(google, 'drive', 'v2');
-    nock.disableNetConnect();
+    utils.loadApi(google, 'drive', 'v2', {}, (err, drive) => {
+      nock.disableNetConnect();
+      if (err) {
+        return done(err);
+      }
+      remoteDrive = drive;
+      done();
+    });
   });
 
   beforeEach(() => {
     nock.cleanAll();
     nock.disableNetConnect();
-    const google = new GoogleApis();
+    const google = new googleapis.GoogleApis();
     localDrive = google.drive('v2');
   });
 
-  it('should exist', done => {
-    assert.notStrictEqual(typeof googleapis.drive, null);
+  it('should exist', (done) => {
+    assert.notEqual(typeof googleapis.drive, null);
     done();
   });
 
-  it('should be a function', done => {
-    assert.strictEqual(typeof googleapis.drive, 'function');
+  it('should be a function', (done) => {
+    assert.equal(typeof googleapis.drive, 'function');
     done();
   });
 
-  it('should create a drive object', done => {
-    assert.notStrictEqual(typeof localDrive, 'undefined');
-    assert.notStrictEqual(typeof remoteDrive, 'undefined');
+  it('should create a drive object', (done) => {
+    assert.notEqual(typeof localDrive, 'undefined');
+    assert.notEqual(typeof remoteDrive, 'undefined');
     done();
   });
 
-  it('should be frozen (immutable)', done => {
-    assert.strictEqual(Object.isFrozen(localDrive), true);
-    assert.strictEqual(Object.isFrozen(remoteDrive), true);
+  it('should be frozen (immutable)', (done) => {
+    assert.equal(Object.isFrozen(localDrive), true);
+    assert.equal(Object.isFrozen(remoteDrive), true);
     done();
   });
 
   describe('.files', () => {
-    it('should exist', done => {
-      assert.notStrictEqual(typeof localDrive.files, 'undefined');
-      assert.notStrictEqual(typeof remoteDrive.files, 'undefined');
+    it('should exist', (done) => {
+      assert.notEqual(typeof localDrive.files, 'undefined');
+      assert.notEqual(typeof remoteDrive.files, 'undefined');
       done();
     });
 
-    it('should be an object', done => {
-      assert.strictEqual(typeof localDrive.files, 'object');
-      assert.strictEqual(typeof remoteDrive.files, 'object');
+    it('should be an object', (done) => {
+      assert.equal(typeof localDrive.files, 'object');
+      assert.equal(typeof remoteDrive.files, 'object');
       done();
     });
 
     describe('.insert', () => {
-      it('should exist', done => {
-        assert.notStrictEqual(typeof localDrive.files.insert, 'undefined');
-        assert.notStrictEqual(typeof remoteDrive.files.insert, 'undefined');
+      it('should exist', (done) => {
+        assert.notEqual(typeof localDrive.files.insert, 'undefined');
+        assert.notEqual(typeof remoteDrive.files.insert, 'undefined');
         done();
       });
 
-      it('should be a function', done => {
-        assert.strictEqual(typeof localDrive.files.insert, 'function');
-        assert.strictEqual(typeof remoteDrive.files.insert, 'function');
+      it('should be a function', (done) => {
+        assert.equal(typeof localDrive.files.insert, 'function');
+        assert.equal(typeof remoteDrive.files.insert, 'function');
         done();
       });
 
-      it('should not return a Request object', done => {
-        let req = localDrive.files.insert(Utils.noop);
-        assert.strictEqual(req, undefined);
-        req = remoteDrive.files.insert(Utils.noop);
-        assert.strictEqual(req, undefined);
+      it('should return a Request object', (done) => {
+        let req = localDrive.files.insert({}, utils.noop);
+        assert.equal(req.constructor.name, 'Request');
+        req = remoteDrive.files.insert({}, utils.noop);
+        assert.equal(req.constructor.name, 'Request');
         done();
       });
     });
 
     describe('.get', () => {
       it('should exist', () => {
-        assert.notStrictEqual(typeof localDrive.files.get, 'undefined');
-        assert.notStrictEqual(typeof remoteDrive.files.get, 'undefined');
+        assert.notEqual(typeof localDrive.files.get, 'undefined');
+        assert.notEqual(typeof remoteDrive.files.get, 'undefined');
       });
 
       it('should be a function', () => {
-        assert.strictEqual(typeof localDrive.files.get, 'function');
-        assert.strictEqual(typeof remoteDrive.files.get, 'function');
+        assert.equal(typeof localDrive.files.get, 'function');
+        assert.equal(typeof remoteDrive.files.get, 'function');
       });
 
-      it('should not return a Request object', () => {
-        let req = localDrive.files.get({fileId: '123'}, Utils.noop);
-        assert.strictEqual(req, undefined);
-        req = remoteDrive.files.get({fileId: '123'}, Utils.noop);
-        assert.strictEqual(req, undefined);
+      it('should return a Request object', () => {
+        let req = localDrive.files.get({ fileId: '123' }, utils.noop);
+        assert.equal(req.constructor.name, 'Request');
+        req = remoteDrive.files.get({ fileId: '123' }, utils.noop);
+        assert.equal(req.constructor.name, 'Request');
+      });
+
+      it('should use logError callback if no callback specified', (done) => {
+        const scope = nock('https://www.googleapis.com')
+          .get('/drive/v2/files?q=hello')
+          .times(2)
+          .reply(501, { error: 'not a real error' });
+
+        // logError internally uses console.error - let's monkey-patch the
+        // function to intercept calls to it, then restore the original function
+        // once we are done testing
+        const origFn = console.error;
+        let count = 0;
+        console.error = (err) => {
+          count++;
+          assert.equal(err.code, 501);
+          if (count === 2) {
+            console.error = origFn;
+            scope.done();
+            done();
+          }
+        };
+
+        assert.doesNotThrow(() => {
+          localDrive.files.list({ q: 'hello' });
+          remoteDrive.files.list({ q: 'hello' });
+        });
       });
     });
   });
 
+  describe('._options', () => {
+    it('should exist', () => {
+      assert.notEqual(typeof localDrive._options, 'undefined');
+      assert.notEqual(typeof remoteDrive._options, 'undefined');
+    });
+
+    it('should be an object', () => {
+      assert.equal(typeof localDrive._options, 'object');
+      assert.equal(typeof remoteDrive._options, 'object');
+    });
+  });
+
   describe('.files.list()', () => {
-    it('should not return missing param error', async () => {
-      nock(Utils.baseUrl)
+    it('should not return missing param error', (done) => {
+      const scope = nock('https://www.googleapis.com')
         .get('/drive/v2/files?q=hello')
         .times(2)
         .reply(200);
-      await localDrive.files.list({q: 'hello'});
-      await remoteDrive.files.list({q: 'hello'});
+      localDrive.files.list({ q: 'hello' }, (err) => {
+        assert.equal(err, null);
+        remoteDrive.files.list({ q: 'hello' }, (err) => {
+          assert.equal(err, null);
+          scope.done();
+          done();
+        });
+      });
     });
   });
 
