@@ -24,9 +24,9 @@ import {APIRequestContext, BodyResponseCallback, createAPIRequest, GlobalOptions
 // tslint:disable: jsdoc-format
 // tslint:disable: no-namespace
 
-export namespace accesscontextmanager_v1beta {
+export namespace accesscontextmanager_v1 {
   export interface Options extends GlobalOptions {
-    version: 'v1beta';
+    version: 'v1';
   }
 
   let context: APIRequestContext;
@@ -90,12 +90,12 @@ export namespace accesscontextmanager_v1beta {
    *
    * @example
    * const {google} = require('googleapis');
-   * const accesscontextmanager = google.accesscontextmanager('v1beta');
+   * const accesscontextmanager = google.accesscontextmanager('v1');
    *
    * @namespace accesscontextmanager
    * @type {Function}
-   * @version v1beta
-   * @variation v1beta
+   * @version v1
+   * @variation v1
    * @param {object=} options Options for Accesscontextmanager
    */
   export class Accesscontextmanager {
@@ -193,6 +193,10 @@ export namespace accesscontextmanager_v1beta {
     conditions?: Schema$Condition[];
   }
   /**
+   * The request message for Operations.CancelOperation.
+   */
+  export interface Schema$CancelOperationRequest {}
+  /**
    * A condition necessary for an `AccessLevel` to be granted. The Condition is
    * an AND over its fields. So a Condition is true if: 1) the request IP is
    * from one of the listed subnetworks AND 2) the originating device complies
@@ -284,6 +288,14 @@ export namespace accesscontextmanager_v1beta {
     requireScreenlock?: boolean;
   }
   /**
+   * A generic empty message that you can re-use to avoid defining duplicated
+   * empty messages in your APIs. A typical example is to use it as the request
+   * or the response type of an API method. For instance:      service Foo { rpc
+   * Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON
+   * representation for `Empty` is empty JSON object `{}`.
+   */
+  export interface Schema$Empty {}
+  /**
    * A response to `ListAccessLevelsRequest`.
    */
   export interface Schema$ListAccessLevelsResponse {
@@ -310,6 +322,19 @@ export namespace accesscontextmanager_v1beta {
      * is empty, no further results remain.
      */
     nextPageToken?: string;
+  }
+  /**
+   * The response message for Operations.ListOperations.
+   */
+  export interface Schema$ListOperationsResponse {
+    /**
+     * The standard List next-page token.
+     */
+    nextPageToken?: string;
+    /**
+     * A list of operations that matches the specified filter in the request.
+     */
+    operations?: Schema$Operation[];
   }
   /**
    * A response to `ListServicePerimetersRequest`.
@@ -419,14 +444,14 @@ export namespace accesscontextmanager_v1beta {
      * Perimeter type indicator. A single project is allowed to be a member of
      * single regular perimeter, but multiple service perimeter bridges. A
      * project cannot be a included in a perimeter bridge without being included
-     * in regular perimeter. For perimeter bridges, restricted/unrestricted
-     * service lists as well as access lists must be empty.
+     * in regular perimeter. For perimeter bridges, the restricted service list
+     * as well as access level lists must be empty.
      */
     perimeterType?: string;
     /**
      * Current ServicePerimeter configuration. Specifies sets of resources,
-     * restricted/unrestricted services and access levels that determine
-     * perimeter content and boundaries.
+     * restricted services and access levels that determine perimeter content
+     * and boundaries.
      */
     status?: Schema$ServicePerimeterConfig;
     /**
@@ -460,19 +485,12 @@ export namespace accesscontextmanager_v1beta {
      */
     resources?: string[];
     /**
-     * GCP services that are subject to the Service Perimeter restrictions. Must
-     * contain a list of services. For example, if `storage.googleapis.com` is
-     * specified, access to the storage buckets inside the perimeter must meet
-     * the perimeter&#39;s access restrictions.
+     * GCP services that are subject to the Service Perimeter restrictions. For
+     * example, if `storage.googleapis.com` is specified, access to the storage
+     * buckets inside the perimeter must meet the perimeter&#39;s access
+     * restrictions.
      */
     restrictedServices?: string[];
-    /**
-     * GCP services that are not subject to the Service Perimeter restrictions.
-     * Deprecated. Must be set to a single wildcard &quot;*&quot;.  The wildcard
-     * means that unless explicitly specified by &quot;restricted_services&quot;
-     * list, any service is treated as unrestricted.
-     */
-    unrestrictedServices?: string[];
   }
   /**
    * The `Status` type defines a logical error model that is suitable for
@@ -592,7 +610,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/accessPolicies')
+              url: (rootUrl + '/v1/accessPolicies')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -662,7 +680,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
             options),
@@ -725,7 +743,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -797,7 +815,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/accessPolicies')
+              url: (rootUrl + '/v1/accessPolicies')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -871,7 +889,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
             options),
@@ -1030,7 +1048,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+parent}/accessLevels')
+              url: (rootUrl + '/v1/{+parent}/accessLevels')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1100,7 +1118,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
             options),
@@ -1164,7 +1182,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -1236,7 +1254,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+parent}/accessLevels')
+              url: (rootUrl + '/v1/{+parent}/accessLevels')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -1309,7 +1327,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
             options),
@@ -1491,7 +1509,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+parent}/servicePerimeters')
+              url: (rootUrl + '/v1/{+parent}/servicePerimeters')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1562,7 +1580,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
             options),
@@ -1625,7 +1643,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -1700,7 +1718,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+parent}/servicePerimeters')
+              url: (rootUrl + '/v1/{+parent}/servicePerimeters')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -1777,7 +1795,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
             options),
@@ -1891,6 +1909,149 @@ export namespace accesscontextmanager_v1beta {
 
 
     /**
+     * accesscontextmanager.operations.cancel
+     * @desc Starts asynchronous cancellation on a long-running operation.  The
+     * server makes a best effort to cancel the operation, but success is not
+     * guaranteed.  If the server doesn't support this method, it returns
+     * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use Operations.GetOperation
+     * or other methods to check whether the cancellation succeeded or whether
+     * the operation completed despite cancellation. On successful cancellation,
+     * the operation is not deleted; instead, it becomes an operation with an
+     * Operation.error value with a google.rpc.Status.code of 1, corresponding
+     * to `Code.CANCELLED`.
+     * @alias accesscontextmanager.operations.cancel
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string} params.name The name of the operation resource to be cancelled.
+     * @param {().CancelOperationRequest} params.resource Request body data
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    cancel(params?: Params$Resource$Operations$Cancel, options?: MethodOptions):
+        GaxiosPromise<Schema$Empty>;
+    cancel(
+        params: Params$Resource$Operations$Cancel,
+        options: MethodOptions|BodyResponseCallback<Schema$Empty>,
+        callback: BodyResponseCallback<Schema$Empty>): void;
+    cancel(
+        params: Params$Resource$Operations$Cancel,
+        callback: BodyResponseCallback<Schema$Empty>): void;
+    cancel(callback: BodyResponseCallback<Schema$Empty>): void;
+    cancel(
+        paramsOrCallback?: Params$Resource$Operations$Cancel|
+        BodyResponseCallback<Schema$Empty>,
+        optionsOrCallback?: MethodOptions|BodyResponseCallback<Schema$Empty>,
+        callback?: BodyResponseCallback<Schema$Empty>):
+        void|GaxiosPromise<Schema$Empty> {
+      let params =
+          (paramsOrCallback || {}) as Params$Resource$Operations$Cancel;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Operations$Cancel;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl =
+          options.rootUrl || 'https://accesscontextmanager.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+            {
+              url: (rootUrl + '/v1/{+name}:cancel')
+                       .replace(/([^:]\/)\/+/g, '$1'),
+              method: 'POST'
+            },
+            options),
+        params,
+        requiredParams: ['name'],
+        pathParams: ['name'],
+        context
+      };
+      if (callback) {
+        createAPIRequest<Schema$Empty>(parameters, callback);
+      } else {
+        return createAPIRequest<Schema$Empty>(parameters);
+      }
+    }
+
+
+    /**
+     * accesscontextmanager.operations.delete
+     * @desc Deletes a long-running operation. This method indicates that the
+     * client is no longer interested in the operation result. It does not
+     * cancel the operation. If the server doesn't support this method, it
+     * returns `google.rpc.Code.UNIMPLEMENTED`.
+     * @alias accesscontextmanager.operations.delete
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string} params.name The name of the operation resource to be deleted.
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    delete(params?: Params$Resource$Operations$Delete, options?: MethodOptions):
+        GaxiosPromise<Schema$Empty>;
+    delete(
+        params: Params$Resource$Operations$Delete,
+        options: MethodOptions|BodyResponseCallback<Schema$Empty>,
+        callback: BodyResponseCallback<Schema$Empty>): void;
+    delete(
+        params: Params$Resource$Operations$Delete,
+        callback: BodyResponseCallback<Schema$Empty>): void;
+    delete(callback: BodyResponseCallback<Schema$Empty>): void;
+    delete(
+        paramsOrCallback?: Params$Resource$Operations$Delete|
+        BodyResponseCallback<Schema$Empty>,
+        optionsOrCallback?: MethodOptions|BodyResponseCallback<Schema$Empty>,
+        callback?: BodyResponseCallback<Schema$Empty>):
+        void|GaxiosPromise<Schema$Empty> {
+      let params =
+          (paramsOrCallback || {}) as Params$Resource$Operations$Delete;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Operations$Delete;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl =
+          options.rootUrl || 'https://accesscontextmanager.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+            {
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              method: 'DELETE'
+            },
+            options),
+        params,
+        requiredParams: ['name'],
+        pathParams: ['name'],
+        context
+      };
+      if (callback) {
+        createAPIRequest<Schema$Empty>(parameters, callback);
+      } else {
+        return createAPIRequest<Schema$Empty>(parameters);
+      }
+    }
+
+
+    /**
      * accesscontextmanager.operations.get
      * @desc Gets the latest state of a long-running operation.  Clients can use
      * this method to poll the operation result at intervals as recommended by
@@ -1937,7 +2098,7 @@ export namespace accesscontextmanager_v1beta {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -1952,8 +2113,114 @@ export namespace accesscontextmanager_v1beta {
         return createAPIRequest<Schema$Operation>(parameters);
       }
     }
+
+
+    /**
+     * accesscontextmanager.operations.list
+     * @desc Lists operations that match the specified filter in the request. If
+     * the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE:
+     * the `name` binding allows API services to override the binding to use
+     * different resource name schemes, such as `users/x/operations`. To
+     * override the binding, API services can add a binding such as
+     * `"/v1/{name=users/x}/operations"` to their service configuration. For
+     * backwards compatibility, the default name includes the operations
+     * collection id, however overriding users must ensure the name binding is
+     * the parent resource, without the operations collection id.
+     * @alias accesscontextmanager.operations.list
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string=} params.filter The standard list filter.
+     * @param {string} params.name The name of the operation's parent resource.
+     * @param {integer=} params.pageSize The standard list page size.
+     * @param {string=} params.pageToken The standard list page token.
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    list(params?: Params$Resource$Operations$List, options?: MethodOptions):
+        GaxiosPromise<Schema$ListOperationsResponse>;
+    list(
+        params: Params$Resource$Operations$List,
+        options: MethodOptions|
+        BodyResponseCallback<Schema$ListOperationsResponse>,
+        callback: BodyResponseCallback<Schema$ListOperationsResponse>): void;
+    list(
+        params: Params$Resource$Operations$List,
+        callback: BodyResponseCallback<Schema$ListOperationsResponse>): void;
+    list(callback: BodyResponseCallback<Schema$ListOperationsResponse>): void;
+    list(
+        paramsOrCallback?: Params$Resource$Operations$List|
+        BodyResponseCallback<Schema$ListOperationsResponse>,
+        optionsOrCallback?: MethodOptions|
+        BodyResponseCallback<Schema$ListOperationsResponse>,
+        callback?: BodyResponseCallback<Schema$ListOperationsResponse>):
+        void|GaxiosPromise<Schema$ListOperationsResponse> {
+      let params = (paramsOrCallback || {}) as Params$Resource$Operations$List;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Operations$List;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl =
+          options.rootUrl || 'https://accesscontextmanager.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+            {
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              method: 'GET'
+            },
+            options),
+        params,
+        requiredParams: ['name'],
+        pathParams: ['name'],
+        context
+      };
+      if (callback) {
+        createAPIRequest<Schema$ListOperationsResponse>(parameters, callback);
+      } else {
+        return createAPIRequest<Schema$ListOperationsResponse>(parameters);
+      }
+    }
   }
 
+  export interface Params$Resource$Operations$Cancel extends
+      StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
+
+    /**
+     * The name of the operation resource to be cancelled.
+     */
+    name?: string;
+
+    /**
+     * Request body metadata
+     */
+    requestBody?: Schema$CancelOperationRequest;
+  }
+  export interface Params$Resource$Operations$Delete extends
+      StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
+
+    /**
+     * The name of the operation resource to be deleted.
+     */
+    name?: string;
+  }
   export interface Params$Resource$Operations$Get extends StandardParameters {
     /**
      * Auth client or API Key for the request
@@ -1964,5 +2231,28 @@ export namespace accesscontextmanager_v1beta {
      * The name of the operation resource.
      */
     name?: string;
+  }
+  export interface Params$Resource$Operations$List extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
+
+    /**
+     * The standard list filter.
+     */
+    filter?: string;
+    /**
+     * The name of the operation's parent resource.
+     */
+    name?: string;
+    /**
+     * The standard list page size.
+     */
+    pageSize?: number;
+    /**
+     * The standard list page token.
+     */
+    pageToken?: string;
   }
 }
