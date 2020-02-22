@@ -24,9 +24,9 @@ import {BodyResponseCallback, createAPIRequest, GlobalOptions, GoogleConfigurabl
 // tslint:disable: jsdoc-format
 // tslint:disable: no-namespace
 
-export namespace dfareporting_v3_0 {
+export namespace dfareporting_v3_2 {
   export interface Options extends GlobalOptions {
-    version: 'v3_0';
+    version: 'v3_2';
   }
 
   /**
@@ -36,12 +36,12 @@ export namespace dfareporting_v3_0 {
    *
    * @example
    * const {google} = require('googleapis');
-   * const dfareporting = google.dfareporting('v3.0');
+   * const dfareporting = google.dfareporting('v3.2');
    *
    * @namespace dfareporting
    * @type {Function}
-   * @version v3.0
-   * @variation v3.0
+   * @version v3.2
+   * @variation v3.2
    * @param {object=} options Options for Dfareporting
    */
   export class Dfareporting {
@@ -84,6 +84,7 @@ export namespace dfareporting_v3_0 {
     inventoryItems: Resource$Inventoryitems;
     languages: Resource$Languages;
     metros: Resource$Metros;
+    mobileApps: Resource$Mobileapps;
     mobileCarriers: Resource$Mobilecarriers;
     operatingSystems: Resource$Operatingsystems;
     operatingSystemVersions: Resource$Operatingsystemversions;
@@ -154,6 +155,7 @@ export namespace dfareporting_v3_0 {
       this.inventoryItems = new Resource$Inventoryitems(this);
       this.languages = new Resource$Languages(this);
       this.metros = new Resource$Metros(this);
+      this.mobileApps = new Resource$Mobileapps(this);
       this.mobileCarriers = new Resource$Mobilecarriers(this);
       this.operatingSystems = new Resource$Operatingsystems(this);
       this.operatingSystemVersions = new Resource$Operatingsystemversions(this);
@@ -1676,7 +1678,8 @@ export namespace dfareporting_v3_0 {
    */
   export interface Schema$Conversion {
     /**
-     * Whether the conversion was directed toward children.
+     * Whether this particular request may come from a user under the age of 13,
+     * under COPPA compliance.
      */
     childDirectedTreatment?: boolean;
     /**
@@ -1736,6 +1739,10 @@ export namespace dfareporting_v3_0 {
      */
     mobileDeviceId?: string;
     /**
+     * Whether the conversion was for a non personalized ad.
+     */
+    nonPersonalizedAd?: boolean;
+    /**
      * The ordinal of the conversion. Use this field to control how conversions
      * of the same user and day are de-duplicated. This is a required field.
      */
@@ -1749,6 +1756,12 @@ export namespace dfareporting_v3_0 {
      * field.
      */
     timestampMicros?: string;
+    /**
+     * Whether this particular request may come from a user under the age of 16
+     * (may differ by country), under compliance with the EU?s General Data
+     * Protection Regulation (GDPR).
+     */
+    treatmentForUnderage?: boolean;
     /**
      * The value of the conversion.
      */
@@ -1925,6 +1938,13 @@ export namespace dfareporting_v3_0 {
      */
     active?: boolean;
     /**
+     * Additional sizes associated with a responsive creative. When inserting or
+     * updating a creative either the size ID field or size width and height
+     * fields can be used. Applicable to DISPLAY creatives when the primary
+     * asset type is HTML_IMAGE
+     */
+    additionalSizes?: Schema$Size[];
+    /**
      * Ad parameters user for VPAID creative. This is a read-only field.
      * Applicable to the following creative types: all VPAID.
      */
@@ -2032,8 +2052,8 @@ export namespace dfareporting_v3_0 {
     /**
      * List of companion creatives assigned to an in-Stream video creative.
      * Acceptable values include IDs of existing flash and image creatives.
-     * Applicable to the following creative types: all VPAID and all
-     * INSTREAM_VIDEO with dynamicAssetSelection set to false.
+     * Applicable to the following creative types: all VPAID, all INSTREAM_AUDIO
+     * and all INSTREAM_VIDEO with dynamicAssetSelection set to false.
      */
     companionCreatives?: string[];
     /**
@@ -2044,9 +2064,11 @@ export namespace dfareporting_v3_0 {
      * Only pre-existing creatives may have these compatibilities since new
      * creatives will either be assigned DISPLAY or DISPLAY_INTERSTITIAL
      * instead. IN_STREAM_VIDEO refers to rendering in in-stream video ads
-     * developed with the VAST standard. Applicable to all creative types.
-     * Acceptable values are: - &quot;APP&quot; - &quot;APP_INTERSTITIAL&quot; -
-     * &quot;IN_STREAM_VIDEO&quot; - &quot;DISPLAY&quot; -
+     * developed with the VAST standard. IN_STREAM_AUDIO refers to rendering in
+     * in-stream audio ads developed with the VAST standard. Applicable to all
+     * creative types.  Acceptable values are: - &quot;APP&quot; -
+     * &quot;APP_INTERSTITIAL&quot; - &quot;IN_STREAM_VIDEO&quot; -
+     * &quot;IN_STREAM_AUDIO&quot; - &quot;DISPLAY&quot; -
      * &quot;DISPLAY_INTERSTITIAL&quot;
      */
     compatibility?: string[];
@@ -2152,6 +2174,17 @@ export namespace dfareporting_v3_0 {
      * creative types: all RICH_MEDIA, and all VPAID.
      */
     latestTraffickedCreativeId?: string;
+    /**
+     * Description of the audio or video ad. Applicable to the following
+     * creative types: all INSTREAM_VIDEO, INSTREAM_AUDIO, and all VPAID.
+     */
+    mediaDescription?: string;
+    /**
+     * Creative audio or video duration in seconds. This is a read-only field.
+     * Applicable to the following creative types: INSTREAM_VIDEO,
+     * INSTREAM_AUDIO, all RICH_MEDIA, and all VPAID.
+     */
+    mediaDuration?: number;
     /**
      * Name of the creative. This is a required field and must be less than 256
      * characters long. Applicable to all creative types.
@@ -2271,8 +2304,9 @@ export namespace dfareporting_v3_0 {
      */
     thirdPartyRichMediaImpressionsUrl?: string;
     /**
-     * Third-party URLs for tracking in-stream video creative events. Applicable
-     * to the following creative types: all INSTREAM_VIDEO and all VPAID.
+     * Third-party URLs for tracking in-stream creative events. Applicable to
+     * the following creative types: all INSTREAM_VIDEO, all INSTREAM_AUDIO, and
+     * all VPAID.
      */
     thirdPartyUrls?: Schema$ThirdPartyTrackingUrl[];
     /**
@@ -2298,7 +2332,7 @@ export namespace dfareporting_v3_0 {
     type?: string;
     /**
      * A Universal Ad ID as per the VAST 4.0 spec. Applicable to the following
-     * creative types: INSTREAM_VIDEO and VPAID.
+     * creative types: INSTREAM_AUDIO and INSTREAM_VIDEO and VPAID.
      */
     universalAdId?: Schema$UniversalAdId;
     /**
@@ -2312,17 +2346,6 @@ export namespace dfareporting_v3_0 {
      * to all creative types.
      */
     version?: number;
-    /**
-     * Description of the video ad. Applicable to the following creative types:
-     * all INSTREAM_VIDEO and all VPAID.
-     */
-    videoDescription?: string;
-    /**
-     * Creative video duration in seconds. This is a read-only field. Applicable
-     * to the following creative types: INSTREAM_VIDEO, all RICH_MEDIA, and all
-     * VPAID.
-     */
-    videoDuration?: number;
   }
   /**
    * Creative Asset.
@@ -2335,11 +2358,17 @@ export namespace dfareporting_v3_0 {
      */
     actionScript3?: boolean;
     /**
-     * Whether the video asset is active. This is a read-only field for
+     * Whether the video or audio asset is active. This is a read-only field for
      * VPAID_NON_LINEAR_VIDEO assets. Applicable to the following creative
-     * types: INSTREAM_VIDEO and all VPAID.
+     * types: INSTREAM_AUDIO, INSTREAM_VIDEO and all VPAID.
      */
     active?: boolean;
+    /**
+     * Additional sizes associated with this creative asset. HTML5 asset
+     * generated by compatible software such as GWD will be able to support more
+     * sizes this creative asset can render.
+     */
+    additionalSizes?: Schema$Size[];
     /**
      * Possible alignments for an asset. This is a read-only field. Applicable
      * to the following creative types:
@@ -2363,8 +2392,9 @@ export namespace dfareporting_v3_0 {
      */
     backupImageExit?: Schema$CreativeCustomEvent;
     /**
-     * Detected bit-rate for video asset. This is a read-only field. Applicable
-     * to the following creative types: INSTREAM_VIDEO and all VPAID.
+     * Detected bit-rate for audio or video asset. This is a read-only field.
+     * Applicable to the following creative types: INSTREAM_AUDIO,
+     * INSTREAM_VIDEO and all VPAID.
      */
     bitRate?: number;
     /**
@@ -2408,8 +2438,8 @@ export namespace dfareporting_v3_0 {
     displayType?: string;
     /**
      * Duration in seconds for which an asset will be displayed. Applicable to
-     * the following creative types: INSTREAM_VIDEO and VPAID_LINEAR_VIDEO.
-     * Value must be greater than or equal to 1.
+     * the following creative types: INSTREAM_AUDIO, INSTREAM_VIDEO and
+     * VPAID_LINEAR_VIDEO. Value must be greater than or equal to 1.
      */
     duration?: number;
     /**
@@ -2461,8 +2491,15 @@ export namespace dfareporting_v3_0 {
      */
     idDimensionValue?: Schema$DimensionValue;
     /**
-     * Detected MIME type for video asset. This is a read-only field. Applicable
-     * to the following creative types: INSTREAM_VIDEO and all VPAID.
+     * Detected duration for audio or video asset. This is a read-only field.
+     * Applicable to the following creative types: INSTREAM_AUDIO,
+     * INSTREAM_VIDEO and all VPAID.
+     */
+    mediaDuration?: number;
+    /**
+     * Detected MIME type for audio or video asset. This is a read-only field.
+     * Applicable to the following creative types: INSTREAM_AUDIO,
+     * INSTREAM_VIDEO and all VPAID.
      */
     mimeType?: string;
     /**
@@ -2539,6 +2576,10 @@ export namespace dfareporting_v3_0 {
      * ALTERNATE_VIDEO assets that are marked active serve as backup in case the
      * VPAID creative cannot be served. Only PARENT_VIDEO assets can be added or
      * removed for an INSTREAM_VIDEO or VPAID_LINEAR_VIDEO creative.
+     * PARENT_AUDIO refers to audios uploaded by the user in DCM and is
+     * applicable to INSTREAM_AUDIO creatives. TRANSCODED_AUDIO refers to audios
+     * transcoded by DCM from PARENT_AUDIO assets and is applicable to
+     * INSTREAM_AUDIO creatives.
      */
     role?: string;
     /**
@@ -2576,11 +2617,6 @@ export namespace dfareporting_v3_0 {
      * Applicable to the following creative types: all RICH_MEDIA.
      */
     verticallyLocked?: boolean;
-    /**
-     * Detected video duration for video asset. This is a read-only field.
-     * Applicable to the following creative types: INSTREAM_VIDEO and all VPAID.
-     */
-    videoDuration?: number;
     /**
      * Window mode options for flash assets. Applicable to the following
      * creative types: FLASH_INPAGE, RICH_MEDIA_DISPLAY_EXPANDING,
@@ -3232,6 +3268,34 @@ export namespace dfareporting_v3_0 {
      * America/New York time zone applies.
      */
     userLocalTime?: boolean;
+  }
+  /**
+   * Contains information about a landing page deep link.
+   */
+  export interface Schema$DeepLink {
+    /**
+     * The URL of the mobile app being linked to.
+     */
+    appUrl?: string;
+    /**
+     * The fallback URL. This URL will be served to users who do not have the
+     * mobile app installed.
+     */
+    fallbackUrl?: string;
+    /**
+     * Identifies what kind of resource this is. Value: the fixed string
+     * &quot;dfareporting#deepLink&quot;.
+     */
+    kind?: string;
+    /**
+     * The mobile app targeted by this deep link.
+     */
+    mobileApp?: Schema$MobileApp;
+    /**
+     * Ads served to users on these remarketing lists will use this deep link.
+     * Applicable when mobileApp.directory is APPLE_APP_STORE.
+     */
+    remarketingListIds?: string[];
   }
   /**
    * Properties of inheriting and overriding the default click-through event
@@ -4602,6 +4666,10 @@ export namespace dfareporting_v3_0 {
      */
     archived?: boolean;
     /**
+     * Links that will direct the user to a mobile app, if installed.
+     */
+    deepLinks?: Schema$DeepLink[];
+    /**
      * ID of this landing page. This is a read-only, auto-generated field.
      */
     id?: string;
@@ -4856,6 +4924,50 @@ export namespace dfareporting_v3_0 {
      * Metro collection.
      */
     metros?: Schema$Metro[];
+  }
+  /**
+   * Contains information about a mobile app. Used as a landing page deep link.
+   */
+  export interface Schema$MobileApp {
+    /**
+     * Mobile app directory.
+     */
+    directory?: string;
+    /**
+     * ID of this mobile app.
+     */
+    id?: string;
+    /**
+     * Identifies what kind of resource this is. Value: the fixed string
+     * &quot;dfareporting#mobileApp&quot;.
+     */
+    kind?: string;
+    /**
+     * Publisher name.
+     */
+    publisherName?: string;
+    /**
+     * Title of this mobile app.
+     */
+    title?: string;
+  }
+  /**
+   * Mobile app List Response
+   */
+  export interface Schema$MobileAppsListResponse {
+    /**
+     * Identifies what kind of resource this is. Value: the fixed string
+     * &quot;dfareporting#mobileAppsListResponse&quot;.
+     */
+    kind?: string;
+    /**
+     * Mobile apps collection.
+     */
+    mobileApps?: Schema$MobileApp[];
+    /**
+     * Pagination token to be used for the next list operation.
+     */
+    nextPageToken?: string;
   }
   /**
    * Contains information about a mobile carrier that can be targeted by ads.
@@ -5324,6 +5436,11 @@ export namespace dfareporting_v3_0 {
      * take effect.
      */
     adBlockingOptOut?: boolean;
+    /**
+     * Additional sizes associated with this placement. When inserting or
+     * updating a placement, only the size ID field is used.
+     */
+    additionalSizes?: Schema$Size[];
     /**
      * Advertiser ID of this placement. This field can be left blank.
      */
@@ -7188,7 +7305,7 @@ export namespace dfareporting_v3_0 {
    */
   export interface Schema$ThirdPartyTrackingUrl {
     /**
-     * Third-party URL type for in-stream video creatives.
+     * Third-party URL type for in-stream video and in-stream audio creatives.
      */
     thirdPartyUrlType?: string;
     /**
@@ -7213,7 +7330,7 @@ export namespace dfareporting_v3_0 {
   }
   /**
    * A Universal Ad ID as per the VAST 4.0 spec. Applicable to the following
-   * creative types: INSTREAM_VIDEO and VPAID.
+   * creative types: INSTREAM_AUDIO, INSTREAM_VIDEO and VPAID.
    */
   export interface Schema$UniversalAdId {
     /**
@@ -7589,7 +7706,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/accountActiveAdSummaries/{summaryAccountId}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/accountActiveAdSummaries/{summaryAccountId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -7687,7 +7804,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/accountPermissionGroups/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/accountPermissionGroups/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -7767,7 +7884,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/accountPermissionGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/accountPermissionGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -7877,7 +7994,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/accountPermissions/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/accountPermissions/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -7953,7 +8070,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/accountPermissions')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/accountPermissions')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -8060,7 +8177,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/accounts/{id}')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/accounts/{id}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -8145,7 +8262,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/accounts')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/accounts')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -8214,7 +8331,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/accounts')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/accounts')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -8282,7 +8399,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/accounts')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/accounts')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -8460,7 +8577,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/accountUserProfiles/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/accountUserProfiles/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -8532,7 +8649,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/accountUserProfiles')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/accountUserProfiles')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -8630,7 +8747,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/accountUserProfiles')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/accountUserProfiles')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -8706,7 +8823,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/accountUserProfiles')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/accountUserProfiles')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -8778,7 +8895,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/accountUserProfiles')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/accountUserProfiles')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -8977,7 +9094,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/ads/{id}')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/ads/{id}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -9044,7 +9161,7 @@ export namespace dfareporting_v3_0 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/dfareporting/v3.0/userprofiles/{profileId}/ads')
+              url: (rootUrl + '/dfareporting/v3.2/userprofiles/{profileId}/ads')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -9161,7 +9278,7 @@ export namespace dfareporting_v3_0 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/dfareporting/v3.0/userprofiles/{profileId}/ads')
+              url: (rootUrl + '/dfareporting/v3.2/userprofiles/{profileId}/ads')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -9229,7 +9346,7 @@ export namespace dfareporting_v3_0 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/dfareporting/v3.0/userprofiles/{profileId}/ads')
+              url: (rootUrl + '/dfareporting/v3.2/userprofiles/{profileId}/ads')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -9296,7 +9413,7 @@ export namespace dfareporting_v3_0 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/dfareporting/v3.0/userprofiles/{profileId}/ads')
+              url: (rootUrl + '/dfareporting/v3.2/userprofiles/{profileId}/ads')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -9563,7 +9680,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserGroups/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserGroups/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -9631,7 +9748,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserGroups/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserGroups/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -9703,7 +9820,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -9794,7 +9911,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -9870,7 +9987,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -9942,7 +10059,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -10147,7 +10264,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserLandingPages/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserLandingPages/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -10219,7 +10336,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserLandingPages')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserLandingPages')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -10320,7 +10437,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserLandingPages')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserLandingPages')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -10396,7 +10513,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserLandingPages')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserLandingPages')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -10468,7 +10585,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertiserLandingPages')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertiserLandingPages')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -10670,7 +10787,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/advertisers/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/advertisers/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -10741,7 +10858,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/advertisers')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/advertisers')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -10837,7 +10954,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/advertisers')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/advertisers')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -10909,7 +11026,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/advertisers')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/advertisers')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -10980,7 +11097,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/advertisers')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/advertisers')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -11196,7 +11313,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/browsers')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/browsers')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -11301,7 +11418,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/campaigns/{campaignId}/campaignCreativeAssociations')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/campaigns/{campaignId}/campaignCreativeAssociations')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -11385,7 +11502,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/campaigns/{campaignId}/campaignCreativeAssociations')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/campaigns/{campaignId}/campaignCreativeAssociations')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -11514,7 +11631,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/campaigns/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/campaigns/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -11582,7 +11699,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/campaigns')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/campaigns')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -11678,7 +11795,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/campaigns')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/campaigns')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -11747,7 +11864,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/campaigns')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/campaigns')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -11815,7 +11932,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/campaigns')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/campaigns')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -12034,7 +12151,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/changeLogs/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/changeLogs/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -12131,7 +12248,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/changeLogs')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/changeLogs')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -12297,7 +12414,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/cities')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/cities')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -12406,7 +12523,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/connectionTypes/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/connectionTypes/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -12481,7 +12598,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/connectionTypes')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/connectionTypes')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -12592,7 +12709,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/contentCategories/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/contentCategories/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -12660,7 +12777,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/contentCategories/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/contentCategories/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -12732,7 +12849,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/contentCategories')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/contentCategories')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -12824,7 +12941,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/contentCategories')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/contentCategories')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -12900,7 +13017,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/contentCategories')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/contentCategories')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -12972,7 +13089,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/contentCategories')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/contentCategories')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -13188,7 +13305,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/conversions/batchinsert')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/conversions/batchinsert')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -13269,7 +13386,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/conversions/batchupdate')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/conversions/batchupdate')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -13383,7 +13500,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/countries/{dartId}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/countries/{dartId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -13452,7 +13569,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/countries')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/countries')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -13570,7 +13687,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeAssets/{advertiserId}/creativeAssets')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeAssets/{advertiserId}/creativeAssets')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -13578,7 +13695,7 @@ export namespace dfareporting_v3_0 {
         params,
         mediaUrl:
             (rootUrl +
-             '/upload/dfareporting/v3.0/userprofiles/{profileId}/creativeAssets/{advertiserId}/creativeAssets')
+             '/upload/dfareporting/v3.2/userprofiles/{profileId}/creativeAssets/{advertiserId}/creativeAssets')
                 .replace(/([^:]\/)\/+/g, '$1'),
         requiredParams: ['profileId', 'advertiserId'],
         pathParams: ['advertiserId', 'profileId'],
@@ -13693,7 +13810,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -13761,7 +13878,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -13833,7 +13950,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -13925,7 +14042,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14000,7 +14117,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -14072,7 +14189,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -14285,7 +14402,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -14355,7 +14472,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14429,7 +14546,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -14519,7 +14636,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14597,7 +14714,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -14671,7 +14788,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -14895,7 +15012,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeGroups/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeGroups/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14967,7 +15084,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -15061,7 +15178,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -15136,7 +15253,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -15208,7 +15325,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creativeGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creativeGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -15404,7 +15521,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/creatives/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/creatives/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -15472,7 +15589,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/creatives')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/creatives')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -15575,7 +15692,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/creatives')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/creatives')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -15644,7 +15761,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/creatives')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/creatives')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -15712,7 +15829,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/creatives')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/creatives')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -15950,7 +16067,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/dimensionvalues/query')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/dimensionvalues/query')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -16057,7 +16174,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/directorySiteContacts/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/directorySiteContacts/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -16156,7 +16273,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/directorySiteContacts')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/directorySiteContacts')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -16302,7 +16419,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/directorySites/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/directorySites/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -16374,7 +16491,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/directorySites')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/directorySites')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -16480,7 +16597,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/directorySites')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/directorySites')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -16675,7 +16792,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/dynamicTargetingKeys/{objectId}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/dynamicTargetingKeys/{objectId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -16751,7 +16868,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/dynamicTargetingKeys')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/dynamicTargetingKeys')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -16839,7 +16956,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/dynamicTargetingKeys')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/dynamicTargetingKeys')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -16992,7 +17109,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/eventTags/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/eventTags/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -17058,7 +17175,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/eventTags/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/eventTags/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -17126,7 +17243,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/eventTags')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/eventTags')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -17230,7 +17347,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/eventTags')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/eventTags')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -17300,7 +17417,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/eventTags')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/eventTags')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -17368,7 +17485,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/eventTags')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/eventTags')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -17600,7 +17717,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/reports/{reportId}/files/{fileId}')
+                    '/dfareporting/v3.2/reports/{reportId}/files/{fileId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -17673,7 +17790,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/files')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/files')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -17803,7 +17920,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivities/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivities/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -17882,7 +17999,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivities/generatetag')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivities/generatetag')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -17952,7 +18069,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivities/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivities/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -18024,7 +18141,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivities')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivities')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -18142,7 +18259,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivities')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivities')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -18218,7 +18335,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivities')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivities')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -18290,7 +18407,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivities')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivities')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -18550,7 +18667,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivityGroups/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivityGroups/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -18624,7 +18741,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivityGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivityGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -18731,7 +18848,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivityGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivityGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -18808,7 +18925,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivityGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivityGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -18882,7 +18999,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightActivityGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightActivityGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -19093,7 +19210,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightConfigurations/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightConfigurations/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -19175,7 +19292,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightConfigurations')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightConfigurations')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -19252,7 +19369,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightConfigurations')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightConfigurations')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -19326,7 +19443,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/floodlightConfigurations')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/floodlightConfigurations')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -19476,7 +19593,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/projects/{projectId}/inventoryItems/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/projects/{projectId}/inventoryItems/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -19565,7 +19682,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/projects/{projectId}/inventoryItems')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/projects/{projectId}/inventoryItems')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -19719,7 +19836,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/languages')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/languages')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -19812,7 +19929,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/metros')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/metros')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -19840,6 +19957,220 @@ export namespace dfareporting_v3_0 {
      * User profile ID associated with this request.
      */
     profileId?: string;
+  }
+
+
+  export class Resource$Mobileapps {
+    root: Dfareporting;
+    constructor(root: Dfareporting) {
+      this.root = root;
+      this.getRoot.bind(this);
+    }
+
+    getRoot() {
+      return this.root;
+    }
+
+
+    /**
+     * dfareporting.mobileApps.get
+     * @desc Gets one mobile app by ID.
+     * @alias dfareporting.mobileApps.get
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string} params.id Mobile app ID.
+     * @param {string} params.profileId User profile ID associated with this
+     *     request.
+     * @param {object} [options] Optionally override request options, such as
+     *     `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    get(params?: Params$Resource$Mobileapps$Get,
+        options?: MethodOptions): AxiosPromise<Schema$MobileApp>;
+    get(params: Params$Resource$Mobileapps$Get,
+        options: MethodOptions|BodyResponseCallback<Schema$MobileApp>,
+        callback: BodyResponseCallback<Schema$MobileApp>): void;
+    get(params: Params$Resource$Mobileapps$Get,
+        callback: BodyResponseCallback<Schema$MobileApp>): void;
+    get(callback: BodyResponseCallback<Schema$MobileApp>): void;
+    get(paramsOrCallback?: Params$Resource$Mobileapps$Get|
+        BodyResponseCallback<Schema$MobileApp>,
+        optionsOrCallback?: MethodOptions|
+        BodyResponseCallback<Schema$MobileApp>,
+        callback?: BodyResponseCallback<Schema$MobileApp>):
+        void|AxiosPromise<Schema$MobileApp> {
+      let params = (paramsOrCallback || {}) as Params$Resource$Mobileapps$Get;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Mobileapps$Get;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+            {
+              url:
+                  (rootUrl +
+                   '/dfareporting/v3.2/userprofiles/{profileId}/mobileApps/{id}')
+                      .replace(/([^:]\/)\/+/g, '$1'),
+              method: 'GET'
+            },
+            options),
+        params,
+        requiredParams: ['profileId', 'id'],
+        pathParams: ['id', 'profileId'],
+        context: this.getRoot()
+      };
+      if (callback) {
+        createAPIRequest<Schema$MobileApp>(parameters, callback);
+      } else {
+        return createAPIRequest<Schema$MobileApp>(parameters);
+      }
+    }
+
+
+    /**
+     * dfareporting.mobileApps.list
+     * @desc Retrieves list of available mobile apps.
+     * @alias dfareporting.mobileApps.list
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string=} params.directories Select only apps from these
+     *     directories.
+     * @param {string=} params.ids Select only apps with these IDs.
+     * @param {integer=} params.maxResults Maximum number of results to return.
+     * @param {string=} params.pageToken Value of the nextPageToken from the
+     *     previous result page.
+     * @param {string} params.profileId User profile ID associated with this
+     *     request.
+     * @param {string=} params.searchString Allows searching for objects by name
+     *     or ID. Wildcards (*) are allowed. For example, "app*2015" will return
+     *     objects with names like "app Jan 2018", "app Jan 2018", or simply
+     *     "app 2018". Most of the searches also add wildcards implicitly at the
+     *     start and the end of the search string. For example, a search string
+     *     of "app" will match objects with name "my app", "app 2018", or simply
+     *     "app".
+     * @param {object} [options] Optionally override request options, such as
+     *     `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    list(params?: Params$Resource$Mobileapps$List, options?: MethodOptions):
+        AxiosPromise<Schema$MobileAppsListResponse>;
+    list(
+        params: Params$Resource$Mobileapps$List,
+        options: MethodOptions|
+        BodyResponseCallback<Schema$MobileAppsListResponse>,
+        callback: BodyResponseCallback<Schema$MobileAppsListResponse>): void;
+    list(
+        params: Params$Resource$Mobileapps$List,
+        callback: BodyResponseCallback<Schema$MobileAppsListResponse>): void;
+    list(callback: BodyResponseCallback<Schema$MobileAppsListResponse>): void;
+    list(
+        paramsOrCallback?: Params$Resource$Mobileapps$List|
+        BodyResponseCallback<Schema$MobileAppsListResponse>,
+        optionsOrCallback?: MethodOptions|
+        BodyResponseCallback<Schema$MobileAppsListResponse>,
+        callback?: BodyResponseCallback<Schema$MobileAppsListResponse>):
+        void|AxiosPromise<Schema$MobileAppsListResponse> {
+      let params = (paramsOrCallback || {}) as Params$Resource$Mobileapps$List;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Mobileapps$List;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+            {
+              url: (rootUrl +
+                    '/dfareporting/v3.2/userprofiles/{profileId}/mobileApps')
+                       .replace(/([^:]\/)\/+/g, '$1'),
+              method: 'GET'
+            },
+            options),
+        params,
+        requiredParams: ['profileId'],
+        pathParams: ['profileId'],
+        context: this.getRoot()
+      };
+      if (callback) {
+        createAPIRequest<Schema$MobileAppsListResponse>(parameters, callback);
+      } else {
+        return createAPIRequest<Schema$MobileAppsListResponse>(parameters);
+      }
+    }
+  }
+
+  export interface Params$Resource$Mobileapps$Get {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
+
+    /**
+     * Mobile app ID.
+     */
+    id?: string;
+    /**
+     * User profile ID associated with this request.
+     */
+    profileId?: string;
+  }
+  export interface Params$Resource$Mobileapps$List {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
+
+    /**
+     * Select only apps from these directories.
+     */
+    directories?: string;
+    /**
+     * Select only apps with these IDs.
+     */
+    ids?: string;
+    /**
+     * Maximum number of results to return.
+     */
+    maxResults?: number;
+    /**
+     * Value of the nextPageToken from the previous result page.
+     */
+    pageToken?: string;
+    /**
+     * User profile ID associated with this request.
+     */
+    profileId?: string;
+    /**
+     * Allows searching for objects by name or ID. Wildcards (*) are allowed.
+     * For example, "app*2015" will return objects with names like "app Jan
+     * 2018", "app Jan 2018", or simply "app 2018". Most of the searches also
+     * add wildcards implicitly at the start and the end of the search string.
+     * For example, a search string of "app" will match objects with name "my
+     * app", "app 2018", or simply "app".
+     */
+    searchString?: string;
   }
 
 
@@ -19905,7 +20236,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/mobileCarriers/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/mobileCarriers/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -19979,7 +20310,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/mobileCarriers')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/mobileCarriers')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -20088,7 +20419,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/operatingSystems/{dartId}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/operatingSystems/{dartId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -20164,7 +20495,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/operatingSystems')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/operatingSystems')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -20275,7 +20606,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/operatingSystemVersions/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/operatingSystemVersions/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -20355,7 +20686,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/operatingSystemVersions')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/operatingSystemVersions')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -20466,7 +20797,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/projects/{projectId}/orderDocuments/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/projects/{projectId}/orderDocuments/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -20563,7 +20894,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/projects/{projectId}/orderDocuments')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/projects/{projectId}/orderDocuments')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -20721,7 +21052,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/projects/{projectId}/orders/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/projects/{projectId}/orders/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -20807,7 +21138,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/projects/{projectId}/orders')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/projects/{projectId}/orders')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -20956,7 +21287,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementGroups/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementGroups/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -21028,7 +21359,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -21153,7 +21484,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -21228,7 +21559,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -21300,7 +21631,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -21572,7 +21903,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placements/generatetags')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placements/generatetags')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -21641,7 +21972,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placements/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placements/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -21711,7 +22042,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/placements')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/placements')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -21836,7 +22167,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/placements')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/placements')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -21907,7 +22238,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/placements')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/placements')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -21977,7 +22308,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/placements')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/placements')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -22269,7 +22600,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementStrategies/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementStrategies/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -22337,7 +22668,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementStrategies/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementStrategies/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -22409,7 +22740,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementStrategies')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementStrategies')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -22504,7 +22835,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementStrategies')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementStrategies')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -22580,7 +22911,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementStrategies')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementStrategies')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -22652,7 +22983,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/placementStrategies')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/placementStrategies')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -22858,7 +23189,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/platformTypes/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/platformTypes/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -22929,7 +23260,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/platformTypes')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/platformTypes')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -23037,7 +23368,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/postalCodes/{code}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/postalCodes/{code}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -23106,7 +23437,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/postalCodes')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/postalCodes')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -23211,7 +23542,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/projects/{id}')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/projects/{id}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -23296,7 +23627,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/projects')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/projects')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -23437,7 +23768,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/regions')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/regions')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -23530,7 +23861,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/remarketingLists/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/remarketingLists/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -23602,7 +23933,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/remarketingLists')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/remarketingLists')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -23698,7 +24029,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/remarketingLists')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/remarketingLists')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -23774,7 +24105,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/remarketingLists')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/remarketingLists')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -23846,7 +24177,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/remarketingLists')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/remarketingLists')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -24045,7 +24376,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/remarketingListShares/{remarketingListId}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/remarketingListShares/{remarketingListId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -24120,7 +24451,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/remarketingListShares')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/remarketingListShares')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -24193,7 +24524,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/remarketingListShares')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/remarketingListShares')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -24329,7 +24660,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/reports/{reportId}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/reports/{reportId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -24394,7 +24725,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/reports/{reportId}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/reports/{reportId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -24461,7 +24792,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/reports')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/reports')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -24535,7 +24866,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/reports')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/reports')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -24604,7 +24935,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/reports/{reportId}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/reports/{reportId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -24671,7 +25002,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/reports/{reportId}/run')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/reports/{reportId}/run')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -24740,7 +25071,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/reports/{reportId}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/reports/{reportId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -24962,7 +25293,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/reports/compatiblefields/query')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/reports/compatiblefields/query')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -25059,7 +25390,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/reports/{reportId}/files/{fileId}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/reports/{reportId}/files/{fileId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -25133,7 +25464,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/reports/{reportId}/files')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/reports/{reportId}/files')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -25263,7 +25594,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/sites/{id}')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/sites/{id}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -25331,7 +25662,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/sites')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/sites')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -25431,7 +25762,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/sites')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/sites')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -25500,7 +25831,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/sites')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/sites')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -25568,7 +25899,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/sites')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/sites')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -25792,7 +26123,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/sizes/{id}')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/sizes/{id}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -25860,7 +26191,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/sizes')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/sizes')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -25935,7 +26266,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/sizes')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/sizes')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -26074,7 +26405,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/subaccounts/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/subaccounts/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -26145,7 +26476,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/subaccounts')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/subaccounts')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -26229,7 +26560,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/subaccounts')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/subaccounts')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -26301,7 +26632,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/subaccounts')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/subaccounts')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -26372,7 +26703,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/subaccounts')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/subaccounts')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -26564,7 +26895,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/targetableRemarketingLists/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/targetableRemarketingLists/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -26660,7 +26991,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/targetableRemarketingLists')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/targetableRemarketingLists')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -26804,7 +27135,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/targetingTemplates/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/targetingTemplates/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -26876,7 +27207,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/targetingTemplates')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/targetingTemplates')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -26969,7 +27300,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/targetingTemplates')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/targetingTemplates')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -27045,7 +27376,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/targetingTemplates')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/targetingTemplates')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -27117,7 +27448,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/targetingTemplates')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/targetingTemplates')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -27306,7 +27637,7 @@ export namespace dfareporting_v3_0 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/dfareporting/v3.0/userprofiles/{profileId}')
+              url: (rootUrl + '/dfareporting/v3.2/userprofiles/{profileId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -27372,7 +27703,7 @@ export namespace dfareporting_v3_0 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/dfareporting/v3.0/userprofiles')
+              url: (rootUrl + '/dfareporting/v3.2/userprofiles')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -27472,7 +27803,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/userRolePermissionGroups/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/userRolePermissionGroups/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -27552,7 +27883,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/userRolePermissionGroups')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/userRolePermissionGroups')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -27662,7 +27993,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/userRolePermissions/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/userRolePermissions/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -27742,7 +28073,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/userRolePermissions')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/userRolePermissions')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -27856,7 +28187,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/userRoles/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/userRoles/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -27922,7 +28253,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/userRoles/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/userRoles/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -27990,7 +28321,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/userRoles')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/userRoles')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -28078,7 +28409,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/userRoles')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/userRoles')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -28148,7 +28479,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/userRoles')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/userRoles')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -28216,7 +28547,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/userRoles')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/userRoles')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -28429,7 +28760,7 @@ export namespace dfareporting_v3_0 {
             {
               url:
                   (rootUrl +
-                   '/dfareporting/v3.0/userprofiles/{profileId}/videoFormats/{id}')
+                   '/dfareporting/v3.2/userprofiles/{profileId}/videoFormats/{id}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -28499,7 +28830,7 @@ export namespace dfareporting_v3_0 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/dfareporting/v3.0/userprofiles/{profileId}/videoFormats')
+                    '/dfareporting/v3.2/userprofiles/{profileId}/videoFormats')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },

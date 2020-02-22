@@ -24,9 +24,9 @@ import {BodyResponseCallback, createAPIRequest, GlobalOptions, GoogleConfigurabl
 // tslint:disable: jsdoc-format
 // tslint:disable: no-namespace
 
-export namespace texttospeech_v1beta1 {
+export namespace texttospeech_v1 {
   export interface Options extends GlobalOptions {
-    version: 'v1beta1';
+    version: 'v1';
   }
 
   /**
@@ -37,12 +37,12 @@ export namespace texttospeech_v1beta1 {
    *
    * @example
    * const {google} = require('googleapis');
-   * const texttospeech = google.texttospeech('v1beta1');
+   * const texttospeech = google.texttospeech('v1');
    *
    * @namespace texttospeech
    * @type {Function}
-   * @version v1beta1
-   * @variation v1beta1
+   * @version v1
+   * @variation v1
    * @param {object=} options Options for Texttospeech
    */
   export class Texttospeech {
@@ -75,12 +75,6 @@ export namespace texttospeech_v1beta1 {
      * Required. The format of the requested audio byte stream.
      */
     audioEncoding?: string;
-    /**
-     * An identifier which selects &#39;audio effects&#39; profiles that are
-     * applied on (post synthesized) text to speech. Effects are applied on top
-     * of each other in the order they are given.
-     */
-    effectsProfileId?: string[];
     /**
      * Optional speaking pitch, in the range [-20.0, 20.0]. 20 means increase 20
      * semitones from the original pitch. -20 means decrease 20 semitones from
@@ -295,7 +289,7 @@ export namespace texttospeech_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/text:synthesize')
+              url: (rootUrl + '/v1/text:synthesize')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -394,7 +388,7 @@ export namespace texttospeech_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/voices').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/voices').replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),

@@ -24,9 +24,9 @@ import {BodyResponseCallback, createAPIRequest, GlobalOptions, GoogleConfigurabl
 // tslint:disable: jsdoc-format
 // tslint:disable: no-namespace
 
-export namespace composer_v1beta1 {
+export namespace composer_v1 {
   export interface Options extends GlobalOptions {
-    version: 'v1beta1';
+    version: 'v1';
   }
 
   /**
@@ -36,12 +36,12 @@ export namespace composer_v1beta1 {
    *
    * @example
    * const {google} = require('googleapis');
-   * const composer = google.composer('v1beta1');
+   * const composer = google.composer('v1');
    *
    * @namespace composer
    * @type {Function}
-   * @version v1beta1
-   * @variation v1beta1
+   * @version v1
+   * @variation v1
    * @param {object=} options Options for Composer
    */
   export class Composer {
@@ -221,20 +221,19 @@ export namespace composer_v1beta1 {
      * Optional. The Compute Engine network to be used for machine
      * communications, specified as a [relative resource
      * name](/apis/design/resource_names#relative_resource_name). For example:
-     * &quot;projects/{projectId}/global/networks/{networkId}&quot;.  If
-     * unspecified, the default network in the environment&#39;s project is
-     * used. If a [Custom Subnet
-     * Network]((/vpc/docs/vpc#vpc_networks_and_subnets) is provided,
-     * `nodeConfig.subnetwork` must also be provided. For [Shared
-     * VPC](/vpc/docs/shared-vpc) subnetwork requirements, see
-     * `nodeConfig.subnetwork`.
+     * &quot;projects/{projectId}/global/networks/{networkId}&quot;.  [Shared
+     * VPC](/vpc/docs/shared-vpc) is not currently supported. The network must
+     * belong to the environment&#39;s project. If unspecified, the
+     * &quot;default&quot; network ID in the environment&#39;s project is used.
+     * If a [Custom Subnet Network]((/vpc/docs/vpc#vpc_networks_and_subnets) is
+     * provided, `nodeConfig.subnetwork` must also be provided.
      */
     network?: string;
     /**
      * Optional. The set of Google API scopes to be made available on all node
-     * VMs. Defaults to
-     * [&quot;https://www.googleapis.com/auth/cloud-platform&quot;] and must be
-     * included in the list of specified scopes. Cannot be updated.
+     * VMs. If `oauth_scopes` is empty, defaults to
+     * [&quot;https://www.googleapis.com/auth/cloud-platform&quot;]. Cannot be
+     * updated.
      */
     oauthScopes?: string[];
     /**
@@ -249,10 +248,8 @@ export namespace composer_v1beta1 {
      * name](/apis/design/resource_names#relative_resource_name). For example:
      * &quot;projects/{projectId}/regions/{regionId}/subnetworks/{subnetworkId}&quot;
      * If a subnetwork is provided, `nodeConfig.network` must also be provided,
-     * and the subnetwork must belong to the same project as the network.  For
-     * Shared VPC, you must configure the subnetwork with secondary ranges named
-     * &lt;strong&gt;composer-pods&lt;/strong&gt; and
-     * &lt;strong&gt;composer-services&lt;/strong&gt; to support Alias IPs.
+     * and the subnetwork must belong to the enclosing environment&#39;s project
+     * and location.
      */
     subnetwork?: string;
     /**
@@ -374,9 +371,9 @@ export namespace composer_v1beta1 {
      * `composer-[0-9]+\.[0-9]+(\.[0-9]+)?-airflow-[0-9]+\.[0-9]+(\.[0-9]+.*)?`.
      * The Cloud Composer portion of the version is a [semantic
      * version](https://semver.org). The portion of the image version following
-     * &lt;em&gt;airflow-&lt;/em&gt; is an official Apache Airflow repository
-     * [release name](https://github.com/apache/incubator-airflow/releases). See
-     * also [Release Notes](/composer/docs/release-notes).
+     * _airflow-_ is an official Apache Airflow repository [release
+     * name](https://github.com/apache/incubator-airflow/releases).  See also
+     * [Release Notes](/composer/docs/release-notes).
      */
     imageVersion?: string;
     /**
@@ -541,7 +538,7 @@ export namespace composer_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+parent}/environments')
+              url: (rootUrl + '/v1/{+parent}/environments')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -611,7 +608,7 @@ export namespace composer_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
             options),
@@ -676,7 +673,7 @@ export namespace composer_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -749,7 +746,7 @@ export namespace composer_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+parent}/environments')
+              url: (rootUrl + '/v1/{+parent}/environments')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -780,16 +777,16 @@ export namespace composer_v1beta1 {
      * @param {string=} params.updateMask Required. A comma-separated list of
      *     paths, relative to `Environment`, of fields to update. For example,
      *     to set the version of scikit-learn to install in the environment to
-     *     0.19.0 and to remove an existing installation of argparse, the
+     *     0.19.0 and to remove an existing installation of numpy, the
      *     `updateMask` parameter would include the following two `paths`
      *     values: "config.softwareConfig.pypiPackages.scikit-learn" and
-     *     "config.softwareConfig.pypiPackages.argparse". The included patch
+     *     "config.softwareConfig.pypiPackages.numpy". The included patch
      *     environment would specify the scikit-learn version as follows:      {
      *     "config":{         "softwareConfig":{           "pypiPackages":{
      *     "scikit-learn":"==0.19.0"           }         }       }     }  Note
      *     that in the above example, any existing PyPI packages other than
-     *     scikit-learn and argparse will be unaffected.  Only one update type
-     *     may be included in a single request's `updateMask`. For example, one
+     *     scikit-learn and numpy will be unaffected.  Only one update type may
+     *     be included in a single request's `updateMask`. For example, one
      *     cannot update both the PyPI packages and labels in the same request.
      *     However, it is possible to update multiple members of a map field
      *     simultaneously in the same request. For example, to set the labels
@@ -808,8 +805,8 @@ export namespace composer_v1beta1 {
      *     "config.softwareConfig.pypiPackages", and the patch environment would
      *     be the following:      {       "config":{         "softwareConfig":{
      *     "pypiPackages":{             "botocore":"==1.7.14"           } } } }
-     *     <strong>Note:</strong> Only the following fields can be updated:
-     *     <table>  <tbody>  <tr>  <td><strong>Mask</strong></td>
+     *     **Note:** Only the following fields can be updated:   <table> <tbody>
+     *     <tr>  <td><strong>Mask</strong></td>
      *     <td><strong>Purpose</strong></td>  </tr>  <tr>
      *     <td>config.softwareConfig.pypiPackages  </td>  <td>Replace all custom
      *     custom PyPI packages. If a replacement  package map is not included
@@ -840,14 +837,14 @@ export namespace composer_v1beta1 {
      *     overrides map is not included in `environment`, all config overrides
      *     are cleared.  It is an error to provide both this mask and a mask
      *     specifying one or  more individual config overrides.</td>  </tr> <tr>
-     *     <td>config.softwareConfig.airflowConfigOverrides.<var>section</var>-<var>name
-     *     </var></td>  <td>Override the Apache Airflow config property
-     *     <var>name</var> in the  section named <var>section</var>, preserving
-     *     other properties. To delete  the property override, include it in
+     *     <td>config.softwareConfig.properties.<var>section</var>-<var>name
+     *     </var></td>  <td>Override the Apache Airflow property <var>name</var>
+     *     in the section  named <var>section</var>, preserving other
+     *     properties. To delete the  property override, include it in
      *     `updateMask` and omit its mapping  in
-     *     `environment.config.softwareConfig.airflowConfigOverrides`.  It is an
-     *     error to provide both a mask of this form and the
-     *     "config.softwareConfig.airflowConfigOverrides" mask.</td>  </tr> <tr>
+     *     `environment.config.softwareConfig.properties`.  It is an error to
+     *     provide both a mask of this form and the
+     *     "config.softwareConfig.properties" mask.</td>  </tr>  <tr>
      *     <td>config.softwareConfig.envVariables</td>  <td>Replace all
      *     environment variables. If a replacement environment  variable map is
      *     not included in `environment`, all custom environment  variables  are
@@ -898,7 +895,7 @@ export namespace composer_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
             options),
@@ -991,16 +988,16 @@ export namespace composer_v1beta1 {
      * Required. A comma-separated list of paths, relative to `Environment`, of
      * fields to update. For example, to set the version of scikit-learn to
      * install in the environment to 0.19.0 and to remove an existing
-     * installation of argparse, the `updateMask` parameter would include the
+     * installation of numpy, the `updateMask` parameter would include the
      * following two `paths` values:
      * "config.softwareConfig.pypiPackages.scikit-learn" and
-     * "config.softwareConfig.pypiPackages.argparse". The included patch
+     * "config.softwareConfig.pypiPackages.numpy". The included patch
      * environment would specify the scikit-learn version as follows:      {
      * "config":{         "softwareConfig":{           "pypiPackages":{
      * "scikit-learn":"==0.19.0"           }         }       }     }  Note that
      * in the above example, any existing PyPI packages other than scikit-learn
-     * and argparse will be unaffected.  Only one update type may be included in
-     * a single request's `updateMask`. For example, one cannot update both the
+     * and numpy will be unaffected.  Only one update type may be included in a
+     * single request's `updateMask`. For example, one cannot update both the
      * PyPI packages and labels in the same request. However, it is possible to
      * update multiple members of a map field simultaneously in the same
      * request. For example, to set the labels "label1" and "label2" while
@@ -1017,8 +1014,8 @@ export namespace composer_v1beta1 {
      * `updateMask` would contain the path "config.softwareConfig.pypiPackages",
      * and the patch environment would be the following:      {       "config":{
      * "softwareConfig":{           "pypiPackages":{ "botocore":"==1.7.14" } }
-     * }     }  <strong>Note:</strong> Only the following fields can be updated:
-     * <table>  <tbody>  <tr>  <td><strong>Mask</strong></td>
+     * }     }  **Note:** Only the following fields can be updated:   <table>
+     * <tbody>  <tr>  <td><strong>Mask</strong></td>
      * <td><strong>Purpose</strong></td>  </tr>  <tr>
      * <td>config.softwareConfig.pypiPackages  </td>  <td>Replace all custom
      * custom PyPI packages. If a replacement  package map is not included in
@@ -1049,14 +1046,13 @@ export namespace composer_v1beta1 {
      * is not included in `environment`, all config overrides  are cleared.  It
      * is an error to provide both this mask and a mask specifying one or  more
      * individual config overrides.</td>  </tr>  <tr>
-     * <td>config.softwareConfig.airflowConfigOverrides.<var>section</var>-<var>name
-     * </var></td>  <td>Override the Apache Airflow config property
-     * <var>name</var> in the  section named <var>section</var>, preserving
-     * other properties. To delete  the property override, include it in
-     * `updateMask` and omit its mapping  in
-     * `environment.config.softwareConfig.airflowConfigOverrides`.  It is an
+     * <td>config.softwareConfig.properties.<var>section</var>-<var>name
+     * </var></td>  <td>Override the Apache Airflow property <var>name</var> in
+     * the section  named <var>section</var>, preserving other properties. To
+     * delete the  property override, include it in `updateMask` and omit its
+     * mapping  in `environment.config.softwareConfig.properties`.  It is an
      * error to provide both a mask of this form and the
-     * "config.softwareConfig.airflowConfigOverrides" mask.</td>  </tr>  <tr>
+     * "config.softwareConfig.properties" mask.</td>  </tr>  <tr>
      * <td>config.softwareConfig.envVariables</td>  <td>Replace all environment
      * variables. If a replacement environment  variable map is not included in
      * `environment`, all custom environment  variables  are cleared.  It is an
@@ -1137,7 +1133,7 @@ export namespace composer_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
             options),
@@ -1202,7 +1198,7 @@ export namespace composer_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -1281,7 +1277,7 @@ export namespace composer_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+name}/operations')
+              url: (rootUrl + '/v1/{+name}/operations')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
