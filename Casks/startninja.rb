@@ -1,11 +1,7 @@
-cask 'startninja' do
-  version :latest
+class Startninja < Cask
+  url 'http://www.allvu.com/downloads/StartNinjaInstaller.dmg'
+  homepage 'http://www.allvu.com/index.php/products/startninja.html'
+  version 'latest'
   sha256 :no_check
-
-  # dl2.macupdate.com/prod was verified as official when first introduced to the cask
-  url 'https://dl2.macupdate.com/prod/StartNinjaInstaller.dmg'
-  name 'StartNinja'
-  homepage 'https://www.allvu.com/start_ninja'
-
-  app 'StartNinja.app'
+  link 'StartNinja.app'
 end

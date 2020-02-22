@@ -1,33 +1,8 @@
-cask 'mono-mdk' do
-  version '6.8.0.105'
-  sha256 'a585985ef908fe0ee4329255f761ff608824296219d2be44e3aca664fc988637'
-
-  url "https://download.mono-project.com/archive/#{version.major_minor_patch}/macos-10-universal/MonoFramework-MDK-#{version}.macos10.xamarin.universal.pkg"
-  appcast 'https://www.mono-project.com/download/stable/'
-  name 'Mono'
-  homepage 'https://www.mono-project.com/'
-
-  conflicts_with cask: 'mono-mdk516'
-
-  pkg "MonoFramework-MDK-#{version}.macos10.xamarin.universal.pkg"
-
-  uninstall delete:  [
-                       "/Library/Frameworks/Mono.framework/Versions/#{version.major_minor_patch}",
-                       '/private/etc/paths.d/mono-commands',
-                     ],
-            pkgutil: 'com.xamarin.mono-*',
-            rmdir:   [
-                       '/Library/Frameworks/Mono.framework/Versions',
-                       '/Library/Frameworks/Mono.framework',
-                     ]
-
-  caveats <<~EOS
-    Installing #{token} removes mono and mono dependant formula binaries in
-    /usr/local/bin and adds #{token} to /private/etc/paths.d/
-    You may want to:
-
-      brew unlink {formula} && brew link {formula}
-
-    and/or remove /private/etc/paths.d/mono-commands
-  EOS
+class MonoMdk < Cask
+  url 'http://download.xamarin.com/MonoFrameworkMDK/Macx86/MonoFramework-MDK-3.4.0.185.macos10.xamarin.x86.pkg'
+  homepage 'http://mono-project.com/'
+  version '3.4.0.185'
+  sha256 '39c36f322a69e559461622a98e859f304a8611421ce394322723261ad902c17e'
+  install 'MonoFramework-MDK-3.4.0.185.macos10.xamarin.x86.pkg'
+  uninstall :pkgutil => 'com.xamarin.mono-MDK.pkg'
 end

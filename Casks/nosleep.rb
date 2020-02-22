@@ -1,14 +1,8 @@
-cask 'nosleep' do
-  version '1.5.1'
-  sha256 '2dd5293c41a16a35deeaf903cc9f10092721b8869b69ef263231a73a4202cb5a'
-
-  # github.com/integralpro/nosleep was verified as official when first introduced to the cask
-  url "https://github.com/integralpro/nosleep/releases/download/#{version}/NoSleep-#{version}.dmg"
-  appcast 'https://github.com/integralpro/nosleep/releases.atom'
-  name 'NoSleep'
-  homepage 'https://integralpro.github.io/nosleep/'
-
-  depends_on macos: '>= :high_sierra'
-
-  app 'NoSleep.app'
+class Nosleep < Cask
+  url 'https://macosx-nosleep-extension.googlecode.com/files/NoSleep-1.3.3.dmg'
+  homepage 'https://code.google.com/p/macosx-nosleep-extension/'
+  version '1.3.3'
+  sha256 '5fe90c54e975d3f1de9f7fdb66def0188c571eab083b18a7e94abaa5f0d41ba9'
+  install 'NoSleep.mpkg'
+  uninstall :script => 'Uninstall.command'
 end

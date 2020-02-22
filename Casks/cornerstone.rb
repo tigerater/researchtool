@@ -1,13 +1,10 @@
-cask 'cornerstone' do
-  version '4.2'
-  sha256 'c18a4ac6d21e3908942d438e23cfbf31635ad268d638960ca7862680aca4247a'
+class Cornerstone < Cask
+  version '2.7.10'
+  sha256 '297237f24cbd605d6e7497fb893db3e7fbc6efef1333f5f25be8238a418d7650'
+  
+  url 'https://www.zennaware.com/cornerstone/downloads/Cornerstone-2.7.10.zip'
+  appcast 'http://www.zennaware.com/cornerstone/appcast/feed2.php'
+  homepage 'http://www.zennaware.com/cornerstone/index.php'
 
-  url "https://www.zennaware.com/cornerstone/downloads/Cornerstone-#{version}.zip"
-  appcast 'https://cornerstone.assembla.com/blog/'
-  name 'Cornerstone'
-  homepage 'https://www.zennaware.com/cornerstone/'
-
-  depends_on macos: '>= :mojave'
-
-  app 'Cornerstone.app'
+  link 'Cornerstone.app'
 end

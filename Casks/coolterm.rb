@@ -1,10 +1,9 @@
-cask 'coolterm' do
-  version :latest
+class Coolterm < Cask
+  version 'latest'
   sha256 :no_check
 
-  url 'https://freeware.the-meiers.org/CoolTermMac.zip'
-  name 'CoolTerm'
-  homepage 'https://freeware.the-meiers.org/'
+  url 'http://freeware.the-meiers.org/CoolTermMac.zip'
+  homepage 'http://freeware.the-meiers.org/'
 
-  app 'CoolTerm.app'
+  link 'CoolTermMac/CoolTerm.app'
 end

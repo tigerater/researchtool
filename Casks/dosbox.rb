@@ -1,14 +1,9 @@
-cask 'dosbox' do
-  version '0.74-3'
-  sha256 'd2ceb2d2b28f03b4c9ca2455bfe08677e78ef8f1a6263b81e7095d237ab26b0d'
+class Dosbox < Cask
+  version '0.74'
+  sha256 '99057370b478608a6f0167ef522ef59e0e1b876f8565622d3dbd707925d61f6c'
 
-  # sourceforge.net/dosbox was verified as official when first introduced to the cask
-  url "https://downloads.sourceforge.net/dosbox/dosbox/#{version}/DOSBox-#{version}.dmg"
-  appcast 'https://sourceforge.net/projects/dosbox/rss?path=/dosbox'
-  name 'DOSBox'
-  homepage 'https://www.dosbox.com/'
+  url 'https://downloads.sourceforge.net/project/dosbox/dosbox/0.74/DOSBox-0.74-1_Universal.dmg'
+  homepage 'http://www.dosbox.com'
 
-  app 'DOSBox.app'
-
-  zap trash: '~/Library/Preferences/DOSBox*'
+  link 'DOSBox.app'
 end

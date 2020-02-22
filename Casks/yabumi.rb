@@ -1,10 +1,7 @@
-cask 'yabumi' do
-  version :latest
-  sha256 :no_check
-
-  url 'https://yabumi.cc/download/Yabumi.dmg'
-  name 'Yabumi'
+class Yabumi < Cask
+  url 'https://yabumi.cc/download/YabumiUploader.dmg'
   homepage 'https://yabumi.cc/'
-
-  app 'Yabumi.app'
+  version 'latest'
+  sha256 :no_check
+  link 'Yabumi.app'
 end

@@ -1,20 +1,8 @@
-cask 'silverlight' do
-  version '5.1.50901.0'
-  sha256 :no_check # required as upstream package is updated in-place
-
-  url 'https://download.microsoft.com/download/0/3/E/03EB1393-4F4E-4191-8364-C641FAB20344/50901.00/Silverlight.dmg'
-  name 'Silverlight'
-  homepage 'https://www.microsoft.com/silverlight/'
-
-  pkg 'silverlight.pkg'
-
-  uninstall pkgutil: 'com.microsoft.silverlight.plugin',
-            delete:  '/Library/Internet Plug-Ins/Silverlight.plugin'
-
-  zap trash: [
-               '~/Library/Application Support/Microsoft/Silverlight',
-               '~/Library/Preferences/com.microsoft.silverlight.plist',
-               '~/Library/Saved Application State/com.microsoft.silverlight.savedState',
-             ],
-      rmdir: '~/Library/Application Support/Microsoft/'
+class Silverlight < Cask
+  url 'http://silverlight.dlservice.microsoft.com/download/D/6/6/D66CF013-1021-437B-9A65-983871CCB3E6/30317.00/Silverlight.dmg'
+  homepage 'http://www.microsoft.com/silverlight/'
+  version '5.1.30317.0'
+  sha256 'a425c522f84c8c3b2bcfb5f40abab0f8d67733f824be5c0e383819d06f230007'
+  install 'Silverlight.pkg'
+  uninstall :pkgutil => 'com.microsoft.SilverlightInstaller'
 end

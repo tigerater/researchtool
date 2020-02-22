@@ -1,21 +1,9 @@
-cask 'send-to-kindle' do
-  version :latest
-  sha256 :no_check
-
-  # sendtokindle.s3.amazonaws.com was verified as official when first introduced to the cask
-  url 'https://sendtokindle.s3.amazonaws.com/SendToKindleForMac-installer.pkg'
-  name 'Send to Kindle'
-  homepage 'https://www.amazon.com/gp/sendtokindle/mac'
-
-  pkg 'SendToKindleForMac-installer.pkg'
-
-  uninstall launchctl: 'com.amazon.sendtokindle.launcher',
-            pkgutil:   'com.amazon.SendToKindleMacInstaller.pkg',
-            quit:      'com.amazon.SendToKindle'
-
-  zap trash: [
-               '~/Library/Application Support/Amazon/SendToKindle',
-               '~/Library/Preferences/com.amazon.SendToKindle.plist',
-               '~/Library/Logs/SendToKindleInstall.log',
-             ]
+class SendToKindle < Cask
+  url 'https://s3.amazonaws.com/sendtokindle/SendToKindleForMac-installer-v1.0.0.218.pkg'
+  homepage 'http://www.amazon.com/gp/sendtokindle/mac'
+  version '1.0.0.218'
+  sha256 '9c3a9eca8fe9f09ff43dfb4132a8be163ef517008979075df3d947699c421494'
+  install 'SendToKindleForMac-installer-v1.0.0.218.pkg'
+  uninstall :launchctl => 'com.amazon.sendtokindle.launcher',
+            :pkgutil   => 'com.amazon.SendToKindleMacInstaller.pkg'
 end

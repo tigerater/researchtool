@@ -1,12 +1,7 @@
-cask 'youll-never-take-me-alive' do
-  version '1.0.2'
-  sha256 '6d89162762e4e952bec046943c094f37c06b89795d477fff46006362bc6c282a'
-
-  url "https://github.com/iSECPartners/yontma-mac/releases/download/#{version}/yontma-#{version}.dmg"
-  appcast 'https://github.com/iSECPartners/yontma-mac/releases.atom'
-  name 'You\'ll Never Take Me Alive!'
-  name 'YoNTMA'
+class YoullNeverTakeMeAlive < Cask
+  url 'https://github.com/iSECPartners/yontma-mac/releases/download/0.9.9/yontma-0.9.9.dmg'
   homepage 'https://github.com/iSECPartners/yontma-mac'
-
-  app 'You\'ll Never Take Me Alive!.app'
+  version '0.9.9'
+  sha256 'e055e96ed1816b30b420533af8f9de90da088b339d51aa99a5c20c636e8ba9c8'
+  link 'You\'ll Never Take Me Alive!.app'
 end

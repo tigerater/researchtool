@@ -1,11 +1,7 @@
-cask 'quicklook-csv' do
-  version '1.3'
-  sha256 'e052e89f8003aed08bb2058e3fb3335ac0a5cdaa0171bfb23b762976e095ef5b'
-
-  url "https://github.com/p2/quicklook-csv/releases/download/#{version}/QuickLookCSV-#{version}.dmg"
-  appcast 'https://github.com/p2/quicklook-csv/releases.atom'
-  name 'QuickLookCSV'
+class QuicklookCsv < Cask
+  url 'https://quicklook-csv.googlecode.com/files/QuickLookCSV.dmg'
   homepage 'https://github.com/p2/quicklook-csv'
-
+  version 'latest'
+  sha256 :no_check
   qlplugin 'QuickLookCSV.qlgenerator'
 end

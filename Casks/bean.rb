@@ -1,10 +1,9 @@
-cask 'bean' do
-  version :latest
+class Bean < Cask
+  version 'latest'
   sha256 :no_check
 
-  url 'https://www.bean-osx.com/releases/Bean-Install.zip'
-  name 'Bean'
-  homepage 'https://www.bean-osx.com/'
+  url 'http://www.bean-osx.com/releases/Bean-Install.zip'
+  homepage 'http://www.bean-osx.com'
 
-  app 'Bean-Install/Bean.app'
+  link 'Bean-Install/Bean.app'
 end

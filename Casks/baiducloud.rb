@@ -1,21 +1,10 @@
-cask 'baiducloud' do
-  version '2.4.6'
-  sha256 '9ae594d4d6a4581d971ed9fcde7cda62022b04247476a8982802324fa16bee2e'
+# encoding: UTF-8
+class Baiducloud < Cask
+  version '2.4.2'
+  sha256 '194e049020bc11110807d7a157c5ab1f25f987b3e14ead7b452319420b97ad51'
 
-  # issuecdn.baidupcs.com was verified as official when first introduced to the cask
-  url "https://issuecdn.baidupcs.com/issue/netdisk/mac_tongbupan/tongbupan_#{version}.dmg"
-  name 'Baidu Cloud'
-  name 'Baidu Yun Tong Bu Pan'
-  name '百度云同步盘'
-  homepage 'https://pan.baidu.com/'
+  url 'http://bcscdn.baidu.com/netdisk/BaiduYun_2.4.2.dmg'
+  homepage 'http://pan.baidu.com'
 
-  app '百度云同步盘.app'
-
-  uninstall quit: 'com.baidu.netdiskmac'
-
-  zap trash: [
-               '~/Library/Application Support/百度云同步盘',
-               '~/Library/Preferences/com.baidu.netdiskmac.plist',
-               '~/Library/Caches/com.baidu.netdiskmac',
-             ]
+  link '百度云同步盘.app'
 end

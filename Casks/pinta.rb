@@ -1,14 +1,7 @@
-cask 'pinta' do
-  version '1.6'
-  sha256 '8d9f04397bf279166e7c23cd6686342fb6b1a7e6d70546eefa23de73c4e251bf'
-
-  # github.com/PintaProject/Pinta was verified as official when first introduced to the cask
-  url "https://github.com/PintaProject/Pinta/releases/download/#{version}/Pinta.app.zip"
-  appcast 'https://github.com/PintaProject/Pinta/releases.atom'
-  name 'Pinta'
-  homepage 'https://pinta-project.com/pintaproject/pinta/'
-
-  depends_on cask: 'mono-mdk'
-
-  app 'Pinta.app'
+class Pinta < Cask
+  url 'https://github.com/downloads/PintaProject/Pinta/pinta-1.4.app.zip'
+  homepage 'http://pinta-project.com/'
+  version '1.4'
+  sha256 'ebe9e8c271e5c445144ecbbce62d0e5bb20a27b75f34b90bf1a898e1cc452edf'
+  link 'Pinta.app'
 end

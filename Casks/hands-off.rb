@@ -1,13 +1,8 @@
-cask 'hands-off' do
-  version '4.4.1'
-  sha256 '76f796f04ad39b6c70e7f8306ef917fc88d0a663c2a6d6b8e3f51376c0a066bc'
-
-  url "https://www.oneperiodic.com/files/Hands%20Off!%20v#{version}.dmg"
-  appcast "https://www.oneperiodic.com/handsoff#{version.major}.xml"
-  name 'Hands Off!'
-  homepage 'https://www.oneperiodic.com/products/handsoff/'
-
-  app 'Hands Off!.app'
-
-  zap trash: '~/Library/Preferences/com.metakine.handsoff.plist'
+class HandsOff < Cask
+  url 'https://www.oneperiodic.com/files/Hands%20Off!%20v2.1.2.dmg'
+  appcast 'http://www.metakine.com/sparkle/handsoff2/checkupdate.php'
+  homepage 'http://www.metakine.com/products/handsoff/'
+  version '2.1.2'
+  sha256 '3dc5a3239560a95ca356641c6cd73dec7a605ecaec52904e2b2a7a1c029357f6'
+  link 'Hands Off!.app'
 end

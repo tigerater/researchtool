@@ -1,23 +1,13 @@
-cask 'flux' do
-  version '40.1'
-  sha256 '1844305519b450cfe3c5475e99f6c06fb2eea51e65c1b0ee25f6671a49fff75d'
-
-  url "https://justgetflux.com/mac/Flux#{version}.zip"
+class Flux < Cask
+  url 'https://justgetflux.com/mac/Flux.zip'
   appcast 'https://justgetflux.com/mac/macflux.xml'
-  name 'f.lux'
-  homepage 'https://justgetflux.com/'
+  homepage 'http://justgetflux.com'
+  version 'latest'
+  sha256 :no_check
+  link 'Flux.app'
 
-  auto_updates true
-
-  app 'Flux.app'
-
-  uninstall quit: 'org.herf.Flux'
-
-  zap trash: [
-               '~/Library/Application Support/Flux',
-               '~/Library/Caches/org.herf.Flux',
-               '~/Library/Containers/com.justgetflux.flux',
-               '~/Library/Cookies/org.herf.Flux.binarycookies',
-               '~/Library/Preferences/org.herf.Flux.plist',
-             ]
+  after_install do
+    # Don't ask to move the app bundle to /Applications
+    system '/usr/bin/defaults', 'write', 'org.herf.Flux', 'moveToApplicationsFolderAlertSuppress', '-bool', 'true'
+  end
 end

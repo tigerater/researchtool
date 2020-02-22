@@ -1,10 +1,7 @@
-cask 'phoneclean' do
-  version :latest
+class Phoneclean < Cask
+  url 'http://www.imobie.com/product/phoneclean-mac.dmg'
+  homepage 'http://www.imobie.com/phoneclean/'
+  version 'latest'
   sha256 :no_check
-
-  url 'https://dl.imobie.com/phoneclean.zip'
-  name 'PhoneClean'
-  homepage 'https://www.imobie.com/phoneclean/'
-
-  app 'PhoneClean.app'
+  link 'PhoneClean.app'
 end

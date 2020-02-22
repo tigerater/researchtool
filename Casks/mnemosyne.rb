@@ -1,12 +1,7 @@
-cask 'mnemosyne' do
-  version '2.6.1'
-  sha256 '05a63b18d0f110db34898656855f71079f36bfa202f4c978ac7b52ce65463e89'
-
-  # sourceforge.net/mnemosyne-proj was verified as official when first introduced to the cask
-  url "https://downloads.sourceforge.net/mnemosyne-proj/mnemosyne/mnemosyne-#{version}/Mnemosyne-#{version}.dmg"
-  appcast 'https://sourceforge.net/projects/mnemosyne-proj/rss?path=/mnemosyne'
-  name 'Mnemosyne'
-  homepage 'https://mnemosyne-proj.org/'
-
-  app 'Mnemosyne.app'
+class Mnemosyne < Cask
+  url 'https://downloads.sourceforge.net/sourceforge/mnemosyne-proj/Mnemosyne-2.3-Mac.dmg'
+  homepage 'http://mnemosyne-proj.org/'
+  version '2.3'
+  sha256 '094c4f6fb50de376a5190c3712b935089579717641ce90685aa48932bf0efa07'
+  link 'Mnemosyne.app'
 end

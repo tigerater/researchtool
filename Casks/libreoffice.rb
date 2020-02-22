@@ -1,41 +1,13 @@
-cask 'libreoffice' do
-  version '6.4.0'
-  sha256 '32e7af23282b6241f580d41f22114daa82a4adf96b817c87f68605743ea423cd'
-
-  # documentfoundation.org was verified as official when first introduced to the cask
-  url "https://download.documentfoundation.org/libreoffice/stable/#{version}/mac/x86_64/LibreOffice_#{version}_MacOS_x86-64.dmg"
-  appcast "https://download.documentfoundation.org/libreoffice/stable/#{version}/mac/x86_64/"
-  name 'LibreOffice'
-  homepage 'https://www.libreoffice.org/'
-
-  conflicts_with cask: 'libreoffice-still'
-
-  app 'LibreOffice.app'
-  binary "#{appdir}/LibreOffice.app/Contents/MacOS/gengal"
-  binary "#{appdir}/LibreOffice.app/Contents/MacOS/regmerge"
-  binary "#{appdir}/LibreOffice.app/Contents/MacOS/regview"
-  binary "#{appdir}/LibreOffice.app/Contents/MacOS/senddoc"
-  binary "#{appdir}/LibreOffice.app/Contents/MacOS/ui-previewer"
-  binary "#{appdir}/LibreOffice.app/Contents/MacOS/uno"
-  binary "#{appdir}/LibreOffice.app/Contents/MacOS/unoinfo"
-  binary "#{appdir}/LibreOffice.app/Contents/MacOS/unopkg"
-  binary "#{appdir}/LibreOffice.app/Contents/MacOS/uri-encode"
-  binary "#{appdir}/LibreOffice.app/Contents/MacOS/xpdfimport"
-  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
-  shimscript = "#{staged_path}/soffice.wrapper.sh"
-  binary shimscript, target: 'soffice'
-
-  preflight do
-    IO.write shimscript, <<~EOS
-      #!/bin/sh
-      '#{appdir}/LibreOffice.app/Contents/MacOS/soffice' "$@"
-    EOS
+class Libreoffice < Cask
+  if Hardware::CPU.is_64_bit? && OS::Mac.version >= '10.8'
+    url 'http://download.documentfoundation.org/libreoffice/stable/4.2.4/mac/x86_64/LibreOffice_4.2.4_MacOS_x86-64.dmg'
+    sha256 '727aef1ab9010e133ee46fc4ceb9ad7573f9c97d49c30ee169ad98100bb90fc8'
+  else
+    url 'http://download.documentfoundation.org/libreoffice/stable/4.2.4/mac/x86/LibreOffice_4.2.4_MacOS_x86.dmg'
+    sha256 '40a9dd187dfe5260d405f502a78ed2d46d309a85f64fe896f1e5e6db136e547c'
   end
 
-  zap trash: [
-               '~/Library/Application Support/LibreOffice',
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.libreoffice.script.sfl*',
-               '~/Library/Preferences/org.libreoffice.script.plist',
-               '~/Library/Saved Application State/org.libreoffice.script.savedState',
-             ]
+  homepage 'http://www.libreoffice.org/'
+  version '4.2.4'
+  link 'LibreOffice.app'
 end

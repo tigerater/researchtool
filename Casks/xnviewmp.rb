@@ -1,10 +1,7 @@
-cask 'xnviewmp' do
-  version :latest
+class Xnviewmp < Cask
+  url 'http://download.xnview.com/XnViewMP-mac.tgz'
+  homepage 'http://www.xnview.com/'
+  version 'latest'
   sha256 :no_check
-
-  url 'https://download.xnview.com/XnViewMP-mac.dmg'
-  name 'XnViewMP'
-  homepage 'https://www.xnview.com/'
-
-  app 'XnViewMP.app'
+  link 'XnViewMP.app'
 end

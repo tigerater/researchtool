@@ -1,17 +1,7 @@
-cask 'smcfancontrol' do
-  version '2.6'
-  sha256 '7662058e618537eb466307e3b12e540b857e61392646a5b09df51bec9ad6da38'
-
-  url "https://www.eidac.de/smcfancontrol/smcfancontrol_#{version.dots_to_underscores}.zip"
-  appcast 'https://www.eidac.de/smcfancontrol/smcfancontrol.xml'
-  name 'smcFanControl'
-  homepage 'https://www.eidac.de/?cat=40'
-
-  app 'smcFanControl.app'
-
-  zap trash: [
-               '~/Library/Application Support/smcFanControl',
-               "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.eidac.smcfancontrol#{version.major}.sfl*",
-               "~/Library/Caches/com.eidac.smcFanControl#{version.major}",
-             ]
+class Smcfancontrol < Cask
+  url 'http://www.eidac.de/smcfancontrol/smcfancontrol_2_4.zip'
+  homepage 'http://www.eidac.de/?p=243'
+  version '2.4'
+  sha256 'f72713be5c3d8bf4ecbf7999af8dc66d23d4f5e22c49b648a485351172cb1ac3'
+  link 'smcFanControl.app'
 end

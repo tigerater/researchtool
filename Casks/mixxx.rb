@@ -1,11 +1,7 @@
-cask 'mixxx' do
-  version '2.2.3'
-  sha256 '8933127b9780fc8f7c5ef050d9b35e1fbeb98e5281595863d22741f5dd292420'
-
-  url "https://downloads.mixxx.org/mixxx-#{version}/mixxx-#{version}-osxintel.dmg"
-  appcast 'https://www.mixxx.org/download/'
-  name 'Mixxx'
-  homepage 'https://www.mixxx.org/'
-
-  app 'Mixxx.app'
+class Mixxx < Cask
+  url 'http://downloads.mixxx.org/mixxx-1.11.0/mixxx-1.11.0-macintel.dmg'
+  homepage 'http://www.mixxx.org'
+  version '1.11.0'
+  sha256 '21fa06153a1a019c001f96024caa940ea6307a29f4cebd334fb2b7f071013314'
+  link 'Mixxx.app'
 end

@@ -1,14 +1,10 @@
-cask 'cord' do
+class Cord < Cask
   version '0.5.7'
   sha256 '8f505b12b94167100b3b8b44ed3cee32ffcc94b73dc44fe0ecc896151f114100'
+  
+  url 'https://downloads.sourceforge.net/sourceforge/cord/CoRD_0.5.7.zip'
+  appcast 'http://cord.sourceforge.net/sparkle.xml'
+  homepage 'http://cord.sourceforge.net/'
 
-  # downloads.sourceforge.net/cord was verified as official when first introduced to the cask
-  url "https://downloads.sourceforge.net/cord/cord/#{version}/CoRD_#{version}.zip"
-  appcast 'https://cord.sourceforge.io/sparkle.xml'
-  name 'CoRD'
-  homepage 'https://cord.sourceforge.io/'
-
-  app 'CoRD.app'
-
-  zap trash: '~/Library/Application Support/CoRD'
+  link 'CoRD.app'
 end

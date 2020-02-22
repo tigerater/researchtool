@@ -1,11 +1,7 @@
-cask 'synergy' do
-  version '1.11.0,b193:b2173efb'
-  sha256 '6f8de72793e69e6d55f32c2edd0e4f76031bf1f776b4c58789edd4ce94a72d8d'
-
-  url "https://binaries.symless.com/synergy/v#{version.before_comma.major}-core-standard/v#{version.before_comma}-stable-#{version.after_colon}/synergy_v#{version.before_comma}-stable_#{version.after_comma.before_colon}-#{version.after_colon}_macos.dmg"
-  appcast 'https://github.com/symless/synergy-core/releases.atom'
-  name 'Synergy'
-  homepage 'https://symless.com/synergy'
-
-  app 'Synergy.app'
+class Synergy < Cask
+  url 'https://synergy-project.org/files/packages/synergy-1.5.0-r2278-MacOSX109-x86_64.dmg'
+  homepage 'http://synergy-foss.org/'
+  version '1.5.0'
+  sha256 'b7f024720a3174ad68aa3489fa8674ca4bdc95a785b82044d57685325f60c913'
+  link 'Synergy.app'
 end

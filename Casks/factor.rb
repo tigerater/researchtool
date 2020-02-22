@@ -1,15 +1,7 @@
-cask 'factor' do
-  version '0.98'
-  sha256 '045847b1cf01e1dda270b834c34effd796ce52da40ada8e2fe52b55e3358db17'
-
-  url "https://downloads.factorcode.org/releases/#{version}/factor-macosx-x86-64-#{version}.dmg"
-  appcast 'https://downloads.factorcode.org/releases/'
-  name 'Factor'
-  homepage 'https://factorcode.org/'
-
-  suite 'factor'
-
-  caveats do
-    path_environment_variable "#{appdir}/factor"
-  end
+class Factor < Cask
+  url 'http://downloads.factorcode.org/releases/0.96/factor-macosx-x86-64-0.96.dmg'
+  homepage 'http://factorcode.org/'
+  version '0.96'
+  sha256 'bd5dca1393c444a9491ef0c70f48b94ae7e39712ea0748a061cd721d26e83c40'
+  link 'factor/Factor.app'
 end

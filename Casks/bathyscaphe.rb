@@ -1,14 +1,9 @@
-cask 'bathyscaphe' do
-  version '310-v1089'
-  sha256 '32f7758d2898fd8cccd1b506c8d78bbff6733640e392eba67c95a6626377a603'
+class Bathyscaphe < Cask
+  version '2.4.1'
+  sha256 '1e63fe7edfd0409342f210ef7c70a595f63f837baef506268b505a8dd21a8794'
 
-  # bitbucket.org/bathyscaphe/public/downloads was verified as official when first introduced to the cask
-  url "https://bitbucket.org/bathyscaphe/public/downloads/BathyScaphe-#{version}.dmg"
-  appcast 'https://bathyscaphe.bitbucket.io/appcast.xml'
-  name 'BathyScaphe'
-  homepage 'https://bathyscaphe.bitbucket.io/'
+  url 'http://dl.sourceforge.jp/bathyscaphe/60135/BathyScaphe-241-v595.dmg'
+  homepage 'http://bathyscaphe.sourceforge.jp/'
 
-  depends_on macos: '>= :sierra'
-
-  app 'BathyScaphe.app'
+  link 'BathyScaphe.app'
 end

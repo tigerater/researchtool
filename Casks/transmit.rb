@@ -1,19 +1,8 @@
-cask 'transmit' do
-  version '5.6.3'
-  sha256 '7c579c03dbd61ea8dc2eb55021a943dd0145397db5a5976b01c968994fd52892'
-
-  url "https://www.panic.com/transmit/d/Transmit%20#{version}.zip"
-  appcast "https://library.panic.com/releasenotes/transmit#{version.major}/"
-  name 'Transmit'
-  homepage 'https://panic.com/transmit/'
-
-  auto_updates true
-  depends_on macos: '>= :high_sierra'
-
-  app 'Transmit.app'
-
-  zap trash: [
-               '~/Library/Preferences/com.panic.Transmit.plist',
-               '~/Library/Application Support/Transmit',
-             ]
+class Transmit < Cask
+  url 'https://www.panic.com/transmit/d/Transmit%204.4.6.zip'
+  appcast 'http://www.panic.com/updates/update.php'
+  homepage 'http://panic.com/transmit'
+  version '4.4.6'
+  sha256 '55b4a6f9c178f82a55a370745ed22cea4ba92a471b4be7a31105f67d04d0290c'
+  link 'Transmit.app'
 end

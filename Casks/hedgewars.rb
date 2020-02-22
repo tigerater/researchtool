@@ -1,11 +1,8 @@
-cask 'hedgewars' do
-  version '1.0.0'
-  sha256 '5a0bdd9bc4cb7beea03b95a2549c1cf994ea8646f6621f5353dd22d79c757404'
-
-  url "https://www.hedgewars.org/download/releases/Hedgewars-#{version}.dmg"
-  appcast 'https://hedgewars.org/'
-  name 'Hedgewars'
-  homepage 'https://hedgewars.org/'
-
-  app 'Hedgewars.app'
+class Hedgewars < Cask
+  url 'http://download.gna.org/hedgewars/Hedgewars-0.9.20-3.dmg'
+  appcast 'http://www.hedgewars.org/download/appcast.xml'
+  homepage 'http://hedgewars.org'
+  version '0.9.20'
+  sha256 '167667f32f4798733b7bfd50423493067e6a9fd19f02f45e737b324038f0d559'
+  link 'Hedgewars.app'
 end

@@ -1,10 +1,7 @@
-cask 'jaikoz' do
-  version :latest
-  sha256 :no_check
-
-  url 'https://www.jthink.net/jaikoz/jsp/manualdownload/jaikoz-osx.dmg'
-  name 'Jaikoz'
-  homepage 'https://www.jthink.net/jaikoz/'
-
-  app 'Jaikoz.app'
+class Jaikoz < Cask
+  url 'http://jthink.net/jaikoz/jsp/manualdownload/jaikoz-osx.dmg?val=136'
+  homepage 'http://jthink.net/jaikoz'
+  version '6.2.0'
+  sha256 '5293e2094846a733384e18b61c61798b1a15b248155c6ce990c532d9a6c52170'
+  link 'Jaikoz.app'
 end

@@ -1,18 +1,8 @@
-cask 'mkvtoolnix' do
-  version '43.0.0'
-  sha256 '0de27a33917319ee79233dbbc74c39918d9ecef1052e37fa08118e8aebc261db'
-
-  url "https://mkvtoolnix.download/macos/MKVToolNix-#{version}.dmg"
-  appcast 'https://www.bunkus.org/blog/feed/'
-  name 'MKVToolNix'
-  homepage 'https://mkvtoolnix.download/'
-
-  conflicts_with formula: 'mkvtoolnix'
-  depends_on macos: '>= :mojave'
-
-  app "MKVToolNix-#{version}.app"
-  binary "#{appdir}/MKVToolNix-#{version}.app/Contents/MacOS/mkvextract"
-  binary "#{appdir}/MKVToolNix-#{version}.app/Contents/MacOS/mkvinfo"
-  binary "#{appdir}/MKVToolNix-#{version}.app/Contents/MacOS/mkvmerge"
-  binary "#{appdir}/MKVToolNix-#{version}.app/Contents/MacOS/mkvpropedit"
+class Mkvtoolnix < Cask
+  url 'http://www.fosshub.com/download/Mkvtoolnix-7.0.0.dmg',
+	:referer => 'http://www.fosshub.com/MKVToolNix.html'
+  homepage 'http://www.bunkus.org/videotools/mkvtoolnix/'
+  version '7.0.0'
+  sha256 'ae0f2dff515a3b82188b50b1358023ca3a738e34a9262775fb6de6f06e7c4b00'
+  link 'Mkvtoolnix-7.0.0.app'
 end

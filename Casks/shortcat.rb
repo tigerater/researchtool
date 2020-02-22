@@ -1,17 +1,8 @@
-cask 'shortcat' do
-  version '0.7.9'
-  sha256 'a6fb545f12783cde33f3b50b393e77bb721c32446dbf37fc71bb7a7a6a9b427e'
-
-  url "https://files.shortcatapp.com/v#{version}/Shortcat.zip"
+class Shortcat < Cask
+  url 'https://files.shortcatapp.com/v0.7.0/Shortcat.zip'
   appcast 'https://shortcatapp.com/updates/appcast.xml'
-  name 'Sproutcube Shortcat'
-  homepage 'https://shortcatapp.com/'
-
-  app 'Shortcat.app'
-
-  zap trash: [
-               '~/Library/Application Support/Shortcat',
-               '~/Library/Cookies/com.sproutcube.Shortcat.binarycookies',
-               '~/Library/Preferences/com.sproutcube.Shortcat.plist',
-             ]
+  homepage 'http://shortcatapp.com/'
+  version '0.7.0'
+  sha256 '90daee12b82157e2025789005688276453ee8fdf243041e056730a5d85ce1cf9'
+  link 'Shortcat.app'
 end

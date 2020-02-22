@@ -1,10 +1,7 @@
-cask 'rss' do
-  version :latest
-  sha256 :no_check
-
+class Rss < Cask
   url 'http://www.rssapplication.com/RSS.zip'
-  name 'RSS'
   homepage 'http://www.rssapplication.com/'
-
-  app 'RSS.app'
+  version 'latest'
+  sha256 :no_check
+  link 'RSS.app'
 end

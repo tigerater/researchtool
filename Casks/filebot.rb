@@ -1,14 +1,11 @@
-cask 'filebot' do
-  version '4.8.5'
-  sha256 '8e9c409ce8d9bc8b87702249897c81a32b7485a78bb15b073477413d34f94f82'
+class Filebot < Cask
+  version '4.1.1'
+  sha256 '4aa3dd0532bd0266ec3bcb60553507dfb51c054a406fba95bd0c6d5c0dce7ec2'
 
-  url "https://get.filebot.net/filebot/FileBot_#{version}/FileBot_#{version}.app.tar.xz"
-  appcast 'https://app.filebot.net/update.xml'
-  name 'FileBot'
-  homepage 'https://www.filebot.net/'
+  homepage 'http://www.filebot.net/'
+  url "https://downloads.sourceforge.net/project/filebot/filebot/HEAD/FileBot_#{version}/FileBot_#{version.gsub(/\.\d/, '')}.app.tar.gz"
 
-  app 'FileBot.app'
-  binary "#{appdir}/FileBot.app/Contents/MacOS/filebot.sh", target: 'filebot'
-
-  zap trash: '~/Library/Preferences/net.filebot.ui.plist'
+  link 'FileBot.app'
+  binary 'FileBot.app/Contents/MacOS/filebot.sh', :target => 'filebot'
+  caveats 'FileBot requires Java 8. Run `java -version` to verify.'
 end

@@ -1,11 +1,7 @@
-cask 'spotify-notifications' do
-  version '0.6.0'
-  sha256 '136f676a4580a561ca08edf13a79a5cea5878f276ff6a38e3f2bb96aeca61031'
-
-  url "https://downloads.spotify-notifications.citruspi.io/#{version}-release.zip"
-  appcast 'https://github.com/citruspi/Spotify-Notifications/releases.atom'
-  name 'Spotify Notifications'
-  homepage 'https://spotify-notifications.citruspi.io/'
-
-  app 'Spotify Notifications.app'
+class SpotifyNotifications < Cask
+  url 'https://github.com/citruspi/Spotify-Notifications/releases/download/0.4.8/Spotify.Notifications.-.0.4.8.zip'
+  homepage 'http://spotify-notifications.citruspi.io/'
+  version '0.4.8'
+  sha256 '953028e9a1aad445005869598050cb8612980821a796563936f557e03b319f50'
+  link 'Spotify Notifications.app'
 end

@@ -1,12 +1,8 @@
-cask 'pins' do
-  version :latest
-  sha256 :no_check
-
+class Pins < Cask
   url 'http://pinsapp.com/download/Pins.dmg'
-  name 'Pins'
+  appcast 'http://pinsapp.com/appcast.xml'
   homepage 'http://pinsapp.com/'
-
-  app 'Pins.app'
-
-  zap trash: '~/Library/Containers/com.pinsapp.pins'
+  version 'latest'
+  sha256 :no_check
+  link 'Pins.app'
 end

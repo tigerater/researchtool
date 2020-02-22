@@ -1,12 +1,9 @@
-cask 'cuda-z' do
-  version '0.10.251'
-  sha256 '552081ce1f632a72231dedeb6c3ddb02b352d0b19eea45f9ae27d930ee9d7c35'
+class CudaZ < Cask
+  version '0.8.207'
+  sha256 '5dcb79ada1fe872cf849e050e5c60471fca9ba18178ecf5819859e6990e96196'
 
-  # downloads.sourceforge.net/cuda-z was verified as official when first introduced to the cask
-  url "https://downloads.sourceforge.net/cuda-z/CUDA-Z-#{version}.dmg"
-  appcast 'https://sourceforge.net/projects/cuda-z/rss'
-  name 'CUDA-Z'
-  homepage 'https://cuda-z.sourceforge.io/'
+  url 'https://downloads.sourceforge.net/sourceforge/cuda-z/CUDA-Z-0.8.207.dmg'
+  homepage 'http://cuda-z.sourceforge.net'
 
-  app 'CUDA-Z.app'
+  link 'Cuda-Z.app'
 end

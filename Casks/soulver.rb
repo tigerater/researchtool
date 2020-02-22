@@ -1,20 +1,13 @@
-cask 'soulver' do
-  version '3.2.2-77'
-  sha256 'c70f6b2048c6fd5f97030ade11a3558f5c828591250db75f94945d23617d32cc'
+class Soulver < Cask
+  url 'http://www.acqualia.com/files/download.php?product=soulver'
+  appcast 'http://www.acqualia.com/soulver/appcast/soulver2.xml'
+  homepage 'http://www.acqualia.com/soulver/'
+  version 'latest'
+  sha256 :no_check
+  link 'Soulver.app'
 
-  url "https://soulver.app/mac/sparkle/soulver-#{version}.zip"
-  appcast 'https://soulver.app/mac/sparkle/appcast.xml'
-  name 'Soulver'
-  homepage 'https://soulver.app/'
-
-  auto_updates true
-  depends_on macos: '>= :mojave'
-
-  app "Soulver #{version.major}.app"
-
-  zap trash: [
-               '~/Library/Application Support/Soulver 3',
-               '~/Library/Application Support/app.soulver.mac',
-               '~/Library/Preferences/app.soulver.mac.plist',
-             ]
+  after_install do
+    # Don't ask to move the app bundle to /Applications
+    system '/usr/bin/defaults', 'write', 'com.acqualia.soulver', 'moveToApplicationsFolderAlertSuppress', '-bool', 'true'
+  end
 end

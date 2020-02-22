@@ -1,21 +1,10 @@
-cask 'clementine' do
-  version '1.3.1'
-  sha256 '825aa66996237e1d3ea2723b24188ead203f298d0bec89f4c3bc6582d9e63e3a'
+class Clementine < Cask
+  version '1.2.1'
+  sha256 '4453ea9a12b6b00e1c2087ffdc98fb9b53c2b760ef475d369417d944ac772f91'
+  
+  url 'https://clementine-player.googlecode.com/files/clementine-1.2.1.dmg'
+  appcast 'https://clementine-data.appspot.com/sparkle'
+  homepage 'http://www.clementine-player.org/'
 
-  # github.com/clementine-player/Clementine was verified as official when first introduced to the cask
-  url "https://github.com/clementine-player/Clementine/releases/download/#{version}/clementine-#{version}.dmg"
-  appcast 'https://github.com/clementine-player/Clementine/releases.atom'
-  name 'Clementine'
-  homepage 'https://www.clementine-player.org/'
-
-  conflicts_with cask: 'clementine-rc'
-
-  app 'clementine.app'
-
-  zap trash: [
-               '~/Library/Application Support/Clementine',
-               '~/Library/Caches/org.clementine-player.Clementine',
-               '~/Library/Preferences/org.clementine-player.Clementine.plist',
-               '~/Library/Saved Application State/org.clementine-player.Clementine.savedState',
-             ]
+  link 'clementine.app'
 end

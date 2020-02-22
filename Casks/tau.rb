@@ -1,10 +1,7 @@
-cask 'tau' do
-  version :latest
+class Tau < Cask
+  url 'http://tau.uoregon.edu/tau.dmg'
+  homepage 'http://tau.uoregon.edu/'
+  version 'latest'
   sha256 :no_check
-
-  url 'https://www.cs.uoregon.edu/research/tau/tau.dmg'
-  name 'TAU'
-  homepage 'https://www.cs.uoregon.edu/research/tau/home.php'
-
-  suite 'TAU'
+  link 'TAU'
 end

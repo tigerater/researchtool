@@ -1,19 +1,9 @@
-cask 'appium' do
-  version '1.15.1'
-  sha256 'f32cd3aea642df1df818fa09c11c434270d81b3e389b635024a676c6a5d36449'
+class Appium < Cask
+  version '1.0.0'
+  sha256 'c54a7af32870ec7046d9978ecd3545d8e10496a1599211debeb723b8deeeea68'
 
-  # github.com/appium/appium-desktop was verified as official when first introduced to the cask.
-  url "https://github.com/appium/appium-desktop/releases/download/v#{version}/Appium-mac-#{version}.dmg"
-  appcast 'https://github.com/appium/appium-desktop/releases.atom'
-  name 'Appium Desktop'
-  homepage 'https://appium.io/'
+  url 'https://bitbucket.org/appium/appium.app/downloads/appium-1.0.0.dmg'
+  homepage 'http://appium.io'
 
-  app 'Appium.app'
-
-  zap trash: [
-               '~/Library/Application Support/appium-desktop',
-               '~/Library/Preferences/io.appium.desktop.helper.plist',
-               '~/Library/Preferences/io.appium.desktop.plist',
-               '~/Library/Saved Application State/io.appium.desktop.savedState',
-             ]
+  link 'Appium.app'
 end

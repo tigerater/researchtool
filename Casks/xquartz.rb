@@ -1,42 +1,22 @@
-cask 'xquartz' do
-  version '2.7.11'
-  sha256 '32e50e8f1e21542b847041711039fa78d44febfed466f834a9281c44d75cd6c3'
+class Xquartz < Cask
+  url 'https://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.6.dmg'
+  homepage 'http://xquartz.macosforge.org/'
+  appcast 'http://xquartz-dl.macosforge.org/sparkle/release.xml'
+  version '2.7.6'
+  sha256 '02aa3268af0bd7dcd5dfbc10d673f5c6834bba6371a928d2a3fc44a8039b194e'
+  install 'XQuartz.pkg'
 
-  # bintray.com/xquartz was verified as official when first introduced to the cask
-  url "https://dl.bintray.com/xquartz/downloads/XQuartz-#{version}.dmg"
-  appcast 'https://www.xquartz.org/releases/sparkle/release.xml'
-  name 'XQuartz'
-  homepage 'https://www.xquartz.org/'
+  after_install do
+    Pathname.new(Dir.home).join('Library', 'Logs').mkpath
 
-  auto_updates true
+    # Set default path to X11 = avoid the need of manual setup
+    system '/usr/bin/defaults', 'write', 'com.apple.applescript', 'ApplicationMap', '-dict-add', 'X11', 'file://localhost/Applications/Utilities/XQuartz.app/'
 
-  pkg 'XQuartz.pkg'
+    # Load & start XServer = avoid the need of relogin
+    system '/bin/launchctl', 'load', '/Library/LaunchAgents/org.macosforge.xquartz.startx.plist'
+  end
 
-  uninstall quit:      'org.macosforge.xquartz.X11',
-            launchctl: [
-                         'org.macosforge.xquartz.startx',
-                         'org.macosforge.xquartz.privileged_startx',
-                       ],
-            pkgutil:   'org.macosforge.xquartz.pkg',
-            delete:    [
-                         '/opt/X11',
-                         '/private/etc/manpaths.d/40-XQuartz',
-                         '/private/etc/paths.d/40-XQuartz',
-                       ]
-
-  zap trash: [
-               '~/.Xauthority',
-               '~/Library/Application Support/XQuartz',
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.macosforge.xquartz.x11.sfl*',
-               '~/Library/Caches/org.macosforge.xquartz.X11',
-               '~/Library/Cookies/org.macosforge.xquartz.X11.binarycookies',
-               '~/Library/Logs/X11/org.macosforge.xquartz.log',
-               '~/Library/Logs/X11/org.macosforge.xquartz.log.old',
-               '~/Library/Preferences/org.macosforge.xquartz.X11.plist',
-               '~/Library/Saved Application State/org.macosforge.xquartz.X11.savedState',
-             ],
-      rmdir: [
-               '~/.fonts',
-               '~/Library/Logs/X11',
-             ]
+  uninstall :quit => 'org.macosforge.xquartz.X11',
+            :launchctl => 'org.macosforge.xquartz.startx',
+            :pkgutil => 'org.macosforge.xquartz.pkg'
 end

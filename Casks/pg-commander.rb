@@ -1,11 +1,7 @@
-cask 'pg-commander' do
-  version '1.5.9'
-  sha256 '8c844dec96e459bd047bd60bc0daae2ee50f5af9594b506b627ff1ecc5395fff'
-
-  # eggerapps-downloads.s3.amazonaws.com was verified as official when first introduced to the cask
-  url "https://eggerapps-downloads.s3.amazonaws.com/pgcommander-#{version}.zip"
-  name 'PG Commander'
-  homepage 'https://eggerapps.at/pgcommander/'
-
-  app 'PG Commander.app'
+class PgCommander < Cask
+  url 'https://eggerapps.at/pgcommander/download/pgcommander-1.3.0.zip'
+  homepage 'http://eggerapps.at/pgcommander/'
+  version '1.3.0'
+  sha256 'ca9dcb73ada73fcd5d4896b82ca2f84f37543ea3e1f8866edc7b3bd66e97c817'
+  link 'PG Commander.app'
 end

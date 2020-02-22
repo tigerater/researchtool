@@ -1,12 +1,9 @@
-cask 'milkytracker' do
-  version '1.02.00'
-  sha256 'b526497dc957454a4150e77b1f2f835ce564122e56f49bbe7b494dc984be076d'
+class Milkytracker < Cask
+  version '0.90.86'
+  sha256 '0029fe9a5e62d2b0db11fcbedb3c13997a4199259d1f36c55f966b0417d818b0'
 
-  # github.com/milkytracker/MilkyTracker was verified as official when first introduced to the cask
-  url "https://github.com/milkytracker/MilkyTracker/releases/download/v#{version}/milkytracker-#{version}.dmg"
-  appcast 'https://github.com/milkytracker/MilkyTracker/releases.atom'
-  name 'MilkyTracker'
-  homepage 'https://milkytracker.titandemo.org/'
+  url "http://www.milkytracker.org/files/milkytracker-#{version}-osx_universal.zip"
+  homepage 'http://www.milkytracker.org/'
 
-  app 'MilkyTracker.app'
+  link "milkytracker-#{version}-osx_universal/MilkyTracker.app"
 end

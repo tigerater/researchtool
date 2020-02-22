@@ -1,42 +1,7 @@
-cask 'pokerstars' do
-  version :latest
+class Pokerstars < Cask
+  url 'http://www.pokerstars.com/PokerStars.app.zip'
+  homepage 'http://www.pokerstars.com/'
+  version 'latest'
   sha256 :no_check
-
-  language 'US', default: true do
-    ['.net', '.net', '.net']
-  end
-
-  language 'DK' do
-    ['.dk', '.net', '.net']
-  end
-
-  language 'GR' do
-    ['.gr', '.net', '.net']
-  end
-
-  language 'IT' do
-    ['.it', '.net', '.net']
-  end
-
-  language 'GB' do
-    ['.uk', 'UK', '.uk']
-  end
-
-  language 'PT' do
-    ['.pt', 'PT', '.pt']
-  end
-
-  url "https://www.pokerstars#{language[2]}/PokerStars#{language[1]}.app.zip"
-  name 'PokerStars'
-  homepage "https://www.pokerstars#{language[0]}/"
-
-  container nested: "PokerStars#{language[1]}/PokerStars#{language[1]}.dmg"
-
-  app "PokerStars#{language[1]}.app"
-
-  zap trash: [
-               "~/Library/Preferences/com.pokerstars#{language[1]}.user.ini",
-               "~/Library/Preferences/com.pokerstars.PokerStars#{language[1]}.plist",
-               "~/Library/Application Support/PokerStars#{language[1]}",
-             ]
+  link 'PokerStars.app'
 end

@@ -1,25 +1,10 @@
-cask 'macdown' do
-  version '0.7.2'
-  sha256 '271f11eb64c19fccee2615e092067cdecc29adf0c2ed0703dae9acda8fa0a672'
+class Macdown < Cask
+  version '0.1'
+  sha256 'd050ee502fb27fd0f431abc1cc2f4a490670346821e269415d184bf08f245eb2'
 
-  # github.com/MacDownApp/macdown was verified as official when first introduced to the cask
-  url "https://github.com/MacDownApp/macdown/releases/download/v#{version}/MacDown.app.zip"
-  appcast 'https://macdown.uranusjr.com/sparkle/macdown/stable/appcast.xml'
-  name 'MacDown'
-  homepage 'https://macdown.uranusjr.com/'
+  url 'http://macdown.uranusjr.com/download/v0.1/'
+  appcast 'http://macdown.uranusjr.com/sparkle/macdown/appcast.xml'
+  homepage 'http://macdown.uranusjr.com/'
 
-  auto_updates true
-
-  app 'MacDown.app'
-  binary "#{appdir}/MacDown.app/Contents/SharedSupport/bin/macdown"
-
-  zap trash: [
-               '~/Library/Application Support/MacDown',
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.uranusjr.macdown.sfl*',
-               '~/Library/Caches/com.uranusjr.macdown',
-               '~/Library/Cookies/com.uranusjr.macdown.binarycookies',
-               '~/Library/Preferences/com.uranusjr.macdown.plist',
-               '~/Library/Saved Application State/com.uranusjr.macdown.savedState',
-               '~/Library/WebKit/com.uranusjr.macdown',
-             ]
+  link 'MacDown.app'
 end

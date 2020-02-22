@@ -1,11 +1,10 @@
-cask 'iexplorer' do
-  version '4.3.7,169'
-  sha256 '82eeb70aac3dcd9f2d647cf83c91937a1dd52c2b304d6afd4fc83a577e48f4b0'
+class Iexplorer < Cask
+  version '3.3.2.0'
+  sha256 'c57c435599ac2480fb09af753fd42208034183f1176121ad1894e5865de1ce39'
 
-  url "https://assets.macroplant.com/download/#{version.after_comma}/iExplorer-#{version.before_comma}.dmg"
-  appcast "https://macroplant.com/iexplorer/mac/v#{version.major}/appcast"
-  name 'iExplorer'
-  homepage 'https://macroplant.com/iexplorer'
+  homepage 'http://www.macroplant.com/'
+  url 'http://downloads.macroplant.com/iExplorer-3.3.2.0.dmg'
+  appcast 'http://www.macroplant.com/iexplorer/ie3-appcast.xml'
 
-  app 'iExplorer.app'
+  link 'iExplorer.app'
 end

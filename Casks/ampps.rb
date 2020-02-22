@@ -1,15 +1,9 @@
-cask 'ampps' do
-  version '3.9'
-  sha256 '7395bdcb3958cef4c3274cc1c6c68444104e6e464f692a76b61ead878236ec7d'
+class Ampps < Cask
+  version '2.3'
+  sha256 'ce7a1a7e71f0314edbc994e10fe4f6a80303c1999904ca1fb14d98c7477ae8e0'
 
-  url "https://files.ampps.com/AMPPS-#{version}.dmg"
-  appcast 'https://www.ampps.com/downloads'
-  name 'AMPPS'
-  homepage 'https://www.ampps.com/'
+  url 'http://files.ampps.com/AMPPS-2.3.dmg'
+  homepage 'http://www.ampps.com'
 
-  suite 'AMPPS'
-
-  uninstall_preflight do
-    set_permissions "#{appdir}/AMPPS", '0777'
-  end
+  link 'AMPPS'
 end

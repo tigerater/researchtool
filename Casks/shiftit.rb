@@ -1,19 +1,8 @@
-cask 'shiftit' do
-  version '1.6.6'
-  sha256 '858045662074579856a521dcf967ddfc818f68583ddc96fe73612d82e071bd00'
-
-  url "https://github.com/fikovnik/ShiftIt/releases/download/version-#{version}/ShiftIt-#{version}.zip"
-  appcast 'https://github.com/fikovnik/ShiftIt/releases.atom'
-  name 'ShiftIt'
-  homepage 'https://github.com/fikovnik/ShiftIt/'
-
-  auto_updates true
-
-  app 'ShiftIt.app'
-
-  zap trash: [
-               '~/Library/Application Support/ShiftIt',
-               '~/Library/Caches/org.shiftitapp.ShiftIt',
-               '~/Library/Preferences/org.shiftitapp.ShiftIt.plist',
-             ]
+class Shiftit < Cask
+  url 'https://github.com/downloads/fikovnik/ShiftIt/ShiftIt-develop-1.6.zip'
+  appcast 'https://raw.github.com/fikovnik/ShiftIt/develop/release/appcast.xml'
+  homepage 'https://github.com/fikovnik/ShiftIt'
+  version '1.6'
+  sha256 '538e0628d6fc99c3562694c0722cb41699d6a802f0032678ef05fa2b53711955'
+  link 'ShiftIt.app'
 end

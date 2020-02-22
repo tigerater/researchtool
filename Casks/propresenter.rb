@@ -1,29 +1,8 @@
-cask 'propresenter' do
-  version '7.0.3,117441283'
-  sha256 '0fba6c670b8ec4c4e38fc27f97cdfc87806a6264e3af83af3dcaa7a011389916'
-
-  url "https://renewedvision.com/downloads/propresenter/mac/ProPresenter_#{version.before_comma}_#{version.after_comma}.zip"
-  appcast 'https://api.renewedvision.com/v1/pro/upgrade?platform=macos&osVersion=0&appVersion=0&buildNumber=0&includeNotes=0'
-  name 'ProPresenter'
-  homepage 'https://www.renewedvision.com/propresenter.php'
-
-  depends_on macos: '>= :mojave'
-
-  app 'ProPresenter.app'
-
-  zap trash: [
-               '~/Library/Application Support/RenewedVision/ProPresenter6',
-               '~/Library/Caches/KSCrashReports/ProPresenter 6',
-               '~/Library/Caches/Sessions/ProPresenter 6',
-               '~/Library/Caches/com.renewedvision.ProPresenter6',
-               '~/Library/Preferences/com.renewedvision.ProPresenter6.plist',
-               '/Library/Application Support/RenewedVision',
-               '/Library/Caches/com.renewedvision.ProPresenter6',
-               '/Users/Shared/Renewed Vision Media',
-             ],
-      rmdir: [
-               '~/Library/Application Support/RenewedVision',
-               '~/Library/Caches/KSCrashReports',
-               '~/Library/Caches/Sessions',
-             ]
+class Propresenter < Cask
+  url 'https://www.renewedvision.com/downloads/ProPresenter5_5.2.8_b11499.dmg'
+  appcast 'https://www.renewedvision.com/update/ProPresenter5.php'
+  homepage 'http://www.renewedvision.com/propresenter.php'
+  version '5.2.8'
+  sha256 '47981ded0b025db373897b0103e9fa2894f4f0a073596da3725a739d33716e11'
+  link 'ProPresenter 5.app'
 end

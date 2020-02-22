@@ -1,17 +1,9 @@
-cask 'apache-directory-studio' do
-  version '2.0.0.v20180908-M14'
-  sha256 '845392529c86e52697c1edac1f0603261324ff2a649e697dbdf566ee5f5f8e5e'
+class ApacheDirectoryStudio < Cask
+  version '2.0.0.v20130628'
+  sha256 '60914cc67f893afdc8bf537fa67a48cb7cd96357e7d28595a2c22a74a19f02e3'
 
-  url "https://www.apache.org/dyn/closer.cgi?path=/directory/studio/#{version}/ApacheDirectoryStudio-#{version}-macosx.cocoa.x86_64.dmg"
-  appcast 'http://apache.mirror.serversaustralia.com.au/directory/studio/'
-  name 'Apache Directory Studio'
-  homepage 'https://directory.apache.org/studio/'
+  url 'http://mirrors.sonic.net/apache//directory/studio/dist/2.0.0.v20130628/ApacheDirectoryStudio-macosx-x86_64-2.0.0.v20130628.dmg'
+  homepage 'http://directory.apache.org/studio/'
 
-  app 'ApacheDirectoryStudio.app'
-
-  zap trash: '~/.ApacheDirectoryStudio'
-
-  caveats do
-    depends_on_java '8+'
-  end
+  link 'Apache Directory Studio.app'
 end

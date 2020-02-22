@@ -1,10 +1,9 @@
-cask 'displaperture' do
-  version :latest
+class Displaperture < Cask
+  version 'latest'
   sha256 :no_check
 
-  url 'https://manytricks.com/download/displaperture'
-  name 'Displaperture'
-  homepage 'https://manytricks.com/displaperture/'
+  url 'http://manytricks.com/download/displaperture'
+  homepage 'http://manytricks.com/displaperture'
 
-  app 'Displaperture.app'
+  link 'Displaperture.app'
 end

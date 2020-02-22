@@ -1,12 +1,7 @@
-cask 'thyme' do
-  version '0.5.1'
-  sha256 '9757fff3198d379d3fc1d6231669d1eea6e0d1ba7aa2b876782998415d050ae2'
-
-  # github.com/joaomoreno/thyme was verified as official when first introduced to the cask
-  url "https://github.com/joaomoreno/thyme/releases/download/#{version}/Thyme.#{version}.dmg"
-  appcast 'https://github.com/joaomoreno/thyme/releases.atom'
-  name 'Thyme'
-  homepage 'https://joaomoreno.github.io/thyme/'
-
-  app 'Thyme.app'
+class Thyme < Cask
+  url 'https://joaomoreno.github.io/thyme/dist/Thyme-0.4.2.dmg'
+  homepage 'http://joaomoreno.github.io/thyme/'
+  version '0.4.2'
+  sha256 '5963d199ff9d64f3cc6966ed532b949fa500c9887d391aef8eedba68ae469a45'
+  link 'Thyme.app'
 end

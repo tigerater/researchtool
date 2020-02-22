@@ -1,11 +1,9 @@
-cask 'butter' do
-  version '0.3.0'
-  sha256 '4255b581368e88ee3c802811f0824093f64bce73fb323d77b49a25700154ad84'
+class Butter < Cask
+  version '0.1.4'
+  sha256 '98cdd021f1c940ac1066600bef344400c3f932747882e971096152397f19b350'
 
-  url "https://github.com/harukasan/butter/releases/download/v#{version}/Butter_#{version}.dmg"
-  appcast 'https://github.com/harukasan/butter/releases.atom'
-  name 'Butter'
-  homepage 'https://github.com/harukasan/butter'
+  url 'https://github.com/harukasan/butter/releases/download/v0.1.4/Butter_0.1.4.dmg'
+  homepage 'http://harukasan.jp'
 
-  app 'Butter.app'
+  link 'Butter.app'
 end

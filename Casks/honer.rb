@@ -1,11 +1,7 @@
-cask 'honer' do
-  version '1.1'
-  sha256 'ca6b657bec7fd20e2cae8c7145852439148211b9d4aac9ab12c354c69426c043'
-
-  url "https://github.com/puffnfresh/Honer.app/releases/download/#{version}/Honer.app.zip"
-  appcast 'https://github.com/puffnfresh/Honer.app/releases.atom'
-  name 'Honer'
+class Honer < Cask
+  url 'https://github.com/puffnfresh/Honer.app/releases/download/v1.0/Honer-6e3863f2.zip'
   homepage 'https://github.com/puffnfresh/Honer.app'
-
-  app 'Honer.app'
+  version '1.0'
+  sha256 'bae10bea6875dbc5c948fb2e86b168c15ee3738d485bd7ab2a9758e64812c531'
+  link 'Honer.app'
 end

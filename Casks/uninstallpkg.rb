@@ -1,20 +1,8 @@
-cask 'uninstallpkg' do
-  version '1.1.7'
-  sha256 '08f7c047e41282b842934519cb485c954c70639141690edccc8681edbc607a73'
-
-  url "https://www.corecode.io/downloads/uninstallpkg_#{version}.zip"
-  appcast 'https://www.corecode.io/uninstallpkg/uninstallpkg.xml'
-  name 'UninstallPKG'
-  homepage 'https://www.corecode.io/uninstallpkg/'
-
-  app 'UninstallPKG.app'
-
-  uninstall delete:    '/Library/PrivilegedHelperTools/com.corecode.UninstallPKGDeleteHelper',
-            launchctl: 'com.corecode.UninstallPKGDeleteHelper'
-
-  zap trash: [
-               '~/Library/Application Support/UninstallPKG',
-               '~/Library/Preferences/com.corecode.UninstallPKG.plist',
-               '~/Library/Saved Application State/com.corecode.UninstallPKG.savedState',
-             ]
+class Uninstallpkg < Cask
+  url 'http://www.corecode.at/downloads/uninstallpkg_1.0.5.zip'
+  appcast 'http://www.corecode.at/uninstallpkg/uninstallpkg.xml'
+  homepage 'http://www.corecode.at/uninstallpkg/'
+  version '1.0.5'
+  sha256 '199cbae47644572aade93bb81a152934178016da7cf90f3c7136b36d4819e752'
+  link 'UninstallPKG.app'
 end
