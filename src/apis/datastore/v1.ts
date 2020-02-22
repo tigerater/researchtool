@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -120,7 +122,7 @@ export namespace datastore_v1 {
    */
   export interface Schema$AllocateIdsRequest {
     /**
-     * Required. A list of keys with incomplete key paths for which to allocate IDs. No key may be reserved/read-only.
+     * A list of keys with incomplete key paths for which to allocate IDs. No key may be reserved/read-only.
      */
     keys?: Schema$Key[];
   }
@@ -158,7 +160,7 @@ export namespace datastore_v1 {
     /**
      * The transaction identifier (always present).
      */
-    transaction?: string | null;
+    transaction?: string;
   }
   /**
    * The request for Datastore.Commit.
@@ -167,7 +169,7 @@ export namespace datastore_v1 {
     /**
      * The type of commit to perform. Defaults to `TRANSACTIONAL`.
      */
-    mode?: string | null;
+    mode?: string;
     /**
      * The mutations to perform.  When mode is `TRANSACTIONAL`, mutations affecting a single entity are applied in order. The following sequences of mutations affecting a single entity are not permitted in a single `Commit` request:  - `insert` followed by `insert` - `update` followed by `insert` - `upsert` followed by `insert` - `delete` followed by `update`  When mode is `NON_TRANSACTIONAL`, no two mutations may affect a single entity.
      */
@@ -175,7 +177,7 @@ export namespace datastore_v1 {
     /**
      * The identifier of the transaction associated with the commit. A transaction identifier is returned by a call to Datastore.BeginTransaction.
      */
-    transaction?: string | null;
+    transaction?: string;
   }
   /**
    * The response for Datastore.Commit.
@@ -184,7 +186,7 @@ export namespace datastore_v1 {
     /**
      * The number of index entries updated during the commit, or zero if none were updated.
      */
-    indexUpdates?: number | null;
+    indexUpdates?: number;
     /**
      * The result of performing the mutations. The i-th mutation result corresponds to the i-th mutation in the request.
      */
@@ -201,7 +203,7 @@ export namespace datastore_v1 {
     /**
      * The operator for combining multiple filters.
      */
-    op?: string | null;
+    op?: string;
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -218,7 +220,7 @@ export namespace datastore_v1 {
     /**
      * The entity&#39;s properties. The map&#39;s keys are property names. A property name matching regex `__.*__` is reserved. A reserved property name is forbidden in certain documented contexts. The name must not contain more than 500 characters. The name cannot be `&quot;&quot;`.
      */
-    properties?: {[key: string]: Schema$Value} | null;
+    properties?: {[key: string]: Schema$Value};
   }
   /**
    * The result of fetching an entity from Datastore.
@@ -227,7 +229,7 @@ export namespace datastore_v1 {
     /**
      * A cursor that points to the position after the result entity. Set only when the `EntityResult` is part of a `QueryResultBatch` message.
      */
-    cursor?: string | null;
+    cursor?: string;
     /**
      * The resulting entity.
      */
@@ -235,7 +237,7 @@ export namespace datastore_v1 {
     /**
      * The version of the entity, a strictly positive number that monotonically increases with changes to the entity.  This field is set for `FULL` entity results.  For missing entities in `LookupResponse`, this is the version of the snapshot that was used to look up the entity, and it is always set except for eventually consistent reads.
      */
-    version?: string | null;
+    version?: string;
   }
   /**
    * A holder for any type of filter.
@@ -257,23 +259,23 @@ export namespace datastore_v1 {
     /**
      * The time the operation ended, either successfully or otherwise.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * The client-assigned labels which were provided when the operation was created. May also include additional labels.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * The type of the operation. Can be used as a filter in ListOperationsRequest.
      */
-    operationType?: string | null;
+    operationType?: string;
     /**
      * The time that work began on the operation.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * The current state of the Operation.
      */
-    state?: string | null;
+    state?: string;
   }
   /**
    * Identifies a subset of entities in a project. This is specified as combinations of kinds and namespaces (either or both of which may be all, as described in the following examples). Example usage:  Entire project:   kinds=[], namespace_ids=[]  Kinds Foo and Bar in all namespaces:   kinds=[&#39;Foo&#39;, &#39;Bar&#39;], namespace_ids=[]  Kinds Foo and Bar only in the default namespace:   kinds=[&#39;Foo&#39;, &#39;Bar&#39;], namespace_ids=[&#39;&#39;]  Kinds Foo and Bar in both the default and Baz namespaces:   kinds=[&#39;Foo&#39;, &#39;Bar&#39;], namespace_ids=[&#39;&#39;, &#39;Baz&#39;]  The entire Baz namespace:   kinds=[], namespace_ids=[&#39;Baz&#39;]
@@ -282,11 +284,11 @@ export namespace datastore_v1 {
     /**
      * If empty, then this represents all kinds.
      */
-    kinds?: string[] | null;
+    kinds?: string[];
     /**
      * An empty list represents all namespaces. This is the preferred usage for projects that don&#39;t use namespaces.  An empty string element represents the default namespace. This should be used if the project has data in non-default namespaces, but doesn&#39;t want to include them. Each namespace in this list must be unique.
      */
-    namespaceIds?: string[] | null;
+    namespaceIds?: string[];
   }
   /**
    * Metadata for ExportEntities operations.
@@ -303,7 +305,7 @@ export namespace datastore_v1 {
     /**
      * Location for the export metadata and data files. This will be the same value as the google.datastore.admin.v1beta1.ExportEntitiesRequest.output_url_prefix field. The final output location is provided in google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url.
      */
-    outputUrlPrefix?: string | null;
+    outputUrlPrefix?: string;
     /**
      * An estimate of the number of bytes processed.
      */
@@ -320,7 +322,7 @@ export namespace datastore_v1 {
     /**
      * Location of the output metadata file. This can be used to begin an import into Cloud Datastore (this project or another project). See google.datastore.admin.v1beta1.ImportEntitiesRequest.input_url. Only present if the operation completed successfully.
      */
-    outputUrl?: string | null;
+    outputUrl?: string;
   }
   /**
    * Metadata for ImportEntities operations.
@@ -337,7 +339,7 @@ export namespace datastore_v1 {
     /**
      * The location of the import metadata file. This will be the same value as the google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url field.
      */
-    inputUrl?: string | null;
+    inputUrl?: string;
     /**
      * An estimate of the number of bytes processed.
      */
@@ -354,11 +356,11 @@ export namespace datastore_v1 {
     /**
      * The amount of work that has been completed. Note that this may be greater than work_estimated.
      */
-    workCompleted?: string | null;
+    workCompleted?: string;
     /**
      * An estimate of how much work needs to be performed. May be zero if the work estimate is unavailable.
      */
-    workEstimated?: string | null;
+    workEstimated?: string;
   }
   /**
    * Metadata common to all Datastore Admin operations.
@@ -367,23 +369,23 @@ export namespace datastore_v1 {
     /**
      * The time the operation ended, either successfully or otherwise.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * The client-assigned labels which were provided when the operation was created. May also include additional labels.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * The type of the operation. Can be used as a filter in ListOperationsRequest.
      */
-    operationType?: string | null;
+    operationType?: string;
     /**
      * The time that work began on the operation.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * The current state of the Operation.
      */
-    state?: string | null;
+    state?: string;
   }
   /**
    * Identifies a subset of entities in a project. This is specified as combinations of kinds and namespaces (either or both of which may be all, as described in the following examples). Example usage:  Entire project:   kinds=[], namespace_ids=[]  Kinds Foo and Bar in all namespaces:   kinds=[&#39;Foo&#39;, &#39;Bar&#39;], namespace_ids=[]  Kinds Foo and Bar only in the default namespace:   kinds=[&#39;Foo&#39;, &#39;Bar&#39;], namespace_ids=[&#39;&#39;]  Kinds Foo and Bar in both the default and Baz namespaces:   kinds=[&#39;Foo&#39;, &#39;Bar&#39;], namespace_ids=[&#39;&#39;, &#39;Baz&#39;]  The entire Baz namespace:   kinds=[], namespace_ids=[&#39;Baz&#39;]
@@ -392,11 +394,11 @@ export namespace datastore_v1 {
     /**
      * If empty, then this represents all kinds.
      */
-    kinds?: string[] | null;
+    kinds?: string[];
     /**
      * An empty list represents all namespaces. This is the preferred usage for projects that don&#39;t use namespaces.  An empty string element represents the default namespace. This should be used if the project has data in non-default namespaces, but doesn&#39;t want to include them. Each namespace in this list must be unique.
      */
-    namespaceIds?: string[] | null;
+    namespaceIds?: string[];
   }
   /**
    * Metadata for ExportEntities operations.
@@ -413,7 +415,7 @@ export namespace datastore_v1 {
     /**
      * Location for the export metadata and data files. This will be the same value as the google.datastore.admin.v1.ExportEntitiesRequest.output_url_prefix field. The final output location is provided in google.datastore.admin.v1.ExportEntitiesResponse.output_url.
      */
-    outputUrlPrefix?: string | null;
+    outputUrlPrefix?: string;
     /**
      * An estimate of the number of bytes processed.
      */
@@ -434,11 +436,11 @@ export namespace datastore_v1 {
     /**
      * Client-assigned labels.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
-     * Required. Location for the export metadata and data files.  The full resource URL of the external storage location. Currently, only Google Cloud Storage is supported. So output_url_prefix should be of the form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name of the Cloud Storage bucket and `NAMESPACE_PATH` is an optional Cloud Storage namespace path (this is not a Cloud Datastore namespace). For more information about Cloud Storage namespace paths, see [Object name considerations](https://cloud.google.com/storage/docs/naming#object-considerations).  The resulting files will be nested deeper than the specified URL prefix. The final output URL will be provided in the google.datastore.admin.v1.ExportEntitiesResponse.output_url field. That value should be used for subsequent ImportEntities operations.  By nesting the data files deeper, the same Cloud Storage bucket can be used in multiple ExportEntities operations without conflict.
+     * Location for the export metadata and data files.  The full resource URL of the external storage location. Currently, only Google Cloud Storage is supported. So output_url_prefix should be of the form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name of the Cloud Storage bucket and `NAMESPACE_PATH` is an optional Cloud Storage namespace path (this is not a Cloud Datastore namespace). For more information about Cloud Storage namespace paths, see [Object name considerations](https://cloud.google.com/storage/docs/naming#object-considerations).  The resulting files will be nested deeper than the specified URL prefix. The final output URL will be provided in the google.datastore.admin.v1.ExportEntitiesResponse.output_url field. That value should be used for subsequent ImportEntities operations.  By nesting the data files deeper, the same Cloud Storage bucket can be used in multiple ExportEntities operations without conflict.
      */
-    outputUrlPrefix?: string | null;
+    outputUrlPrefix?: string;
   }
   /**
    * The response for google.datastore.admin.v1.DatastoreAdmin.ExportEntities.
@@ -447,7 +449,7 @@ export namespace datastore_v1 {
     /**
      * Location of the output metadata file. This can be used to begin an import into Cloud Datastore (this project or another project). See google.datastore.admin.v1.ImportEntitiesRequest.input_url. Only present if the operation completed successfully.
      */
-    outputUrl?: string | null;
+    outputUrl?: string;
   }
   /**
    * Metadata for ImportEntities operations.
@@ -464,7 +466,7 @@ export namespace datastore_v1 {
     /**
      * The location of the import metadata file. This will be the same value as the google.datastore.admin.v1.ExportEntitiesResponse.output_url field.
      */
-    inputUrl?: string | null;
+    inputUrl?: string;
     /**
      * An estimate of the number of bytes processed.
      */
@@ -483,55 +485,55 @@ export namespace datastore_v1 {
      */
     entityFilter?: Schema$GoogleDatastoreAdminV1EntityFilter;
     /**
-     * Required. The full resource URL of the external storage location. Currently, only Google Cloud Storage is supported. So input_url should be of the form: `gs://BUCKET_NAME[/NAMESPACE_PATH]/OVERALL_EXPORT_METADATA_FILE`, where `BUCKET_NAME` is the name of the Cloud Storage bucket, `NAMESPACE_PATH` is an optional Cloud Storage namespace path (this is not a Cloud Datastore namespace), and `OVERALL_EXPORT_METADATA_FILE` is the metadata file written by the ExportEntities operation. For more information about Cloud Storage namespace paths, see [Object name considerations](https://cloud.google.com/storage/docs/naming#object-considerations).  For more information, see google.datastore.admin.v1.ExportEntitiesResponse.output_url.
+     * The full resource URL of the external storage location. Currently, only Google Cloud Storage is supported. So input_url should be of the form: `gs://BUCKET_NAME[/NAMESPACE_PATH]/OVERALL_EXPORT_METADATA_FILE`, where `BUCKET_NAME` is the name of the Cloud Storage bucket, `NAMESPACE_PATH` is an optional Cloud Storage namespace path (this is not a Cloud Datastore namespace), and `OVERALL_EXPORT_METADATA_FILE` is the metadata file written by the ExportEntities operation. For more information about Cloud Storage namespace paths, see [Object name considerations](https://cloud.google.com/storage/docs/naming#object-considerations).  For more information, see google.datastore.admin.v1.ExportEntitiesResponse.output_url.
      */
-    inputUrl?: string | null;
+    inputUrl?: string;
     /**
      * Client-assigned labels.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
   }
   /**
    * A minimal index definition.
    */
   export interface Schema$GoogleDatastoreAdminV1Index {
     /**
-     * Required. The index&#39;s ancestor mode.  Must not be ANCESTOR_MODE_UNSPECIFIED.
+     * The index&#39;s ancestor mode.  Must not be ANCESTOR_MODE_UNSPECIFIED. Required.
      */
-    ancestor?: string | null;
+    ancestor?: string;
     /**
-     * Output only. The resource ID of the index.
+     * The resource ID of the index. Output only.
      */
-    indexId?: string | null;
+    indexId?: string;
     /**
-     * Required. The entity kind to which this index applies.
+     * The entity kind to which this index applies. Required.
      */
-    kind?: string | null;
+    kind?: string;
     /**
-     * Output only. Project ID.
+     * Project ID. Output only.
      */
-    projectId?: string | null;
+    projectId?: string;
     /**
-     * Required. An ordered sequence of property names and their index attributes.
+     * An ordered sequence of property names and their index attributes. Required.
      */
     properties?: Schema$GoogleDatastoreAdminV1IndexedProperty[];
     /**
-     * Output only. The state of the index.
+     * The state of the index. Output only.
      */
-    state?: string | null;
+    state?: string;
   }
   /**
    * A property of an index.
    */
   export interface Schema$GoogleDatastoreAdminV1IndexedProperty {
     /**
-     * Required. The indexed property&#39;s direction.  Must not be DIRECTION_UNSPECIFIED.
+     * The indexed property&#39;s direction.  Must not be DIRECTION_UNSPECIFIED. Required.
      */
-    direction?: string | null;
+    direction?: string;
     /**
-     * Required. The property name to index.
+     * The property name to index. Required.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Metadata for Index operations.
@@ -544,7 +546,7 @@ export namespace datastore_v1 {
     /**
      * The index resource ID that this operation is acting on.
      */
-    indexId?: string | null;
+    indexId?: string;
     /**
      * An estimate of the number of entities processed.
      */
@@ -561,7 +563,7 @@ export namespace datastore_v1 {
     /**
      * The standard List next-page token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Measures the progress of a particular metric.
@@ -570,11 +572,11 @@ export namespace datastore_v1 {
     /**
      * The amount of work that has been completed. Note that this may be greater than work_estimated.
      */
-    workCompleted?: string | null;
+    workCompleted?: string;
     /**
      * An estimate of how much work needs to be performed. May be zero if the work estimate is unavailable.
      */
-    workEstimated?: string | null;
+    workEstimated?: string;
   }
   /**
    * The response message for Operations.ListOperations.
@@ -583,7 +585,7 @@ export namespace datastore_v1 {
     /**
      * The standard List next-page token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * A list of operations that matches the specified filter in the request.
      */
@@ -596,7 +598,7 @@ export namespace datastore_v1 {
     /**
      * If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * The error result of the operation in case of failure or cancellation.
      */
@@ -604,15 +606,15 @@ export namespace datastore_v1 {
     /**
      * Service-specific metadata associated with the operation.  It typically contains progress information and common metadata such as create time. Some services might not provide such metadata.  Any method that returns a long-running operation should document the metadata type, if any.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
-     * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+     * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should have the format of `operations/some/unique/name`.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The normal response of the operation in case of success.  If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`.  If the original method is standard `Get`/`Create`/`Update`, the response should be the resource.  For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name.  For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
      */
-    response?: {[key: string]: any} | null;
+    response?: {[key: string]: any};
   }
   /**
    * A [GQL query](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).
@@ -621,11 +623,11 @@ export namespace datastore_v1 {
     /**
      * When false, the query string must not contain any literals and instead must bind all values. For example, `SELECT * FROM Kind WHERE a = &#39;string literal&#39;` is not allowed, while `SELECT * FROM Kind WHERE a = @value` is.
      */
-    allowLiterals?: boolean | null;
+    allowLiterals?: boolean;
     /**
      * For each non-reserved named binding site in the query string, there must be a named parameter with that name, but not necessarily the inverse.  Key must match regex `A-Za-z_$*`, must not match regex `__.*__`, and must not be `&quot;&quot;`.
      */
-    namedBindings?: {[key: string]: Schema$GqlQueryParameter} | null;
+    namedBindings?: {[key: string]: Schema$GqlQueryParameter};
     /**
      * Numbered binding site @1 references the first numbered parameter, effectively using 1-based indexing, rather than the usual 0.  For each binding site numbered i in `query_string`, there must be an i-th numbered parameter. The inverse must also be true.
      */
@@ -633,7 +635,7 @@ export namespace datastore_v1 {
     /**
      * A string of the format described [here](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).
      */
-    queryString?: string | null;
+    queryString?: string;
   }
   /**
    * A binding parameter for a GQL query.
@@ -642,7 +644,7 @@ export namespace datastore_v1 {
     /**
      * A query cursor. Query cursors are returned in query result batches.
      */
-    cursor?: string | null;
+    cursor?: string;
     /**
      * A value parameter.
      */
@@ -668,7 +670,7 @@ export namespace datastore_v1 {
     /**
      * The name of the kind.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * An object representing a latitude/longitude pair. This is expressed as a pair of doubles representing degrees latitude and degrees longitude. Unless specified otherwise, this must conform to the &lt;a href=&quot;http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf&quot;&gt;WGS84 standard&lt;/a&gt;. Values must be within normalized ranges.
@@ -677,18 +679,18 @@ export namespace datastore_v1 {
     /**
      * The latitude in degrees. It must be in the range [-90.0, +90.0].
      */
-    latitude?: number | null;
+    latitude?: number;
     /**
      * The longitude in degrees. It must be in the range [-180.0, +180.0].
      */
-    longitude?: number | null;
+    longitude?: number;
   }
   /**
    * The request for Datastore.Lookup.
    */
   export interface Schema$LookupRequest {
     /**
-     * Required. Keys of entities to look up.
+     * Keys of entities to look up.
      */
     keys?: Schema$Key[];
     /**
@@ -720,7 +722,7 @@ export namespace datastore_v1 {
     /**
      * The version of the entity that this mutation is being applied to. If this does not match the current version on the server, the mutation conflicts.
      */
-    baseVersion?: string | null;
+    baseVersion?: string;
     /**
      * The key of the entity to delete. The entity may or may not already exist. Must have a complete key path and must not be reserved/read-only.
      */
@@ -745,7 +747,7 @@ export namespace datastore_v1 {
     /**
      * Whether a conflict was detected for this mutation. Always false when a conflict detection strategy field is not set in the mutation.
      */
-    conflictDetected?: boolean | null;
+    conflictDetected?: boolean;
     /**
      * The automatically allocated key. Set only when the mutation allocated a key.
      */
@@ -753,7 +755,7 @@ export namespace datastore_v1 {
     /**
      * The version of the entity on the server after processing the mutation. If the mutation doesn&#39;t change anything on the server, then the version will be the version of the current entity or, if no entity is present, a version that is strictly greater than the version of any previous entity and less than the version of any possible future entity.
      */
-    version?: string | null;
+    version?: string;
   }
   /**
    * A partition ID identifies a grouping of entities. The grouping is always by project and namespace, however the namespace ID may be empty.  A partition ID contains several dimensions: project ID and namespace ID.  Partition dimensions:  - May be `&quot;&quot;`. - Must be valid UTF-8 bytes. - Must have values that match regex `[A-Za-z\d\.\-_]{1,100}` If the value of any dimension matches regex `__.*__`, the partition is reserved/read-only. A reserved/read-only partition ID is forbidden in certain documented contexts.  Foreign partition IDs (in which the project ID does not match the context project ID ) are discouraged. Reads and writes of foreign partition IDs may fail if the project is not in an active state.
@@ -762,11 +764,11 @@ export namespace datastore_v1 {
     /**
      * If not empty, the ID of the namespace to which the entities belong.
      */
-    namespaceId?: string | null;
+    namespaceId?: string;
     /**
      * The ID of the project to which the entities belong.
      */
-    projectId?: string | null;
+    projectId?: string;
   }
   /**
    * A (kind, ID/name) pair used to construct a key path.  If either name or ID is set, the element is complete. If neither is set, the element is incomplete.
@@ -775,15 +777,15 @@ export namespace datastore_v1 {
     /**
      * The auto-allocated ID of the entity. Never equal to zero. Values less than zero are discouraged and may not be supported in the future.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of the entity. A kind matching regex `__.*__` is reserved/read-only. A kind must not contain more than 1500 bytes when UTF-8 encoded. Cannot be `&quot;&quot;`.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The name of the entity. A name matching regex `__.*__` is reserved/read-only. A name must not be more than 1500 bytes when UTF-8 encoded. Cannot be `&quot;&quot;`.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * A representation of a property in a projection.
@@ -801,7 +803,7 @@ export namespace datastore_v1 {
     /**
      * The operator to filter by.
      */
-    op?: string | null;
+    op?: string;
     /**
      * The property to filter by.
      */
@@ -818,7 +820,7 @@ export namespace datastore_v1 {
     /**
      * The direction to order by. Defaults to `ASCENDING`.
      */
-    direction?: string | null;
+    direction?: string;
     /**
      * The property to order by.
      */
@@ -831,7 +833,7 @@ export namespace datastore_v1 {
     /**
      * The name of the property. If name includes &quot;.&quot;s, it may be interpreted as a property name path.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * A query for entities.
@@ -844,7 +846,7 @@ export namespace datastore_v1 {
     /**
      * An ending point for the query results. Query cursors are returned in query result batches and [can only be used to limit the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
      */
-    endCursor?: string | null;
+    endCursor?: string;
     /**
      * The filter to apply.
      */
@@ -856,11 +858,11 @@ export namespace datastore_v1 {
     /**
      * The maximum number of results to return. Applies after all other constraints. Optional. Unspecified is interpreted as no limit. Must be &gt;= 0 if specified.
      */
-    limit?: number | null;
+    limit?: number;
     /**
      * The number of results to skip. Applies before limit, but after all other constraints. Optional. Must be &gt;= 0 if specified.
      */
-    offset?: number | null;
+    offset?: number;
     /**
      * The order to apply to the query results (if empty, order is unspecified).
      */
@@ -872,7 +874,7 @@ export namespace datastore_v1 {
     /**
      * A starting point for the query results. Query cursors are returned in query result batches and [can only be used to continue the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
      */
-    startCursor?: string | null;
+    startCursor?: string;
   }
   /**
    * A batch of results produced by a query.
@@ -881,7 +883,7 @@ export namespace datastore_v1 {
     /**
      * A cursor that points to the position after the last result in the batch.
      */
-    endCursor?: string | null;
+    endCursor?: string;
     /**
      * The results for this batch.
      */
@@ -889,23 +891,23 @@ export namespace datastore_v1 {
     /**
      * The result type for every entity in `entity_results`.
      */
-    entityResultType?: string | null;
+    entityResultType?: string;
     /**
      * The state of the query after the current batch.
      */
-    moreResults?: string | null;
+    moreResults?: string;
     /**
      * A cursor that points to the position after the last skipped result. Will be set when `skipped_results` != 0.
      */
-    skippedCursor?: string | null;
+    skippedCursor?: string;
     /**
      * The number of results skipped, typically because of an offset.
      */
-    skippedResults?: number | null;
+    skippedResults?: number;
     /**
      * The version number of the snapshot this batch was returned from. This applies to the range of results from the query&#39;s `start_cursor` (or the beginning of the query if no cursor was given) to this batch&#39;s `end_cursor` (not the query&#39;s `end_cursor`).  In a single transaction, subsequent query result batches for the same query can have a greater snapshot version number. Each batch&#39;s snapshot version is valid for all preceding batches. The value will be zero for eventually consistent queries.
      */
-    snapshotVersion?: string | null;
+    snapshotVersion?: string;
   }
   /**
    * Options specific to read-only transactions.
@@ -918,11 +920,11 @@ export namespace datastore_v1 {
     /**
      * The non-transactional read consistency to use. Cannot be set to `STRONG` for global queries.
      */
-    readConsistency?: string | null;
+    readConsistency?: string;
     /**
      * The identifier of the transaction in which to read. A transaction identifier is returned by a call to Datastore.BeginTransaction.
      */
-    transaction?: string | null;
+    transaction?: string;
   }
   /**
    * Options specific to read / write transactions.
@@ -931,7 +933,7 @@ export namespace datastore_v1 {
     /**
      * The transaction identifier of the transaction being retried.
      */
-    previousTransaction?: string | null;
+    previousTransaction?: string;
   }
   /**
    * The request for Datastore.ReserveIds.
@@ -940,9 +942,9 @@ export namespace datastore_v1 {
     /**
      * If not empty, the ID of the database against which to make the request.
      */
-    databaseId?: string | null;
+    databaseId?: string;
     /**
-     * Required. A list of keys with complete key paths whose numeric IDs should not be auto-allocated.
+     * A list of keys with complete key paths whose numeric IDs should not be auto-allocated.
      */
     keys?: Schema$Key[];
   }
@@ -955,9 +957,9 @@ export namespace datastore_v1 {
    */
   export interface Schema$RollbackRequest {
     /**
-     * Required. The transaction identifier, returned by a call to Datastore.BeginTransaction.
+     * The transaction identifier, returned by a call to Datastore.BeginTransaction.
      */
-    transaction?: string | null;
+    transaction?: string;
   }
   /**
    * The response for Datastore.Rollback. (an empty message).
@@ -998,21 +1000,21 @@ export namespace datastore_v1 {
     query?: Schema$Query;
   }
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * Options for beginning a new transaction.  Transactions can be created explicitly with calls to Datastore.BeginTransaction or implicitly by setting ReadOptions.new_transaction in read requests.
@@ -1038,15 +1040,15 @@ export namespace datastore_v1 {
     /**
      * A blob value. May have at most 1,000,000 bytes. When `exclude_from_indexes` is false, may have at most 1500 bytes. In JSON requests, must be base64-encoded.
      */
-    blobValue?: string | null;
+    blobValue?: string;
     /**
      * A boolean value.
      */
-    booleanValue?: boolean | null;
+    booleanValue?: boolean;
     /**
      * A double value.
      */
-    doubleValue?: number | null;
+    doubleValue?: number;
     /**
      * An entity value.  - May have no key. - May have a key with an incomplete key path. - May have a reserved/read-only key.
      */
@@ -1054,7 +1056,7 @@ export namespace datastore_v1 {
     /**
      * If the value should be excluded from all indexes including those defined explicitly.
      */
-    excludeFromIndexes?: boolean | null;
+    excludeFromIndexes?: boolean;
     /**
      * A geo point value representing a point on the surface of Earth.
      */
@@ -1062,7 +1064,7 @@ export namespace datastore_v1 {
     /**
      * An integer value.
      */
-    integerValue?: string | null;
+    integerValue?: string;
     /**
      * A key value.
      */
@@ -1070,19 +1072,19 @@ export namespace datastore_v1 {
     /**
      * The `meaning` field should only be populated for backwards compatibility.
      */
-    meaning?: number | null;
+    meaning?: number;
     /**
      * A null value.
      */
-    nullValue?: string | null;
+    nullValue?: string;
     /**
      * A UTF-8 encoded string value. When `exclude_from_indexes` is false (it is indexed) , may have at most 1500 bytes. Otherwise, may be set to at least 1,000,000 bytes.
      */
-    stringValue?: string | null;
+    stringValue?: string;
     /**
      * A timestamp value. When stored in the Datastore, precise only to microseconds; any additional precision is rounded down.
      */
-    timestampValue?: string | null;
+    timestampValue?: string;
   }
 
   export class Resource$Projects {
@@ -1102,8 +1104,8 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
-     * @param {().AllocateIdsRequest} params.requestBody Request body data
+     * @param {string} params.projectId The ID of the project against which to make the request.
+     * @param {().AllocateIdsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1179,8 +1181,8 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
-     * @param {().BeginTransactionRequest} params.requestBody Request body data
+     * @param {string} params.projectId The ID of the project against which to make the request.
+     * @param {().BeginTransactionRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1257,8 +1259,8 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
-     * @param {().CommitRequest} params.requestBody Request body data
+     * @param {string} params.projectId The ID of the project against which to make the request.
+     * @param {().CommitRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1331,8 +1333,8 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. Project ID against which to make the request.
-     * @param {().GoogleDatastoreAdminV1ExportEntitiesRequest} params.requestBody Request body data
+     * @param {string} params.projectId Project ID against which to make the request.
+     * @param {().GoogleDatastoreAdminV1ExportEntitiesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1412,8 +1414,8 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. Project ID against which to make the request.
-     * @param {().GoogleDatastoreAdminV1ImportEntitiesRequest} params.requestBody Request body data
+     * @param {string} params.projectId Project ID against which to make the request.
+     * @param {().GoogleDatastoreAdminV1ImportEntitiesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1493,8 +1495,8 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
-     * @param {().LookupRequest} params.requestBody Request body data
+     * @param {string} params.projectId The ID of the project against which to make the request.
+     * @param {().LookupRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1567,8 +1569,8 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
-     * @param {().ReserveIdsRequest} params.requestBody Request body data
+     * @param {string} params.projectId The ID of the project against which to make the request.
+     * @param {().ReserveIdsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1642,8 +1644,8 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
-     * @param {().RollbackRequest} params.requestBody Request body data
+     * @param {string} params.projectId The ID of the project against which to make the request.
+     * @param {().RollbackRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1717,8 +1719,8 @@ export namespace datastore_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.projectId Required. The ID of the project against which to make the request.
-     * @param {().RunQueryRequest} params.requestBody Request body data
+     * @param {string} params.projectId The ID of the project against which to make the request.
+     * @param {().RunQueryRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1794,7 +1796,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1811,7 +1813,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1827,7 +1829,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1843,7 +1845,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. Project ID against which to make the request.
+     * Project ID against which to make the request.
      */
     projectId?: string;
 
@@ -1859,7 +1861,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. Project ID against which to make the request.
+     * Project ID against which to make the request.
      */
     projectId?: string;
 
@@ -1875,7 +1877,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1892,7 +1894,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1909,7 +1911,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1926,7 +1928,7 @@ export namespace datastore_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The ID of the project against which to make the request.
+     * The ID of the project against which to make the request.
      */
     projectId?: string;
 
@@ -1940,169 +1942,6 @@ export namespace datastore_v1 {
     context: APIRequestContext;
     constructor(context: APIRequestContext) {
       this.context = context;
-    }
-
-    /**
-     * datastore.projects.indexes.create
-     * @desc Creates the specified index. A newly created index's initial state is `CREATING`. On completion of the returned google.longrunning.Operation, the state will be `READY`. If the index already exists, the call will return an `ALREADY_EXISTS` status.  During index creation, the process could result in an error, in which case the index will move to the `ERROR` state. The process can be recovered by fixing the data that caused the error, removing the index with delete, then re-creating the index with create.  Indexes with a single property cannot be created.
-     * @alias datastore.projects.indexes.create
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.projectId Project ID against which to make the request.
-     * @param {().GoogleDatastoreAdminV1Index} params.requestBody Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    create(
-      params?: Params$Resource$Projects$Indexes$Create,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$GoogleLongrunningOperation>;
-    create(
-      params: Params$Resource$Projects$Indexes$Create,
-      options:
-        | MethodOptions
-        | BodyResponseCallback<Schema$GoogleLongrunningOperation>,
-      callback: BodyResponseCallback<Schema$GoogleLongrunningOperation>
-    ): void;
-    create(
-      params: Params$Resource$Projects$Indexes$Create,
-      callback: BodyResponseCallback<Schema$GoogleLongrunningOperation>
-    ): void;
-    create(
-      callback: BodyResponseCallback<Schema$GoogleLongrunningOperation>
-    ): void;
-    create(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Indexes$Create
-        | BodyResponseCallback<Schema$GoogleLongrunningOperation>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$GoogleLongrunningOperation>,
-      callback?: BodyResponseCallback<Schema$GoogleLongrunningOperation>
-    ): void | GaxiosPromise<Schema$GoogleLongrunningOperation> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Indexes$Create;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Indexes$Create;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://datastore.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1/projects/{projectId}/indexes').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'POST',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['projectId'],
-        pathParams: ['projectId'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$GoogleLongrunningOperation>(
-          parameters,
-          callback
-        );
-      } else {
-        return createAPIRequest<Schema$GoogleLongrunningOperation>(parameters);
-      }
-    }
-
-    /**
-     * datastore.projects.indexes.delete
-     * @desc Deletes an existing index. An index can only be deleted if it is in a `READY` or `ERROR` state. On successful execution of the request, the index will be in a `DELETING` state. And on completion of the returned google.longrunning.Operation, the index will be removed.  During index deletion, the process could result in an error, in which case the index will move to the `ERROR` state. The process can be recovered by fixing the data that caused the error, followed by calling delete again.
-     * @alias datastore.projects.indexes.delete
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.indexId The resource ID of the index to delete.
-     * @param {string} params.projectId Project ID against which to make the request.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    delete(
-      params?: Params$Resource$Projects$Indexes$Delete,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$GoogleLongrunningOperation>;
-    delete(
-      params: Params$Resource$Projects$Indexes$Delete,
-      options:
-        | MethodOptions
-        | BodyResponseCallback<Schema$GoogleLongrunningOperation>,
-      callback: BodyResponseCallback<Schema$GoogleLongrunningOperation>
-    ): void;
-    delete(
-      params: Params$Resource$Projects$Indexes$Delete,
-      callback: BodyResponseCallback<Schema$GoogleLongrunningOperation>
-    ): void;
-    delete(
-      callback: BodyResponseCallback<Schema$GoogleLongrunningOperation>
-    ): void;
-    delete(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Indexes$Delete
-        | BodyResponseCallback<Schema$GoogleLongrunningOperation>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$GoogleLongrunningOperation>,
-      callback?: BodyResponseCallback<Schema$GoogleLongrunningOperation>
-    ): void | GaxiosPromise<Schema$GoogleLongrunningOperation> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Indexes$Delete;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Indexes$Delete;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://datastore.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (
-              rootUrl + '/v1/projects/{projectId}/indexes/{indexId}'
-            ).replace(/([^:]\/)\/+/g, '$1'),
-            method: 'DELETE',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['projectId', 'indexId'],
-        pathParams: ['indexId', 'projectId'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$GoogleLongrunningOperation>(
-          parameters,
-          callback
-        );
-      } else {
-        return createAPIRequest<Schema$GoogleLongrunningOperation>(parameters);
-      }
     }
 
     /**
@@ -2287,39 +2126,6 @@ export namespace datastore_v1 {
     }
   }
 
-  export interface Params$Resource$Projects$Indexes$Create
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Project ID against which to make the request.
-     */
-    projectId?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$GoogleDatastoreAdminV1Index;
-  }
-  export interface Params$Resource$Projects$Indexes$Delete
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * The resource ID of the index to delete.
-     */
-    indexId?: string;
-    /**
-     * Project ID against which to make the request.
-     */
-    projectId?: string;
-  }
   export interface Params$Resource$Projects$Indexes$Get
     extends StandardParameters {
     /**

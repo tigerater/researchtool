@@ -32,12 +32,10 @@ import * as androidmanagement from './androidmanagement';
 import * as androidpublisher from './androidpublisher';
 import * as appengine from './appengine';
 import * as appsactivity from './appsactivity';
+import * as appstate from './appstate';
 import * as bigquery from './bigquery';
-import * as bigqueryconnection from './bigqueryconnection';
 import * as bigquerydatatransfer from './bigquerydatatransfer';
-import * as bigqueryreservation from './bigqueryreservation';
 import * as bigtableadmin from './bigtableadmin';
-import * as billingbudgets from './billingbudgets';
 import * as binaryauthorization from './binaryauthorization';
 import * as blogger from './blogger';
 import * as books from './books';
@@ -70,7 +68,6 @@ import * as container from './container';
 import * as containeranalysis from './containeranalysis';
 import * as content from './content';
 import * as customsearch from './customsearch';
-import * as datacatalog from './datacatalog';
 import * as dataflow from './dataflow';
 import * as datafusion from './datafusion';
 import * as dataproc from './dataproc';
@@ -83,20 +80,18 @@ import * as discovery from './discovery';
 import * as dlp from './dlp';
 import * as dns from './dns';
 import * as docs from './docs';
-import * as domainsrdap from './domainsrdap';
 import * as doubleclickbidmanager from './doubleclickbidmanager';
 import * as doubleclicksearch from './doubleclicksearch';
 import * as drive from './drive';
 import * as driveactivity from './driveactivity';
 import * as factchecktools from './factchecktools';
-import * as fcm from './fcm';
 import * as file from './file';
-import * as firebase from './firebase';
 import * as firebasedynamiclinks from './firebasedynamiclinks';
 import * as firebasehosting from './firebasehosting';
 import * as firebaserules from './firebaserules';
 import * as firestore from './firestore';
 import * as fitness from './fitness';
+import * as fusiontables from './fusiontables';
 import * as games from './games';
 import * as gamesConfiguration from './gamesConfiguration';
 import * as gamesManagement from './gamesManagement';
@@ -105,7 +100,6 @@ import * as gmail from './gmail';
 import * as groupsmigration from './groupsmigration';
 import * as groupssettings from './groupssettings';
 import * as healthcare from './healthcare';
-import * as homegraph from './homegraph';
 import * as iam from './iam';
 import * as iamcredentials from './iamcredentials';
 import * as iap from './iap';
@@ -116,7 +110,6 @@ import * as kgsearch from './kgsearch';
 import * as language from './language';
 import * as libraryagent from './libraryagent';
 import * as licensing from './licensing';
-import * as lifesciences from './lifesciences';
 import * as logging from './logging';
 import * as manufacturers from './manufacturers';
 import * as mirror from './mirror';
@@ -129,12 +122,9 @@ import * as people from './people';
 import * as playcustomapp from './playcustomapp';
 import * as plus from './plus';
 import * as plusDomains from './plusDomains';
-import * as policytroubleshooter from './policytroubleshooter';
 import * as poly from './poly';
-import * as prod_tt_sasportal from './prod_tt_sasportal';
 import * as proximitybeacon from './proximitybeacon';
 import * as pubsub from './pubsub';
-import * as recommender from './recommender';
 import * as redis from './redis';
 import * as remotebuildexecution from './remotebuildexecution';
 import * as replicapool from './replicapool';
@@ -142,9 +132,8 @@ import * as reseller from './reseller';
 import * as run from './run';
 import * as runtimeconfig from './runtimeconfig';
 import * as safebrowsing from './safebrowsing';
-import * as sasportal from './sasportal';
 import * as script from './script';
-import * as secretmanager from './secretmanager';
+import * as searchconsole from './searchconsole';
 import * as securitycenter from './securitycenter';
 import * as servicebroker from './servicebroker';
 import * as serviceconsumermanagement from './serviceconsumermanagement';
@@ -158,10 +147,11 @@ import * as slides from './slides';
 import * as sourcerepo from './sourcerepo';
 import * as spanner from './spanner';
 import * as speech from './speech';
-import * as sql from './sql';
+import * as sqladmin from './sqladmin';
 import * as storage from './storage';
 import * as storagetransfer from './storagetransfer';
 import * as streetviewpublish from './streetviewpublish';
+import * as surveys from './surveys';
 import * as tagmanager from './tagmanager';
 import * as tasks from './tasks';
 import * as testing from './testing';
@@ -169,8 +159,8 @@ import * as texttospeech from './texttospeech';
 import * as toolresults from './toolresults';
 import * as tpu from './tpu';
 import * as translate from './translate';
+import * as urlshortener from './urlshortener';
 import * as vault from './vault';
-import * as verifiedaccess from './verifiedaccess';
 import * as videointelligence from './videointelligence';
 import * as vision from './vision';
 import * as webfonts from './webfonts';
@@ -205,12 +195,10 @@ export const APIS: APIList = {
   androidpublisher: androidpublisher.VERSIONS,
   appengine: appengine.VERSIONS,
   appsactivity: appsactivity.VERSIONS,
+  appstate: appstate.VERSIONS,
   bigquery: bigquery.VERSIONS,
-  bigqueryconnection: bigqueryconnection.VERSIONS,
   bigquerydatatransfer: bigquerydatatransfer.VERSIONS,
-  bigqueryreservation: bigqueryreservation.VERSIONS,
   bigtableadmin: bigtableadmin.VERSIONS,
-  billingbudgets: billingbudgets.VERSIONS,
   binaryauthorization: binaryauthorization.VERSIONS,
   blogger: blogger.VERSIONS,
   books: books.VERSIONS,
@@ -243,7 +231,6 @@ export const APIS: APIList = {
   containeranalysis: containeranalysis.VERSIONS,
   content: content.VERSIONS,
   customsearch: customsearch.VERSIONS,
-  datacatalog: datacatalog.VERSIONS,
   dataflow: dataflow.VERSIONS,
   datafusion: datafusion.VERSIONS,
   dataproc: dataproc.VERSIONS,
@@ -256,20 +243,18 @@ export const APIS: APIList = {
   dlp: dlp.VERSIONS,
   dns: dns.VERSIONS,
   docs: docs.VERSIONS,
-  domainsrdap: domainsrdap.VERSIONS,
   doubleclickbidmanager: doubleclickbidmanager.VERSIONS,
   doubleclicksearch: doubleclicksearch.VERSIONS,
   drive: drive.VERSIONS,
   driveactivity: driveactivity.VERSIONS,
   factchecktools: factchecktools.VERSIONS,
-  fcm: fcm.VERSIONS,
   file: file.VERSIONS,
-  firebase: firebase.VERSIONS,
   firebasedynamiclinks: firebasedynamiclinks.VERSIONS,
   firebasehosting: firebasehosting.VERSIONS,
   firebaserules: firebaserules.VERSIONS,
   firestore: firestore.VERSIONS,
   fitness: fitness.VERSIONS,
+  fusiontables: fusiontables.VERSIONS,
   games: games.VERSIONS,
   gamesConfiguration: gamesConfiguration.VERSIONS,
   gamesManagement: gamesManagement.VERSIONS,
@@ -278,7 +263,6 @@ export const APIS: APIList = {
   groupsmigration: groupsmigration.VERSIONS,
   groupssettings: groupssettings.VERSIONS,
   healthcare: healthcare.VERSIONS,
-  homegraph: homegraph.VERSIONS,
   iam: iam.VERSIONS,
   iamcredentials: iamcredentials.VERSIONS,
   iap: iap.VERSIONS,
@@ -289,7 +273,6 @@ export const APIS: APIList = {
   language: language.VERSIONS,
   libraryagent: libraryagent.VERSIONS,
   licensing: licensing.VERSIONS,
-  lifesciences: lifesciences.VERSIONS,
   logging: logging.VERSIONS,
   manufacturers: manufacturers.VERSIONS,
   mirror: mirror.VERSIONS,
@@ -302,12 +285,9 @@ export const APIS: APIList = {
   playcustomapp: playcustomapp.VERSIONS,
   plus: plus.VERSIONS,
   plusDomains: plusDomains.VERSIONS,
-  policytroubleshooter: policytroubleshooter.VERSIONS,
   poly: poly.VERSIONS,
-  prod_tt_sasportal: prod_tt_sasportal.VERSIONS,
   proximitybeacon: proximitybeacon.VERSIONS,
   pubsub: pubsub.VERSIONS,
-  recommender: recommender.VERSIONS,
   redis: redis.VERSIONS,
   remotebuildexecution: remotebuildexecution.VERSIONS,
   replicapool: replicapool.VERSIONS,
@@ -315,9 +295,8 @@ export const APIS: APIList = {
   run: run.VERSIONS,
   runtimeconfig: runtimeconfig.VERSIONS,
   safebrowsing: safebrowsing.VERSIONS,
-  sasportal: sasportal.VERSIONS,
   script: script.VERSIONS,
-  secretmanager: secretmanager.VERSIONS,
+  searchconsole: searchconsole.VERSIONS,
   securitycenter: securitycenter.VERSIONS,
   servicebroker: servicebroker.VERSIONS,
   serviceconsumermanagement: serviceconsumermanagement.VERSIONS,
@@ -331,10 +310,11 @@ export const APIS: APIList = {
   sourcerepo: sourcerepo.VERSIONS,
   spanner: spanner.VERSIONS,
   speech: speech.VERSIONS,
-  sql: sql.VERSIONS,
+  sqladmin: sqladmin.VERSIONS,
   storage: storage.VERSIONS,
   storagetransfer: storagetransfer.VERSIONS,
   streetviewpublish: streetviewpublish.VERSIONS,
+  surveys: surveys.VERSIONS,
   tagmanager: tagmanager.VERSIONS,
   tasks: tasks.VERSIONS,
   testing: testing.VERSIONS,
@@ -342,8 +322,8 @@ export const APIS: APIList = {
   toolresults: toolresults.VERSIONS,
   tpu: tpu.VERSIONS,
   translate: translate.VERSIONS,
+  urlshortener: urlshortener.VERSIONS,
   vault: vault.VERSIONS,
-  verifiedaccess: verifiedaccess.VERSIONS,
   videointelligence: videointelligence.VERSIONS,
   vision: vision.VERSIONS,
   webfonts: webfonts.VERSIONS,
@@ -375,12 +355,10 @@ export class GeneratedAPIs {
   androidpublisher = androidpublisher.androidpublisher;
   appengine = appengine.appengine;
   appsactivity = appsactivity.appsactivity;
+  appstate = appstate.appstate;
   bigquery = bigquery.bigquery;
-  bigqueryconnection = bigqueryconnection.bigqueryconnection;
   bigquerydatatransfer = bigquerydatatransfer.bigquerydatatransfer;
-  bigqueryreservation = bigqueryreservation.bigqueryreservation;
   bigtableadmin = bigtableadmin.bigtableadmin;
-  billingbudgets = billingbudgets.billingbudgets;
   binaryauthorization = binaryauthorization.binaryauthorization;
   blogger = blogger.blogger;
   books = books.books;
@@ -414,7 +392,6 @@ export class GeneratedAPIs {
   containeranalysis = containeranalysis.containeranalysis;
   content = content.content;
   customsearch = customsearch.customsearch;
-  datacatalog = datacatalog.datacatalog;
   dataflow = dataflow.dataflow;
   datafusion = datafusion.datafusion;
   dataproc = dataproc.dataproc;
@@ -427,20 +404,18 @@ export class GeneratedAPIs {
   dlp = dlp.dlp;
   dns = dns.dns;
   docs = docs.docs;
-  domainsrdap = domainsrdap.domainsrdap;
   doubleclickbidmanager = doubleclickbidmanager.doubleclickbidmanager;
   doubleclicksearch = doubleclicksearch.doubleclicksearch;
   drive = drive.drive;
   driveactivity = driveactivity.driveactivity;
   factchecktools = factchecktools.factchecktools;
-  fcm = fcm.fcm;
   file = file.file;
-  firebase = firebase.firebase;
   firebasedynamiclinks = firebasedynamiclinks.firebasedynamiclinks;
   firebasehosting = firebasehosting.firebasehosting;
   firebaserules = firebaserules.firebaserules;
   firestore = firestore.firestore;
   fitness = fitness.fitness;
+  fusiontables = fusiontables.fusiontables;
   games = games.games;
   gamesConfiguration = gamesConfiguration.gamesConfiguration;
   gamesManagement = gamesManagement.gamesManagement;
@@ -449,7 +424,6 @@ export class GeneratedAPIs {
   groupsmigration = groupsmigration.groupsmigration;
   groupssettings = groupssettings.groupssettings;
   healthcare = healthcare.healthcare;
-  homegraph = homegraph.homegraph;
   iam = iam.iam;
   iamcredentials = iamcredentials.iamcredentials;
   iap = iap.iap;
@@ -460,7 +434,6 @@ export class GeneratedAPIs {
   language = language.language;
   libraryagent = libraryagent.libraryagent;
   licensing = licensing.licensing;
-  lifesciences = lifesciences.lifesciences;
   logging = logging.logging;
   manufacturers = manufacturers.manufacturers;
   mirror = mirror.mirror;
@@ -473,12 +446,9 @@ export class GeneratedAPIs {
   playcustomapp = playcustomapp.playcustomapp;
   plus = plus.plus;
   plusDomains = plusDomains.plusDomains;
-  policytroubleshooter = policytroubleshooter.policytroubleshooter;
   poly = poly.poly;
-  prod_tt_sasportal = prod_tt_sasportal.prod_tt_sasportal;
   proximitybeacon = proximitybeacon.proximitybeacon;
   pubsub = pubsub.pubsub;
-  recommender = recommender.recommender;
   redis = redis.redis;
   remotebuildexecution = remotebuildexecution.remotebuildexecution;
   replicapool = replicapool.replicapool;
@@ -486,9 +456,8 @@ export class GeneratedAPIs {
   run = run.run;
   runtimeconfig = runtimeconfig.runtimeconfig;
   safebrowsing = safebrowsing.safebrowsing;
-  sasportal = sasportal.sasportal;
   script = script.script;
-  secretmanager = secretmanager.secretmanager;
+  searchconsole = searchconsole.searchconsole;
   securitycenter = securitycenter.securitycenter;
   servicebroker = servicebroker.servicebroker;
   serviceconsumermanagement =
@@ -503,10 +472,11 @@ export class GeneratedAPIs {
   sourcerepo = sourcerepo.sourcerepo;
   spanner = spanner.spanner;
   speech = speech.speech;
-  sql = sql.sql;
+  sqladmin = sqladmin.sqladmin;
   storage = storage.storage;
   storagetransfer = storagetransfer.storagetransfer;
   streetviewpublish = streetviewpublish.streetviewpublish;
+  surveys = surveys.surveys;
   tagmanager = tagmanager.tagmanager;
   tasks = tasks.tasks;
   testing = testing.testing;
@@ -514,8 +484,8 @@ export class GeneratedAPIs {
   toolresults = toolresults.toolresults;
   tpu = tpu.tpu;
   translate = translate.translate;
+  urlshortener = urlshortener.urlshortener;
   vault = vault.vault;
-  verifiedaccess = verifiedaccess.verifiedaccess;
   videointelligence = videointelligence.videointelligence;
   vision = vision.vision;
   webfonts = webfonts.webfonts;

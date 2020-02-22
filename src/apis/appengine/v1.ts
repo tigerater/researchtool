@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -122,23 +124,23 @@ export namespace appengine_v1 {
     /**
      * Action to take when users access resources that require authentication. Defaults to redirect.
      */
-    authFailAction?: string | null;
+    authFailAction?: string;
     /**
      * Level of login required to access this resource. Defaults to optional.
      */
-    login?: string | null;
+    login?: string;
     /**
      * Path to the script from the application root directory.
      */
-    script?: string | null;
+    script?: string;
     /**
      * Security (HTTPS) enforcement for this URL.
      */
-    securityLevel?: string | null;
+    securityLevel?: string;
     /**
      * URL to serve the endpoint at.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Uses Google Cloud Endpoints to handle requests.
@@ -147,7 +149,7 @@ export namespace appengine_v1 {
     /**
      * Path to the script from the application root directory.
      */
-    scriptPath?: string | null;
+    scriptPath?: string;
   }
   /**
    * An Application resource contains the top-level configuration of an App Engine application.
@@ -156,23 +158,23 @@ export namespace appengine_v1 {
     /**
      * Google Apps authentication domain that controls which users can access this application.Defaults to open access for any Google Account.
      */
-    authDomain?: string | null;
+    authDomain?: string;
     /**
      * Google Cloud Storage bucket that can be used for storing files associated with this application. This bucket is associated with the application and can be used by the gcloud deployment commands.@OutputOnly
      */
-    codeBucket?: string | null;
+    codeBucket?: string;
     /**
      * Google Cloud Storage bucket that can be used by this application to store content.@OutputOnly
      */
-    defaultBucket?: string | null;
+    defaultBucket?: string;
     /**
      * Cookie expiration policy for this application.
      */
-    defaultCookieExpiration?: string | null;
+    defaultCookieExpiration?: string;
     /**
      * Hostname used to reach this application, as resolved by App Engine.@OutputOnly
      */
-    defaultHostname?: string | null;
+    defaultHostname?: string;
     /**
      * HTTP path dispatch rules for requests to the application that do not explicitly target a service or version. Rules are order-dependent. Up to 20 dispatch rules can be supported.
      */
@@ -184,24 +186,24 @@ export namespace appengine_v1 {
     /**
      * The Google Container Registry domain used for storing managed build docker images for this application.
      */
-    gcrDomain?: string | null;
+    gcrDomain?: string;
     iap?: Schema$IdentityAwareProxy;
     /**
      * Identifier of the Application resource. This identifier is equivalent to the project ID of the Google Cloud Platform project where you want to deploy your application. Example: myapp.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Location from which this application runs. Application instances run out of the data centers in the specified location, which is also where all of the application&#39;s end user content is stored.Defaults to us-central.View the list of supported locations (https://cloud.google.com/appengine/docs/locations).
      */
-    locationId?: string | null;
+    locationId?: string;
     /**
      * Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly
      */
-    name?: string | null;
+    name?: string;
     /**
      * Serving status of this application.
      */
-    servingStatus?: string | null;
+    servingStatus?: string;
   }
   /**
    * An SSL certificate that a user has been authorized to administer. A user is authorized to administer any certificate that applies to one of their authorized domains.
@@ -214,23 +216,23 @@ export namespace appengine_v1 {
     /**
      * The user-specified display name of the certificate. This is not guaranteed to be unique. Example: My Certificate.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Aggregate count of the domain mappings with this certificate mapped. This count includes domain mappings on applications for which the user does not have VIEWER permissions.Only returned by GET or LIST requests when specifically requested by the view=FULL_CERTIFICATE option.@OutputOnly
      */
-    domainMappingsCount?: number | null;
+    domainMappingsCount?: number;
     /**
      * Topmost applicable domains of this certificate. This certificate applies to these domains and their subdomains. Example: example.com.@OutputOnly
      */
-    domainNames?: string[] | null;
+    domainNames?: string[];
     /**
      * The time when this certificate expires. To update the renewal time on this certificate, upload an SSL certificate with a different expiration time using AuthorizedCertificates.UpdateAuthorizedCertificate.@OutputOnly
      */
-    expireTime?: string | null;
+    expireTime?: string;
     /**
      * Relative name of the certificate. This is a unique value autogenerated on AuthorizedCertificate resource creation. Example: 12345.@OutputOnly
      */
-    id?: string | null;
+    id?: string;
     /**
      * Only applicable if this certificate is managed by App Engine. Managed certificates are tied to the lifecycle of a DomainMapping and cannot be updated or deleted via the AuthorizedCertificates API. If this certificate is manually administered by the user, this field will be empty.@OutputOnly
      */
@@ -238,11 +240,11 @@ export namespace appengine_v1 {
     /**
      * Full path to the AuthorizedCertificate resource in the API. Example: apps/myapp/authorizedCertificates/12345.@OutputOnly
      */
-    name?: string | null;
+    name?: string;
     /**
      * The full paths to user visible Domain Mapping resources that have this certificate mapped. Example: apps/myapp/domainMappings/example.com.This may not represent the full list of mapped domain mappings if the user does not have VIEWER permissions on all of the applications that have this certificate mapped. See domain_mappings_count for a complete count.Only returned by GET or LIST requests when specifically requested by the view=FULL_CERTIFICATE option.@OutputOnly
      */
-    visibleDomainMappings?: string[] | null;
+    visibleDomainMappings?: string[];
   }
   /**
    * A domain that a user has been authorized to administer. To authorize use of a domain, verify ownership via Webmaster Central (https://www.google.com/webmasters/verification/home).
@@ -251,11 +253,11 @@ export namespace appengine_v1 {
     /**
      * Fully qualified domain name of the domain authorized for use. Example: example.com.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Full path to the AuthorizedDomain resource in the API. Example: apps/myapp/authorizedDomains/example.com.@OutputOnly
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Automatic scaling is based on request rate, response latencies, and other application metrics.
@@ -264,7 +266,7 @@ export namespace appengine_v1 {
     /**
      * The time period that the Autoscaler (https://cloud.google.com/compute/docs/autoscaler/) should wait before it starts collecting information from a new instance. This prevents the autoscaler from collecting information when the instance is initializing, during which the collected usage would not be reliable. Only applicable in the App Engine flexible environment.
      */
-    coolDownPeriod?: string | null;
+    coolDownPeriod?: string;
     /**
      * Target scaling by CPU usage.
      */
@@ -276,31 +278,31 @@ export namespace appengine_v1 {
     /**
      * Number of concurrent requests an automatic scaling instance can accept before the scheduler spawns a new instance.Defaults to a runtime-specific value.
      */
-    maxConcurrentRequests?: number | null;
+    maxConcurrentRequests?: number;
     /**
      * Maximum number of idle instances that should be maintained for this version.
      */
-    maxIdleInstances?: number | null;
+    maxIdleInstances?: number;
     /**
      * Maximum amount of time that a request should wait in the pending queue before starting a new instance to handle it.
      */
-    maxPendingLatency?: string | null;
+    maxPendingLatency?: string;
     /**
      * Maximum number of instances that should be started to handle requests for this version.
      */
-    maxTotalInstances?: number | null;
+    maxTotalInstances?: number;
     /**
      * Minimum number of idle instances that should be maintained for this version. Only applicable for the default version of a service.
      */
-    minIdleInstances?: number | null;
+    minIdleInstances?: number;
     /**
      * Minimum amount of time a request should wait in the pending queue before starting a new instance to handle it.
      */
-    minPendingLatency?: string | null;
+    minPendingLatency?: string;
     /**
      * Minimum number of running instances that should be maintained for this version.
      */
-    minTotalInstances?: number | null;
+    minTotalInstances?: number;
     /**
      * Target scaling by network usage.
      */
@@ -321,11 +323,11 @@ export namespace appengine_v1 {
     /**
      * Duration of time after the last request that an instance must wait before the instance is shut down.
      */
-    idleTimeout?: string | null;
+    idleTimeout?: string;
     /**
      * Maximum number of instances to create for this version.
      */
-    maxInstances?: number | null;
+    maxInstances?: number;
   }
   /**
    * Request message for Firewall.BatchUpdateIngressRules.
@@ -352,11 +354,11 @@ export namespace appengine_v1 {
     /**
      * Unencrypted PEM encoded RSA private key. This field is set once on certificate creation and then encrypted. The key size must be 2048 bits or fewer. Must include the header and footer. Example: &lt;pre&gt; -----BEGIN RSA PRIVATE KEY----- &lt;unencrypted_key_value&gt; -----END RSA PRIVATE KEY----- &lt;/pre&gt; @InputOnly
      */
-    privateKey?: string | null;
+    privateKey?: string;
     /**
      * PEM encoded x.509 public key certificate. This field is set once on certificate creation. Must include the header and footer. Example: &lt;pre&gt; -----BEGIN CERTIFICATE----- &lt;certificate_value&gt; -----END CERTIFICATE----- &lt;/pre&gt;
      */
-    publicCertificate?: string | null;
+    publicCertificate?: string;
   }
   /**
    * Options for the build operations performed as a part of the version deployment. Only applicable for App Engine flexible environment when creating a version using source code directly.
@@ -365,11 +367,11 @@ export namespace appengine_v1 {
     /**
      * Path to the yaml file used in deployment, used to determine runtime configuration details.Required for flexible environment builds.See https://cloud.google.com/appengine/docs/standard/python/config/appref for more details.
      */
-    appYamlPath?: string | null;
+    appYamlPath?: string;
     /**
      * The Cloud Build timeout used as part of any dependent builds performed by version creation. Defaults to 10 minutes.
      */
-    cloudBuildTimeout?: string | null;
+    cloudBuildTimeout?: string;
   }
   /**
    * Docker image that is used to create a container and start a VM instance for the version that you deploy. Only applicable for instances running in the App Engine flexible environment.
@@ -378,7 +380,7 @@ export namespace appengine_v1 {
     /**
      * URI to the hosted container image in Google Container Registry. The URI must be fully qualified and include a tag or digest. Examples: &quot;gcr.io/my-project/image:tag&quot; or &quot;gcr.io/my-project/image@digest&quot;
      */
-    image?: string | null;
+    image?: string;
   }
   /**
    * Target scaling by CPU usage.
@@ -387,11 +389,11 @@ export namespace appengine_v1 {
     /**
      * Period of time over which CPU utilization is calculated.
      */
-    aggregationWindowLength?: string | null;
+    aggregationWindowLength?: string;
     /**
      * Target CPU utilization ratio to maintain when scaling. Must be between 0 and 1.
      */
-    targetUtilization?: number | null;
+    targetUtilization?: number;
   }
   /**
    * Metadata for the given google.longrunning.Operation during a google.appengine.v1.CreateVersionRequest.
@@ -400,7 +402,7 @@ export namespace appengine_v1 {
     /**
      * The Cloud Build ID if one was created as part of the version create. @OutputOnly
      */
-    cloudBuildId?: string | null;
+    cloudBuildId?: string;
   }
   /**
    * Metadata for the given google.longrunning.Operation during a google.appengine.v1alpha.CreateVersionRequest.
@@ -409,7 +411,7 @@ export namespace appengine_v1 {
     /**
      * The Cloud Build ID if one was created as part of the version create. @OutputOnly
      */
-    cloudBuildId?: string | null;
+    cloudBuildId?: string;
   }
   /**
    * Metadata for the given google.longrunning.Operation during a google.appengine.v1beta.CreateVersionRequest.
@@ -418,7 +420,7 @@ export namespace appengine_v1 {
     /**
      * The Cloud Build ID if one was created as part of the version create. @OutputOnly
      */
-    cloudBuildId?: string | null;
+    cloudBuildId?: string;
   }
   /**
    * Request message for Instances.DebugInstance.
@@ -427,7 +429,7 @@ export namespace appengine_v1 {
     /**
      * Public SSH key to add to the instance. Examples: [USERNAME]:ssh-rsa [KEY_VALUE] [USERNAME] [USERNAME]:ssh-rsa [KEY_VALUE] google-ssh {&quot;userName&quot;:&quot;[USERNAME]&quot;,&quot;expireOn&quot;:&quot;[EXPIRE_TIME]&quot;}For more information, see Adding and Removing SSH Keys (https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys).
      */
-    sshKey?: string | null;
+    sshKey?: string;
   }
   /**
    * Code and application artifacts used to deploy a version to App Engine.
@@ -444,7 +446,7 @@ export namespace appengine_v1 {
     /**
      * Manifest of the files stored in Google Cloud Storage that are included as part of this version. All files must be readable using the credentials supplied with this call.
      */
-    files?: {[key: string]: Schema$FileInfo} | null;
+    files?: {[key: string]: Schema$FileInfo};
     /**
      * The zip file for this deployment, if this is a zip deployment.
      */
@@ -457,19 +459,19 @@ export namespace appengine_v1 {
     /**
      * Target bytes read per second.
      */
-    targetReadBytesPerSecond?: number | null;
+    targetReadBytesPerSecond?: number;
     /**
      * Target ops read per seconds.
      */
-    targetReadOpsPerSecond?: number | null;
+    targetReadOpsPerSecond?: number;
     /**
      * Target bytes written per second.
      */
-    targetWriteBytesPerSecond?: number | null;
+    targetWriteBytesPerSecond?: number;
     /**
      * Target ops written per second.
      */
-    targetWriteOpsPerSecond?: number | null;
+    targetWriteOpsPerSecond?: number;
   }
   /**
    * A domain serving an App Engine application.
@@ -478,11 +480,11 @@ export namespace appengine_v1 {
     /**
      * Relative name of the domain serving the application. Example: example.com.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Full path to the DomainMapping resource in the API. Example: apps/myapp/domainMapping/example.com.@OutputOnly
      */
-    name?: string | null;
+    name?: string;
     /**
      * The resource records required to configure this domain mapping. These records must be added to the domain&#39;s DNS configuration in order to serve the application via this domain mapping.@OutputOnly
      */
@@ -503,19 +505,19 @@ export namespace appengine_v1 {
     /**
      * Endpoints service configuration ID as specified by the Service Management API. For example &quot;2016-09-19r1&quot;.By default, the rollout strategy for Endpoints is RolloutStrategy.FIXED. This means that Endpoints starts up with a particular configuration ID. When a new configuration is rolled out, Endpoints must be given the new configuration ID. The config_id field is used to give the configuration ID and is required in this case.Endpoints also has a rollout strategy called RolloutStrategy.MANAGED. When using this, Endpoints fetches the latest configuration and does not need the configuration ID. In this case, config_id must be omitted.
      */
-    configId?: string | null;
+    configId?: string;
     /**
      * Enable or disable trace sampling. By default, this is set to false for enabled.
      */
-    disableTraceSampling?: boolean | null;
+    disableTraceSampling?: boolean;
     /**
      * Endpoints service name which is the name of the &quot;service&quot; resource in the Service Management API. For example &quot;myapi.endpoints.myproject.cloud.goog&quot;
      */
-    name?: string | null;
+    name?: string;
     /**
      * Endpoints rollout strategy. If FIXED, config_id must be specified. If MANAGED, config_id must be omitted.
      */
-    rolloutStrategy?: string | null;
+    rolloutStrategy?: string;
   }
   /**
    * The entrypoint for the application.
@@ -524,7 +526,7 @@ export namespace appengine_v1 {
     /**
      * The format should be a shell command that can be fed to bash -c.
      */
-    shell?: string | null;
+    shell?: string;
   }
   /**
    * Custom static error page to be served when an error occurs.
@@ -533,15 +535,15 @@ export namespace appengine_v1 {
     /**
      * Error condition this handler applies to.
      */
-    errorCode?: string | null;
+    errorCode?: string;
     /**
      * MIME type of file. Defaults to text/html.
      */
-    mimeType?: string | null;
+    mimeType?: string;
     /**
      * Static file content to be served for this error.
      */
-    staticFile?: string | null;
+    staticFile?: string;
   }
   /**
    * The feature specific settings to be used in the application. These define behaviors that are user configurable.
@@ -550,11 +552,11 @@ export namespace appengine_v1 {
     /**
      * Boolean value indicating if split health checks should be used instead of the legacy health checks. At an app.yaml level, this means defaulting to &#39;readiness_check&#39; and &#39;liveness_check&#39; values instead of &#39;health_check&#39; ones. Once the legacy &#39;health_check&#39; behavior is deprecated, and this value is always true, this setting can be removed.
      */
-    splitHealthChecks?: boolean | null;
+    splitHealthChecks?: boolean;
     /**
      * If true, use Container-Optimized OS (https://cloud.google.com/container-optimized-os/) base image for VMs, rather than a base Debian image.
      */
-    useContainerOptimizedOs?: boolean | null;
+    useContainerOptimizedOs?: boolean;
   }
   /**
    * Single source file that is part of the version to be deployed. Each source file that is deployed must be specified separately.
@@ -563,15 +565,15 @@ export namespace appengine_v1 {
     /**
      * The MIME type of the file.Defaults to the value from Google Cloud Storage.
      */
-    mimeType?: string | null;
+    mimeType?: string;
     /**
      * The SHA1 hash of the file, in hex.
      */
-    sha1Sum?: string | null;
+    sha1Sum?: string;
     /**
      * URL source to use to fetch this file. Must be a URL to a resource in Google Cloud Storage in the form &#39;http(s)://storage.googleapis.com/&lt;bucket&gt;/&lt;object&gt;&#39;.
      */
-    sourceUrl?: string | null;
+    sourceUrl?: string;
   }
   /**
    * A single firewall rule that is evaluated against incoming traffic and provides an action to take on matched requests.
@@ -580,19 +582,19 @@ export namespace appengine_v1 {
     /**
      * The action to take on matched requests.
      */
-    action?: string | null;
+    action?: string;
     /**
      * An optional string description of this rule. This field has a maximum length of 100 characters.
      */
-    description?: string | null;
+    description?: string;
     /**
      * A positive integer between 1, Int32.MaxValue-1 that defines the order of rule evaluation. Rules with the lowest priority are evaluated first.A default rule at priority Int32.MaxValue matches all IPv4 and IPv6 traffic when no previous rule matches. Only the action of this rule can be modified by the user.
      */
-    priority?: number | null;
+    priority?: number;
     /**
      * IP address or range, defined using CIDR notation, of requests that this rule applies to. You can use the wildcard character &quot;*&quot; to match all IPs equivalent to &quot;0/0&quot; and &quot;::/0&quot; together. Examples: 192.168.1.1 or 192.168.0.0/16 or 2001:db8::/32  or 2001:0db8:0000:0042:0000:8a2e:0370:7334.&lt;p&gt;Truncation will be silently performed on addresses which are not properly truncated. For example, 1.2.3.4/24 is accepted as the same address as 1.2.3.0/24. Similarly, for IPv6, 2001:db8::1/32 is accepted as the same address as 2001:db8::/32.
      */
-    sourceRange?: string | null;
+    sourceRange?: string;
   }
   /**
    * Health checking configuration for VM instances. Unhealthy instances are killed and replaced with new instances. Only applicable for instances in App Engine flexible environment.
@@ -601,31 +603,31 @@ export namespace appengine_v1 {
     /**
      * Interval between health checks.
      */
-    checkInterval?: string | null;
+    checkInterval?: string;
     /**
      * Whether to explicitly disable health checks for this instance.
      */
-    disableHealthCheck?: boolean | null;
+    disableHealthCheck?: boolean;
     /**
      * Number of consecutive successful health checks required before receiving traffic.
      */
-    healthyThreshold?: number | null;
+    healthyThreshold?: number;
     /**
      * Host header to send when performing an HTTP health check. Example: &quot;myapp.appspot.com&quot;
      */
-    host?: string | null;
+    host?: string;
     /**
      * Number of consecutive failed health checks required before an instance is restarted.
      */
-    restartThreshold?: number | null;
+    restartThreshold?: number;
     /**
      * Time before the health check is considered failed.
      */
-    timeout?: string | null;
+    timeout?: string;
     /**
      * Number of consecutive failed health checks required before removing traffic.
      */
-    unhealthyThreshold?: number | null;
+    unhealthyThreshold?: number;
   }
   /**
    * Identity-Aware Proxy
@@ -634,19 +636,19 @@ export namespace appengine_v1 {
     /**
      * Whether the serving infrastructure will authenticate and authorize all incoming requests.If true, the oauth2_client_id and oauth2_client_secret fields must be non-empty.
      */
-    enabled?: boolean | null;
+    enabled?: boolean;
     /**
      * OAuth2 client ID to use for the authentication flow.
      */
-    oauth2ClientId?: string | null;
+    oauth2ClientId?: string;
     /**
      * OAuth2 client secret to use for the authentication flow.For security reasons, this value cannot be retrieved via the API. Instead, the SHA-256 hash of the value is returned in the oauth2_client_secret_sha256 field.@InputOnly
      */
-    oauth2ClientSecret?: string | null;
+    oauth2ClientSecret?: string;
     /**
      * Hex-encoded SHA-256 hash of the client secret.@OutputOnly
      */
-    oauth2ClientSecretSha256?: string | null;
+    oauth2ClientSecretSha256?: string;
   }
   /**
    * An Instance resource is the computing unit that App Engine uses to automatically scale an application.
@@ -655,67 +657,67 @@ export namespace appengine_v1 {
     /**
      * App Engine release this instance is running on.@OutputOnly
      */
-    appEngineRelease?: string | null;
+    appEngineRelease?: string;
     /**
      * Availability of the instance.@OutputOnly
      */
-    availability?: string | null;
+    availability?: string;
     /**
      * Average latency (ms) over the last minute.@OutputOnly
      */
-    averageLatency?: number | null;
+    averageLatency?: number;
     /**
      * Number of errors since this instance was started.@OutputOnly
      */
-    errors?: number | null;
+    errors?: number;
     /**
      * Relative name of the instance within the version. Example: instance-1.@OutputOnly
      */
-    id?: string | null;
+    id?: string;
     /**
      * Total memory in use (bytes).@OutputOnly
      */
-    memoryUsage?: string | null;
+    memoryUsage?: string;
     /**
      * Full path to the Instance resource in the API. Example: apps/myapp/services/default/versions/v1/instances/instance-1.@OutputOnly
      */
-    name?: string | null;
+    name?: string;
     /**
      * Average queries per second (QPS) over the last minute.@OutputOnly
      */
-    qps?: number | null;
+    qps?: number;
     /**
      * Number of requests since this instance was started.@OutputOnly
      */
-    requests?: number | null;
+    requests?: number;
     /**
      * Time that this instance was started.@OutputOnly
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * Whether this instance is in debug mode. Only applicable for instances in App Engine flexible environment.@OutputOnly
      */
-    vmDebugEnabled?: boolean | null;
+    vmDebugEnabled?: boolean;
     /**
      * Virtual machine ID of this instance. Only applicable for instances in App Engine flexible environment.@OutputOnly
      */
-    vmId?: string | null;
+    vmId?: string;
     /**
      * The IP address of this instance. Only applicable for instances in App Engine flexible environment.@OutputOnly
      */
-    vmIp?: string | null;
+    vmIp?: string;
     /**
      * Name of the virtual machine where this instance lives. Only applicable for instances in App Engine flexible environment.@OutputOnly
      */
-    vmName?: string | null;
+    vmName?: string;
     /**
      * Status of the virtual machine where this instance lives. Only applicable for instances in App Engine flexible environment.@OutputOnly
      */
-    vmStatus?: string | null;
+    vmStatus?: string;
     /**
      * Zone where the virtual machine is located. Only applicable for instances in App Engine flexible environment.@OutputOnly
      */
-    vmZoneName?: string | null;
+    vmZoneName?: string;
   }
   /**
    * Third-party Python runtime library that is required by the application.
@@ -724,11 +726,11 @@ export namespace appengine_v1 {
     /**
      * Name of the library. Example: &quot;django&quot;.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Version of the library to select, or &quot;latest&quot;.
      */
-    version?: string | null;
+    version?: string;
   }
   /**
    * Response message for AuthorizedCertificates.ListAuthorizedCertificates.
@@ -741,7 +743,7 @@ export namespace appengine_v1 {
     /**
      * Continuation token for fetching the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for AuthorizedDomains.ListAuthorizedDomains.
@@ -754,7 +756,7 @@ export namespace appengine_v1 {
     /**
      * Continuation token for fetching the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for DomainMappings.ListDomainMappings.
@@ -767,7 +769,7 @@ export namespace appengine_v1 {
     /**
      * Continuation token for fetching the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for Firewall.ListIngressRules.
@@ -780,7 +782,7 @@ export namespace appengine_v1 {
     /**
      * Continuation token for fetching the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for Instances.ListInstances.
@@ -793,7 +795,7 @@ export namespace appengine_v1 {
     /**
      * Continuation token for fetching the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * The response message for Locations.ListLocations.
@@ -806,7 +808,7 @@ export namespace appengine_v1 {
     /**
      * The standard List next-page token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * The response message for Operations.ListOperations.
@@ -815,7 +817,7 @@ export namespace appengine_v1 {
     /**
      * The standard List next-page token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * A list of operations that matches the specified filter in the request.
      */
@@ -828,7 +830,7 @@ export namespace appengine_v1 {
     /**
      * Continuation token for fetching the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The services belonging to the requested application.
      */
@@ -841,7 +843,7 @@ export namespace appengine_v1 {
     /**
      * Continuation token for fetching the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The versions belonging to the requested service.
      */
@@ -854,31 +856,31 @@ export namespace appengine_v1 {
     /**
      * Interval between health checks.
      */
-    checkInterval?: string | null;
+    checkInterval?: string;
     /**
      * Number of consecutive failed checks required before considering the VM unhealthy.
      */
-    failureThreshold?: number | null;
+    failureThreshold?: number;
     /**
      * Host header to send when performing a HTTP Liveness check. Example: &quot;myapp.appspot.com&quot;
      */
-    host?: string | null;
+    host?: string;
     /**
      * The initial delay before starting to execute the checks.
      */
-    initialDelay?: string | null;
+    initialDelay?: string;
     /**
      * The request path.
      */
-    path?: string | null;
+    path?: string;
     /**
      * Number of consecutive successful checks required before considering the VM healthy.
      */
-    successThreshold?: number | null;
+    successThreshold?: number;
     /**
      * Time before the check is considered failed.
      */
-    timeout?: string | null;
+    timeout?: string;
   }
   /**
    * A resource that represents Google Cloud Platform location.
@@ -887,23 +889,23 @@ export namespace appengine_v1 {
     /**
      * The friendly name for this location, typically a nearby city name. For example, &quot;Tokyo&quot;.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Cross-service attributes for the location. For example {&quot;cloud.googleapis.com/region&quot;: &quot;us-east1&quot;}
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * The canonical id for this location. For example: &quot;us-east1&quot;.
      */
-    locationId?: string | null;
+    locationId?: string;
     /**
      * Service-specific metadata. For example the available capacity at the given location.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * Resource name for the location, which may vary between implementations. For example: &quot;projects/example-project/locations/us-east1&quot;
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Metadata for the given google.cloud.location.Location.
@@ -912,11 +914,11 @@ export namespace appengine_v1 {
     /**
      * App Engine flexible environment is available in the given location.@OutputOnly
      */
-    flexibleEnvironmentAvailable?: boolean | null;
+    flexibleEnvironmentAvailable?: boolean;
     /**
      * App Engine standard environment is available in the given location.@OutputOnly
      */
-    standardEnvironmentAvailable?: boolean | null;
+    standardEnvironmentAvailable?: boolean;
   }
   /**
    * A certificate managed by App Engine.
@@ -925,11 +927,11 @@ export namespace appengine_v1 {
     /**
      * Time at which the certificate was last renewed. The renewal process is fully managed. Certificate renewal will automatically occur before the certificate expires. Renewal errors can be tracked via ManagementStatus.@OutputOnly
      */
-    lastRenewalTime?: string | null;
+    lastRenewalTime?: string;
     /**
      * Status of certificate management. Refers to the most recent certificate acquisition or renewal attempt.@OutputOnly
      */
-    status?: string | null;
+    status?: string;
   }
   /**
    * A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.
@@ -938,7 +940,7 @@ export namespace appengine_v1 {
     /**
      * Number of instances to assign to the service at the start. This number can later be altered by using the Modules API (https://cloud.google.com/appengine/docs/python/modules/functions) set_num_instances() function.
      */
-    instances?: number | null;
+    instances?: number;
   }
   /**
    * Extra network settings. Only applicable in the App Engine flexible environment.
@@ -947,23 +949,23 @@ export namespace appengine_v1 {
     /**
      * List of ports, or port pairs, to forward from the virtual machine to the application container. Only applicable in the App Engine flexible environment.
      */
-    forwardedPorts?: string[] | null;
+    forwardedPorts?: string[];
     /**
      * Tag to apply to the instance during creation. Only applicable in the App Engine flexible environment.
      */
-    instanceTag?: string | null;
+    instanceTag?: string;
     /**
      * Google Compute Engine network where the virtual machines are created. Specify the short name, not the resource path.Defaults to default.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Enable session affinity. Only applicable in the App Engine flexible environment.
      */
-    sessionAffinity?: boolean | null;
+    sessionAffinity?: boolean;
     /**
      * Google Cloud Platform sub-network where the virtual machines are created. Specify the short name, not the resource path.If a subnetwork name is specified, a network name will also be required unless it is for the default network. If the network that the instance is being created in is a Legacy network, then the IP address is allocated from the IPv4Range. If the network that the instance is being created in is an auto Subnet Mode Network, then only network name should be specified (not the subnetwork_name) and the IP address is created from the IPCidrRange of the subnetwork that exists in that zone for that network. If the network that the instance is being created in is a custom Subnet Mode Network, then the subnetwork_name must be specified and the IP address is created from the IPCidrRange of the subnetwork.If specified, the subnetwork must exist in the same region as the App Engine flexible environment application.
      */
-    subnetworkName?: string | null;
+    subnetworkName?: string;
   }
   /**
    * Target scaling by network usage. Only applicable in the App Engine flexible environment.
@@ -972,19 +974,19 @@ export namespace appengine_v1 {
     /**
      * Target bytes received per second.
      */
-    targetReceivedBytesPerSecond?: number | null;
+    targetReceivedBytesPerSecond?: number;
     /**
      * Target packets received per second.
      */
-    targetReceivedPacketsPerSecond?: number | null;
+    targetReceivedPacketsPerSecond?: number;
     /**
      * Target bytes sent per second.
      */
-    targetSentBytesPerSecond?: number | null;
+    targetSentBytesPerSecond?: number;
     /**
      * Target packets sent per second.
      */
-    targetSentPacketsPerSecond?: number | null;
+    targetSentPacketsPerSecond?: number;
   }
   /**
    * This resource represents a long-running operation that is the result of a network API call.
@@ -993,7 +995,7 @@ export namespace appengine_v1 {
     /**
      * If the value is false, it means the operation is still in progress. If true, the operation is completed, and either error or response is available.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * The error result of the operation in case of failure or cancellation.
      */
@@ -1001,15 +1003,15 @@ export namespace appengine_v1 {
     /**
      * Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the name should be a resource name ending with operations/{unique_id}.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
      */
-    response?: {[key: string]: any} | null;
+    response?: {[key: string]: any};
   }
   /**
    * Metadata for the given google.longrunning.Operation.
@@ -1019,31 +1021,31 @@ export namespace appengine_v1 {
     /**
      * Time that this operation completed.@OutputOnly
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * Ephemeral message that may change every time the operation is polled. @OutputOnly
      */
-    ephemeralMessage?: string | null;
+    ephemeralMessage?: string;
     /**
      * Time that this operation was created.@OutputOnly
      */
-    insertTime?: string | null;
+    insertTime?: string;
     /**
      * API method that initiated this operation. Example: google.appengine.v1.Versions.CreateVersion.@OutputOnly
      */
-    method?: string | null;
+    method?: string;
     /**
      * Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly
      */
-    target?: string | null;
+    target?: string;
     /**
      * User who requested this operation.@OutputOnly
      */
-    user?: string | null;
+    user?: string;
     /**
      * Durable messages that persist on every operation poll. @OutputOnly
      */
-    warning?: string[] | null;
+    warning?: string[];
   }
   /**
    * Metadata for the given google.longrunning.Operation.
@@ -1053,31 +1055,31 @@ export namespace appengine_v1 {
     /**
      * Time that this operation completed.@OutputOnly
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * Ephemeral message that may change every time the operation is polled. @OutputOnly
      */
-    ephemeralMessage?: string | null;
+    ephemeralMessage?: string;
     /**
      * Time that this operation was created.@OutputOnly
      */
-    insertTime?: string | null;
+    insertTime?: string;
     /**
      * API method that initiated this operation. Example: google.appengine.v1alpha.Versions.CreateVersion.@OutputOnly
      */
-    method?: string | null;
+    method?: string;
     /**
      * Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly
      */
-    target?: string | null;
+    target?: string;
     /**
      * User who requested this operation.@OutputOnly
      */
-    user?: string | null;
+    user?: string;
     /**
      * Durable messages that persist on every operation poll. @OutputOnly
      */
-    warning?: string[] | null;
+    warning?: string[];
   }
   /**
    * Metadata for the given google.longrunning.Operation.
@@ -1087,31 +1089,31 @@ export namespace appengine_v1 {
     /**
      * Time that this operation completed.@OutputOnly
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * Ephemeral message that may change every time the operation is polled. @OutputOnly
      */
-    ephemeralMessage?: string | null;
+    ephemeralMessage?: string;
     /**
      * Time that this operation was created.@OutputOnly
      */
-    insertTime?: string | null;
+    insertTime?: string;
     /**
      * API method that initiated this operation. Example: google.appengine.v1beta.Versions.CreateVersion.@OutputOnly
      */
-    method?: string | null;
+    method?: string;
     /**
      * Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly
      */
-    target?: string | null;
+    target?: string;
     /**
      * User who requested this operation.@OutputOnly
      */
-    user?: string | null;
+    user?: string;
     /**
      * Durable messages that persist on every operation poll. @OutputOnly
      */
-    warning?: string[] | null;
+    warning?: string[];
   }
   /**
    * Readiness checking configuration for VM instances. Unhealthy instances are removed from traffic rotation.
@@ -1120,31 +1122,31 @@ export namespace appengine_v1 {
     /**
      * A maximum time limit on application initialization, measured from moment the application successfully replies to a healthcheck until it is ready to serve traffic.
      */
-    appStartTimeout?: string | null;
+    appStartTimeout?: string;
     /**
      * Interval between health checks.
      */
-    checkInterval?: string | null;
+    checkInterval?: string;
     /**
      * Number of consecutive failed checks required before removing traffic.
      */
-    failureThreshold?: number | null;
+    failureThreshold?: number;
     /**
      * Host header to send when performing a HTTP Readiness check. Example: &quot;myapp.appspot.com&quot;
      */
-    host?: string | null;
+    host?: string;
     /**
      * The request path.
      */
-    path?: string | null;
+    path?: string;
     /**
      * Number of consecutive successful checks required before receiving traffic.
      */
-    successThreshold?: number | null;
+    successThreshold?: number;
     /**
      * Time before the check is considered failed.
      */
-    timeout?: string | null;
+    timeout?: string;
   }
   /**
    * Request message for &#39;Applications.RepairApplication&#39;.
@@ -1157,11 +1159,11 @@ export namespace appengine_v1 {
     /**
      * Target number of concurrent requests.
      */
-    targetConcurrentRequests?: number | null;
+    targetConcurrentRequests?: number;
     /**
      * Target requests per second.
      */
-    targetRequestCountPerSecond?: number | null;
+    targetRequestCountPerSecond?: number;
   }
   /**
    * A DNS resource record.
@@ -1170,15 +1172,15 @@ export namespace appengine_v1 {
     /**
      * Relative name of the object affected by this record. Only applicable for CNAME records. Example: &#39;www&#39;.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Data for this record. Values vary by record type, as defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1).
      */
-    rrdata?: string | null;
+    rrdata?: string;
     /**
      * Resource record type. Example: AAAA.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Machine resources for a version.
@@ -1187,15 +1189,15 @@ export namespace appengine_v1 {
     /**
      * Number of CPU cores needed.
      */
-    cpu?: number | null;
+    cpu?: number;
     /**
      * Disk size (GB) needed.
      */
-    diskGb?: number | null;
+    diskGb?: number;
     /**
      * Memory (GB) needed.
      */
-    memoryGb?: number | null;
+    memoryGb?: number;
     /**
      * User specified volumes.
      */
@@ -1208,7 +1210,7 @@ export namespace appengine_v1 {
     /**
      * Path to the script from the application root directory.
      */
-    scriptPath?: string | null;
+    scriptPath?: string;
   }
   /**
    * A Service resource is a logical component of an application that can share state and communicate in a secure fashion with other services. For example, an application that handles customer requests might include separate services to handle tasks such as backend data analysis or API requests from mobile devices. Each service has a collection of versions that define a specific set of code used to implement the functionality of that service.
@@ -1217,11 +1219,11 @@ export namespace appengine_v1 {
     /**
      * Relative name of the service within the application. Example: default.@OutputOnly
      */
-    id?: string | null;
+    id?: string;
     /**
      * Full path to the Service resource in the API. Example: apps/myapp/services/default.@OutputOnly
      */
-    name?: string | null;
+    name?: string;
     /**
      * Mapping that defines fractional HTTP traffic diversion to different versions within the service.
      */
@@ -1234,15 +1236,15 @@ export namespace appengine_v1 {
     /**
      * ID of the AuthorizedCertificate resource configuring SSL for the application. Clearing this field will remove SSL support.By default, a managed certificate is automatically created for every domain mapping. To omit SSL support or to configure SSL manually, specify SslManagementType.MANUAL on a CREATE or UPDATE request. You must be authorized to administer the AuthorizedCertificate resource to manually map it to a DomainMapping resource. Example: 12345.
      */
-    certificateId?: string | null;
+    certificateId?: string;
     /**
      * ID of the managed AuthorizedCertificate resource currently being provisioned, if applicable. Until the new managed certificate has been successfully provisioned, the previous SSL state will be preserved. Once the provisioning process completes, the certificate_id field will reflect the new managed certificate and this field will be left empty. To remove SSL support while there is still a pending managed certificate, clear the certificate_id field with an UpdateDomainMappingRequest.@OutputOnly
      */
-    pendingManagedCertificateId?: string | null;
+    pendingManagedCertificateId?: string;
     /**
      * SSL management type for this domain. If AUTOMATIC, a managed certificate is automatically provisioned. If MANUAL, certificate_id must be manually specified in order to configure SSL for this domain.
      */
-    sslManagementType?: string | null;
+    sslManagementType?: string;
   }
   /**
    * Scheduler settings for standard environment.
@@ -1251,19 +1253,19 @@ export namespace appengine_v1 {
     /**
      * Maximum number of instances to run for this version. Set to zero to disable max_instances configuration.
      */
-    maxInstances?: number | null;
+    maxInstances?: number;
     /**
      * Minimum number of instances to run for this version. Set to zero to disable min_instances configuration.
      */
-    minInstances?: number | null;
+    minInstances?: number;
     /**
      * Target CPU utilization ratio to maintain when scaling.
      */
-    targetCpuUtilization?: number | null;
+    targetCpuUtilization?: number;
     /**
      * Target throughput utilization ratio to maintain when scaling
      */
-    targetThroughputUtilization?: number | null;
+    targetThroughputUtilization?: number;
   }
   /**
    * Files served directly to the user for a given URL, such as images, CSS stylesheets, or JavaScript source files. Static file handlers describe which files in the application directory are static files, and which URLs serve them.
@@ -1272,48 +1274,48 @@ export namespace appengine_v1 {
     /**
      * Whether files should also be uploaded as code data. By default, files declared in static file handlers are uploaded as static data and are only served to end users; they cannot be read by the application. If enabled, uploads are charged against both your code and static data storage resource quotas.
      */
-    applicationReadable?: boolean | null;
+    applicationReadable?: boolean;
     /**
      * Time a static file served by this handler should be cached by web proxies and browsers.
      */
-    expiration?: string | null;
+    expiration?: string;
     /**
      * HTTP headers to use for all responses from these URLs.
      */
-    httpHeaders?: {[key: string]: string} | null;
+    httpHeaders?: {[key: string]: string};
     /**
      * MIME type used to serve all files served by this handler.Defaults to file-specific MIME types, which are derived from each file&#39;s filename extension.
      */
-    mimeType?: string | null;
+    mimeType?: string;
     /**
      * Path to the static files matched by the URL pattern, from the application root directory. The path can refer to text matched in groupings in the URL pattern.
      */
-    path?: string | null;
+    path?: string;
     /**
      * Whether this handler should match the request if the file referenced by the handler does not exist.
      */
-    requireMatchingFile?: boolean | null;
+    requireMatchingFile?: boolean;
     /**
      * Regular expression that matches the file paths for all files that should be referenced by this handler.
      */
-    uploadPathRegex?: string | null;
+    uploadPathRegex?: string;
   }
   /**
-   * The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors).
+   * The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). The error model is designed to be: Simple to use and understand for most users Flexible enough to meet unexpected needsOverviewThe Status message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers understand and resolve the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package google.rpc that can be used for common error conditions.Language mappingThe Status message is the logical representation of the error model, but it is not necessarily the actual wire format. When the Status message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.Other usesThe error model and the Status message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.Example uses of this error model include: Partial errors. If a service needs to return partial errors to the client, it may embed the Status in the normal response to indicate the partial errors. Workflow errors. A typical workflow has multiple steps. Each step may have a Status message for error reporting. Batch operations. If a client uses batch request and batch response, the Status message should be used directly inside batch response, one for each error sub-response. Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the Status message. Logging. If some API errors are stored in logs, the message Status could be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details. There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * Traffic routing configuration for versions within a single service. Traffic splits define how traffic directed to the service is assigned to versions.
@@ -1322,11 +1324,11 @@ export namespace appengine_v1 {
     /**
      * Mapping from version IDs within the service to fractional (0.000, 1] allocations of traffic for that version. Each version can be specified only once, but some versions in the service may not have any traffic allocation. Services that have traffic allocated cannot be deleted until either the service is deleted or their traffic allocation is removed. Allocations must sum to 1. Up to two decimal place precision is supported for IP-based splits and up to three decimal places is supported for cookie-based splits.
      */
-    allocations?: {[key: string]: number} | null;
+    allocations?: {[key: string]: number};
     /**
      * Mechanism used to determine which version a request is sent to. The traffic selection algorithm will be stable for either type until allocations are changed.
      */
-    shardBy?: string | null;
+    shardBy?: string;
   }
   /**
    * Rules to match an HTTP request and dispatch that request to a service.
@@ -1335,15 +1337,15 @@ export namespace appengine_v1 {
     /**
      * Domain name to match against. The wildcard &quot;*&quot; is supported if specified before a period: &quot;*.&quot;.Defaults to matching all domains: &quot;*&quot;.
      */
-    domain?: string | null;
+    domain?: string;
     /**
      * Pathname within the host. Must start with a &quot;/&quot;. A single &quot;*&quot; can be included at the end of the path.The sum of the lengths of the domain and path may not exceed 100 characters.
      */
-    path?: string | null;
+    path?: string;
     /**
      * Resource ID of a service in this application that should serve the matched request. The service must already exist. Example: default.
      */
-    service?: string | null;
+    service?: string;
   }
   /**
    * URL pattern and description of how the URL should be handled. App Engine can handle URLs by executing application code or by serving static files uploaded with the version, such as images, CSS, or JavaScript.
@@ -1356,15 +1358,15 @@ export namespace appengine_v1 {
     /**
      * Action to take when users access resources that require authentication. Defaults to redirect.
      */
-    authFailAction?: string | null;
+    authFailAction?: string;
     /**
      * Level of login required to access this resource. Not supported for Node.js in the App Engine standard environment.
      */
-    login?: string | null;
+    login?: string;
     /**
      * 30x code to use when performing redirects for the secure field. Defaults to 302.
      */
-    redirectHttpResponseCode?: string | null;
+    redirectHttpResponseCode?: string;
     /**
      * Executes a script to handle the requests that match this URL pattern. Only the auto value is supported for Node.js in the App Engine standard environment, for example &quot;script&quot;: &quot;auto&quot;.
      */
@@ -1372,7 +1374,7 @@ export namespace appengine_v1 {
     /**
      * Security (HTTPS) enforcement for this URL.
      */
-    securityLevel?: string | null;
+    securityLevel?: string;
     /**
      * Returns the contents of a file, such as an image, as the response.
      */
@@ -1380,7 +1382,7 @@ export namespace appengine_v1 {
     /**
      * URL prefix. Uses regular expression syntax, which means regexp special characters must be escaped, but should not contain groupings. All URLs that begin with this prefix are handled by this handler, using the portion of the URL after the prefix as part of the file path.
      */
-    urlRegex?: string | null;
+    urlRegex?: string;
   }
   /**
    * A Version resource is a specific set of source code and configuration files that are deployed into a service.
@@ -1401,19 +1403,19 @@ export namespace appengine_v1 {
     /**
      * Metadata settings that are supplied to this version to enable beta runtime features.
      */
-    betaSettings?: {[key: string]: string} | null;
+    betaSettings?: {[key: string]: string};
     /**
      * Email address of the user who created this version.@OutputOnly
      */
-    createdBy?: string | null;
+    createdBy?: string;
     /**
      * Time that this version was created.@OutputOnly
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Duration that static files should be cached by web proxies and browsers. Only applicable if the corresponding StaticFilesHandler (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StaticFilesHandler) does not specify its own expiration time.Only returned in GET requests if view=FULL is set.
      */
-    defaultExpiration?: string | null;
+    defaultExpiration?: string;
     /**
      * Code and application artifacts that make up this version.Only returned in GET requests if view=FULL is set.
      */
@@ -1421,7 +1423,7 @@ export namespace appengine_v1 {
     /**
      * Total size in bytes of all the files that are included in this version and currently hosted on the App Engine disk.@OutputOnly
      */
-    diskUsageBytes?: string | null;
+    diskUsageBytes?: string;
     /**
      * Cloud Endpoints configuration.If endpoints_api_service is set, the Cloud Endpoints Extensible Service Proxy will be provided to serve the API implemented by the app.
      */
@@ -1433,11 +1435,11 @@ export namespace appengine_v1 {
     /**
      * App Engine execution environment for this version.Defaults to standard.
      */
-    env?: string | null;
+    env?: string;
     /**
      * Environment variables available to the application.Only returned in GET requests if view=FULL is set.
      */
-    envVariables?: {[key: string]: string} | null;
+    envVariables?: {[key: string]: string};
     /**
      * Custom static error pages. Limited to 10KB per page.Only returned in GET requests if view=FULL is set.
      */
@@ -1453,15 +1455,15 @@ export namespace appengine_v1 {
     /**
      * Relative name of the version within the service. Example: v1. Version names can contain only lowercase letters, numbers, or hyphens. Reserved names: &quot;default&quot;, &quot;latest&quot;, and any name with the prefix &quot;ah-&quot;.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Before an application can receive email or XMPP messages, the application must be configured to enable the service.
      */
-    inboundServices?: string[] | null;
+    inboundServices?: string[];
     /**
      * Instance class that is used to run this version. Valid values are: AutomaticScaling: F1, F2, F4, F4_1G ManualScaling or BasicScaling: B1, B2, B4, B8, B4_1GDefaults to F1 for AutomaticScaling and B1 for ManualScaling or BasicScaling.
      */
-    instanceClass?: string | null;
+    instanceClass?: string;
     /**
      * Configuration for third-party Python runtime libraries that are required by the application.Only returned in GET requests if view=FULL is set.
      */
@@ -1477,7 +1479,7 @@ export namespace appengine_v1 {
     /**
      * Full path to the Version resource in the API. Example: apps/myapp/services/default/versions/v1.@OutputOnly
      */
-    name?: string | null;
+    name?: string;
     /**
      * Extra network settings. Only applicable in the App Engine flexible environment.
      */
@@ -1485,7 +1487,7 @@ export namespace appengine_v1 {
     /**
      * Files that match this pattern will not be built into this version. Only applicable for Go runtimes.Only returned in GET requests if view=FULL is set.
      */
-    nobuildFilesRegex?: string | null;
+    nobuildFilesRegex?: string;
     /**
      * Configures readiness health checking for instances. Unhealthy instances are not put into the backend traffic rotation.Only returned in GET requests if view=FULL is set.
      */
@@ -1497,35 +1499,35 @@ export namespace appengine_v1 {
     /**
      * Desired runtime. Example: python27.
      */
-    runtime?: string | null;
+    runtime?: string;
     /**
      * The version of the API in the given runtime environment. Please see the app.yaml reference for valid values at https://cloud.google.com/appengine/docs/standard/&lt;language&gt;/config/appref
      */
-    runtimeApiVersion?: string | null;
+    runtimeApiVersion?: string;
     /**
      * The channel of the runtime to use. Only available for some runtimes. Defaults to the default channel.
      */
-    runtimeChannel?: string | null;
+    runtimeChannel?: string;
     /**
      * The path or name of the app&#39;s main executable.
      */
-    runtimeMainExecutablePath?: string | null;
+    runtimeMainExecutablePath?: string;
     /**
      * Current serving status of this version. Only the versions with a SERVING status create instances and can be billed.SERVING_STATUS_UNSPECIFIED is an invalid value. Defaults to SERVING.
      */
-    servingStatus?: string | null;
+    servingStatus?: string;
     /**
      * Whether multiple requests can be dispatched to this version at once.
      */
-    threadsafe?: boolean | null;
+    threadsafe?: boolean;
     /**
      * Serving URL for this version. Example: &quot;https://myversion-dot-myservice-dot-myapp.appspot.com&quot;@OutputOnly
      */
-    versionUrl?: string | null;
+    versionUrl?: string;
     /**
      * Whether to deploy this version in a container on a virtual machine.
      */
-    vm?: boolean | null;
+    vm?: boolean;
     /**
      * Enables VPC connectivity for standard apps.
      */
@@ -1533,7 +1535,7 @@ export namespace appengine_v1 {
     /**
      * The Google Compute Engine zones that are supported by this version in the App Engine flexible environment. Deprecated.
      */
-    zones?: string[] | null;
+    zones?: string[];
   }
   /**
    * Volumes mounted within the app container. Only applicable in the App Engine flexible environment.
@@ -1542,15 +1544,15 @@ export namespace appengine_v1 {
     /**
      * Unique name for the volume.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Volume size in gigabytes.
      */
-    sizeGb?: number | null;
+    sizeGb?: number;
     /**
      * Underlying volume type, e.g. &#39;tmpfs&#39;.
      */
-    volumeType?: string | null;
+    volumeType?: string;
   }
   /**
    * VPC access connector specification.
@@ -1559,7 +1561,7 @@ export namespace appengine_v1 {
     /**
      * Full Serverless VPC Access Connector name e.g. /projects/my-project/locations/us-central1/connectors/c1.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * The zip file information for a zip deployment.
@@ -1568,11 +1570,11 @@ export namespace appengine_v1 {
     /**
      * An estimate of the number of files in a zip for a zip deployment. If set, must be greater than or equal to the actual number of files. Used for optimizing performance; if not provided, deployment may be slow.
      */
-    filesCount?: number | null;
+    filesCount?: number;
     /**
      * URL of the zip file to deploy from. Must be a URL to a resource in Google Cloud Storage in the form &#39;http(s)://storage.googleapis.com/&lt;bucket&gt;/&lt;object&gt;&#39;.
      */
-    sourceUrl?: string | null;
+    sourceUrl?: string;
   }
 
   export class Resource$Apps {
@@ -1606,7 +1608,7 @@ export namespace appengine_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Application} params.requestBody Request body data
+     * @param {().Application} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1748,7 +1750,7 @@ export namespace appengine_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.appsId Part of `name`. Name of the Application resource to update. Example: apps/myapp.
      * @param {string=} params.updateMask Standard field mask for the set of fields to be updated.
-     * @param {().Application} params.requestBody Request body data
+     * @param {().Application} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1819,7 +1821,7 @@ export namespace appengine_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.appsId Part of `name`. Name of the application to repair. Example: apps/myapp
-     * @param {().RepairApplicationRequest} params.requestBody Request body data
+     * @param {().RepairApplicationRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1959,7 +1961,7 @@ export namespace appengine_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.appsId Part of `parent`. Name of the parent Application resource. Example: apps/myapp.
-     * @param {().AuthorizedCertificate} params.requestBody Request body data
+     * @param {().AuthorizedCertificate} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2275,7 +2277,7 @@ export namespace appengine_v1 {
      * @param {string} params.appsId Part of `name`. Name of the resource to update. Example: apps/myapp/authorizedCertificates/12345.
      * @param {string} params.authorizedCertificatesId Part of `name`. See documentation of `appsId`.
      * @param {string=} params.updateMask Standard field mask for the set of fields to be updated. Updates are only supported on the certificate_raw_data and display_name fields.
-     * @param {().AuthorizedCertificate} params.requestBody Request body data
+     * @param {().AuthorizedCertificate} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2576,7 +2578,7 @@ export namespace appengine_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.appsId Part of `parent`. Name of the parent Application resource. Example: apps/myapp.
      * @param {string=} params.overrideStrategy Whether the domain creation should override any existing mappings for this domain. By default, overrides are rejected.
-     * @param {().DomainMapping} params.requestBody Request body data
+     * @param {().DomainMapping} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2884,7 +2886,7 @@ export namespace appengine_v1 {
      * @param {string} params.appsId Part of `name`. Name of the resource to update. Example: apps/myapp/domainMappings/example.com.
      * @param {string} params.domainMappingsId Part of `name`. See documentation of `appsId`.
      * @param {string=} params.updateMask Standard field mask for the set of fields to be updated.
-     * @param {().DomainMapping} params.requestBody Request body data
+     * @param {().DomainMapping} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3073,7 +3075,7 @@ export namespace appengine_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.appsId Part of `name`. Name of the Firewall collection to set. Example: apps/myapp/firewall/ingressRules.
-     * @param {().BatchUpdateIngressRulesRequest} params.requestBody Request body data
+     * @param {().BatchUpdateIngressRulesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3156,7 +3158,7 @@ export namespace appengine_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.appsId Part of `parent`. Name of the parent Firewall collection in which to create a new rule. Example: apps/myapp/firewall/ingressRules.
-     * @param {().FirewallRule} params.requestBody Request body data
+     * @param {().FirewallRule} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3460,7 +3462,7 @@ export namespace appengine_v1 {
      * @param {string} params.appsId Part of `name`. Name of the Firewall resource to update. Example: apps/myapp/firewall/ingressRules/100.
      * @param {string} params.ingressRulesId Part of `name`. See documentation of `appsId`.
      * @param {string=} params.updateMask Standard field mask for the set of fields to be updated.
-     * @param {().FirewallRule} params.requestBody Request body data
+     * @param {().FirewallRule} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4289,7 +4291,7 @@ export namespace appengine_v1 {
      * @param {boolean=} params.migrateTraffic Set to true to gradually shift traffic to one or more versions that you specify. By default, traffic is shifted immediately. For gradual traffic migration, the target versions must be located within instances that are configured for both warmup requests (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#InboundServiceType) and automatic scaling (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#AutomaticScaling). You must specify the shardBy (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services#ShardBy) field in the Service resource. Gradual traffic migration is not supported in the App Engine flexible environment. For examples, see Migrating and Splitting Traffic (https://cloud.google.com/appengine/docs/admin-api/migrating-splitting-traffic).
      * @param {string} params.servicesId Part of `name`. See documentation of `appsId`.
      * @param {string=} params.updateMask Standard field mask for the set of fields to be updated.
-     * @param {().Service} params.requestBody Request body data
+     * @param {().Service} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4458,7 +4460,7 @@ export namespace appengine_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.appsId Part of `parent`. Name of the parent resource to create this version under. Example: apps/myapp/services/default.
      * @param {string} params.servicesId Part of `parent`. See documentation of `appsId`.
-     * @param {().Version} params.requestBody Request body data
+     * @param {().Version} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4765,7 +4767,7 @@ export namespace appengine_v1 {
      * @param {string} params.servicesId Part of `name`. See documentation of `appsId`.
      * @param {string=} params.updateMask Standard field mask for the set of fields to be updated.
      * @param {string} params.versionsId Part of `name`. See documentation of `appsId`.
-     * @param {().Version} params.requestBody Request body data
+     * @param {().Version} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4973,7 +4975,7 @@ export namespace appengine_v1 {
      * @param {string} params.instancesId Part of `name`. See documentation of `appsId`.
      * @param {string} params.servicesId Part of `name`. See documentation of `appsId`.
      * @param {string} params.versionsId Part of `name`. See documentation of `appsId`.
-     * @param {().DebugInstanceRequest} params.requestBody Request body data
+     * @param {().DebugInstanceRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5042,7 +5044,7 @@ export namespace appengine_v1 {
 
     /**
      * appengine.apps.services.versions.instances.delete
-     * @desc Stops a running instance.The instance might be automatically recreated based on the scaling settings of the version. For more information, see "How Instances are Managed" (standard environment (https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) | flexible environment (https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)).To ensure that instances are not re-created and avoid getting billed, you can stop all instances within the target version by changing the serving status of the version to STOPPED with the apps.services.versions.patch (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch) method.
+     * @desc Stops a running instance.
      * @alias appengine.apps.services.versions.instances.delete
      * @memberOf! ()
      *

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -131,7 +133,7 @@ export namespace storage_v1beta2 {
       method?: string[];
       origin?: string[];
       responseHeader?: string[];
-    }> | null;
+    }>;
     /**
      * Default access controls to apply to new objects when no ACL is provided.
      */
@@ -139,15 +141,15 @@ export namespace storage_v1beta2 {
     /**
      * HTTP 1.1 Entity tag for the bucket.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID of the bucket.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of item this is. For buckets, this is always storage#bucket.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The bucket&#39;s lifecycle configuration. See object lifecycle management for more information.
      */
@@ -161,47 +163,47 @@ export namespace storage_v1beta2 {
           numNewerVersions?: number;
         };
       }>;
-    } | null;
+    };
     /**
      * The location of the bucket. Object data for objects in the bucket resides in physical storage within this region. Typical values are US and EU. Defaults to US. See the developer&#39;s guide for the authoritative list.
      */
-    location?: string | null;
+    location?: string;
     /**
      * The bucket&#39;s logging configuration, which defines the destination bucket and optional name prefix for the current bucket&#39;s logs.
      */
-    logging?: {logBucket?: string; logObjectPrefix?: string} | null;
+    logging?: {logBucket?: string; logObjectPrefix?: string};
     /**
      * The metadata generation of this bucket.
      */
-    metageneration?: string | null;
+    metageneration?: string;
     /**
      * The name of the bucket.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The owner of the bucket. This is always the project team&#39;s owner group.
      */
-    owner?: {entity?: string; entityId?: string} | null;
+    owner?: {entity?: string; entityId?: string};
     /**
      * The URI of this bucket.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The bucket&#39;s storage class. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Typical values are STANDARD and DURABLE_REDUCED_AVAILABILITY. Defaults to STANDARD. See the developer&#39;s guide for the authoritative list.
      */
-    storageClass?: string | null;
+    storageClass?: string;
     /**
      * Creation time of the bucket in RFC 3339 format.
      */
-    timeCreated?: string | null;
+    timeCreated?: string;
     /**
      * The bucket&#39;s versioning configuration.
      */
-    versioning?: {enabled?: boolean} | null;
+    versioning?: {enabled?: boolean};
     /**
      * The bucket&#39;s website configuration.
      */
-    website?: {mainPageSuffix?: string; notFoundPage?: string} | null;
+    website?: {mainPageSuffix?: string; notFoundPage?: string};
   }
   /**
    * An access-control entry.
@@ -210,43 +212,43 @@ export namespace storage_v1beta2 {
     /**
      * The name of the bucket.
      */
-    bucket?: string | null;
+    bucket?: string;
     /**
      * The domain associated with the entity, if any.
      */
-    domain?: string | null;
+    domain?: string;
     /**
      * The email address associated with the entity, if any.
      */
-    email?: string | null;
+    email?: string;
     /**
      * The entity holding the permission, in one of the following forms:  - user-userId  - user-email  - group-groupId  - group-email  - domain-domain  - allUsers  - allAuthenticatedUsers Examples:  - The user liz@example.com would be user-liz@example.com.  - The group example@googlegroups.com would be group-example@googlegroups.com.  - To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.
      */
-    entity?: string | null;
+    entity?: string;
     /**
      * The ID for the entity, if any.
      */
-    entityId?: string | null;
+    entityId?: string;
     /**
      * HTTP 1.1 Entity tag for the access-control entry.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID of the access-control entry.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of item this is. For bucket access control entries, this is always storage#bucketAccessControl.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The access permission for the entity. Can be READER, WRITER, or OWNER.
      */
-    role?: string | null;
+    role?: string;
     /**
      * The link to this access-control entry.
      */
-    selfLink?: string | null;
+    selfLink?: string;
   }
   /**
    * An access-control list.
@@ -259,7 +261,7 @@ export namespace storage_v1beta2 {
     /**
      * The kind of item this is. For lists of bucket access control entries, this is always storage#bucketAccessControls.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * A list of buckets.
@@ -272,11 +274,11 @@ export namespace storage_v1beta2 {
     /**
      * The kind of item this is. For lists of buckets, this is always storage#buckets.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * An notification channel used to watch for resource changes.
@@ -285,43 +287,43 @@ export namespace storage_v1beta2 {
     /**
      * The address where notifications are delivered for this channel.
      */
-    address?: string | null;
+    address?: string;
     /**
      * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
      */
-    expiration?: string | null;
+    expiration?: string;
     /**
      * A UUID or similar unique string that identifies this channel.
      */
-    id?: string | null;
+    id?: string;
     /**
-     * Identifies this as a notification channel used to watch for changes to a resource, which is &quot;api#channel&quot;.
+     * Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string &quot;api#channel&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Additional parameters controlling delivery channel behavior. Optional.
      */
-    params?: {[key: string]: string} | null;
+    params?: {[key: string]: string};
     /**
      * A Boolean value to indicate whether payload is wanted. Optional.
      */
-    payload?: boolean | null;
+    payload?: boolean;
     /**
      * An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
      */
-    resourceId?: string | null;
+    resourceId?: string;
     /**
      * A version-specific identifier for the watched resource.
      */
-    resourceUri?: string | null;
+    resourceUri?: string;
     /**
      * An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
      */
-    token?: string | null;
+    token?: string;
     /**
      * The type of delivery mechanism used for this channel.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * A Compose request.
@@ -334,7 +336,7 @@ export namespace storage_v1beta2 {
     /**
      * The kind of item this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The list of source objects that will be concatenated into a single object.
      */
@@ -342,7 +344,7 @@ export namespace storage_v1beta2 {
       generation?: string;
       name?: string;
       objectPreconditions?: {ifGenerationMatch?: string};
-    }> | null;
+    }>;
   }
   /**
    * An object.
@@ -355,95 +357,95 @@ export namespace storage_v1beta2 {
     /**
      * The bucket containing this object.
      */
-    bucket?: string | null;
+    bucket?: string;
     /**
      * Cache-Control directive for the object data.
      */
-    cacheControl?: string | null;
+    cacheControl?: string;
     /**
      * Number of underlying components that make up this object. Components are accumulated by compose operations and are limited to a count of 32.
      */
-    componentCount?: number | null;
+    componentCount?: number;
     /**
      * Content-Disposition of the object data.
      */
-    contentDisposition?: string | null;
+    contentDisposition?: string;
     /**
      * Content-Encoding of the object data.
      */
-    contentEncoding?: string | null;
+    contentEncoding?: string;
     /**
      * Content-Language of the object data.
      */
-    contentLanguage?: string | null;
+    contentLanguage?: string;
     /**
      * Content-Type of the object data.
      */
-    contentType?: string | null;
+    contentType?: string;
     /**
      * CRC32c checksum, as described in RFC 4960, Appendix B; encoded using base64.
      */
-    crc32c?: string | null;
+    crc32c?: string;
     /**
      * HTTP 1.1 Entity tag for the object.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The content generation of this object. Used for object versioning.
      */
-    generation?: string | null;
+    generation?: string;
     /**
      * The ID of the object.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of item this is. For objects, this is always storage#object.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * MD5 hash of the data; encoded using base64.
      */
-    md5Hash?: string | null;
+    md5Hash?: string;
     /**
      * Media download link.
      */
-    mediaLink?: string | null;
+    mediaLink?: string;
     /**
      * User-provided metadata, in key/value pairs.
      */
-    metadata?: {[key: string]: string} | null;
+    metadata?: {[key: string]: string};
     /**
      * The generation of the metadata for this object at this generation. Used for metadata versioning. Has no meaning outside of the context of this generation.
      */
-    metageneration?: string | null;
+    metageneration?: string;
     /**
      * The name of this object. Required if not specified by URL parameter.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The owner of the object. This will always be the uploader of the object.
      */
-    owner?: {entity?: string; entityId?: string} | null;
+    owner?: {entity?: string; entityId?: string};
     /**
      * The link to this object.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * Content-Length of the data in bytes.
      */
-    size?: string | null;
+    size?: string;
     /**
      * Storage class of the object.
      */
-    storageClass?: string | null;
+    storageClass?: string;
     /**
      * Deletion time of the object in RFC 3339 format. Will be returned if and only if this version of the object has been deleted.
      */
-    timeDeleted?: string | null;
+    timeDeleted?: string;
     /**
      * Modification time of the object metadata in RFC 3339 format.
      */
-    updated?: string | null;
+    updated?: string;
   }
   /**
    * An access-control entry.
@@ -452,51 +454,51 @@ export namespace storage_v1beta2 {
     /**
      * The name of the bucket.
      */
-    bucket?: string | null;
+    bucket?: string;
     /**
      * The domain associated with the entity, if any.
      */
-    domain?: string | null;
+    domain?: string;
     /**
      * The email address associated with the entity, if any.
      */
-    email?: string | null;
+    email?: string;
     /**
      * The entity holding the permission, in one of the following forms:  - user-userId  - user-email  - group-groupId  - group-email  - domain-domain  - allUsers  - allAuthenticatedUsers Examples:  - The user liz@example.com would be user-liz@example.com.  - The group example@googlegroups.com would be group-example@googlegroups.com.  - To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.
      */
-    entity?: string | null;
+    entity?: string;
     /**
      * The ID for the entity, if any.
      */
-    entityId?: string | null;
+    entityId?: string;
     /**
      * HTTP 1.1 Entity tag for the access-control entry.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The content generation of the object.
      */
-    generation?: string | null;
+    generation?: string;
     /**
      * The ID of the access-control entry.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of item this is. For object access control entries, this is always storage#objectAccessControl.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The name of the object.
      */
-    object?: string | null;
+    object?: string;
     /**
      * The access permission for the entity. Can be READER or OWNER.
      */
-    role?: string | null;
+    role?: string;
     /**
      * The link to this access-control entry.
      */
-    selfLink?: string | null;
+    selfLink?: string;
   }
   /**
    * An access-control list.
@@ -505,11 +507,11 @@ export namespace storage_v1beta2 {
     /**
      * The list of items.
      */
-    items?: any[] | null;
+    items?: any[];
     /**
      * The kind of item this is. For lists of object access control entries, this is always storage#objectAccessControls.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * A list of objects.
@@ -522,15 +524,15 @@ export namespace storage_v1beta2 {
     /**
      * The kind of item this is. For lists of objects, this is always storage#objects.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of prefixes of objects matching-but-not-listed up to and including the requested delimiter.
      */
-    prefixes?: string[] | null;
+    prefixes?: string[];
   }
 
   export class Resource$Bucketaccesscontrols {
@@ -695,7 +697,7 @@ export namespace storage_v1beta2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.bucket Name of a bucket.
-     * @param {().BucketAccessControl} params.requestBody Request body data
+     * @param {().BucketAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -847,7 +849,7 @@ export namespace storage_v1beta2 {
      * @param {object} params Parameters for request
      * @param {string} params.bucket Name of a bucket.
      * @param {string} params.entity The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
-     * @param {().BucketAccessControl} params.requestBody Request body data
+     * @param {().BucketAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -923,7 +925,7 @@ export namespace storage_v1beta2 {
      * @param {object} params Parameters for request
      * @param {string} params.bucket Name of a bucket.
      * @param {string} params.entity The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
-     * @param {().BucketAccessControl} params.requestBody Request body data
+     * @param {().BucketAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1257,7 +1259,7 @@ export namespace storage_v1beta2 {
      * @param {object} params Parameters for request
      * @param {string} params.project A valid API project identifier.
      * @param {string=} params.projection Set of properties to return. Defaults to noAcl, unless the bucket resource specifies acl or defaultObjectAcl properties, when it defaults to full.
-     * @param {().Bucket} params.requestBody Request body data
+     * @param {().Bucket} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1400,7 +1402,7 @@ export namespace storage_v1beta2 {
      * @param {string=} params.ifMetagenerationMatch Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value.
      * @param {string=} params.ifMetagenerationNotMatch Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value.
      * @param {string=} params.projection Set of properties to return. Defaults to full.
-     * @param {().Bucket} params.requestBody Request body data
+     * @param {().Bucket} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1475,7 +1477,7 @@ export namespace storage_v1beta2 {
      * @param {string=} params.ifMetagenerationMatch Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value.
      * @param {string=} params.ifMetagenerationNotMatch Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value.
      * @param {string=} params.projection Set of properties to return. Defaults to full.
-     * @param {().Bucket} params.requestBody Request body data
+     * @param {().Bucket} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1695,7 +1697,7 @@ export namespace storage_v1beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Channel} params.requestBody Request body data
+     * @param {().Channel} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1932,7 +1934,7 @@ export namespace storage_v1beta2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.bucket Name of a bucket.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2084,7 +2086,7 @@ export namespace storage_v1beta2 {
      * @param {object} params Parameters for request
      * @param {string} params.bucket Name of a bucket.
      * @param {string} params.entity The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2159,7 +2161,7 @@ export namespace storage_v1beta2 {
      * @param {object} params Parameters for request
      * @param {string} params.bucket Name of a bucket.
      * @param {string} params.entity The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2504,7 +2506,7 @@ export namespace storage_v1beta2 {
      * @param {string} params.bucket Name of a bucket.
      * @param {string=} params.generation If present, selects a specific revision of this object (as opposed to the latest version, the default).
      * @param {string} params.object Name of the object.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2658,7 +2660,7 @@ export namespace storage_v1beta2 {
      * @param {string} params.entity The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
      * @param {string=} params.generation If present, selects a specific revision of this object (as opposed to the latest version, the default).
      * @param {string} params.object Name of the object.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2735,7 +2737,7 @@ export namespace storage_v1beta2 {
      * @param {string} params.entity The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
      * @param {string=} params.generation If present, selects a specific revision of this object (as opposed to the latest version, the default).
      * @param {string} params.object Name of the object.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2971,7 +2973,7 @@ export namespace storage_v1beta2 {
      * @param {string} params.destinationObject Name of the new object.
      * @param {string=} params.ifGenerationMatch Makes the operation conditional on whether the object's current generation matches the given value.
      * @param {string=} params.ifMetagenerationMatch Makes the operation conditional on whether the object's current metageneration matches the given value.
-     * @param {().ComposeRequest} params.requestBody Request body data
+     * @param {().ComposeRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3056,7 +3058,7 @@ export namespace storage_v1beta2 {
      * @param {string} params.sourceBucket Name of the bucket in which to find the source object.
      * @param {string=} params.sourceGeneration If present, selects a specific revision of the source object (as opposed to the latest version, the default).
      * @param {string} params.sourceObject Name of the source object.
-     * @param {().Object} params.requestBody Request body data
+     * @param {().Object} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3299,7 +3301,7 @@ export namespace storage_v1beta2 {
      * @param {string=} params.ifMetagenerationNotMatch Makes the operation conditional on whether the object's current metageneration does not match the given value.
      * @param {string=} params.name Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any.
      * @param {string=} params.projection Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
-     * @param  {object} params.requestBody Media resource metadata
+     * @param  {object} params.resource Media resource metadata
      * @param {object} params.media Media object
      * @param {string} params.media.mimeType Media mime-type
      * @param {string|object} params.media.body Media body contents
@@ -3462,7 +3464,7 @@ export namespace storage_v1beta2 {
      * @param {string=} params.ifMetagenerationNotMatch Makes the operation conditional on whether the object's current metageneration does not match the given value.
      * @param {string} params.object Name of the object.
      * @param {string=} params.projection Set of properties to return. Defaults to full.
-     * @param {().Object} params.requestBody Request body data
+     * @param {().Object} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3541,7 +3543,7 @@ export namespace storage_v1beta2 {
      * @param {string=} params.ifMetagenerationNotMatch Makes the operation conditional on whether the object's current metageneration does not match the given value.
      * @param {string} params.object Name of the object.
      * @param {string=} params.projection Set of properties to return. Defaults to full.
-     * @param {().Object} params.requestBody Request body data
+     * @param {().Object} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3619,7 +3621,7 @@ export namespace storage_v1beta2 {
      * @param {string=} params.prefix Filter results to objects whose names begin with this prefix.
      * @param {string=} params.projection Set of properties to return. Defaults to noAcl.
      * @param {boolean=} params.versions If true, lists all versions of a file as distinct results.
-     * @param {().Channel} params.requestBody Request body data
+     * @param {().Channel} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

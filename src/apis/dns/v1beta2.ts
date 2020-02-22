@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -128,23 +130,23 @@ export namespace dns_v1beta2 {
     /**
      * Unique identifier for the resource; defined by the server (output only).
      */
-    id?: string | null;
+    id?: string;
     /**
      * If the DNS queries for the zone will be served.
      */
-    isServing?: boolean | null;
+    isServing?: boolean;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#change&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The time that this operation was started by the server (output only). This is in RFC3339 text format.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * Status of the operation (output only). A status of &quot;done&quot; means that the request to update the authoritative servers has been sent, but the servers might not be updated yet.
      */
-    status?: string | null;
+    status?: string;
   }
   /**
    * The response to a request to enumerate Changes to a ResourceRecordSets collection.
@@ -158,11 +160,11 @@ export namespace dns_v1beta2 {
     /**
      * Type of resource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token.  In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a &quot;snapshot&quot; of collections larger than the maximum page size.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * A DNSSEC key pair.
@@ -171,15 +173,15 @@ export namespace dns_v1beta2 {
     /**
      * String mnemonic specifying the DNSSEC algorithm of this key. Immutable after creation time.
      */
-    algorithm?: string | null;
+    algorithm?: string;
     /**
      * The time that this resource was created in the control plane. This is in RFC3339 text format. Output only.
      */
-    creationTime?: string | null;
+    creationTime?: string;
     /**
      * A mutable string of at most 1024 characters associated with this resource for the user&#39;s convenience. Has no effect on the resource&#39;s function.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Cryptographic hashes of the DNSKEY resource record associated with this DnsKey. These digests are needed to construct a DS record that points at this DNS key. Output only.
      */
@@ -187,41 +189,41 @@ export namespace dns_v1beta2 {
     /**
      * Unique identifier for the resource; defined by the server (output only).
      */
-    id?: string | null;
+    id?: string;
     /**
      * Active keys will be used to sign subsequent changes to the ManagedZone. Inactive keys will still be present as DNSKEY Resource Records for the use of resolvers validating existing signatures.
      */
-    isActive?: boolean | null;
+    isActive?: boolean;
     /**
      * Length of the key in bits. Specified at creation time then immutable.
      */
-    keyLength?: number | null;
+    keyLength?: number;
     /**
      * The key tag is a non-cryptographic hash of the a DNSKEY resource record associated with this DnsKey. The key tag can be used to identify a DNSKEY more quickly (but it is not a unique identifier). In particular, the key tag is used in a parent zone&#39;s DS record to point at the DNSKEY in this child ManagedZone. The key tag is a number in the range [0, 65535] and the algorithm to calculate it is specified in RFC4034 Appendix B. Output only.
      */
-    keyTag?: number | null;
+    keyTag?: number;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#dnsKey&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Base64 encoded public half of this key. Output only.
      */
-    publicKey?: string | null;
+    publicKey?: string;
     /**
      * One of &quot;KEY_SIGNING&quot; or &quot;ZONE_SIGNING&quot;. Keys of type KEY_SIGNING have the Secure Entry Point flag set and, when active, will be used to sign only resource record sets of type DNSKEY. Otherwise, the Secure Entry Point flag will be cleared and this key will be used to sign only resource record sets of other types. Immutable after creation time.
      */
-    type?: string | null;
+    type?: string;
   }
   export interface Schema$DnsKeyDigest {
     /**
      * The base-16 encoded bytes of this digest. Suitable for use in a DS resource record.
      */
-    digest?: string | null;
+    digest?: string;
     /**
      * Specifies the algorithm used to calculate this digest.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * The response to a request to enumerate DnsKeys in a ManagedZone.
@@ -235,11 +237,11 @@ export namespace dns_v1beta2 {
     /**
      * Type of resource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token.  In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a &quot;snapshot&quot; of collections larger than the maximum page size.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Parameters for DnsKey key generation. Used for generating initial keys for a new ManagedZone and as default when adding a new DnsKey.
@@ -248,19 +250,19 @@ export namespace dns_v1beta2 {
     /**
      * String mnemonic specifying the DNSSEC algorithm of this key.
      */
-    algorithm?: string | null;
+    algorithm?: string;
     /**
      * Length of the keys in bits.
      */
-    keyLength?: number | null;
+    keyLength?: number;
     /**
      * Specifies whether this is a key signing key (KSK) or a zone signing key (ZSK). Key signing keys have the Secure Entry Point flag set and, when active, will only be used to sign resource record sets of type DNSKEY. Zone signing keys do not have the Secure Entry Point flag set and will be used to sign all other types of resource record sets.
      */
-    keyType?: string | null;
+    keyType?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#dnsKeySpec&quot;.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * A zone is a subtree of the DNS namespace under one administrative responsibility. A ManagedZone is a resource that represents a DNS zone hosted by the Cloud DNS service.
@@ -269,15 +271,15 @@ export namespace dns_v1beta2 {
     /**
      * The time that this resource was created on the server. This is in RFC3339 text format. Output only.
      */
-    creationTime?: string | null;
+    creationTime?: string;
     /**
      * A mutable string of at most 1024 characters associated with this resource for the user&#39;s convenience. Has no effect on the managed zone&#39;s function.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The DNS name of this managed zone, for instance &quot;example.com.&quot;.
      */
-    dnsName?: string | null;
+    dnsName?: string;
     /**
      * DNSSEC configuration.
      */
@@ -289,27 +291,27 @@ export namespace dns_v1beta2 {
     /**
      * Unique identifier for the resource; defined by the server (output only)
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#managedZone&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * User labels.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * User assigned name for this resource. Must be unique within the project. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Delegate your managed_zone to these virtual name servers; defined by the server (output only)
      */
-    nameServers?: string[] | null;
+    nameServers?: string[];
     /**
      * Optionally specifies the NameServerSet for this ManagedZone. A NameServerSet is a set of DNS name servers that all host the same ManagedZones. Most users will leave this field unset.
      */
-    nameServerSet?: string | null;
+    nameServerSet?: string;
     /**
      * The presence of this field indicates that DNS Peering is enabled for this zone. The value of this field contains the network to peer with.
      */
@@ -319,37 +321,33 @@ export namespace dns_v1beta2 {
      */
     privateVisibilityConfig?: Schema$ManagedZonePrivateVisibilityConfig;
     /**
-     * The presence of this field indicates that this is a managed reverse lookup zone and Cloud DNS will resolve reverse lookup queries using automatically configured records for VPC resources. This only applies to networks listed under private_visibility_config.
-     */
-    reverseLookupConfig?: Schema$ManagedZoneReverseLookupConfig;
-    /**
      * The zone&#39;s visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources.
      */
-    visibility?: string | null;
+    visibility?: string;
   }
   export interface Schema$ManagedZoneDnsSecConfig {
     /**
-     * Specifies parameters for generating initial DnsKeys for this ManagedZone. Can only be changed while the state is OFF.
+     * Specifies parameters that will be used for generating initial DnsKeys for this ManagedZone. Output only while state is not OFF.
      */
     defaultKeySpecs?: Schema$DnsKeySpec[];
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#managedZoneDnsSecConfig&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
-     * Specifies the mechanism for authenticated denial-of-existence responses. Can only be changed while the state is OFF.
+     * Specifies the mechanism used to provide authenticated denial-of-existence responses. Output only while state is not OFF.
      */
-    nonExistence?: string | null;
+    nonExistence?: string;
     /**
      * Specifies whether DNSSEC is enabled, and what mode it is in.
      */
-    state?: string | null;
+    state?: string;
   }
   export interface Schema$ManagedZoneForwardingConfig {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#managedZoneForwardingConfig&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * List of target name servers to forward to. Cloud DNS will select the best available name server if more than one target is given.
      */
@@ -357,28 +355,24 @@ export namespace dns_v1beta2 {
   }
   export interface Schema$ManagedZoneForwardingConfigNameServerTarget {
     /**
-     * Forwarding path for this NameServerTarget, if unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, Non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target
-     */
-    forwardingPath?: string | null;
-    /**
      * IPv4 address of a target name server.
      */
-    ipv4Address?: string | null;
+    ipv4Address?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#managedZoneForwardingConfigNameServerTarget&quot;.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$ManagedZoneOperationsListResponse {
     header?: Schema$ResponseHeader;
     /**
      * Type of resource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token.  In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The operation resources.
      */
@@ -388,7 +382,7 @@ export namespace dns_v1beta2 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#managedZonePeeringConfig&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The network with which to peer.
      */
@@ -396,23 +390,23 @@ export namespace dns_v1beta2 {
   }
   export interface Schema$ManagedZonePeeringConfigTargetNetwork {
     /**
-     * The time at which the zone was deactivated, in RFC 3339 date-time format. An empty string indicates that the peering connection is active. The producer network can deactivate a zone. The zone is automatically deactivated if the producer network that the zone targeted is deleted. Output only.
+     * If this zone has been deactivated due to a problem with the network it targeted, the time at which it was deactivated. The zone can be deactivated if, for instance, the network it targeted was deleted. If the targeted network is still present, this will be the empty string. This is in RFC3339 text format. Output only.
      */
-    deactivateTime?: string | null;
+    deactivateTime?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#managedZonePeeringConfigTargetNetwork&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The fully qualified URL of the VPC network to forward queries to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
      */
-    networkUrl?: string | null;
+    networkUrl?: string;
   }
   export interface Schema$ManagedZonePrivateVisibilityConfig {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#managedZonePrivateVisibilityConfig&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The list of VPC networks that can see this zone.
      */
@@ -422,24 +416,18 @@ export namespace dns_v1beta2 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#managedZonePrivateVisibilityConfigNetwork&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
      */
-    networkUrl?: string | null;
-  }
-  export interface Schema$ManagedZoneReverseLookupConfig {
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string &quot;dns#managedZoneReverseLookupConfig&quot;.
-     */
-    kind?: string | null;
+    networkUrl?: string;
   }
   export interface Schema$ManagedZonesListResponse {
     header?: Schema$ResponseHeader;
     /**
      * Type of resource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The managed zone resources.
      */
@@ -447,7 +435,7 @@ export namespace dns_v1beta2 {
     /**
      * The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token.  In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * An operation represents a successful mutation performed on a Cloud DNS resource. Operations provide: - An audit log of server resource mutations. - A way to recover/retry API calls in the case where the response is never received by the caller. Use the caller specified client_operation_id.
@@ -460,27 +448,27 @@ export namespace dns_v1beta2 {
     /**
      * Unique identifier for the resource. This is the client_operation_id if the client specified it when the mutation was initiated, otherwise, it is generated by the server. The name must be 1-63 characters long and match the regular expression [-a-z0-9]? (output only)
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#operation&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The time that this operation was started by the server. This is in RFC3339 text format (output only).
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * Status of the operation. Can be one of the following: &quot;PENDING&quot; or &quot;DONE&quot; (output only). A status of &quot;DONE&quot; means that the request to update the authoritative servers has been sent, but the servers might not be updated yet.
      */
-    status?: string | null;
+    status?: string;
     /**
      * Type of the operation. Operations include insert, update, and delete (output only).
      */
-    type?: string | null;
+    type?: string;
     /**
      * User who requested the operation, for example: user@example.com. cloud-dns-system for operations automatically done by the system. (output only)
      */
-    user?: string | null;
+    user?: string;
     /**
      * Only populated if the operation targeted a ManagedZone (output only).
      */
@@ -511,11 +499,11 @@ export namespace dns_v1beta2 {
     /**
      * Type of resource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token.  In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The policy resources.
      */
@@ -540,27 +528,27 @@ export namespace dns_v1beta2 {
     /**
      * A mutable string of at most 1024 characters associated with this resource for the user&#39;s convenience. Has no effect on the policy&#39;s function.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Allows networks bound to this policy to receive DNS queries sent by VMs or applications over VPN connections. When enabled, a virtual IP address will be allocated from each of the sub-networks that are bound to this policy.
      */
-    enableInboundForwarding?: boolean | null;
+    enableInboundForwarding?: boolean;
     /**
      * Controls whether logging is enabled for the networks bound to this policy. Defaults to no logging if not set.
      */
-    enableLogging?: boolean | null;
+    enableLogging?: boolean;
     /**
      * Unique identifier for the resource; defined by the server (output only).
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#policy&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * User assigned name for this policy.
      */
-    name?: string | null;
+    name?: string;
     /**
      * List of network names specifying networks to which this policy is applied.
      */
@@ -570,7 +558,7 @@ export namespace dns_v1beta2 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#policyAlternativeNameServerConfig&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Sets an alternative name server for the associated networks. When specified, all DNS queries are forwarded to a name server that you choose. Names such as .internal are not available when an alternative name server is specified.
      */
@@ -578,27 +566,23 @@ export namespace dns_v1beta2 {
   }
   export interface Schema$PolicyAlternativeNameServerConfigTargetNameServer {
     /**
-     * Forwarding path for this TargetNameServer, if unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, Non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target
-     */
-    forwardingPath?: string | null;
-    /**
      * IPv4 address to forward to.
      */
-    ipv4Address?: string | null;
+    ipv4Address?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#policyAlternativeNameServerConfigTargetNameServer&quot;.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$PolicyNetwork {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#policyNetwork&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
      */
-    networkUrl?: string | null;
+    networkUrl?: string;
   }
   /**
    * A project resource. The project is a top level container for resources including Cloud DNS ManagedZones. Projects can be created only in the APIs console.
@@ -607,15 +591,15 @@ export namespace dns_v1beta2 {
     /**
      * User assigned unique identifier for the resource (output only).
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#project&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Unique numeric identifier for the resource; defined by the server (output only).
      */
-    number?: string | null;
+    number?: string;
     /**
      * Quotas assigned to this project (output only).
      */
@@ -628,59 +612,59 @@ export namespace dns_v1beta2 {
     /**
      * Maximum allowed number of DnsKeys per ManagedZone.
      */
-    dnsKeysPerManagedZone?: number | null;
+    dnsKeysPerManagedZone?: number;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#quota&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Maximum allowed number of managed zones in the project.
      */
-    managedZones?: number | null;
+    managedZones?: number;
     /**
      * Maximum allowed number of managed zones which can be attached to a network.
      */
-    managedZonesPerNetwork?: number | null;
+    managedZonesPerNetwork?: number;
     /**
      * Maximum allowed number of networks to which a privately scoped zone can be attached.
      */
-    networksPerManagedZone?: number | null;
+    networksPerManagedZone?: number;
     /**
      * Maximum allowed number of networks per policy.
      */
-    networksPerPolicy?: number | null;
+    networksPerPolicy?: number;
     /**
      * Maximum allowed number of policies per project.
      */
-    policies?: number | null;
+    policies?: number;
     /**
      * Maximum allowed number of ResourceRecords per ResourceRecordSet.
      */
-    resourceRecordsPerRrset?: number | null;
+    resourceRecordsPerRrset?: number;
     /**
      * Maximum allowed number of ResourceRecordSets to add per ChangesCreateRequest.
      */
-    rrsetAdditionsPerChange?: number | null;
+    rrsetAdditionsPerChange?: number;
     /**
      * Maximum allowed number of ResourceRecordSets to delete per ChangesCreateRequest.
      */
-    rrsetDeletionsPerChange?: number | null;
+    rrsetDeletionsPerChange?: number;
     /**
      * Maximum allowed number of ResourceRecordSets per zone in the project.
      */
-    rrsetsPerManagedZone?: number | null;
+    rrsetsPerManagedZone?: number;
     /**
      * Maximum allowed number of target name servers per managed forwarding zone.
      */
-    targetNameServersPerManagedZone?: number | null;
+    targetNameServersPerManagedZone?: number;
     /**
      * Maximum allowed number of alternative target name servers per policy.
      */
-    targetNameServersPerPolicy?: number | null;
+    targetNameServersPerPolicy?: number;
     /**
      * Maximum allowed size for total rrdata in one ChangesCreateRequest in bytes.
      */
-    totalRrdataSizePerChange?: number | null;
+    totalRrdataSizePerChange?: number;
     /**
      * DNSSEC algorithm and key length types that can be used for DnsKeys.
      */
@@ -693,38 +677,38 @@ export namespace dns_v1beta2 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;dns#resourceRecordSet&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * For example, www.example.com.
      */
-    name?: string | null;
+    name?: string;
     /**
      * As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1) -- see examples.
      */
-    rrdatas?: string[] | null;
+    rrdatas?: string[];
     /**
      * As defined in RFC 4034 (section 3.2).
      */
-    signatureRrdatas?: string[] | null;
+    signatureRrdatas?: string[];
     /**
      * Number of seconds that this ResourceRecordSet can be cached by resolvers.
      */
-    ttl?: number | null;
+    ttl?: number;
     /**
      * The identifier of a supported record type. See the list of Supported DNS record types.
      */
-    type?: string | null;
+    type?: string;
   }
   export interface Schema$ResourceRecordSetsListResponse {
     header?: Schema$ResponseHeader;
     /**
      * Type of resource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token.  In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The resource record set resources.
      */
@@ -737,7 +721,7 @@ export namespace dns_v1beta2 {
     /**
      * For mutating operation requests that completed successfully. This is the client_operation_id if the client specified it, otherwise it is generated by the server (output only).
      */
-    operationId?: string | null;
+    operationId?: string;
   }
 
   export class Resource$Changes {
@@ -756,7 +740,7 @@ export namespace dns_v1beta2 {
      * @param {string=} params.clientOperationId For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
      * @param {string} params.managedZone Identifies the managed zone addressed by this request. Can be the managed zone name or id.
      * @param {string} params.project Identifies the project addressed by this request.
-     * @param {().Change} params.requestBody Request body data
+     * @param {().Change} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -796,7 +780,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -870,7 +854,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -948,7 +932,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -1109,7 +1093,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -1186,7 +1170,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -1325,7 +1309,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -1407,7 +1391,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -1505,7 +1489,7 @@ export namespace dns_v1beta2 {
      * @param {object} params Parameters for request
      * @param {string=} params.clientOperationId For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
      * @param {string} params.project Identifies the project addressed by this request.
-     * @param {().ManagedZone} params.requestBody Request body data
+     * @param {().ManagedZone} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1548,7 +1532,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -1621,7 +1605,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -1696,7 +1680,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -1775,7 +1759,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -1808,7 +1792,7 @@ export namespace dns_v1beta2 {
      * @param {string=} params.clientOperationId For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
      * @param {string} params.managedZone Identifies the managed zone addressed by this request. Can be the managed zone name or id.
      * @param {string} params.project Identifies the project addressed by this request.
-     * @param {().ManagedZone} params.requestBody Request body data
+     * @param {().ManagedZone} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1851,7 +1835,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -1885,7 +1869,7 @@ export namespace dns_v1beta2 {
      * @param {string=} params.clientOperationId For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
      * @param {string} params.managedZone Identifies the managed zone addressed by this request. Can be the managed zone name or id.
      * @param {string} params.project Identifies the project addressed by this request.
-     * @param {().ManagedZone} params.requestBody Request body data
+     * @param {().ManagedZone} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1928,7 +1912,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -2103,7 +2087,7 @@ export namespace dns_v1beta2 {
      * @param {object} params Parameters for request
      * @param {string=} params.clientOperationId For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
      * @param {string} params.project Identifies the project addressed by this request.
-     * @param {().Policy} params.requestBody Request body data
+     * @param {().Policy} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2143,7 +2127,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -2216,7 +2200,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -2288,7 +2272,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -2364,7 +2348,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -2398,7 +2382,7 @@ export namespace dns_v1beta2 {
      * @param {string=} params.clientOperationId For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
      * @param {string} params.policy User given friendly name of the policy addressed by this request.
      * @param {string} params.project Identifies the project addressed by this request.
-     * @param {().Policy} params.requestBody Request body data
+     * @param {().Policy} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2442,7 +2426,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -2475,7 +2459,7 @@ export namespace dns_v1beta2 {
      * @param {string=} params.clientOperationId For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
      * @param {string} params.policy User given friendly name of the policy addressed by this request.
      * @param {string} params.project Identifies the project addressed by this request.
-     * @param {().Policy} params.requestBody Request body data
+     * @param {().Policy} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2519,7 +2503,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -2723,7 +2707,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {
@@ -2829,7 +2813,7 @@ export namespace dns_v1beta2 {
         options = {};
       }
 
-      const rootUrl = options.rootUrl || 'https://dns.googleapis.com/';
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
       const parameters = {
         options: Object.assign(
           {

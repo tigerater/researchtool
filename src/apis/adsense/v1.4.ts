@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -36,7 +38,7 @@ import {GaxiosPromise} from 'gaxios';
 
 export namespace adsense_v1_4 {
   export interface Options extends GlobalOptions {
-    version: 'v1.4';
+    version: 'v1_4';
   }
 
   interface StandardParameters {
@@ -118,23 +120,23 @@ export namespace adsense_v1_4 {
   }
 
   export interface Schema$Account {
-    creation_time?: string | null;
+    creation_time?: string;
     /**
      * Unique identifier of this account.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is, in this case adsense#account.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Name of this account.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Whether this account is premium.
      */
-    premium?: boolean | null;
+    premium?: boolean;
     /**
      * Sub accounts of the this account.
      */
@@ -142,13 +144,13 @@ export namespace adsense_v1_4 {
     /**
      * AdSense timezone of this account.
      */
-    timezone?: string | null;
+    timezone?: string;
   }
   export interface Schema$Accounts {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The accounts returned in this list response.
      */
@@ -156,39 +158,39 @@ export namespace adsense_v1_4 {
     /**
      * Kind of list this is, in this case adsense#accounts.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Continuation token used to page through accounts. To retrieve the next page of results, set the next request&#39;s &quot;pageToken&quot; value to this.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$AdClient {
     /**
      * Whether this ad client is opted in to ARC.
      */
-    arcOptIn?: boolean | null;
+    arcOptIn?: boolean;
     /**
      * Unique identifier of this ad client.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is, in this case adsense#adClient.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * This ad client&#39;s product code, which corresponds to the PRODUCT_CODE report dimension.
      */
-    productCode?: string | null;
+    productCode?: string;
     /**
      * Whether this ad client supports being reported on.
      */
-    supportsReporting?: boolean | null;
+    supportsReporting?: boolean;
   }
   export interface Schema$AdClients {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ad clients returned in this list response.
      */
@@ -196,67 +198,67 @@ export namespace adsense_v1_4 {
     /**
      * Kind of list this is, in this case adsense#adClients.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Continuation token used to page through ad clients. To retrieve the next page of results, set the next request&#39;s &quot;pageToken&quot; value to this.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$AdCode {
     /**
      * The Auto ad code snippet. The ad code snippet.
      */
-    adCode?: string | null;
+    adCode?: string;
     /**
      * The AMP Auto ad code snippet that goes in the body of an AMP page.
      */
-    ampBody?: string | null;
+    ampBody?: string;
     /**
      * The AMP Auto ad code snippet that goes in the head of an AMP page.
      */
-    ampHead?: string | null;
+    ampHead?: string;
     /**
      * Kind this is, in this case adsense#adCode.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$AdsenseReportsGenerateResponse {
     /**
      * The averages of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.
      */
-    averages?: string[] | null;
+    averages?: string[];
     /**
      * The requested end date in yyyy-mm-dd format.
      */
-    endDate?: string | null;
+    endDate?: string;
     /**
      * The header information of the columns requested in the report. This is a list of headers; one for each dimension in the request, followed by one for each metric in the request.
      */
-    headers?: Array<{currency?: string; name?: string; type?: string}> | null;
+    headers?: Array<{currency?: string; name?: string; type?: string}>;
     /**
      * Kind this is, in this case adsense#report.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The output rows of the report. Each row is a list of cells; one for each dimension in the request, followed by one for each metric in the request. The dimension cells contain strings, and the metric cells contain numbers.
      */
-    rows?: string[][] | null;
+    rows?: string[][];
     /**
      * The requested start date in yyyy-mm-dd format.
      */
-    startDate?: string | null;
+    startDate?: string;
     /**
      * The total number of rows matched by the report request. Fewer rows may be returned in the response due to being limited by the row count requested or the report row limit.
      */
-    totalMatchedRows?: string | null;
+    totalMatchedRows?: string;
     /**
      * The totals of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.
      */
-    totals?: string[] | null;
+    totals?: string[];
     /**
      * Any warnings associated with generation of the report.
      */
-    warnings?: string[] | null;
+    warnings?: string[];
   }
   export interface Schema$AdStyle {
     /**
@@ -268,25 +270,25 @@ export namespace adsense_v1_4 {
       text?: string;
       title?: string;
       url?: string;
-    } | null;
+    };
     /**
      * The style of the corners in the ad (deprecated: never populated, ignored).
      */
-    corners?: string | null;
+    corners?: string;
     /**
      * The font which is included in the style.
      */
-    font?: {family?: string; size?: string} | null;
+    font?: {family?: string; size?: string};
     /**
      * Kind this is, in this case adsense#adStyle.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$AdUnit {
     /**
      * Identity code of this ad unit, not necessarily unique across ad clients.
      */
-    code?: string | null;
+    code?: string;
     /**
      * Settings specific to content ads (AFC) and highend mobile content ads (AFMC - deprecated).
      */
@@ -294,7 +296,7 @@ export namespace adsense_v1_4 {
       backupOption?: {color?: string; type?: string; url?: string};
       size?: string;
       type?: string;
-    } | null;
+    };
     /**
      * Custom style information specific to this ad unit.
      */
@@ -307,15 +309,15 @@ export namespace adsense_v1_4 {
       frequency?: number;
       minimumWordCount?: number;
       type?: string;
-    } | null;
+    };
     /**
      * Unique identifier of this ad unit. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is, in this case adsense#adUnit.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Settings specific to WAP mobile content ads (AFMC) - deprecated.
      */
@@ -324,25 +326,25 @@ export namespace adsense_v1_4 {
       scriptingLanguage?: string;
       size?: string;
       type?: string;
-    } | null;
+    };
     /**
      * Name of this ad unit.
      */
-    name?: string | null;
+    name?: string;
     /**
      * ID of the saved ad style which holds this ad unit&#39;s style information.
      */
-    savedStyleId?: string | null;
+    savedStyleId?: string;
     /**
      * Status of this ad unit. Possible values are: NEW: Indicates that the ad unit was created within the last seven days and does not yet have any activity associated with it.  ACTIVE: Indicates that there has been activity on this ad unit in the last seven days.  INACTIVE: Indicates that there has been no activity on this ad unit in the last seven days.
      */
-    status?: string | null;
+    status?: string;
   }
   export interface Schema$AdUnits {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ad units returned in this list response.
      */
@@ -350,37 +352,37 @@ export namespace adsense_v1_4 {
     /**
      * Kind of list this is, in this case adsense#adUnits.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Continuation token used to page through ad units. To retrieve the next page of results, set the next request&#39;s &quot;pageToken&quot; value to this.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$Alert {
     /**
      * Unique identifier of this alert. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Whether this alert can be dismissed.
      */
-    isDismissible?: boolean | null;
+    isDismissible?: boolean;
     /**
      * Kind of resource this is, in this case adsense#alert.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The localized alert message.
      */
-    message?: string | null;
+    message?: string;
     /**
      * Severity of this alert. Possible values: INFO, WARNING, SEVERE.
      */
-    severity?: string | null;
+    severity?: string;
     /**
      * Type of this alert. Possible values: SELF_HOLD, MIGRATED_TO_BILLING3, ADDRESS_PIN_VERIFICATION, PHONE_PIN_VERIFICATION, CORPORATE_ENTITY, GRAYLISTED_PUBLISHER, API_HOLD.
      */
-    type?: string | null;
+    type?: string;
   }
   export interface Schema$Alerts {
     /**
@@ -390,25 +392,25 @@ export namespace adsense_v1_4 {
     /**
      * Kind of list this is, in this case adsense#alerts.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$CustomChannel {
     /**
      * Code of this custom channel, not necessarily unique across ad clients.
      */
-    code?: string | null;
+    code?: string;
     /**
      * Unique identifier of this custom channel. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is, in this case adsense#customChannel.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Name of this custom channel.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The targeting information of this custom channel, if activated.
      */
@@ -417,13 +419,13 @@ export namespace adsense_v1_4 {
       description?: string;
       location?: string;
       siteLanguage?: string;
-    } | null;
+    };
   }
   export interface Schema$CustomChannels {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The custom channels returned in this list response.
      */
@@ -431,40 +433,40 @@ export namespace adsense_v1_4 {
     /**
      * Kind of list this is, in this case adsense#customChannels.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Continuation token used to page through custom channels. To retrieve the next page of results, set the next request&#39;s &quot;pageToken&quot; value to this.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$Metadata {
     items?: Schema$ReportingMetadataEntry[];
     /**
      * Kind of list this is, in this case adsense#metadata.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$Payment {
     /**
      * Unique identifier of this Payment.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is, in this case adsense#payment.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The amount to be paid.
      */
-    paymentAmount?: string | null;
+    paymentAmount?: string;
     /**
      * The currency code for the amount to be paid.
      */
-    paymentAmountCurrencyCode?: string | null;
+    paymentAmountCurrencyCode?: string;
     /**
      * The date this payment was/will be credited to the user, or none if the payment threshold has not been met.
      */
-    paymentDate?: string | null;
+    paymentDate?: string;
   }
   export interface Schema$Payments {
     /**
@@ -474,37 +476,37 @@ export namespace adsense_v1_4 {
     /**
      * Kind of list this is, in this case adsense#payments.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$ReportingMetadataEntry {
     /**
      * For metrics this is a list of dimension IDs which the metric is compatible with, for dimensions it is a list of compatibility groups the dimension belongs to.
      */
-    compatibleDimensions?: string[] | null;
+    compatibleDimensions?: string[];
     /**
      * The names of the metrics the dimension or metric this reporting metadata entry describes is compatible with.
      */
-    compatibleMetrics?: string[] | null;
+    compatibleMetrics?: string[];
     /**
      * Unique identifier of this reporting metadata entry, corresponding to the name of the appropriate dimension or metric.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is, in this case adsense#reportingMetadataEntry.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The names of the dimensions which the dimension or metric this reporting metadata entry describes requires to also be present in order for the report to be valid. Omitting these will not cause an error or warning, but may result in data which cannot be correctly interpreted.
      */
-    requiredDimensions?: string[] | null;
+    requiredDimensions?: string[];
     /**
      * The names of the metrics which the dimension or metric this reporting metadata entry describes requires to also be present in order for the report to be valid. Omitting these will not cause an error or warning, but may result in data which cannot be correctly interpreted.
      */
-    requiredMetrics?: string[] | null;
+    requiredMetrics?: string[];
     /**
      * The codes of the projects supported by the dimension or metric this reporting metadata entry describes.
      */
-    supportedProducts?: string[] | null;
+    supportedProducts?: string[];
   }
   export interface Schema$SavedAdStyle {
     /**
@@ -514,21 +516,21 @@ export namespace adsense_v1_4 {
     /**
      * Unique identifier of this saved ad style. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is, in this case adsense#savedAdStyle.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The user selected name of this SavedAdStyle.
      */
-    name?: string | null;
+    name?: string;
   }
   export interface Schema$SavedAdStyles {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The saved ad styles returned in this list response.
      */
@@ -536,31 +538,31 @@ export namespace adsense_v1_4 {
     /**
      * Kind of list this is, in this case adsense#savedAdStyles.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Continuation token used to page through ad units. To retrieve the next page of results, set the next request&#39;s &quot;pageToken&quot; value to this.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$SavedReport {
     /**
      * Unique identifier of this saved report.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is, in this case adsense#savedReport.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * This saved report&#39;s name.
      */
-    name?: string | null;
+    name?: string;
   }
   export interface Schema$SavedReports {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The saved reports returned in this list response.
      */
@@ -568,31 +570,31 @@ export namespace adsense_v1_4 {
     /**
      * Kind of list this is, in this case adsense#savedReports.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Continuation token used to page through saved reports. To retrieve the next page of results, set the next request&#39;s &quot;pageToken&quot; value to this.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$UrlChannel {
     /**
      * Unique identifier of this URL channel. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is, in this case adsense#urlChannel.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * URL Pattern of this URL channel. Does not include &quot;http://&quot; or &quot;https://&quot;. Example: www.example.com/home
      */
-    urlPattern?: string | null;
+    urlPattern?: string;
   }
   export interface Schema$UrlChannels {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The URL channels returned in this list response.
      */
@@ -600,11 +602,11 @@ export namespace adsense_v1_4 {
     /**
      * Kind of list this is, in this case adsense#urlChannels.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Continuation token used to page through URL channels. To retrieve the next page of results, set the next request&#39;s &quot;pageToken&quot; value to this.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
 
   export class Resource$Accounts {

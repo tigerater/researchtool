@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -124,21 +126,13 @@ export namespace accessapproval_v1beta1 {
    */
   export interface Schema$AccessApprovalSettings {
     /**
-     * Output only. This field is read only (not settable via UpdateAccessAccessApprovalSettings method). If the field is true, that indicates that at least one service is enrolled for Access Approval in one or more ancestors of the Project or Folder (this field will always be unset for the organization since organizations do not have ancestors).
-     */
-    enrolledAncestor?: boolean | null;
-    /**
-     * A list of Google Cloud Services for which the given resource has Access Approval enrolled. Access requests for the resource given by name against any of these services contained here will be required to have explicit approval. If name refers to an organization, enrollment can be done for individual services. If name refers to a folder or project, enrollment can only be done on an all or nothing basis.  If a cloud_product is repeated in this list, the first entry will be honored and all following entries will be discarded. A maximum of 10 enrolled services will be enforced, to be expanded as the set of supported services is expanded.
-     */
-    enrolledServices?: Schema$EnrolledService[];
-    /**
      * The resource name of the settings. Format is one of: &lt;ol&gt;   &lt;li&gt;&quot;projects/{project_id}/accessApprovalSettings&quot;&lt;/li&gt;   &lt;li&gt;&quot;folders/{folder_id}/accessApprovalSettings&quot;&lt;/li&gt;   &lt;li&gt;&quot;organizations/{organization_id}/accessApprovalSettings&quot;&lt;/li&gt; &lt;ol&gt;
      */
-    name?: string | null;
+    name?: string;
     /**
-     * A list of email addresses to which notifications relating to approval requests should be sent. Notifications relating to a resource will be sent to all emails in the settings of ancestor resources of that resource. A maximum of 50 email addresses are allowed.
+     * A list of email addresses to which notifications relating to approval requests should be sent. Notifications relating to a resource will be sent to all emails in the settings of ancestor resources of that resource.
      */
-    notificationEmails?: string[] | null;
+    notificationEmails?: string[];
   }
   /**
    * Home office and physical location of the principal.
@@ -147,21 +141,21 @@ export namespace accessapproval_v1beta1 {
     /**
      * The &quot;home office&quot; location of the principal. A two-letter country code (ISO 3166-1 alpha-2), such as &quot;US&quot;, &quot;DE&quot; or &quot;GB&quot; or a region code. In some limited situations Google systems may refer refer to a region code instead of a country code. Possible Region Codes: &lt;ol&gt;   &lt;li&gt;ASI: Asia&lt;/li&gt;   &lt;li&gt;EUR: Europe&lt;/li&gt;   &lt;li&gt;OCE: Oceania&lt;/li&gt;   &lt;li&gt;AFR: Africa&lt;/li&gt;   &lt;li&gt;NAM: North America&lt;/li&gt;   &lt;li&gt;SAM: South America&lt;/li&gt;   &lt;li&gt;ANT: Antarctica&lt;/li&gt;   &lt;li&gt;ANY: Any location&lt;/li&gt; &lt;/ol&gt;
      */
-    principalOfficeCountry?: string | null;
+    principalOfficeCountry?: string;
     /**
      * Physical location of the principal at the time of the access. A two-letter country code (ISO 3166-1 alpha-2), such as &quot;US&quot;, &quot;DE&quot; or &quot;GB&quot; or a region code. In some limited situations Google systems may refer refer to a region code instead of a country code. Possible Region Codes: &lt;ol&gt;   &lt;li&gt;ASI: Asia&lt;/li&gt;   &lt;li&gt;EUR: Europe&lt;/li&gt;   &lt;li&gt;OCE: Oceania&lt;/li&gt;   &lt;li&gt;AFR: Africa&lt;/li&gt;   &lt;li&gt;NAM: North America&lt;/li&gt;   &lt;li&gt;SAM: South America&lt;/li&gt;   &lt;li&gt;ANT: Antarctica&lt;/li&gt;   &lt;li&gt;ANY: Any location&lt;/li&gt; &lt;/ol&gt;
      */
-    principalPhysicalLocationCountry?: string | null;
+    principalPhysicalLocationCountry?: string;
   }
   export interface Schema$AccessReason {
     /**
      * More detail about certain reason types. See comments for each type above.
      */
-    detail?: string | null;
+    detail?: string;
     /**
      * Type of access justification.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * A request for the customer to approve access to a resource.
@@ -178,11 +172,11 @@ export namespace accessapproval_v1beta1 {
     /**
      * The resource name of the request. Format is &quot;{projects|folders|organizations}/{id}/approvalRequests/{approval_request_id}&quot;.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The requested expiration for the approval. If the request is approved, access will be granted from the time of approval until the expiration time.
      */
-    requestedExpiration?: string | null;
+    requestedExpiration?: string;
     /**
      * The locations for which approval is being requested.
      */
@@ -194,7 +188,7 @@ export namespace accessapproval_v1beta1 {
     /**
      * The resource for which approval is being requested. The format of the resource name is defined at https://cloud.google.com/apis/design/resource_names. The resource name here may either be a &quot;full&quot; resource name (e.g. &quot;//library.googleapis.com/shelves/shelf1/books/book2&quot;) or a &quot;relative&quot; resource name (e.g. &quot;shelves/shelf1/books/book2&quot;) as described in the resource name specification.
      */
-    requestedResourceName?: string | null;
+    requestedResourceName?: string;
     /**
      * Properties related to the resource represented by requested_resource_name.
      */
@@ -202,7 +196,7 @@ export namespace accessapproval_v1beta1 {
     /**
      * The time at which approval was requested.
      */
-    requestTime?: string | null;
+    requestTime?: string;
   }
   /**
    * Request to approve an ApprovalRequest.
@@ -211,7 +205,7 @@ export namespace accessapproval_v1beta1 {
     /**
      * The expiration time of this approval.
      */
-    expireTime?: string | null;
+    expireTime?: string;
   }
   /**
    * A decision that has been made to approve access to a resource.
@@ -220,11 +214,11 @@ export namespace accessapproval_v1beta1 {
     /**
      * The time at which approval was granted.
      */
-    approveTime?: string | null;
+    approveTime?: string;
     /**
      * The time at which the approval expires.
      */
-    expireTime?: string | null;
+    expireTime?: string;
   }
   /**
    * Request to dismiss an approval request.
@@ -237,24 +231,7 @@ export namespace accessapproval_v1beta1 {
     /**
      * The time at which the approval request was dismissed.
      */
-    dismissTime?: string | null;
-  }
-  /**
-   * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
-   */
-  export interface Schema$Empty {}
-  /**
-   * Represents the enrollment of a cloud resource into a specific service.
-   */
-  export interface Schema$EnrolledService {
-    /**
-     * The product for which Access Approval will be enrolled. Allowed values are listed below (case-sensitive): &lt;ol&gt;   &lt;li&gt;all&lt;/li&gt;   &lt;li&gt;appengine.googleapis.com&lt;/li&gt;   &lt;li&gt;bigquery.googleapis.com&lt;/li&gt;   &lt;li&gt;bigtable.googleapis.com&lt;/li&gt;   &lt;li&gt;cloudkms.googleapis.com&lt;/li&gt;   &lt;li&gt;compute.googleapis.com&lt;/li&gt;   &lt;li&gt;dataflow.googleapis.com&lt;/li&gt;   &lt;li&gt;iam.googleapis.com&lt;/li&gt;   &lt;li&gt;pubsub.googleapis.com&lt;/li&gt;   &lt;li&gt;storage.googleapis.com&lt;/li&gt; &lt;ol&gt;
-     */
-    cloudProduct?: string | null;
-    /**
-     * The enrollment level of the service.
-     */
-    enrollmentLevel?: string | null;
+    dismissTime?: string;
   }
   /**
    * Response to listing of ApprovalRequest objects.
@@ -267,7 +244,7 @@ export namespace accessapproval_v1beta1 {
     /**
      * Token to retrieve the next page of results, or empty if there are no more.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * The properties associated with the resource of the request.
@@ -276,7 +253,7 @@ export namespace accessapproval_v1beta1 {
     /**
      * Whether an approval will exclude the descendants of the resource being requested.
      */
-    excludesDescendants?: boolean | null;
+    excludesDescendants?: boolean;
   }
 
   export class Resource$Folders {
@@ -287,78 +264,6 @@ export namespace accessapproval_v1beta1 {
       this.approvalRequests = new Resource$Folders$Approvalrequests(
         this.context
       );
-    }
-
-    /**
-     * accessapproval.folders.deleteAccessApprovalSettings
-     * @desc Deletes the settings associated with a project, folder, or organization. This will have the effect of disabling Access Approval for the project, folder, or organization, but only if all ancestors also have Access Approval disabled. If Access Approval is enabled at a higher level of the hierarchy, then Access Approval will still be enabled at this level as the settings are inherited.
-     * @alias accessapproval.folders.deleteAccessApprovalSettings
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.name Name of the AccessApprovalSettings to delete.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    deleteAccessApprovalSettings(
-      params?: Params$Resource$Folders$Deleteaccessapprovalsettings,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$Empty>;
-    deleteAccessApprovalSettings(
-      params: Params$Resource$Folders$Deleteaccessapprovalsettings,
-      options: MethodOptions | BodyResponseCallback<Schema$Empty>,
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    deleteAccessApprovalSettings(
-      params: Params$Resource$Folders$Deleteaccessapprovalsettings,
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    deleteAccessApprovalSettings(
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    deleteAccessApprovalSettings(
-      paramsOrCallback?:
-        | Params$Resource$Folders$Deleteaccessapprovalsettings
-        | BodyResponseCallback<Schema$Empty>,
-      optionsOrCallback?: MethodOptions | BodyResponseCallback<Schema$Empty>,
-      callback?: BodyResponseCallback<Schema$Empty>
-    ): void | GaxiosPromise<Schema$Empty> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Folders$Deleteaccessapprovalsettings;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Folders$Deleteaccessapprovalsettings;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl =
-        options.rootUrl || 'https://accessapproval.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1beta1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
-            method: 'DELETE',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['name'],
-        pathParams: ['name'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$Empty>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$Empty>(parameters);
-      }
     }
 
     /**
@@ -439,14 +344,13 @@ export namespace accessapproval_v1beta1 {
 
     /**
      * accessapproval.folders.updateAccessApprovalSettings
-     * @desc Updates the settings associated with a project, folder, or organization. Settings to update are determined by the value of field_mask.
+     * @desc Updates the settings associated with a project, folder, or organization. Completely replaces the existing settings.
      * @alias accessapproval.folders.updateAccessApprovalSettings
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The resource name of the settings. Format is one of: <ol>   <li>"projects/{project_id}/accessApprovalSettings"</li>   <li>"folders/{folder_id}/accessApprovalSettings"</li>   <li>"organizations/{organization_id}/accessApprovalSettings"</li> <ol>
-     * @param {string=} params.updateMask For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask If this field is left unset, only the notification_emails field will be updated.
-     * @param {().AccessApprovalSettings} params.requestBody Request body data
+     * @param {().AccessApprovalSettings} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -516,18 +420,6 @@ export namespace accessapproval_v1beta1 {
     }
   }
 
-  export interface Params$Resource$Folders$Deleteaccessapprovalsettings
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Name of the AccessApprovalSettings to delete.
-     */
-    name?: string;
-  }
   export interface Params$Resource$Folders$Getaccessapprovalsettings
     extends StandardParameters {
     /**
@@ -551,10 +443,6 @@ export namespace accessapproval_v1beta1 {
      * The resource name of the settings. Format is one of: <ol>   <li>"projects/{project_id}/accessApprovalSettings"</li>   <li>"folders/{folder_id}/accessApprovalSettings"</li>   <li>"organizations/{organization_id}/accessApprovalSettings"</li> <ol>
      */
     name?: string;
-    /**
-     * For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask If this field is left unset, only the notification_emails field will be updated.
-     */
-    updateMask?: string;
 
     /**
      * Request body metadata
@@ -576,7 +464,7 @@ export namespace accessapproval_v1beta1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Name of the approval request to approve.
-     * @param {().ApproveApprovalRequestMessage} params.requestBody Request body data
+     * @param {().ApproveApprovalRequestMessage} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -652,7 +540,7 @@ export namespace accessapproval_v1beta1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Name of the ApprovalRequest to dismiss.
-     * @param {().DismissApprovalRequestMessage} params.requestBody Request body data
+     * @param {().DismissApprovalRequestMessage} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -962,78 +850,6 @@ export namespace accessapproval_v1beta1 {
     }
 
     /**
-     * accessapproval.organizations.deleteAccessApprovalSettings
-     * @desc Deletes the settings associated with a project, folder, or organization. This will have the effect of disabling Access Approval for the project, folder, or organization, but only if all ancestors also have Access Approval disabled. If Access Approval is enabled at a higher level of the hierarchy, then Access Approval will still be enabled at this level as the settings are inherited.
-     * @alias accessapproval.organizations.deleteAccessApprovalSettings
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.name Name of the AccessApprovalSettings to delete.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    deleteAccessApprovalSettings(
-      params?: Params$Resource$Organizations$Deleteaccessapprovalsettings,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$Empty>;
-    deleteAccessApprovalSettings(
-      params: Params$Resource$Organizations$Deleteaccessapprovalsettings,
-      options: MethodOptions | BodyResponseCallback<Schema$Empty>,
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    deleteAccessApprovalSettings(
-      params: Params$Resource$Organizations$Deleteaccessapprovalsettings,
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    deleteAccessApprovalSettings(
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    deleteAccessApprovalSettings(
-      paramsOrCallback?:
-        | Params$Resource$Organizations$Deleteaccessapprovalsettings
-        | BodyResponseCallback<Schema$Empty>,
-      optionsOrCallback?: MethodOptions | BodyResponseCallback<Schema$Empty>,
-      callback?: BodyResponseCallback<Schema$Empty>
-    ): void | GaxiosPromise<Schema$Empty> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Organizations$Deleteaccessapprovalsettings;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Organizations$Deleteaccessapprovalsettings;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl =
-        options.rootUrl || 'https://accessapproval.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1beta1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
-            method: 'DELETE',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['name'],
-        pathParams: ['name'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$Empty>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$Empty>(parameters);
-      }
-    }
-
-    /**
      * accessapproval.organizations.getAccessApprovalSettings
      * @desc Gets the settings associated with a project, folder, or organization.
      * @alias accessapproval.organizations.getAccessApprovalSettings
@@ -1111,14 +927,13 @@ export namespace accessapproval_v1beta1 {
 
     /**
      * accessapproval.organizations.updateAccessApprovalSettings
-     * @desc Updates the settings associated with a project, folder, or organization. Settings to update are determined by the value of field_mask.
+     * @desc Updates the settings associated with a project, folder, or organization. Completely replaces the existing settings.
      * @alias accessapproval.organizations.updateAccessApprovalSettings
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The resource name of the settings. Format is one of: <ol>   <li>"projects/{project_id}/accessApprovalSettings"</li>   <li>"folders/{folder_id}/accessApprovalSettings"</li>   <li>"organizations/{organization_id}/accessApprovalSettings"</li> <ol>
-     * @param {string=} params.updateMask For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask If this field is left unset, only the notification_emails field will be updated.
-     * @param {().AccessApprovalSettings} params.requestBody Request body data
+     * @param {().AccessApprovalSettings} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1188,18 +1003,6 @@ export namespace accessapproval_v1beta1 {
     }
   }
 
-  export interface Params$Resource$Organizations$Deleteaccessapprovalsettings
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Name of the AccessApprovalSettings to delete.
-     */
-    name?: string;
-  }
   export interface Params$Resource$Organizations$Getaccessapprovalsettings
     extends StandardParameters {
     /**
@@ -1223,10 +1026,6 @@ export namespace accessapproval_v1beta1 {
      * The resource name of the settings. Format is one of: <ol>   <li>"projects/{project_id}/accessApprovalSettings"</li>   <li>"folders/{folder_id}/accessApprovalSettings"</li>   <li>"organizations/{organization_id}/accessApprovalSettings"</li> <ol>
      */
     name?: string;
-    /**
-     * For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask If this field is left unset, only the notification_emails field will be updated.
-     */
-    updateMask?: string;
 
     /**
      * Request body metadata
@@ -1248,7 +1047,7 @@ export namespace accessapproval_v1beta1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Name of the approval request to approve.
-     * @param {().ApproveApprovalRequestMessage} params.requestBody Request body data
+     * @param {().ApproveApprovalRequestMessage} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1324,7 +1123,7 @@ export namespace accessapproval_v1beta1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Name of the ApprovalRequest to dismiss.
-     * @param {().DismissApprovalRequestMessage} params.requestBody Request body data
+     * @param {().DismissApprovalRequestMessage} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1634,78 +1433,6 @@ export namespace accessapproval_v1beta1 {
     }
 
     /**
-     * accessapproval.projects.deleteAccessApprovalSettings
-     * @desc Deletes the settings associated with a project, folder, or organization. This will have the effect of disabling Access Approval for the project, folder, or organization, but only if all ancestors also have Access Approval disabled. If Access Approval is enabled at a higher level of the hierarchy, then Access Approval will still be enabled at this level as the settings are inherited.
-     * @alias accessapproval.projects.deleteAccessApprovalSettings
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.name Name of the AccessApprovalSettings to delete.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    deleteAccessApprovalSettings(
-      params?: Params$Resource$Projects$Deleteaccessapprovalsettings,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$Empty>;
-    deleteAccessApprovalSettings(
-      params: Params$Resource$Projects$Deleteaccessapprovalsettings,
-      options: MethodOptions | BodyResponseCallback<Schema$Empty>,
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    deleteAccessApprovalSettings(
-      params: Params$Resource$Projects$Deleteaccessapprovalsettings,
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    deleteAccessApprovalSettings(
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    deleteAccessApprovalSettings(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Deleteaccessapprovalsettings
-        | BodyResponseCallback<Schema$Empty>,
-      optionsOrCallback?: MethodOptions | BodyResponseCallback<Schema$Empty>,
-      callback?: BodyResponseCallback<Schema$Empty>
-    ): void | GaxiosPromise<Schema$Empty> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Deleteaccessapprovalsettings;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Deleteaccessapprovalsettings;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl =
-        options.rootUrl || 'https://accessapproval.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1beta1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
-            method: 'DELETE',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['name'],
-        pathParams: ['name'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$Empty>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$Empty>(parameters);
-      }
-    }
-
-    /**
      * accessapproval.projects.getAccessApprovalSettings
      * @desc Gets the settings associated with a project, folder, or organization.
      * @alias accessapproval.projects.getAccessApprovalSettings
@@ -1783,14 +1510,13 @@ export namespace accessapproval_v1beta1 {
 
     /**
      * accessapproval.projects.updateAccessApprovalSettings
-     * @desc Updates the settings associated with a project, folder, or organization. Settings to update are determined by the value of field_mask.
+     * @desc Updates the settings associated with a project, folder, or organization. Completely replaces the existing settings.
      * @alias accessapproval.projects.updateAccessApprovalSettings
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The resource name of the settings. Format is one of: <ol>   <li>"projects/{project_id}/accessApprovalSettings"</li>   <li>"folders/{folder_id}/accessApprovalSettings"</li>   <li>"organizations/{organization_id}/accessApprovalSettings"</li> <ol>
-     * @param {string=} params.updateMask For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask If this field is left unset, only the notification_emails field will be updated.
-     * @param {().AccessApprovalSettings} params.requestBody Request body data
+     * @param {().AccessApprovalSettings} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1860,18 +1586,6 @@ export namespace accessapproval_v1beta1 {
     }
   }
 
-  export interface Params$Resource$Projects$Deleteaccessapprovalsettings
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Name of the AccessApprovalSettings to delete.
-     */
-    name?: string;
-  }
   export interface Params$Resource$Projects$Getaccessapprovalsettings
     extends StandardParameters {
     /**
@@ -1895,10 +1609,6 @@ export namespace accessapproval_v1beta1 {
      * The resource name of the settings. Format is one of: <ol>   <li>"projects/{project_id}/accessApprovalSettings"</li>   <li>"folders/{folder_id}/accessApprovalSettings"</li>   <li>"organizations/{organization_id}/accessApprovalSettings"</li> <ol>
      */
     name?: string;
-    /**
-     * For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask If this field is left unset, only the notification_emails field will be updated.
-     */
-    updateMask?: string;
 
     /**
      * Request body metadata
@@ -1920,7 +1630,7 @@ export namespace accessapproval_v1beta1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Name of the approval request to approve.
-     * @param {().ApproveApprovalRequestMessage} params.requestBody Request body data
+     * @param {().ApproveApprovalRequestMessage} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1996,7 +1706,7 @@ export namespace accessapproval_v1beta1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Name of the ApprovalRequest to dismiss.
-     * @param {().DismissApprovalRequestMessage} params.requestBody Request body data
+     * @param {().DismissApprovalRequestMessage} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

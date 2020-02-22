@@ -1,4 +1,4 @@
-// Copyright 2012 Google LLC
+// Copyright 2012-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,17 +11,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as apis from './apis';
-
+import {Compute, GoogleAuth, JWT, OAuth2Client} from 'google-auth-library';
 import {
-  AuthPlus,
   APIEndpoint,
   Discovery,
   Endpoint,
   GlobalOptions,
 } from 'googleapis-common';
 
-export {AuthPlus};
+import * as apis from './apis';
+
+export class AuthPlus extends GoogleAuth {
+  // tslint:disable-next-line: variable-name
+  JWT = JWT;
+  // tslint:disable-next-line: variable-name
+  Compute = Compute;
+  // tslint:disable-next-line: variable-name
+  OAuth2 = OAuth2Client;
+}
 
 export class GoogleApis extends apis.GeneratedAPIs {
   private _discovery = new Discovery({debug: false, includePrivate: false});

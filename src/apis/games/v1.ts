@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -95,6 +97,8 @@ export namespace games_v1 {
     metagame: Resource$Metagame;
     players: Resource$Players;
     pushtokens: Resource$Pushtokens;
+    questMilestones: Resource$Questmilestones;
+    quests: Resource$Quests;
     revisions: Resource$Revisions;
     rooms: Resource$Rooms;
     scores: Resource$Scores;
@@ -117,6 +121,8 @@ export namespace games_v1 {
       this.metagame = new Resource$Metagame(this.context);
       this.players = new Resource$Players(this.context);
       this.pushtokens = new Resource$Pushtokens(this.context);
+      this.questMilestones = new Resource$Questmilestones(this.context);
+      this.quests = new Resource$Quests(this.context);
       this.revisions = new Resource$Revisions(this.context);
       this.rooms = new Resource$Rooms(this.context);
       this.scores = new Resource$Scores(this.context);
@@ -132,55 +138,55 @@ export namespace games_v1 {
     /**
      * The type of the achievement. Possible values are:   - &quot;STANDARD&quot; - Achievement is either locked or unlocked.  - &quot;INCREMENTAL&quot; - Achievement is incremental.
      */
-    achievementType?: string | null;
+    achievementType?: string;
     /**
      * The description of the achievement.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Experience points which will be earned when unlocking this achievement.
      */
-    experiencePoints?: string | null;
+    experiencePoints?: string;
     /**
      * The total steps for an incremental achievement as a string.
      */
-    formattedTotalSteps?: string | null;
+    formattedTotalSteps?: string;
     /**
      * The ID of the achievement.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The initial state of the achievement. Possible values are:   - &quot;HIDDEN&quot; - Achievement is hidden.  - &quot;REVEALED&quot; - Achievement is revealed.  - &quot;UNLOCKED&quot; - Achievement is unlocked.
      */
-    initialState?: string | null;
+    initialState?: string;
     /**
      * Indicates whether the revealed icon image being returned is a default image, or is provided by the game.
      */
-    isRevealedIconUrlDefault?: boolean | null;
+    isRevealedIconUrlDefault?: boolean;
     /**
      * Indicates whether the unlocked icon image being returned is a default image, or is game-provided.
      */
-    isUnlockedIconUrlDefault?: boolean | null;
+    isUnlockedIconUrlDefault?: boolean;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementDefinition.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The name of the achievement.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The image URL for the revealed achievement icon.
      */
-    revealedIconUrl?: string | null;
+    revealedIconUrl?: string;
     /**
      * The total steps for an incremental achievement.
      */
-    totalSteps?: number | null;
+    totalSteps?: number;
     /**
      * The image URL for the unlocked achievement icon.
      */
-    unlockedIconUrl?: string | null;
+    unlockedIconUrl?: string;
   }
   /**
    * This is a JSON template for a list of achievement definition objects.
@@ -193,11 +199,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementDefinitionsListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token corresponding to the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for an achievement increment response
@@ -206,15 +212,15 @@ export namespace games_v1 {
     /**
      * The current steps recorded for this incremental achievement.
      */
-    currentSteps?: number | null;
+    currentSteps?: number;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementIncrementResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Whether the current steps for the achievement has reached the number of steps required to unlock.
      */
-    newlyUnlocked?: boolean | null;
+    newlyUnlocked?: boolean;
   }
   /**
    * This is a JSON template for an achievement reveal response
@@ -223,11 +229,11 @@ export namespace games_v1 {
     /**
      * The current state of the achievement for which a reveal was attempted. This might be UNLOCKED if the achievement was already unlocked. Possible values are:   - &quot;REVEALED&quot; - Achievement is revealed.  - &quot;UNLOCKED&quot; - Achievement is unlocked.
      */
-    currentState?: string | null;
+    currentState?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementRevealResponse.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * This is a JSON template for an achievement set steps at least response.
@@ -236,15 +242,15 @@ export namespace games_v1 {
     /**
      * The current steps recorded for this incremental achievement.
      */
-    currentSteps?: number | null;
+    currentSteps?: number;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementSetStepsAtLeastResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Whether the the current steps for the achievement has reached the number of steps required to unlock.
      */
-    newlyUnlocked?: boolean | null;
+    newlyUnlocked?: boolean;
   }
   /**
    * This is a JSON template for an achievement unlock response
@@ -253,11 +259,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementUnlockResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Whether this achievement was newly unlocked (that is, whether the unlock request for the achievement was the first for the player).
      */
-    newlyUnlocked?: boolean | null;
+    newlyUnlocked?: boolean;
   }
   /**
    * This is a JSON template for a list of achievement update requests.
@@ -266,7 +272,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementUpdateMultipleRequest.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The individual achievement update requests.
      */
@@ -279,7 +285,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementUpdateListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The updated state of the achievements.
      */
@@ -292,7 +298,7 @@ export namespace games_v1 {
     /**
      * The achievement this update is being applied to.
      */
-    achievementId?: string | null;
+    achievementId?: string;
     /**
      * The payload if an update of type INCREMENT was requested for the achievement.
      */
@@ -300,7 +306,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementUpdateRequest.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The payload if an update of type SET_STEPS_AT_LEAST was requested for the achievement.
      */
@@ -308,7 +314,7 @@ export namespace games_v1 {
     /**
      * The type of update being applied. Possible values are:   - &quot;REVEAL&quot; - Achievement is revealed.  - &quot;UNLOCK&quot; - Achievement is unlocked.  - &quot;INCREMENT&quot; - Achievement is incremented.  - &quot;SET_STEPS_AT_LEAST&quot; - Achievement progress is set to at least the passed value.
      */
-    updateType?: string | null;
+    updateType?: string;
   }
   /**
    * This is a JSON template for an achievement update response.
@@ -317,27 +323,27 @@ export namespace games_v1 {
     /**
      * The achievement this update is was applied to.
      */
-    achievementId?: string | null;
+    achievementId?: string;
     /**
      * The current state of the achievement. Possible values are:   - &quot;HIDDEN&quot; - Achievement is hidden.  - &quot;REVEALED&quot; - Achievement is revealed.  - &quot;UNLOCKED&quot; - Achievement is unlocked.
      */
-    currentState?: string | null;
+    currentState?: string;
     /**
      * The current steps recorded for this achievement if it is incremental.
      */
-    currentSteps?: number | null;
+    currentSteps?: number;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementUpdateResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Whether this achievement was newly unlocked (that is, whether the unlock request for the achievement was the first for the player).
      */
-    newlyUnlocked?: boolean | null;
+    newlyUnlocked?: boolean;
     /**
      * Whether the requested updates actually affected the achievement.
      */
-    updateOccurred?: boolean | null;
+    updateOccurred?: boolean;
   }
   /**
    * This is a JSON template for aggregate stats.
@@ -346,23 +352,23 @@ export namespace games_v1 {
     /**
      * The number of messages sent between a pair of peers.
      */
-    count?: string | null;
+    count?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#aggregateStats.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The maximum amount.
      */
-    max?: string | null;
+    max?: string;
     /**
      * The minimum amount.
      */
-    min?: string | null;
+    min?: string;
     /**
      * The total number of bytes sent for messages between a pair of peers.
      */
-    sum?: string | null;
+    sum?: string;
   }
   /**
    * This is a JSON template for an anonymous player
@@ -371,15 +377,15 @@ export namespace games_v1 {
     /**
      * The base URL for the image to display for the anonymous player.
      */
-    avatarImageUrl?: string | null;
+    avatarImageUrl?: string;
     /**
      * The name to display for the anonymous player.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#anonymousPlayer.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * This is a JSON template for the Application resource.
@@ -388,7 +394,7 @@ export namespace games_v1 {
     /**
      * The number of achievements visible to the currently authenticated player.
      */
-    achievement_count?: number | null;
+    achievement_count?: number;
     /**
      * The assets of the application.
      */
@@ -396,7 +402,7 @@ export namespace games_v1 {
     /**
      * The author of the application.
      */
-    author?: string | null;
+    author?: string;
     /**
      * The category of the application.
      */
@@ -404,15 +410,15 @@ export namespace games_v1 {
     /**
      * The description of the application.
      */
-    description?: string | null;
+    description?: string;
     /**
      * A list of features that have been enabled for the application. Possible values are:   - &quot;SNAPSHOTS&quot; - Snapshots has been enabled
      */
-    enabledFeatures?: string[] | null;
+    enabledFeatures?: string[];
     /**
      * The ID of the application.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The instances of the application.
      */
@@ -420,23 +426,23 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#application.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The last updated timestamp of the application.
      */
-    lastUpdatedTimestamp?: string | null;
+    lastUpdatedTimestamp?: string;
     /**
      * The number of leaderboards visible to the currently authenticated player.
      */
-    leaderboard_count?: number | null;
+    leaderboard_count?: number;
     /**
      * The name of the application.
      */
-    name?: string | null;
+    name?: string;
     /**
      * A hint to the client UI for what color to use as an app-themed color. The color is given as an RGB triplet (e.g. &quot;E0E0E0&quot;).
      */
-    themeColor?: string | null;
+    themeColor?: string;
   }
   /**
    * This is a JSON template for an application category object.
@@ -445,15 +451,15 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#applicationCategory.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The primary category.
      */
-    primary?: string | null;
+    primary?: string;
     /**
      * The secondary category.
      */
-    secondary?: string | null;
+    secondary?: string;
   }
   /**
    * This is a JSON template for a third party application verification response resource.
@@ -462,15 +468,15 @@ export namespace games_v1 {
     /**
      * An alternate ID that was once used for the player that was issued the auth token used in this request. (This field is not normally populated.)
      */
-    alternate_player_id?: string | null;
+    alternate_player_id?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#applicationVerifyResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The ID of the player that was issued the auth token used in this request.
      */
-    player_id?: string | null;
+    player_id?: string;
   }
   /**
    * This is a JSON template for data related to individual game categories.
@@ -479,15 +485,15 @@ export namespace games_v1 {
     /**
      * The category name.
      */
-    category?: string | null;
+    category?: string;
     /**
      * Experience points earned in this category.
      */
-    experiencePoints?: string | null;
+    experiencePoints?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#category.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * This is a JSON template for a list of category data objects.
@@ -500,11 +506,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#categoryListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token corresponding to the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for a batch update failure resource.
@@ -513,11 +519,11 @@ export namespace games_v1 {
     /**
      * The cause for the update failure. Possible values are:   - &quot;TOO_LARGE&quot;: A batch request was issued with more events than are allowed in a single batch.  - &quot;TIME_PERIOD_EXPIRED&quot;: A batch was sent with data too far in the past to record.  - &quot;TIME_PERIOD_SHORT&quot;: A batch was sent with a time range that was too short.  - &quot;TIME_PERIOD_LONG&quot;: A batch was sent with a time range that was too long.  - &quot;ALREADY_UPDATED&quot;: An attempt was made to record a batch of data which was already seen.  - &quot;RECORD_RATE_HIGH&quot;: An attempt was made to record data faster than the server will apply updates.
      */
-    failureCause?: string | null;
+    failureCause?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#eventBatchRecordFailure.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The time range which was rejected; empty for a request-wide failure.
      */
@@ -530,11 +536,11 @@ export namespace games_v1 {
     /**
      * The ID of the child event.
      */
-    childId?: string | null;
+    childId?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#eventChild.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * This is a JSON template for an event definition resource.
@@ -547,31 +553,31 @@ export namespace games_v1 {
     /**
      * Description of what this event represents.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The name to display for the event.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The ID of the event.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The base URL for the image that represents the event.
      */
-    imageUrl?: string | null;
+    imageUrl?: string;
     /**
      * Indicates whether the icon image being returned is a default image, or is game-provided.
      */
-    isDefaultImageUrl?: boolean | null;
+    isDefaultImageUrl?: boolean;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#eventDefinition.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The visibility of event being tracked in this definition. Possible values are:   - &quot;REVEALED&quot;: This event should be visible to all users.  - &quot;HIDDEN&quot;: This event should only be shown to users that have recorded this event at least once.
      */
-    visibility?: string | null;
+    visibility?: string;
   }
   /**
    * This is a JSON template for a ListDefinitions response.
@@ -584,11 +590,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#eventDefinitionListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The pagination token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for an event period time range.
@@ -597,15 +603,15 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#eventPeriodRange.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The time when this update period ends, in millis, since 1970 UTC (Unix Epoch).
      */
-    periodEndMillis?: string | null;
+    periodEndMillis?: string;
     /**
      * The time when this update period begins, in millis, since 1970 UTC (Unix Epoch).
      */
-    periodStartMillis?: string | null;
+    periodStartMillis?: string;
   }
   /**
    * This is a JSON template for an event period update resource.
@@ -614,7 +620,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#eventPeriodUpdate.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The time period being covered by this update.
      */
@@ -631,15 +637,15 @@ export namespace games_v1 {
     /**
      * The ID of the event that was not updated.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * The cause for the update failure. Possible values are:   - &quot;NOT_FOUND&quot; - An attempt was made to set an event that was not defined.  - &quot;INVALID_UPDATE_VALUE&quot; - An attempt was made to increment an event by a non-positive value.
      */
-    failureCause?: string | null;
+    failureCause?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#eventRecordFailure.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * This is a JSON template for an event period update resource.
@@ -648,15 +654,15 @@ export namespace games_v1 {
     /**
      * The current time when this update was sent, in milliseconds, since 1970 UTC (Unix Epoch).
      */
-    currentTimeMillis?: string | null;
+    currentTimeMillis?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#eventRecordRequest.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The request ID used to identify this attempt to record events.
      */
-    requestId?: string | null;
+    requestId?: string;
     /**
      * A list of the time period updates being made in this request.
      */
@@ -669,15 +675,15 @@ export namespace games_v1 {
     /**
      * The ID of the event being modified in this update.
      */
-    definitionId?: string | null;
+    definitionId?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#eventUpdateRequest.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The number of times this event occurred in this time period.
      */
-    updateCount?: string | null;
+    updateCount?: string;
   }
   /**
    * This is a JSON template for an event period update resource.
@@ -694,7 +700,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#eventUpdateResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The current status of any updated events
      */
@@ -707,15 +713,15 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#GamesAchievementIncrement.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The requestId associated with an increment to an achievement.
      */
-    requestId?: string | null;
+    requestId?: string;
     /**
      * The number of steps to be incremented.
      */
-    steps?: number | null;
+    steps?: number;
   }
   /**
    * This is a JSON template for the payload to request to increment an achievement.
@@ -724,11 +730,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#GamesAchievementSetStepsAtLeast.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The minimum number of steps for the achievement to be set to.
      */
-    steps?: number | null;
+    steps?: number;
   }
   /**
    * This is a JSON template for an image asset object.
@@ -737,23 +743,23 @@ export namespace games_v1 {
     /**
      * The height of the asset.
      */
-    height?: number | null;
+    height?: number;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#imageAsset.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The name of the asset.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The URL of the asset.
      */
-    url?: string | null;
+    url?: string;
     /**
      * The width of the asset.
      */
-    width?: number | null;
+    width?: number;
   }
   /**
    * This is a JSON template for the Instance resource.
@@ -762,7 +768,7 @@ export namespace games_v1 {
     /**
      * URI which shows where a user can acquire this instance.
      */
-    acquisitionUri?: string | null;
+    acquisitionUri?: string;
     /**
      * Platform dependent details for Android.
      */
@@ -774,23 +780,23 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#instance.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Localized display name.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The platform type. Possible values are:   - &quot;ANDROID&quot; - Instance is for Android.  - &quot;IOS&quot; - Instance is for iOS  - &quot;WEB_APP&quot; - Instance is for Web App.
      */
-    platformType?: string | null;
+    platformType?: string;
     /**
      * Flag to show if this game instance supports realtime play.
      */
-    realtimePlay?: boolean | null;
+    realtimePlay?: boolean;
     /**
      * Flag to show if this game instance supports turn based play.
      */
-    turnBasedPlay?: boolean | null;
+    turnBasedPlay?: boolean;
     /**
      * Platform dependent details for Web.
      */
@@ -803,19 +809,19 @@ export namespace games_v1 {
     /**
      * Flag indicating whether the anti-piracy check is enabled.
      */
-    enablePiracyCheck?: boolean | null;
+    enablePiracyCheck?: boolean;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#instanceAndroidDetails.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Android package name which maps to Google Play URL.
      */
-    packageName?: string | null;
+    packageName?: string;
     /**
      * Indicates that this instance is the default for new installations.
      */
-    preferred?: boolean | null;
+    preferred?: boolean;
   }
   /**
    * This is a JSON template for the iOS details resource.
@@ -824,31 +830,31 @@ export namespace games_v1 {
     /**
      * Bundle identifier.
      */
-    bundleIdentifier?: string | null;
+    bundleIdentifier?: string;
     /**
      * iTunes App ID.
      */
-    itunesAppId?: string | null;
+    itunesAppId?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#instanceIosDetails.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Indicates that this instance is the default for new installations on iPad devices.
      */
-    preferredForIpad?: boolean | null;
+    preferredForIpad?: boolean;
     /**
      * Indicates that this instance is the default for new installations on iPhone devices.
      */
-    preferredForIphone?: boolean | null;
+    preferredForIphone?: boolean;
     /**
      * Flag to indicate if this instance supports iPad.
      */
-    supportIpad?: boolean | null;
+    supportIpad?: boolean;
     /**
      * Flag to indicate if this instance supports iPhone.
      */
-    supportIphone?: boolean | null;
+    supportIphone?: boolean;
   }
   /**
    * This is a JSON template for the Web details resource.
@@ -857,15 +863,15 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#instanceWebDetails.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Launch URL for the game.
      */
-    launchUrl?: string | null;
+    launchUrl?: string;
     /**
      * Indicates that this instance is the default for new installations.
      */
-    preferred?: boolean | null;
+    preferred?: boolean;
   }
   /**
    * This is a JSON template for the Leaderboard resource.
@@ -874,27 +880,27 @@ export namespace games_v1 {
     /**
      * The icon for the leaderboard.
      */
-    iconUrl?: string | null;
+    iconUrl?: string;
     /**
      * The leaderboard ID.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Indicates whether the icon image being returned is a default image, or is game-provided.
      */
-    isIconUrlDefault?: boolean | null;
+    isIconUrlDefault?: boolean;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#leaderboard.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The name of the leaderboard.
      */
-    name?: string | null;
+    name?: string;
     /**
      * How scores are ordered. Possible values are:   - &quot;LARGER_IS_BETTER&quot; - Larger values are better; scores are sorted in descending order.  - &quot;SMALLER_IS_BETTER&quot; - Smaller values are better; scores are sorted in ascending order.
      */
-    order?: string | null;
+    order?: string;
   }
   /**
    * This is a JSON template for the Leaderboard Entry resource.
@@ -903,15 +909,15 @@ export namespace games_v1 {
     /**
      * The localized string for the numerical value of this score.
      */
-    formattedScore?: string | null;
+    formattedScore?: string;
     /**
      * The localized string for the rank of this score for this leaderboard.
      */
-    formattedScoreRank?: string | null;
+    formattedScoreRank?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#leaderboardEntry.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The player who holds this score.
      */
@@ -919,23 +925,23 @@ export namespace games_v1 {
     /**
      * The rank of this score for this leaderboard.
      */
-    scoreRank?: string | null;
+    scoreRank?: string;
     /**
      * Additional information about the score. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
      */
-    scoreTag?: string | null;
+    scoreTag?: string;
     /**
      * The numerical value of this score.
      */
-    scoreValue?: string | null;
+    scoreValue?: string;
     /**
      * The time span of this high score. Possible values are:   - &quot;ALL_TIME&quot; - The score is an all-time high score.  - &quot;WEEKLY&quot; - The score is a weekly high score.  - &quot;DAILY&quot; - The score is a daily high score.
      */
-    timeSpan?: string | null;
+    timeSpan?: string;
     /**
      * The timestamp at which this score was recorded, in milliseconds since the epoch in UTC.
      */
-    writeTimestampMillis?: string | null;
+    writeTimestampMillis?: string;
   }
   /**
    * This is a JSON template for a list of leaderboard objects.
@@ -948,11 +954,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#leaderboardListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token corresponding to the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for a score rank in a leaderboard.
@@ -961,23 +967,23 @@ export namespace games_v1 {
     /**
      * The number of scores in the leaderboard as a string.
      */
-    formattedNumScores?: string | null;
+    formattedNumScores?: string;
     /**
      * The rank in the leaderboard as a string.
      */
-    formattedRank?: string | null;
+    formattedRank?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#leaderboardScoreRank.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The number of scores in the leaderboard.
      */
-    numScores?: string | null;
+    numScores?: string;
     /**
      * The rank in the leaderboard.
      */
-    rank?: string | null;
+    rank?: string;
   }
   /**
    * This is a JSON template for a ListScores response.
@@ -990,15 +996,15 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#leaderboardScores.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The pagination token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total number of scores in the leaderboard.
      */
-    numScores?: string | null;
+    numScores?: string;
     /**
      * The score of the requesting player on the leaderboard. The player&#39;s score may appear both here and in the list of scores above. If you are viewing a public leaderboard and the player is not sharing their gameplay information publicly, the scoreRank and formattedScoreRank values will not be present.
      */
@@ -1006,7 +1012,7 @@ export namespace games_v1 {
     /**
      * The pagination token for the previous page of results.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
   }
   /**
    * This is a JSON template for the metagame config resource
@@ -1015,11 +1021,11 @@ export namespace games_v1 {
     /**
      * Current version of the metagame configuration data. When this data is updated, the version number will be increased by one.
      */
-    currentVersion?: number | null;
+    currentVersion?: number;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#metagameConfig.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The list of player levels.
      */
@@ -1032,31 +1038,31 @@ export namespace games_v1 {
     /**
      * The Android network subtype.
      */
-    androidNetworkSubtype?: number | null;
+    androidNetworkSubtype?: number;
     /**
      * The Android network type.
      */
-    androidNetworkType?: number | null;
+    androidNetworkType?: number;
     /**
      * iOS network type as defined in Reachability.h.
      */
-    iosNetworkType?: number | null;
+    iosNetworkType?: number;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#networkDiagnostics.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The MCC+MNC code for the client&#39;s network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperator() On iOS, see: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html
      */
-    networkOperatorCode?: string | null;
+    networkOperatorCode?: string;
     /**
      * The name of the carrier of the client&#39;s network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperatorName() On iOS: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html#//apple_ref/occ/instp/CTCarrier/carrierName
      */
-    networkOperatorName?: string | null;
+    networkOperatorName?: string;
     /**
      * The amount of time in milliseconds it took for the client to establish a connection with the XMPP server.
      */
-    registrationLatencyMillis?: number | null;
+    registrationLatencyMillis?: number;
   }
   /**
    * This is a JSON template for a result for a match participant.
@@ -1065,19 +1071,19 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#participantResult.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The ID of the participant.
      */
-    participantId?: string | null;
+    participantId?: string;
     /**
      * The placement or ranking of the participant in the match results; a number from one to the number of participants in the match. Multiple participants may have the same placing value in case of a type.
      */
-    placing?: number | null;
+    placing?: number;
     /**
      * The result of the participant for this match. Possible values are:   - &quot;MATCH_RESULT_WIN&quot; - The participant won the match.  - &quot;MATCH_RESULT_LOSS&quot; - The participant lost the match.  - &quot;MATCH_RESULT_TIE&quot; - The participant tied the match.  - &quot;MATCH_RESULT_NONE&quot; - There was no winner for the match (nobody wins or loses this kind of game.)  - &quot;MATCH_RESULT_DISCONNECT&quot; - The participant disconnected / left during the match.  - &quot;MATCH_RESULT_DISAGREED&quot; - Different clients reported different results for this participant.
      */
-    result?: string | null;
+    result?: string;
   }
   /**
    * This is a JSON template for peer channel diagnostics.
@@ -1094,23 +1100,23 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#peerChannelDiagnostics.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Number of messages lost.
      */
-    numMessagesLost?: number | null;
+    numMessagesLost?: number;
     /**
      * Number of messages received.
      */
-    numMessagesReceived?: number | null;
+    numMessagesReceived?: number;
     /**
      * Number of messages sent.
      */
-    numMessagesSent?: number | null;
+    numMessagesSent?: number;
     /**
      * Number of send failures.
      */
-    numSendFailures?: number | null;
+    numSendFailures?: number;
     /**
      * Roundtrip latency stats in milliseconds.
      */
@@ -1123,15 +1129,15 @@ export namespace games_v1 {
     /**
      * Connected time in milliseconds.
      */
-    connectedTimestampMillis?: string | null;
+    connectedTimestampMillis?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#peerSessionDiagnostics.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The participant ID of the peer.
      */
-    participantId?: string | null;
+    participantId?: string;
     /**
      * Reliable channel diagnostics.
      */
@@ -1148,15 +1154,15 @@ export namespace games_v1 {
     /**
      * True if the player was auto-matched with the currently authenticated user.
      */
-    autoMatched?: boolean | null;
+    autoMatched?: boolean;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#played.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The last time the player played the game in milliseconds since the epoch in UTC.
      */
-    timeMillis?: string | null;
+    timeMillis?: string;
   }
   /**
    * This is a JSON template for a Player resource.
@@ -1165,19 +1171,19 @@ export namespace games_v1 {
     /**
      * The base URL for the image that represents the player.
      */
-    avatarImageUrl?: string | null;
+    avatarImageUrl?: string;
     /**
      * The url to the landscape mode player banner image.
      */
-    bannerUrlLandscape?: string | null;
+    bannerUrlLandscape?: string;
     /**
      * The url to the portrait mode player banner image.
      */
-    bannerUrlPortrait?: string | null;
+    bannerUrlPortrait?: string;
     /**
      * The name to display for the player.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * An object to represent Play Game experience information for the player.
      */
@@ -1185,7 +1191,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#player.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Details about the last time this player played a multiplayer game with the currently authenticated player. Populated for PLAYED_WITH player collection members.
      */
@@ -1193,16 +1199,15 @@ export namespace games_v1 {
     /**
      * An object representation of the individual components of the player&#39;s name. For some players, these fields may not be present.
      */
-    name?: {familyName?: string; givenName?: string} | null;
+    name?: {familyName?: string; givenName?: string};
     /**
      * The player ID that was used for this player the first time they signed into the game in question. This is only populated for calls to player.get for the requesting player, only if the player ID has subsequently changed, and only to clients that support remapping player IDs.
      */
-    originalPlayerId?: string | null;
+    originalPlayerId?: string;
     /**
      * The ID of the player.
      */
-    playerId?: string | null;
-    playerStattus?: string | null;
+    playerId?: string;
     /**
      * The player&#39;s profile settings. Controls whether or not the player&#39;s profile is visible to other players.
      */
@@ -1210,7 +1215,7 @@ export namespace games_v1 {
     /**
      * The player&#39;s title rewarded for their game activities.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * This is a JSON template for an achievement object.
@@ -1219,31 +1224,31 @@ export namespace games_v1 {
     /**
      * The state of the achievement. Possible values are:   - &quot;HIDDEN&quot; - Achievement is hidden.  - &quot;REVEALED&quot; - Achievement is revealed.  - &quot;UNLOCKED&quot; - Achievement is unlocked.
      */
-    achievementState?: string | null;
+    achievementState?: string;
     /**
      * The current steps for an incremental achievement.
      */
-    currentSteps?: number | null;
+    currentSteps?: number;
     /**
      * Experience points earned for the achievement. This field is absent for achievements that have not yet been unlocked and 0 for achievements that have been unlocked by testers but that are unpublished.
      */
-    experiencePoints?: string | null;
+    experiencePoints?: string;
     /**
      * The current steps for an incremental achievement as a string.
      */
-    formattedCurrentStepsString?: string | null;
+    formattedCurrentStepsString?: string;
     /**
      * The ID of the achievement.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerAchievement.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The timestamp of the last modification to this achievement&#39;s state.
      */
-    lastUpdatedTimestamp?: string | null;
+    lastUpdatedTimestamp?: string;
   }
   /**
    * This is a JSON template for a list of achievement objects.
@@ -1256,11 +1261,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerAchievementListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token corresponding to the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for an event status resource.
@@ -1269,23 +1274,23 @@ export namespace games_v1 {
     /**
      * The ID of the event definition.
      */
-    definitionId?: string | null;
+    definitionId?: string;
     /**
      * The current number of times this event has occurred, as a string. The formatting of this string depends on the configuration of your event in the Play Games Developer Console.
      */
-    formattedNumEvents?: string | null;
+    formattedNumEvents?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerEvent.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The current number of times this event has occurred.
      */
-    numEvents?: string | null;
+    numEvents?: string;
     /**
      * The ID of the player.
      */
-    playerId?: string | null;
+    playerId?: string;
   }
   /**
    * This is a JSON template for a ListByPlayer response.
@@ -1298,11 +1303,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerEventListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The pagination token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for 1P/3P metadata about the player&#39;s experience.
@@ -1311,7 +1316,7 @@ export namespace games_v1 {
     /**
      * The current number of experience points for the player.
      */
-    currentExperiencePoints?: string | null;
+    currentExperiencePoints?: string;
     /**
      * The current level of the player.
      */
@@ -1319,11 +1324,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerExperienceInfo.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The timestamp when the player was leveled up, in millis since Unix epoch UTC.
      */
-    lastLevelUpTimestampMillis?: string | null;
+    lastLevelUpTimestampMillis?: string;
     /**
      * The next level of the player. If the current level is the maximum level, this should be same as the current level.
      */
@@ -1336,11 +1341,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerLeaderboardScore.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The ID of the leaderboard this score is in.
      */
-    leaderboard_id?: string | null;
+    leaderboard_id?: string;
     /**
      * The public rank of the score in this leaderboard. This object will not be present if the user is not sharing their scores publicly.
      */
@@ -1348,15 +1353,15 @@ export namespace games_v1 {
     /**
      * The formatted value of this score.
      */
-    scoreString?: string | null;
+    scoreString?: string;
     /**
      * Additional information about the score. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
      */
-    scoreTag?: string | null;
+    scoreTag?: string;
     /**
      * The numerical value of this score.
      */
-    scoreValue?: string | null;
+    scoreValue?: string;
     /**
      * The social rank of the score in this leaderboard.
      */
@@ -1364,11 +1369,11 @@ export namespace games_v1 {
     /**
      * The time span of this score. Possible values are:   - &quot;ALL_TIME&quot; - The score is an all-time score.  - &quot;WEEKLY&quot; - The score is a weekly score.  - &quot;DAILY&quot; - The score is a daily score.
      */
-    timeSpan?: string | null;
+    timeSpan?: string;
     /**
      * The timestamp at which this score was recorded, in milliseconds since the epoch in UTC.
      */
-    writeTimestamp?: string | null;
+    writeTimestamp?: string;
   }
   /**
    * This is a JSON template for a list of player leaderboard scores.
@@ -1381,11 +1386,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerLeaderboardScoreListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The pagination token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The Player resources for the owner of this score.
      */
@@ -1398,19 +1403,19 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerLevel.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The level for the user.
      */
-    level?: number | null;
+    level?: number;
     /**
      * The maximum experience points for this level.
      */
-    maxExperiencePoints?: string | null;
+    maxExperiencePoints?: string;
     /**
      * The minimum experience points for this level.
      */
-    minExperiencePoints?: string | null;
+    minExperiencePoints?: string;
   }
   /**
    * This is a JSON template for a third party player list response.
@@ -1423,11 +1428,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token corresponding to the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for a player score.
@@ -1436,23 +1441,23 @@ export namespace games_v1 {
     /**
      * The formatted score for this player score.
      */
-    formattedScore?: string | null;
+    formattedScore?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerScore.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The numerical value for this player score.
      */
-    score?: string | null;
+    score?: string;
     /**
      * Additional information about this score. Values will contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
      */
-    scoreTag?: string | null;
+    scoreTag?: string;
     /**
      * The time span for this player score. Possible values are:   - &quot;ALL_TIME&quot; - The score is an all-time score.  - &quot;WEEKLY&quot; - The score is a weekly score.  - &quot;DAILY&quot; - The score is a daily score.
      */
-    timeSpan?: string | null;
+    timeSpan?: string;
   }
   /**
    * This is a JSON template for a list of score submission statuses.
@@ -1461,7 +1466,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerScoreListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The score submissions statuses.
      */
@@ -1474,23 +1479,23 @@ export namespace games_v1 {
     /**
      * The time spans where the submitted score is better than the existing score for that time span. Possible values are:   - &quot;ALL_TIME&quot; - The score is an all-time score.  - &quot;WEEKLY&quot; - The score is a weekly score.  - &quot;DAILY&quot; - The score is a daily score.
      */
-    beatenScoreTimeSpans?: string[] | null;
+    beatenScoreTimeSpans?: string[];
     /**
      * The formatted value of the submitted score.
      */
-    formattedScore?: string | null;
+    formattedScore?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerScoreResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The leaderboard ID that this score was submitted to.
      */
-    leaderboardId?: string | null;
+    leaderboardId?: string;
     /**
      * Additional information about this score. Values will contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
      */
-    scoreTag?: string | null;
+    scoreTag?: string;
     /**
      * The scores in time spans that have not been beaten. As an example, the submitted score may be better than the player&#39;s DAILY score, but not better than the player&#39;s scores for the WEEKLY or ALL_TIME time spans.
      */
@@ -1503,7 +1508,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#playerScoreSubmissionList.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The score submissions.
      */
@@ -1516,8 +1521,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#profileSettings.
      */
-    kind?: string | null;
-    profileVisible?: boolean | null;
+    kind?: string;
+    /**
+     * The player&#39;s current profile visibility. This field is visible to both 1P and 3P APIs.
+     */
+    profileVisible?: boolean;
   }
   /**
    * This is a JSON template for a push token resource.
@@ -1526,7 +1534,7 @@ export namespace games_v1 {
     /**
      * The revision of the client SDK used by your application, in the same format that&#39;s used by revisions.check. Used to send backward compatible messages. Format: [PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:   - IOS - Push token is for iOS
      */
-    clientRevision?: string | null;
+    clientRevision?: string;
     /**
      * Unique identifier for this push token.
      */
@@ -1534,11 +1542,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#pushToken.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The preferred language for notifications that are sent using this token.
      */
-    language?: string | null;
+    language?: string;
   }
   /**
    * This is a JSON template for a push token ID resource.
@@ -1547,11 +1555,164 @@ export namespace games_v1 {
     /**
      * A push token ID for iOS devices.
      */
-    ios?: {apns_device_token?: string; apns_environment?: string} | null;
+    ios?: {apns_device_token?: string; apns_environment?: string};
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#pushTokenId.
      */
-    kind?: string | null;
+    kind?: string;
+  }
+  /**
+   * This is a JSON template for a Quest resource.
+   */
+  export interface Schema$Quest {
+    /**
+     * The timestamp at which the user accepted the quest in milliseconds since the epoch in UTC. Only present if the player has accepted the quest.
+     */
+    acceptedTimestampMillis?: string;
+    /**
+     * The ID of the application this quest is part of.
+     */
+    applicationId?: string;
+    /**
+     * The banner image URL for the quest.
+     */
+    bannerUrl?: string;
+    /**
+     * The description of the quest.
+     */
+    description?: string;
+    /**
+     * The timestamp at which the quest ceases to be active in milliseconds since the epoch in UTC.
+     */
+    endTimestampMillis?: string;
+    /**
+     * The icon image URL for the quest.
+     */
+    iconUrl?: string;
+    /**
+     * The ID of the quest.
+     */
+    id?: string;
+    /**
+     * Indicates whether the banner image being returned is a default image, or is game-provided.
+     */
+    isDefaultBannerUrl?: boolean;
+    /**
+     * Indicates whether the icon image being returned is a default image, or is game-provided.
+     */
+    isDefaultIconUrl?: boolean;
+    /**
+     * Uniquely identifies the type of this resource. Value is always the fixed string games#quest.
+     */
+    kind?: string;
+    /**
+     * The timestamp at which the quest was last updated by the user in milliseconds since the epoch in UTC. Only present if the player has accepted the quest.
+     */
+    lastUpdatedTimestampMillis?: string;
+    /**
+     * The quest milestones.
+     */
+    milestones?: Schema$QuestMilestone[];
+    /**
+     * The name of the quest.
+     */
+    name?: string;
+    /**
+     * The timestamp at which the user should be notified that the quest will end soon in milliseconds since the epoch in UTC.
+     */
+    notifyTimestampMillis?: string;
+    /**
+     * The timestamp at which the quest becomes active in milliseconds since the epoch in UTC.
+     */
+    startTimestampMillis?: string;
+    /**
+     * The state of the quest. Possible values are:   - &quot;UPCOMING&quot;: The quest is upcoming. The user can see the quest, but cannot accept it until it is open.  - &quot;OPEN&quot;: The quest is currently open and may be accepted at this time.  - &quot;ACCEPTED&quot;: The user is currently participating in this quest.  - &quot;COMPLETED&quot;: The user has completed the quest.  - &quot;FAILED&quot;: The quest was attempted but was not completed before the deadline expired.  - &quot;EXPIRED&quot;: The quest has expired and was not accepted.  - &quot;DELETED&quot;: The quest should be deleted from the local database.
+     */
+    state?: string;
+  }
+  /**
+   * This is a JSON template for a Quest Criterion Contribution resource.
+   */
+  export interface Schema$QuestContribution {
+    /**
+     * The formatted value of the contribution as a string. Format depends on the configuration for the associated event definition in the Play Games Developer Console.
+     */
+    formattedValue?: string;
+    /**
+     * Uniquely identifies the type of this resource. Value is always the fixed string games#questContribution.
+     */
+    kind?: string;
+    /**
+     * The value of the contribution.
+     */
+    value?: string;
+  }
+  /**
+   * This is a JSON template for a Quest Criterion resource.
+   */
+  export interface Schema$QuestCriterion {
+    /**
+     * The total number of times the associated event must be incremented for the player to complete this quest.
+     */
+    completionContribution?: Schema$QuestContribution;
+    /**
+     * The number of increments the player has made toward the completion count event increments required to complete the quest. This value will not exceed the completion contribution. There will be no currentContribution until the player has accepted the quest.
+     */
+    currentContribution?: Schema$QuestContribution;
+    /**
+     * The ID of the event the criterion corresponds to.
+     */
+    eventId?: string;
+    /**
+     * The value of the event associated with this quest at the time that the quest was accepted. This value may change if event increments that took place before the start of quest are uploaded after the quest starts. There will be no initialPlayerProgress until the player has accepted the quest.
+     */
+    initialPlayerProgress?: Schema$QuestContribution;
+    /**
+     * Uniquely identifies the type of this resource. Value is always the fixed string games#questCriterion.
+     */
+    kind?: string;
+  }
+  /**
+   * This is a JSON template for a list of quest objects.
+   */
+  export interface Schema$QuestListResponse {
+    /**
+     * The quests.
+     */
+    items?: Schema$Quest[];
+    /**
+     * Uniquely identifies the type of this resource. Value is always the fixed string games#questListResponse.
+     */
+    kind?: string;
+    /**
+     * Token corresponding to the next page of results.
+     */
+    nextPageToken?: string;
+  }
+  /**
+   * This is a JSON template for a Quest Milestone resource.
+   */
+  export interface Schema$QuestMilestone {
+    /**
+     * The completion reward data of the milestone, represented as a Base64-encoded string. This is a developer-specified binary blob with size between 0 and 2 KB before encoding.
+     */
+    completionRewardData?: string;
+    /**
+     * The criteria of the milestone.
+     */
+    criteria?: Schema$QuestCriterion[];
+    /**
+     * The milestone ID.
+     */
+    id?: string;
+    /**
+     * Uniquely identifies the type of this resource. Value is always the fixed string games#questMilestone.
+     */
+    kind?: string;
+    /**
+     * The current state of the milestone. Possible values are:   - &quot;COMPLETED_NOT_CLAIMED&quot; - The milestone is complete, but has not yet been claimed.  - &quot;CLAIMED&quot; - The milestone is complete and has been claimed.  - &quot;NOT_COMPLETED&quot; - The milestone has not yet been completed.  - &quot;NOT_STARTED&quot; - The milestone is for a quest that has not yet been accepted.
+     */
+    state?: string;
   }
   /**
    * This is a JSON template for the result of checking a revision.
@@ -1560,15 +1721,15 @@ export namespace games_v1 {
     /**
      * The version of the API this client revision should use when calling API methods.
      */
-    apiVersion?: string | null;
+    apiVersion?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#revisionCheckResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The result of the revision check. Possible values are:   - &quot;OK&quot; - The revision being used is current.  - &quot;DEPRECATED&quot; - There is currently a newer version available, but the revision being used still works.  - &quot;INVALID&quot; - The revision being used is not supported in any released version.
      */
-    revisionStatus?: string | null;
+    revisionStatus?: string;
   }
   /**
    * This is a JSON template for a room resource object.
@@ -1577,7 +1738,7 @@ export namespace games_v1 {
     /**
      * The ID of the application being played.
      */
-    applicationId?: string | null;
+    applicationId?: string;
     /**
      * Criteria for auto-matching players into this room.
      */
@@ -1593,15 +1754,15 @@ export namespace games_v1 {
     /**
      * This short description is generated by our servers and worded relative to the player requesting the room. It is intended to be displayed when the room is shown in a list (that is, an invitation to a room.)
      */
-    description?: string | null;
+    description?: string;
     /**
      * The ID of the participant that invited the user to the room. Not set if the user was not invited to the room.
      */
-    inviterId?: string | null;
+    inviterId?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#room.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Details about the last update to the room.
      */
@@ -1613,19 +1774,19 @@ export namespace games_v1 {
     /**
      * Globally unique ID for a room.
      */
-    roomId?: string | null;
+    roomId?: string;
     /**
      * The version of the room status: an increasing counter, used by the client to ignore out-of-order updates to room status.
      */
-    roomStatusVersion?: number | null;
+    roomStatusVersion?: number;
     /**
      * The status of the room. Possible values are:   - &quot;ROOM_INVITING&quot; - One or more players have been invited and not responded.  - &quot;ROOM_AUTO_MATCHING&quot; - One or more slots need to be filled by auto-matching.  - &quot;ROOM_CONNECTING&quot; - Players have joined and are connecting to each other (either before or after auto-matching).  - &quot;ROOM_ACTIVE&quot; - All players have joined and connected to each other.  - &quot;ROOM_DELETED&quot; - The room should no longer be shown on the client. Returned in sync calls when a player joins a room (as a tombstone), or for rooms where all joined participants have left.
      */
-    status?: string | null;
+    status?: string;
     /**
      * The variant / mode of the application being played; can be any integer value, or left blank.
      */
-    variant?: number | null;
+    variant?: number;
   }
   /**
    * This is a JSON template for a room auto-match criteria object.
@@ -1634,19 +1795,19 @@ export namespace games_v1 {
     /**
      * A bitmask indicating when auto-matches are valid. When ANDed with other exclusive bitmasks, the result must be zero. Can be used to support exclusive roles within a game.
      */
-    exclusiveBitmask?: string | null;
+    exclusiveBitmask?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomAutoMatchingCriteria.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The maximum number of players that should be added to the room by auto-matching.
      */
-    maxAutoMatchingPlayers?: number | null;
+    maxAutoMatchingPlayers?: number;
     /**
      * The minimum number of players that should be added to the room by auto-matching.
      */
-    minAutoMatchingPlayers?: number | null;
+    minAutoMatchingPlayers?: number;
   }
   /**
    * This is a JSON template for status of room automatching that is in progress.
@@ -1655,11 +1816,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomAutoMatchStatus.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * An estimate for the amount of time (in seconds) that auto-matching is expected to take to complete.
      */
-    waitEstimateSeconds?: number | null;
+    waitEstimateSeconds?: number;
   }
   /**
    * This is a JSON template for the client address when setting up a room.
@@ -1668,11 +1829,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomClientAddress.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The XMPP address of the client on the Google Games XMPP network.
      */
-    xmppAddress?: string | null;
+    xmppAddress?: string;
   }
   /**
    * This is a JSON template for a room creation request.
@@ -1685,7 +1846,7 @@ export namespace games_v1 {
     /**
      * The capabilities that this client supports for realtime communication.
      */
-    capabilities?: string[] | null;
+    capabilities?: string[];
     /**
      * Client address for the player creating the room.
      */
@@ -1693,11 +1854,11 @@ export namespace games_v1 {
     /**
      * The player IDs to invite to the room.
      */
-    invitedPlayerIds?: string[] | null;
+    invitedPlayerIds?: string[];
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomCreateRequest.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Network diagnostics for the client creating the room.
      */
@@ -1705,11 +1866,11 @@ export namespace games_v1 {
     /**
      * A randomly generated numeric ID. This number is used at the server to ensure that the request is handled correctly across retries.
      */
-    requestId?: string | null;
+    requestId?: string;
     /**
      * The variant / mode of the application to be played. This can be any integer value, or left blank. You should use a small number of variants to keep the auto-matching pool as large as possible.
      */
-    variant?: number | null;
+    variant?: number;
   }
   /**
    * This is a JSON template for a join room request.
@@ -1718,7 +1879,7 @@ export namespace games_v1 {
     /**
      * The capabilities that this client supports for realtime communication.
      */
-    capabilities?: string[] | null;
+    capabilities?: string[];
     /**
      * Client address for the player joining the room.
      */
@@ -1726,7 +1887,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomJoinRequest.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Network diagnostics for the client joining the room.
      */
@@ -1739,27 +1900,27 @@ export namespace games_v1 {
     /**
      * Android network subtype. http://developer.android.com/reference/android/net/NetworkInfo.html#getSubtype()
      */
-    androidNetworkSubtype?: number | null;
+    androidNetworkSubtype?: number;
     /**
      * Android network type. http://developer.android.com/reference/android/net/NetworkInfo.html#getType()
      */
-    androidNetworkType?: number | null;
+    androidNetworkType?: number;
     /**
      * iOS network type as defined in Reachability.h.
      */
-    iosNetworkType?: number | null;
+    iosNetworkType?: number;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomLeaveDiagnostics.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The MCC+MNC code for the client&#39;s network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperator() On iOS, see: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html
      */
-    networkOperatorCode?: string | null;
+    networkOperatorCode?: string;
     /**
      * The name of the carrier of the client&#39;s network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperatorName() On iOS: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html#//apple_ref/occ/instp/CTCarrier/carrierName
      */
-    networkOperatorName?: string | null;
+    networkOperatorName?: string;
     /**
      * Diagnostics about all peer sessions.
      */
@@ -1767,7 +1928,7 @@ export namespace games_v1 {
     /**
      * Whether or not sockets were used.
      */
-    socketsUsed?: boolean | null;
+    socketsUsed?: boolean;
   }
   /**
    * This is a JSON template for a leave room request.
@@ -1776,7 +1937,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomLeaveRequest.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Diagnostics for a player leaving the room.
      */
@@ -1784,7 +1945,7 @@ export namespace games_v1 {
     /**
      * Reason for leaving the match. Possible values are:   - &quot;PLAYER_LEFT&quot; - The player chose to leave the room..  - &quot;GAME_LEFT&quot; - The game chose to remove the player from the room.  - &quot;REALTIME_ABANDONED&quot; - The player switched to another application and abandoned the room.  - &quot;REALTIME_PEER_CONNECTION_FAILURE&quot; - The client was unable to establish a connection to other peer(s).  - &quot;REALTIME_SERVER_CONNECTION_FAILURE&quot; - The client was unable to communicate with the server.  - &quot;REALTIME_SERVER_ERROR&quot; - The client received an error response when it tried to communicate with the server.  - &quot;REALTIME_TIMEOUT&quot; - The client timed out while waiting for a room.  - &quot;REALTIME_CLIENT_DISCONNECTING&quot; - The client disconnects without first calling Leave.  - &quot;REALTIME_SIGN_OUT&quot; - The user signed out of G+ while in the room.  - &quot;REALTIME_GAME_CRASHED&quot; - The game crashed.  - &quot;REALTIME_ROOM_SERVICE_CRASHED&quot; - RoomAndroidService crashed.  - &quot;REALTIME_DIFFERENT_CLIENT_ROOM_OPERATION&quot; - Another client is trying to enter a room.  - &quot;REALTIME_SAME_CLIENT_ROOM_OPERATION&quot; - The same client is trying to enter a new room.
      */
-    reason?: string | null;
+    reason?: string;
   }
   /**
    * This is a JSON template for a list of rooms.
@@ -1797,11 +1958,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomList.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The pagination token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for room modification metadata.
@@ -1810,15 +1971,15 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomModification.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The timestamp at which they modified the room, in milliseconds since the epoch in UTC.
      */
-    modifiedTimestampMillis?: string | null;
+    modifiedTimestampMillis?: string;
     /**
      * The ID of the participant that modified the room.
      */
-    participantId?: string | null;
+    participantId?: string;
   }
   /**
    * This is a JSON template for an update on the status of a peer in a room.
@@ -1827,31 +1988,31 @@ export namespace games_v1 {
     /**
      * The amount of time in milliseconds it took to establish connections with this peer.
      */
-    connectionSetupLatencyMillis?: number | null;
+    connectionSetupLatencyMillis?: number;
     /**
      * The error code in event of a failure. Possible values are:   - &quot;P2P_FAILED&quot; - The client failed to establish a P2P connection with the peer.  - &quot;PRESENCE_FAILED&quot; - The client failed to register to receive P2P connections.  - &quot;RELAY_SERVER_FAILED&quot; - The client received an error when trying to use the relay server to establish a P2P connection with the peer.
      */
-    error?: string | null;
+    error?: string;
     /**
      * More detailed diagnostic message returned in event of a failure.
      */
-    error_reason?: string | null;
+    error_reason?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomP2PStatus.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The ID of the participant.
      */
-    participantId?: string | null;
+    participantId?: string;
     /**
      * The status of the peer in the room. Possible values are:   - &quot;CONNECTION_ESTABLISHED&quot; - The client established a P2P connection with the peer.  - &quot;CONNECTION_FAILED&quot; - The client failed to establish directed presence with the peer.
      */
-    status?: string | null;
+    status?: string;
     /**
      * The amount of time in milliseconds it took to send packets back and forth on the unreliable channel with this peer.
      */
-    unreliableRoundtripLatencyMillis?: number | null;
+    unreliableRoundtripLatencyMillis?: number;
   }
   /**
    * This is a JSON template for an update on the status of peers in a room.
@@ -1860,7 +2021,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomP2PStatuses.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The updates for the peers.
      */
@@ -1873,7 +2034,7 @@ export namespace games_v1 {
     /**
      * True if this participant was auto-matched with the requesting player.
      */
-    autoMatched?: boolean | null;
+    autoMatched?: boolean;
     /**
      * Information about a player that has been anonymously auto-matched against the requesting player. (Either player or autoMatchedPlayer will be set.)
      */
@@ -1881,7 +2042,7 @@ export namespace games_v1 {
     /**
      * The capabilities which can be used when communicating with this participant.
      */
-    capabilities?: string[] | null;
+    capabilities?: string[];
     /**
      * Client address for the participant.
      */
@@ -1889,19 +2050,19 @@ export namespace games_v1 {
     /**
      * True if this participant is in the fully connected set of peers in the room.
      */
-    connected?: boolean | null;
+    connected?: boolean;
     /**
      * An identifier for the participant in the scope of the room. Cannot be used to identify a player across rooms or in other contexts.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomParticipant.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The reason the participant left the room; populated if the participant status is PARTICIPANT_LEFT. Possible values are:   - &quot;PLAYER_LEFT&quot; - The player explicitly chose to leave the room.  - &quot;GAME_LEFT&quot; - The game chose to remove the player from the room.  - &quot;ABANDONED&quot; - The player switched to another application and abandoned the room. - &quot;PEER_CONNECTION_FAILURE&quot; - The client was unable to establish or maintain a connection to other peer(s) in the room. - &quot;SERVER_ERROR&quot; - The client received an error response when it tried to communicate with the server.  - &quot;TIMEOUT&quot; - The client timed out while waiting for players to join and connect.  - &quot;PRESENCE_FAILURE&quot; - The client&#39;s XMPP connection ended abruptly.
      */
-    leaveReason?: string | null;
+    leaveReason?: string;
     /**
      * Information about the player. Not populated if this player was anonymously auto-matched against the requesting player. (Either player or autoMatchedPlayer will be set.)
      */
@@ -1909,7 +2070,7 @@ export namespace games_v1 {
     /**
      * The status of the participant with respect to the room. Possible values are:   - &quot;PARTICIPANT_INVITED&quot; - The participant has been invited to join the room, but has not yet responded.  - &quot;PARTICIPANT_JOINED&quot; - The participant has joined the room (either after creating it or accepting an invitation.)  - &quot;PARTICIPANT_DECLINED&quot; - The participant declined an invitation to join the room.  - &quot;PARTICIPANT_LEFT&quot; - The participant joined the room and then left it.
      */
-    status?: string | null;
+    status?: string;
   }
   /**
    * This is a JSON template for the status of a room that the player has joined.
@@ -1922,7 +2083,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#roomStatus.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The participants involved in the room, along with their statuses. Includes participants who have left or declined invitations.
      */
@@ -1930,15 +2091,15 @@ export namespace games_v1 {
     /**
      * Globally unique ID for a room.
      */
-    roomId?: string | null;
+    roomId?: string;
     /**
      * The status of the room. Possible values are:   - &quot;ROOM_INVITING&quot; - One or more players have been invited and not responded.  - &quot;ROOM_AUTO_MATCHING&quot; - One or more slots need to be filled by auto-matching.  - &quot;ROOM_CONNECTING&quot; - Players have joined are connecting to each other (either before or after auto-matching).  - &quot;ROOM_ACTIVE&quot; - All players have joined and connected to each other.  - &quot;ROOM_DELETED&quot; - All joined players have left.
      */
-    status?: string | null;
+    status?: string;
     /**
      * The version of the status for the room: an increasing counter, used by the client to ignore out-of-order updates to room status.
      */
-    statusVersion?: number | null;
+    statusVersion?: number;
   }
   /**
    * This is a JSON template for a request to submit a score to leaderboards.
@@ -1947,23 +2108,23 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#scoreSubmission.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The leaderboard this score is being submitted to.
      */
-    leaderboardId?: string | null;
+    leaderboardId?: string;
     /**
      * The new score being submitted.
      */
-    score?: string | null;
+    score?: string;
     /**
      * Additional information about this score. Values will contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
      */
-    scoreTag?: string | null;
+    scoreTag?: string;
     /**
      * Signature Values will contain URI-safe characters as defined by section 2.3 of RFC 3986.
      */
-    signature?: string | null;
+    signature?: string;
   }
   /**
    * This is a JSON template for an snapshot object.
@@ -1976,43 +2137,43 @@ export namespace games_v1 {
     /**
      * The description of this snapshot.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The ID of the file underlying this snapshot in the Drive API. Only present if the snapshot is a view on a Drive file and the file is owned by the caller.
      */
-    driveId?: string | null;
+    driveId?: string;
     /**
      * The duration associated with this snapshot, in millis.
      */
-    durationMillis?: string | null;
+    durationMillis?: string;
     /**
      * The ID of the snapshot.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#snapshot.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The timestamp (in millis since Unix epoch) of the last modification to this snapshot.
      */
-    lastModifiedMillis?: string | null;
+    lastModifiedMillis?: string;
     /**
      * The progress value (64-bit integer set by developer) associated with this snapshot.
      */
-    progressValue?: string | null;
+    progressValue?: string;
     /**
      * The title of this snapshot.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The type of this snapshot. Possible values are:   - &quot;SAVE_GAME&quot; - A snapshot representing a save game.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The unique name provided when the snapshot was created.
      */
-    uniqueName?: string | null;
+    uniqueName?: string;
   }
   /**
    * This is a JSON template for an image of a snapshot.
@@ -2021,23 +2182,23 @@ export namespace games_v1 {
     /**
      * The height of the image.
      */
-    height?: number | null;
+    height?: number;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#snapshotImage.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The MIME type of the image.
      */
-    mime_type?: string | null;
+    mime_type?: string;
     /**
      * The URL of the image. This URL may be invalidated at any time and should not be cached.
      */
-    url?: string | null;
+    url?: string;
     /**
      * The width of the image.
      */
-    width?: number | null;
+    width?: number;
   }
   /**
    * This is a JSON template for a list of snapshot objects.
@@ -2050,11 +2211,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#snapshotListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token corresponding to the next page of results. If there are no more results, the token is omitted.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for an turn-based auto-match criteria object.
@@ -2063,19 +2224,19 @@ export namespace games_v1 {
     /**
      * A bitmask indicating when auto-matches are valid. When ANDed with other exclusive bitmasks, the result must be zero. Can be used to support exclusive roles within a game.
      */
-    exclusiveBitmask?: string | null;
+    exclusiveBitmask?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedAutoMatchingCriteria.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The maximum number of players that should be added to the match by auto-matching.
      */
-    maxAutoMatchingPlayers?: number | null;
+    maxAutoMatchingPlayers?: number;
     /**
      * The minimum number of players that should be added to the match by auto-matching.
      */
-    minAutoMatchingPlayers?: number | null;
+    minAutoMatchingPlayers?: number;
   }
   /**
    * This is a JSON template for a turn-based match resource object.
@@ -2084,7 +2245,7 @@ export namespace games_v1 {
     /**
      * The ID of the application being played.
      */
-    applicationId?: string | null;
+    applicationId?: string;
     /**
      * Criteria for auto-matching players into this match.
      */
@@ -2100,15 +2261,15 @@ export namespace games_v1 {
     /**
      * This short description is generated by our servers based on turn state and is localized and worded relative to the player requesting the match. It is intended to be displayed when the match is shown in a list.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The ID of the participant that invited the user to the match. Not set if the user was not invited to the match.
      */
-    inviterId?: string | null;
+    inviterId?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatch.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Details about the last update to the match.
      */
@@ -2116,15 +2277,15 @@ export namespace games_v1 {
     /**
      * Globally unique ID for a turn-based match.
      */
-    matchId?: string | null;
+    matchId?: string;
     /**
      * The number of the match in a chain of rematches. Will be set to 1 for the first match and incremented by 1 for each rematch.
      */
-    matchNumber?: number | null;
+    matchNumber?: number;
     /**
      * The version of this match: an increasing counter, used to avoid out-of-date updates to the match.
      */
-    matchVersion?: number | null;
+    matchVersion?: number;
     /**
      * The participants involved in the match, along with their statuses. Includes participants who have left or declined invitations.
      */
@@ -2132,7 +2293,7 @@ export namespace games_v1 {
     /**
      * The ID of the participant that is taking a turn.
      */
-    pendingParticipantId?: string | null;
+    pendingParticipantId?: string;
     /**
      * The data / game state for the previous match; set for the first turn of rematches only.
      */
@@ -2140,7 +2301,7 @@ export namespace games_v1 {
     /**
      * The ID of a rematch of this match. Only set for completed matches that have been rematched.
      */
-    rematchId?: string | null;
+    rematchId?: string;
     /**
      * The results reported for this match.
      */
@@ -2148,19 +2309,19 @@ export namespace games_v1 {
     /**
      * The status of the match. Possible values are:   - &quot;MATCH_AUTO_MATCHING&quot; - One or more slots need to be filled by auto-matching; the match cannot be established until they are filled.  - &quot;MATCH_ACTIVE&quot; - The match has started.  - &quot;MATCH_COMPLETE&quot; - The match has finished.  - &quot;MATCH_CANCELED&quot; - The match was canceled.  - &quot;MATCH_EXPIRED&quot; - The match expired due to inactivity.  - &quot;MATCH_DELETED&quot; - The match should no longer be shown on the client. Returned only for tombstones for matches when sync is called.
      */
-    status?: string | null;
+    status?: string;
     /**
      * The status of the current user in the match. Derived from the match type, match status, the user&#39;s participant status, and the pending participant for the match. Possible values are:   - &quot;USER_INVITED&quot; - The user has been invited to join the match and has not responded yet.  - &quot;USER_AWAITING_TURN&quot; - The user is waiting for their turn.  - &quot;USER_TURN&quot; - The user has an action to take in the match.  - &quot;USER_MATCH_COMPLETED&quot; - The match has ended (it is completed, canceled, or expired.)
      */
-    userMatchStatus?: string | null;
+    userMatchStatus?: string;
     /**
      * The variant / mode of the application being played; can be any integer value, or left blank.
      */
-    variant?: number | null;
+    variant?: number;
     /**
      * The ID of another participant in the match that can be used when describing the participants the user is playing with.
      */
-    withParticipantId?: string | null;
+    withParticipantId?: string;
   }
   /**
    * This is a JSON template for a turn-based match creation request.
@@ -2173,19 +2334,19 @@ export namespace games_v1 {
     /**
      * The player ids to invite to the match.
      */
-    invitedPlayerIds?: string[] | null;
+    invitedPlayerIds?: string[];
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatchCreateRequest.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * A randomly generated numeric ID. This number is used at the server to ensure that the request is handled correctly across retries.
      */
-    requestId?: string | null;
+    requestId?: string;
     /**
      * The variant / mode of the application to be played. This can be any integer value, or left blank. You should use a small number of variants to keep the auto-matching pool as large as possible.
      */
-    variant?: number | null;
+    variant?: number;
   }
   /**
    * This is a JSON template for a turn-based match data object.
@@ -2194,15 +2355,15 @@ export namespace games_v1 {
     /**
      * The byte representation of the data (limited to 128 kB), as a Base64-encoded string with the URL_SAFE encoding option.
      */
-    data?: string | null;
+    data?: string;
     /**
      * True if this match has data available but it wasn&#39;t returned in a list response; fetching the match individually will retrieve this data.
      */
-    dataAvailable?: boolean | null;
+    dataAvailable?: boolean;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatchData.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * This is a JSON template for sending a turn-based match data object.
@@ -2211,11 +2372,11 @@ export namespace games_v1 {
     /**
      * The byte representation of the data (limited to 128 kB), as a Base64-encoded string with the URL_SAFE encoding option.
      */
-    data?: string | null;
+    data?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatchDataRequest.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * This is a JSON template for a list of turn-based matches.
@@ -2228,11 +2389,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatchList.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The pagination token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for turn-based match modification metadata.
@@ -2241,15 +2402,15 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatchModification.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The timestamp at which they modified the match, in milliseconds since the epoch in UTC.
      */
-    modifiedTimestampMillis?: string | null;
+    modifiedTimestampMillis?: string;
     /**
      * The ID of the participant that modified the match.
      */
-    participantId?: string | null;
+    participantId?: string;
   }
   /**
    * This is a JSON template for a participant in a turn-based match.
@@ -2258,7 +2419,7 @@ export namespace games_v1 {
     /**
      * True if this participant was auto-matched with the requesting player.
      */
-    autoMatched?: boolean | null;
+    autoMatched?: boolean;
     /**
      * Information about a player that has been anonymously auto-matched against the requesting player. (Either player or autoMatchedPlayer will be set.)
      */
@@ -2266,11 +2427,11 @@ export namespace games_v1 {
     /**
      * An identifier for the participant in the scope of the match. Cannot be used to identify a player across matches or in other contexts.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatchParticipant.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Information about the player. Not populated if this player was anonymously auto-matched against the requesting player. (Either player or autoMatchedPlayer will be set.)
      */
@@ -2278,7 +2439,7 @@ export namespace games_v1 {
     /**
      * The status of the participant with respect to the match. Possible values are:   - &quot;PARTICIPANT_NOT_INVITED_YET&quot; - The participant is slated to be invited to the match, but the invitation has not been sent; the invite will be sent when it becomes their turn.  - &quot;PARTICIPANT_INVITED&quot; - The participant has been invited to join the match, but has not yet responded.  - &quot;PARTICIPANT_JOINED&quot; - The participant has joined the match (either after creating it or accepting an invitation.)  - &quot;PARTICIPANT_DECLINED&quot; - The participant declined an invitation to join the match.  - &quot;PARTICIPANT_LEFT&quot; - The participant joined the match and then left it.  - &quot;PARTICIPANT_FINISHED&quot; - The participant finished playing in the match.  - &quot;PARTICIPANT_UNRESPONSIVE&quot; - The participant did not take their turn in the allotted time.
      */
-    status?: string | null;
+    status?: string;
   }
   /**
    * This is a JSON template for a rematch response.
@@ -2287,7 +2448,7 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatchRematch.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The old match that the rematch was created from; will be updated such that the rematchId field will point at the new match.
      */
@@ -2308,11 +2469,11 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatchResults.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The version of the match being updated.
      */
-    matchVersion?: number | null;
+    matchVersion?: number;
     /**
      * The match results for the participants in the match.
      */
@@ -2329,15 +2490,15 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatchSync.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * True if there were more matches available to fetch at the time the response was generated (which were not returned due to page size limits.)
      */
-    moreAvailable?: boolean | null;
+    moreAvailable?: boolean;
     /**
      * The pagination token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for the object representing a turn.
@@ -2350,15 +2511,15 @@ export namespace games_v1 {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#turnBasedMatchTurn.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The version of this match: an increasing counter, used to avoid out-of-date updates to the match.
      */
-    matchVersion?: number | null;
+    matchVersion?: number;
     /**
      * The ID of the participant who should take their turn next. May be set to the current player&#39;s participant ID to update match state without changing the turn. If not set, the match will wait for other player(s) to join via automatching; this is only valid if automatch criteria is set on the match with remaining slots for automatched players.
      */
-    pendingParticipantId?: string | null;
+    pendingParticipantId?: string;
     /**
      * The match results for the participants in the match.
      */
@@ -2906,7 +3067,7 @@ export namespace games_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.builtinGameId Override used only by built-in games in Play Games application.
-     * @param {().AchievementUpdateMultipleRequest} params.requestBody Request body data
+     * @param {().AchievementUpdateMultipleRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3545,7 +3706,7 @@ export namespace games_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.language The preferred language to use for strings returned by this method.
-     * @param {().EventRecordRequest} params.requestBody Request body data
+     * @param {().EventRecordRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4266,7 +4427,7 @@ export namespace games_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().PushTokenId} params.requestBody Request body data
+     * @param {().PushTokenId} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4338,7 +4499,7 @@ export namespace games_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().PushToken} params.requestBody Request body data
+     * @param {().PushToken} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4427,6 +4588,302 @@ export namespace games_v1 {
      * Request body metadata
      */
     requestBody?: Schema$PushToken;
+  }
+
+  export class Resource$Questmilestones {
+    context: APIRequestContext;
+    constructor(context: APIRequestContext) {
+      this.context = context;
+    }
+
+    /**
+     * games.questMilestones.claim
+     * @desc Report that a reward for the milestone corresponding to milestoneId for the quest corresponding to questId has been claimed by the currently authorized user.
+     * @alias games.questMilestones.claim
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string} params.milestoneId The ID of the milestone.
+     * @param {string} params.questId The ID of the quest.
+     * @param {string} params.requestId A numeric ID to ensure that the request is handled correctly across retries. Your client application must generate this ID randomly.
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    claim(
+      params?: Params$Resource$Questmilestones$Claim,
+      options?: MethodOptions
+    ): GaxiosPromise<void>;
+    claim(
+      params: Params$Resource$Questmilestones$Claim,
+      options: MethodOptions | BodyResponseCallback<void>,
+      callback: BodyResponseCallback<void>
+    ): void;
+    claim(
+      params: Params$Resource$Questmilestones$Claim,
+      callback: BodyResponseCallback<void>
+    ): void;
+    claim(callback: BodyResponseCallback<void>): void;
+    claim(
+      paramsOrCallback?:
+        | Params$Resource$Questmilestones$Claim
+        | BodyResponseCallback<void>,
+      optionsOrCallback?: MethodOptions | BodyResponseCallback<void>,
+      callback?: BodyResponseCallback<void>
+    ): void | GaxiosPromise<void> {
+      let params = (paramsOrCallback ||
+        {}) as Params$Resource$Questmilestones$Claim;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Questmilestones$Claim;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+          {
+            url: (
+              rootUrl +
+              '/games/v1/quests/{questId}/milestones/{milestoneId}/claim'
+            ).replace(/([^:]\/)\/+/g, '$1'),
+            method: 'PUT',
+          },
+          options
+        ),
+        params,
+        requiredParams: ['questId', 'milestoneId', 'requestId'],
+        pathParams: ['milestoneId', 'questId'],
+        context: this.context,
+      };
+      if (callback) {
+        createAPIRequest<void>(parameters, callback);
+      } else {
+        return createAPIRequest<void>(parameters);
+      }
+    }
+  }
+
+  export interface Params$Resource$Questmilestones$Claim
+    extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+
+    /**
+     * The ID of the milestone.
+     */
+    milestoneId?: string;
+    /**
+     * The ID of the quest.
+     */
+    questId?: string;
+    /**
+     * A numeric ID to ensure that the request is handled correctly across retries. Your client application must generate this ID randomly.
+     */
+    requestId?: string;
+  }
+
+  export class Resource$Quests {
+    context: APIRequestContext;
+    constructor(context: APIRequestContext) {
+      this.context = context;
+    }
+
+    /**
+     * games.quests.accept
+     * @desc Indicates that the currently authorized user will participate in the quest.
+     * @alias games.quests.accept
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string=} params.language The preferred language to use for strings returned by this method.
+     * @param {string} params.questId The ID of the quest.
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    accept(
+      params?: Params$Resource$Quests$Accept,
+      options?: MethodOptions
+    ): GaxiosPromise<Schema$Quest>;
+    accept(
+      params: Params$Resource$Quests$Accept,
+      options: MethodOptions | BodyResponseCallback<Schema$Quest>,
+      callback: BodyResponseCallback<Schema$Quest>
+    ): void;
+    accept(
+      params: Params$Resource$Quests$Accept,
+      callback: BodyResponseCallback<Schema$Quest>
+    ): void;
+    accept(callback: BodyResponseCallback<Schema$Quest>): void;
+    accept(
+      paramsOrCallback?:
+        | Params$Resource$Quests$Accept
+        | BodyResponseCallback<Schema$Quest>,
+      optionsOrCallback?: MethodOptions | BodyResponseCallback<Schema$Quest>,
+      callback?: BodyResponseCallback<Schema$Quest>
+    ): void | GaxiosPromise<Schema$Quest> {
+      let params = (paramsOrCallback || {}) as Params$Resource$Quests$Accept;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Quests$Accept;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+          {
+            url: (rootUrl + '/games/v1/quests/{questId}/accept').replace(
+              /([^:]\/)\/+/g,
+              '$1'
+            ),
+            method: 'POST',
+          },
+          options
+        ),
+        params,
+        requiredParams: ['questId'],
+        pathParams: ['questId'],
+        context: this.context,
+      };
+      if (callback) {
+        createAPIRequest<Schema$Quest>(parameters, callback);
+      } else {
+        return createAPIRequest<Schema$Quest>(parameters);
+      }
+    }
+
+    /**
+     * games.quests.list
+     * @desc Get a list of quests for your application and the currently authenticated player.
+     * @alias games.quests.list
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string=} params.language The preferred language to use for strings returned by this method.
+     * @param {integer=} params.maxResults The maximum number of quest resources to return in the response, used for paging. For any response, the actual number of quest resources returned may be less than the specified maxResults. Acceptable values are 1 to 50, inclusive. (Default: 50).
+     * @param {string=} params.pageToken The token returned by the previous request.
+     * @param {string} params.playerId A player ID. A value of me may be used in place of the authenticated player's ID.
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    list(
+      params?: Params$Resource$Quests$List,
+      options?: MethodOptions
+    ): GaxiosPromise<Schema$QuestListResponse>;
+    list(
+      params: Params$Resource$Quests$List,
+      options: MethodOptions | BodyResponseCallback<Schema$QuestListResponse>,
+      callback: BodyResponseCallback<Schema$QuestListResponse>
+    ): void;
+    list(
+      params: Params$Resource$Quests$List,
+      callback: BodyResponseCallback<Schema$QuestListResponse>
+    ): void;
+    list(callback: BodyResponseCallback<Schema$QuestListResponse>): void;
+    list(
+      paramsOrCallback?:
+        | Params$Resource$Quests$List
+        | BodyResponseCallback<Schema$QuestListResponse>,
+      optionsOrCallback?:
+        | MethodOptions
+        | BodyResponseCallback<Schema$QuestListResponse>,
+      callback?: BodyResponseCallback<Schema$QuestListResponse>
+    ): void | GaxiosPromise<Schema$QuestListResponse> {
+      let params = (paramsOrCallback || {}) as Params$Resource$Quests$List;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Quests$List;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+          {
+            url: (rootUrl + '/games/v1/players/{playerId}/quests').replace(
+              /([^:]\/)\/+/g,
+              '$1'
+            ),
+            method: 'GET',
+          },
+          options
+        ),
+        params,
+        requiredParams: ['playerId'],
+        pathParams: ['playerId'],
+        context: this.context,
+      };
+      if (callback) {
+        createAPIRequest<Schema$QuestListResponse>(parameters, callback);
+      } else {
+        return createAPIRequest<Schema$QuestListResponse>(parameters);
+      }
+    }
+  }
+
+  export interface Params$Resource$Quests$Accept extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+
+    /**
+     * The preferred language to use for strings returned by this method.
+     */
+    language?: string;
+    /**
+     * The ID of the quest.
+     */
+    questId?: string;
+  }
+  export interface Params$Resource$Quests$List extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+
+    /**
+     * The preferred language to use for strings returned by this method.
+     */
+    language?: string;
+    /**
+     * The maximum number of quest resources to return in the response, used for paging. For any response, the actual number of quest resources returned may be less than the specified maxResults. Acceptable values are 1 to 50, inclusive. (Default: 50).
+     */
+    maxResults?: number;
+    /**
+     * The token returned by the previous request.
+     */
+    pageToken?: string;
+    /**
+     * A player ID. A value of me may be used in place of the authenticated player's ID.
+     */
+    playerId?: string;
   }
 
   export class Resource$Revisions {
@@ -4537,7 +4994,7 @@ export namespace games_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.language The preferred language to use for strings returned by this method.
-     * @param {().RoomCreateRequest} params.requestBody Request body data
+     * @param {().RoomCreateRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4825,7 +5282,7 @@ export namespace games_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.language The preferred language to use for strings returned by this method.
      * @param {string} params.roomId The ID of the room.
-     * @param {().RoomJoinRequest} params.requestBody Request body data
+     * @param {().RoomJoinRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4898,7 +5355,7 @@ export namespace games_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.language The preferred language to use for strings returned by this method.
      * @param {string} params.roomId The ID of the room.
-     * @param {().RoomLeaveRequest} params.requestBody Request body data
+     * @param {().RoomLeaveRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5041,7 +5498,7 @@ export namespace games_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.language The preferred language to use for strings returned by this method.
      * @param {string} params.roomId The ID of the room.
-     * @param {().RoomP2PStatuses} params.requestBody Request body data
+     * @param {().RoomP2PStatuses} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5583,7 +6040,7 @@ export namespace games_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.language The preferred language to use for strings returned by this method.
-     * @param {().PlayerScoreSubmissionList} params.requestBody Request body data
+     * @param {().PlayerScoreSubmissionList} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6083,7 +6540,7 @@ export namespace games_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.language The preferred language to use for strings returned by this method.
-     * @param {().TurnBasedMatchCreateRequest} params.requestBody Request body data
+     * @param {().TurnBasedMatchCreateRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6304,7 +6761,7 @@ export namespace games_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.language The preferred language to use for strings returned by this method.
      * @param {string} params.matchId The ID of the match.
-     * @param {().TurnBasedMatchResults} params.requestBody Request body data
+     * @param {().TurnBasedMatchResults} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6912,7 +7369,7 @@ export namespace games_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.language The preferred language to use for strings returned by this method.
      * @param {string} params.matchId The ID of the match.
-     * @param {().TurnBasedMatchTurn} params.requestBody Request body data
+     * @param {().TurnBasedMatchTurn} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

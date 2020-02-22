@@ -1,24 +1,25 @@
-// Copyright 2018 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2018 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import * as execa from 'execa';
 import * as fs from 'fs';
 import * as nunjucks from 'nunjucks';
+import Q = require('p-queue');
 import * as path from 'path';
 import {promisify} from 'util';
-// there is a typings issue with p-queue and TypeScript 3.6.4.
-const {default: Q} = require('p-queue');
 
 const readdir = promisify(fs.readdir);
 const writeFile = promisify(fs.writeFile);
@@ -42,7 +43,11 @@ if (!fs.existsSync(docsPath)) {
 async function main() {
   const children = await readdir(apiPath);
   const dirs = children.filter(x => {
-    return !x.endsWith('.ts') && !x.includes('compute');
+    return (
+      !x.endsWith('.ts') &&
+      !x.includes('dfareporting') &&
+      !x.includes('compute')
+    );
   });
   const contents = nunjucks.render(templatePath, {apis: dirs});
   await writeFile(indexPath, contents);
@@ -52,13 +57,7 @@ async function main() {
   const promises = dirs.map(dir => {
     return q
       .add(() =>
-        execa(process.execPath, [
-          '--max-old-space-size=8192',
-          './node_modules/.bin/compodoc',
-          `src/apis/${dir}`,
-          '-d',
-          `./docs/${dir}`,
-        ])
+        execa('npx', ['compodoc', `src/apis/${dir}`, '-d', `./docs/${dir}`])
       )
       .then(() => {
         i++;

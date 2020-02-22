@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -127,11 +129,11 @@ export namespace books_v1 {
     /**
      * Anchor text after excerpt. For requests, if the user bookmarked a screen that has no flowing text on it, then this field should be empty.
      */
-    afterSelectedText?: string | null;
+    afterSelectedText?: string;
     /**
      * Anchor text before excerpt. For requests, if the user bookmarked a screen that has no flowing text on it, then this field should be empty.
      */
-    beforeSelectedText?: string | null;
+    beforeSelectedText?: string;
     /**
      * Selection ranges sent from the client.
      */
@@ -141,11 +143,11 @@ export namespace books_v1 {
       gbImageRange?: Schema$BooksAnnotationsRange;
       gbTextRange?: Schema$BooksAnnotationsRange;
       imageCfiRange?: Schema$BooksAnnotationsRange;
-    } | null;
+    };
     /**
      * Timestamp for the created time of this annotation.
      */
-    created?: string | null;
+    created?: string;
     /**
      * Selection ranges for the most recent content version.
      */
@@ -155,91 +157,91 @@ export namespace books_v1 {
       gbImageRange?: Schema$BooksAnnotationsRange;
       gbTextRange?: Schema$BooksAnnotationsRange;
       imageCfiRange?: Schema$BooksAnnotationsRange;
-    } | null;
+    };
     /**
      * User-created data for this annotation.
      */
-    data?: string | null;
+    data?: string;
     /**
      * Indicates that this annotation is deleted.
      */
-    deleted?: boolean | null;
+    deleted?: boolean;
     /**
      * The highlight style for this annotation.
      */
-    highlightStyle?: string | null;
+    highlightStyle?: string;
     /**
      * Id of this annotation, in the form of a GUID.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The layer this annotation is for.
      */
-    layerId?: string | null;
+    layerId?: string;
     layerSummary?: {
       allowedCharacterCount?: number;
       limitType?: string;
       remainingCharacterCount?: number;
-    } | null;
+    };
     /**
      * Pages that this annotation spans.
      */
-    pageIds?: string[] | null;
+    pageIds?: string[];
     /**
      * Excerpt from the volume.
      */
-    selectedText?: string | null;
+    selectedText?: string;
     /**
      * URL to this resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * Timestamp for the last time this annotation was modified.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The volume that this annotation belongs to.
      */
-    volumeId?: string | null;
+    volumeId?: string;
   }
   export interface Schema$Annotationdata {
     /**
      * The type of annotation this data is for.
      */
-    annotationType?: string | null;
-    data?: any | null;
+    annotationType?: string;
+    data?: any;
     /**
      * Base64 encoded data for this annotation data.
      */
-    encoded_data?: string | null;
+    encoded_data?: string;
     /**
      * Unique id for this annotation data.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Resource Type
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The Layer id for this data. *
      */
-    layerId?: string | null;
+    layerId?: string;
     /**
      * URL for this resource. *
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * Timestamp for the last time this data was updated. (RFC 3339 UTC date-time format).
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The volume id for this data. *
      */
-    volumeId?: string | null;
+    volumeId?: string;
   }
   export interface Schema$Annotations {
     /**
@@ -249,15 +251,15 @@ export namespace books_v1 {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token to pass in for pagination for the next page. This will not be present if this request does not have more results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Total number of annotations found. This may be greater than the number of notes returned in this response if results have been paginated.
      */
-    totalItems?: number | null;
+    totalItems?: number;
   }
   export interface Schema$Annotationsdata {
     /**
@@ -267,91 +269,91 @@ export namespace books_v1 {
     /**
      * Resource type
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token to pass in for pagination for the next page. This will not be present if this request does not have more results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total number of volume annotations found.
      */
-    totalItems?: number | null;
+    totalItems?: number;
   }
   export interface Schema$AnnotationsSummary {
-    kind?: string | null;
+    kind?: string;
     layers?: Array<{
       allowedCharacterCount?: number;
       layerId?: string;
       limitType?: string;
       remainingCharacterCount?: number;
       updated?: string;
-    }> | null;
+    }>;
   }
   export interface Schema$BooksAnnotationsRange {
     /**
      * The offset from the ending position.
      */
-    endOffset?: string | null;
+    endOffset?: string;
     /**
      * The ending position for the range.
      */
-    endPosition?: string | null;
+    endPosition?: string;
     /**
      * The offset from the starting position.
      */
-    startOffset?: string | null;
+    startOffset?: string;
     /**
      * The starting position for the range.
      */
-    startPosition?: string | null;
+    startPosition?: string;
   }
   export interface Schema$BooksCloudloadingResource {
-    author?: string | null;
-    processingState?: string | null;
-    title?: string | null;
-    volumeId?: string | null;
+    author?: string;
+    processingState?: string;
+    title?: string;
+    volumeId?: string;
   }
   export interface Schema$Bookshelf {
     /**
      * Whether this bookshelf is PUBLIC or PRIVATE.
      */
-    access?: string | null;
+    access?: string;
     /**
      * Created time for this bookshelf (formatted UTC timestamp with millisecond resolution).
      */
-    created?: string | null;
+    created?: string;
     /**
      * Description of this bookshelf.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Id of this bookshelf, only unique by user.
      */
-    id?: number | null;
+    id?: number;
     /**
      * Resource type for bookshelf metadata.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * URL to this resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * Title of this bookshelf.
      */
-    title?: string | null;
+    title?: string;
     /**
      * Last modified time of this bookshelf (formatted UTC timestamp with millisecond resolution).
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * Number of volumes in this bookshelf.
      */
-    volumeCount?: number | null;
+    volumeCount?: number;
     /**
      * Last time a volume was added or removed from this bookshelf (formatted UTC timestamp with millisecond resolution).
      */
-    volumesLastUpdated?: string | null;
+    volumesLastUpdated?: string;
   }
   export interface Schema$Bookshelves {
     /**
@@ -361,73 +363,69 @@ export namespace books_v1 {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$BooksVolumesRecommendedRateResponse {
-    consistency_token?: string | null;
+    consistency_token?: string;
   }
   export interface Schema$Category {
     /**
      * A list of onboarding categories.
      */
-    items?: Array<{
-      badgeUrl?: string;
-      categoryId?: string;
-      name?: string;
-    }> | null;
+    items?: Array<{badgeUrl?: string; categoryId?: string; name?: string}>;
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$ConcurrentAccessRestriction {
     /**
      * Whether access is granted for this (user, device, volume).
      */
-    deviceAllowed?: boolean | null;
+    deviceAllowed?: boolean;
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The maximum number of concurrent access licenses for this volume.
      */
-    maxConcurrentDevices?: number | null;
+    maxConcurrentDevices?: number;
     /**
      * Error/warning message.
      */
-    message?: string | null;
+    message?: string;
     /**
      * Client nonce for verification. Download access and client-validation only.
      */
-    nonce?: string | null;
+    nonce?: string;
     /**
      * Error/warning reason code.
      */
-    reasonCode?: string | null;
+    reasonCode?: string;
     /**
      * Whether this volume has any concurrent access restrictions.
      */
-    restricted?: boolean | null;
+    restricted?: boolean;
     /**
      * Response signature.
      */
-    signature?: string | null;
+    signature?: string;
     /**
      * Client app identifier for verification. Download access and client-validation only.
      */
-    source?: string | null;
+    source?: string;
     /**
      * Time in seconds for license auto-expiration.
      */
-    timeWindowSeconds?: number | null;
+    timeWindowSeconds?: number;
     /**
      * Identifies the volume for which this entry applies.
      */
-    volumeId?: string | null;
+    volumeId?: string;
   }
   export interface Schema$Dictlayerdata {
-    common?: {title?: string} | null;
+    common?: {title?: string};
     dict?: {
       source?: {attribution?: string; url?: string};
       words?: Array<{
@@ -460,8 +458,8 @@ export namespace books_v1 {
         }>;
         source?: {attribution?: string; url?: string};
       }>;
-    } | null;
-    kind?: string | null;
+    };
+    kind?: string;
   }
   export interface Schema$Discoveryclusters {
     clusters?: Array<{
@@ -478,12 +476,12 @@ export namespace books_v1 {
       totalVolumes?: number;
       uid?: string;
       volumes?: Schema$Volume[];
-    }> | null;
+    }>;
     /**
      * Resorce type.
      */
-    kind?: string | null;
-    totalClusters?: number | null;
+    kind?: string;
+    totalClusters?: number;
   }
   export interface Schema$DownloadAccesses {
     /**
@@ -493,63 +491,63 @@ export namespace books_v1 {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$DownloadAccessRestriction {
     /**
      * If restricted, whether access is granted for this (user, device, volume).
      */
-    deviceAllowed?: boolean | null;
+    deviceAllowed?: boolean;
     /**
      * If restricted, the number of content download licenses already acquired (including the requesting client, if licensed).
      */
-    downloadsAcquired?: number | null;
+    downloadsAcquired?: number;
     /**
      * If deviceAllowed, whether access was just acquired with this request.
      */
-    justAcquired?: boolean | null;
+    justAcquired?: boolean;
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * If restricted, the maximum number of content download licenses for this volume.
      */
-    maxDownloadDevices?: number | null;
+    maxDownloadDevices?: number;
     /**
      * Error/warning message.
      */
-    message?: string | null;
+    message?: string;
     /**
      * Client nonce for verification. Download access and client-validation only.
      */
-    nonce?: string | null;
+    nonce?: string;
     /**
      * Error/warning reason code. Additional codes may be added in the future. 0 OK 100 ACCESS_DENIED_PUBLISHER_LIMIT 101 ACCESS_DENIED_LIMIT 200 WARNING_USED_LAST_ACCESS
      */
-    reasonCode?: string | null;
+    reasonCode?: string;
     /**
      * Whether this volume has any download access restrictions.
      */
-    restricted?: boolean | null;
+    restricted?: boolean;
     /**
      * Response signature.
      */
-    signature?: string | null;
+    signature?: string;
     /**
      * Client app identifier for verification. Download access and client-validation only.
      */
-    source?: string | null;
+    source?: string;
     /**
      * Identifies the volume for which this entry applies.
      */
-    volumeId?: string | null;
+    volumeId?: string;
   }
   export interface Schema$FamilyInfo {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Family membership info of the user that made the request.
      */
@@ -559,7 +557,7 @@ export namespace books_v1 {
       allowedMaturityRating?: string;
       isInFamily?: boolean;
       role?: string;
-    } | null;
+    };
   }
   export interface Schema$Geolayerdata {
     common?: {
@@ -568,7 +566,7 @@ export namespace books_v1 {
       snippet?: string;
       snippetUrl?: string;
       title?: string;
-    } | null;
+    };
     geo?: {
       boundary?: Array<Array<{latitude?: number; longitude?: number}>>;
       cachePolicy?: string;
@@ -581,8 +579,8 @@ export namespace books_v1 {
         lo?: {latitude?: number; longitude?: number};
       };
       zoom?: number;
-    } | null;
-    kind?: string | null;
+    };
+    kind?: string;
   }
   export interface Schema$Layersummaries {
     /**
@@ -592,65 +590,65 @@ export namespace books_v1 {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The total number of layer summaries found.
      */
-    totalItems?: number | null;
+    totalItems?: number;
   }
   export interface Schema$Layersummary {
     /**
      * The number of annotations for this layer.
      */
-    annotationCount?: number | null;
+    annotationCount?: number;
     /**
      * Link to get data for this annotation.
      */
-    annotationsDataLink?: string | null;
+    annotationsDataLink?: string;
     /**
      * The link to get the annotations for this layer.
      */
-    annotationsLink?: string | null;
+    annotationsLink?: string;
     /**
      * The list of annotation types contained for this layer.
      */
-    annotationTypes?: string[] | null;
+    annotationTypes?: string[];
     /**
      * The content version this resource is for.
      */
-    contentVersion?: string | null;
+    contentVersion?: string;
     /**
      * The number of data items for this layer.
      */
-    dataCount?: number | null;
+    dataCount?: number;
     /**
      * Unique id of this layer summary.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Resource Type
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The layer id for this summary.
      */
-    layerId?: string | null;
+    layerId?: string;
     /**
      * URL to this resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * Timestamp for the last time an item in this layer was updated. (RFC 3339 UTC date-time format).
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The current version of this layer&#39;s volume annotations. Note that this version applies only to the data in the books.layers.volumeAnnotations.* responses. The actual annotation data is versioned separately.
      */
-    volumeAnnotationsVersion?: string | null;
+    volumeAnnotationsVersion?: string;
     /**
      * The volume id this resource is for.
      */
-    volumeId?: string | null;
+    volumeId?: string;
   }
   export interface Schema$Metadata {
     /**
@@ -662,35 +660,35 @@ export namespace books_v1 {
       language?: string;
       size?: string;
       version?: string;
-    }> | null;
+    }>;
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$Notification {
-    body?: string | null;
+    body?: string;
     /**
      * The list of crm experiment ids.
      */
-    crmExperimentIds?: string[] | null;
-    doc_id?: string | null;
-    doc_type?: string | null;
-    dont_show_notification?: boolean | null;
-    iconUrl?: string | null;
-    is_document_mature?: boolean | null;
+    crmExperimentIds?: string[];
+    doc_id?: string;
+    doc_type?: string;
+    dont_show_notification?: boolean;
+    iconUrl?: string;
+    is_document_mature?: boolean;
     /**
      * Resource type.
      */
-    kind?: string | null;
-    notificationGroup?: string | null;
-    notification_type?: string | null;
-    pcampaign_id?: string | null;
-    reason?: string | null;
-    show_notification_settings_action?: boolean | null;
-    targetUrl?: string | null;
-    timeToExpireMs?: string | null;
-    title?: string | null;
+    kind?: string;
+    notificationGroup?: string;
+    notification_type?: string;
+    pcampaign_id?: string;
+    reason?: string;
+    show_notification_settings_action?: boolean;
+    targetUrl?: string;
+    timeToExpireMs?: string;
+    title?: string;
   }
   export interface Schema$Offers {
     /**
@@ -708,41 +706,41 @@ export namespace books_v1 {
         title?: string;
         volumeId?: string;
       }>;
-    }> | null;
+    }>;
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$ReadingPosition {
     /**
      * Position in an EPUB as a CFI.
      */
-    epubCfiPosition?: string | null;
+    epubCfiPosition?: string;
     /**
      * Position in a volume for image-based content.
      */
-    gbImagePosition?: string | null;
+    gbImagePosition?: string;
     /**
      * Position in a volume for text-based content.
      */
-    gbTextPosition?: string | null;
+    gbTextPosition?: string;
     /**
      * Resource type for a reading position.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Position in a PDF file.
      */
-    pdfPosition?: string | null;
+    pdfPosition?: string;
     /**
      * Timestamp when this reading position was last updated (formatted UTC timestamp with millisecond resolution).
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * Volume id associated with this reading position.
      */
-    volumeId?: string | null;
+    volumeId?: string;
   }
   export interface Schema$RequestAccess {
     /**
@@ -756,94 +754,87 @@ export namespace books_v1 {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$Review {
     /**
      * Author of this review.
      */
-    author?: {displayName?: string} | null;
+    author?: {displayName?: string};
     /**
      * Review text.
      */
-    content?: string | null;
+    content?: string;
     /**
      * Date of this review.
      */
-    date?: string | null;
+    date?: string;
     /**
      * URL for the full review text, for reviews gathered from the web.
      */
-    fullTextUrl?: string | null;
+    fullTextUrl?: string;
     /**
      * Resource type for a review.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Star rating for this review. Possible values are ONE, TWO, THREE, FOUR, FIVE or NOT_RATED.
      */
-    rating?: string | null;
+    rating?: string;
     /**
      * Information regarding the source of this review, when the review is not from a Google Books user.
      */
-    source?: {
-      description?: string;
-      extraDescription?: string;
-      url?: string;
-    } | null;
+    source?: {description?: string; extraDescription?: string; url?: string};
     /**
      * Title for this review.
      */
-    title?: string | null;
+    title?: string;
     /**
      * Source type for this review. Possible values are EDITORIAL, WEB_USER or GOOGLE_USER.
      */
-    type?: string | null;
+    type?: string;
     /**
      * Volume that this review is for.
      */
-    volumeId?: string | null;
+    volumeId?: string;
   }
   export interface Schema$Series {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     series?: Array<{
       bannerImageUrl?: string;
-      eligibleForSubscription?: boolean;
       imageUrl?: string;
-      isComplete?: boolean;
       seriesId?: string;
       seriesType?: string;
-      subscriptionId?: string;
       title?: string;
-    }> | null;
+    }>;
   }
   export interface Schema$Seriesmembership {
     /**
      * Resorce type.
      */
-    kind?: string | null;
+    kind?: string;
     member?: Schema$Volume[];
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$Usersettings {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * User settings in sub-objects, each for different purposes.
      */
-    notesExport?: {folderName?: string; isEnabled?: boolean} | null;
+    notesExport?: {folderName?: string; isEnabled?: boolean};
     notification?: {
       matchMyInterests?: {opted_state?: string};
       moreFromAuthors?: {opted_state?: string};
       moreFromSeries?: {opted_state?: string};
       priceDrop?: {opted_state?: string};
       rewardExpirations?: {opted_state?: string};
-    } | null;
+    };
   }
   export interface Schema$Volume {
     /**
@@ -872,29 +863,29 @@ export namespace books_v1 {
       viewOrderUrl?: string;
       viewability?: string;
       webReaderLink?: string;
-    } | null;
+    };
     /**
      * Opaque identifier for a specific version of a volume resource. (In LITE projection)
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Unique identifier for a volume. (In LITE projection.)
      */
-    id?: string | null;
+    id?: string;
     /**
      * Resource type for a volume. (In LITE projection.)
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * What layers exist in this volume and high level information about them.
      */
     layerInfo?: {
       layers?: Array<{layerId?: string; volumeAnnotationsVersion?: string}>;
-    } | null;
+    };
     /**
      * Recommendation related information for this volume.
      */
-    recommendedInfo?: {explanation?: string} | null;
+    recommendedInfo?: {explanation?: string};
     /**
      * Any information about a volume related to the eBookstore and/or purchaseability. This information can depend on the country where the request originates from (i.e. books may not be for sale in certain countries).
      */
@@ -913,15 +904,15 @@ export namespace books_v1 {
       onSaleDate?: string;
       retailPrice?: {amount?: number; currencyCode?: string};
       saleability?: string;
-    } | null;
+    };
     /**
      * Search result information related to this volume.
      */
-    searchInfo?: {textSnippet?: string} | null;
+    searchInfo?: {textSnippet?: string};
     /**
      * URL to this resource. (In LITE projection.)
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * User specific information related to this volume. (e.g. page this user last read or whether they purchased this book)
      */
@@ -954,7 +945,7 @@ export namespace books_v1 {
       review?: Schema$Review;
       updated?: string;
       userUploadedVolumeInfo?: {processingState?: string};
-    } | null;
+    };
     /**
      * General volume information.
      */
@@ -999,7 +990,7 @@ export namespace books_v1 {
       seriesInfo?: Schema$Volumeseriesinfo;
       subtitle?: string;
       title?: string;
-    } | null;
+    };
   }
   export interface Schema$Volume2 {
     /**
@@ -1009,22 +1000,22 @@ export namespace books_v1 {
     /**
      * Resource type.
      */
-    kind?: string | null;
-    nextPageToken?: string | null;
+    kind?: string;
+    nextPageToken?: string;
   }
   export interface Schema$Volumeannotation {
     /**
      * The annotation data id for this volume annotation.
      */
-    annotationDataId?: string | null;
+    annotationDataId?: string;
     /**
      * Link to get data for this annotation.
      */
-    annotationDataLink?: string | null;
+    annotationDataLink?: string;
     /**
      * The type of annotation this is.
      */
-    annotationType?: string | null;
+    annotationType?: string;
     /**
      * The content ranges to identify the selected text.
      */
@@ -1033,47 +1024,47 @@ export namespace books_v1 {
       contentVersion?: string;
       gbImageRange?: Schema$BooksAnnotationsRange;
       gbTextRange?: Schema$BooksAnnotationsRange;
-    } | null;
+    };
     /**
      * Data for this annotation.
      */
-    data?: string | null;
+    data?: string;
     /**
      * Indicates that this annotation is deleted.
      */
-    deleted?: boolean | null;
+    deleted?: boolean;
     /**
      * Unique id of this volume annotation.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Resource Type
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The Layer this annotation is for.
      */
-    layerId?: string | null;
+    layerId?: string;
     /**
      * Pages the annotation spans.
      */
-    pageIds?: string[] | null;
+    pageIds?: string[];
     /**
      * Excerpt from the volume.
      */
-    selectedText?: string | null;
+    selectedText?: string;
     /**
      * URL to this resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * Timestamp for the last time this anntoation was updated. (RFC 3339 UTC date-time format).
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The Volume this annotation is for.
      */
-    volumeId?: string | null;
+    volumeId?: string;
   }
   export interface Schema$Volumeannotations {
     /**
@@ -1083,19 +1074,19 @@ export namespace books_v1 {
     /**
      * Resource type
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token to pass in for pagination for the next page. This will not be present if this request does not have more results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total number of volume annotations found.
      */
-    totalItems?: number | null;
+    totalItems?: number;
     /**
      * The version string for all of the volume annotations in this layer (not just the ones in this response). Note: the version string doesn&#39;t apply to the annotation data, just the information in this response (e.g. the location of annotations in the book).
      */
-    version?: string | null;
+    version?: string;
   }
   export interface Schema$Volumes {
     /**
@@ -1105,31 +1096,31 @@ export namespace books_v1 {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Total number of volumes found. This might be greater than the number of volumes returned in this response if results have been paginated.
      */
-    totalItems?: number | null;
+    totalItems?: number;
   }
   export interface Schema$Volumeseriesinfo {
     /**
      * The display number string. This should be used only for display purposes and the actual sequence should be inferred from the below orderNumber.
      */
-    bookDisplayNumber?: string | null;
+    bookDisplayNumber?: string;
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Short book title in the context of the series.
      */
-    shortSeriesBookTitle?: string | null;
+    shortSeriesBookTitle?: string;
     volumeSeries?: Array<{
       issue?: Array<{issueDisplayNumber?: string; issueOrderNumber?: number}>;
       orderNumber?: number;
       seriesBookType?: string;
       seriesId?: string;
-    }> | null;
+    }>;
   }
 
   export class Resource$Bookshelves {
@@ -1607,7 +1598,7 @@ export namespace books_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().BooksCloudloadingResource} params.requestBody Request body data
+     * @param {().BooksCloudloadingResource} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3201,7 +3192,7 @@ export namespace books_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Usersettings} params.requestBody Request body data
+     * @param {().Usersettings} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3491,7 +3482,7 @@ export namespace books_v1 {
      * @param {string=} params.country ISO-3166-1 code to override the IP-based location.
      * @param {boolean=} params.showOnlySummaryInResponse Requests that only the summary of the specified layer be provided in the response.
      * @param {string=} params.source String to identify the originator of this request.
-     * @param {().Annotation} params.requestBody Request body data
+     * @param {().Annotation} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3725,7 +3716,7 @@ export namespace books_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.annotationId The ID for the annotation to update.
      * @param {string=} params.source String to identify the originator of this request.
-     * @param {().Annotation} params.requestBody Request body data
+     * @param {().Annotation} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

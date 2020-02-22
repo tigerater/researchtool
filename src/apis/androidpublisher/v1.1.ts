@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -36,7 +38,7 @@ import {GaxiosPromise} from 'gaxios';
 
 export namespace androidpublisher_v1_1 {
   export interface Options extends GlobalOptions {
-    version: 'v1.1';
+    version: 'v1_1';
   }
 
   interface StandardParameters {
@@ -108,31 +110,31 @@ export namespace androidpublisher_v1_1 {
     /**
      * The consumption state of the inapp product. Possible values are:   - Yet to be consumed  - Consumed
      */
-    consumptionState?: number | null;
+    consumptionState?: number;
     /**
      * A developer-specified string that contains supplemental information about an order.
      */
-    developerPayload?: string | null;
+    developerPayload?: string;
     /**
      * This kind represents an inappPurchase object in the androidpublisher service.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The order id associated with the purchase of the inapp product.
      */
-    orderId?: string | null;
+    orderId?: string;
     /**
-     * The purchase state of the order. Possible values are:   - Purchased  - Canceled  - Pending
+     * The purchase state of the order. Possible values are:   - Purchased  - Canceled
      */
-    purchaseState?: number | null;
+    purchaseState?: number;
     /**
      * The time the product was purchased, in milliseconds since the epoch (Jan 1, 1970).
      */
-    purchaseTime?: string | null;
+    purchaseTime?: string;
     /**
      * The type of purchase of the inapp product. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:   - Test (i.e. purchased from a license testing account)  - Promo (i.e. purchased using a promo code)  - Rewarded (i.e. from watching a video ad instead of paying)
      */
-    purchaseType?: number | null;
+    purchaseType?: number;
   }
   /**
    * A SubscriptionPurchase resource indicates the status of a user&#39;s subscription purchase.
@@ -141,19 +143,19 @@ export namespace androidpublisher_v1_1 {
     /**
      * Whether the subscription will automatically be renewed when it reaches its current expiry time.
      */
-    autoRenewing?: boolean | null;
+    autoRenewing?: boolean;
     /**
      * Time at which the subscription was granted, in milliseconds since the Epoch.
      */
-    initiationTimestampMsec?: string | null;
+    initiationTimestampMsec?: string;
     /**
      * This kind represents a subscriptionPurchase object in the androidpublisher service.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Time at which the subscription will expire, in milliseconds since the Epoch.
      */
-    validUntilTimestampMsec?: string | null;
+    validUntilTimestampMsec?: string;
   }
 
   export class Resource$Inapppurchases {

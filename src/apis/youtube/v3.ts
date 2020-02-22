@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -102,8 +104,6 @@ export namespace youtube_v3 {
     liveChatMessages: Resource$Livechatmessages;
     liveChatModerators: Resource$Livechatmoderators;
     liveStreams: Resource$Livestreams;
-    members: Resource$Members;
-    membershipsLevels: Resource$Membershipslevels;
     playlistItems: Resource$Playlistitems;
     playlists: Resource$Playlists;
     search: Resource$Search;
@@ -137,8 +137,6 @@ export namespace youtube_v3 {
       this.liveChatMessages = new Resource$Livechatmessages(this.context);
       this.liveChatModerators = new Resource$Livechatmoderators(this.context);
       this.liveStreams = new Resource$Livestreams(this.context);
-      this.members = new Resource$Members(this.context);
-      this.membershipsLevels = new Resource$Membershipslevels(this.context);
       this.playlistItems = new Resource$Playlistitems(this.context);
       this.playlists = new Resource$Playlists(this.context);
       this.search = new Resource$Search(this.context);
@@ -162,11 +160,11 @@ export namespace youtube_v3 {
     /**
      * The value of allowed indicates whether the access to the policy is allowed or denied by default.
      */
-    allowed?: boolean | null;
+    allowed?: boolean;
     /**
      * A list of region codes that identify countries where the default policy do not apply.
      */
-    exception?: string[] | null;
+    exception?: string[];
   }
   /**
    * An activity resource contains information about an action that a particular channel, or user, has taken on YouTube.The actions reported in activity feeds include rating a video, sharing a video, marking a video as a favorite, commenting on a video, uploading a video, and so forth. Each activity resource identifies the type of action, the channel associated with the action, and the resource(s) associated with the action, such as the video that was rated or uploaded.
@@ -179,15 +177,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the activity.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#activity&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the activity, including the activity&#39;s type and group ID.
      */
@@ -294,11 +292,11 @@ export namespace youtube_v3 {
     /**
      * The value that YouTube uses to uniquely identify the playlist.
      */
-    playlistId?: string | null;
+    playlistId?: string;
     /**
      * ID of the item within the playlist.
      */
-    playlistItemId?: string | null;
+    playlistItemId?: string;
     /**
      * The resourceId object contains information about the resource that was added to the playlist.
      */
@@ -311,43 +309,43 @@ export namespace youtube_v3 {
     /**
      * The URL the client should fetch to request a promoted item.
      */
-    adTag?: string | null;
+    adTag?: string;
     /**
      * The URL the client should ping to indicate that the user clicked through on this promoted item.
      */
-    clickTrackingUrl?: string | null;
+    clickTrackingUrl?: string;
     /**
      * The URL the client should ping to indicate that the user was shown this promoted item.
      */
-    creativeViewUrl?: string | null;
+    creativeViewUrl?: string;
     /**
      * The type of call-to-action, a message to the user indicating action that can be taken.
      */
-    ctaType?: string | null;
+    ctaType?: string;
     /**
      * The custom call-to-action button text. If specified, it will override the default button text for the cta_type.
      */
-    customCtaButtonText?: string | null;
+    customCtaButtonText?: string;
     /**
      * The text description to accompany the promoted item.
      */
-    descriptionText?: string | null;
+    descriptionText?: string;
     /**
      * The URL the client should direct the user to, if the user chooses to visit the advertiser&#39;s website.
      */
-    destinationUrl?: string | null;
+    destinationUrl?: string;
     /**
      * The list of forecasting URLs. The client should ping all of these URLs when a promoted item is not available, to indicate that a promoted item could have been shown.
      */
-    forecastingUrl?: string[] | null;
+    forecastingUrl?: string[];
     /**
      * The list of impression URLs. The client should ping all of these URLs to indicate that the user was shown this promoted item.
      */
-    impressionUrl?: string[] | null;
+    impressionUrl?: string[];
     /**
      * The ID that YouTube uses to uniquely identify the promoted video.
      */
-    videoId?: string | null;
+    videoId?: string;
   }
   /**
    * Information that identifies the recommended resource.
@@ -356,7 +354,7 @@ export namespace youtube_v3 {
     /**
      * The reason that the resource is recommended to the user.
      */
-    reason?: string | null;
+    reason?: string;
     /**
      * The resourceId object contains information that identifies the recommended resource.
      */
@@ -373,15 +371,15 @@ export namespace youtube_v3 {
     /**
      * The author of the social network post.
      */
-    author?: string | null;
+    author?: string;
     /**
      * An image of the post&#39;s author.
      */
-    imageUrl?: string | null;
+    imageUrl?: string;
     /**
      * The URL of the social network post.
      */
-    referenceUrl?: string | null;
+    referenceUrl?: string;
     /**
      * The resourceId object encapsulates information that identifies the resource associated with a social network post.
      */
@@ -389,7 +387,7 @@ export namespace youtube_v3 {
     /**
      * The name of the social network.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Information about a channel that a user subscribed to.
@@ -407,17 +405,17 @@ export namespace youtube_v3 {
     /**
      * The ID that YouTube uses to uniquely identify the uploaded video.
      */
-    videoId?: string | null;
+    videoId?: string;
   }
   export interface Schema$ActivityListResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of activities, or events, that match the request criteria.
      */
@@ -425,21 +423,21 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#activityListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Basic details about an activity, including title, description, thumbnails, activity type and group.
@@ -448,23 +446,23 @@ export namespace youtube_v3 {
     /**
      * The ID that YouTube uses to uniquely identify the channel associated with the activity.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * Channel title for the channel responsible for this activity
      */
-    channelTitle?: string | null;
+    channelTitle?: string;
     /**
      * The description of the resource primarily associated with the activity.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The group ID associated with the activity. A group ID identifies user events that are associated with the same user and resource. For example, if a user rates a video and marks the same video as a favorite, the entries for those events would have the same group ID in the user&#39;s activity feed. In your user interface, you can avoid repetition by grouping events with the same groupId value.
      */
-    groupId?: string | null;
+    groupId?: string;
     /**
      * The date and time that the video was uploaded. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * A map of thumbnail images associated with the resource that is primarily associated with the activity. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
      */
@@ -472,11 +470,11 @@ export namespace youtube_v3 {
     /**
      * The title of the resource primarily associated with the activity.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The type of activity that the resource describes.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * A caption resource represents a YouTube caption track. A caption track is associated with exactly one YouTube video.
@@ -485,15 +483,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the caption track.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#caption&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the caption.
      */
@@ -503,11 +501,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of captions that match the request criteria.
      */
@@ -515,11 +513,11 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#captionListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Basic details about a caption track, such as its language and name.
@@ -528,55 +526,55 @@ export namespace youtube_v3 {
     /**
      * The type of audio track associated with the caption track.
      */
-    audioTrackType?: string | null;
+    audioTrackType?: string;
     /**
      * The reason that YouTube failed to process the caption track. This property is only present if the state property&#39;s value is failed.
      */
-    failureReason?: string | null;
+    failureReason?: string;
     /**
      * Indicates whether YouTube synchronized the caption track to the audio track in the video. The value will be true if a sync was explicitly requested when the caption track was uploaded. For example, when calling the captions.insert or captions.update methods, you can set the sync parameter to true to instruct YouTube to sync the uploaded track to the video. If the value is false, YouTube uses the time codes in the uploaded caption track to determine when to display captions.
      */
-    isAutoSynced?: boolean | null;
+    isAutoSynced?: boolean;
     /**
      * Indicates whether the track contains closed captions for the deaf and hard of hearing. The default value is false.
      */
-    isCC?: boolean | null;
+    isCC?: boolean;
     /**
      * Indicates whether the caption track is a draft. If the value is true, then the track is not publicly visible. The default value is false.
      */
-    isDraft?: boolean | null;
+    isDraft?: boolean;
     /**
      * Indicates whether caption track is formatted for &quot;easy reader,&quot; meaning it is at a third-grade level for language learners. The default value is false.
      */
-    isEasyReader?: boolean | null;
+    isEasyReader?: boolean;
     /**
      * Indicates whether the caption track uses large text for the vision-impaired. The default value is false.
      */
-    isLarge?: boolean | null;
+    isLarge?: boolean;
     /**
      * The language of the caption track. The property value is a BCP-47 language tag.
      */
-    language?: string | null;
+    language?: string;
     /**
      * The date and time when the caption track was last updated. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    lastUpdated?: string | null;
+    lastUpdated?: string;
     /**
      * The name of the caption track. The name is intended to be visible to the user as an option during playback.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The caption track&#39;s status.
      */
-    status?: string | null;
+    status?: string;
     /**
      * The caption track&#39;s type.
      */
-    trackKind?: string | null;
+    trackKind?: string;
     /**
      * The ID that YouTube uses to uniquely identify the video associated with the caption track.
      */
-    videoId?: string | null;
+    videoId?: string;
   }
   /**
    * Brief description of the live stream cdn settings.
@@ -585,11 +583,11 @@ export namespace youtube_v3 {
     /**
      * The format of the video stream that you are sending to Youtube.
      */
-    format?: string | null;
+    format?: string;
     /**
      * The frame rate of the inbound video data.
      */
-    frameRate?: string | null;
+    frameRate?: string;
     /**
      * The ingestionInfo object contains information that YouTube provides that you need to transmit your RTMP or HTTP stream to YouTube.
      */
@@ -597,11 +595,11 @@ export namespace youtube_v3 {
     /**
      * The method or protocol used to transmit the video stream.
      */
-    ingestionType?: string | null;
+    ingestionType?: string;
     /**
      * The resolution of the inbound video data.
      */
-    resolution?: string | null;
+    resolution?: string;
   }
   /**
    * A channel resource contains information about a YouTube channel.
@@ -630,11 +628,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the channel.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The invideoPromotion object encapsulates information about promotion campaign associated with the channel.
      */
@@ -642,11 +640,11 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#channel&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Localizations for different languages
      */
-    localizations?: {[key: string]: Schema$ChannelLocalization} | null;
+    localizations?: {[key: string]: Schema$ChannelLocalization};
     /**
      * The snippet object contains basic details about the channel, such as its title, description, and thumbnail images.
      */
@@ -671,15 +669,15 @@ export namespace youtube_v3 {
     /**
      * Whether or not the channel respects the community guidelines.
      */
-    communityGuidelinesGoodStanding?: boolean | null;
+    communityGuidelinesGoodStanding?: boolean;
     /**
      * Whether or not the channel has any unresolved claims.
      */
-    contentIdClaimsGoodStanding?: boolean | null;
+    contentIdClaimsGoodStanding?: boolean;
     /**
      * Whether or not the channel has any copyright strikes.
      */
-    copyrightStrikesGoodStanding?: boolean | null;
+    copyrightStrikesGoodStanding?: boolean;
   }
   /**
    * A channel banner returned as the response to a channel_banner.insert call.
@@ -688,15 +686,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#channelBannerResource&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The URL of this banner image.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Branding properties of a YouTube channel.
@@ -729,7 +727,7 @@ export namespace youtube_v3 {
       uploads?: string;
       watchHistory?: string;
       watchLater?: string;
-    } | null;
+    };
   }
   /**
    * The contentOwnerDetails object encapsulates channel data that is relevant for YouTube Partners linked with the channel.
@@ -738,11 +736,11 @@ export namespace youtube_v3 {
     /**
      * The ID of the content owner linked to the channel.
      */
-    contentOwner?: string | null;
+    contentOwner?: string;
     /**
      * The date and time of when the channel was linked to the content owner. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    timeLinked?: string | null;
+    timeLinked?: string;
   }
   /**
    * Pings that the app shall fire (authenticated by biscotti cookie). Each ping has a context, in which the app must fire the ping, and a url identifying the ping.
@@ -751,11 +749,11 @@ export namespace youtube_v3 {
     /**
      * Defines the context of the ping.
      */
-    context?: string | null;
+    context?: string;
     /**
      * The url (without the schema) that the player shall send the ping to. It&#39;s at caller&#39;s descretion to decide which schema to use (http vs https) Example of a returned url: //googleads.g.doubleclick.net/pagead/ viewthroughconversion/962985656/?data=path%3DtHe_path%3Btype%3D cview%3Butuid%3DGISQtTNGYqaYl4sKxoVvKA&amp;labe=default The caller must append biscotti authentication (ms param in case of mobile, for example) to this ping.
      */
-    conversionUrl?: string | null;
+    conversionUrl?: string;
   }
   /**
    * The conversionPings object encapsulates information about conversion pings that need to be respected by the channel.
@@ -770,11 +768,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of channels that match the request criteria.
      */
@@ -782,21 +780,21 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#channelListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Channel localization setting
@@ -805,29 +803,29 @@ export namespace youtube_v3 {
     /**
      * The localized strings for channel&#39;s description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The localized strings for channel&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   export interface Schema$ChannelProfileDetails {
     /**
      * The YouTube channel ID.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The channel&#39;s URL.
      */
-    channelUrl?: string | null;
+    channelUrl?: string;
     /**
      * The channel&#39;s display name.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The channels&#39;s avatar URL.
      */
-    profileImageUrl?: string | null;
+    profileImageUrl?: string;
   }
   export interface Schema$ChannelSection {
     /**
@@ -837,19 +835,19 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the channel section.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#channelSection&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Localizations for different languages
      */
-    localizations?: {[key: string]: Schema$ChannelSectionLocalization} | null;
+    localizations?: {[key: string]: Schema$ChannelSectionLocalization};
     /**
      * The snippet object contains basic details about the channel section, such as its type, style and title.
      */
@@ -866,21 +864,21 @@ export namespace youtube_v3 {
     /**
      * The channel ids for type multiple_channels.
      */
-    channels?: string[] | null;
+    channels?: string[];
     /**
      * The playlist ids for type single_playlist and multiple_playlists. For singlePlaylist, only one playlistId is allowed.
      */
-    playlists?: string[] | null;
+    playlists?: string[];
   }
   export interface Schema$ChannelSectionListResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of ChannelSections that match the request criteria.
      */
@@ -888,11 +886,11 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#channelSectionListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * ChannelSection localization setting
@@ -901,7 +899,7 @@ export namespace youtube_v3 {
     /**
      * The localized strings for channel section&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Basic details about a channel section, including title, style and position.
@@ -910,11 +908,11 @@ export namespace youtube_v3 {
     /**
      * The ID that YouTube uses to uniquely identify the channel that published the channel section.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The language of the channel section&#39;s default title and description.
      */
-    defaultLanguage?: string | null;
+    defaultLanguage?: string;
     /**
      * Localized title, read-only.
      */
@@ -922,19 +920,19 @@ export namespace youtube_v3 {
     /**
      * The position of the channel section in the channel.
      */
-    position?: number | null;
+    position?: number;
     /**
      * The style of the channel section.
      */
-    style?: string | null;
+    style?: string;
     /**
      * The channel section&#39;s title for multiple_playlists and multiple_channels.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The type of the channel section.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * ChannelSection targeting setting.
@@ -943,15 +941,15 @@ export namespace youtube_v3 {
     /**
      * The country the channel section is targeting.
      */
-    countries?: string[] | null;
+    countries?: string[];
     /**
      * The language the channel section is targeting.
      */
-    languages?: string[] | null;
+    languages?: string[];
     /**
      * The region the channel section is targeting.
      */
-    regions?: string[] | null;
+    regions?: string[];
   }
   /**
    * Branding properties for the channel view.
@@ -960,56 +958,56 @@ export namespace youtube_v3 {
     /**
      * The country of the channel.
      */
-    country?: string | null;
-    defaultLanguage?: string | null;
+    country?: string;
+    defaultLanguage?: string;
     /**
      * Which content tab users should see when viewing the channel.
      */
-    defaultTab?: string | null;
+    defaultTab?: string;
     /**
      * Specifies the channel description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Title for the featured channels tab.
      */
-    featuredChannelsTitle?: string | null;
+    featuredChannelsTitle?: string;
     /**
      * The list of featured channels.
      */
-    featuredChannelsUrls?: string[] | null;
+    featuredChannelsUrls?: string[];
     /**
      * Lists keywords associated with the channel, comma-separated.
      */
-    keywords?: string | null;
+    keywords?: string;
     /**
      * Whether user-submitted comments left on the channel page need to be approved by the channel owner to be publicly visible.
      */
-    moderateComments?: boolean | null;
+    moderateComments?: boolean;
     /**
      * A prominent color that can be rendered on this channel page.
      */
-    profileColor?: string | null;
+    profileColor?: string;
     /**
      * Whether the tab to browse the videos should be displayed.
      */
-    showBrowseView?: boolean | null;
+    showBrowseView?: boolean;
     /**
      * Whether related channels should be proposed.
      */
-    showRelatedChannels?: boolean | null;
+    showRelatedChannels?: boolean;
     /**
      * Specifies the channel title.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The ID for a Google Analytics account to track and measure traffic to the channels.
      */
-    trackingAnalyticsAccountId?: string | null;
+    trackingAnalyticsAccountId?: string;
     /**
      * The trailer of the channel, for users that are not subscribers.
      */
-    unsubscribedTrailer?: string | null;
+    unsubscribedTrailer?: string;
   }
   /**
    * Basic details about a channel, including title, description and thumbnails.
@@ -1018,19 +1016,19 @@ export namespace youtube_v3 {
     /**
      * The country of the channel.
      */
-    country?: string | null;
+    country?: string;
     /**
      * The custom url of the channel.
      */
-    customUrl?: string | null;
+    customUrl?: string;
     /**
      * The language of the channel&#39;s default title and description.
      */
-    defaultLanguage?: string | null;
+    defaultLanguage?: string;
     /**
      * The description of the channel.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Localized title and description, read-only.
      */
@@ -1038,7 +1036,7 @@ export namespace youtube_v3 {
     /**
      * The date and time that the channel was created. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * A map of thumbnail images associated with the channel. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.  When displaying thumbnails in your application, make sure that your code uses the image URLs exactly as they are returned in API responses. For example, your application should not use the http domain instead of the https domain in a URL returned in an API response.  Beginning in July 2018, channel thumbnail URLs will only be available in the https domain, which is how the URLs appear in API responses. After that time, you might see broken images in your application if it tries to load YouTube images from the http domain.
      */
@@ -1046,7 +1044,7 @@ export namespace youtube_v3 {
     /**
      * The channel&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Statistics about a channel: number of subscribers, number of videos in the channel, etc.
@@ -1055,23 +1053,23 @@ export namespace youtube_v3 {
     /**
      * The number of comments for the channel.
      */
-    commentCount?: string | null;
+    commentCount?: string;
     /**
      * Whether or not the number of subscribers is shown for this user.
      */
-    hiddenSubscriberCount?: boolean | null;
+    hiddenSubscriberCount?: boolean;
     /**
      * The number of subscribers that the channel has.
      */
-    subscriberCount?: string | null;
+    subscriberCount?: string;
     /**
      * The number of videos uploaded to the channel.
      */
-    videoCount?: string | null;
+    videoCount?: string;
     /**
      * The number of times the channel has been viewed.
      */
-    viewCount?: string | null;
+    viewCount?: string;
   }
   /**
    * JSON template for the status part of a channel.
@@ -1080,17 +1078,15 @@ export namespace youtube_v3 {
     /**
      * If true, then the user is linked to either a YouTube username or G+ account. Otherwise, the user doesn&#39;t have a public YouTube identity.
      */
-    isLinked?: boolean | null;
+    isLinked?: boolean;
     /**
      * The long uploads status of this channel. See
      */
-    longUploadsStatus?: string | null;
-    madeForKids?: boolean | null;
+    longUploadsStatus?: string;
     /**
      * Privacy status of the channel.
      */
-    privacyStatus?: string | null;
-    selfDeclaredMadeForKids?: boolean | null;
+    privacyStatus?: string;
   }
   /**
    * Freebase topic information related to the channel.
@@ -1099,11 +1095,11 @@ export namespace youtube_v3 {
     /**
      * A list of Wikipedia URLs that describe the channel&#39;s content.
      */
-    topicCategories?: string[] | null;
+    topicCategories?: string[];
     /**
      * A list of Freebase topic IDs associated with the channel. You can retrieve information about each topic using the Freebase Topic API.
      */
-    topicIds?: string[] | null;
+    topicIds?: string[];
   }
   /**
    * A comment represents a single YouTube comment.
@@ -1112,15 +1108,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the comment.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#comment&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the comment.
      */
@@ -1130,11 +1126,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of comments that match the request criteria.
      */
@@ -1142,17 +1138,17 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#commentListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Basic details about a comment, such as its author and text.
@@ -1161,63 +1157,63 @@ export namespace youtube_v3 {
     /**
      * The id of the author&#39;s YouTube channel, if any.
      */
-    authorChannelId?: any | null;
+    authorChannelId?: any;
     /**
      * Link to the author&#39;s YouTube channel, if any.
      */
-    authorChannelUrl?: string | null;
+    authorChannelUrl?: string;
     /**
      * The name of the user who posted the comment.
      */
-    authorDisplayName?: string | null;
+    authorDisplayName?: string;
     /**
      * The URL for the avatar of the user who posted the comment.
      */
-    authorProfileImageUrl?: string | null;
+    authorProfileImageUrl?: string;
     /**
      * Whether the current viewer can rate this comment.
      */
-    canRate?: boolean | null;
+    canRate?: boolean;
     /**
      * The id of the corresponding YouTube channel. In case of a channel comment this is the channel the comment refers to. In case of a video comment it&#39;s the video&#39;s channel.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The total number of likes this comment has received.
      */
-    likeCount?: number | null;
+    likeCount?: number;
     /**
      * The comment&#39;s moderation status. Will not be set if the comments were requested through the id filter.
      */
-    moderationStatus?: string | null;
+    moderationStatus?: string;
     /**
      * The unique id of the parent comment, only set for replies.
      */
-    parentId?: string | null;
+    parentId?: string;
     /**
      * The date and time when the comment was orignally published. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * The comment&#39;s text. The format is either plain text or HTML dependent on what has been requested. Even the plain text representation may differ from the text originally posted in that it may replace video links with video titles etc.
      */
-    textDisplay?: string | null;
+    textDisplay?: string;
     /**
      * The comment&#39;s original raw text as initially posted or last updated. The original text will only be returned if it is accessible to the viewer, which is only guaranteed if the viewer is the comment&#39;s author.
      */
-    textOriginal?: string | null;
+    textOriginal?: string;
     /**
      * The date and time when was last updated . The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    updatedAt?: string | null;
+    updatedAt?: string;
     /**
      * The ID of the video the comment refers to, if any.
      */
-    videoId?: string | null;
+    videoId?: string;
     /**
      * The rating the viewer has given to this comment. For the time being this will never return RATE_TYPE_DISLIKE and instead return RATE_TYPE_NONE. This may change in the future.
      */
-    viewerRating?: string | null;
+    viewerRating?: string;
   }
   /**
    * A comment thread represents information that applies to a top level comment and all its replies. It can also include the top level comment itself and some of the replies.
@@ -1226,15 +1222,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the comment thread.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#commentThread&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The replies object contains a limited number of replies (if any) to the top level comment found in the snippet.
      */
@@ -1248,11 +1244,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of comment threads that match the request criteria.
      */
@@ -1260,17 +1256,17 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#commentThreadListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Comments written in (direct or indirect) reply to the top level comment.
@@ -1288,15 +1284,15 @@ export namespace youtube_v3 {
     /**
      * Whether the current viewer of the thread can reply to it. This is viewer specific - other viewers may see a different value for this field.
      */
-    canReply?: boolean | null;
+    canReply?: boolean;
     /**
      * The YouTube channel the comments in the thread refer to or the channel with the video the comments refer to. If video_id isn&#39;t set the comments refer to the channel itself.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * Whether the thread (and therefore all its comments) is visible to all YouTube users.
      */
-    isPublic?: boolean | null;
+    isPublic?: boolean;
     /**
      * The top level comment of this thread.
      */
@@ -1304,297 +1300,296 @@ export namespace youtube_v3 {
     /**
      * The total number of replies (not including the top level comment).
      */
-    totalReplyCount?: number | null;
+    totalReplyCount?: number;
     /**
      * The ID of the video the comments refer to, if any. No video_id implies a channel discussion comment.
      */
-    videoId?: string | null;
+    videoId?: string;
   }
   /**
-   * Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 72
+   * Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 71
    */
   export interface Schema$ContentRating {
     /**
      * The video&#39;s Australian Classification Board (ACB) or Australian Communications and Media Authority (ACMA) rating. ACMA ratings are used to classify children&#39;s television programming.
      */
-    acbRating?: string | null;
+    acbRating?: string;
     /**
      * The video&#39;s rating from Italy&#39;s Autorità per le Garanzie nelle Comunicazioni (AGCOM).
      */
-    agcomRating?: string | null;
+    agcomRating?: string;
     /**
      * The video&#39;s Anatel (Asociación Nacional de Televisión) rating for Chilean television.
      */
-    anatelRating?: string | null;
+    anatelRating?: string;
     /**
      * The video&#39;s British Board of Film Classification (BBFC) rating.
      */
-    bbfcRating?: string | null;
+    bbfcRating?: string;
     /**
      * The video&#39;s rating from Thailand&#39;s Board of Film and Video Censors.
      */
-    bfvcRating?: string | null;
+    bfvcRating?: string;
     /**
      * The video&#39;s rating from the Austrian Board of Media Classification (Bundesministerium für Unterricht, Kunst und Kultur).
      */
-    bmukkRating?: string | null;
+    bmukkRating?: string;
     /**
      * The video&#39;s rating from the Canadian Radio-Television and Telecommunications Commission (CRTC) for Canadian French-language broadcasts. For more information, see the Canadian Broadcast Standards Council website.
      */
-    catvfrRating?: string | null;
+    catvfrRating?: string;
     /**
      * Rating system for Canadian TV - Canadian TV Classification System The video&#39;s rating from the Canadian Radio-Television and Telecommunications Commission (CRTC) for Canadian English-language broadcasts. For more information, see the Canadian Broadcast Standards Council website.
      */
-    catvRating?: string | null;
+    catvRating?: string;
     /**
      * The video&#39;s Central Board of Film Certification (CBFC - India) rating.
      */
-    cbfcRating?: string | null;
+    cbfcRating?: string;
     /**
      * The video&#39;s Consejo de Calificación Cinematográfica (Chile) rating.
      */
-    cccRating?: string | null;
+    cccRating?: string;
     /**
      * The video&#39;s rating from Portugal&#39;s Comissão de Classificação de Espect´culos.
      */
-    cceRating?: string | null;
+    cceRating?: string;
     /**
      * The video&#39;s rating in Switzerland.
      */
-    chfilmRating?: string | null;
+    chfilmRating?: string;
     /**
      * The video&#39;s Canadian Home Video Rating System (CHVRS) rating.
      */
-    chvrsRating?: string | null;
+    chvrsRating?: string;
     /**
      * The video&#39;s rating from the Commission de Contrôle des Films (Belgium).
      */
-    cicfRating?: string | null;
+    cicfRating?: string;
     /**
      * The video&#39;s rating from Romania&#39;s CONSILIUL NATIONAL AL AUDIOVIZUALULUI (CNA).
      */
-    cnaRating?: string | null;
+    cnaRating?: string;
     /**
      * Rating system in France - Commission de classification cinematographique
      */
-    cncRating?: string | null;
+    cncRating?: string;
     /**
      * The video&#39;s rating from France&#39;s Conseil supérieur de l?audiovisuel, which rates broadcast content.
      */
-    csaRating?: string | null;
+    csaRating?: string;
     /**
      * The video&#39;s rating from Luxembourg&#39;s Commission de surveillance de la classification des films (CSCF).
      */
-    cscfRating?: string | null;
+    cscfRating?: string;
     /**
      * The video&#39;s rating in the Czech Republic.
      */
-    czfilmRating?: string | null;
+    czfilmRating?: string;
     /**
      * The video&#39;s Departamento de Justiça, Classificação, Qualificação e Títulos (DJCQT - Brazil) rating.
      */
-    djctqRating?: string | null;
+    djctqRating?: string;
     /**
      * Reasons that explain why the video received its DJCQT (Brazil) rating.
      */
-    djctqRatingReasons?: string[] | null;
+    djctqRatingReasons?: string[];
     /**
      * Rating system in Turkey - Evaluation and Classification Board of the Ministry of Culture and Tourism
      */
-    ecbmctRating?: string | null;
+    ecbmctRating?: string;
     /**
      * The video&#39;s rating in Estonia.
      */
-    eefilmRating?: string | null;
+    eefilmRating?: string;
     /**
      * The video&#39;s rating in Egypt.
      */
-    egfilmRating?: string | null;
+    egfilmRating?: string;
     /**
      * The video&#39;s Eirin (映倫) rating. Eirin is the Japanese rating system.
      */
-    eirinRating?: string | null;
+    eirinRating?: string;
     /**
      * The video&#39;s rating from Malaysia&#39;s Film Censorship Board.
      */
-    fcbmRating?: string | null;
+    fcbmRating?: string;
     /**
      * The video&#39;s rating from Hong Kong&#39;s Office for Film, Newspaper and Article Administration.
      */
-    fcoRating?: string | null;
+    fcoRating?: string;
     /**
      * This property has been deprecated. Use the contentDetails.contentRating.cncRating instead.
      */
-    fmocRating?: string | null;
+    fmocRating?: string;
     /**
      * The video&#39;s rating from South Africa&#39;s Film and Publication Board.
      */
-    fpbRating?: string | null;
+    fpbRating?: string;
     /**
      * Reasons that explain why the video received its FPB (South Africa) rating.
      */
-    fpbRatingReasons?: string[] | null;
+    fpbRatingReasons?: string[];
     /**
      * The video&#39;s Freiwillige Selbstkontrolle der Filmwirtschaft (FSK - Germany) rating.
      */
-    fskRating?: string | null;
+    fskRating?: string;
     /**
      * The video&#39;s rating in Greece.
      */
-    grfilmRating?: string | null;
+    grfilmRating?: string;
     /**
      * The video&#39;s Instituto de la Cinematografía y de las Artes Audiovisuales (ICAA - Spain) rating.
      */
-    icaaRating?: string | null;
+    icaaRating?: string;
     /**
      * The video&#39;s Irish Film Classification Office (IFCO - Ireland) rating. See the IFCO website for more information.
      */
-    ifcoRating?: string | null;
+    ifcoRating?: string;
     /**
      * The video&#39;s rating in Israel.
      */
-    ilfilmRating?: string | null;
+    ilfilmRating?: string;
     /**
      * The video&#39;s INCAA (Instituto Nacional de Cine y Artes Audiovisuales - Argentina) rating.
      */
-    incaaRating?: string | null;
+    incaaRating?: string;
     /**
      * The video&#39;s rating from the Kenya Film Classification Board.
      */
-    kfcbRating?: string | null;
+    kfcbRating?: string;
     /**
      * voor de Classificatie van Audiovisuele Media (Netherlands).
      */
-    kijkwijzerRating?: string | null;
+    kijkwijzerRating?: string;
     /**
      * The video&#39;s Korea Media Rating Board (영상물등급위원회) rating. The KMRB rates videos in South Korea.
      */
-    kmrbRating?: string | null;
+    kmrbRating?: string;
     /**
      * The video&#39;s rating from Indonesia&#39;s Lembaga Sensor Film.
      */
-    lsfRating?: string | null;
+    lsfRating?: string;
     /**
      * The video&#39;s rating from Malta&#39;s Film Age-Classification Board.
      */
-    mccaaRating?: string | null;
+    mccaaRating?: string;
     /**
      * The video&#39;s rating from the Danish Film Institute&#39;s (Det Danske Filminstitut) Media Council for Children and Young People.
      */
-    mccypRating?: string | null;
+    mccypRating?: string;
     /**
      * The video&#39;s rating system for Vietnam - MCST
      */
-    mcstRating?: string | null;
+    mcstRating?: string;
     /**
      * The video&#39;s rating from Singapore&#39;s Media Development Authority (MDA) and, specifically, it&#39;s Board of Film Censors (BFC).
      */
-    mdaRating?: string | null;
+    mdaRating?: string;
     /**
      * The video&#39;s rating from Medietilsynet, the Norwegian Media Authority.
      */
-    medietilsynetRating?: string | null;
+    medietilsynetRating?: string;
     /**
      * The video&#39;s rating from Finland&#39;s Kansallinen Audiovisuaalinen Instituutti (National Audiovisual Institute).
      */
-    mekuRating?: string | null;
+    mekuRating?: string;
     /**
      * The rating system for MENA countries, a clone of MPAA. It is needed to
      */
-    menaMpaaRating?: string | null;
+    menaMpaaRating?: string;
     /**
      * The video&#39;s rating from the Ministero dei Beni e delle Attività Culturali e del Turismo (Italy).
      */
-    mibacRating?: string | null;
+    mibacRating?: string;
     /**
      * The video&#39;s Ministerio de Cultura (Colombia) rating.
      */
-    mocRating?: string | null;
+    mocRating?: string;
     /**
      * The video&#39;s rating from Taiwan&#39;s Ministry of Culture (文化部).
      */
-    moctwRating?: string | null;
+    moctwRating?: string;
     /**
      * The video&#39;s Motion Picture Association of America (MPAA) rating.
      */
-    mpaaRating?: string | null;
+    mpaaRating?: string;
     /**
      * The rating system for trailer, DVD, and Ad in the US. See http://movielabs.com/md/ratings/v2.3/html/US_MPAAT_Ratings.html.
      */
-    mpaatRating?: string | null;
+    mpaatRating?: string;
     /**
      * The video&#39;s rating from the Movie and Television Review and Classification Board (Philippines).
      */
-    mtrcbRating?: string | null;
+    mtrcbRating?: string;
     /**
      * The video&#39;s rating in Poland.
      */
-    nbcplRating?: string | null;
+    nbcplRating?: string;
     /**
      * The video&#39;s rating from the Maldives National Bureau of Classification.
      */
-    nbcRating?: string | null;
+    nbcRating?: string;
     /**
      * The video&#39;s rating from the Bulgarian National Film Center.
      */
-    nfrcRating?: string | null;
+    nfrcRating?: string;
     /**
      * The video&#39;s rating from Nigeria&#39;s National Film and Video Censors Board.
      */
-    nfvcbRating?: string | null;
+    nfvcbRating?: string;
     /**
      * The video&#39;s rating from the Nacionãlais Kino centrs (National Film Centre of Latvia).
      */
-    nkclvRating?: string | null;
-    nmcRating?: string | null;
+    nkclvRating?: string;
     /**
      * The video&#39;s Office of Film and Literature Classification (OFLC - New Zealand) rating.
      */
-    oflcRating?: string | null;
+    oflcRating?: string;
     /**
      * The video&#39;s rating in Peru.
      */
-    pefilmRating?: string | null;
+    pefilmRating?: string;
     /**
      * The video&#39;s rating from the Hungarian Nemzeti Filmiroda, the Rating Committee of the National Office of Film.
      */
-    rcnofRating?: string | null;
+    rcnofRating?: string;
     /**
      * The video&#39;s rating in Venezuela.
      */
-    resorteviolenciaRating?: string | null;
+    resorteviolenciaRating?: string;
     /**
      * The video&#39;s General Directorate of Radio, Television and Cinematography (Mexico) rating.
      */
-    rtcRating?: string | null;
+    rtcRating?: string;
     /**
      * The video&#39;s rating from Ireland&#39;s Raidió Teilifís Éireann.
      */
-    rteRating?: string | null;
+    rteRating?: string;
     /**
      * The video&#39;s National Film Registry of the Russian Federation (MKRF - Russia) rating.
      */
-    russiaRating?: string | null;
+    russiaRating?: string;
     /**
      * The video&#39;s rating in Slovakia.
      */
-    skfilmRating?: string | null;
+    skfilmRating?: string;
     /**
      * The video&#39;s rating in Iceland.
      */
-    smaisRating?: string | null;
+    smaisRating?: string;
     /**
      * The video&#39;s rating from Statens medieråd (Sweden&#39;s National Media Council).
      */
-    smsaRating?: string | null;
+    smsaRating?: string;
     /**
      * The video&#39;s TV Parental Guidelines (TVPG) rating.
      */
-    tvpgRating?: string | null;
+    tvpgRating?: string;
     /**
      * A rating that YouTube uses to identify age-restricted content.
      */
-    ytRating?: string | null;
+    ytRating?: string;
   }
   /**
    * Geographical coordinates of a point, in WGS84.
@@ -1603,15 +1598,15 @@ export namespace youtube_v3 {
     /**
      * Altitude above the reference ellipsoid, in meters.
      */
-    altitude?: number | null;
+    altitude?: number;
     /**
      * Latitude in degrees.
      */
-    latitude?: number | null;
+    latitude?: number;
     /**
      * Longitude in degrees.
      */
-    longitude?: number | null;
+    longitude?: number;
   }
   /**
    * A guideCategory resource identifies a category that YouTube algorithmically assigns based on a channel&#39;s content or other indicators, such as the channel&#39;s popularity. The list is similar to video categories, with the difference being that a video&#39;s uploader can assign a video category but only YouTube can assign a channel category.
@@ -1620,15 +1615,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the guide category.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#guideCategory&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the category, such as its title.
      */
@@ -1638,11 +1633,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of categories that can be associated with YouTube channels. In this map, the category ID is the map key, and its value is the corresponding guideCategory resource.
      */
@@ -1650,31 +1645,31 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#guideCategoryListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Basic details about a guide category.
    */
   export interface Schema$GuideCategorySnippet {
-    channelId?: string | null;
+    channelId?: string;
     /**
      * Description of the guide category.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * An i18nLanguage resource identifies a UI language currently supported by YouTube.
@@ -1683,15 +1678,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the i18n language.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#i18nLanguage&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the i18n language, such as language code and human-readable name.
      */
@@ -1701,11 +1696,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of supported i18n languages. In this map, the i18n language ID is the map key, and its value is the corresponding i18nLanguage resource.
      */
@@ -1713,11 +1708,11 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#i18nLanguageListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Basic details about an i18n language, such as language code and human-readable name.
@@ -1726,11 +1721,11 @@ export namespace youtube_v3 {
     /**
      * A short BCP-47 code that uniquely identifies a language.
      */
-    hl?: string | null;
+    hl?: string;
     /**
      * The human-readable name of the language in the language itself.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * A i18nRegion resource identifies a region where YouTube is available.
@@ -1739,15 +1734,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the i18n region.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#i18nRegion&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the i18n region, such as region code and human-readable name.
      */
@@ -1757,11 +1752,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of regions where YouTube is available. In this map, the i18n region ID is the map key, and its value is the corresponding i18nRegion resource.
      */
@@ -1769,11 +1764,11 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#i18nRegionListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Basic details about an i18n region, such as region code and human-readable name.
@@ -1782,11 +1777,11 @@ export namespace youtube_v3 {
     /**
      * The region code as a 2-letter ISO country code.
      */
-    gl?: string | null;
+    gl?: string;
     /**
      * The human-readable name of the region.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Branding properties for images associated with the channel.
@@ -1799,63 +1794,63 @@ export namespace youtube_v3 {
     /**
      * This is used only in update requests; if it&#39;s set, we use this URL to generate all of the above banner URLs.
      */
-    bannerExternalUrl?: string | null;
+    bannerExternalUrl?: string;
     /**
      * Banner image. Desktop size (1060x175).
      */
-    bannerImageUrl?: string | null;
+    bannerImageUrl?: string;
     /**
      * Banner image. Mobile size high resolution (1440x395).
      */
-    bannerMobileExtraHdImageUrl?: string | null;
+    bannerMobileExtraHdImageUrl?: string;
     /**
      * Banner image. Mobile size high resolution (1280x360).
      */
-    bannerMobileHdImageUrl?: string | null;
+    bannerMobileHdImageUrl?: string;
     /**
      * Banner image. Mobile size (640x175).
      */
-    bannerMobileImageUrl?: string | null;
+    bannerMobileImageUrl?: string;
     /**
      * Banner image. Mobile size low resolution (320x88).
      */
-    bannerMobileLowImageUrl?: string | null;
+    bannerMobileLowImageUrl?: string;
     /**
      * Banner image. Mobile size medium/high resolution (960x263).
      */
-    bannerMobileMediumHdImageUrl?: string | null;
+    bannerMobileMediumHdImageUrl?: string;
     /**
      * Banner image. Tablet size extra high resolution (2560x424).
      */
-    bannerTabletExtraHdImageUrl?: string | null;
+    bannerTabletExtraHdImageUrl?: string;
     /**
      * Banner image. Tablet size high resolution (2276x377).
      */
-    bannerTabletHdImageUrl?: string | null;
+    bannerTabletHdImageUrl?: string;
     /**
      * Banner image. Tablet size (1707x283).
      */
-    bannerTabletImageUrl?: string | null;
+    bannerTabletImageUrl?: string;
     /**
      * Banner image. Tablet size low resolution (1138x188).
      */
-    bannerTabletLowImageUrl?: string | null;
+    bannerTabletLowImageUrl?: string;
     /**
      * Banner image. TV size high resolution (1920x1080).
      */
-    bannerTvHighImageUrl?: string | null;
+    bannerTvHighImageUrl?: string;
     /**
      * Banner image. TV size extra high resolution (2120x1192).
      */
-    bannerTvImageUrl?: string | null;
+    bannerTvImageUrl?: string;
     /**
      * Banner image. TV size low resolution (854x480).
      */
-    bannerTvLowImageUrl?: string | null;
+    bannerTvLowImageUrl?: string;
     /**
      * Banner image. TV size medium resolution (1280x720).
      */
-    bannerTvMediumImageUrl?: string | null;
+    bannerTvMediumImageUrl?: string;
     /**
      * The image map script for the large banner image.
      */
@@ -1875,11 +1870,11 @@ export namespace youtube_v3 {
     /**
      * The URL for a 1px by 1px tracking pixel that can be used to collect statistics for views of the channel or video pages.
      */
-    trackingImageUrl?: string | null;
+    trackingImageUrl?: string;
     /**
      * The URL for the image that appears above the top-left corner of the video player. This is a 25-pixel-high image with a flexible width that cannot exceed 170 pixels.
      */
-    watchIconImageUrl?: string | null;
+    watchIconImageUrl?: string;
   }
   /**
    * Describes information necessary for ingesting an RTMP or an HTTP stream.
@@ -1888,21 +1883,21 @@ export namespace youtube_v3 {
     /**
      * The backup ingestion URL that you should use to stream video to YouTube. You have the option of simultaneously streaming the content that you are sending to the ingestionAddress to this URL.
      */
-    backupIngestionAddress?: string | null;
+    backupIngestionAddress?: string;
     /**
      * The primary ingestion URL that you should use to stream video to YouTube. You must stream video to this URL.  Depending on which application or tool you use to encode your video stream, you may need to enter the stream URL and stream name separately or you may need to concatenate them in the following format:  STREAM_URL/STREAM_NAME
      */
-    ingestionAddress?: string | null;
+    ingestionAddress?: string;
     /**
      * The HTTP or RTMP stream name that YouTube assigns to the video stream.
      */
-    streamName?: string | null;
+    streamName?: string;
   }
   export interface Schema$InvideoBranding {
-    imageBytes?: string | null;
-    imageUrl?: string | null;
+    imageBytes?: string;
+    imageUrl?: string;
     position?: Schema$InvideoPosition;
-    targetChannelId?: string | null;
+    targetChannelId?: string;
     timing?: Schema$InvideoTiming;
   }
   /**
@@ -1912,11 +1907,11 @@ export namespace youtube_v3 {
     /**
      * Describes in which corner of the video the visual widget will appear.
      */
-    cornerPosition?: string | null;
+    cornerPosition?: string;
     /**
      * Defines the position type.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Describes an invideo promotion campaign consisting of multiple promoted items. A campaign belongs to a single channel_id.
@@ -1937,7 +1932,7 @@ export namespace youtube_v3 {
     /**
      * Indicates whether the channel&#39;s promotional campaign uses &quot;smart timing.&quot; This feature attempts to show promotions at a point in the video when they are more likely to be clicked and less likely to disrupt the viewing experience. This feature also picks up a single promotion to show on each video.
      */
-    useSmartTiming?: boolean | null;
+    useSmartTiming?: boolean;
   }
   /**
    * Describes a temporal position of a visual widget inside a video.
@@ -1946,21 +1941,18 @@ export namespace youtube_v3 {
     /**
      * Defines the duration in milliseconds for which the promotion should be displayed. If missing, the client should use the default.
      */
-    durationMs?: string | null;
+    durationMs?: string;
     /**
      * Defines the time at which the promotion will appear. Depending on the value of type the value of the offsetMs field will represent a time offset from the start or from the end of the video, expressed in milliseconds.
      */
-    offsetMs?: string | null;
+    offsetMs?: string;
     /**
      * Describes a timing type. If the value is offsetFromStart, then the offsetMs field represents an offset from the start of the video. If the value is offsetFromEnd, then the offsetMs field represents an offset from the end of the video.
      */
-    type?: string | null;
+    type?: string;
   }
   export interface Schema$LanguageTag {
-    value?: string | null;
-  }
-  export interface Schema$LevelDetails {
-    displayName?: string | null;
+    value?: string;
   }
   /**
    * A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
@@ -1973,15 +1965,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube assigns to uniquely identify the broadcast.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#liveBroadcast&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the event, including its title, description, start time, and end time.
      */
@@ -2002,41 +1994,41 @@ export namespace youtube_v3 {
     /**
      * This value uniquely identifies the live stream bound to the broadcast.
      */
-    boundStreamId?: string | null;
+    boundStreamId?: string;
     /**
      * The date and time that the live stream referenced by boundStreamId was last updated.
      */
-    boundStreamLastUpdateTimeMs?: string | null;
-    closedCaptionsType?: string | null;
+    boundStreamLastUpdateTimeMs?: string;
+    closedCaptionsType?: string;
     /**
      * This setting indicates whether auto start is enabled for this broadcast.
      */
-    enableAutoStart?: boolean | null;
+    enableAutoStart?: boolean;
     /**
      * This setting indicates whether HTTP POST closed captioning is enabled for this broadcast. The ingestion URL of the closed captions is returned through the liveStreams API. This is mutually exclusive with using the closed_captions_type property, and is equivalent to setting closed_captions_type to CLOSED_CAPTIONS_HTTP_POST.
      */
-    enableClosedCaptions?: boolean | null;
+    enableClosedCaptions?: boolean;
     /**
      * This setting indicates whether YouTube should enable content encryption for the broadcast.
      */
-    enableContentEncryption?: boolean | null;
+    enableContentEncryption?: boolean;
     /**
      * This setting determines whether viewers can access DVR controls while watching the video. DVR controls enable the viewer to control the video playback experience by pausing, rewinding, or fast forwarding content. The default value for this property is true.    Important: You must set the value to true and also set the enableArchive property&#39;s value to true if you want to make playback available immediately after the broadcast ends.
      */
-    enableDvr?: boolean | null;
+    enableDvr?: boolean;
     /**
      * This setting indicates whether the broadcast video can be played in an embedded player. If you choose to archive the video (using the enableArchive property), this setting will also apply to the archived video.
      */
-    enableEmbed?: boolean | null;
+    enableEmbed?: boolean;
     /**
      * Indicates whether this broadcast has low latency enabled.
      */
-    enableLowLatency?: boolean | null;
+    enableLowLatency?: boolean;
     /**
      * If both this and enable_low_latency are set, they must match. LATENCY_NORMAL should match enable_low_latency=false LATENCY_LOW should match enable_low_latency=true LATENCY_ULTRA_LOW should have enable_low_latency omitted.
      */
-    latencyPreference?: string | null;
-    mesh?: string | null;
+    latencyPreference?: string;
+    mesh?: string;
     /**
      * The monitorStream object contains information about the monitor stream, which the broadcaster can use to review the event content before the broadcast stream is shown publicly.
      */
@@ -2044,26 +2036,26 @@ export namespace youtube_v3 {
     /**
      * The projection format of this broadcast. This defaults to rectangular.
      */
-    projection?: string | null;
+    projection?: string;
     /**
      * Automatically start recording after the event goes live. The default value for this property is true.    Important: You must also set the enableDvr property&#39;s value to true if you want the playback to be available immediately after the broadcast ends. If you set this property&#39;s value to true but do not also set the enableDvr property to true, there may be a delay of around one day before the archived video will be available for playback.
      */
-    recordFromStart?: boolean | null;
+    recordFromStart?: boolean;
     /**
      * This setting indicates whether the broadcast should automatically begin with an in-stream slate when you update the broadcast&#39;s status to live. After updating the status, you then need to send a liveCuepoints.insert request that sets the cuepoint&#39;s eventState to end to remove the in-stream slate and make your broadcast stream visible to viewers.
      */
-    startWithSlate?: boolean | null;
-    stereoLayout?: string | null;
+    startWithSlate?: boolean;
+    stereoLayout?: string;
   }
   export interface Schema$LiveBroadcastListResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of broadcasts that match the request criteria.
      */
@@ -2071,57 +2063,56 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#liveBroadcastListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   export interface Schema$LiveBroadcastSnippet {
     /**
      * The date and time that the broadcast actually ended. This information is only available once the broadcast&#39;s state is complete. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    actualEndTime?: string | null;
+    actualEndTime?: string;
     /**
      * The date and time that the broadcast actually started. This information is only available once the broadcast&#39;s state is live. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    actualStartTime?: string | null;
-    broadcastType?: string | null;
+    actualStartTime?: string;
     /**
      * The ID that YouTube uses to uniquely identify the channel that is publishing the broadcast.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The broadcast&#39;s description. As with the title, you can set this field by modifying the broadcast resource or by setting the description field of the corresponding video resource.
      */
-    description?: string | null;
-    isDefaultBroadcast?: boolean | null;
+    description?: string;
+    isDefaultBroadcast?: boolean;
     /**
      * The id of the live chat for this broadcast.
      */
-    liveChatId?: string | null;
+    liveChatId?: string;
     /**
      * The date and time that the broadcast was added to YouTube&#39;s live broadcast schedule. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * The date and time that the broadcast is scheduled to end. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    scheduledEndTime?: string | null;
+    scheduledEndTime?: string;
     /**
      * The date and time that the broadcast is scheduled to start. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    scheduledStartTime?: string | null;
+    scheduledStartTime?: string;
     /**
      * A map of thumbnail images associated with the broadcast. For each nested object in this object, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
      */
@@ -2129,7 +2120,7 @@ export namespace youtube_v3 {
     /**
      * The broadcast&#39;s title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Statistics about the live broadcast. These represent a snapshot of the values at the time of the request. Statistics are only returned for live broadcasts.
@@ -2138,31 +2129,29 @@ export namespace youtube_v3 {
     /**
      * The number of viewers currently watching the broadcast. The property and its value will be present if the broadcast has current viewers and the broadcast owner has not hidden the viewcount for the video. Note that YouTube stops tracking the number of concurrent viewers for a broadcast when the broadcast ends. So, this property would not identify the number of viewers watching an archived video of a live broadcast that already ended.
      */
-    concurrentViewers?: string | null;
+    concurrentViewers?: string;
     /**
      * The total number of live chat messages currently on the broadcast. The property and its value will be present if the broadcast is public, has the live chat feature enabled, and has at least one message. Note that this field will not be filled after the broadcast ends. So this property would not identify the number of chat messages for an archived video of a completed live broadcast.
      */
-    totalChatCount?: string | null;
+    totalChatCount?: string;
   }
   export interface Schema$LiveBroadcastStatus {
     /**
      * The broadcast&#39;s status. The status can be updated using the API&#39;s liveBroadcasts.transition method.
      */
-    lifeCycleStatus?: string | null;
+    lifeCycleStatus?: string;
     /**
      * Priority of the live broadcast event (internal state).
      */
-    liveBroadcastPriority?: string | null;
-    madeForKids?: boolean | null;
+    liveBroadcastPriority?: string;
     /**
      * The broadcast&#39;s privacy status. Note that the broadcast represents exactly one YouTube video, so the privacy settings are identical to those supported for videos. In addition, you can set this field by modifying the broadcast resource or by setting the privacyStatus field of the corresponding video resource.
      */
-    privacyStatus?: string | null;
+    privacyStatus?: string;
     /**
      * The broadcast&#39;s recording status.
      */
-    recordingStatus?: string | null;
-    selfDeclaredMadeForKids?: boolean | null;
+    recordingStatus?: string;
   }
   /**
    * A liveChatBan resource represents a ban for a YouTube live chat.
@@ -2171,15 +2160,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube assigns to uniquely identify the ban.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#liveChatBan&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the ban.
      */
@@ -2189,34 +2178,34 @@ export namespace youtube_v3 {
     /**
      * The duration of a ban, only filled if the ban has type TEMPORARY.
      */
-    banDurationSeconds?: string | null;
+    banDurationSeconds?: string;
     bannedUserDetails?: Schema$ChannelProfileDetails;
     /**
      * The chat this ban is pertinent to.
      */
-    liveChatId?: string | null;
+    liveChatId?: string;
     /**
      * The type of ban.
      */
-    type?: string | null;
+    type?: string;
   }
   export interface Schema$LiveChatFanFundingEventDetails {
     /**
      * A rendered string that displays the fund amount and currency to the user.
      */
-    amountDisplayString?: string | null;
+    amountDisplayString?: string;
     /**
      * The amount of the fund.
      */
-    amountMicros?: string | null;
+    amountMicros?: string;
     /**
      * The currency in which the fund was made.
      */
-    currency?: string | null;
+    currency?: string;
     /**
      * The comment added by the user to this fan funding event.
      */
-    userComment?: string | null;
+    userComment?: string;
   }
   /**
    * A liveChatMessage resource represents a chat message in a YouTube Live Chat.
@@ -2229,15 +2218,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube assigns to uniquely identify the message.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#liveChatMessage&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the message.
      */
@@ -2247,48 +2236,48 @@ export namespace youtube_v3 {
     /**
      * The YouTube channel ID.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The channel&#39;s URL.
      */
-    channelUrl?: string | null;
+    channelUrl?: string;
     /**
      * The channel&#39;s display name.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Whether the author is a moderator of the live chat.
      */
-    isChatModerator?: boolean | null;
+    isChatModerator?: boolean;
     /**
      * Whether the author is the owner of the live chat.
      */
-    isChatOwner?: boolean | null;
+    isChatOwner?: boolean;
     /**
      * Whether the author is a sponsor of the live chat.
      */
-    isChatSponsor?: boolean | null;
+    isChatSponsor?: boolean;
     /**
      * Whether the author&#39;s identity has been verified by YouTube.
      */
-    isVerified?: boolean | null;
+    isVerified?: boolean;
     /**
      * The channels&#39;s avatar URL.
      */
-    profileImageUrl?: string | null;
+    profileImageUrl?: string;
   }
   export interface Schema$LiveChatMessageDeletedDetails {
-    deletedMessageId?: string | null;
+    deletedMessageId?: string;
   }
   export interface Schema$LiveChatMessageListResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of live chat messages.
      */
@@ -2296,38 +2285,38 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#liveChatMessageListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The date and time when the underlying stream went offline. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    offlineAt?: string | null;
+    offlineAt?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The amount of time the client should wait before polling again.
      */
-    pollingIntervalMillis?: number | null;
+    pollingIntervalMillis?: number;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   export interface Schema$LiveChatMessageRetractedDetails {
-    retractedMessageId?: string | null;
+    retractedMessageId?: string;
   }
   export interface Schema$LiveChatMessageSnippet {
     /**
      * The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action superChatEvent - the user that made the purchase
      */
-    authorChannelId?: string | null;
+    authorChannelId?: string;
     /**
      * Contains a string that can be displayed to the user. If this field is not present the message is silent, at the moment only messages of type TOMBSTONE and CHAT_ENDED_EVENT are silent.
      */
-    displayMessage?: string | null;
+    displayMessage?: string;
     /**
      * Details about the funding event, this is only set if the type is &#39;fanFundingEvent&#39;.
      */
@@ -2335,8 +2324,8 @@ export namespace youtube_v3 {
     /**
      * Whether the message has display content that should be displayed to users.
      */
-    hasDisplayContent?: boolean | null;
-    liveChatId?: string | null;
+    hasDisplayContent?: boolean;
+    liveChatId?: string;
     messageDeletedDetails?: Schema$LiveChatMessageDeletedDetails;
     messageRetractedDetails?: Schema$LiveChatMessageRetractedDetails;
     pollClosedDetails?: Schema$LiveChatPollClosedDetails;
@@ -2346,7 +2335,7 @@ export namespace youtube_v3 {
     /**
      * The date and time when the message was orignally published. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * Details about the Super Chat event, this is only set if the type is &#39;superChatEvent&#39;.
      */
@@ -2362,7 +2351,7 @@ export namespace youtube_v3 {
     /**
      * The type of message, this will always be present, it determines the contents of the message as well as which fields will be present.
      */
-    type?: string | null;
+    type?: string;
     userBannedDetails?: Schema$LiveChatUserBannedMessageDetails;
   }
   /**
@@ -2372,15 +2361,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube assigns to uniquely identify the moderator.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#liveChatModerator&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the moderator.
      */
@@ -2390,11 +2379,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of moderators that match the request criteria.
      */
@@ -2402,27 +2391,27 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#liveChatModeratorListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   export interface Schema$LiveChatModeratorSnippet {
     /**
      * The ID of the live chat this moderator can act on.
      */
-    liveChatId?: string | null;
+    liveChatId?: string;
     /**
      * Details about the moderator.
      */
@@ -2432,70 +2421,70 @@ export namespace youtube_v3 {
     /**
      * The id of the poll that was closed.
      */
-    pollId?: string | null;
+    pollId?: string;
   }
   export interface Schema$LiveChatPollEditedDetails {
-    id?: string | null;
+    id?: string;
     items?: Schema$LiveChatPollItem[];
-    prompt?: string | null;
+    prompt?: string;
   }
   export interface Schema$LiveChatPollItem {
     /**
      * Plain text description of the item.
      */
-    description?: string | null;
-    itemId?: string | null;
+    description?: string;
+    itemId?: string;
   }
   export interface Schema$LiveChatPollOpenedDetails {
-    id?: string | null;
+    id?: string;
     items?: Schema$LiveChatPollItem[];
-    prompt?: string | null;
+    prompt?: string;
   }
   export interface Schema$LiveChatPollVotedDetails {
     /**
      * The poll item the user chose.
      */
-    itemId?: string | null;
+    itemId?: string;
     /**
      * The poll the user voted on.
      */
-    pollId?: string | null;
+    pollId?: string;
   }
   export interface Schema$LiveChatSuperChatDetails {
     /**
      * A rendered string that displays the fund amount and currency to the user.
      */
-    amountDisplayString?: string | null;
+    amountDisplayString?: string;
     /**
      * The amount purchased by the user, in micros (1,750,000 micros = 1.75).
      */
-    amountMicros?: string | null;
+    amountMicros?: string;
     /**
      * The currency in which the purchase was made.
      */
-    currency?: string | null;
+    currency?: string;
     /**
      * The tier in which the amount belongs. Lower amounts belong to lower tiers. The lowest tier is 1.
      */
-    tier?: number | null;
+    tier?: number;
     /**
      * The comment added by the user to this Super Chat event.
      */
-    userComment?: string | null;
+    userComment?: string;
   }
   export interface Schema$LiveChatSuperStickerDetails {
     /**
      * A rendered string that displays the fund amount and currency to the user.
      */
-    amountDisplayString?: string | null;
+    amountDisplayString?: string;
     /**
      * The amount purchased by the user, in micros (1,750,000 micros = 1.75).
      */
-    amountMicros?: string | null;
+    amountMicros?: string;
     /**
      * The currency in which the purchase was made.
      */
-    currency?: string | null;
+    currency?: string;
     /**
      * Information about the Super Sticker.
      */
@@ -2503,19 +2492,19 @@ export namespace youtube_v3 {
     /**
      * The tier in which the amount belongs. Lower amounts belong to lower tiers. The lowest tier is 1.
      */
-    tier?: number | null;
+    tier?: number;
   }
   export interface Schema$LiveChatTextMessageDetails {
     /**
      * The user&#39;s message.
      */
-    messageText?: string | null;
+    messageText?: string;
   }
   export interface Schema$LiveChatUserBannedMessageDetails {
     /**
      * The duration of the ban. This property is only present if the banType is temporary.
      */
-    banDurationSeconds?: string | null;
+    banDurationSeconds?: string;
     /**
      * The details of the user that was banned.
      */
@@ -2523,7 +2512,7 @@ export namespace youtube_v3 {
     /**
      * The type of ban.
      */
-    banType?: string | null;
+    banType?: string;
   }
   /**
    * A live stream describes a live ingestion point.
@@ -2540,15 +2529,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube assigns to uniquely identify the stream.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#liveStream&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the stream, including its channel, title, and description.
      */
@@ -2562,19 +2551,19 @@ export namespace youtube_v3 {
     /**
      * The long-form description of the issue and how to resolve it.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The short-form reason for this issue.
      */
-    reason?: string | null;
+    reason?: string;
     /**
      * How severe this issue is to the stream.
      */
-    severity?: string | null;
+    severity?: string;
     /**
      * The kind of error happening.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Detailed settings of a stream.
@@ -2583,11 +2572,11 @@ export namespace youtube_v3 {
     /**
      * The ingestion URL where the closed captions of this stream are sent.
      */
-    closedCaptionsIngestionUrl?: string | null;
+    closedCaptionsIngestionUrl?: string;
     /**
      * Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts. It is common for broadcasters to reuse the same stream for many different broadcasts if those broadcasts occur at different times.  If you set this value to false, then the stream will not be reusable, which means that it can only be bound to one broadcast. Non-reusable streams differ from reusable streams in the following ways:   - A non-reusable stream can only be bound to one broadcast.  - A non-reusable stream might be deleted by an automated process after the broadcast ends.  - The  liveStreams.list method does not list non-reusable streams if you call the method and set the mine parameter to true. The only way to use that method to retrieve the resource for a non-reusable stream is to use the id parameter to identify the stream.
      */
-    isReusable?: boolean | null;
+    isReusable?: boolean;
   }
   export interface Schema$LiveStreamHealthStatus {
     /**
@@ -2597,21 +2586,21 @@ export namespace youtube_v3 {
     /**
      * The last time this status was updated (in seconds)
      */
-    lastUpdateTimeSeconds?: string | null;
+    lastUpdateTimeSeconds?: string;
     /**
      * The status code of this stream
      */
-    status?: string | null;
+    status?: string;
   }
   export interface Schema$LiveStreamListResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of live streams that match the request criteria.
      */
@@ -2619,40 +2608,40 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#liveStreamListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   export interface Schema$LiveStreamSnippet {
     /**
      * The ID that YouTube uses to uniquely identify the channel that is transmitting the stream.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The stream&#39;s description. The value cannot be longer than 10000 characters.
      */
-    description?: string | null;
-    isDefaultStream?: boolean | null;
+    description?: string;
+    isDefaultStream?: boolean;
     /**
      * The date and time that the stream was created. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * The stream&#39;s title. The value must be between 1 and 128 characters long.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Brief description of the live stream status.
@@ -2662,10 +2651,10 @@ export namespace youtube_v3 {
      * The health status of the stream.
      */
     healthStatus?: Schema$LiveStreamHealthStatus;
-    streamStatus?: string | null;
+    streamStatus?: string;
   }
   export interface Schema$LocalizedProperty {
-    default?: string | null;
+    default?: string;
     /**
      * The language of the default property.
      */
@@ -2673,151 +2662,8 @@ export namespace youtube_v3 {
     localized?: Schema$LocalizedString[];
   }
   export interface Schema$LocalizedString {
-    language?: string | null;
-    value?: string | null;
-  }
-  /**
-   * A member resource represents a member for a YouTube channel. A member provides recurring monetary support to a creator and receives special benefits.
-   */
-  export interface Schema$Member {
-    /**
-     * Etag of this resource.
-     */
-    etag?: string | null;
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#member&quot;.
-     */
-    kind?: string | null;
-    /**
-     * The snippet object contains basic details about the member.
-     */
-    snippet?: Schema$MemberSnippet;
-  }
-  export interface Schema$MemberListResponse {
-    /**
-     * Etag of this resource.
-     */
-    etag?: string | null;
-    /**
-     * Serialized EventId of the request which produced this response.
-     */
-    eventId?: string | null;
-    /**
-     * A list of members that match the request criteria.
-     */
-    items?: Schema$Member[];
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#memberListResponse&quot;.
-     */
-    kind?: string | null;
-    /**
-     * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
-     */
-    nextPageToken?: string | null;
-    pageInfo?: Schema$PageInfo;
-    tokenPagination?: Schema$TokenPagination;
-    /**
-     * The visitorId identifies the visitor.
-     */
-    visitorId?: string | null;
-  }
-  export interface Schema$MembershipsDetails {
-    /**
-     * All levels that the user has access to. This includes the currently active level and all other levels that are included because of a higher purchase.
-     */
-    accessibleLevels?: string[] | null;
-    /**
-     * The highest level that the user has access to at the moment.
-     */
-    highestAccessibleLevel?: string | null;
-    /**
-     * Display name for the highest level that the user has access to at the moment.
-     */
-    highestAccessibleLevelDisplayName?: string | null;
-    /**
-     * The date and time when the user became a continuous member across all levels.
-     */
-    memberSince?: string | null;
-    /**
-     * The date and time when the user started to continuously have access to the currently highest level.
-     */
-    memberSinceCurrentLevel?: string | null;
-    /**
-     * The cumulative time the user has been a member across all levels in complete months (the time is rounded down to the nearest integer).
-     */
-    memberTotalDuration?: number | null;
-    /**
-     * The cumulative time the user has had access to the currently highest level in complete months (the time is rounded down to the nearest integer).
-     */
-    memberTotalDurationCurrentLevel?: number | null;
-    /**
-     * The highest level that the user has access to at the moment. DEPRECATED - highest_accessible_level should be used instead. This will be removed after we make sure there are no 3rd parties relying on it.
-     */
-    purchasedLevel?: string | null;
-  }
-  /**
-   * A membershipsLevel resource represents an offer made by YouTube creators for their fans. Users can become members of the channel by joining one of the available levels. They will provide recurring monetary support and receives special benefits.
-   */
-  export interface Schema$MembershipsLevel {
-    /**
-     * Etag of this resource.
-     */
-    etag?: string | null;
-    /**
-     * The ID that YouTube assigns to uniquely identify the memberships level.
-     */
-    id?: string | null;
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#membershipsLevel&quot;.
-     */
-    kind?: string | null;
-    /**
-     * The snippet object contains basic details about the level.
-     */
-    snippet?: Schema$MembershipsLevelSnippet;
-  }
-  export interface Schema$MembershipsLevelListResponse {
-    /**
-     * Etag of this resource.
-     */
-    etag?: string | null;
-    /**
-     * Serialized EventId of the request which produced this response.
-     */
-    eventId?: string | null;
-    /**
-     * A list of pricing levels offered by a creator to the fans.
-     */
-    items?: Schema$MembershipsLevel[];
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#membershipsLevelListResponse&quot;.
-     */
-    kind?: string | null;
-    /**
-     * The visitorId identifies the visitor.
-     */
-    visitorId?: string | null;
-  }
-  export interface Schema$MembershipsLevelSnippet {
-    /**
-     * The id of the channel that&#39;s offering channel memberships.
-     */
-    creatorChannelId?: string | null;
-    levelDetails?: Schema$LevelDetails;
-  }
-  export interface Schema$MemberSnippet {
-    /**
-     * The id of the channel that&#39;s offering memberships.
-     */
-    creatorChannelId?: string | null;
-    /**
-     * Details about the member.
-     */
-    memberDetails?: Schema$ChannelProfileDetails;
-    /**
-     * Details about the user&#39;s membership.
-     */
-    membershipsDetails?: Schema$MembershipsDetails;
+    language?: string;
+    value?: string;
   }
   /**
    * Settings and Info of the monitor stream
@@ -2826,15 +2672,15 @@ export namespace youtube_v3 {
     /**
      * If you have set the enableMonitorStream property to true, then this property determines the length of the live broadcast delay.
      */
-    broadcastStreamDelayMs?: number | null;
+    broadcastStreamDelayMs?: number;
     /**
      * HTML code that embeds a player that plays the monitor stream.
      */
-    embedHtml?: string | null;
+    embedHtml?: string;
     /**
      * This value determines whether the monitor stream is enabled for the broadcast. If the monitor stream is enabled, then YouTube will broadcast the event content on a special stream intended only for the broadcaster&#39;s consumption. The broadcaster can use the stream to review the event content and also to identify the optimal times to insert cuepoints.  You need to set this value to true if you intend to have a broadcast delay for your event.  Note: This property cannot be updated once the broadcast is in the testing or live state.
      */
-    enableMonitorStream?: boolean | null;
+    enableMonitorStream?: boolean;
   }
   /**
    * Nonprofit information.
@@ -2847,10 +2693,10 @@ export namespace youtube_v3 {
     /**
      * Legal name of the nonprofit.
      */
-    nonprofitLegalName?: string | null;
+    nonprofitLegalName?: string;
   }
   export interface Schema$NonprofitId {
-    value?: string | null;
+    value?: string;
   }
   /**
    * Paging details for lists of resources, including total number of items available and number of resources returned in a single page.
@@ -2859,11 +2705,11 @@ export namespace youtube_v3 {
     /**
      * The number of results included in the API response.
      */
-    resultsPerPage?: number | null;
+    resultsPerPage?: number;
     /**
      * The total number of results in the result set.
      */
-    totalResults?: number | null;
+    totalResults?: number;
   }
   /**
    * A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. A playlist can contain up to 200 videos, and YouTube does not limit the number of playlists that each user creates. By default, playlists are publicly visible to other users, but playlists can be public or private.  YouTube also uses playlists to identify special collections of videos for a channel, such as:   - uploaded videos  - favorite videos  - positively rated (liked) videos  - watch history  - watch later  To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company&#39;s videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the  channel resource for a given channel.  You can then use the   playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the   playlistItems.insert and   playlistItems.delete methods.
@@ -2876,19 +2722,19 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the playlist.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#playlist&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Localizations for different languages
      */
-    localizations?: {[key: string]: Schema$PlaylistLocalization} | null;
+    localizations?: {[key: string]: Schema$PlaylistLocalization};
     /**
      * The player object contains information that you would use to play the playlist in an embedded player.
      */
@@ -2906,7 +2752,7 @@ export namespace youtube_v3 {
     /**
      * The number of videos in the playlist.
      */
-    itemCount?: number | null;
+    itemCount?: number;
   }
   /**
    * A playlistItem resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem  resource contains details about the included resource that pertain specifically to how that resource is used in that playlist.  YouTube uses playlists to identify special collections of videos for a channel, such as:   - uploaded videos  - favorite videos  - positively rated (liked) videos  - watch history  - watch later  To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company&#39;s videos, playlists, and other YouTube information.  You can retrieve the playlist IDs for each of these lists from the  channel resource  for a given channel. You can then use the   playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the   playlistItems.insert and   playlistItems.delete methods. For example, if a user gives a positive rating to a video, you would insert that video into the liked videos playlist for that user&#39;s channel.
@@ -2919,15 +2765,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the playlist item.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#playlistItem&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the playlist item, such as its title and position in the playlist.
      */
@@ -2941,33 +2787,33 @@ export namespace youtube_v3 {
     /**
      * The time, measured in seconds from the start of the video, when the video should stop playing. (The playlist owner can specify the times when the video should start and stop playing when the video is played in the context of the playlist.) By default, assume that the video.endTime is the end of the video.
      */
-    endAt?: string | null;
+    endAt?: string;
     /**
      * A user-generated note for this item.
      */
-    note?: string | null;
+    note?: string;
     /**
      * The time, measured in seconds from the start of the video, when the video should start playing. (The playlist owner can specify the times when the video should start and stop playing when the video is played in the context of the playlist.) The default value is 0.
      */
-    startAt?: string | null;
+    startAt?: string;
     /**
      * The ID that YouTube uses to uniquely identify a video. To retrieve the video resource, set the id query parameter to this value in your API request.
      */
-    videoId?: string | null;
+    videoId?: string;
     /**
      * The date and time that the video was published to YouTube. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    videoPublishedAt?: string | null;
+    videoPublishedAt?: string;
   }
   export interface Schema$PlaylistItemListResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of playlist items that match the request criteria.
      */
@@ -2975,21 +2821,21 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#playlistItemListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Basic details about a playlist, including title, description and thumbnails.
@@ -2998,27 +2844,27 @@ export namespace youtube_v3 {
     /**
      * The ID that YouTube uses to uniquely identify the user that added the item to the playlist.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * Channel title for the channel that the playlist item belongs to.
      */
-    channelTitle?: string | null;
+    channelTitle?: string;
     /**
      * The item&#39;s description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The ID that YouTube uses to uniquely identify the playlist that the playlist item is in.
      */
-    playlistId?: string | null;
+    playlistId?: string;
     /**
      * The order in which the item appears in the playlist. The value uses a zero-based index, so the first item has a position of 0, the second item has a position of 1, and so forth.
      */
-    position?: number | null;
+    position?: number;
     /**
      * The date and time that the item was added to the playlist. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * The id object contains information that can be used to uniquely identify the resource that is included in the playlist as the playlist item.
      */
@@ -3030,7 +2876,7 @@ export namespace youtube_v3 {
     /**
      * The item&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Information about the playlist item&#39;s privacy status.
@@ -3039,17 +2885,17 @@ export namespace youtube_v3 {
     /**
      * This resource&#39;s privacy status.
      */
-    privacyStatus?: string | null;
+    privacyStatus?: string;
   }
   export interface Schema$PlaylistListResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of playlists that match the request criteria.
      */
@@ -3057,21 +2903,21 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#playlistListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Playlist localization setting
@@ -3080,17 +2926,17 @@ export namespace youtube_v3 {
     /**
      * The localized strings for playlist&#39;s description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The localized strings for playlist&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   export interface Schema$PlaylistPlayer {
     /**
      * An &lt;iframe&gt; tag that embeds a player that will play the playlist.
      */
-    embedHtml?: string | null;
+    embedHtml?: string;
   }
   /**
    * Basic details about a playlist, including title, description and thumbnails.
@@ -3099,19 +2945,19 @@ export namespace youtube_v3 {
     /**
      * The ID that YouTube uses to uniquely identify the channel that published the playlist.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The channel title of the channel that the video belongs to.
      */
-    channelTitle?: string | null;
+    channelTitle?: string;
     /**
      * The language of the playlist&#39;s default title and description.
      */
-    defaultLanguage?: string | null;
+    defaultLanguage?: string;
     /**
      * The playlist&#39;s description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Localized title and description, read-only.
      */
@@ -3119,11 +2965,11 @@ export namespace youtube_v3 {
     /**
      * The date and time that the playlist was created. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * Keyword tags associated with the playlist.
      */
-    tags?: string[] | null;
+    tags?: string[];
     /**
      * A map of thumbnail images associated with the playlist. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
      */
@@ -3131,13 +2977,13 @@ export namespace youtube_v3 {
     /**
      * The playlist&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   export interface Schema$PlaylistStatus {
     /**
      * The playlist&#39;s privacy status.
      */
-    privacyStatus?: string | null;
+    privacyStatus?: string;
   }
   /**
    * Describes a single promoted item.
@@ -3146,7 +2992,7 @@ export namespace youtube_v3 {
     /**
      * A custom message to display for this promotion. This field is currently ignored unless the promoted item is a website.
      */
-    customMessage?: string | null;
+    customMessage?: string;
     /**
      * Identifies the promoted item.
      */
@@ -3154,7 +3000,7 @@ export namespace youtube_v3 {
     /**
      * If true, the content owner&#39;s name will be used when displaying the promotion. This field can only be set when the update is made on behalf of the content owner.
      */
-    promotedByContentOwner?: boolean | null;
+    promotedByContentOwner?: boolean;
     /**
      * The temporal position within the video where the promoted item will be displayed. If present, it overrides the default timing.
      */
@@ -3167,19 +3013,19 @@ export namespace youtube_v3 {
     /**
      * If type is recentUpload, this field identifies the channel from which to take the recent upload. If missing, the channel is assumed to be the same channel for which the invideoPromotion is set.
      */
-    recentlyUploadedBy?: string | null;
+    recentlyUploadedBy?: string;
     /**
      * Describes the type of the promoted item.
      */
-    type?: string | null;
+    type?: string;
     /**
      * If the promoted item represents a video, this field represents the unique YouTube ID identifying it. This field will be present only if type has the value video.
      */
-    videoId?: string | null;
+    videoId?: string;
     /**
      * If the promoted item represents a website, this field represents the url pointing to the website. This field will be present only if type has the value website.
      */
-    websiteUrl?: string | null;
+    websiteUrl?: string;
   }
   /**
    * A pair Property / Value.
@@ -3188,11 +3034,11 @@ export namespace youtube_v3 {
     /**
      * A property.
      */
-    property?: string | null;
+    property?: string;
     /**
      * The property&#39;s value.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A resource id is a generic reference that points to another YouTube resource.
@@ -3201,29 +3047,29 @@ export namespace youtube_v3 {
     /**
      * The ID that YouTube uses to uniquely identify the referred resource, if that resource is a channel. This property is only present if the resourceId.kind value is youtube#channel.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The type of the API resource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The ID that YouTube uses to uniquely identify the referred resource, if that resource is a playlist. This property is only present if the resourceId.kind value is youtube#playlist.
      */
-    playlistId?: string | null;
+    playlistId?: string;
     /**
      * The ID that YouTube uses to uniquely identify the referred resource, if that resource is a video. This property is only present if the resourceId.kind value is youtube#video.
      */
-    videoId?: string | null;
+    videoId?: string;
   }
   export interface Schema$SearchListResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of results that match the search criteria.
      */
@@ -3231,22 +3077,22 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#searchListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
-    regionCode?: string | null;
+    prevPageToken?: string;
+    regionCode?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
@@ -3255,7 +3101,7 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The id object contains information that can be used to uniquely identify the resource that matches the search request.
      */
@@ -3263,7 +3109,7 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#searchResult&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about a search result, such as its title or description. For example, if the search result is a video, then the title will be the video&#39;s title and the description will be the video&#39;s description.
      */
@@ -3276,23 +3122,23 @@ export namespace youtube_v3 {
     /**
      * The value that YouTube uses to uniquely identify the channel that published the resource that the search result identifies.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The title of the channel that published the resource that the search result identifies.
      */
-    channelTitle?: string | null;
+    channelTitle?: string;
     /**
      * A description of the search result.
      */
-    description?: string | null;
+    description?: string;
     /**
      * It indicates if the resource (video or channel) has upcoming/active live broadcast content. Or it&#39;s &quot;none&quot; if there is not any upcoming/active live broadcasts.
      */
-    liveBroadcastContent?: string | null;
+    liveBroadcastContent?: string;
     /**
      * The creation date and time of the resource that the search result identifies. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * A map of thumbnail images associated with the search result. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
      */
@@ -3300,7 +3146,7 @@ export namespace youtube_v3 {
     /**
      * The title of the search result.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * A sponsor resource represents a sponsor for a YouTube channel. A sponsor provides recurring monetary support to a creator and receives special benefits.
@@ -3309,11 +3155,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#sponsor&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the sponsor.
      */
@@ -3323,11 +3169,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of sponsors that match the request criteria.
      */
@@ -3335,27 +3181,27 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#sponsorListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   export interface Schema$SponsorSnippet {
     /**
      * The id of the channel being sponsored.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The cumulative time a user has been a sponsor in months.
      */
-    cumulativeDurationMonths?: number | null;
+    cumulativeDurationMonths?: number;
     /**
      * Details about the sponsor.
      */
@@ -3363,7 +3209,7 @@ export namespace youtube_v3 {
     /**
      * The date and time when the user became a sponsor. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    sponsorSince?: string | null;
+    sponsorSince?: string;
   }
   /**
    * A subscription resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.
@@ -3376,15 +3222,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the subscription.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#subscription&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the subscription, including its title and the channel that the user subscribed to.
      */
@@ -3401,25 +3247,25 @@ export namespace youtube_v3 {
     /**
      * The type of activity this subscription is for (only uploads, everything).
      */
-    activityType?: string | null;
+    activityType?: string;
     /**
      * The number of new items in the subscription since its content was last read.
      */
-    newItemCount?: number | null;
+    newItemCount?: number;
     /**
      * The approximate number of items that the subscription points to.
      */
-    totalItemCount?: number | null;
+    totalItemCount?: number;
   }
   export interface Schema$SubscriptionListResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of subscriptions that match the request criteria.
      */
@@ -3427,21 +3273,21 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#subscriptionListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Basic details about a subscription, including title, description and thumbnails of the subscribed item.
@@ -3450,19 +3296,19 @@ export namespace youtube_v3 {
     /**
      * The ID that YouTube uses to uniquely identify the subscriber&#39;s channel.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * Channel title for the channel that the subscription belongs to.
      */
-    channelTitle?: string | null;
+    channelTitle?: string;
     /**
      * The subscription&#39;s details.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The date and time that the subscription was created. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * The id object contains information about the channel that the user subscribed to.
      */
@@ -3474,7 +3320,7 @@ export namespace youtube_v3 {
     /**
      * The subscription&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Basic details about a subscription&#39;s subscriber including title, description, channel ID and thumbnails.
@@ -3483,11 +3329,11 @@ export namespace youtube_v3 {
     /**
      * The channel ID of the subscriber.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The description of the subscriber.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Thumbnails for this subscriber.
      */
@@ -3495,7 +3341,7 @@ export namespace youtube_v3 {
     /**
      * The title of the subscriber.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * A superChatEvent resource represents a Super Chat purchase on a YouTube channel.
@@ -3504,15 +3350,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube assigns to uniquely identify the Super Chat event.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#superChatEvent&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the Super Chat event.
      */
@@ -3522,11 +3368,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of Super Chat purchases that match the request criteria.
      */
@@ -3534,55 +3380,55 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#superChatEventListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   export interface Schema$SuperChatEventSnippet {
     /**
      * The purchase amount, in micros of the purchase currency. e.g., 1 is represented as 1000000.
      */
-    amountMicros?: string | null;
+    amountMicros?: string;
     /**
      * Channel id where the event occurred.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The text contents of the comment left by the user.
      */
-    commentText?: string | null;
+    commentText?: string;
     /**
      * The date and time when the event occurred. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    createdAt?: string | null;
+    createdAt?: string;
     /**
      * The currency in which the purchase was made. ISO 4217.
      */
-    currency?: string | null;
+    currency?: string;
     /**
      * A rendered string that displays the purchase amount and currency (e.g., &quot;$1.00&quot;). The string is rendered for the given language.
      */
-    displayString?: string | null;
+    displayString?: string;
     /**
      * True if this event is a Super Chat for Good purchase.
      */
-    isSuperChatForGood?: boolean | null;
+    isSuperChatForGood?: boolean;
     /**
      * True if this event is a Super Sticker event.
      */
-    isSuperStickerEvent?: boolean | null;
+    isSuperStickerEvent?: boolean;
     /**
      * The tier for the paid message, which is based on the amount of money spent to purchase the message.
      */
-    messageType?: number | null;
+    messageType?: number;
     /**
      * If this event is a Super Chat for Good purchase, this field will contain information about the charity the purchase is donated to.
      */
@@ -3600,15 +3446,15 @@ export namespace youtube_v3 {
     /**
      * Internationalized alt text that describes the sticker image and any animation associated with it.
      */
-    altText?: string | null;
+    altText?: string;
     /**
      * Specifies the localization language in which the alt text is returned.
      */
-    altTextLanguage?: string | null;
+    altTextLanguage?: string;
     /**
      * Unique identifier of the Super Sticker. This is a shorter form of the alt_text that includes pack name and a recognizable characteristic of the sticker.
      */
-    stickerId?: string | null;
+    stickerId?: string;
   }
   /**
    * A thumbnail is an image representing a YouTube resource.
@@ -3617,15 +3463,15 @@ export namespace youtube_v3 {
     /**
      * (Optional) Height of the thumbnail image.
      */
-    height?: number | null;
+    height?: number;
     /**
      * The thumbnail image&#39;s URL.
      */
-    url?: string | null;
+    url?: string;
     /**
      * (Optional) Width of the thumbnail image.
      */
-    width?: number | null;
+    width?: number;
   }
   /**
    * Internal representation of thumbnails for a YouTube resource.
@@ -3656,11 +3502,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of thumbnails.
      */
@@ -3668,11 +3514,11 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#thumbnailSetResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Stub token pagination template to suppress results.
@@ -3693,7 +3539,7 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The fileDetails object encapsulates information about the video file that was uploaded to YouTube, including the file&#39;s resolution, duration, audio and video codecs, stream bitrates, and more. This data can only be retrieved by the video owner.
      */
@@ -3701,11 +3547,11 @@ export namespace youtube_v3 {
     /**
      * The ID that YouTube uses to uniquely identify the video.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#video&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The liveStreamingDetails object contains metadata about a live video broadcast. The object will only be present in a video resource if the video is an upcoming, live, or completed live broadcast.
      */
@@ -3713,7 +3559,7 @@ export namespace youtube_v3 {
     /**
      * List with all localizations.
      */
-    localizations?: {[key: string]: Schema$VideoLocalization} | null;
+    localizations?: {[key: string]: Schema$VideoLocalization};
     /**
      * The monetizationDetails object encapsulates information about the monetization status of the video.
      */
@@ -3759,23 +3605,23 @@ export namespace youtube_v3 {
     /**
      * Additional comments regarding the abuse report.
      */
-    comments?: string | null;
+    comments?: string;
     /**
      * The language that the content was viewed in.
      */
-    language?: string | null;
+    language?: string;
     /**
      * The high-level, or primary, reason that the content is abusive. The value is an abuse report reason ID.
      */
-    reasonId?: string | null;
+    reasonId?: string;
     /**
      * The specific, or secondary, reason that this content is abusive (if available). The value is an abuse report reason ID that is a valid secondary reason for the primary reason.
      */
-    secondaryReasonId?: string | null;
+    secondaryReasonId?: string;
     /**
      * The ID that YouTube uses to uniquely identify the video.
      */
-    videoId?: string | null;
+    videoId?: string;
   }
   /**
    * A videoAbuseReportReason resource identifies a reason that a video could be reported as abusive. Video abuse report reasons are used with video.ReportAbuse.
@@ -3784,15 +3630,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID of this abuse report reason.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#videoAbuseReportReason&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the abuse report reason.
      */
@@ -3802,11 +3648,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of valid abuse reasons that are used with video.ReportAbuse.
      */
@@ -3814,11 +3660,11 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#videoAbuseReportReasonListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Basic details about a video category, such as its localized title.
@@ -3827,7 +3673,7 @@ export namespace youtube_v3 {
     /**
      * The localized label belonging to this abuse report reason.
      */
-    label?: string | null;
+    label?: string;
     /**
      * The secondary reasons associated with this reason, if any are available. (There might be 0 or more.)
      */
@@ -3837,25 +3683,25 @@ export namespace youtube_v3 {
     /**
      * The ID of this abuse report secondary reason.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The localized label for this abuse report secondary reason.
      */
-    label?: string | null;
+    label?: string;
   }
   export interface Schema$VideoAgeGating {
     /**
      * Indicates whether or not the video has alcoholic beverage content. Only users of legal purchasing age in a particular country, as identified by ICAP, can view the content.
      */
-    alcoholContent?: boolean | null;
+    alcoholContent?: boolean;
     /**
      * Age-restricted trailers. For redband trailers and adult-rated video-games. Only users aged 18+ can view the content. The the field is true the content is restricted to viewers aged 18+. Otherwise The field won&#39;t be present.
      */
-    restricted?: boolean | null;
+    restricted?: boolean;
     /**
      * Video game rating, if any.
      */
-    videoGameRating?: string | null;
+    videoGameRating?: string;
   }
   /**
    * A videoCategory resource identifies a category that has been or could be associated with uploaded videos.
@@ -3864,15 +3710,15 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID that YouTube uses to uniquely identify the video category.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#videoCategory&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The snippet object contains basic details about the video category, including its title.
      */
@@ -3882,11 +3728,11 @@ export namespace youtube_v3 {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of video categories that can be associated with YouTube videos. In this map, the video category ID is the map key, and its value is the corresponding videoCategory resource.
      */
@@ -3894,35 +3740,35 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#videoCategoryListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Basic details about a video category, such as its localized title.
    */
   export interface Schema$VideoCategorySnippet {
-    assignable?: boolean | null;
+    assignable?: boolean;
     /**
      * The YouTube channel that created the video category.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * The video category&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Details about the content of a YouTube Video.
@@ -3931,7 +3777,7 @@ export namespace youtube_v3 {
     /**
      * The value of captions indicates whether the video has captions or not.
      */
-    caption?: string | null;
+    caption?: string;
     /**
      * Specifies the ratings that the video received under various rating schemes.
      */
@@ -3943,27 +3789,27 @@ export namespace youtube_v3 {
     /**
      * The value of definition indicates whether the video is available in high definition or only in standard definition.
      */
-    definition?: string | null;
+    definition?: string;
     /**
      * The value of dimension indicates whether the video is available in 3D or in 2D.
      */
-    dimension?: string | null;
+    dimension?: string;
     /**
      * The length of the video. The tag value is an ISO 8601 duration in the format PT#M#S, in which the letters PT indicate that the value specifies a period of time, and the letters M and S refer to length in minutes and seconds, respectively. The # characters preceding the M and S letters are both integers that specify the number of minutes (or seconds) of the video. For example, a value of PT15M51S indicates that the video is 15 minutes and 51 seconds long.
      */
-    duration?: string | null;
+    duration?: string;
     /**
      * Indicates whether the video uploader has provided a custom thumbnail image for the video. This property is only visible to the video uploader.
      */
-    hasCustomThumbnail?: boolean | null;
+    hasCustomThumbnail?: boolean;
     /**
      * The value of is_license_content indicates whether the video is licensed content.
      */
-    licensedContent?: boolean | null;
+    licensedContent?: boolean;
     /**
      * Specifies the projection format of the video.
      */
-    projection?: string | null;
+    projection?: string;
     /**
      * The regionRestriction object contains information about the countries where a video is (or is not) viewable. The object will contain either the contentDetails.regionRestriction.allowed property or the contentDetails.regionRestriction.blocked property.
      */
@@ -3976,11 +3822,11 @@ export namespace youtube_v3 {
     /**
      * A list of region codes that identify countries where the video is viewable. If this property is present and a country is not listed in its value, then the video is blocked from appearing in that country. If this property is present and contains an empty list, the video is blocked in all countries.
      */
-    allowed?: string[] | null;
+    allowed?: string[];
     /**
      * A list of region codes that identify countries where the video is blocked. If this property is present and a country is not listed in its value, then the video is viewable in that country. If this property is present and contains an empty list, the video is viewable in all countries.
      */
-    blocked?: string[] | null;
+    blocked?: string[];
   }
   /**
    * Describes original video file properties, including technical details about audio and video streams, but also metadata information like content length, digitization time, or geotagging information.
@@ -3993,31 +3839,31 @@ export namespace youtube_v3 {
     /**
      * The uploaded video file&#39;s combined (video and audio) bitrate in bits per second.
      */
-    bitrateBps?: string | null;
+    bitrateBps?: string;
     /**
      * The uploaded video file&#39;s container format.
      */
-    container?: string | null;
+    container?: string;
     /**
      * The date and time when the uploaded video file was created. The value is specified in ISO 8601 format. Currently, the following ISO 8601 formats are supported:   - Date only: YYYY-MM-DD  - Naive time: YYYY-MM-DDTHH:MM:SS  - Time with timezone: YYYY-MM-DDTHH:MM:SS+HH:MM
      */
-    creationTime?: string | null;
+    creationTime?: string;
     /**
      * The length of the uploaded video in milliseconds.
      */
-    durationMs?: string | null;
+    durationMs?: string;
     /**
      * The uploaded file&#39;s name. This field is present whether a video file or another type of file was uploaded.
      */
-    fileName?: string | null;
+    fileName?: string;
     /**
      * The uploaded file&#39;s size in bytes. This field is present whether a video file or another type of file was uploaded.
      */
-    fileSize?: string | null;
+    fileSize?: string;
     /**
      * The uploaded file&#39;s type as detected by YouTube&#39;s video processing engine. Currently, YouTube only processes video files, but this field is present whether a video file or another type of file was uploaded.
      */
-    fileType?: string | null;
+    fileType?: string;
     /**
      * A list of video streams contained in the uploaded video file. Each item in the list contains detailed metadata about a video stream.
      */
@@ -4030,19 +3876,19 @@ export namespace youtube_v3 {
     /**
      * The audio stream&#39;s bitrate, in bits per second.
      */
-    bitrateBps?: string | null;
+    bitrateBps?: string;
     /**
      * The number of audio channels that the stream contains.
      */
-    channelCount?: number | null;
+    channelCount?: number;
     /**
      * The audio codec that the stream uses.
      */
-    codec?: string | null;
+    codec?: string;
     /**
      * A value that uniquely identifies a video vendor. Typically, the value is a four-letter vendor code.
      */
-    vendor?: string | null;
+    vendor?: string;
   }
   /**
    * Information about a video stream.
@@ -4051,45 +3897,45 @@ export namespace youtube_v3 {
     /**
      * The video content&#39;s display aspect ratio, which specifies the aspect ratio in which the video should be displayed.
      */
-    aspectRatio?: number | null;
+    aspectRatio?: number;
     /**
      * The video stream&#39;s bitrate, in bits per second.
      */
-    bitrateBps?: string | null;
+    bitrateBps?: string;
     /**
      * The video codec that the stream uses.
      */
-    codec?: string | null;
+    codec?: string;
     /**
      * The video stream&#39;s frame rate, in frames per second.
      */
-    frameRateFps?: number | null;
+    frameRateFps?: number;
     /**
      * The encoded video content&#39;s height in pixels.
      */
-    heightPixels?: number | null;
+    heightPixels?: number;
     /**
      * The amount that YouTube needs to rotate the original source content to properly display the video.
      */
-    rotation?: string | null;
+    rotation?: string;
     /**
      * A value that uniquely identifies a video vendor. Typically, the value is a four-letter vendor code.
      */
-    vendor?: string | null;
+    vendor?: string;
     /**
      * The encoded video content&#39;s width in pixels. You can calculate the video&#39;s encoding aspect ratio as width_pixels / height_pixels.
      */
-    widthPixels?: number | null;
+    widthPixels?: number;
   }
   export interface Schema$VideoGetRatingResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of ratings that match the request criteria.
      */
@@ -4097,21 +3943,21 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#videoGetRatingResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   export interface Schema$VideoListResponse {
     /**
      * Etag of this resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Serialized EventId of the request which produced this response.
      */
-    eventId?: string | null;
+    eventId?: string;
     /**
      * A list of videos that match the request criteria.
      */
@@ -4119,21 +3965,21 @@ export namespace youtube_v3 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;youtube#videoListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     pageInfo?: Schema$PageInfo;
     /**
      * The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
     tokenPagination?: Schema$TokenPagination;
     /**
      * The visitorId identifies the visitor.
      */
-    visitorId?: string | null;
+    visitorId?: string;
   }
   /**
    * Details about the live streaming metadata.
@@ -4142,27 +3988,27 @@ export namespace youtube_v3 {
     /**
      * The ID of the currently active live chat attached to this video. This field is filled only if the video is a currently live broadcast that has live chat. Once the broadcast transitions to complete this field will be removed and the live chat closed down. For persistent broadcasts that live chat id will no longer be tied to this video but rather to the new video being displayed at the persistent page.
      */
-    activeLiveChatId?: string | null;
+    activeLiveChatId?: string;
     /**
      * The time that the broadcast actually ended. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. This value will not be available until the broadcast is over.
      */
-    actualEndTime?: string | null;
+    actualEndTime?: string;
     /**
      * The time that the broadcast actually started. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. This value will not be available until the broadcast begins.
      */
-    actualStartTime?: string | null;
+    actualStartTime?: string;
     /**
      * The number of viewers currently watching the broadcast. The property and its value will be present if the broadcast has current viewers and the broadcast owner has not hidden the viewcount for the video. Note that YouTube stops tracking the number of concurrent viewers for a broadcast when the broadcast ends. So, this property would not identify the number of viewers watching an archived video of a live broadcast that already ended.
      */
-    concurrentViewers?: string | null;
+    concurrentViewers?: string;
     /**
      * The time that the broadcast is scheduled to end. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. If the value is empty or the property is not present, then the broadcast is scheduled to continue indefinitely.
      */
-    scheduledEndTime?: string | null;
+    scheduledEndTime?: string;
     /**
      * The time that the broadcast is scheduled to begin. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    scheduledStartTime?: string | null;
+    scheduledStartTime?: string;
   }
   /**
    * Localized versions of certain video properties (e.g. title).
@@ -4171,11 +4017,11 @@ export namespace youtube_v3 {
     /**
      * Localized version of the video&#39;s description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Localized version of the video&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Details about monetization of a YouTube Video.
@@ -4190,15 +4036,15 @@ export namespace youtube_v3 {
    * Player to be used for a video playback.
    */
   export interface Schema$VideoPlayer {
-    embedHeight?: string | null;
+    embedHeight?: string;
     /**
      * An &lt;iframe&gt; tag that embeds a player that will play the video.
      */
-    embedHtml?: string | null;
+    embedHtml?: string;
     /**
      * The embed width
      */
-    embedWidth?: string | null;
+    embedWidth?: string;
   }
   /**
    * Describes processing status and progress and availability of some other Video resource parts.
@@ -4207,19 +4053,19 @@ export namespace youtube_v3 {
     /**
      * This value indicates whether video editing suggestions, which might improve video quality or the playback experience, are available for the video. You can retrieve these suggestions by requesting the suggestions part in your videos.list() request.
      */
-    editorSuggestionsAvailability?: string | null;
+    editorSuggestionsAvailability?: string;
     /**
      * This value indicates whether file details are available for the uploaded video. You can retrieve a video&#39;s file details by requesting the fileDetails part in your videos.list() request.
      */
-    fileDetailsAvailability?: string | null;
+    fileDetailsAvailability?: string;
     /**
      * The reason that YouTube failed to process the video. This property will only have a value if the processingStatus property&#39;s value is failed.
      */
-    processingFailureReason?: string | null;
+    processingFailureReason?: string;
     /**
      * This value indicates whether the video processing engine has generated suggestions that might improve YouTube&#39;s ability to process the the video, warnings that explain video processing problems, or errors that cause video processing problems. You can retrieve these suggestions by requesting the suggestions part in your videos.list() request.
      */
-    processingIssuesAvailability?: string | null;
+    processingIssuesAvailability?: string;
     /**
      * The processingProgress object contains information about the progress YouTube has made in processing the video. The values are really only relevant if the video&#39;s processing status is processing.
      */
@@ -4227,15 +4073,15 @@ export namespace youtube_v3 {
     /**
      * The video&#39;s processing status. This value indicates whether YouTube was able to process the video or if the video is still being processed.
      */
-    processingStatus?: string | null;
+    processingStatus?: string;
     /**
      * This value indicates whether keyword (tag) suggestions are available for the video. Tags can be added to a video&#39;s metadata to make it easier for other users to find the video. You can retrieve these suggestions by requesting the suggestions part in your videos.list() request.
      */
-    tagSuggestionsAvailability?: string | null;
+    tagSuggestionsAvailability?: string;
     /**
      * This value indicates whether thumbnail images have been generated for the video.
      */
-    thumbnailsAvailability?: string | null;
+    thumbnailsAvailability?: string;
   }
   /**
    * Video processing progress and completion time estimate.
@@ -4244,15 +4090,15 @@ export namespace youtube_v3 {
     /**
      * The number of parts of the video that YouTube has already processed. You can estimate the percentage of the video that YouTube has already processed by calculating: 100 * parts_processed / parts_total  Note that since the estimated number of parts could increase without a corresponding increase in the number of parts that have already been processed, it is possible that the calculated progress could periodically decrease while YouTube processes a video.
      */
-    partsProcessed?: string | null;
+    partsProcessed?: string;
     /**
      * An estimate of the total number of parts that need to be processed for the video. The number may be updated with more precise estimates while YouTube processes the video.
      */
-    partsTotal?: string | null;
+    partsTotal?: string;
     /**
      * An estimate of the amount of time, in millseconds, that YouTube needs to finish processing the video.
      */
-    timeLeftMs?: string | null;
+    timeLeftMs?: string;
   }
   /**
    * Project specific details about the content of a YouTube Video.
@@ -4261,11 +4107,11 @@ export namespace youtube_v3 {
     /**
      * A list of project tags associated with the video during the upload.
      */
-    tags?: string[] | null;
+    tags?: string[];
   }
   export interface Schema$VideoRating {
-    rating?: string | null;
-    videoId?: string | null;
+    rating?: string;
+    videoId?: string;
   }
   /**
    * Recording information associated with the video.
@@ -4278,11 +4124,11 @@ export namespace youtube_v3 {
     /**
      * The text description of the location where the video was recorded.
      */
-    locationDescription?: string | null;
+    locationDescription?: string;
     /**
      * The date and time when the video was recorded. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sssZ) format.
      */
-    recordingDate?: string | null;
+    recordingDate?: string;
   }
   /**
    * Basic details about a video, including title, description, uploader, thumbnails and category.
@@ -4291,31 +4137,31 @@ export namespace youtube_v3 {
     /**
      * The YouTube video category associated with the video.
      */
-    categoryId?: string | null;
+    categoryId?: string;
     /**
      * The ID that YouTube uses to uniquely identify the channel that the video was uploaded to.
      */
-    channelId?: string | null;
+    channelId?: string;
     /**
      * Channel title for the channel that the video belongs to.
      */
-    channelTitle?: string | null;
+    channelTitle?: string;
     /**
      * The default_audio_language property specifies the language spoken in the video&#39;s default audio track.
      */
-    defaultAudioLanguage?: string | null;
+    defaultAudioLanguage?: string;
     /**
      * The language of the videos&#39;s default snippet.
      */
-    defaultLanguage?: string | null;
+    defaultLanguage?: string;
     /**
      * The video&#39;s description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Indicates if the video is an upcoming/active live broadcast. Or it&#39;s &quot;none&quot; if the video is not an upcoming/active live broadcast.
      */
-    liveBroadcastContent?: string | null;
+    liveBroadcastContent?: string;
     /**
      * Localized snippet selected with the hl parameter. If no such localization exists, this field is populated with the default snippet. (Read-only)
      */
@@ -4323,11 +4169,11 @@ export namespace youtube_v3 {
     /**
      * The date and time that the video was uploaded. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishedAt?: string | null;
+    publishedAt?: string;
     /**
      * A list of keyword tags associated with the video. Tags may contain spaces.
      */
-    tags?: string[] | null;
+    tags?: string[];
     /**
      * A map of thumbnail images associated with the video. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
      */
@@ -4335,7 +4181,7 @@ export namespace youtube_v3 {
     /**
      * The video&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Statistics about the video, such as the number of times the video was viewed or liked.
@@ -4344,23 +4190,23 @@ export namespace youtube_v3 {
     /**
      * The number of comments for the video.
      */
-    commentCount?: string | null;
+    commentCount?: string;
     /**
      * The number of users who have indicated that they disliked the video by giving it a negative rating.
      */
-    dislikeCount?: string | null;
+    dislikeCount?: string;
     /**
      * The number of users who currently have the video marked as a favorite video.
      */
-    favoriteCount?: string | null;
+    favoriteCount?: string;
     /**
      * The number of users who have indicated that they liked the video by giving it a positive rating.
      */
-    likeCount?: string | null;
+    likeCount?: string;
     /**
      * The number of times the video has been viewed.
      */
-    viewCount?: string | null;
+    viewCount?: string;
   }
   /**
    * Basic details about a video category, such as its localized title.
@@ -4369,40 +4215,35 @@ export namespace youtube_v3 {
     /**
      * This value indicates if the video can be embedded on another website.
      */
-    embeddable?: boolean | null;
+    embeddable?: boolean;
     /**
      * This value explains why a video failed to upload. This property is only present if the uploadStatus property indicates that the upload failed.
      */
-    failureReason?: string | null;
+    failureReason?: string;
     /**
      * The video&#39;s license.
      */
-    license?: string | null;
-    madeForKids?: boolean | null;
+    license?: string;
     /**
      * The video&#39;s privacy status.
      */
-    privacyStatus?: string | null;
+    privacyStatus?: string;
     /**
      * This value indicates if the extended video statistics on the watch page can be viewed by everyone. Note that the view count, likes, etc will still be visible if this is disabled.
      */
-    publicStatsViewable?: boolean | null;
+    publicStatsViewable?: boolean;
     /**
      * The date and time when the video is scheduled to publish. It can be set only if the privacy status of the video is private. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
      */
-    publishAt?: string | null;
+    publishAt?: string;
     /**
      * This value explains why YouTube rejected an uploaded video. This property is only present if the uploadStatus property indicates that the upload was rejected.
      */
-    rejectionReason?: string | null;
-    /**
-     * Allows clients to set the Crosswalk self_declared state for a Video. This maps to VAPI.Video.creator_flags.is_crosswalk_self_declared() and VAPI.Video.creator_flags.is_not_crosswalk_self_declared().
-     */
-    selfDeclaredMadeForKids?: boolean | null;
+    rejectionReason?: string;
     /**
      * The status of the uploaded video.
      */
-    uploadStatus?: string | null;
+    uploadStatus?: string;
   }
   /**
    * Specifies suggestions on how to improve video content, including encoding hints, tag suggestions, and editor suggestions.
@@ -4411,19 +4252,19 @@ export namespace youtube_v3 {
     /**
      * A list of video editing operations that might improve the video quality or playback experience of the uploaded video.
      */
-    editorSuggestions?: string[] | null;
+    editorSuggestions?: string[];
     /**
      * A list of errors that will prevent YouTube from successfully processing the uploaded video video. These errors indicate that, regardless of the video&#39;s current processing status, eventually, that status will almost certainly be failed.
      */
-    processingErrors?: string[] | null;
+    processingErrors?: string[];
     /**
      * A list of suggestions that may improve YouTube&#39;s ability to process the video.
      */
-    processingHints?: string[] | null;
+    processingHints?: string[];
     /**
      * A list of reasons why YouTube may have difficulty transcoding the uploaded video or that might result in an erroneous transcoding. These warnings are generated before YouTube actually processes the uploaded video file. In addition, they identify issues that are unlikely to cause the video processing to fail but that might cause problems such as sync issues, video artifacts, or a missing audio track.
      */
-    processingWarnings?: string[] | null;
+    processingWarnings?: string[];
     /**
      * A list of keyword tags that could be added to the video&#39;s metadata to increase the likelihood that users will locate your video when searching or browsing on YouTube.
      */
@@ -4436,11 +4277,11 @@ export namespace youtube_v3 {
     /**
      * A set of video categories for which the tag is relevant. You can use this information to display appropriate tag suggestions based on the video category that the video uploader associates with the video. By default, tag suggestions are relevant for all categories if there are no restricts defined for the keyword.
      */
-    categoryRestricts?: string[] | null;
+    categoryRestricts?: string[];
     /**
      * The keyword tag suggested for the video.
      */
-    tag?: string | null;
+    tag?: string;
   }
   /**
    * Freebase topic information related to the video.
@@ -4449,15 +4290,15 @@ export namespace youtube_v3 {
     /**
      * Similar to topic_id, except that these topics are merely relevant to the video. These are topics that may be mentioned in, or appear in the video. You can retrieve information about each topic using Freebase Topic API.
      */
-    relevantTopicIds?: string[] | null;
+    relevantTopicIds?: string[];
     /**
      * A list of Wikipedia URLs that provide a high-level description of the video&#39;s content.
      */
-    topicCategories?: string[] | null;
+    topicCategories?: string[];
     /**
      * A list of Freebase topic IDs that are centrally associated with the video. These are topics that are centrally featured in the video, and it can be said that the video is mainly about each of these. You can retrieve information about each topic using the Freebase Topic API.
      */
-    topicIds?: string[] | null;
+    topicIds?: string[];
   }
   /**
    * Branding properties for the watch. All deprecated.
@@ -4466,15 +4307,15 @@ export namespace youtube_v3 {
     /**
      * The text color for the video watch page&#39;s branded area.
      */
-    backgroundColor?: string | null;
+    backgroundColor?: string;
     /**
      * An ID that uniquely identifies a playlist that displays next to the video player.
      */
-    featuredPlaylistId?: string | null;
+    featuredPlaylistId?: string;
     /**
      * The background color for the video watch page&#39;s branded area.
      */
-    textColor?: string | null;
+    textColor?: string;
   }
 
   export class Resource$Activities {
@@ -4491,7 +4332,7 @@ export namespace youtube_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-     * @param {().Activity} params.requestBody Request body data
+     * @param {().Activity} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4867,7 +4708,7 @@ export namespace youtube_v3 {
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string} params.part The part parameter specifies the caption resource parts that the API response will include. Set the parameter value to snippet.
      * @param {boolean=} params.sync The sync parameter indicates whether YouTube should automatically synchronize the caption file with the audio track of the video. If you set the value to true, YouTube will disregard any time codes that are in the uploaded caption file and generate new time codes for the captions.  You should set the sync parameter to true if you are uploading a transcript, which has no time codes, or if you suspect the time codes in your file are incorrect and want YouTube to try to fix them.
-     * @param  {object} params.requestBody Media resource metadata
+     * @param  {object} params.resource Media resource metadata
      * @param {object} params.media Media object
      * @param {string} params.media.mimeType Media mime-type
      * @param {string|object} params.media.body Media body contents
@@ -5026,7 +4867,7 @@ export namespace youtube_v3 {
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the property value to snippet if you are updating the track's draft status. Otherwise, set the property value to id.
      * @param {boolean=} params.sync Note: The API server only processes the parameter value if the request contains an updated caption file.  The sync parameter indicates whether YouTube should automatically synchronize the caption file with the audio track of the video. If you set the value to true, YouTube will automatically synchronize the caption track with the audio track.
-     * @param  {object} params.requestBody Media resource metadata
+     * @param  {object} params.resource Media resource metadata
      * @param {object} params.media Media object
      * @param {string} params.media.mimeType Media mime-type
      * @param {string|object} params.media.body Media body contents
@@ -5274,7 +5115,7 @@ export namespace youtube_v3 {
      * @param {object} params Parameters for request
      * @param {string=} params.channelId The channelId parameter identifies the YouTube channel to which the banner is uploaded. The channelId parameter was introduced as a required parameter in May 2017. As this was a backward-incompatible change, channelBanners.insert requests that do not specify this parameter will not return an error until six months have passed from the time that the parameter was introduced. Please see the API Terms of Service for the official policy regarding backward incompatible changes and the API revision history for the exact date that the parameter was introduced.
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
-     * @param  {object} params.requestBody Media resource metadata
+     * @param  {object} params.resource Media resource metadata
      * @param {object} params.media Media object
      * @param {string} params.media.mimeType Media mime-type
      * @param {string|object} params.media.body Media body contents
@@ -5485,7 +5326,7 @@ export namespace youtube_v3 {
      * @param {object} params Parameters for request
      * @param {string=} params.onBehalfOfContentOwner The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with needs to be linked to the specified YouTube content owner.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  The API currently only allows the parameter value to be set to either brandingSettings or invideoPromotion. (You cannot update both of those parts with a single request.)  Note that this method overrides the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies.
-     * @param {().Channel} params.requestBody Request body data
+     * @param {().Channel} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5711,7 +5552,7 @@ export namespace youtube_v3 {
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string=} params.onBehalfOfContentOwnerChannel This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.  This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  The part names that you can include in the parameter value are snippet and contentDetails.
-     * @param {().ChannelSection} params.requestBody Request body data
+     * @param {().ChannelSection} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5873,7 +5714,7 @@ export namespace youtube_v3 {
      * @param {object} params Parameters for request
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  The part names that you can include in the parameter value are snippet and contentDetails.
-     * @param {().ChannelSection} params.requestBody Request body data
+     * @param {().ChannelSection} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6121,7 +5962,7 @@ export namespace youtube_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.part The part parameter identifies the properties that the API response will include. Set the parameter value to snippet. The snippet part has a quota cost of 2 units.
-     * @param {().Comment} params.requestBody Request body data
+     * @param {().Comment} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6417,7 +6258,7 @@ export namespace youtube_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.part The part parameter identifies the properties that the API response will include. You must at least include the snippet part in the parameter value since that part contains all of the properties that the API request can update.
-     * @param {().Comment} params.requestBody Request body data
+     * @param {().Comment} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6603,7 +6444,7 @@ export namespace youtube_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.part The part parameter identifies the properties that the API response will include. Set the parameter value to snippet. The snippet part has a quota cost of 2 units.
-     * @param {().CommentThread} params.requestBody Request body data
+     * @param {().CommentThread} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6769,7 +6610,7 @@ export namespace youtube_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.part The part parameter specifies a comma-separated list of commentThread resource properties that the API response will include. You must at least include the snippet part in the parameter value since that part contains all of the properties that the API request can update.
-     * @param {().CommentThread} params.requestBody Request body data
+     * @param {().CommentThread} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7488,7 +7329,7 @@ export namespace youtube_v3 {
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string=} params.onBehalfOfContentOwnerChannel This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.  This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.
-     * @param {().LiveBroadcast} params.requestBody Request body data
+     * @param {().LiveBroadcast} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7732,7 +7573,7 @@ export namespace youtube_v3 {
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string=} params.onBehalfOfContentOwnerChannel This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.  This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.  Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a broadcast's privacy status is defined in the status part. As such, if your request is updating a private or unlisted broadcast, and the request's part parameter value includes the status part, the broadcast's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the broadcast will revert to the default privacy setting.
-     * @param {().LiveBroadcast} params.requestBody Request body data
+     * @param {().LiveBroadcast} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8093,7 +7934,7 @@ export namespace youtube_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet.
-     * @param {().LiveChatBan} params.requestBody Request body data
+     * @param {().LiveChatBan} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8277,7 +8118,7 @@ export namespace youtube_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.part The part parameter serves two purposes. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the parameter value to snippet.
-     * @param {().LiveChatMessage} params.requestBody Request body data
+     * @param {().LiveChatMessage} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8579,7 +8420,7 @@ export namespace youtube_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet.
-     * @param {().LiveChatModerator} params.requestBody Request body data
+     * @param {().LiveChatModerator} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8877,7 +8718,7 @@ export namespace youtube_v3 {
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string=} params.onBehalfOfContentOwnerChannel This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.  This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  The part properties that you can include in the parameter value are id, snippet, cdn, and status.
-     * @param {().LiveStream} params.requestBody Request body data
+     * @param {().LiveStream} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9035,7 +8876,7 @@ export namespace youtube_v3 {
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string=} params.onBehalfOfContentOwnerChannel This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.  This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  The part properties that you can include in the parameter value are id, snippet, cdn, and status.  Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. If the request body does not specify a value for a mutable property, the existing value for that property will be removed.
-     * @param {().LiveStream} params.requestBody Request body data
+     * @param {().LiveStream} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9209,226 +9050,6 @@ export namespace youtube_v3 {
     requestBody?: Schema$LiveStream;
   }
 
-  export class Resource$Members {
-    context: APIRequestContext;
-    constructor(context: APIRequestContext) {
-      this.context = context;
-    }
-
-    /**
-     * youtube.members.list
-     * @desc Lists members for a channel.
-     * @alias youtube.members.list
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string=} params.filterByMemberChannelId The filterByMemberChannelId parameter represents a comma separated list of channel IDs. Only data about members that are part of this list will be included in the response. It can be used to efficiently check whether specific users are entitled to perks offered via third parties.
-     * @param {string=} params.hasAccessToLevel The hasAccessToLevel parameter specifies, when set, the ID of a pricing level that members from the results set should have access to. When not set, all members will be considered, regardless of their active pricing level.
-     * @param {integer=} params.maxResults The maxResults parameter specifies the maximum number of items that should be returned in the result set.
-     * @param {string=} params.mode The mode parameter specifies which channel members to return.
-     * @param {string=} params.pageToken The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
-     * @param {string} params.part The part parameter specifies the member resource parts that the API response will include. Set the parameter value to snippet.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    list(
-      params?: Params$Resource$Members$List,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$MemberListResponse>;
-    list(
-      params: Params$Resource$Members$List,
-      options: MethodOptions | BodyResponseCallback<Schema$MemberListResponse>,
-      callback: BodyResponseCallback<Schema$MemberListResponse>
-    ): void;
-    list(
-      params: Params$Resource$Members$List,
-      callback: BodyResponseCallback<Schema$MemberListResponse>
-    ): void;
-    list(callback: BodyResponseCallback<Schema$MemberListResponse>): void;
-    list(
-      paramsOrCallback?:
-        | Params$Resource$Members$List
-        | BodyResponseCallback<Schema$MemberListResponse>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$MemberListResponse>,
-      callback?: BodyResponseCallback<Schema$MemberListResponse>
-    ): void | GaxiosPromise<Schema$MemberListResponse> {
-      let params = (paramsOrCallback || {}) as Params$Resource$Members$List;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Members$List;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/youtube/v3/members').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'GET',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['part'],
-        pathParams: [],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$MemberListResponse>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$MemberListResponse>(parameters);
-      }
-    }
-  }
-
-  export interface Params$Resource$Members$List extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * The filterByMemberChannelId parameter represents a comma separated list of channel IDs. Only data about members that are part of this list will be included in the response. It can be used to efficiently check whether specific users are entitled to perks offered via third parties.
-     */
-    filterByMemberChannelId?: string;
-    /**
-     * The hasAccessToLevel parameter specifies, when set, the ID of a pricing level that members from the results set should have access to. When not set, all members will be considered, regardless of their active pricing level.
-     */
-    hasAccessToLevel?: string;
-    /**
-     * The maxResults parameter specifies the maximum number of items that should be returned in the result set.
-     */
-    maxResults?: number;
-    /**
-     * The mode parameter specifies which channel members to return.
-     */
-    mode?: string;
-    /**
-     * The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
-     */
-    pageToken?: string;
-    /**
-     * The part parameter specifies the member resource parts that the API response will include. Set the parameter value to snippet.
-     */
-    part?: string;
-  }
-
-  export class Resource$Membershipslevels {
-    context: APIRequestContext;
-    constructor(context: APIRequestContext) {
-      this.context = context;
-    }
-
-    /**
-     * youtube.membershipsLevels.list
-     * @desc Lists pricing levels for a channel.
-     * @alias youtube.membershipsLevels.list
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.part The part parameter specifies the membershipsLevel resource parts that the API response will include. Supported values are id and snippet.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    list(
-      params?: Params$Resource$Membershipslevels$List,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$MembershipsLevelListResponse>;
-    list(
-      params: Params$Resource$Membershipslevels$List,
-      options:
-        | MethodOptions
-        | BodyResponseCallback<Schema$MembershipsLevelListResponse>,
-      callback: BodyResponseCallback<Schema$MembershipsLevelListResponse>
-    ): void;
-    list(
-      params: Params$Resource$Membershipslevels$List,
-      callback: BodyResponseCallback<Schema$MembershipsLevelListResponse>
-    ): void;
-    list(
-      callback: BodyResponseCallback<Schema$MembershipsLevelListResponse>
-    ): void;
-    list(
-      paramsOrCallback?:
-        | Params$Resource$Membershipslevels$List
-        | BodyResponseCallback<Schema$MembershipsLevelListResponse>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$MembershipsLevelListResponse>,
-      callback?: BodyResponseCallback<Schema$MembershipsLevelListResponse>
-    ): void | GaxiosPromise<Schema$MembershipsLevelListResponse> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Membershipslevels$List;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Membershipslevels$List;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/youtube/v3/membershipsLevels').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'GET',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['part'],
-        pathParams: [],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$MembershipsLevelListResponse>(
-          parameters,
-          callback
-        );
-      } else {
-        return createAPIRequest<Schema$MembershipsLevelListResponse>(
-          parameters
-        );
-      }
-    }
-  }
-
-  export interface Params$Resource$Membershipslevels$List
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * The part parameter specifies the membershipsLevel resource parts that the API response will include. Supported values are id and snippet.
-     */
-    part?: string;
-  }
-
   export class Resource$Playlistitems {
     context: APIRequestContext;
     constructor(context: APIRequestContext) {
@@ -9517,7 +9138,7 @@ export namespace youtube_v3 {
      * @param {object} params Parameters for request
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-     * @param {().PlaylistItem} params.requestBody Request body data
+     * @param {().PlaylistItem} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9675,7 +9296,7 @@ export namespace youtube_v3 {
      * @param {object} params Parameters for request
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a playlist item can specify a start time and end time, which identify the times portion of the video that should play when users watch the video in the playlist. If your request is updating a playlist item that sets these values, and the request's part parameter value includes the contentDetails part, the playlist item's start and end times will be updated to whatever value the request body specifies. If the request body does not specify values, the existing start and end times will be removed and replaced with the default settings.
-     * @param {().PlaylistItem} params.requestBody Request body data
+     * @param {().PlaylistItem} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9926,7 +9547,7 @@ export namespace youtube_v3 {
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string=} params.onBehalfOfContentOwnerChannel This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.  This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-     * @param {().Playlist} params.requestBody Request body data
+     * @param {().Playlist} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10082,7 +9703,7 @@ export namespace youtube_v3 {
      * @param {object} params Parameters for request
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  Note that this method will override the existing values for mutable properties that are contained in any parts that the request body specifies. For example, a playlist's description is contained in the snippet part, which must be included in the request body. If the request does not specify a value for the snippet.description property, the playlist's existing description will be deleted.
-     * @param {().Playlist} params.requestBody Request body data
+     * @param {().Playlist} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10682,7 +10303,7 @@ export namespace youtube_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-     * @param {().Subscription} params.requestBody Request body data
+     * @param {().Subscription} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11550,7 +11171,7 @@ export namespace youtube_v3 {
      * @param {string=} params.onBehalfOfContentOwnerChannel This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.  This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  Note that not all parts contain properties that can be set when inserting or updating a video. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response.
      * @param {boolean=} params.stabilize The stabilize parameter indicates whether YouTube should adjust the video to remove shaky camera motions.
-     * @param  {object} params.requestBody Media resource metadata
+     * @param  {object} params.resource Media resource metadata
      * @param {object} params.media Media object
      * @param {string} params.media.mimeType Media mime-type
      * @param {string|object} params.media.body Media body contents
@@ -11780,7 +11401,7 @@ export namespace youtube_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
-     * @param {().VideoAbuseReport} params.requestBody Request body data
+     * @param {().VideoAbuseReport} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11854,7 +11475,7 @@ export namespace youtube_v3 {
      * @param {object} params Parameters for request
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
      * @param {string} params.part The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.  Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a video's privacy setting is contained in the status part. As such, if your request is updating a private video, and the request's part parameter value includes the status part, the video's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the video will revert to the default privacy setting.  In addition, not all parts contain properties that can be set when inserting or updating a video. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response.
-     * @param {().Video} params.requestBody Request body data
+     * @param {().Video} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -12124,7 +11745,7 @@ export namespace youtube_v3 {
      * @param {object} params Parameters for request
      * @param {string} params.channelId The channelId parameter specifies the YouTube channel ID for which the watermark is being provided.
      * @param {string=} params.onBehalfOfContentOwner Note: This parameter is intended exclusively for YouTube content partners.  The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
-     * @param  {object} params.requestBody Media resource metadata
+     * @param  {object} params.resource Media resource metadata
      * @param {object} params.media Media object
      * @param {string} params.media.mimeType Media mime-type
      * @param {string|object} params.media.body Media body contents

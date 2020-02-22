@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -108,21 +110,21 @@ export namespace admin_datatransfer_v1 {
     /**
      * Etag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The application&#39;s ID.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies the resource as a DataTransfer Application Resource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The application&#39;s name.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * The list of all possible transfer parameters for this application. These parameters can be used to select the data of the user in this application to be transferred.
+     * The list of all possible transfer parameters for this application. These parameters can be used to select the data of the user in this application to be transfered.
      */
     transferParams?: Schema$ApplicationTransferParam[];
   }
@@ -133,15 +135,15 @@ export namespace admin_datatransfer_v1 {
     /**
      * The application&#39;s ID.
      */
-    applicationId?: string | null;
+    applicationId?: string;
     /**
-     * The transfer parameters for the application. These parameters are used to select the data which will get transferred in context of this application.
+     * The transfer parameters for the application. These parameters are used to select the data which will get transfered in context of this application.
      */
     applicationTransferParams?: Schema$ApplicationTransferParam[];
     /**
      * Current status of transfer for this application. (Read-only)
      */
-    applicationTransferStatus?: string | null;
+    applicationTransferStatus?: string;
   }
   /**
    * Template for a collection of Applications.
@@ -154,15 +156,15 @@ export namespace admin_datatransfer_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Identifies the resource as a collection of Applications.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Continuation token which will be used to specify next page in list API.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Template for application transfer parameters.
@@ -171,11 +173,11 @@ export namespace admin_datatransfer_v1 {
     /**
      * The type of the transfer parameter. eg: &#39;PRIVACY_LEVEL&#39;
      */
-    key?: string | null;
+    key?: string;
     /**
-     * The value of the corresponding transfer parameter. eg: &#39;PRIVATE&#39; or &#39;SHARED&#39;
+     * The value of the coressponding transfer parameter. eg: &#39;PRIVATE&#39; or &#39;SHARED&#39;
      */
-    value?: string[] | null;
+    value?: string[];
   }
   /**
    * The JSON template for a DataTransfer resource.
@@ -188,31 +190,31 @@ export namespace admin_datatransfer_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The transfer&#39;s ID (Read-only).
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies the resource as a DataTransfer request.
      */
-    kind?: string | null;
+    kind?: string;
     /**
-     * ID of the user to whom the data is being transferred.
+     * ID of the user to whom the data is being transfered.
      */
-    newOwnerUserId?: string | null;
+    newOwnerUserId?: string;
     /**
-     * ID of the user whose data is being transferred.
+     * ID of the user whose data is being transfered.
      */
-    oldOwnerUserId?: string | null;
+    oldOwnerUserId?: string;
     /**
      * Overall transfer status (Read-only).
      */
-    overallTransferStatusCode?: string | null;
+    overallTransferStatusCode?: string;
     /**
      * The time at which the data transfer was requested (Read-only).
      */
-    requestTime?: string | null;
+    requestTime?: string;
   }
   /**
    * Template for a collection of DataTransfer resources.
@@ -225,15 +227,15 @@ export namespace admin_datatransfer_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Identifies the resource as a collection of data transfer requests.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Continuation token which will be used to specify next page in list API.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
 
   export class Resource$Applications {
@@ -321,7 +323,7 @@ export namespace admin_datatransfer_v1 {
      * @memberOf! ()
      *
      * @param {object=} params Parameters for request
-     * @param {string=} params.customerId Immutable ID of the G Suite account.
+     * @param {string=} params.customerId Immutable ID of the Google Apps account.
      * @param {integer=} params.maxResults Maximum number of results to return. Default is 100.
      * @param {string=} params.pageToken Token to specify next page in the list.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -412,7 +414,7 @@ export namespace admin_datatransfer_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Immutable ID of the G Suite account.
+     * Immutable ID of the Google Apps account.
      */
     customerId?: string;
     /**
@@ -510,7 +512,7 @@ export namespace admin_datatransfer_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().DataTransfer} params.requestBody Request body data
+     * @param {().DataTransfer} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -583,7 +585,7 @@ export namespace admin_datatransfer_v1 {
      * @memberOf! ()
      *
      * @param {object=} params Parameters for request
-     * @param {string=} params.customerId Immutable ID of the G Suite account.
+     * @param {string=} params.customerId Immutable ID of the Google Apps account.
      * @param {integer=} params.maxResults Maximum number of results to return. Default is 100.
      * @param {string=} params.newOwnerUserId Destination user's profile ID.
      * @param {string=} params.oldOwnerUserId Source user's profile ID.
@@ -691,7 +693,7 @@ export namespace admin_datatransfer_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Immutable ID of the G Suite account.
+     * Immutable ID of the Google Apps account.
      */
     customerId?: string;
     /**

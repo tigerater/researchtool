@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -115,7 +117,7 @@ export namespace androidpublisher_v2 {
     /**
      * The version code of the APK, as specified in the APK&#39;s manifest file.
      */
-    versionCode?: number | null;
+    versionCode?: number;
   }
   /**
    * Represents the binary payload of an APK.
@@ -124,27 +126,27 @@ export namespace androidpublisher_v2 {
     /**
      * A sha1 hash of the APK payload, encoded as a hex string and matching the output of the sha1sum command.
      */
-    sha1?: string | null;
+    sha1?: string;
     /**
      * A sha256 hash of the APK payload, encoded as a hex string and matching the output of the sha256sum command.
      */
-    sha256?: string | null;
+    sha256?: string;
   }
   export interface Schema$ApkListing {
     /**
      * The language code, in BCP 47 format (eg &quot;en-US&quot;).
      */
-    language?: string | null;
+    language?: string;
     /**
      * Describe what&#39;s new in your APK.
      */
-    recentChanges?: string | null;
+    recentChanges?: string;
   }
   export interface Schema$ApkListingsListResponse {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;androidpublisher#apkListingsListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     listings?: Schema$ApkListing[];
   }
   export interface Schema$ApksAddExternallyHostedRequest {
@@ -164,25 +166,25 @@ export namespace androidpublisher_v2 {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;androidpublisher#apksListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$AppDetails {
     /**
      * The user-visible support email for this app.
      */
-    contactEmail?: string | null;
+    contactEmail?: string;
     /**
      * The user-visible support telephone number for this app.
      */
-    contactPhone?: string | null;
+    contactPhone?: string;
     /**
      * The user-visible website for this app.
      */
-    contactWebsite?: string | null;
+    contactWebsite?: string;
     /**
      * Default language code, in BCP 47 format (eg &quot;en-US&quot;).
      */
-    defaultLanguage?: string | null;
+    defaultLanguage?: string;
   }
   /**
    * Represents an edit of an app. An edit allows clients to make multiple changes before committing them in one operation.
@@ -191,32 +193,32 @@ export namespace androidpublisher_v2 {
     /**
      * The time at which the edit will expire and will be no longer valid for use in any subsequent API calls (encoded as seconds since the Epoch).
      */
-    expiryTimeSeconds?: string | null;
+    expiryTimeSeconds?: string;
     /**
      * The ID of the edit that can be used in subsequent API calls.
      */
-    id?: string | null;
+    id?: string;
   }
   export interface Schema$Bundle {
     /**
      * A sha1 hash of the upload payload, encoded as a hex string and matching the output of the sha1sum command.
      */
-    sha1?: string | null;
+    sha1?: string;
     /**
      * A sha256 hash of the upload payload, encoded as a hex string and matching the output of the sha256sum command.
      */
-    sha256?: string | null;
+    sha256?: string;
     /**
      * The version code of the Android App Bundle. As specified in the Android App Bundle&#39;s base module APK manifest file.
      */
-    versionCode?: number | null;
+    versionCode?: number;
   }
   export interface Schema$BundlesListResponse {
     bundles?: Schema$Bundle[];
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;androidpublisher#bundlesListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$Comment {
     /**
@@ -235,7 +237,7 @@ export namespace androidpublisher_v2 {
     /**
      * The type of the deobfuscation file.
      */
-    symbolType?: string | null;
+    symbolType?: string;
   }
   export interface Schema$DeobfuscationFilesUploadResponse {
     deobfuscationFile?: Schema$DeobfuscationFile;
@@ -248,63 +250,63 @@ export namespace androidpublisher_v2 {
     /**
      * The content of the comment, i.e. reply body.
      */
-    text?: string | null;
+    text?: string;
   }
   export interface Schema$DeviceMetadata {
     /**
      * Device CPU make e.g. &quot;Qualcomm&quot;
      */
-    cpuMake?: string | null;
+    cpuMake?: string;
     /**
      * Device CPU model e.g. &quot;MSM8974&quot;
      */
-    cpuModel?: string | null;
+    cpuModel?: string;
     /**
      * Device class (e.g. tablet)
      */
-    deviceClass?: string | null;
+    deviceClass?: string;
     /**
      * OpenGL version
      */
-    glEsVersion?: number | null;
+    glEsVersion?: number;
     /**
      * Device manufacturer (e.g. Motorola)
      */
-    manufacturer?: string | null;
+    manufacturer?: string;
     /**
      * Comma separated list of native platforms (e.g. &quot;arm&quot;, &quot;arm7&quot;)
      */
-    nativePlatform?: string | null;
+    nativePlatform?: string;
     /**
      * Device model name (e.g. Droid)
      */
-    productName?: string | null;
+    productName?: string;
     /**
      * Device RAM in Megabytes e.g. &quot;2048&quot;
      */
-    ramMb?: number | null;
+    ramMb?: number;
     /**
      * Screen density in DPI
      */
-    screenDensityDpi?: number | null;
+    screenDensityDpi?: number;
     /**
      * Screen height in pixels
      */
-    screenHeightPx?: number | null;
+    screenHeightPx?: number;
     /**
      * Screen width in pixels
      */
-    screenWidthPx?: number | null;
+    screenWidthPx?: number;
   }
   export interface Schema$ExpansionFile {
     /**
      * If set this field indicates that this APK has an Expansion File uploaded to it: this APK does not reference another APK&#39;s Expansion File. The field&#39;s value is the size of the uploaded Expansion File in bytes.
      */
-    fileSize?: string | null;
+    fileSize?: string;
     /**
      * If set this APK&#39;s Expansion File references another APK&#39;s Expansion File. The file_size field will not be set.
      */
-    referencesVersion?: number | null;
+    referencesVersion?: number;
   }
   export interface Schema$ExpansionFilesUploadResponse {
     expansionFile?: Schema$ExpansionFile;
@@ -316,51 +318,51 @@ export namespace androidpublisher_v2 {
     /**
      * The application label.
      */
-    applicationLabel?: string | null;
+    applicationLabel?: string;
     /**
      * A certificate (or array of certificates if a certificate-chain is used) used to signed this APK, represented as a base64 encoded byte array.
      */
-    certificateBase64s?: string[] | null;
+    certificateBase64s?: string[];
     /**
      * The URL at which the APK is hosted. This must be an https URL.
      */
-    externallyHostedUrl?: string | null;
+    externallyHostedUrl?: string;
     /**
      * The SHA1 checksum of this APK, represented as a base64 encoded byte array.
      */
-    fileSha1Base64?: string | null;
+    fileSha1Base64?: string;
     /**
      * The SHA256 checksum of this APK, represented as a base64 encoded byte array.
      */
-    fileSha256Base64?: string | null;
+    fileSha256Base64?: string;
     /**
      * The file size in bytes of this APK.
      */
-    fileSize?: string | null;
+    fileSize?: string;
     /**
      * The icon image from the APK, as a base64 encoded byte array.
      */
-    iconBase64?: string | null;
+    iconBase64?: string;
     /**
      * The maximum SDK supported by this APK (optional).
      */
-    maximumSdk?: number | null;
+    maximumSdk?: number;
     /**
      * The minimum SDK targeted by this APK.
      */
-    minimumSdk?: number | null;
+    minimumSdk?: number;
     /**
      * The native code environments supported by this APK (optional).
      */
-    nativeCodes?: string[] | null;
+    nativeCodes?: string[];
     /**
      * The package name.
      */
-    packageName?: string | null;
+    packageName?: string;
     /**
      * The features required by this APK (optional).
      */
-    usesFeatures?: string[] | null;
+    usesFeatures?: string[];
     /**
      * The permissions requested by this APK.
      */
@@ -368,11 +370,11 @@ export namespace androidpublisher_v2 {
     /**
      * The version code of this APK.
      */
-    versionCode?: number | null;
+    versionCode?: number;
     /**
      * The version name of this APK.
      */
-    versionName?: string | null;
+    versionName?: string;
   }
   /**
    * A permission used by this APK.
@@ -381,29 +383,25 @@ export namespace androidpublisher_v2 {
     /**
      * Optionally, the maximum SDK version for which the permission is required.
      */
-    maxSdkVersion?: number | null;
+    maxSdkVersion?: number;
     /**
      * The name of the permission requested.
      */
-    name?: string | null;
+    name?: string;
   }
   export interface Schema$Image {
     /**
      * A unique id representing this image.
      */
-    id?: string | null;
+    id?: string;
     /**
      * A sha1 hash of the image that was uploaded.
      */
-    sha1?: string | null;
-    /**
-     * A sha256 hash of the image that was uploaded.
-     */
-    sha256?: string | null;
+    sha1?: string;
     /**
      * A URL that will serve a preview of the image.
      */
-    url?: string | null;
+    url?: string;
   }
   export interface Schema$ImagesDeleteAllResponse {
     deleted?: Schema$Image[];
@@ -418,7 +416,7 @@ export namespace androidpublisher_v2 {
     /**
      * The default language of the localized data, as defined by BCP 47. e.g. &quot;en-US&quot;, &quot;en-GB&quot;.
      */
-    defaultLanguage?: string | null;
+    defaultLanguage?: string;
     /**
      * Default price cannot be zero. In-app products can never be free. Default price is always in the developer&#39;s Checkout merchant currency.
      */
@@ -426,23 +424,23 @@ export namespace androidpublisher_v2 {
     /**
      * Grace period of the subscription, specified in ISO 8601 format. It will allow developers to give their subscribers a grace period when the payment for the new recurrence period is declined. Acceptable values = &quot;P3D&quot; (three days) and &quot;P7D&quot; (seven days)
      */
-    gracePeriod?: string | null;
+    gracePeriod?: string;
     /**
      * List of localized title and description data.
      */
-    listings?: {[key: string]: Schema$InAppProductListing} | null;
+    listings?: {[key: string]: Schema$InAppProductListing};
     /**
      * The package name of the parent app.
      */
-    packageName?: string | null;
+    packageName?: string;
     /**
      * Prices per buyer region. None of these prices should be zero. In-app products can never be free.
      */
-    prices?: {[key: string]: Schema$Price} | null;
+    prices?: {[key: string]: Schema$Price};
     /**
      * Purchase type enum value. Unmodifiable after creation.
      */
-    purchaseType?: string | null;
+    purchaseType?: string;
     /**
      * Definition of a season for a seasonal subscription. Can be defined only for yearly subscriptions.
      */
@@ -450,27 +448,27 @@ export namespace androidpublisher_v2 {
     /**
      * The stock-keeping-unit (SKU) of the product, unique within an app.
      */
-    sku?: string | null;
-    status?: string | null;
+    sku?: string;
+    status?: string;
     /**
      * Subscription period, specified in ISO 8601 format. Acceptable values are &quot;P1W&quot; (one week), &quot;P1M&quot; (one month), &quot;P3M&quot; (three months), &quot;P6M&quot; (six months), and &quot;P1Y&quot; (one year).
      */
-    subscriptionPeriod?: string | null;
+    subscriptionPeriod?: string;
     /**
      * Trial period, specified in ISO 8601 format. Acceptable values are anything between &quot;P7D&quot; (seven days) and &quot;P999D&quot; (999 days). Seasonal subscriptions cannot have a trial period.
      */
-    trialPeriod?: string | null;
+    trialPeriod?: string;
   }
   export interface Schema$InAppProductListing {
-    description?: string | null;
-    title?: string | null;
+    description?: string;
+    title?: string;
   }
   export interface Schema$InappproductsListResponse {
     inappproduct?: Schema$InAppProduct[];
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;androidpublisher#inappproductsListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     pageInfo?: Schema$PageInfo;
     tokenPagination?: Schema$TokenPagination;
   }
@@ -478,55 +476,55 @@ export namespace androidpublisher_v2 {
     /**
      * Full description of the app; this may be up to 4000 characters in length.
      */
-    fullDescription?: string | null;
+    fullDescription?: string;
     /**
      * Language localization code (for example, &quot;de-AT&quot; for Austrian German).
      */
-    language?: string | null;
+    language?: string;
     /**
      * Short description of the app (previously known as promo text); this may be up to 80 characters in length.
      */
-    shortDescription?: string | null;
+    shortDescription?: string;
     /**
      * App&#39;s localized title.
      */
-    title?: string | null;
+    title?: string;
     /**
      * URL of a promotional YouTube video for the app.
      */
-    video?: string | null;
+    video?: string;
   }
   export interface Schema$ListingsListResponse {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;androidpublisher#listingsListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     listings?: Schema$Listing[];
   }
   export interface Schema$MonthDay {
     /**
      * Day of a month, value in [1, 31] range. Valid range depends on the specified month.
      */
-    day?: number | null;
+    day?: number;
     /**
      * Month of a year. e.g. 1 = JAN, 2 = FEB etc.
      */
-    month?: number | null;
+    month?: number;
   }
   export interface Schema$PageInfo {
-    resultPerPage?: number | null;
-    startIndex?: number | null;
-    totalResults?: number | null;
+    resultPerPage?: number;
+    startIndex?: number;
+    totalResults?: number;
   }
   export interface Schema$Price {
     /**
      * 3 letter Currency code, as defined by ISO 4217.
      */
-    currency?: string | null;
+    currency?: string;
     /**
      * The price in millionths of the currency base unit represented as a string.
      */
-    priceMicros?: string | null;
+    priceMicros?: string;
   }
   /**
    * A ProductPurchase resource indicates the status of a user&#39;s inapp product purchase.
@@ -535,31 +533,31 @@ export namespace androidpublisher_v2 {
     /**
      * The consumption state of the inapp product. Possible values are:   - Yet to be consumed  - Consumed
      */
-    consumptionState?: number | null;
+    consumptionState?: number;
     /**
      * A developer-specified string that contains supplemental information about an order.
      */
-    developerPayload?: string | null;
+    developerPayload?: string;
     /**
      * This kind represents an inappPurchase object in the androidpublisher service.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The order id associated with the purchase of the inapp product.
      */
-    orderId?: string | null;
+    orderId?: string;
     /**
-     * The purchase state of the order. Possible values are:   - Purchased  - Canceled  - Pending
+     * The purchase state of the order. Possible values are:   - Purchased  - Canceled
      */
-    purchaseState?: number | null;
+    purchaseState?: number;
     /**
      * The time the product was purchased, in milliseconds since the epoch (Jan 1, 1970).
      */
-    purchaseTimeMillis?: string | null;
+    purchaseTimeMillis?: string;
     /**
      * The type of purchase of the inapp product. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:   - Test (i.e. purchased from a license testing account)  - Promo (i.e. purchased using a promo code)  - Rewarded (i.e. from watching a video ad instead of paying)
      */
-    purchaseType?: number | null;
+    purchaseType?: number;
   }
   export interface Schema$Prorate {
     /**
@@ -575,7 +573,7 @@ export namespace androidpublisher_v2 {
     /**
      * The name of the user who wrote the review.
      */
-    authorName?: string | null;
+    authorName?: string;
     /**
      * A repeated field containing comments for the review.
      */
@@ -583,7 +581,7 @@ export namespace androidpublisher_v2 {
     /**
      * Unique identifier for this review.
      */
-    reviewId?: string | null;
+    reviewId?: string;
   }
   export interface Schema$ReviewReplyResult {
     /**
@@ -593,7 +591,7 @@ export namespace androidpublisher_v2 {
     /**
      * The reply text that was applied.
      */
-    replyText?: string | null;
+    replyText?: string;
   }
   export interface Schema$ReviewsListResponse {
     pageInfo?: Schema$PageInfo;
@@ -604,7 +602,7 @@ export namespace androidpublisher_v2 {
     /**
      * The text to set as the reply. Replies of more than approximately 350 characters will be rejected. HTML tags will be stripped.
      */
-    replyText?: string | null;
+    replyText?: string;
   }
   export interface Schema$ReviewsReplyResponse {
     result?: Schema$ReviewReplyResult;
@@ -630,11 +628,11 @@ export namespace androidpublisher_v2 {
     /**
      * The cancellation reason the user chose in the survey. Possible values are:   - Other  - I don&#39;t use this service enough  - Technical issues  - Cost-related reasons  - I found a better app
      */
-    cancelSurveyReason?: number | null;
+    cancelSurveyReason?: number;
     /**
      * The customized input cancel reason from the user. Only present when cancelReason is 0.
      */
-    userInputCancelReason?: string | null;
+    userInputCancelReason?: string;
   }
   /**
    * A SubscriptionDeferralInfo contains the data needed to defer a subscription purchase to a future expiry time.
@@ -643,11 +641,11 @@ export namespace androidpublisher_v2 {
     /**
      * The desired next expiry time to assign to the subscription, in milliseconds since the Epoch. The given time must be later/greater than the current expiry time for the subscription.
      */
-    desiredExpiryTimeMillis?: string | null;
+    desiredExpiryTimeMillis?: string;
     /**
      * The expected expiry time for the subscription. If the current expiry time for the subscription is not the value specified here, the deferral will not occur.
      */
-    expectedExpiryTimeMillis?: string | null;
+    expectedExpiryTimeMillis?: string;
   }
   /**
    * Contains the price change information for a subscription that can be used to control the user journey for the price change in the app. This can be in the form of seeking confirmation from the user or tailoring the experience for a successful conversion.
@@ -660,7 +658,7 @@ export namespace androidpublisher_v2 {
     /**
      * The current state of the price change. Possible values are:   - Outstanding: State for a pending price change waiting for the user to agree. In this state, you can optionally seek confirmation from the user using the In-App API.  - Accepted: State for an accepted price change that the subscription will renew with unless it&#39;s canceled. The price change takes effect on a future date when the subscription renews. Note that the change might not occur when the subscription is renewed next.
      */
-    state?: number | null;
+    state?: number;
   }
   /**
    * A SubscriptionPurchase resource indicates the status of a user&#39;s subscription purchase.
@@ -669,11 +667,11 @@ export namespace androidpublisher_v2 {
     /**
      * Whether the subscription will automatically be renewed when it reaches its current expiry time.
      */
-    autoRenewing?: boolean | null;
+    autoRenewing?: boolean;
     /**
      * The reason why a subscription was canceled or is not auto-renewing. Possible values are:   - User canceled the subscription  - Subscription was canceled by the system, for example because of a billing problem  - Subscription was replaced with a new subscription  - Subscription was canceled by the developer
      */
-    cancelReason?: number | null;
+    cancelReason?: number;
     /**
      * Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
      */
@@ -681,47 +679,47 @@ export namespace androidpublisher_v2 {
     /**
      * ISO 3166-1 alpha-2 billing country/region code of the user at the time the subscription was granted.
      */
-    countryCode?: string | null;
+    countryCode?: string;
     /**
      * A developer-specified string that contains supplemental information about an order.
      */
-    developerPayload?: string | null;
+    developerPayload?: string;
     /**
      * The email address of the user when the subscription was purchased. Only present for purchases made with &#39;Subscribe with Google&#39;.
      */
-    emailAddress?: string | null;
+    emailAddress?: string;
     /**
      * Time at which the subscription will expire, in milliseconds since the Epoch.
      */
-    expiryTimeMillis?: string | null;
+    expiryTimeMillis?: string;
     /**
      * The family name of the user when the subscription was purchased. Only present for purchases made with &#39;Subscribe with Google&#39;.
      */
-    familyName?: string | null;
+    familyName?: string;
     /**
      * The given name of the user when the subscription was purchased. Only present for purchases made with &#39;Subscribe with Google&#39;.
      */
-    givenName?: string | null;
+    givenName?: string;
     /**
      * This kind represents a subscriptionPurchase object in the androidpublisher service.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The purchase token of the originating purchase if this subscription is one of the following:   - Re-signup of a canceled but non-lapsed subscription  - Upgrade/downgrade from a previous subscription  For example, suppose a user originally signs up and you receive purchase token X, then the user cancels and goes through the resignup flow (before their subscription lapses) and you receive purchase token Y, and finally the user upgrades their subscription and you receive purchase token Z. If you call this API with purchase token Z, this field will be set to Y. If you call this API with purchase token Y, this field will be set to X. If you call this API with purchase token X, this field will not be set.
      */
-    linkedPurchaseToken?: string | null;
+    linkedPurchaseToken?: string;
     /**
      * The order id of the latest recurring order associated with the purchase of the subscription.
      */
-    orderId?: string | null;
+    orderId?: string;
     /**
      * The payment state of the subscription. Possible values are:   - Payment pending  - Payment received  - Free trial  - Pending deferred upgrade/downgrade
      */
-    paymentState?: number | null;
+    paymentState?: number;
     /**
      * Price of the subscription, not including tax. Price is expressed in micro-units, where 1,000,000 micro-units represents one unit of the currency. For example, if the subscription price is €1.99, price_amount_micros is 1990000.
      */
-    priceAmountMicros?: string | null;
+    priceAmountMicros?: string;
     /**
      * The latest price change information available. This is present only when there is an upcoming price change for the subscription yet to be applied.  Once the subscription renews with the new price or the subscription is canceled, no price change information will be returned.
      */
@@ -729,27 +727,27 @@ export namespace androidpublisher_v2 {
     /**
      * ISO 4217 currency code for the subscription price. For example, if the price is specified in British pounds sterling, price_currency_code is &quot;GBP&quot;.
      */
-    priceCurrencyCode?: string | null;
+    priceCurrencyCode?: string;
     /**
-     * The Google profile id of the user when the subscription was purchased. Only present for purchases made with &#39;Subscribe with Google&#39;.
+     * The profile id of the user when the subscription was purchased. Only present for purchases made with &#39;Subscribe with Google&#39;.
      */
-    profileId?: string | null;
+    profileId?: string;
     /**
      * The profile name of the user when the subscription was purchased. Only present for purchases made with &#39;Subscribe with Google&#39;.
      */
-    profileName?: string | null;
+    profileName?: string;
     /**
      * The type of purchase of the subscription. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:   - Test (i.e. purchased from a license testing account)
      */
-    purchaseType?: number | null;
+    purchaseType?: number;
     /**
      * Time at which the subscription was granted, in milliseconds since the Epoch.
      */
-    startTimeMillis?: string | null;
+    startTimeMillis?: string;
     /**
      * The time at which the subscription was canceled by the user, in milliseconds since the epoch. Only present if cancelReason is 0.
      */
-    userCancellationTimeMillis?: string | null;
+    userCancellationTimeMillis?: string;
   }
   export interface Schema$SubscriptionPurchasesDeferRequest {
     /**
@@ -761,57 +759,55 @@ export namespace androidpublisher_v2 {
     /**
      * The new expiry time for the subscription in milliseconds since the Epoch.
      */
-    newExpiryTimeMillis?: string | null;
+    newExpiryTimeMillis?: string;
   }
   export interface Schema$Testers {
-    /**
-     * A list of all Google Groups, as email addresses, that define testers for this track.
-     */
-    googleGroups?: string[] | null;
+    googleGroups?: string[];
+    googlePlusCommunities?: string[];
   }
   export interface Schema$Timestamp {
-    nanos?: number | null;
-    seconds?: string | null;
+    nanos?: number;
+    seconds?: string;
   }
   export interface Schema$TokenPagination {
-    nextPageToken?: string | null;
-    previousPageToken?: string | null;
+    nextPageToken?: string;
+    previousPageToken?: string;
   }
   export interface Schema$Track {
     /**
      * Identifier for this track.
      */
-    track?: string | null;
-    userFraction?: number | null;
+    track?: string;
+    userFraction?: number;
     /**
      * Version codes to make active on this track. Note that this list should contain all versions you wish to be active, including those you wish to retain from previous releases.
      */
-    versionCodes?: number[] | null;
+    versionCodes?: number[];
   }
   export interface Schema$TracksListResponse {
     /**
      * Identifies what kind of resource this is. Value: the fixed string &quot;androidpublisher#tracksListResponse&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     tracks?: Schema$Track[];
   }
   export interface Schema$UserComment {
     /**
      * Integer Android SDK version of the user&#39;s device at the time the review was written, e.g. 23 is Marshmallow. May be absent.
      */
-    androidOsVersion?: number | null;
+    androidOsVersion?: number;
     /**
      * Integer version code of the app as installed at the time the review was written. May be absent.
      */
-    appVersionCode?: number | null;
+    appVersionCode?: number;
     /**
      * String version name of the app as installed at the time the review was written. May be absent.
      */
-    appVersionName?: string | null;
+    appVersionName?: string;
     /**
      * Codename for the reviewer&#39;s device, e.g. klte, flounder. May be absent.
      */
-    device?: string | null;
+    device?: string;
     /**
      * Some information about the characteristics of the user&#39;s device
      */
@@ -823,27 +819,27 @@ export namespace androidpublisher_v2 {
     /**
      * Untranslated text of the review, in the case where the review has been translated. If the review has not been translated this is left blank.
      */
-    originalText?: string | null;
+    originalText?: string;
     /**
      * Language code for the reviewer. This is taken from the device settings so is not guaranteed to match the language the review is written in. May be absent.
      */
-    reviewerLanguage?: string | null;
+    reviewerLanguage?: string;
     /**
      * The star rating associated with the review, from 1 to 5.
      */
-    starRating?: number | null;
+    starRating?: number;
     /**
      * The content of the comment, i.e. review body. In some cases users have been able to write a review with separate title and body; in those cases the title and body are concatenated and separated by a tab character.
      */
-    text?: string | null;
+    text?: string;
     /**
      * Number of users who have given this review a thumbs down
      */
-    thumbsDownCount?: number | null;
+    thumbsDownCount?: number;
     /**
      * Number of users who have given this review a thumbs up
      */
-    thumbsUpCount?: number | null;
+    thumbsUpCount?: number;
   }
   /**
    * A VoidedPurchase resource indicates a purchase that was either canceled/refunded/charged-back.
@@ -852,19 +848,19 @@ export namespace androidpublisher_v2 {
     /**
      * This kind represents a voided purchase object in the androidpublisher service.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The time at which the purchase was made, in milliseconds since the epoch (Jan 1, 1970).
      */
-    purchaseTimeMillis?: string | null;
+    purchaseTimeMillis?: string;
     /**
-     * The token which uniquely identifies a one-time purchase or subscription. To uniquely identify subscription renewals use order_id (available starting from version 3 of the API).
+     * The token that was generated when a purchase was made. This uniquely identifies a purchase.
      */
-    purchaseToken?: string | null;
+    purchaseToken?: string;
     /**
      * The time at which the purchase was canceled/refunded/charged-back, in milliseconds since the epoch (Jan 1, 1970).
      */
-    voidedTimeMillis?: string | null;
+    voidedTimeMillis?: string;
   }
   export interface Schema$VoidedPurchasesListResponse {
     pageInfo?: Schema$PageInfo;
@@ -1124,7 +1120,7 @@ export namespace androidpublisher_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().AppEdit} params.requestBody Request body data
+     * @param {().AppEdit} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1658,7 +1654,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.language The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass "de-AT".
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().ApkListing} params.requestBody Request body data
+     * @param {().ApkListing} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1736,7 +1732,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.language The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass "de-AT".
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().ApkListing} params.requestBody Request body data
+     * @param {().ApkListing} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1966,7 +1962,7 @@ export namespace androidpublisher_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().ApksAddExternallyHostedRequest} params.requestBody Request body data
+     * @param {().ApksAddExternallyHostedRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2717,7 +2713,7 @@ export namespace androidpublisher_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().AppDetails} params.requestBody Request body data
+     * @param {().AppDetails} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2793,7 +2789,7 @@ export namespace androidpublisher_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().AppDetails} params.requestBody Request body data
+     * @param {().AppDetails} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3024,7 +3020,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.expansionFileType
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().ExpansionFile} params.requestBody Request body data
+     * @param {().ExpansionFile} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3112,7 +3108,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.expansionFileType
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().ExpansionFile} params.requestBody Request body data
+     * @param {().ExpansionFile} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4184,7 +4180,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.language The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass "de-AT".
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().Listing} params.requestBody Request body data
+     * @param {().Listing} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4259,7 +4255,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.language The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass "de-AT".
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().Listing} params.requestBody Request body data
+     * @param {().Listing} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4536,7 +4532,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
      * @param {string} params.track The track to read or modify.
-     * @param {().Testers} params.requestBody Request body data
+     * @param {().Testers} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4610,7 +4606,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
      * @param {string} params.track The track to read or modify.
-     * @param {().Testers} params.requestBody Request body data
+     * @param {().Testers} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4911,7 +4907,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
      * @param {string} params.track The track to read or modify.
-     * @param {().Track} params.requestBody Request body data
+     * @param {().Track} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4986,7 +4982,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.editId Unique identifier for this edit.
      * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
      * @param {string} params.track The track to read or modify.
-     * @param {().Track} params.requestBody Request body data
+     * @param {().Track} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5301,7 +5297,7 @@ export namespace androidpublisher_v2 {
      * @param {object} params Parameters for request
      * @param {boolean=} params.autoConvertMissingPrices If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
      * @param {string} params.packageName Unique identifier for the Android app; for example, "com.spiffygame".
-     * @param {().InAppProduct} params.requestBody Request body data
+     * @param {().InAppProduct} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5462,7 +5458,7 @@ export namespace androidpublisher_v2 {
      * @param {boolean=} params.autoConvertMissingPrices If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
      * @param {string} params.packageName Unique identifier for the Android app with the in-app product; for example, "com.spiffygame".
      * @param {string} params.sku Unique identifier for the in-app product.
-     * @param {().InAppProduct} params.requestBody Request body data
+     * @param {().InAppProduct} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5539,7 +5535,7 @@ export namespace androidpublisher_v2 {
      * @param {boolean=} params.autoConvertMissingPrices If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
      * @param {string} params.packageName Unique identifier for the Android app with the in-app product; for example, "com.spiffygame".
      * @param {string} params.sku Unique identifier for the in-app product.
-     * @param {().InAppProduct} params.requestBody Request body data
+     * @param {().InAppProduct} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6044,7 +6040,7 @@ export namespace androidpublisher_v2 {
      * @param {string} params.packageName The package name of the application for which this subscription was purchased (for example, 'com.some.thing').
      * @param {string} params.subscriptionId The purchased subscription ID (for example, 'monthly001').
      * @param {string} params.token The token provided to the user's device when the subscription was purchased.
-     * @param {().SubscriptionPurchasesDeferRequest} params.requestBody Request body data
+     * @param {().SubscriptionPurchasesDeferRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6466,11 +6462,11 @@ export namespace androidpublisher_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.endTime The time, in milliseconds since the Epoch, of the newest voided purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.
+     * @param {string=} params.endTime The time, in milliseconds since the Epoch, of the newest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.
      * @param {integer=} params.maxResults
      * @param {string} params.packageName The package name of the application for which voided purchases need to be returned (for example, 'com.some.thing').
      * @param {integer=} params.startIndex
-     * @param {string=} params.startTime The time, in milliseconds since the Epoch, of the oldest voided purchase that you want to see in the response. The value of this parameter cannot be older than 30 days and is ignored if a pagination token is set. Default value is current time minus 30 days. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.
+     * @param {string=} params.startTime The time, in milliseconds since the Epoch, of the oldest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be older than 30 days and is ignored if a pagination token is set. Default value is current time minus 30 days. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.
      * @param {string=} params.token
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -6554,7 +6550,7 @@ export namespace androidpublisher_v2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The time, in milliseconds since the Epoch, of the newest voided purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.
+     * The time, in milliseconds since the Epoch, of the newest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.
      */
     endTime?: string;
     /**
@@ -6570,7 +6566,7 @@ export namespace androidpublisher_v2 {
      */
     startIndex?: number;
     /**
-     * The time, in milliseconds since the Epoch, of the oldest voided purchase that you want to see in the response. The value of this parameter cannot be older than 30 days and is ignored if a pagination token is set. Default value is current time minus 30 days. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.
+     * The time, in milliseconds since the Epoch, of the oldest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be older than 30 days and is ignored if a pagination token is set. Default value is current time minus 30 days. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.
      */
     startTime?: string;
     /**
@@ -6744,7 +6740,7 @@ export namespace androidpublisher_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.packageName Unique identifier for the Android app for which we want reviews; for example, "com.spiffygame".
      * @param {string} params.reviewId
-     * @param {().ReviewsReplyRequest} params.requestBody Request body data
+     * @param {().ReviewsReplyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -41,21 +43,9 @@ export namespace tagmanager_v1 {
 
   interface StandardParameters {
     /**
-     * V1 error format.
-     */
-    '$.xgafv'?: string;
-    /**
-     * OAuth access token.
-     */
-    access_token?: string;
-    /**
-     * Data format for response.
+     * Data format for the response.
      */
     alt?: string;
-    /**
-     * JSONP
-     */
-    callback?: string;
     /**
      * Selector specifying which fields to include in a partial response.
      */
@@ -73,23 +63,19 @@ export namespace tagmanager_v1 {
      */
     prettyPrint?: boolean;
     /**
-     * Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+     * An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
      */
     quotaUser?: string;
     /**
-     * Legacy upload protocol for media (e.g. "media", "multipart").
+     * Deprecated. Please use quotaUser instead.
      */
-    uploadType?: string;
-    /**
-     * Upload protocol for media (e.g. "raw", "multipart").
-     */
-    upload_protocol?: string;
+    userIp?: string;
   }
 
   /**
    * Tag Manager API
    *
-   * This API allows clients to access and modify container and tag      configuration.
+   * Accesses Tag Manager accounts and containers.
    *
    * @example
    * const {google} = require('googleapis');
@@ -122,41 +108,41 @@ export namespace tagmanager_v1 {
     /**
      * The Account ID uniquely identifies the GTM Account.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * The fingerprint of the GTM Account as computed at storage time. This value is recomputed whenever the account is modified.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
-     * Account display name. @mutable tagmanager.accounts.create @mutable tagmanager.accounts.update
+     * Account display name.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * Whether the account shares data anonymously with Google and others. @mutable tagmanager.accounts.create @mutable tagmanager.accounts.update
+     * Whether the account shares data anonymously with Google and others.
      */
-    shareData?: boolean | null;
+    shareData?: boolean;
   }
   /**
    * Defines the Google Tag Manager Account access permissions.
    */
   export interface Schema$AccountAccess {
     /**
-     * List of Account permissions. Valid account permissions are &lt;code&gt;read&lt;/code&gt; and &lt;code&gt;manage&lt;/code&gt;. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
+     * List of Account permissions. Valid account permissions are read and manage.
      */
-    permission?: string[] | null;
+    permission?: string[];
   }
   /**
    * Represents a predicate.
    */
   export interface Schema$Condition {
     /**
-     * A list of named parameters (key/value), depending on the condition&#39;s type. Notes:&lt;ul&gt; &lt;li&gt;For binary operators, include parameters named &lt;code&gt;arg0&lt;/code&gt; and    &lt;code&gt;arg1&lt;/code&gt; for specifying the left and right operands,    respectively.&lt;/li&gt; &lt;li&gt;At this time, the left operand (&lt;code&gt;arg0&lt;/code&gt;) must be a reference     to a variable.&lt;/li&gt; &lt;li&gt;For case-insensitive Regex matching, include a boolean parameter named     &lt;code&gt;ignore_case&lt;/code&gt; that is set to &lt;code&gt;true&lt;/code&gt;.     If not specified or set to any other value, the matching will be case     sensitive.&lt;/li&gt; &lt;li&gt;To negate an operator, include a boolean parameter named     &lt;code&gt;negate&lt;/code&gt; boolean parameter that is set to &lt;code&gt;true&lt;/code&gt;.     &lt;/li&gt; &lt;/ul&gt; @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * A list of named parameters (key/value), depending on the condition&#39;s type. Notes:  - For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively.  - At this time, the left operand (arg0) must be a reference to a variable.  - For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive.  - To negate an operator, include a boolean parameter named negate boolean parameter that is set to true.
      */
     parameter?: Schema$Parameter[];
     /**
-     * The type of operator for this condition. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * The type of operator for this condition.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Represents a Google Tag Manager Container.
@@ -165,60 +151,60 @@ export namespace tagmanager_v1 {
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * The Container ID uniquely identifies the GTM Container.
      */
-    containerId?: string | null;
+    containerId?: string;
     /**
-     * Optional list of domain names associated with the Container. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * Optional list of domain names associated with the Container.
      */
-    domainName?: string[] | null;
+    domainName?: string[];
     /**
-     * List of enabled built-in variables. Valid values include: &lt;code&gt;pageUrl, pageHostname, pagePath, referrer, event, clickElement, clickClasses, clickId, clickTarget, clickUrl, clickText, formElement, formClasses, formId, formTarget, formUrl, formText, errorMessage, errorUrl, errorLine, newHistoryFragment, oldHistoryFragment, newHistoryState, oldHistoryState, historySource, containerVersion, debugMode, randomNumber, containerId&lt;/code&gt;. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * List of enabled built-in variables. Valid values include: pageUrl, pageHostname, pagePath, referrer, event, clickElement, clickClasses, clickId, clickTarget, clickUrl, clickText, formElement, formClasses, formId, formTarget, formUrl, formText, errorMessage, errorUrl, errorLine, newHistoryFragment, oldHistoryFragment, newHistoryState, oldHistoryState, historySource, containerVersion, debugMode, randomNumber, containerId.
      */
-    enabledBuiltInVariable?: string[] | null;
+    enabledBuiltInVariable?: string[];
     /**
-     * The fingerprint of the GTM Container as computed at storage time.  This value is recomputed whenever the account is modified.
+     * The fingerprint of the GTM Container as computed at storage time. This value is recomputed whenever the account is modified.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
-     * Container display name. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * Container display name.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * Container Notes. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * Container Notes.
      */
-    notes?: string | null;
+    notes?: string;
     /**
      * Container Public ID.
      */
-    publicId?: string | null;
+    publicId?: string;
     /**
-     * Container Country ID. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * Container Country ID.
      */
-    timeZoneCountryId?: string | null;
+    timeZoneCountryId?: string;
     /**
-     * Container Time Zone ID. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * Container Time Zone ID.
      */
-    timeZoneId?: string | null;
+    timeZoneId?: string;
     /**
-     * List of Usage Contexts for the Container. Valid values include: &lt;code&gt;web, android, ios&lt;/code&gt;. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+     * List of Usage Contexts for the Container. Valid values include: web, android, ios.
      */
-    usageContext?: string[] | null;
+    usageContext?: string[];
   }
   /**
    * Defines the Google Tag Manager Container access permissions.
    */
   export interface Schema$ContainerAccess {
     /**
-     * GTM Container ID. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
+     * GTM Container ID.
      */
-    containerId?: string | null;
+    containerId?: string;
     /**
-     * List of Container permissions. Valid container permissions are: &lt;code&gt;read, edit, delete, publish&lt;/code&gt;. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
+     * List of Container permissions. Valid container permissions are: read, edit, delete, publish.
      */
-    permission?: string[] | null;
+    permission?: string[];
   }
   /**
    * Represents a Google Tag Manager Container Version.
@@ -227,7 +213,7 @@ export namespace tagmanager_v1 {
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * The container that this version was taken from.
      */
@@ -235,19 +221,19 @@ export namespace tagmanager_v1 {
     /**
      * GTM Container ID.
      */
-    containerId?: string | null;
+    containerId?: string;
     /**
      * The Container Version ID uniquely identifies the GTM Container Version.
      */
-    containerVersionId?: string | null;
+    containerVersionId?: string;
     /**
      * A value of true indicates this container version has been deleted.
      */
-    deleted?: boolean | null;
+    deleted?: boolean;
     /**
      * The fingerprint of the GTM Container Version as computed at storage time. This value is recomputed whenever the container version is modified.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
      * The folders in the container that this version was taken from.
      */
@@ -257,13 +243,13 @@ export namespace tagmanager_v1 {
      */
     macro?: Schema$Macro[];
     /**
-     * Container version display name. @mutable tagmanager.accounts.containers.versions.update
+     * Container version display name.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * User notes on how to apply this container version in the container. @mutable tagmanager.accounts.containers.versions.update
+     * User notes on how to apply this container version in the container.
      */
-    notes?: string | null;
+    notes?: string;
     /**
      * The rules in the container that this version was taken from.
      */
@@ -288,43 +274,43 @@ export namespace tagmanager_v1 {
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * GTM Container ID.
      */
-    containerId?: string | null;
+    containerId?: string;
     /**
      * The Container Version ID uniquely identifies the GTM Container Version.
      */
-    containerVersionId?: string | null;
+    containerVersionId?: string;
     /**
      * A value of true indicates this container version has been deleted.
      */
-    deleted?: boolean | null;
+    deleted?: boolean;
     /**
      * Container version display name.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Number of macros in the container version.
      */
-    numMacros?: string | null;
+    numMacros?: string;
     /**
      * Number of rules in the container version.
      */
-    numRules?: string | null;
+    numRules?: string;
     /**
      * Number of tags in the container version.
      */
-    numTags?: string | null;
+    numTags?: string;
     /**
      * Number of triggers in the container version.
      */
-    numTriggers?: string | null;
+    numTriggers?: string;
     /**
      * Number of variables in the container version.
      */
-    numVariables?: string | null;
+    numVariables?: string;
   }
   /**
    * Options for new container versions.
@@ -333,15 +319,15 @@ export namespace tagmanager_v1 {
     /**
      * The name of the container version to be created.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The notes of the container version to be created.
      */
-    notes?: string | null;
+    notes?: string;
     /**
      * The creation of this version may be for quick preview and shouldn&#39;t be saved.
      */
-    quickPreview?: boolean | null;
+    quickPreview?: boolean;
   }
   /**
    * Create container versions response.
@@ -350,7 +336,7 @@ export namespace tagmanager_v1 {
     /**
      * Compiler errors or not.
      */
-    compilerError?: boolean | null;
+    compilerError?: boolean;
     /**
      * The container version created.
      */
@@ -363,48 +349,48 @@ export namespace tagmanager_v1 {
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * The environment authorization code.
      */
-    authorizationCode?: string | null;
+    authorizationCode?: string;
     /**
      * The last update time-stamp for the authorization code.
      */
-    authorizationTimestampMs?: string | null;
+    authorizationTimestampMs?: string;
     /**
      * GTM Container ID.
      */
-    containerId?: string | null;
-    containerVersionId?: string | null;
+    containerId?: string;
+    containerVersionId?: string;
     /**
-     * The environment description. Can be set or changed only on USER type environments. @mutable tagmanager.accounts.containers.environments.create @mutable tagmanager.accounts.containers.environments.update
+     * The environment description. Can be set or changed only on USER type environments.
      */
-    description?: string | null;
+    description?: string;
     /**
-     * Whether or not to enable debug by default on for the environment. @mutable tagmanager.accounts.containers.environments.create @mutable tagmanager.accounts.containers.environments.update
+     * Whether or not to enable debug by default on for the environment.
      */
-    enableDebug?: boolean | null;
+    enableDebug?: boolean;
     /**
      * GTM Environment ID uniquely identifies the GTM Environment.
      */
-    environmentId?: string | null;
+    environmentId?: string;
     /**
      * The fingerprint of the GTM environment as computed at storage time. This value is recomputed whenever the environment is modified.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
-     * The environment display name. Can be set or changed only on USER type environments. @mutable tagmanager.accounts.containers.environments.create @mutable tagmanager.accounts.containers.environments.update
+     * The environment display name. Can be set or changed only on USER type environments.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The type of this environment.
      */
-    type?: string | null;
+    type?: string;
     /**
-     * Default preview page url for the environment. @mutable tagmanager.accounts.containers.environments.create @mutable tagmanager.accounts.containers.environments.update
+     * Default preview page url for the environment.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Represents a Google Tag Manager Folder.
@@ -413,23 +399,23 @@ export namespace tagmanager_v1 {
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * GTM Container ID.
      */
-    containerId?: string | null;
+    containerId?: string;
     /**
      * The fingerprint of the GTM Folder as computed at storage time. This value is recomputed whenever the folder is modified.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
      * The Folder ID uniquely identifies the GTM Folder.
      */
-    folderId?: string | null;
+    folderId?: string;
     /**
-     * Folder display name. @mutable tagmanager.accounts.containers.folders.create @mutable tagmanager.accounts.containers.folders.update
+     * Folder display name.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Represents a Google Tag Manager Folder&#39;s contents.
@@ -540,80 +526,80 @@ export namespace tagmanager_v1 {
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * GTM Container ID.
      */
-    containerId?: string | null;
+    containerId?: string;
     /**
-     * For mobile containers only: A list of rule IDs for disabling conditional macros; the macro is enabled if one of the enabling rules is true while all the disabling rules are false. Treated as an unordered set. @mutable tagmanager.accounts.containers.macros.create @mutable tagmanager.accounts.containers.macros.update
+     * For mobile containers only: A list of rule IDs for disabling conditional macros; the macro is enabled if one of the enabling rules is true while all the disabling rules are false. Treated as an unordered set.
      */
-    disablingRuleId?: string[] | null;
+    disablingRuleId?: string[];
     /**
-     * For mobile containers only: A list of rule IDs for enabling conditional macros; the macro is enabled if one of the enabling rules is true while all the disabling rules are false. Treated as an unordered set. @mutable tagmanager.accounts.containers.macros.create @mutable tagmanager.accounts.containers.macros.update
+     * For mobile containers only: A list of rule IDs for enabling conditional macros; the macro is enabled if one of the enabling rules is true while all the disabling rules are false. Treated as an unordered set.
      */
-    enablingRuleId?: string[] | null;
+    enablingRuleId?: string[];
     /**
      * The fingerprint of the GTM Macro as computed at storage time. This value is recomputed whenever the macro is modified.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
      * The Macro ID uniquely identifies the GTM Macro.
      */
-    macroId?: string | null;
+    macroId?: string;
     /**
-     * Macro display name. @mutable tagmanager.accounts.containers.macros.create @mutable tagmanager.accounts.containers.macros.update
+     * Macro display name.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * User notes on how to apply this macro in the container. @mutable tagmanager.accounts.containers.macros.create @mutable tagmanager.accounts.containers.macros.update
+     * User notes on how to apply this macro in the container.
      */
-    notes?: string | null;
+    notes?: string;
     /**
-     * The macro&#39;s parameters. @mutable tagmanager.accounts.containers.macros.create @mutable tagmanager.accounts.containers.macros.update
+     * The macro&#39;s parameters.
      */
     parameter?: Schema$Parameter[];
     /**
      * Parent folder id.
      */
-    parentFolderId?: string | null;
+    parentFolderId?: string;
     /**
-     * The end timestamp in milliseconds to schedule a macro. @mutable tagmanager.accounts.containers.macros.create @mutable tagmanager.accounts.containers.macros.update
+     * The end timestamp in milliseconds to schedule a macro.
      */
-    scheduleEndMs?: string | null;
+    scheduleEndMs?: string;
     /**
-     * The start timestamp in milliseconds to schedule a macro. @mutable tagmanager.accounts.containers.macros.create @mutable tagmanager.accounts.containers.macros.update
+     * The start timestamp in milliseconds to schedule a macro.
      */
-    scheduleStartMs?: string | null;
+    scheduleStartMs?: string;
     /**
-     * GTM Macro Type. @mutable tagmanager.accounts.containers.macros.create @mutable tagmanager.accounts.containers.macros.update
+     * GTM Macro Type.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Represents a Google Tag Manager Parameter.
    */
   export interface Schema$Parameter {
     /**
-     * The named key that uniquely identifies a parameter.  Required for top-level parameters, as well as map values.  Ignored for list values. @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
      */
-    key?: string | null;
+    key?: string;
     /**
-     * This list parameter&#39;s parameters (keys will be ignored). @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * This list parameter&#39;s parameters (keys will be ignored).
      */
     list?: Schema$Parameter[];
     /**
-     * This map parameter&#39;s parameters (must have keys; keys must be unique). @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * This map parameter&#39;s parameters (must have keys; keys must be unique).
      */
     map?: Schema$Parameter[];
     /**
-     * The parameter type.  Valid values are:&lt;ul&gt; &lt;li&gt;&lt;code&gt;boolean&lt;/code&gt;: The value represents a boolean, represented as     &#39;true&#39; or &#39;false&#39;&lt;/li&gt; &lt;li&gt;&lt;code&gt;integer&lt;/code&gt;: The value represents a 64-bit signed integer     value, in base 10&lt;/li&gt; &lt;li&gt;&lt;code&gt;list&lt;/code&gt;: A list of parameters should be specified&lt;/li&gt; &lt;li&gt;&lt;code&gt;map&lt;/code&gt;: A map of parameters should be specified&lt;/li&gt; &lt;li&gt;&lt;code&gt;template&lt;/code&gt;: The value represents any text; this can include     variable references (even variable references that might return     non-string types)&lt;/li&gt; &lt;li&gt;&lt;code&gt;trigger_reference&lt;/code&gt;: The value represents a trigger,     represented as the trigger id&lt;/li&gt; &lt;li&gt;&lt;code&gt;tag_reference&lt;/code&gt;: The value represents a tag, represented as     the tag name&lt;/li&gt; &lt;/ul&gt; @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * The parameter type. Valid values are:  - boolean: The value represents a boolean, represented as &#39;true&#39; or &#39;false&#39;  - integer: The value represents a 64-bit signed integer value, in base 10  - list: A list of parameters should be specified  - map: A map of parameters should be specified  - template: The value represents any text; this can include variable references (even variable references that might return non-string types)
      */
-    type?: string | null;
+    type?: string;
     /**
-     * A parameter&#39;s value (may contain variable references such as &quot;{{myVariable}}&quot;) as appropriate to the specified type. @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * A parameter&#39;s value (may contain variable references such as &quot;{{myVariable}}&quot;) as appropriate to the specified type.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * Publish container version response.
@@ -622,7 +608,7 @@ export namespace tagmanager_v1 {
     /**
      * Compiler errors or not.
      */
-    compilerError?: boolean | null;
+    compilerError?: boolean;
     /**
      * The container version created.
      */
@@ -635,41 +621,41 @@ export namespace tagmanager_v1 {
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
-     * The list of conditions that make up this rule (implicit AND between them). @mutable tagmanager.accounts.containers.rules.create @mutable tagmanager.accounts.containers.rules.update
+     * The list of conditions that make up this rule (implicit AND between them).
      */
     condition?: Schema$Condition[];
     /**
      * GTM Container ID.
      */
-    containerId?: string | null;
+    containerId?: string;
     /**
      * The fingerprint of the GTM Rule as computed at storage time. This value is recomputed whenever the rule is modified.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
-     * Rule display name. @mutable tagmanager.accounts.containers.rules.create @mutable tagmanager.accounts.containers.rules.update
+     * Rule display name.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * User notes on how to apply this rule in the container. @mutable tagmanager.accounts.containers.rules.create @mutable tagmanager.accounts.containers.rules.update
+     * User notes on how to apply this rule in the container.
      */
-    notes?: string | null;
+    notes?: string;
     /**
      * The Rule ID uniquely identifies the GTM Rule.
      */
-    ruleId?: string | null;
+    ruleId?: string;
   }
   export interface Schema$SetupTag {
     /**
      * If true, fire the main tag if and only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.
      */
-    stopOnSetupFailure?: boolean | null;
+    stopOnSetupFailure?: boolean;
     /**
      * The name of the setup tag.
      */
-    tagName?: string | null;
+    tagName?: string;
   }
   /**
    * Represents a Google Tag Manager Tag.
@@ -678,67 +664,67 @@ export namespace tagmanager_v1 {
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
-     * Blocking rule IDs. If any of the listed rules evaluate to true, the tag     will not fire. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * Blocking rule IDs. If any of the listed rules evaluate to true, the tag will not fire.
      */
-    blockingRuleId?: string[] | null;
+    blockingRuleId?: string[];
     /**
-     * Blocking trigger IDs. If any of the listed triggers evaluate to true, the tag     will not fire. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * Blocking trigger IDs. If any of the listed triggers evaluate to true, the tag will not fire.
      */
-    blockingTriggerId?: string[] | null;
+    blockingTriggerId?: string[];
     /**
      * GTM Container ID.
      */
-    containerId?: string | null;
+    containerId?: string;
     /**
      * The fingerprint of the GTM Tag as computed at storage time. This value is recomputed whenever the tag is modified.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
-     * Firing rule IDs. A tag will fire when any of the listed rules are true and     all of its &lt;code&gt;blockingRuleIds&lt;/code&gt; (if any specified) are false. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * Firing rule IDs. A tag will fire when any of the listed rules are true and all of its blockingRuleIds (if any specified) are false.
      */
-    firingRuleId?: string[] | null;
+    firingRuleId?: string[];
     /**
-     * Firing trigger IDs. A tag will fire when any of the listed triggers are true and all of its &lt;code&gt;blockingTriggerIds&lt;/code&gt; (if any specified) are false. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * Firing trigger IDs. A tag will fire when any of the listed triggers are true and all of its blockingTriggerIds (if any specified) are false.
      */
-    firingTriggerId?: string[] | null;
+    firingTriggerId?: string[];
     /**
-     * If set to true, this tag will only fire in the live environment (e.g. not in preview or debug mode). @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * If set to true, this tag will only fire in the live environment (e.g. not in preview or debug mode).
      */
-    liveOnly?: boolean | null;
+    liveOnly?: boolean;
     /**
-     * Tag display name. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * Tag display name.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * User notes on how to apply this tag in the container. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * User notes on how to apply this tag in the container.
      */
-    notes?: string | null;
+    notes?: string;
     /**
-     * The tag&#39;s parameters. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * The tag&#39;s parameters.
      */
     parameter?: Schema$Parameter[];
     /**
      * Parent folder id.
      */
-    parentFolderId?: string | null;
+    parentFolderId?: string;
     /**
-     * True if the tag is paused. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * True if the tag is paused.
      */
-    paused?: boolean | null;
+    paused?: boolean;
     /**
-     * User defined numeric priority of the tag. Tags are fired asynchronously in order of priority. Tags with higher numeric value fire first. A tag&#39;s priority can be a positive or negative value. The default value is 0. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * User defined numeric priority of the tag. Tags are fired asynchronously in order of priority. Tags with higher numeric value fire first. A tag&#39;s priority can be a positive or negative value. The default value is 0.
      */
     priority?: Schema$Parameter;
     /**
-     * The end timestamp in milliseconds to schedule a tag. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * The end timestamp in milliseconds to schedule a tag.
      */
-    scheduleEndMs?: string | null;
+    scheduleEndMs?: string;
     /**
-     * The start timestamp in milliseconds to schedule a tag. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * The start timestamp in milliseconds to schedule a tag.
      */
-    scheduleStartMs?: string | null;
+    scheduleStartMs?: string;
     /**
      * The list of setup tags. Currently we only allow one.
      */
@@ -746,29 +732,29 @@ export namespace tagmanager_v1 {
     /**
      * Option to fire this tag.
      */
-    tagFiringOption?: string | null;
+    tagFiringOption?: string;
     /**
      * The Tag ID uniquely identifies the GTM Tag.
      */
-    tagId?: string | null;
+    tagId?: string;
     /**
      * The list of teardown tags. Currently we only allow one.
      */
     teardownTag?: Schema$TeardownTag[];
     /**
-     * GTM Tag Type. @mutable tagmanager.accounts.containers.tags.create @mutable tagmanager.accounts.containers.tags.update
+     * GTM Tag Type.
      */
-    type?: string | null;
+    type?: string;
   }
   export interface Schema$TeardownTag {
     /**
      * If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.
      */
-    stopTeardownOnFailure?: boolean | null;
+    stopTeardownOnFailure?: boolean;
     /**
      * The name of the teardown tag.
      */
-    tagName?: string | null;
+    tagName?: string;
   }
   /**
    * Represents a Google Tag Manager Trigger
@@ -777,113 +763,113 @@ export namespace tagmanager_v1 {
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
-     * Used in the case of auto event tracking. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Used in the case of auto event tracking.
      */
     autoEventFilter?: Schema$Condition[];
     /**
-     * Whether or not we should only fire tags if the form submit or link click event is not cancelled by some other event handler (e.g. because of validation). Only valid for Form Submission and Link Click triggers. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Whether or not we should only fire tags if the form submit or link click event is not cancelled by some other event handler (e.g. because of validation). Only valid for Form Submission and Link Click triggers.
      */
     checkValidation?: Schema$Parameter;
     /**
      * GTM Container ID.
      */
-    containerId?: string | null;
+    containerId?: string;
     /**
-     * A visibility trigger minimum continuous visible time (in milliseconds). Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * A visibility trigger minimum continuous visible time (in milliseconds). Only valid for AMP Visibility trigger.
      */
     continuousTimeMinMilliseconds?: Schema$Parameter;
     /**
-     * Used in the case of custom event, which is fired iff all Conditions are true. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Used in the case of custom event, which is fired iff all Conditions are true.
      */
     customEventFilter?: Schema$Condition[];
     /**
-     * Name of the GTM event that is fired. Only valid for Timer triggers. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Name of the GTM event that is fired. Only valid for Timer triggers.
      */
     eventName?: Schema$Parameter;
     /**
-     * The trigger will only fire iff all Conditions are true. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * The trigger will only fire iff all Conditions are true.
      */
     filter?: Schema$Condition[];
     /**
      * The fingerprint of the GTM Trigger as computed at storage time. This value is recomputed whenever the trigger is modified.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
-     * List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled horizontally. Only valid for AMP scroll triggers. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled horizontally. Only valid for AMP scroll triggers.
      */
     horizontalScrollPercentageList?: Schema$Parameter;
     /**
-     * Time between triggering recurring Timer Events (in milliseconds). Only valid for Timer triggers. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Time between triggering recurring Timer Events (in milliseconds). Only valid for Timer triggers.
      */
     interval?: Schema$Parameter;
     /**
-     * Time between Timer Events to fire (in seconds). Only valid for AMP Timer trigger. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Time between Timer Events to fire (in seconds). Only valid for AMP Timer trigger.
      */
     intervalSeconds?: Schema$Parameter;
     /**
-     * Limit of the number of GTM events this Timer Trigger will fire. If no limit is set, we will continue to fire GTM events until the user leaves the page. Only valid for Timer triggers. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Limit of the number of GTM events this Timer Trigger will fire. If no limit is set, we will continue to fire GTM events until the user leaves the page. Only valid for Timer triggers.
      */
     limit?: Schema$Parameter;
     /**
-     * Max time to fire Timer Events (in seconds). Only valid for AMP Timer trigger. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Max time to fire Timer Events (in seconds). Only valid for AMP Timer trigger.
      */
     maxTimerLengthSeconds?: Schema$Parameter;
     /**
-     * Trigger display name. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Trigger display name.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * Additional parameters. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
+     * Additional parameters.
      */
     parameter?: Schema$Parameter[];
     /**
      * Parent folder id.
      */
-    parentFolderId?: string | null;
+    parentFolderId?: string;
     /**
-     * A click trigger CSS selector (i.e. &quot;a&quot;, &quot;button&quot; etc.). Only valid for AMP Click trigger. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * A click trigger CSS selector (i.e. &quot;a&quot;, &quot;button&quot; etc.). Only valid for AMP Click trigger.
      */
     selector?: Schema$Parameter;
     /**
-     * A visibility trigger minimum total visible time (in milliseconds). Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * A visibility trigger minimum total visible time (in milliseconds). Only valid for AMP Visibility trigger.
      */
     totalTimeMinMilliseconds?: Schema$Parameter;
     /**
      * The Trigger ID uniquely identifies the GTM Trigger.
      */
-    triggerId?: string | null;
+    triggerId?: string;
     /**
-     * Defines the data layer event that causes this trigger. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Defines the data layer event that causes this trigger.
      */
-    type?: string | null;
+    type?: string;
     /**
-     * Globally unique id of the trigger that auto-generates this (a Form Submit, Link Click or Timer listener) if any. Used to make incompatible auto-events work together with trigger filtering based on trigger ids. This value is populated during output generation since the tags implied by triggers don&#39;t exist until then. Only valid for Form Submit, Link Click and Timer triggers. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Globally unique id of the trigger that auto-generates this (a Form Submit, Link Click or Timer listener) if any. Used to make incompatible auto-events work together with trigger filtering based on trigger ids. This value is populated during output generation since the tags implied by triggers don&#39;t exist until then. Only valid for Form Submit, Link Click and Timer triggers.
      */
     uniqueTriggerId?: Schema$Parameter;
     /**
-     * List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled vertically. Only valid for AMP scroll triggers. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled vertically. Only valid for AMP scroll triggers.
      */
     verticalScrollPercentageList?: Schema$Parameter;
     /**
-     * A visibility trigger CSS selector (i.e. &quot;#id&quot;). Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * A visibility trigger CSS selector (i.e. &quot;#id&quot;). Only valid for AMP Visibility trigger.
      */
     visibilitySelector?: Schema$Parameter;
     /**
-     * A visibility trigger maximum percent visibility. Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * A visibility trigger maximum percent visibility. Only valid for AMP Visibility trigger.
      */
     visiblePercentageMax?: Schema$Parameter;
     /**
-     * A visibility trigger minimum percent visibility. Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * A visibility trigger minimum percent visibility. Only valid for AMP Visibility trigger.
      */
     visiblePercentageMin?: Schema$Parameter;
     /**
-     * Whether or not we should delay the form submissions or link opening until all of the tags have fired (by preventing the default action and later simulating the default action). Only valid for Form Submission and Link Click triggers. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * Whether or not we should delay the form submissions or link opening until all of the tags have fired (by preventing the default action and later simulating the default action). Only valid for Form Submission and Link Click triggers.
      */
     waitForTags?: Schema$Parameter;
     /**
-     * How long to wait (in milliseconds) for tags to fire when &#39;waits_for_tags&#39; above evaluates to &lt;code&gt;true&lt;/code&gt;.  Only valid for Form Submission and Link Click triggers. @mutable tagmanager.accounts.containers.triggers.create @mutable tagmanager.accounts.containers.triggers.update
+     * How long to wait (in milliseconds) for tags to fire when &#39;waits_for_tags&#39; above evaluates to true. Only valid for Form Submission and Link Click triggers.
      */
     waitForTagsTimeout?: Schema$Parameter;
   }
@@ -892,25 +878,25 @@ export namespace tagmanager_v1 {
    */
   export interface Schema$UserAccess {
     /**
-     * GTM Account access permissions. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
+     * GTM Account access permissions.
      */
     accountAccess?: Schema$AccountAccess;
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
-     * GTM Container access permissions. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
+     * GTM Container access permissions.
      */
     containerAccess?: Schema$ContainerAccess[];
     /**
-     * User&#39;s email address. @mutable tagmanager.accounts.permissions.create
+     * User&#39;s email address.
      */
-    emailAddress?: string | null;
+    emailAddress?: string;
     /**
      * Account Permission ID.
      */
-    permissionId?: string | null;
+    permissionId?: string;
   }
   /**
    * Represents a Google Tag Manager Variable.
@@ -919,55 +905,55 @@ export namespace tagmanager_v1 {
     /**
      * GTM Account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * GTM Container ID.
      */
-    containerId?: string | null;
+    containerId?: string;
     /**
-     * For mobile containers only: A list of trigger IDs for disabling conditional variables; the variable is enabled if one of the enabling trigger is true while all the disabling trigger are false. Treated as an unordered set. @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update
+     * For mobile containers only: A list of trigger IDs for disabling conditional variables; the variable is enabled if one of the enabling trigger is true while all the disabling trigger are false. Treated as an unordered set.
      */
-    disablingTriggerId?: string[] | null;
+    disablingTriggerId?: string[];
     /**
-     * For mobile containers only: A list of trigger IDs for enabling conditional variables; the variable is enabled if one of the enabling triggers is true while all the disabling triggers are false. Treated as an unordered set. @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update
+     * For mobile containers only: A list of trigger IDs for enabling conditional variables; the variable is enabled if one of the enabling triggers is true while all the disabling triggers are false. Treated as an unordered set.
      */
-    enablingTriggerId?: string[] | null;
+    enablingTriggerId?: string[];
     /**
      * The fingerprint of the GTM Variable as computed at storage time. This value is recomputed whenever the variable is modified.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
-     * Variable display name. @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update
+     * Variable display name.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * User notes on how to apply this variable in the container. @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update
+     * User notes on how to apply this variable in the container.
      */
-    notes?: string | null;
+    notes?: string;
     /**
-     * The variable&#39;s parameters. @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update
+     * The variable&#39;s parameters.
      */
     parameter?: Schema$Parameter[];
     /**
      * Parent folder id.
      */
-    parentFolderId?: string | null;
+    parentFolderId?: string;
     /**
-     * The end timestamp in milliseconds to schedule a variable. @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update
+     * The end timestamp in milliseconds to schedule a variable.
      */
-    scheduleEndMs?: string | null;
+    scheduleEndMs?: string;
     /**
-     * The start timestamp in milliseconds to schedule a variable. @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update
+     * The start timestamp in milliseconds to schedule a variable.
      */
-    scheduleStartMs?: string | null;
+    scheduleStartMs?: string;
     /**
-     * GTM Variable Type. @mutable tagmanager.accounts.containers.variables.create @mutable tagmanager.accounts.containers.variables.update
+     * GTM Variable Type.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The Variable ID uniquely identifies the GTM Variable.
      */
-    variableId?: string | null;
+    variableId?: string;
   }
 
   export class Resource$Accounts {
@@ -1057,7 +1043,7 @@ export namespace tagmanager_v1 {
      * @alias tagmanager.accounts.list
      * @memberOf! ()
      *
-     * @param {object} params Parameters for request
+     * @param {object=} params Parameters for request
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1134,7 +1120,7 @@ export namespace tagmanager_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
      * @param {string=} params.fingerprint When provided, this fingerprint must match the fingerprint of the account in storage.
-     * @param {().Account} params.requestBody Request body data
+     * @param {().Account} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1273,7 +1259,7 @@ export namespace tagmanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
-     * @param {().Container} params.requestBody Request body data
+     * @param {().Container} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1572,7 +1558,7 @@ export namespace tagmanager_v1 {
      * @param {string} params.accountId The GTM Account ID.
      * @param {string} params.containerId The GTM Container ID.
      * @param {string=} params.fingerprint When provided, this fingerprint must match the fingerprint of the container in storage.
-     * @param {().Container} params.requestBody Request body data
+     * @param {().Container} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1742,7 +1728,7 @@ export namespace tagmanager_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
      * @param {string} params.containerId The GTM Container ID.
-     * @param {().Environment} params.requestBody Request body data
+     * @param {().Environment} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2047,7 +2033,7 @@ export namespace tagmanager_v1 {
      * @param {string} params.containerId The GTM Container ID.
      * @param {string} params.environmentId The GTM Environment ID.
      * @param {string=} params.fingerprint When provided, this fingerprint must match the fingerprint of the environment in storage.
-     * @param {().Environment} params.requestBody Request body data
+     * @param {().Environment} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2241,7 +2227,7 @@ export namespace tagmanager_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
      * @param {string} params.containerId The GTM Container ID.
-     * @param {().Folder} params.requestBody Request body data
+     * @param {().Folder} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2540,7 +2526,7 @@ export namespace tagmanager_v1 {
      * @param {string} params.containerId The GTM Container ID.
      * @param {string=} params.fingerprint When provided, this fingerprint must match the fingerprint of the folder in storage.
      * @param {string} params.folderId The GTM Folder ID.
-     * @param {().Folder} params.requestBody Request body data
+     * @param {().Folder} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2836,7 +2822,7 @@ export namespace tagmanager_v1 {
      * @param {string=} params.tagId The tags to be moved to the folder.
      * @param {string=} params.triggerId The triggers to be moved to the folder.
      * @param {string=} params.variableId The variables to be moved to the folder.
-     * @param {().Folder} params.requestBody Request body data
+     * @param {().Folder} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2956,7 +2942,7 @@ export namespace tagmanager_v1 {
      * @param {string} params.accountId The GTM Account ID.
      * @param {string} params.containerId The GTM Container ID.
      * @param {string} params.environmentId The GTM Environment ID.
-     * @param {().Environment} params.requestBody Request body data
+     * @param {().Environment} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3065,7 +3051,7 @@ export namespace tagmanager_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
      * @param {string} params.containerId The GTM Container ID.
-     * @param {().Tag} params.requestBody Request body data
+     * @param {().Tag} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3364,7 +3350,7 @@ export namespace tagmanager_v1 {
      * @param {string} params.containerId The GTM Container ID.
      * @param {string=} params.fingerprint When provided, this fingerprint must match the fingerprint of the tag in storage.
      * @param {string} params.tagId The GTM Tag ID.
-     * @param {().Tag} params.requestBody Request body data
+     * @param {().Tag} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3552,7 +3538,7 @@ export namespace tagmanager_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
      * @param {string} params.containerId The GTM Container ID.
-     * @param {().Trigger} params.requestBody Request body data
+     * @param {().Trigger} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3853,7 +3839,7 @@ export namespace tagmanager_v1 {
      * @param {string} params.containerId The GTM Container ID.
      * @param {string=} params.fingerprint When provided, this fingerprint must match the fingerprint of the trigger in storage.
      * @param {string} params.triggerId The GTM Trigger ID.
-     * @param {().Trigger} params.requestBody Request body data
+     * @param {().Trigger} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4041,7 +4027,7 @@ export namespace tagmanager_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
      * @param {string} params.containerId The GTM Container ID.
-     * @param {().Variable} params.requestBody Request body data
+     * @param {().Variable} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4342,7 +4328,7 @@ export namespace tagmanager_v1 {
      * @param {string} params.containerId The GTM Container ID.
      * @param {string=} params.fingerprint When provided, this fingerprint must match the fingerprint of the variable in storage.
      * @param {string} params.variableId The GTM Variable ID.
-     * @param {().Variable} params.requestBody Request body data
+     * @param {().Variable} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4530,7 +4516,7 @@ export namespace tagmanager_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
      * @param {string} params.containerId The GTM Container ID.
-     * @param {().CreateContainerVersionRequestVersionOptions} params.requestBody Request body data
+     * @param {().CreateContainerVersionRequestVersionOptions} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4689,7 +4675,7 @@ export namespace tagmanager_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
      * @param {string} params.containerId The GTM Container ID.
-     * @param {string} params.containerVersionId The GTM Container Version ID. Specify <code>published</code> to retrieve the currently published version.
+     * @param {string} params.containerVersionId The GTM Container Version ID. Specify published to retrieve the currently published version.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5091,7 +5077,7 @@ export namespace tagmanager_v1 {
      * @param {string} params.containerId The GTM Container ID.
      * @param {string} params.containerVersionId The GTM Container Version ID.
      * @param {string=} params.fingerprint When provided, this fingerprint must match the fingerprint of the container version in storage.
-     * @param {().ContainerVersion} params.requestBody Request body data
+     * @param {().ContainerVersion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5216,7 +5202,7 @@ export namespace tagmanager_v1 {
      */
     containerId?: string;
     /**
-     * The GTM Container Version ID. Specify <code>published</code> to retrieve the currently published version.
+     * The GTM Container Version ID. Specify published to retrieve the currently published version.
      */
     containerVersionId?: string;
   }
@@ -5352,7 +5338,7 @@ export namespace tagmanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
-     * @param {().UserAccess} params.requestBody Request body data
+     * @param {().UserAccess} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5573,7 +5559,7 @@ export namespace tagmanager_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.accountId The GTM Account ID.
+     * @param {string} params.accountId The GTM Account ID. @required tagmanager.accounts.permissions.list
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5650,7 +5636,7 @@ export namespace tagmanager_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.accountId The GTM Account ID.
      * @param {string} params.permissionId The GTM User ID.
-     * @param {().UserAccess} params.requestBody Request body data
+     * @param {().UserAccess} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5775,7 +5761,7 @@ export namespace tagmanager_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The GTM Account ID.
+     * The GTM Account ID. @required tagmanager.accounts.permissions.list
      */
     accountId?: string;
   }

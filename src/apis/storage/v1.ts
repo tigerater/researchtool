@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -130,7 +132,7 @@ export namespace storage_v1 {
     /**
      * The bucket&#39;s billing configuration.
      */
-    billing?: {requesterPays?: boolean} | null;
+    billing?: {requesterPays?: boolean};
     /**
      * The bucket&#39;s Cross-Origin Resource Sharing (CORS) configuration.
      */
@@ -139,11 +141,11 @@ export namespace storage_v1 {
       method?: string[];
       origin?: string[];
       responseHeader?: string[];
-    }> | null;
+    }>;
     /**
      * The default value for event-based hold on newly created objects in this bucket. Event-based hold is a way to retain objects indefinitely until an event occurs, signified by the hold&#39;s release. After being released, such objects will be subject to bucket-level retention (if any). One sample use case of this flag is for banks to hold loan documents for at least 3 years after loan is paid in full. Here, bucket-level retention is 3 years and the event is loan being paid in full. In this example, these objects will be held intact for any number of years until the event has occurred (event-based hold on the object is released) and then 3 more years after that. That means retention duration of the objects begins from the moment event-based hold transitioned from true to false. Objects under event-based hold cannot be deleted, overwritten or archived until the hold is removed.
      */
-    defaultEventBasedHold?: boolean | null;
+    defaultEventBasedHold?: boolean;
     /**
      * Default access controls to apply to new objects when no ACL is provided.
      */
@@ -151,30 +153,29 @@ export namespace storage_v1 {
     /**
      * Encryption configuration for a bucket.
      */
-    encryption?: {defaultKmsKeyName?: string} | null;
+    encryption?: {defaultKmsKeyName?: string};
     /**
      * HTTP 1.1 Entity tag for the bucket.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The bucket&#39;s IAM configuration.
      */
     iamConfiguration?: {
       bucketPolicyOnly?: {enabled?: boolean; lockedTime?: string};
-      uniformBucketLevelAccess?: {enabled?: boolean; lockedTime?: string};
-    } | null;
+    };
     /**
      * The ID of the bucket. For buckets, the id and name properties are the same.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of item this is. For buckets, this is always storage#bucket.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * User-provided labels, in key/value pairs.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * The bucket&#39;s lifecycle configuration. See lifecycle management for more information.
      */
@@ -190,35 +191,35 @@ export namespace storage_v1 {
           numNewerVersions?: number;
         };
       }>;
-    } | null;
+    };
     /**
      * The location of the bucket. Object data for objects in the bucket resides in physical storage within this region. Defaults to US. See the developer&#39;s guide for the authoritative list.
      */
-    location?: string | null;
+    location?: string;
     /**
      * The type of the bucket location.
      */
-    locationType?: string | null;
+    locationType?: string;
     /**
      * The bucket&#39;s logging configuration, which defines the destination bucket and optional name prefix for the current bucket&#39;s logs.
      */
-    logging?: {logBucket?: string; logObjectPrefix?: string} | null;
+    logging?: {logBucket?: string; logObjectPrefix?: string};
     /**
      * The metadata generation of this bucket.
      */
-    metageneration?: string | null;
+    metageneration?: string;
     /**
      * The name of the bucket.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The owner of the bucket. This is always the project team&#39;s owner group.
      */
-    owner?: {entity?: string; entityId?: string} | null;
+    owner?: {entity?: string; entityId?: string};
     /**
      * The project number of the project the bucket belongs to.
      */
-    projectNumber?: string | null;
+    projectNumber?: string;
     /**
      * The bucket&#39;s retention policy. The retention policy enforces a minimum retention time for all objects contained in the bucket, based on their creation time. Any attempt to overwrite or delete objects younger than the retention period will result in a PERMISSION_DENIED error. An unlocked retention policy can be modified or removed from the bucket via a storage.buckets.update operation. A locked retention policy cannot be removed or shortened in duration for the lifetime of the bucket. Attempting to remove or decrease period of a locked retention policy will result in a PERMISSION_DENIED error.
      */
@@ -226,31 +227,31 @@ export namespace storage_v1 {
       effectiveTime?: string;
       isLocked?: boolean;
       retentionPeriod?: string;
-    } | null;
+    };
     /**
      * The URI of this bucket.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
-     * The bucket&#39;s default storage class, used whenever no storageClass is specified for a newly-created object. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include MULTI_REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, ARCHIVE, and DURABLE_REDUCED_AVAILABILITY. If this value is not specified when the bucket is created, it will default to STANDARD. For more information, see storage classes.
+     * The bucket&#39;s default storage class, used whenever no storageClass is specified for a newly-created object. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include MULTI_REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, and DURABLE_REDUCED_AVAILABILITY. If this value is not specified when the bucket is created, it will default to STANDARD. For more information, see storage classes.
      */
-    storageClass?: string | null;
+    storageClass?: string;
     /**
      * The creation time of the bucket in RFC 3339 format.
      */
-    timeCreated?: string | null;
+    timeCreated?: string;
     /**
      * The modification time of the bucket in RFC 3339 format.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The bucket&#39;s versioning configuration.
      */
-    versioning?: {enabled?: boolean} | null;
+    versioning?: {enabled?: boolean};
     /**
      * The bucket&#39;s website configuration, controlling how the service behaves when accessing bucket contents as a web site. See the Static Website Examples for more information.
      */
-    website?: {mainPageSuffix?: string; notFoundPage?: string} | null;
+    website?: {mainPageSuffix?: string; notFoundPage?: string};
   }
   /**
    * An access-control entry.
@@ -259,47 +260,47 @@ export namespace storage_v1 {
     /**
      * The name of the bucket.
      */
-    bucket?: string | null;
+    bucket?: string;
     /**
      * The domain associated with the entity, if any.
      */
-    domain?: string | null;
+    domain?: string;
     /**
      * The email address associated with the entity, if any.
      */
-    email?: string | null;
+    email?: string;
     /**
      * The entity holding the permission, in one of the following forms:  - user-userId  - user-email  - group-groupId  - group-email  - domain-domain  - project-team-projectId  - allUsers  - allAuthenticatedUsers Examples:  - The user liz@example.com would be user-liz@example.com.  - The group example@googlegroups.com would be group-example@googlegroups.com.  - To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.
      */
-    entity?: string | null;
+    entity?: string;
     /**
      * The ID for the entity, if any.
      */
-    entityId?: string | null;
+    entityId?: string;
     /**
      * HTTP 1.1 Entity tag for the access-control entry.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID of the access-control entry.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of item this is. For bucket access control entries, this is always storage#bucketAccessControl.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The project team associated with the entity, if any.
      */
-    projectTeam?: {projectNumber?: string; team?: string} | null;
+    projectTeam?: {projectNumber?: string; team?: string};
     /**
      * The access permission for the entity.
      */
-    role?: string | null;
+    role?: string;
     /**
      * The link to this access-control entry.
      */
-    selfLink?: string | null;
+    selfLink?: string;
   }
   /**
    * An access-control list.
@@ -312,7 +313,7 @@ export namespace storage_v1 {
     /**
      * The kind of item this is. For lists of bucket access control entries, this is always storage#bucketAccessControls.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * A list of buckets.
@@ -325,11 +326,11 @@ export namespace storage_v1 {
     /**
      * The kind of item this is. For lists of buckets, this is always storage#buckets.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * An notification channel used to watch for resource changes.
@@ -338,43 +339,43 @@ export namespace storage_v1 {
     /**
      * The address where notifications are delivered for this channel.
      */
-    address?: string | null;
+    address?: string;
     /**
      * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
      */
-    expiration?: string | null;
+    expiration?: string;
     /**
      * A UUID or similar unique string that identifies this channel.
      */
-    id?: string | null;
+    id?: string;
     /**
-     * Identifies this as a notification channel used to watch for changes to a resource, which is &quot;api#channel&quot;.
+     * Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string &quot;api#channel&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Additional parameters controlling delivery channel behavior. Optional.
      */
-    params?: {[key: string]: string} | null;
+    params?: {[key: string]: string};
     /**
      * A Boolean value to indicate whether payload is wanted. Optional.
      */
-    payload?: boolean | null;
+    payload?: boolean;
     /**
      * An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
      */
-    resourceId?: string | null;
+    resourceId?: string;
     /**
      * A version-specific identifier for the watched resource.
      */
-    resourceUri?: string | null;
+    resourceUri?: string;
     /**
      * An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
      */
-    token?: string | null;
+    token?: string;
     /**
      * The type of delivery mechanism used for this channel.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * A Compose request.
@@ -387,7 +388,7 @@ export namespace storage_v1 {
     /**
      * The kind of item this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The list of source objects that will be concatenated into a single object.
      */
@@ -395,7 +396,7 @@ export namespace storage_v1 {
       generation?: string;
       name?: string;
       objectPreconditions?: {ifGenerationMatch?: string};
-    }> | null;
+    }>;
   }
   /**
    * Represents an expression text. Example: title: &quot;User account presence&quot; description: &quot;Determines whether the request has a user account&quot; expression: &quot;size(request.user) &gt; 0&quot;
@@ -404,19 +405,23 @@ export namespace storage_v1 {
     /**
      * An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Textual representation of an expression in Common Expression Language syntax. The application context of the containing message determines which well-known feature set of CEL is supported.
      */
-    expression?: string | null;
+    expression?: string;
+    /**
+     * The kind of item this is. For storage, this is always storage#expr. This field is ignored on input.
+     */
+    kind?: string;
     /**
      * An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
      */
-    location?: string | null;
+    location?: string;
     /**
      * An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * JSON template to produce a JSON-style HMAC Key resource for Create responses.
@@ -425,7 +430,7 @@ export namespace storage_v1 {
     /**
      * The kind of item this is. For HMAC keys, this is always storage#hmacKey.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Key metadata.
      */
@@ -433,7 +438,7 @@ export namespace storage_v1 {
     /**
      * HMAC secret key material.
      */
-    secret?: string | null;
+    secret?: string;
   }
   /**
    * JSON template to produce a JSON-style HMAC Key metadata resource.
@@ -442,43 +447,43 @@ export namespace storage_v1 {
     /**
      * The ID of the HMAC Key.
      */
-    accessId?: string | null;
+    accessId?: string;
     /**
      * HTTP 1.1 Entity tag for the HMAC key.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID of the HMAC key, including the Project ID and the Access ID.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of item this is. For HMAC Key metadata, this is always storage#hmacKeyMetadata.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Project ID owning the service account to which the key authenticates.
      */
-    projectId?: string | null;
+    projectId?: string;
     /**
      * The link to this resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The email address of the key&#39;s associated service account.
      */
-    serviceAccountEmail?: string | null;
+    serviceAccountEmail?: string;
     /**
      * The state of the key. Can be one of ACTIVE, INACTIVE, or DELETED.
      */
-    state?: string | null;
+    state?: string;
     /**
      * The creation time of the HMAC key in RFC 3339 format.
      */
-    timeCreated?: string | null;
+    timeCreated?: string;
     /**
      * The last modification time of the HMAC key metadata in RFC 3339 format.
      */
-    updated?: string | null;
+    updated?: string;
   }
   /**
    * A list of hmacKeys.
@@ -491,11 +496,11 @@ export namespace storage_v1 {
     /**
      * The kind of item this is. For lists of hmacKeys, this is always storage#hmacKeysMetadata.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * A subscription to receive Google PubSub notifications.
@@ -504,39 +509,39 @@ export namespace storage_v1 {
     /**
      * An optional list of additional attributes to attach to each Cloud PubSub message published for this notification subscription.
      */
-    custom_attributes?: {[key: string]: string} | null;
+    custom_attributes?: {[key: string]: string};
     /**
      * HTTP 1.1 Entity tag for this subscription notification.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * If present, only send notifications about listed event types. If empty, sent notifications for all event types.
      */
-    event_types?: string[] | null;
+    event_types?: string[];
     /**
      * The ID of the notification.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of item this is. For notifications, this is always storage#notification.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * If present, only apply this notification configuration to object names that begin with this prefix.
      */
-    object_name_prefix?: string | null;
+    object_name_prefix?: string;
     /**
      * The desired content of the Payload.
      */
-    payload_format?: string | null;
+    payload_format?: string;
     /**
      * The canonical URL of this notification.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The Cloud PubSub topic to which this subscription publishes. Formatted as: &#39;//pubsub.googleapis.com/projects/{project-identifier}/topics/{my-topic}&#39;
      */
-    topic?: string | null;
+    topic?: string;
   }
   /**
    * A list of notification subscriptions.
@@ -549,7 +554,7 @@ export namespace storage_v1 {
     /**
      * The kind of item this is. For lists of notifications, this is always storage#notifications.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * An object.
@@ -562,126 +567,123 @@ export namespace storage_v1 {
     /**
      * The name of the bucket containing this object.
      */
-    bucket?: string | null;
+    bucket?: string;
     /**
      * Cache-Control directive for the object data. If omitted, and the object is accessible to all anonymous users, the default will be public, max-age=3600.
      */
-    cacheControl?: string | null;
+    cacheControl?: string;
     /**
      * Number of underlying components that make up this object. Components are accumulated by compose operations.
      */
-    componentCount?: number | null;
+    componentCount?: number;
     /**
      * Content-Disposition of the object data.
      */
-    contentDisposition?: string | null;
+    contentDisposition?: string;
     /**
      * Content-Encoding of the object data.
      */
-    contentEncoding?: string | null;
+    contentEncoding?: string;
     /**
      * Content-Language of the object data.
      */
-    contentLanguage?: string | null;
+    contentLanguage?: string;
     /**
      * Content-Type of the object data. If an object is stored without a Content-Type, it is served as application/octet-stream.
      */
-    contentType?: string | null;
+    contentType?: string;
     /**
      * CRC32c checksum, as described in RFC 4960, Appendix B; encoded using base64 in big-endian byte order. For more information about using the CRC32c checksum, see Hashes and ETags: Best Practices.
      */
-    crc32c?: string | null;
+    crc32c?: string;
     /**
      * Metadata of customer-supplied encryption key, if the object is encrypted by such a key.
      */
-    customerEncryption?: {
-      encryptionAlgorithm?: string;
-      keySha256?: string;
-    } | null;
+    customerEncryption?: {encryptionAlgorithm?: string; keySha256?: string};
     /**
      * HTTP 1.1 Entity tag for the object.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Whether an object is under event-based hold. Event-based hold is a way to retain objects until an event occurs, which is signified by the hold&#39;s release (i.e. this value is set to false). After being released (set to false), such objects will be subject to bucket-level retention (if any). One sample use case of this flag is for banks to hold loan documents for at least 3 years after loan is paid in full. Here, bucket-level retention is 3 years and the event is the loan being paid in full. In this example, these objects will be held intact for any number of years until the event has occurred (event-based hold on the object is released) and then 3 more years after that. That means retention duration of the objects begins from the moment event-based hold transitioned from true to false.
      */
-    eventBasedHold?: boolean | null;
+    eventBasedHold?: boolean;
     /**
      * The content generation of this object. Used for object versioning.
      */
-    generation?: string | null;
+    generation?: string;
     /**
      * The ID of the object, including the bucket name, object name, and generation number.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of item this is. For objects, this is always storage#object.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Cloud KMS Key used to encrypt this object, if the object is encrypted by such a key.
      */
-    kmsKeyName?: string | null;
+    kmsKeyName?: string;
     /**
      * MD5 hash of the data; encoded using base64. For more information about using the MD5 hash, see Hashes and ETags: Best Practices.
      */
-    md5Hash?: string | null;
+    md5Hash?: string;
     /**
      * Media download link.
      */
-    mediaLink?: string | null;
+    mediaLink?: string;
     /**
      * User-provided metadata, in key/value pairs.
      */
-    metadata?: {[key: string]: string} | null;
+    metadata?: {[key: string]: string};
     /**
      * The version of the metadata for this object at this generation. Used for preconditions and for detecting changes in metadata. A metageneration number is only meaningful in the context of a particular generation of a particular object.
      */
-    metageneration?: string | null;
+    metageneration?: string;
     /**
      * The name of the object. Required if not specified by URL parameter.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The owner of the object. This will always be the uploader of the object.
      */
-    owner?: {entity?: string; entityId?: string} | null;
+    owner?: {entity?: string; entityId?: string};
     /**
      * A server-determined value that specifies the earliest time that the object&#39;s retention period expires. This value is in RFC 3339 format. Note 1: This field is not provided for objects with an active event-based hold, since retention expiration is unknown until the hold is removed. Note 2: This value can be provided even when temporary hold is set (so that the user can reason about policy without having to first unset the temporary hold).
      */
-    retentionExpirationTime?: string | null;
+    retentionExpirationTime?: string;
     /**
      * The link to this object.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * Content-Length of the data in bytes.
      */
-    size?: string | null;
+    size?: string;
     /**
      * Storage class of the object.
      */
-    storageClass?: string | null;
+    storageClass?: string;
     /**
      * Whether an object is under temporary hold. While this flag is set to true, the object is protected against deletion and overwrites. A common use case of this flag is regulatory investigations where objects need to be retained while the investigation is ongoing. Note that unlike event-based hold, temporary hold does not impact retention expiration time of an object.
      */
-    temporaryHold?: boolean | null;
+    temporaryHold?: boolean;
     /**
      * The creation time of the object in RFC 3339 format.
      */
-    timeCreated?: string | null;
+    timeCreated?: string;
     /**
      * The deletion time of the object in RFC 3339 format. Will be returned if and only if this version of the object has been deleted.
      */
-    timeDeleted?: string | null;
+    timeDeleted?: string;
     /**
      * The time at which the object&#39;s storage class was last changed. When the object is initially created, it will be set to timeCreated.
      */
-    timeStorageClassUpdated?: string | null;
+    timeStorageClassUpdated?: string;
     /**
      * The modification time of the object metadata in RFC 3339 format.
      */
-    updated?: string | null;
+    updated?: string;
   }
   /**
    * An access-control entry.
@@ -690,55 +692,55 @@ export namespace storage_v1 {
     /**
      * The name of the bucket.
      */
-    bucket?: string | null;
+    bucket?: string;
     /**
      * The domain associated with the entity, if any.
      */
-    domain?: string | null;
+    domain?: string;
     /**
      * The email address associated with the entity, if any.
      */
-    email?: string | null;
+    email?: string;
     /**
      * The entity holding the permission, in one of the following forms:  - user-userId  - user-email  - group-groupId  - group-email  - domain-domain  - project-team-projectId  - allUsers  - allAuthenticatedUsers Examples:  - The user liz@example.com would be user-liz@example.com.  - The group example@googlegroups.com would be group-example@googlegroups.com.  - To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.
      */
-    entity?: string | null;
+    entity?: string;
     /**
      * The ID for the entity, if any.
      */
-    entityId?: string | null;
+    entityId?: string;
     /**
      * HTTP 1.1 Entity tag for the access-control entry.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The content generation of the object, if applied to an object.
      */
-    generation?: string | null;
+    generation?: string;
     /**
      * The ID of the access-control entry.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of item this is. For object access control entries, this is always storage#objectAccessControl.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The name of the object, if applied to an object.
      */
-    object?: string | null;
+    object?: string;
     /**
      * The project team associated with the entity, if any.
      */
-    projectTeam?: {projectNumber?: string; team?: string} | null;
+    projectTeam?: {projectNumber?: string; team?: string};
     /**
      * The access permission for the entity.
      */
-    role?: string | null;
+    role?: string;
     /**
      * The link to this access-control entry.
      */
-    selfLink?: string | null;
+    selfLink?: string;
   }
   /**
    * An access-control list.
@@ -751,7 +753,7 @@ export namespace storage_v1 {
     /**
      * The kind of item this is. For lists of object access control entries, this is always storage#objectAccessControls.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * A list of objects.
@@ -764,15 +766,15 @@ export namespace storage_v1 {
     /**
      * The kind of item this is. For lists of objects, this is always storage#objects.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of prefixes of objects matching-but-not-listed up to and including the requested delimiter.
      */
-    prefixes?: string[] | null;
+    prefixes?: string[];
   }
   /**
    * A bucket/object IAM policy.
@@ -785,23 +787,19 @@ export namespace storage_v1 {
       condition?: Schema$Expr;
       members?: string[];
       role?: string;
-    }> | null;
+    }>;
     /**
      * HTTP 1.1  Entity tag for the policy.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The kind of item this is. For policies, this is always storage#policy. This field is ignored on input.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The ID of the resource to which this policy belongs. Will be of the form projects/_/buckets/bucket for buckets, and projects/_/buckets/bucket/objects/object for objects. A specific generation may be specified by appending #generationNumber to the end of the object name, e.g. projects/_/buckets/my-bucket/objects/data.txt#17. The current generation can be denoted with #0. This field is ignored on input.
      */
-    resourceId?: string | null;
-    /**
-     * The IAM policy format version.
-     */
-    version?: number | null;
+    resourceId?: string;
   }
   /**
    * A rewrite response.
@@ -810,15 +808,15 @@ export namespace storage_v1 {
     /**
      * true if the copy is finished; otherwise, false if the copy is in progress. This property is always present in the response.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * The kind of item this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The total size of the object being copied in bytes. This property is always present in the response.
      */
-    objectSize?: string | null;
+    objectSize?: string;
     /**
      * A resource containing the metadata for the copied-to object. This property is present in the response only when copying completes.
      */
@@ -826,11 +824,11 @@ export namespace storage_v1 {
     /**
      * A token to use in subsequent requests to continue copying data. This token is present in the response only when there is more data to copy.
      */
-    rewriteToken?: string | null;
+    rewriteToken?: string;
     /**
      * The total bytes written so far, which can be used to provide a waiting user with a progress indicator. This property is always present in the response.
      */
-    totalBytesRewritten?: string | null;
+    totalBytesRewritten?: string;
   }
   /**
    * A subscription to receive Google PubSub notifications.
@@ -839,11 +837,11 @@ export namespace storage_v1 {
     /**
      * The ID of the notification.
      */
-    email_address?: string | null;
+    email_address?: string;
     /**
      * The kind of item this is. For notifications, this is always storage#notification.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * A storage.(buckets|objects).testIamPermissions response.
@@ -852,11 +850,11 @@ export namespace storage_v1 {
     /**
      * The kind of item this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The permissions held by the caller. Permissions are always of the format storage.resource.capability, where resource is one of buckets or objects. The supported permissions are as follows:   - storage.buckets.delete — Delete bucket.   - storage.buckets.get — Read bucket metadata.   - storage.buckets.getIamPolicy — Read bucket IAM policy.   - storage.buckets.create — Create bucket.   - storage.buckets.list — List buckets.   - storage.buckets.setIamPolicy — Update bucket IAM policy.   - storage.buckets.update — Update bucket metadata.   - storage.objects.delete — Delete object.   - storage.objects.get — Read object data and metadata.   - storage.objects.getIamPolicy — Read object IAM policy.   - storage.objects.create — Create object.   - storage.objects.list — List objects.   - storage.objects.setIamPolicy — Update object IAM policy.   - storage.objects.update — Update object metadata.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
 
   export class Resource$Bucketaccesscontrols {
@@ -883,7 +881,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -907,12 +905,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.bucketAccessControls.delete
@@ -1005,7 +1007,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -1032,12 +1034,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.bucketAccessControls.get
@@ -1132,7 +1138,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -1159,12 +1165,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.bucketAccessControls.insert
@@ -1174,7 +1184,7 @@ export namespace storage_v1 {
      * @param {string} params.bucket Name of a bucket.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().BucketAccessControl} params.requestBody Request body data
+     * @param {().BucketAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1259,7 +1269,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -1282,12 +1292,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.bucketAccessControls.list
@@ -1383,7 +1397,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -1415,12 +1429,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.bucketAccessControls.patch
@@ -1431,7 +1449,7 @@ export namespace storage_v1 {
      * @param {string} params.entity The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().BucketAccessControl} params.requestBody Request body data
+     * @param {().BucketAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1516,7 +1534,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -1548,12 +1566,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.bucketAccessControls.update
@@ -1564,7 +1586,7 @@ export namespace storage_v1 {
      * @param {string} params.entity The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().BucketAccessControl} params.requestBody Request body data
+     * @param {().BucketAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1808,7 +1830,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -1828,12 +1850,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.buckets.delete
@@ -1926,7 +1952,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -1949,12 +1975,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.buckets.get
@@ -2048,7 +2078,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -2071,12 +2101,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.buckets.getIamPolicy
@@ -2084,7 +2118,6 @@ export namespace storage_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.bucket Name of a bucket.
-     * @param {integer=} params.optionsRequestedPolicyVersion The IAM policy format version to be returned. If the optionsRequestedPolicyVersion is for an older version that doesn't support part of the requested IAM policy, the request fails.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -2169,7 +2202,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -2196,12 +2229,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.buckets.insert
@@ -2214,7 +2251,7 @@ export namespace storage_v1 {
      * @param {string=} params.projection Set of properties to return. Defaults to noAcl, unless the bucket resource specifies acl or defaultObjectAcl properties, when it defaults to full.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request.
-     * @param {().Bucket} params.requestBody Request body data
+     * @param {().Bucket} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2293,7 +2330,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -2329,12 +2366,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.buckets.list
@@ -2411,55 +2452,6 @@ export namespace storage_v1 {
     /**
      * storage.buckets.lockRetentionPolicy
      * @desc Locks retention policy on a bucket.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Storage JSON API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/storage
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var storage = google.storage('v1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of a bucket.
-     *     bucket: 'my-bucket',  // TODO: Update placeholder value.
-     *
-     *     // Makes the operation conditional on whether bucket's current metageneration matches the given value.
-     *     ifMetagenerationMatch: '0',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   storage.buckets.lockRetentionPolicy(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias storage.buckets.lockRetentionPolicy
      * @memberOf! ()
      *
@@ -2549,7 +2541,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -2577,12 +2569,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.buckets.patch
@@ -2597,7 +2593,7 @@ export namespace storage_v1 {
      * @param {string=} params.projection Set of properties to return. Defaults to full.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().Bucket} params.requestBody Request body data
+     * @param {().Bucket} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2679,7 +2675,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -2707,12 +2703,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.buckets.setIamPolicy
@@ -2722,7 +2722,7 @@ export namespace storage_v1 {
      * @param {string} params.bucket Name of a bucket.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().Policy} params.requestBody Request body data
+     * @param {().Policy} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2805,7 +2805,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -2831,12 +2831,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.buckets.testIamPermissions
@@ -2937,7 +2941,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -2965,12 +2969,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.buckets.update
@@ -2985,7 +2993,7 @@ export namespace storage_v1 {
      * @param {string=} params.projection Set of properties to return. Defaults to full.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().Bucket} params.requestBody Request body data
+     * @param {().Bucket} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3119,10 +3127,6 @@ export namespace storage_v1 {
      * Name of a bucket.
      */
     bucket?: string;
-    /**
-     * The IAM policy format version to be returned. If the optionsRequestedPolicyVersion is for an older version that doesn't support part of the requested IAM policy, the request fails.
-     */
-    optionsRequestedPolicyVersion?: number;
     /**
      * The project to be billed for this request if the target bucket is requester-pays bucket.
      */
@@ -3389,7 +3393,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -3410,19 +3414,23 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.channels.stop
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Channel} params.requestBody Request body data
+     * @param {().Channel} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3523,7 +3531,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -3547,12 +3555,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.defaultObjectAccessControls.delete
@@ -3644,7 +3656,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -3671,12 +3683,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.defaultObjectAccessControls.get
@@ -3770,7 +3786,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -3797,12 +3813,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.defaultObjectAccessControls.insert
@@ -3812,7 +3832,7 @@ export namespace storage_v1 {
      * @param {string} params.bucket Name of a bucket.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3897,7 +3917,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -3920,12 +3940,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.defaultObjectAccessControls.list
@@ -4023,7 +4047,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -4055,12 +4079,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.defaultObjectAccessControls.patch
@@ -4071,7 +4099,7 @@ export namespace storage_v1 {
      * @param {string} params.entity The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4155,7 +4183,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -4187,12 +4215,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.defaultObjectAccessControls.update
@@ -4203,7 +4235,7 @@ export namespace storage_v1 {
      * @param {string} params.entity The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4454,7 +4486,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -4477,12 +4509,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.notifications.delete
@@ -4575,7 +4611,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -4601,12 +4637,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.notifications.get
@@ -4701,7 +4741,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -4728,12 +4768,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.notifications.insert
@@ -4743,7 +4787,7 @@ export namespace storage_v1 {
      * @param {string} params.bucket The parent bucket of the notification.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().Notification} params.requestBody Request body data
+     * @param {().Notification} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4827,7 +4871,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -4850,12 +4894,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.notifications.list
@@ -5049,7 +5097,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -5077,12 +5125,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objectAccessControls.delete
@@ -5176,7 +5228,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -5207,12 +5259,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objectAccessControls.get
@@ -5308,7 +5364,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -5339,12 +5395,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objectAccessControls.insert
@@ -5356,7 +5416,7 @@ export namespace storage_v1 {
      * @param {string} params.object Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5441,7 +5501,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -5468,12 +5528,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objectAccessControls.list
@@ -5571,7 +5635,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -5607,12 +5671,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objectAccessControls.patch
@@ -5625,7 +5693,7 @@ export namespace storage_v1 {
      * @param {string} params.object Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5709,7 +5777,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -5745,12 +5813,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objectAccessControls.update
@@ -5763,7 +5835,7 @@ export namespace storage_v1 {
      * @param {string} params.object Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().ObjectAccessControl} params.requestBody Request body data
+     * @param {().ObjectAccessControl} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6054,12 +6126,12 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
      *   var request = {
-     *     // Name of the bucket containing the source objects. The destination object is stored in this bucket.
+     *     // Name of the bucket in which to store the new object.
      *     destinationBucket: 'my-destination-bucket',  // TODO: Update placeholder value.
      *
      *     // Name of the new object. For information about how to URL encode object names to be path safe, see
@@ -6085,12 +6157,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.compose
@@ -6105,7 +6181,7 @@ export namespace storage_v1 {
      * @param {string=} params.kmsKeyName Resource name of the Cloud KMS key, of the form projects/my-project/locations/global/keyRings/my-kr/cryptoKeys/my-key, that will be used to encrypt the object. Overrides the object metadata's kms_key_name value, if any.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().ComposeRequest} params.requestBody Request body data
+     * @param {().ComposeRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6187,7 +6263,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -6227,12 +6303,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.copy
@@ -6256,7 +6336,7 @@ export namespace storage_v1 {
      * @param {string=} params.sourceGeneration If present, selects a specific revision of the source object (as opposed to the latest version, the default).
      * @param {string} params.sourceObject Name of the source object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().Object} params.requestBody Request body data
+     * @param {().Object} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6348,7 +6428,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -6372,12 +6452,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.delete
@@ -6474,7 +6558,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -6505,12 +6589,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.get
@@ -6608,7 +6696,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -6635,12 +6723,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.getIamPolicy
@@ -6734,7 +6826,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -6769,12 +6861,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.insert
@@ -6793,7 +6889,7 @@ export namespace storage_v1 {
      * @param {string=} params.projection Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param  {object} params.requestBody Media resource metadata
+     * @param  {object} params.resource Media resource metadata
      * @param {object} params.media Media object
      * @param {string} params.media.mimeType Media mime-type
      * @param {string|object} params.media.body Media body contents
@@ -6882,7 +6978,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -6918,12 +7014,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.list
@@ -7021,7 +7121,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -7053,12 +7153,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.patch
@@ -7076,7 +7180,7 @@ export namespace storage_v1 {
      * @param {string=} params.projection Set of properties to return. Defaults to full.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request, for Requester Pays buckets.
-     * @param {().Object} params.requestBody Request body data
+     * @param {().Object} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7158,7 +7262,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -7198,12 +7302,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.rewrite
@@ -7230,7 +7338,7 @@ export namespace storage_v1 {
      * @param {string=} params.sourceGeneration If present, selects a specific revision of the source object (as opposed to the latest version, the default).
      * @param {string} params.sourceObject Name of the source object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().Object} params.requestBody Request body data
+     * @param {().Object} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7324,7 +7432,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -7356,12 +7464,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.setIamPolicy
@@ -7373,7 +7485,7 @@ export namespace storage_v1 {
      * @param {string} params.object Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().Policy} params.requestBody Request body data
+     * @param {().Policy} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7456,7 +7568,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -7486,12 +7598,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.testIamPermissions
@@ -7594,7 +7710,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -7626,12 +7742,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.update
@@ -7649,7 +7769,7 @@ export namespace storage_v1 {
      * @param {string=} params.projection Set of properties to return. Defaults to full.
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
-     * @param {().Object} params.requestBody Request body data
+     * @param {().Object} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7731,7 +7851,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -7758,12 +7878,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.objects.watchAll
@@ -7780,7 +7904,7 @@ export namespace storage_v1 {
      * @param {string=} params.provisionalUserProject The project to be billed for this request if the target bucket is requester-pays bucket.
      * @param {string=} params.userProject The project to be billed for this request. Required for Requester Pays buckets.
      * @param {boolean=} params.versions If true, lists all versions of an object as distinct results. The default is false. For more information, see Object Versioning.
-     * @param {().Channel} params.requestBody Request body data
+     * @param {().Channel} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8551,55 +8675,6 @@ export namespace storage_v1 {
     /**
      * storage.projects.hmacKeys.create
      * @desc Creates a new HMAC key for the specified service account.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Storage JSON API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/storage
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var storage = google.storage('v1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Project ID owning the service account.
-     *     projectId: 'my-project-id',  // TODO: Update placeholder value.
-     *
-     *     // Email address of the service account.
-     *     serviceAccountEmail: '',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   storage.projects.hmacKeys.create(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias storage.projects.hmacKeys.create
      * @memberOf! ()
      *
@@ -8673,52 +8748,6 @@ export namespace storage_v1 {
     /**
      * storage.projects.hmacKeys.delete
      * @desc Deletes an HMAC key.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Storage JSON API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/storage
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var storage = google.storage('v1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Project ID owning the requested key
-     *     projectId: 'my-project-id',  // TODO: Update placeholder value.
-     *
-     *     // Name of the HMAC key to be deleted.
-     *     accessId: 'my-access-id',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   storage.projects.hmacKeys.delete(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias storage.projects.hmacKeys.delete
      * @memberOf! ()
      *
@@ -8792,55 +8821,6 @@ export namespace storage_v1 {
     /**
      * storage.projects.hmacKeys.get
      * @desc Retrieves an HMAC key's metadata
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Storage JSON API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/storage
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var storage = google.storage('v1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Project ID owning the service account of the requested key.
-     *     projectId: 'my-project-id',  // TODO: Update placeholder value.
-     *
-     *     // Name of the HMAC key.
-     *     accessId: 'my-access-id',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   storage.projects.hmacKeys.get(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias storage.projects.hmacKeys.get
      * @memberOf! ()
      *
@@ -8916,65 +8896,6 @@ export namespace storage_v1 {
     /**
      * storage.projects.hmacKeys.list
      * @desc Retrieves a list of HMAC keys matching the criteria.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Storage JSON API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/storage
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var storage = google.storage('v1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of the project in which to look for HMAC keys.
-     *     projectId: 'my-project-id',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   var handlePage = function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     var itemsPage = response['items'];
-     *     if (!itemsPage) {
-     *       return;
-     *     }
-     *     for (var i = 0; i < itemsPage.length; i++) {
-     *       // TODO: Change code below to process each resource in `itemsPage`:
-     *       console.log(JSON.stringify(itemsPage[i], null, 2));
-     *     }
-     *
-     *     if (response.nextPageToken) {
-     *       request.pageToken = response.nextPageToken;
-     *       storage.projects.hmacKeys.list(request, handlePage);
-     *     }
-     *   };
-     *
-     *   storage.projects.hmacKeys.list(request, handlePage);
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias storage.projects.hmacKeys.list
      * @memberOf! ()
      *
@@ -9053,60 +8974,6 @@ export namespace storage_v1 {
     /**
      * storage.projects.hmacKeys.update
      * @desc Updates the state of an HMAC key. See the HMAC Key resource descriptor for valid states.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Storage JSON API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/storage
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var storage = google.storage('v1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Project ID owning the service account of the updated key.
-     *     projectId: 'my-project-id',  // TODO: Update placeholder value.
-     *
-     *     // Name of the HMAC key being updated.
-     *     accessId: 'my-access-id',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body. All existing properties
-     *       // will be replaced.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   storage.projects.hmacKeys.update(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias storage.projects.hmacKeys.update
      * @memberOf! ()
      *
@@ -9114,7 +8981,7 @@ export namespace storage_v1 {
      * @param {string} params.accessId Name of the HMAC key being updated.
      * @param {string} params.projectId Project ID owning the service account of the updated key.
      * @param {string=} params.userProject The project to be billed for this request.
-     * @param {().HmacKeyMetadata} params.requestBody Request body data
+     * @param {().HmacKeyMetadata} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9323,7 +9190,7 @@ export namespace storage_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var storage = google.storage('v1');
      *
      * authorize(function(authClient) {
@@ -9346,12 +9213,16 @@ export namespace storage_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias storage.projects.serviceAccount.get

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -111,47 +113,47 @@ export namespace blogger_v2 {
     /**
      * The description of this blog. This is displayed underneath the title.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The identifier for this resource.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of this entry. Always blogger#blog
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The locale this Blog is set to.
      */
-    locale?: {country?: string; language?: string; variant?: string} | null;
+    locale?: {country?: string; language?: string; variant?: string};
     /**
      * The name of this blog. This is displayed as the title.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The container of pages in this blog.
      */
-    pages?: {selfLink?: string; totalItems?: number} | null;
+    pages?: {selfLink?: string; totalItems?: number};
     /**
      * The container of posts in this blog.
      */
-    posts?: {selfLink?: string; totalItems?: number} | null;
+    posts?: {selfLink?: string; totalItems?: number};
     /**
      * RFC 3339 date-time when this blog was published.
      */
-    published?: string | null;
+    published?: string;
     /**
      * The API REST URL to fetch this resource from.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * RFC 3339 date-time when this blog was last updated.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The URL where this blog is published.
      */
-    url?: string | null;
+    url?: string;
   }
   export interface Schema$BlogList {
     /**
@@ -161,7 +163,7 @@ export namespace blogger_v2 {
     /**
      * The kind of this entity. Always blogger#blogList
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$Comment {
     /**
@@ -172,43 +174,43 @@ export namespace blogger_v2 {
       id?: string;
       image?: {url?: string};
       url?: string;
-    } | null;
+    };
     /**
      * Data about the blog containing this comment.
      */
-    blog?: {id?: string} | null;
+    blog?: {id?: string};
     /**
      * The actual content of the comment. May include HTML markup.
      */
-    content?: string | null;
+    content?: string;
     /**
      * The identifier for this resource.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Data about the comment this is in reply to.
      */
-    inReplyTo?: {id?: string} | null;
+    inReplyTo?: {id?: string};
     /**
      * The kind of this entry. Always blogger#comment
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Data about the post containing this comment.
      */
-    post?: {id?: string} | null;
+    post?: {id?: string};
     /**
      * RFC 3339 date-time when this comment was published.
      */
-    published?: string | null;
+    published?: string;
     /**
      * The API REST URL to fetch this resource from.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * RFC 3339 date-time when this comment was last updated.
      */
-    updated?: string | null;
+    updated?: string;
   }
   export interface Schema$CommentList {
     /**
@@ -218,15 +220,15 @@ export namespace blogger_v2 {
     /**
      * The kind of this entry. Always blogger#commentList
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Pagination token to fetch the next page, if one exists.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Pagination token to fetch the previous page, if one exists.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
   }
   export interface Schema$Page {
     /**
@@ -237,43 +239,43 @@ export namespace blogger_v2 {
       id?: string;
       image?: {url?: string};
       url?: string;
-    } | null;
+    };
     /**
      * Data about the blog containing this Page.
      */
-    blog?: {id?: string} | null;
+    blog?: {id?: string};
     /**
      * The body content of this Page, in HTML.
      */
-    content?: string | null;
+    content?: string;
     /**
      * The identifier for this resource.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of this entity. Always blogger#page
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * RFC 3339 date-time when this Page was published.
      */
-    published?: string | null;
+    published?: string;
     /**
      * The API REST URL to fetch this resource from.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The title of this entity. This is the name displayed in the Admin user interface.
      */
-    title?: string | null;
+    title?: string;
     /**
      * RFC 3339 date-time when this Page was last updated.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The URL that this Page is displayed at.
      */
-    url?: string | null;
+    url?: string;
   }
   export interface Schema$PageList {
     /**
@@ -283,7 +285,7 @@ export namespace blogger_v2 {
     /**
      * The kind of this entity. Always blogger#pageList
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$Post {
     /**
@@ -294,51 +296,51 @@ export namespace blogger_v2 {
       id?: string;
       image?: {url?: string};
       url?: string;
-    } | null;
+    };
     /**
      * Data about the blog containing this Post.
      */
-    blog?: {id?: string} | null;
+    blog?: {id?: string};
     /**
      * The content of the Post. May contain HTML markup.
      */
-    content?: string | null;
+    content?: string;
     /**
      * The identifier of this Post.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of this entity. Always blogger#post
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The list of labels this Post was tagged with.
      */
-    labels?: string[] | null;
+    labels?: string[];
     /**
      * RFC 3339 date-time when this Post was published.
      */
-    published?: string | null;
+    published?: string;
     /**
      * The container of comments on this Post.
      */
-    replies?: {selfLink?: string; totalItems?: string} | null;
+    replies?: {selfLink?: string; totalItems?: string};
     /**
      * The API REST URL to fetch this resource from.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The title of the Post.
      */
-    title?: string | null;
+    title?: string;
     /**
      * RFC 3339 date-time when this Post was last updated.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The URL where this Post is displayed.
      */
-    url?: string | null;
+    url?: string;
   }
   export interface Schema$PostList {
     /**
@@ -348,53 +350,53 @@ export namespace blogger_v2 {
     /**
      * The kind of this entity. Always blogger#postList
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Pagination token to fetch the next page, if one exists.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Pagination token to fetch the previous page, if one exists.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
   }
   export interface Schema$User {
     /**
      * Profile summary information.
      */
-    about?: string | null;
+    about?: string;
     /**
      * The container of blogs for this user.
      */
-    blogs?: {selfLink?: string} | null;
+    blogs?: {selfLink?: string};
     /**
      * The timestamp of when this profile was created, in seconds since epoch.
      */
-    created?: string | null;
+    created?: string;
     /**
      * The display name.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The identifier for this User.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of this entity. Always blogger#user
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * This user&#39;s locale
      */
-    locale?: {country?: string; language?: string; variant?: string} | null;
+    locale?: {country?: string; language?: string; variant?: string};
     /**
      * The API REST URL to fetch this resource from.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The user&#39;s profile page.
      */
-    url?: string | null;
+    url?: string;
   }
 
   export class Resource$Blogs {

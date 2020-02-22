@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -105,95 +107,95 @@ export namespace tasks_v1 {
     /**
      * Completion date of the task (as a RFC 3339 timestamp). This field is omitted if the task has not been completed.
      */
-    completed?: string | null;
+    completed?: string;
     /**
      * Flag indicating whether the task has been deleted. The default if False.
      */
-    deleted?: boolean | null;
+    deleted?: boolean;
     /**
-     * Due date of the task (as a RFC 3339 timestamp). Optional. The due date only records date information; the time portion of the timestamp is discarded when setting the due date. It isn&#39;t possible to read or write the time that a task is due via the API.
+     * Due date of the task (as a RFC 3339 timestamp). Optional.
      */
-    due?: string | null;
+    due?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Flag indicating whether the task is hidden. This is the case if the task had been marked completed when the task list was last cleared. The default is False. This field is read-only.
      */
-    hidden?: boolean | null;
+    hidden?: boolean;
     /**
      * Task identifier.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Type of the resource. This is always &quot;tasks#task&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Collection of links. This collection is read-only.
      */
-    links?: Array<{description?: string; link?: string; type?: string}> | null;
+    links?: Array<{description?: string; link?: string; type?: string}>;
     /**
      * Notes describing the task. Optional.
      */
-    notes?: string | null;
+    notes?: string;
     /**
      * Parent task identifier. This field is omitted if it is a top-level task. This field is read-only. Use the &quot;move&quot; method to move the task under a different parent or to the top level.
      */
-    parent?: string | null;
+    parent?: string;
     /**
      * String indicating the position of the task among its sibling tasks under the same parent task or at the top level. If this string is greater than another task&#39;s corresponding position string according to lexicographical ordering, the task is positioned after the other task under the same parent task (or at the top level). This field is read-only. Use the &quot;move&quot; method to move the task to another position.
      */
-    position?: string | null;
+    position?: string;
     /**
      * URL pointing to this task. Used to retrieve, update, or delete this task.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * Status of the task. This is either &quot;needsAction&quot; or &quot;completed&quot;.
      */
-    status?: string | null;
+    status?: string;
     /**
      * Title of the task.
      */
-    title?: string | null;
+    title?: string;
     /**
      * Last modification time of the task (as a RFC 3339 timestamp).
      */
-    updated?: string | null;
+    updated?: string;
   }
   export interface Schema$TaskList {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Task list identifier.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Type of the resource. This is always &quot;tasks#taskList&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * URL pointing to this task list. Used to retrieve, update, or delete this task list.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * Title of the task list.
      */
-    title?: string | null;
+    title?: string;
     /**
      * Last modification time of the task list (as a RFC 3339 timestamp).
      */
-    updated?: string | null;
+    updated?: string;
   }
   export interface Schema$TaskLists {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Collection of task lists.
      */
@@ -201,17 +203,17 @@ export namespace tasks_v1 {
     /**
      * Type of the resource. This is always &quot;tasks#taskLists&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token that can be used to request the next page of this result.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$Tasks {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Collection of tasks.
      */
@@ -219,11 +221,11 @@ export namespace tasks_v1 {
     /**
      * Type of the resource. This is always &quot;tasks#tasks&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token used to access the next page of this result.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
 
   export class Resource$Tasklists {
@@ -381,7 +383,7 @@ export namespace tasks_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().TaskList} params.requestBody Request body data
+     * @param {().TaskList} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -527,7 +529,7 @@ export namespace tasks_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.tasklist Task list identifier.
-     * @param {().TaskList} params.requestBody Request body data
+     * @param {().TaskList} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -599,7 +601,7 @@ export namespace tasks_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.tasklist Task list identifier.
-     * @param {().TaskList} params.requestBody Request body data
+     * @param {().TaskList} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -976,7 +978,7 @@ export namespace tasks_v1 {
      * @param {string=} params.parent Parent task identifier. If the task is created at the top level, this parameter is omitted. Optional.
      * @param {string=} params.previous Previous sibling task identifier. If the task is created at the first position among its siblings, this parameter is omitted. Optional.
      * @param {string} params.tasklist Task list identifier.
-     * @param {().Task} params.requestBody Request body data
+     * @param {().Task} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1203,7 +1205,7 @@ export namespace tasks_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.task Task identifier.
      * @param {string} params.tasklist Task list identifier.
-     * @param {().Task} params.requestBody Request body data
+     * @param {().Task} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1276,7 +1278,7 @@ export namespace tasks_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.task Task identifier.
      * @param {string} params.tasklist Task list identifier.
-     * @param {().Task} params.requestBody Request body data
+     * @param {().Task} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -135,11 +137,11 @@ export namespace cloudtrace_v2 {
     /**
      * The set of attributes. Each attribute&#39;s key can be up to 128 bytes long. The value can be a string up to 256 bytes, a signed 64-bit integer, or the Boolean values `true` and `false`. For example:      &quot;/instance_id&quot;: &quot;my-instance&quot;     &quot;/http/user_agent&quot;: &quot;&quot;     &quot;/http/request_bytes&quot;: 300     &quot;abc.com/myattribute&quot;: true
      */
-    attributeMap?: {[key: string]: Schema$AttributeValue} | null;
+    attributeMap?: {[key: string]: Schema$AttributeValue};
     /**
      * The number of attributes that were discarded. Attributes can be discarded because their keys are too long or because there are too many attributes. If this value is 0 then all attributes are valid.
      */
-    droppedAttributesCount?: number | null;
+    droppedAttributesCount?: number;
   }
   /**
    * The allowed types for [VALUE] in a `[KEY]:[VALUE]` attribute.
@@ -148,11 +150,11 @@ export namespace cloudtrace_v2 {
     /**
      * A Boolean value represented by `true` or `false`.
      */
-    boolValue?: boolean | null;
+    boolValue?: boolean;
     /**
      * A 64-bit signed integer.
      */
-    intValue?: string | null;
+    intValue?: string;
     /**
      * A string up to 256 bytes long.
      */
@@ -163,7 +165,7 @@ export namespace cloudtrace_v2 {
    */
   export interface Schema$BatchWriteSpansRequest {
     /**
-     * Required. A list of new spans. The span names must not match existing spans, or the results are undefined.
+     * A list of new spans. The span names must not match existing spans, or the results are undefined.
      */
     spans?: Schema$Span[];
   }
@@ -182,15 +184,15 @@ export namespace cloudtrace_v2 {
     /**
      * The [SPAN_ID] for a span within a trace.
      */
-    spanId?: string | null;
+    spanId?: string;
     /**
      * The [TRACE_ID] for a trace within a project.
      */
-    traceId?: string | null;
+    traceId?: string;
     /**
      * The relationship of the current span relative to the linked span.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * A collection of links, which are references from this span to a span in the same or different trace.
@@ -199,7 +201,7 @@ export namespace cloudtrace_v2 {
     /**
      * The number of dropped links after the maximum size was enforced. If this value is 0, then no links were dropped.
      */
-    droppedLinksCount?: number | null;
+    droppedLinksCount?: number;
     /**
      * A collection of links.
      */
@@ -212,19 +214,19 @@ export namespace cloudtrace_v2 {
     /**
      * The number of compressed bytes sent or received. If missing assumed to be the same size as uncompressed.
      */
-    compressedSizeBytes?: string | null;
+    compressedSizeBytes?: string;
     /**
      * An identifier for the MessageEvent&#39;s message that can be used to match SENT and RECEIVED MessageEvents. It is recommended to be unique within a Span.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Type of MessageEvent. Indicates whether the message was sent or received.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The number of uncompressed bytes sent or received.
      */
-    uncompressedSizeBytes?: string | null;
+    uncompressedSizeBytes?: string;
   }
   /**
    * Binary module.
@@ -248,17 +250,17 @@ export namespace cloudtrace_v2 {
      */
     attributes?: Schema$Attributes;
     /**
-     * Optional. The number of child spans that were generated while this span was active. If set, allows implementation to detect missing child spans.
+     * An optional number of child spans that were generated while this span was active. If set, allows implementation to detect missing child spans.
      */
-    childSpanCount?: number | null;
+    childSpanCount?: number;
     /**
-     * Required. A description of the span&#39;s operation (up to 128 bytes). Stackdriver Trace displays the description in the Google Cloud Platform Console. For example, the display name can be a qualified method name or a file name and a line number where the operation is called. A best practice is to use the same display name within an application and at the same call point. This makes it easier to correlate spans in different traces.
+     * A description of the span&#39;s operation (up to 128 bytes). Stackdriver Trace displays the description in the Google Cloud Platform Console. For example, the display name can be a qualified method name or a file name and a line number where the operation is called. A best practice is to use the same display name within an application and at the same call point. This makes it easier to correlate spans in different traces.
      */
     displayName?: Schema$TruncatableString;
     /**
-     * Required. The end time of the span. On the client side, this is the time kept by the local machine where the span execution ends. On the server side, this is the time when the server application handler stops running.
+     * The end time of the span. On the client side, this is the time kept by the local machine where the span execution ends. On the server side, this is the time when the server application handler stops running.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * Links associated with the span. You can have up to 128 links per Span.
      */
@@ -266,33 +268,29 @@ export namespace cloudtrace_v2 {
     /**
      * The resource name of the span in the following format:      projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/SPAN_ID is a unique identifier for a trace within a project; it is a 32-character hexadecimal encoding of a 16-byte array.  [SPAN_ID] is a unique identifier for a span within a trace; it is a 16-character hexadecimal encoding of an 8-byte array.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The [SPAN_ID] of this span&#39;s parent span. If this is a root span, then this field must be empty.
      */
-    parentSpanId?: string | null;
+    parentSpanId?: string;
     /**
-     * Optional. Set this parameter to indicate whether this span is in the same process as its parent. If you do not set this parameter, Stackdriver Trace is unable to take advantage of this helpful information.
+     * (Optional) Set this parameter to indicate whether this span is in the same process as its parent. If you do not set this parameter, Stackdriver Trace is unable to take advantage of this helpful information.
      */
-    sameProcessAsParentSpan?: boolean | null;
+    sameProcessAsParentSpan?: boolean;
     /**
-     * Required. The [SPAN_ID] portion of the span&#39;s resource name.
+     * The [SPAN_ID] portion of the span&#39;s resource name.
      */
-    spanId?: string | null;
-    /**
-     * Distinguishes between spans generated in a particular context. For example, two spans with the same name may be distinguished using `CLIENT` (caller) and `SERVER` (callee) to identify an RPC call.
-     */
-    spanKind?: string | null;
+    spanId?: string;
     /**
      * Stack trace captured at the start of the span.
      */
     stackTrace?: Schema$StackTrace;
     /**
-     * Required. The start time of the span. On the client side, this is the time kept by the local machine where the span execution starts. On the server side, this is the time when the server&#39;s application handler starts running.
+     * The start time of the span. On the client side, this is the time kept by the local machine where the span execution starts. On the server side, this is the time when the server&#39;s application handler starts running.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
-     * Optional. The final status for this span.
+     * An optional final status for this span.
      */
     status?: Schema$Status;
     /**
@@ -307,7 +305,7 @@ export namespace cloudtrace_v2 {
     /**
      * The column number where the function call appears, if available. This is important in JavaScript because of its anonymous functions.
      */
-    columnNumber?: string | null;
+    columnNumber?: string;
     /**
      * The name of the source file where the function call appears (up to 256 bytes).
      */
@@ -319,7 +317,7 @@ export namespace cloudtrace_v2 {
     /**
      * The line number in `file_name` where the function call appears.
      */
-    lineNumber?: string | null;
+    lineNumber?: string;
     /**
      * The binary module from where the code was loaded.
      */
@@ -340,7 +338,7 @@ export namespace cloudtrace_v2 {
     /**
      * The number of stack frames that were dropped because there were too many stack frames. If this value is 0, then no stack frames were dropped.
      */
-    droppedFramesCount?: number | null;
+    droppedFramesCount?: number;
     /**
      * Stack frames in this call stack.
      */
@@ -357,24 +355,24 @@ export namespace cloudtrace_v2 {
     /**
      * The hash ID is used to conserve network bandwidth for duplicate stack traces within a single trace.  Often multiple spans will have identical stack traces. The first occurrence of a stack trace should contain both the `stackFrame` content and a value in `stackTraceHashId`.  Subsequent spans within the same request can refer to that stack trace by only setting `stackTraceHashId`.
      */
-    stackTraceHashId?: string | null;
+    stackTraceHashId?: string;
   }
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * A time-stamped annotation or message event in the Span.
@@ -391,7 +389,7 @@ export namespace cloudtrace_v2 {
     /**
      * The timestamp indicating the time the event occurred.
      */
-    time?: string | null;
+    time?: string;
   }
   /**
    * A collection of `TimeEvent`s. A `TimeEvent` is a time-stamped annotation on the span, consisting of either user-supplied key:value pairs, or details of a message sent/received between Spans.
@@ -400,11 +398,11 @@ export namespace cloudtrace_v2 {
     /**
      * The number of dropped annotations in all the included time events. If the value is 0, then no annotations were dropped.
      */
-    droppedAnnotationsCount?: number | null;
+    droppedAnnotationsCount?: number;
     /**
      * The number of dropped message events in all the included time events. If the value is 0, then no message events were dropped.
      */
-    droppedMessageEventsCount?: number | null;
+    droppedMessageEventsCount?: number;
     /**
      * A collection of `TimeEvent`s.
      */
@@ -417,11 +415,11 @@ export namespace cloudtrace_v2 {
     /**
      * The number of bytes removed from the original string. If this value is 0, then the string was not shortened.
      */
-    truncatedByteCount?: number | null;
+    truncatedByteCount?: number;
     /**
      * The shortened string. For example, if the original string is 500 bytes long and the limit of the string is 128 bytes, then `value` contains the first 128 bytes of the 500-byte string.  Truncation always happens on a UTF8 character boundary. If there are multi-byte characters in the string, then the length of the shortened string might be less than the size limit.
      */
-    value?: string | null;
+    value?: string;
   }
 
   export class Resource$Projects {
@@ -449,7 +447,7 @@ export namespace cloudtrace_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The name of the project where the spans belong. The format is `projects/[PROJECT_ID]`.
-     * @param {().BatchWriteSpansRequest} params.requestBody Request body data
+     * @param {().BatchWriteSpansRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -547,7 +545,7 @@ export namespace cloudtrace_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The resource name of the span in the following format:      projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/SPAN_ID is a unique identifier for a trace within a project; it is a 32-character hexadecimal encoding of a 16-byte array.  [SPAN_ID] is a unique identifier for a span within a trace; it is a 16-character hexadecimal encoding of an 8-byte array.
-     * @param {().Span} params.requestBody Request body data
+     * @param {().Span} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

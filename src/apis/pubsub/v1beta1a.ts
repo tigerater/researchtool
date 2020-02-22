@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -124,11 +126,11 @@ export namespace pubsub_v1beta1a {
     /**
      * The acknowledgment ID for the message being acknowledged. This was returned by the Pub/Sub system in the Pull response.
      */
-    ackId?: string[] | null;
+    ackId?: string[];
     /**
      * The subscription whose message is being acknowledged.
      */
-    subscription?: string | null;
+    subscription?: string;
   }
   /**
    * An empty message that you can re-use to avoid defining duplicated empty messages in your project. A typical example is to use it as argument or the return value of a service API. For instance:    service Foo {     rpc Bar (proto2.Empty) returns (proto2.Empty) { };   };  BEGIN GOOGLE-INTERNAL The difference between this one and net/rpc/empty-message.proto is that 1) The generated message here is in proto2 C++ API. 2) The proto2.Empty has minimum dependencies    (no message_set or net/rpc dependencies) END GOOGLE-INTERNAL
@@ -141,15 +143,15 @@ export namespace pubsub_v1beta1a {
     /**
      * The key of a label is a syntactically valid URL (as per RFC 1738) with the &quot;scheme&quot; and initial slashes omitted and with the additional restrictions noted below.  Each key should be globally unique.  The &quot;host&quot; portion is called the &quot;namespace&quot; and is not necessarily resolvable to a network endpoint.  Instead, the namespace indicates what system or entity defines the semantics of the label.  Namespaces do not restrict the set of objects to which a label may be associated.  Keys are defined by the following grammar:    key          = hostname &quot;/&quot; kpath   kpath        = ksegment *[ &quot;/&quot; ksegment ]   ksegment     = alphadigit | *[ alphadigit | &quot;-&quot; | &quot;_&quot; | &quot;.&quot; ]  where &quot;hostname&quot; and &quot;alphadigit&quot; are defined as in RFC 1738.  Example key:   spanner.google.com/universe
      */
-    key?: string | null;
+    key?: string;
     /**
      * An integer value.
      */
-    numValue?: string | null;
+    numValue?: string;
     /**
      * A string value.
      */
-    strValue?: string | null;
+    strValue?: string;
   }
   /**
    * Response for the ListSubscriptions method.
@@ -158,7 +160,7 @@ export namespace pubsub_v1beta1a {
     /**
      * If not empty, indicates that there are more subscriptions that match the request and this value should be passed to the next &lt;code&gt;ListSubscriptionsRequest&lt;/code&gt; to continue.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The subscriptions that match the request.
      */
@@ -171,7 +173,7 @@ export namespace pubsub_v1beta1a {
     /**
      * If not empty, indicates that there are more topics that match the request, and this value should be passed to the next &lt;code&gt;ListTopicsRequest&lt;/code&gt; to continue.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The resulting topics.
      */
@@ -184,19 +186,19 @@ export namespace pubsub_v1beta1a {
     /**
      * The new ack deadline with respect to the time this request was sent to the Pub/Sub system. Must be &gt;= 0. For example, if the value is 10, the new ack deadline will expire 10 seconds after the ModifyAckDeadline call was made. Specifying zero may immediately make the message available for another pull request.
      */
-    ackDeadlineSeconds?: number | null;
+    ackDeadlineSeconds?: number;
     /**
      * The acknowledgment ID. Either this or ack_ids must be populated, not both.
      */
-    ackId?: string | null;
+    ackId?: string;
     /**
      * List of acknowledgment IDs. Either this field or ack_id should be populated, not both.
      */
-    ackIds?: string[] | null;
+    ackIds?: string[];
     /**
      * Next Index: 5 The name of the subscription from which messages are being pulled.
      */
-    subscription?: string | null;
+    subscription?: string;
   }
   /**
    * Request for the ModifyPushConfig method.
@@ -209,7 +211,7 @@ export namespace pubsub_v1beta1a {
     /**
      * The name of the subscription.
      */
-    subscription?: string | null;
+    subscription?: string;
   }
   /**
    * Request for the PublishBatch method.
@@ -222,7 +224,7 @@ export namespace pubsub_v1beta1a {
     /**
      * The messages in the request will be published on this topic.
      */
-    topic?: string | null;
+    topic?: string;
   }
   /**
    * Response for the PublishBatch method.
@@ -231,7 +233,7 @@ export namespace pubsub_v1beta1a {
     /**
      * The server-assigned ID of each published message, in the same order as the messages in the request. IDs are guaranteed to be unique within the topic.
      */
-    messageIds?: string[] | null;
+    messageIds?: string[];
   }
   /**
    * Request for the Publish method.
@@ -244,7 +246,7 @@ export namespace pubsub_v1beta1a {
     /**
      * The message in the request will be published on this topic.
      */
-    topic?: string | null;
+    topic?: string;
   }
   /**
    * An event indicating a received message or truncation event.
@@ -253,7 +255,7 @@ export namespace pubsub_v1beta1a {
     /**
      * Indicates that this subscription has been deleted. (Note that pull subscribers will always receive NOT_FOUND in response in their pull request on the subscription, rather than seeing this boolean.)
      */
-    deleted?: boolean | null;
+    deleted?: boolean;
     /**
      * A received message.
      */
@@ -261,11 +263,11 @@ export namespace pubsub_v1beta1a {
     /**
      * The subscription that received the event.
      */
-    subscription?: string | null;
+    subscription?: string;
     /**
      * Indicates that this subscription has been truncated.
      */
-    truncated?: boolean | null;
+    truncated?: boolean;
   }
   /**
    * A message data and its labels.
@@ -274,7 +276,7 @@ export namespace pubsub_v1beta1a {
     /**
      * The message payload.
      */
-    data?: string | null;
+    data?: string;
     /**
      * Optional list of labels for this message. Keys in this collection must be unique.
      */
@@ -282,11 +284,11 @@ export namespace pubsub_v1beta1a {
     /**
      * ID of this message assigned by the server at publication time. Guaranteed to be unique within the topic. This value may be read by a subscriber that receives a PubsubMessage via a Pull call or a push delivery. It must not be populated by a publisher in a Publish call.
      */
-    messageId?: string | null;
+    messageId?: string;
     /**
      * The time at which the message was published. The time is milliseconds since the UNIX epoch.
      */
-    publishTime?: string | null;
+    publishTime?: string;
   }
   /**
    * Request for the PullBatch method.
@@ -295,15 +297,15 @@ export namespace pubsub_v1beta1a {
     /**
      * The maximum number of PubsubEvents returned for this request. The Pub/Sub system may return fewer than the number of events specified.
      */
-    maxEvents?: number | null;
+    maxEvents?: number;
     /**
      * If this is specified as true the system will respond immediately even if it is not able to return a message in the Pull response. Otherwise the system is allowed to wait until at least one message is available rather than returning no messages. The client may cancel the request if it does not wish to wait any longer for the response.
      */
-    returnImmediately?: boolean | null;
+    returnImmediately?: boolean;
     /**
      * The subscription from which messages should be pulled.
      */
-    subscription?: string | null;
+    subscription?: string;
   }
   /**
    * Response for the PullBatch method.
@@ -321,11 +323,11 @@ export namespace pubsub_v1beta1a {
     /**
      * If this is specified as true the system will respond immediately even if it is not able to return a message in the Pull response. Otherwise the system is allowed to wait until at least one message is available rather than returning FAILED_PRECONDITION. The client may cancel the request if it does not wish to wait any longer for the response.
      */
-    returnImmediately?: boolean | null;
+    returnImmediately?: boolean;
     /**
      * The subscription from which a message should be pulled.
      */
-    subscription?: string | null;
+    subscription?: string;
   }
   /**
    * Either a &lt;code&gt;PubsubMessage&lt;/code&gt; or a truncation event. One of these two must be populated.
@@ -334,7 +336,7 @@ export namespace pubsub_v1beta1a {
     /**
      * This ID must be used to acknowledge the received event or message.
      */
-    ackId?: string | null;
+    ackId?: string;
     /**
      * A pubsub message or truncation event.
      */
@@ -347,7 +349,7 @@ export namespace pubsub_v1beta1a {
     /**
      * A URL locating the endpoint to which messages should be pushed. For example, a Webhook endpoint might use &quot;https://example.com/push&quot;.
      */
-    pushEndpoint?: string | null;
+    pushEndpoint?: string;
   }
   /**
    * A subscription resource.
@@ -356,11 +358,11 @@ export namespace pubsub_v1beta1a {
     /**
      * For either push or pull delivery, the value is the maximum time after a subscriber receives a message before the subscriber should acknowledge or Nack the message. If the Ack deadline for a message passes without an Ack or a Nack, the Pub/Sub system will eventually redeliver the message. If a subscriber acknowledges after the deadline, the Pub/Sub system may accept the Ack, but it is possible that the message has been already delivered again. Multiple Acks to the message are allowed and will succeed.  For push delivery, this value is used to set the request timeout for the call to the push endpoint.  For pull delivery, this value is used as the initial value for the Ack deadline. It may be overridden for each message using its corresponding ack_id with &lt;code&gt;ModifyAckDeadline&lt;/code&gt;. While a message is outstanding (i.e. it has been delivered to a pull subscriber and the subscriber has not yet Acked or Nacked), the Pub/Sub system will not deliver that message to another pull subscriber (on a best-effort basis).
      */
-    ackDeadlineSeconds?: number | null;
+    ackDeadlineSeconds?: number;
     /**
      * Name of the subscription.
      */
-    name?: string | null;
+    name?: string;
     /**
      * If push delivery is used with this subscription, this field is used to configure it.
      */
@@ -368,7 +370,7 @@ export namespace pubsub_v1beta1a {
     /**
      * The name of the topic from which this subscription is receiving messages.
      */
-    topic?: string | null;
+    topic?: string;
   }
   /**
    * A topic resource.
@@ -377,7 +379,7 @@ export namespace pubsub_v1beta1a {
     /**
      * Name of the topic.
      */
-    name?: string | null;
+    name?: string;
   }
 
   export class Resource$Subscriptions {
@@ -393,7 +395,7 @@ export namespace pubsub_v1beta1a {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().AcknowledgeRequest} params.requestBody Request body data
+     * @param {().AcknowledgeRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -465,7 +467,7 @@ export namespace pubsub_v1beta1a {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Subscription} params.requestBody Request body data
+     * @param {().Subscription} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -768,7 +770,7 @@ export namespace pubsub_v1beta1a {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().ModifyAckDeadlineRequest} params.requestBody Request body data
+     * @param {().ModifyAckDeadlineRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -839,7 +841,7 @@ export namespace pubsub_v1beta1a {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().ModifyPushConfigRequest} params.requestBody Request body data
+     * @param {().ModifyPushConfigRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -911,7 +913,7 @@ export namespace pubsub_v1beta1a {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().PullRequest} params.requestBody Request body data
+     * @param {().PullRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -985,7 +987,7 @@ export namespace pubsub_v1beta1a {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().PullBatchRequest} params.requestBody Request body data
+     * @param {().PullBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1183,7 +1185,7 @@ export namespace pubsub_v1beta1a {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Topic} params.requestBody Request body data
+     * @param {().Topic} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1465,7 +1467,7 @@ export namespace pubsub_v1beta1a {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().PublishRequest} params.requestBody Request body data
+     * @param {().PublishRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1536,7 +1538,7 @@ export namespace pubsub_v1beta1a {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().PublishBatchRequest} params.requestBody Request body data
+     * @param {().PublishBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

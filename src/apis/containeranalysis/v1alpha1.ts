@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -124,19 +126,19 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Hash or checksum value of a binary, or Docker Registry 2.0 digest of a container.
      */
-    checksum?: string | null;
+    checksum?: string;
     /**
      * Artifact ID, if any; for container images, this will be a URL by digest like gcr.io/projectID/imagename@sha256:123456
      */
-    id?: string | null;
+    id?: string;
     /**
      * Name of the artifact. This may be the path to a binary or jar file, or in the case of a container build, the name used to push the container image to Google Container Registry, as presented to `docker push`.  This field is deprecated in favor of the plural `names` field; it continues to exist here to allow existing BuildProvenance serialized to json in google.devtools.containeranalysis.v1alpha1.BuildDetails.provenance_bytes to deserialize back into proto.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Related artifact names. This may be the path to a binary or jar file, or in the case of a container build, the name used to push the container image to Google Container Registry, as presented to `docker push`. Note that a single Artifact ID can have multiple names, for example if two tags are applied to one image.
      */
-    names?: string[] | null;
+    names?: string[];
   }
   /**
    * Occurrence that represents a single &quot;attestation&quot;.  The authenticity of an Attestation can be verified using the attached signature. If the verifier trusts the public key of the signer, then verifying the signature is sufficient to establish trust.  In this circumstance, the AttestationAuthority to which this Attestation is attached is primarily useful for look-up (how to find this Attestation if you already know the Authority and artifact to be verified) and intent (which authority was this attestation intended to sign for).
@@ -157,7 +159,33 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The human readable name of this Attestation Authority, for example &quot;qa&quot;.
      */
-    humanReadableName?: string | null;
+    humanReadableName?: string;
+  }
+  /**
+   * Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.  If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.  Example Policy with multiple AuditConfigs:      {       &quot;audit_configs&quot;: [         {           &quot;service&quot;: &quot;allServices&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,               &quot;exempted_members&quot;: [                 &quot;user:foo@gmail.com&quot;               ]             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,             },             {               &quot;log_type&quot;: &quot;ADMIN_READ&quot;,             }           ]         },         {           &quot;service&quot;: &quot;fooservice.googleapis.com&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,               &quot;exempted_members&quot;: [                 &quot;user:bar@gmail.com&quot;               ]             }           ]         }       ]     }  For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
+   */
+  export interface Schema$AuditConfig {
+    /**
+     * The configuration for logging of each type of permission.
+     */
+    auditLogConfigs?: Schema$AuditLogConfig[];
+    /**
+     * Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
+     */
+    service?: string;
+  }
+  /**
+   * Provides the configuration for logging a type of permissions. Example:      {       &quot;audit_log_configs&quot;: [         {           &quot;log_type&quot;: &quot;DATA_READ&quot;,           &quot;exempted_members&quot;: [             &quot;user:foo@gmail.com&quot;           ]         },         {           &quot;log_type&quot;: &quot;DATA_WRITE&quot;,         }       ]     }  This enables &#39;DATA_READ&#39; and &#39;DATA_WRITE&#39; logging, while exempting foo@gmail.com from DATA_READ logging.
+   */
+  export interface Schema$AuditLogConfig {
+    /**
+     * Specifies the identities that do not cause logging for this type of permission. Follows the same format of Binding.members.
+     */
+    exemptedMembers?: string[];
+    /**
+     * The log type that this config enables.
+     */
+    logType?: string;
   }
   /**
    * Basis describes the base image portion (Note) of the DockerImage relationship.  Linked occurrences are derived from this or an equivalent image via:   FROM &lt;Basis.resource_url&gt; Or an equivalent reference, e.g. a tag of the resource_url.
@@ -170,7 +198,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The resource_url for the resource representing the basis of associated occurrence images.
      */
-    resourceUrl?: string | null;
+    resourceUrl?: string;
   }
   /**
    * Associates `members` with a `role`.
@@ -181,13 +209,13 @@ export namespace containeranalysis_v1alpha1 {
      */
     condition?: Schema$Expr;
     /**
-     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@example.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.  * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a user that has been recently deleted. For    example, `alice@example.com?uid=123456789012345678901`. If the user is    recovered, this value reverts to `user:{emailid}` and the recovered user    retains the role in the binding.  * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus    unique identifier) representing a service account that has been recently    deleted. For example,    `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`.    If the service account is undeleted, this value reverts to    `serviceAccount:{emailid}` and the undeleted service account retains the    role in the binding.  * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a Google group that has been recently    deleted. For example, `admins@example.com?uid=123456789012345678901`. If    the group is recovered, this value reverts to `group:{emailid}` and the    recovered group retains the role in the binding.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@gmail.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
      */
-    members?: string[] | null;
+    members?: string[];
     /**
      * Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
      */
-    role?: string | null;
+    role?: string;
   }
   /**
    * Message encapsulating build provenance details.
@@ -200,7 +228,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Serialized JSON representation of the provenance, used in generating the `BuildSignature` in the corresponding Result. After verifying the signature, `provenance_bytes` can be unmarshalled and compared to the provenance to confirm that it is unchanged. A base64-encoded string representation of the provenance bytes is used for the signature in order to interoperate with openssl which expects this format for signature verification.  The serialized form is captured both to avoid ambiguity in how the provenance is marshalled to json as well to prevent incompatibilities with future changes.
      */
-    provenanceBytes?: string | null;
+    provenanceBytes?: string;
   }
   /**
    * Provenance of a build. Contains all information needed to verify the full details about the build from source to completion.
@@ -209,11 +237,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Version string of the builder at the time this build was executed.
      */
-    builderVersion?: string | null;
+    builderVersion?: string;
     /**
      * Special options applied to this build. This is a catch-all field where build providers can enter any desired additional details.
      */
-    buildOptions?: {[key: string]: string} | null;
+    buildOptions?: {[key: string]: string};
     /**
      * Output of the build.
      */
@@ -225,27 +253,27 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Time at which the build was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * E-mail address of the user who initiated this build. Note that this was the user&#39;s e-mail address at the time the build was initiated; this address may not represent the same end-user for all time.
      */
-    creator?: string | null;
+    creator?: string;
     /**
      * Time at which execution of the build was finished.
      */
-    finishTime?: string | null;
+    finishTime?: string;
     /**
      * Unique identifier of the build.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Google Cloud Storage bucket where logs were written.
      */
-    logsBucket?: string | null;
+    logsBucket?: string;
     /**
      * ID of the project.
      */
-    projectId?: string | null;
+    projectId?: string;
     /**
      * Details of the Source input to the build.
      */
@@ -253,11 +281,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Time at which execution of the build was started.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * Trigger identifier if the build was triggered automatically; empty if not.
      */
-    triggerId?: string | null;
+    triggerId?: string;
   }
   /**
    * Message encapsulating the signature of the verified build.
@@ -266,19 +294,19 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * An Id for the key used to sign. This could be either an Id for the key stored in `public_key` (such as the Id or fingerprint for a PGP key, or the CN for a cert), or a reference to an external key (such as a reference to a key in Cloud Key Management Service).
      */
-    keyId?: string | null;
+    keyId?: string;
     /**
      * The type of the key, either stored in `public_key` or referenced in `key_id`
      */
-    keyType?: string | null;
+    keyType?: string;
     /**
      * Public key of the builder which can be used to verify that the related findings are valid and unchanged. If `key_type` is empty, this defaults to PEM encoded public keys.  This field may be empty if `key_id` references an external key.  For Cloud Build based signatures, this is a PEM encoded public key. To verify the Cloud Build signature, place the contents of this field into a file (public.pem). The signature field is base64-decoded into its binary representation in signature.bin, and the provenance bytes from `BuildDetails` are base64-decoded into a binary representation in signed.bin. OpenSSL can then verify the signature: `openssl sha256 -verify public.pem -signature signature.bin signed.bin`
      */
-    publicKey?: string | null;
+    publicKey?: string;
     /**
      * Signature of the related `BuildProvenance`, encoded in a base64 string.
      */
-    signature?: string | null;
+    signature?: string;
   }
   /**
    * Note holding the version of the provider&#39;s builder and the signature of the provenance message in linked BuildDetails.
@@ -287,7 +315,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Version of the builder which produced this Note.
      */
-    builderVersion?: string | null;
+    builderVersion?: string;
     /**
      * Signature of the build in Occurrences pointing to the Note containing this `BuilderDetails`.
      */
@@ -300,27 +328,27 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Command-line arguments used when executing this Command.
      */
-    args?: string[] | null;
+    args?: string[];
     /**
      * Working directory (relative to project source root) used when running this Command.
      */
-    dir?: string | null;
+    dir?: string;
     /**
      * Environment variables set before running this Command.
      */
-    env?: string[] | null;
+    env?: string[];
     /**
      * Optional unique identifier for this Command, used in wait_for to reference this Command as a dependency.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Name of the command, as presented on the command line, or if the command is packaged as a Docker container, as presented to `docker pull`.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The ID(s) of the Command(s) that this Command depends on.
      */
-    waitFor?: string[] | null;
+    waitFor?: string[];
   }
   /**
    * Request for creating an operation
@@ -333,7 +361,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The ID to use for this operation.
      */
-    operationId?: string | null;
+    operationId?: string;
   }
   /**
    * An artifact that can be deployed in some runtime.
@@ -342,7 +370,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Resource URI for the artifact being deployed.
      */
-    resourceUri?: string[] | null;
+    resourceUri?: string[];
   }
   /**
    * The period during which some deployable was active in a runtime.
@@ -351,31 +379,31 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Address of the runtime element hosting this deployment.
      */
-    address?: string | null;
+    address?: string;
     /**
      * Configuration used to create this deployment.
      */
-    config?: string | null;
+    config?: string;
     /**
      * Beginning of the lifetime of this deployment.
      */
-    deployTime?: string | null;
+    deployTime?: string;
     /**
      * Platform hosting this deployment.
      */
-    platform?: string | null;
+    platform?: string;
     /**
      * Output only. Resource URI for the artifact being deployed taken from the deployable field with the same name.
      */
-    resourceUri?: string[] | null;
+    resourceUri?: string[];
     /**
      * End of the lifetime of this deployment.
      */
-    undeployTime?: string | null;
+    undeployTime?: string;
     /**
      * Identity of the user that triggered this deployment.
      */
-    userEmail?: string | null;
+    userEmail?: string;
   }
   /**
    * Derived describes the derived image portion (Occurrence) of the DockerImage relationship.  This image would be produced from a Dockerfile with FROM &lt;DockerImage.Basis in attached Note&gt;.
@@ -384,11 +412,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Output only. This contains the base image URL for the derived image occurrence.
      */
-    baseResourceUrl?: string | null;
+    baseResourceUrl?: string;
     /**
      * Output only. The number of layers by which this image differs from the associated image basis.
      */
-    distance?: number | null;
+    distance?: number;
     /**
      * The fingerprint of the derived image.
      */
@@ -405,11 +433,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The cpe_uri in [cpe format] (https://cpe.mitre.org/specification/) in which the vulnerability manifests.  Examples include distro or storage location for vulnerable jar. This field can be used as a filter in list requests.
      */
-    cpeUri?: string | null;
+    cpeUri?: string;
     /**
      * A vendor-specific description of this note.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The fix for this specific package version.
      */
@@ -417,9 +445,9 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Whether this Detail is obsolete. Occurrences are expected not to point to obsolete details.
      */
-    isObsolete?: boolean | null;
+    isObsolete?: boolean;
     /**
-     * The max version of the package in which the vulnerability exists.
+     * The max version of the package in which the vulnerability exists. This field can be used as a filter in list requests.
      */
     maxAffectedVersion?: Schema$Version;
     /**
@@ -429,15 +457,15 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The name of the package where the vulnerability was found. This field can be used as a filter in list requests.
      */
-    package?: string | null;
+    package?: string;
     /**
      * The type of package; whether native or non native(ruby gems, node.js packages etc)
      */
-    packageType?: string | null;
+    packageType?: string;
     /**
      * The severity (eg: distro assigned severity) for this vulnerability.
      */
-    severityName?: string | null;
+    severityName?: string;
   }
   /**
    * Provides information about the scan status of a discovered resource.
@@ -446,7 +474,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The status of discovery for the resource.
      */
-    analysisStatus?: string | null;
+    analysisStatus?: string;
     /**
      * When an error is encountered this will contain a LocalizedMessage under details to show to the user. The LocalizedMessage output only and populated by the API.
      */
@@ -454,11 +482,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Whether the resource is continuously analyzed.
      */
-    continuousAnalysis?: string | null;
-    /**
-     * The CPE of the resource being scanned.
-     */
-    cpe?: string | null;
+    continuousAnalysis?: string;
     /**
      * Output only. An operation that indicates the status of the current scan. This field is deprecated, do not use.
      */
@@ -471,7 +495,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The kind of analysis that is handled by this discovery.
      */
-    analysisKind?: string | null;
+    analysisKind?: string;
   }
   /**
    * This represents a particular channel of distribution for a given package. e.g. Debian&#39;s jessie-backports dpkg mirror
@@ -480,15 +504,15 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The CPU architecture for which packages in this distribution channel were built
      */
-    architecture?: string | null;
+    architecture?: string;
     /**
      * The cpe_uri in [cpe format](https://cpe.mitre.org/specification/) denoting the package manager version distributing a package.
      */
-    cpeUri?: string | null;
+    cpeUri?: string;
     /**
      * The distribution channel-specific description of this package.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The latest available version of this package in this distribution channel.
      */
@@ -496,11 +520,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * A freeform string denoting the maintainer of this package.
      */
-    maintainer?: string | null;
+    maintainer?: string;
     /**
      * The distribution channel-specific homepage for this package.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -513,19 +537,19 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Textual representation of an expression in Common Expression Language syntax.  The application context of the containing message determines which well-known feature set of CEL is supported.
      */
-    expression?: string | null;
+    expression?: string;
     /**
      * An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
      */
-    location?: string | null;
+    location?: string;
     /**
      * An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Container message for hashes of byte content of files, used in Source messages to verify integrity of source input to the build.
@@ -543,34 +567,20 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The layer-id of the final layer in the Docker image&#39;s v1 representation. This field can be used as a filter in list requests.
      */
-    v1Name?: string | null;
+    v1Name?: string;
     /**
      * The ordered list of v2 blobs that represent a given image.
      */
-    v2Blob?: string[] | null;
+    v2Blob?: string[];
     /**
      * Output only. The name of the image&#39;s v2 blobs computed via:   [bottom] := v2_blobbottom := sha256(v2_blob[N] + &quot; &quot; + v2_name[N+1]) Only the name of the final blob is kept. This field can be used as a filter in list requests.
      */
-    v2Name?: string | null;
+    v2Name?: string;
   }
   /**
    * Request message for `GetIamPolicy` method.
    */
-  export interface Schema$GetIamPolicyRequest {
-    /**
-     * OPTIONAL: A `GetPolicyOptions` object for specifying options to `GetIamPolicy`. This field is only used by Cloud IAM.
-     */
-    options?: Schema$GetPolicyOptions;
-  }
-  /**
-   * Encapsulates settings provided to GetIamPolicy.
-   */
-  export interface Schema$GetPolicyOptions {
-    /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    requestedPolicyVersion?: number | null;
-  }
+  export interface Schema$GetIamPolicyRequest {}
   /**
    * A summary of how many vulnz occurrences there are per severity type. counts by groups, or if we should have different summary messages like this.
    */
@@ -587,11 +597,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The alias kind.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The alias name.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * A CloudRepoSourceContext denotes a particular revision in a Google Cloud Source Repo.
@@ -608,7 +618,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * A revision ID.
      */
-    revisionId?: string | null;
+    revisionId?: string;
   }
   /**
    * A SourceContext referring to a Gerrit project.
@@ -621,15 +631,15 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The full project name within the host. Projects may be nested, so &quot;project/subproject&quot; is a valid project name. The &quot;repo name&quot; is the hostURI/project.
      */
-    gerritProject?: string | null;
+    gerritProject?: string;
     /**
      * The URI of a running Gerrit instance.
      */
-    hostUri?: string | null;
+    hostUri?: string;
     /**
      * A revision (commit) ID.
      */
-    revisionId?: string | null;
+    revisionId?: string;
   }
   /**
    * A GitSourceContext denotes a particular revision in a third party Git repository (e.g., GitHub).
@@ -638,11 +648,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Required. Git commit hash.
      */
-    revisionId?: string | null;
+    revisionId?: string;
     /**
      * Git repository URL.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Metadata for all operations used and required for all operations that created by Container Analysis Providers
@@ -651,11 +661,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Output only. The time this operation was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Output only. The time that this operation was marked completed or failed.
      */
-    endTime?: string | null;
+    endTime?: string;
   }
   /**
    * Selects a repo using a Google Cloud Platform project ID (e.g., winged-cargo-31) and a repo name within that project.
@@ -664,11 +674,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The ID of the project.
      */
-    projectId?: string | null;
+    projectId?: string;
     /**
      * The name of the repo. Leave empty for the default repo.
      */
-    repoName?: string | null;
+    repoName?: string;
   }
   /**
    * A unique identifier for a Cloud Repo.
@@ -681,7 +691,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * A server-assigned, globally unique identifier.
      */
-    uid?: string | null;
+    uid?: string;
   }
   /**
    * A SourceContext is a reference to a tree of files. A SourceContext together with a path point to a unique revision of a single file or directory.
@@ -702,7 +712,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Labels with user defined metadata.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
   }
   /**
    * Container message for hash values.
@@ -711,11 +721,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The type of hash that was performed.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The hash value.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * This represents how a particular software package may be installed on a system.
@@ -728,7 +738,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Output only. The name of the installed package.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Layer holds metadata specific to a layer of a Docker image.
@@ -737,11 +747,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The recovered arguments to the Dockerfile directive.
      */
-    arguments?: string | null;
+    arguments?: string;
     /**
      * The recovered Dockerfile directive used to construct this layer.
      */
-    directive?: string | null;
+    directive?: string;
   }
   /**
    * Response including listed occurrences for a note.
@@ -750,7 +760,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Token to receive the next page of notes.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The occurrences attached to the specified note.
      */
@@ -763,7 +773,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The next pagination token in the list response. It should be used as page_token for the following request. An empty value means no more result.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The occurrences requested
      */
@@ -776,7 +786,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The next pagination token in the list response. It should be used as `page_token` for the following request. An empty value means no more results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The occurrences requested.
      */
@@ -789,7 +799,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * A page token to pass in order to get more scan configs.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The set of scan configs.
      */
@@ -802,11 +812,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The cpe_uri in [cpe format](https://cpe.mitre.org/specification/) denoting the package manager version distributing a package.
      */
-    cpeUri?: string | null;
+    cpeUri?: string;
     /**
      * The path from which we gathered that this package/version is installed.
      */
-    path?: string | null;
+    path?: string;
     /**
      * The version installed at this location.
      */
@@ -831,7 +841,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Output only. The time this note was created. This field can be used as a filter in list requests.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * A note describing something that can be deployed.
      */
@@ -843,19 +853,19 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Time of expiration for this note, null if note does not expire.
      */
-    expirationTime?: string | null;
+    expirationTime?: string;
     /**
      * Output only. This explicitly denotes which kind of note is specified. This field can be used as a filter in list requests.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * A detailed description of this `Note`.
      */
-    longDescription?: string | null;
+    longDescription?: string;
     /**
-     * The name of the note in the form &quot;projects/{provider_project_id}/notes/{NOTE_ID}&quot;
+     * The name of the note in the form &quot;providers/{provider_id}/notes/{NOTE_ID}&quot;
      */
-    name?: string | null;
+    name?: string;
     /**
      * A note describing a package hosted by various package managers.
      */
@@ -867,15 +877,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * A one sentence description of this `Note`.
      */
-    shortDescription?: string | null;
+    shortDescription?: string;
     /**
      * Output only. The time this note was last updated. This field can be used as a filter in list requests.
      */
-    updateTime?: string | null;
-    /**
-     * A note describing an upgrade.
-     */
-    upgrade?: Schema$UpgradeNote;
+    updateTime?: string;
     /**
      * A package vulnerability type of note.
      */
@@ -896,7 +902,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Output only. The time this `Occurrence` was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Describes the deployment of an artifact on a runtime.
      */
@@ -916,35 +922,31 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Output only. This explicitly denotes which of the `Occurrence` details are specified. This field can be used as a filter in list requests.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Output only. The name of the `Occurrence` in the form &quot;projects/{project_id}/occurrences/{OCCURRENCE_ID}&quot;
      */
-    name?: string | null;
+    name?: string;
     /**
      * An analysis note associated with this image, in the form &quot;providers/{provider_id}/notes/{NOTE_ID}&quot; This field can be used as a filter in list requests.
      */
-    noteName?: string | null;
+    noteName?: string;
     /**
      * A description of actions that can be taken to remedy the `Note`
      */
-    remediation?: string | null;
+    remediation?: string;
     /**
-     *  The resource for which the `Occurrence` applies.
+     * The resource for which the `Occurrence` applies.
      */
     resource?: Schema$Resource;
     /**
      * The unique URL of the image or the container for which the `Occurrence` applies. For example, https://gcr.io/project/image@sha256:foo This field can be used as a filter in list requests.
      */
-    resourceUrl?: string | null;
+    resourceUrl?: string;
     /**
      * Output only. The time this `Occurrence` was last updated.
      */
-    updateTime?: string | null;
-    /**
-     * Describes an upgrade.
-     */
-    upgrade?: Schema$UpgradeOccurrence;
+    updateTime?: string;
     /**
      * Details of a security vulnerability note.
      */
@@ -957,7 +959,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * The error result of the operation in case of failure or cancellation.
      */
@@ -965,15 +967,15 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Service-specific metadata associated with the operation.  It typically contains progress information and common metadata such as create time. Some services might not provide such metadata.  Any method that returns a long-running operation should document the metadata type, if any.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The normal response of the operation in case of success.  If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`.  If the original method is standard `Get`/`Create`/`Update`, the response should be the resource.  For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name.  For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
      */
-    response?: {[key: string]: any} | null;
+    response?: {[key: string]: any};
   }
   /**
    * This represents a particular package that is distributed over various channels. e.g. glibc (aka libc6) is distributed by many, at various versions.
@@ -986,7 +988,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The name of the package.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * This message wraps a location affected by a vulnerability and its associated fix (if one is available).
@@ -1000,7 +1002,7 @@ export namespace containeranalysis_v1alpha1 {
      * The location of the available fix for vulnerability.
      */
     fixedLocation?: Schema$VulnerabilityLocation;
-    severityName?: string | null;
+    severityName?: string;
   }
   /**
    * An attestation wrapper with a PGP-compatible signature. This message only supports `ATTACHED` signatures, where the payload that is signed is included alongside the signature itself in the same file.
@@ -1009,32 +1011,36 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Type (for example schema) of the attestation payload that was signed. The verifier must ensure that the provided type is one that the verifier supports, and that the attestation payload is a valid instantiation of that type (for example by validating a JSON schema).
      */
-    contentType?: string | null;
+    contentType?: string;
     /**
      * The cryptographic fingerprint of the key used to generate the signature, as output by, e.g. `gpg --list-keys`. This should be the version 4, full 160-bit fingerprint, expressed as a 40 character hexadecimal string. See https://tools.ietf.org/html/rfc4880#section-12.2 for details. Implementations may choose to acknowledge &quot;LONG&quot;, &quot;SHORT&quot;, or other abbreviated key IDs, but only the full fingerprint is guaranteed to work. In gpg, the full fingerprint can be retrieved from the `fpr` field returned when calling --list-keys with --with-colons.  For example: ``` gpg --with-colons --with-fingerprint --force-v4-certs \     --list-keys attester@example.com tru::1:1513631572:0:3:1:5 pub:...&lt;SNIP&gt;... fpr:::::::::24FF6481B76AC91E66A00AC657A93A81EF3AE6FB: ``` Above, the fingerprint is `24FF6481B76AC91E66A00AC657A93A81EF3AE6FB`.
      */
-    pgpKeyId?: string | null;
+    pgpKeyId?: string;
     /**
      * The raw content of the signature, as output by GNU Privacy Guard (GPG) or equivalent.  Since this message only supports attached signatures, the payload that was signed must be attached. While the signature format supported is dependent on the verification implementation, currently only ASCII-armored (`--armor` to gpg), non-clearsigned (`--sign` rather than `--clearsign` to gpg) are supported. Concretely, `gpg --sign --armor --output=signature.gpg payload.json` will create the signature content expected in this field in `signature.gpg` for the `payload.json` attestation payload.
      */
-    signature?: string | null;
+    signature?: string;
   }
   /**
-   * An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources.   A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role.  Optionally, a `binding` can specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both.  **JSON example:**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationAdmin&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-project-id@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationViewer&quot;,           &quot;members&quot;: [&quot;user:eve@example.com&quot;],           &quot;condition&quot;: {             &quot;title&quot;: &quot;expirable access&quot;,             &quot;description&quot;: &quot;Does not grant access after Sep 2020&quot;,             &quot;expression&quot;: &quot;request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)&quot;,           }         }       ],       &quot;etag&quot;: &quot;BwWWja0YfJA=&quot;,       &quot;version&quot;: 3     }  **YAML example:**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-project-id@appspot.gserviceaccount.com       role: roles/resourcemanager.organizationAdmin     - members:       - user:eve@example.com       role: roles/resourcemanager.organizationViewer       condition:         title: expirable access         description: Does not grant access after Sep 2020         expression: request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)     - etag: BwWWja0YfJA=     - version: 3  For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).
+   * Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.   A `Policy` consists of a list of `bindings`. A `binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.  **JSON Example**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/owner&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-other-app@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/viewer&quot;,           &quot;members&quot;: [&quot;user:sean@example.com&quot;]         }       ]     }  **YAML Example**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-other-app@appspot.gserviceaccount.com       role: roles/owner     - members:       - user:sean@example.com       role: roles/viewer   For a description of IAM and its features, see the [IAM developer&#39;s guide](https://cloud.google.com/iam/docs).
    */
   export interface Schema$Policy {
     /**
-     * Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
+     * Specifies cloud audit logging configuration for this policy.
+     */
+    auditConfigs?: Schema$AuditConfig[];
+    /**
+     * Associates a list of `members` to a `role`. `bindings` with no members will result in an error.
      */
     bindings?: Schema$Binding[];
     /**
-     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.
+     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
      */
-    etag?: string | null;
+    etag?: string;
     /**
-     * Specifies the format of the policy.  Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected.  Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations:  * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy   that includes conditions  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.  If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset.
+     * Deprecated.
      */
-    version?: number | null;
+    version?: number;
   }
   /**
    * Metadata for any related URL information
@@ -1043,11 +1049,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Label to describe usage of the URL
      */
-    label?: string | null;
+    label?: string;
     /**
      * Specific URL to associate with the note
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * RepoSource describes the location of the source in a Google Cloud Source Repository.
@@ -1056,26 +1062,26 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Name of the branch to build.
      */
-    branchName?: string | null;
+    branchName?: string;
     /**
      * Explicit commit SHA to build.
      */
-    commitSha?: string | null;
+    commitSha?: string;
     /**
      * ID of the project that owns the repo.
      */
-    projectId?: string | null;
+    projectId?: string;
     /**
      * Name of the repo.
      */
-    repoName?: string | null;
+    repoName?: string;
     /**
      * Name of the tag to build.
      */
-    tagName?: string | null;
+    tagName?: string;
   }
   /**
-   *  Resource is an entity that can have metadata. E.g., a Docker image.
+   * Resource is an entity that can have metadata. E.g., a Docker image.
    */
   export interface Schema$Resource {
     /**
@@ -1085,11 +1091,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The name of the resource. E.g., the name of a Docker image - &quot;Debian&quot;.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The unique URI of the resource. E.g., &quot;https://gcr.io/project/image@sha256:foo&quot; for a Docker image.
      */
-    uri?: string | null;
+    uri?: string;
   }
   /**
    * Indicates various scans and whether they are turned on or off.
@@ -1098,23 +1104,23 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Output only. The time this scan config was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Output only. A human-readable description of what the `ScanConfig` does.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Indicates whether the Scan is enabled.
      */
-    enabled?: boolean | null;
+    enabled?: boolean;
     /**
      * Output only. The name of the ScanConfig in the form “projects/{project_id}/scanConfigs/{scan_config_id}&quot;.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The time this scan config was last updated.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * Request message for `SetIamPolicy` method.
@@ -1124,6 +1130,10 @@ export namespace containeranalysis_v1alpha1 {
      * REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
      */
     policy?: Schema$Policy;
+    /**
+     * OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: paths: &quot;bindings, etag&quot; This field is only used by Cloud IAM.
+     */
+    updateMask?: string;
   }
   /**
    * The number of occurrences created for a specific severity.
@@ -1132,11 +1142,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The number of occurrences with the severity.
      */
-    count?: string | null;
+    count?: string;
     /**
      * The severity of the occurrences.
      */
-    severity?: string | null;
+    severity?: string;
   }
   /**
    * Source describes the location of the source used for the build.
@@ -1157,7 +1167,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Hash(es) of the build source, which can be used to verify that the original source integrity was maintained in the build.  The keys to this map are file paths used as build source and the values contain the hash values for those files.  If the build source came in a single package such as a gzipped tarfile (.tar.gz), the FileHash will be for the single path to that file.
      */
-    fileHashes?: {[key: string]: Schema$FileHashes} | null;
+    fileHashes?: {[key: string]: Schema$FileHashes};
     /**
      * If provided, get source from this location in a Cloud Repo.
      */
@@ -1168,21 +1178,21 @@ export namespace containeranalysis_v1alpha1 {
     storageSource?: Schema$StorageSource;
   }
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * StorageSource describes the location of the source in an archive file in Google Cloud Storage.
@@ -1191,15 +1201,15 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Google Cloud Storage bucket containing source (see [Bucket Name Requirements] (https://cloud.google.com/storage/docs/bucket-naming#requirements)).
      */
-    bucket?: string | null;
+    bucket?: string;
     /**
      * Google Cloud Storage generation for the object.
      */
-    generation?: string | null;
+    generation?: string;
     /**
      * Google Cloud Storage object containing source.
      */
-    object?: string | null;
+    object?: string;
   }
   /**
    * Request message for `TestIamPermissions` method.
@@ -1208,7 +1218,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The set of permissions to check for the `resource`. Permissions with wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * Response message for `TestIamPermissions` method.
@@ -1217,7 +1227,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * Request for updating an existing operation
@@ -1230,62 +1240,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The fields to update.
      */
-    updateMask?: string | null;
-  }
-  /**
-   * The Upgrade Distribution represents metadata about the Upgrade for each operating system (CPE). Some distributions have additional metadata around updates, classifying them into various categories and severities.
-   */
-  export interface Schema$UpgradeDistribution {
-    /**
-     * The operating system classification of this Upgrade, as specified by the upstream operating system upgrade feed.
-     */
-    classification?: string | null;
-    /**
-     * Required - The specific operating system this metadata applies to. See https://cpe.mitre.org/specification/.
-     */
-    cpeUri?: string | null;
-    /**
-     * The cve that would be resolved by this upgrade.
-     */
-    cve?: string[] | null;
-    /**
-     * The severity as specified by the upstream operating system.
-     */
-    severity?: string | null;
-  }
-  /**
-   * An Upgrade Note represents a potential upgrade of a package to a given version. For each package version combination (i.e. bash 4.0, bash 4.1, bash 4.1.2), there will be a Upgrade Note.
-   */
-  export interface Schema$UpgradeNote {
-    /**
-     * Metadata about the upgrade for each specific operating system.
-     */
-    distributions?: Schema$UpgradeDistribution[];
-    /**
-     * Required - The package this Upgrade is for.
-     */
-    package?: string | null;
-    /**
-     * Required - The version of the package in machine + human readable form.
-     */
-    version?: Schema$Version;
-  }
-  /**
-   * An Upgrade Occurrence represents that a specific resource_url could install a specific upgrade. This presence is supplied via local sources (i.e. it is present in the mirror and the running system has noticed its availability).
-   */
-  export interface Schema$UpgradeOccurrence {
-    /**
-     * Metadata about the upgrade for available for the specific operating system for the resource_url. This allows efficient filtering, as well as making it easier to use the occurrence.
-     */
-    distribution?: Schema$UpgradeDistribution;
-    /**
-     * Required - The package this Upgrade is for.
-     */
-    package?: string | null;
-    /**
-     * Required - The version of the package in a machine + human readable form.
-     */
-    parsedVersion?: Schema$Version;
+    updateMask?: string;
   }
   /**
    * Version contains structured information about the version of the package. For a discussion of this in Debian/Ubuntu: http://serverfault.com/questions/604541/debian-packages-version-convention For a discussion of this in Redhat/Fedora/Centos: http://blog.jasonantman.com/2014/07/how-yum-and-rpm-compare-versions/
@@ -1294,19 +1249,19 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Used to correct mistakes in the version numbering scheme.
      */
-    epoch?: number | null;
+    epoch?: number;
     /**
      * Distinguish between sentinel MIN/MAX versions and normal versions. If kind is not NORMAL, then the other fields are ignored.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The main part of the version name.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The iteration of the package build from the above version.
      */
-    revision?: string | null;
+    revision?: string;
   }
   /**
    * Used by Occurrence to point to where the vulnerability exists and how to fix it.
@@ -1315,11 +1270,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Output only. The CVSS score of this vulnerability. CVSS score is on a scale of 0-10 where 0 indicates low severity and 10 indicates high severity.
      */
-    cvssScore?: number | null;
+    cvssScore?: number;
     /**
      * The distro assigned severity for this vulnerability when that is available and note provider assigned severity when distro has not yet assigned a severity for this vulnerability.
      */
-    effectiveSeverity?: string | null;
+    effectiveSeverity?: string;
     /**
      * The set of affected locations and their fixes (if available) within the associated resource.
      */
@@ -1327,11 +1282,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Output only. The note provider assigned Severity of the vulnerability.
      */
-    severity?: string | null;
+    severity?: string;
     /**
      * The type of package; whether native or non native(ruby gems, node.js packages etc)
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * The location of the vulnerability
@@ -1340,11 +1295,11 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The cpe_uri in [cpe format] (https://cpe.mitre.org/specification/) format. Examples include distro or storage location for vulnerable jar. This field can be used as a filter in list requests.
      */
-    cpeUri?: string | null;
+    cpeUri?: string;
     /**
      * The package being described.
      */
-    package?: string | null;
+    package?: string;
     /**
      * The version of the package being described. This field can be used as a filter in list requests.
      */
@@ -1357,7 +1312,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * The CVSS score for this Vulnerability.
      */
-    cvssScore?: number | null;
+    cvssScore?: number;
     /**
      * All information about the package to specifically identify this vulnerability. One entry per (version range and cpe_uri) the package vulnerability has manifested in.
      */
@@ -1365,7 +1320,7 @@ export namespace containeranalysis_v1alpha1 {
     /**
      * Note provider assigned impact of the vulnerability
      */
-    severity?: string | null;
+    severity?: string;
   }
 
   export class Resource$Projects {
@@ -1401,7 +1356,7 @@ export namespace containeranalysis_v1alpha1 {
      * @param {string=} params.name The name of the project. Should be of the form "providers/{provider_id}". @Deprecated
      * @param {string=} params.noteId The ID to use for this note.
      * @param {string} params.parent This field contains the project Id for example: "projects/{project_id}
-     * @param {().Note} params.requestBody Request body data
+     * @param {().Note} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1615,7 +1570,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().GetIamPolicyRequest} params.requestBody Request body data
+     * @param {().GetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1769,7 +1724,7 @@ export namespace containeranalysis_v1alpha1 {
      * @param {object} params Parameters for request
      * @param {string} params.name The name of the note. Should be of the form "projects/{provider_id}/notes/{note_id}".
      * @param {string=} params.updateMask The fields to update.
-     * @param {().Note} params.requestBody Request body data
+     * @param {().Note} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1840,7 +1795,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1914,7 +1869,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2272,7 +2227,7 @@ export namespace containeranalysis_v1alpha1 {
      * @param {object} params Parameters for request
      * @param {string=} params.name The name of the project.  Should be of the form "projects/{project_id}". @Deprecated
      * @param {string} params.parent This field contains the project Id for example: "projects/{project_id}"
-     * @param {().Occurrence} params.requestBody Request body data
+     * @param {().Occurrence} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2490,7 +2445,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().GetIamPolicyRequest} params.requestBody Request body data
+     * @param {().GetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2804,7 +2759,7 @@ export namespace containeranalysis_v1alpha1 {
      * @param {object} params Parameters for request
      * @param {string} params.name The name of the occurrence. Should be of the form "projects/{project_id}/occurrences/{OCCURRENCE_ID}".
      * @param {string=} params.updateMask The fields to update.
-     * @param {().Occurrence} params.requestBody Request body data
+     * @param {().Occurrence} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2877,7 +2832,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2951,7 +2906,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3219,7 +3174,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent The project Id that this operation should be created under.
-     * @param {().CreateOperationRequest} params.requestBody Request body data
+     * @param {().CreateOperationRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3295,7 +3250,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The name of the Operation. Should be of the form "projects/{provider_id}/operations/{operation_id}".
-     * @param {().UpdateOperationRequest} params.requestBody Request body data
+     * @param {().UpdateOperationRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3563,7 +3518,7 @@ export namespace containeranalysis_v1alpha1 {
      * @param {object} params Parameters for request
      * @param {string} params.name The scan config to update of the form projects/{project_id}/scanConfigs/{scan_config_id}.
      * @param {string=} params.updateMask The fields to update.
-     * @param {().ScanConfig} params.requestBody Request body data
+     * @param {().ScanConfig} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3714,7 +3669,7 @@ export namespace containeranalysis_v1alpha1 {
      * @param {string} params.name The name of the project. Should be of the form "providers/{provider_id}". @Deprecated
      * @param {string=} params.noteId The ID to use for this note.
      * @param {string=} params.parent This field contains the project Id for example: "projects/{project_id}
-     * @param {().Note} params.requestBody Request body data
+     * @param {().Note} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3928,7 +3883,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().GetIamPolicyRequest} params.requestBody Request body data
+     * @param {().GetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4082,7 +4037,7 @@ export namespace containeranalysis_v1alpha1 {
      * @param {object} params Parameters for request
      * @param {string} params.name The name of the note. Should be of the form "projects/{provider_id}/notes/{note_id}".
      * @param {string=} params.updateMask The fields to update.
-     * @param {().Note} params.requestBody Request body data
+     * @param {().Note} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4153,7 +4108,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4227,7 +4182,7 @@ export namespace containeranalysis_v1alpha1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

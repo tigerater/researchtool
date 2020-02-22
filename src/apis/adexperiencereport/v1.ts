@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -118,61 +120,61 @@ export namespace adexperiencereport_v1 {
   }
 
   /**
-   * A site&#39;s Ad Experience Report summary on a single platform.
+   * Summary of the ad experience rating of a site for a specific platform.
    */
   export interface Schema$PlatformSummary {
     /**
-     * The site&#39;s Ad Experience Report status on this platform.
+     * The status of the site reviewed for the Better Ads Standards.
      */
-    betterAdsStatus?: string | null;
+    betterAdsStatus?: string;
     /**
-     * The time at which [enforcement](https://support.google.com/webtools/answer/7308033) against the site began or will begin on this platform.  Not set when the filter_status is OFF.
+     * The date on which ad filtering begins.
      */
-    enforcementTime?: string | null;
+    enforcementTime?: string;
     /**
-     * The site&#39;s [enforcement status](https://support.google.com/webtools/answer/7308033) on this platform.
+     * The ad filtering status of the site.
      */
-    filterStatus?: string | null;
+    filterStatus?: string;
     /**
-     * The time at which the site&#39;s status last changed on this platform.
+     * The last time that the site changed status.
      */
-    lastChangeTime?: string | null;
+    lastChangeTime?: string;
     /**
-     * The site&#39;s regions on this platform.  No longer populated, because there is no longer any semantic difference between sites in different regions.
+     * The assigned regions for the site and platform.
      */
-    region?: string[] | null;
+    region?: string[];
     /**
-     * A link to the full Ad Experience Report for the site on this platform..  Not set in ViolatingSitesResponse.  Note that you must complete the [Search Console verification process](https://support.google.com/webmasters/answer/9008080) for the site before you can access the full report.
+     * A link that leads to a full ad experience report.
      */
-    reportUrl?: string | null;
+    reportUrl?: string;
     /**
-     * Whether the site is currently under review on this platform.
+     * Whether the site is currently under review.
      */
-    underReview?: boolean | null;
+    underReview?: boolean;
   }
   /**
    * Response message for GetSiteSummary.
    */
   export interface Schema$SiteSummaryResponse {
     /**
-     * The site&#39;s Ad Experience Report summary on desktop.
+     * Summary for the desktop review of the site.
      */
     desktopSummary?: Schema$PlatformSummary;
     /**
-     * The site&#39;s Ad Experience Report summary on mobile.
+     * Summary for the mobile review of the site.
      */
     mobileSummary?: Schema$PlatformSummary;
     /**
-     * The name of the reviewed site, e.g. `google.com`.
+     * The name of the site reviewed.
      */
-    reviewedSite?: string | null;
+    reviewedSite?: string;
   }
   /**
    * Response message for ListViolatingSites.
    */
   export interface Schema$ViolatingSitesResponse {
     /**
-     * The list of violating sites.
+     * A list of summaries of violating sites.
      */
     violatingSites?: Schema$SiteSummaryResponse[];
   }
@@ -185,12 +187,12 @@ export namespace adexperiencereport_v1 {
 
     /**
      * adexperiencereport.sites.get
-     * @desc Gets a site's Ad Experience Report summary.
+     * @desc Gets a summary of the ad experience rating of a site.
      * @alias adexperiencereport.sites.get
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the site whose summary to get, e.g. `sites/http%3A%2F%2Fwww.google.com%2F`.  Format: `sites/{site}`
+     * @param {string} params.name The required site name. It should be the site property whose ad experiences may have been reviewed, and it should be URL-encoded. For example, sites/https%3A%2F%2Fwww.google.com. The server will return an error of BAD_REQUEST if this field is not filled in. Note that if the site property is not yet verified in Search Console, the reportUrl field returned by the API will lead to the verification page, prompting the user to go through that process before they can gain access to the Ad Experience Report.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -262,7 +264,7 @@ export namespace adexperiencereport_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the site whose summary to get, e.g. `sites/http%3A%2F%2Fwww.google.com%2F`.  Format: `sites/{site}`
+     * The required site name. It should be the site property whose ad experiences may have been reviewed, and it should be URL-encoded. For example, sites/https%3A%2F%2Fwww.google.com. The server will return an error of BAD_REQUEST if this field is not filled in. Note that if the site property is not yet verified in Search Console, the reportUrl field returned by the API will lead to the verification page, prompting the user to go through that process before they can gain access to the Ad Experience Report.
      */
     name?: string;
   }
@@ -275,7 +277,7 @@ export namespace adexperiencereport_v1 {
 
     /**
      * adexperiencereport.violatingSites.list
-     * @desc Lists sites that are failing in the Ad Experience Report on at least one platform.
+     * @desc Lists sites with Ad Experience Report statuses of "Failing" or "Warning".
      * @alias adexperiencereport.violatingSites.list
      * @memberOf! ()
      *

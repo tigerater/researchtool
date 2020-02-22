@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -116,7 +118,7 @@ export namespace healthcare_v1beta1 {
   }
 
   /**
-   * Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.  If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.  Example Policy with multiple AuditConfigs:      {       &quot;audit_configs&quot;: [         {           &quot;service&quot;: &quot;allServices&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,               &quot;exempted_members&quot;: [                 &quot;user:jose@example.com&quot;               ]             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,             },             {               &quot;log_type&quot;: &quot;ADMIN_READ&quot;,             }           ]         },         {           &quot;service&quot;: &quot;sampleservice.googleapis.com&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,               &quot;exempted_members&quot;: [                 &quot;user:aliya@example.com&quot;               ]             }           ]         }       ]     }  For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts jose@example.com from DATA_READ logging, and aliya@example.com from DATA_WRITE logging.
+   * Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.  If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.  Example Policy with multiple AuditConfigs:      {       &quot;audit_configs&quot;: [         {           &quot;service&quot;: &quot;allServices&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,               &quot;exempted_members&quot;: [                 &quot;user:foo@gmail.com&quot;               ]             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,             },             {               &quot;log_type&quot;: &quot;ADMIN_READ&quot;,             }           ]         },         {           &quot;service&quot;: &quot;fooservice.googleapis.com&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,               &quot;exempted_members&quot;: [                 &quot;user:bar@gmail.com&quot;               ]             }           ]         }       ]     }  For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
    */
   export interface Schema$AuditConfig {
     /**
@@ -126,20 +128,20 @@ export namespace healthcare_v1beta1 {
     /**
      * Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    service?: string | null;
+    service?: string;
   }
   /**
-   * Provides the configuration for logging a type of permissions. Example:      {       &quot;audit_log_configs&quot;: [         {           &quot;log_type&quot;: &quot;DATA_READ&quot;,           &quot;exempted_members&quot;: [             &quot;user:jose@example.com&quot;           ]         },         {           &quot;log_type&quot;: &quot;DATA_WRITE&quot;,         }       ]     }  This enables &#39;DATA_READ&#39; and &#39;DATA_WRITE&#39; logging, while exempting jose@example.com from DATA_READ logging.
+   * Provides the configuration for logging a type of permissions. Example:      {       &quot;audit_log_configs&quot;: [         {           &quot;log_type&quot;: &quot;DATA_READ&quot;,           &quot;exempted_members&quot;: [             &quot;user:foo@gmail.com&quot;           ]         },         {           &quot;log_type&quot;: &quot;DATA_WRITE&quot;,         }       ]     }  This enables &#39;DATA_READ&#39; and &#39;DATA_WRITE&#39; logging, while exempting foo@gmail.com from DATA_READ logging.
    */
   export interface Schema$AuditLogConfig {
     /**
      * Specifies the identities that do not cause logging for this type of permission. Follows the same format of Binding.members.
      */
-    exemptedMembers?: string[] | null;
+    exemptedMembers?: string[];
     /**
      * The log type that this config enables.
      */
-    logType?: string | null;
+    logType?: string;
   }
   /**
    * Associates `members` with a `role`.
@@ -150,13 +152,13 @@ export namespace healthcare_v1beta1 {
      */
     condition?: Schema$Expr;
     /**
-     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@example.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.  * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a user that has been recently deleted. For    example, `alice@example.com?uid=123456789012345678901`. If the user is    recovered, this value reverts to `user:{emailid}` and the recovered user    retains the role in the binding.  * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus    unique identifier) representing a service account that has been recently    deleted. For example,    `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`.    If the service account is undeleted, this value reverts to    `serviceAccount:{emailid}` and the undeleted service account retains the    role in the binding.  * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a Google group that has been recently    deleted. For example, `admins@example.com?uid=123456789012345678901`. If    the group is recovered, this value reverts to `group:{emailid}` and the    recovered group retains the role in the binding.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@gmail.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
      */
-    members?: string[] | null;
+    members?: string[];
     /**
      * Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
      */
-    role?: string | null;
+    role?: string;
   }
   /**
    * Mask a string by replacing its characters with a fixed character.
@@ -165,7 +167,7 @@ export namespace healthcare_v1beta1 {
     /**
      * Character to mask the sensitive values. If not supplied, defaults to &quot;*&quot;.
      */
-    maskingCharacter?: string | null;
+    maskingCharacter?: string;
   }
   /**
    * Creates a new message.
@@ -181,9 +183,9 @@ export namespace healthcare_v1beta1 {
    */
   export interface Schema$CryptoHashConfig {
     /**
-     * An AES 128/192/256 bit key. Causes the hash to be computed based on this key. A default key is generated for each Deidentify operation and is used wherever crypto_key is not specified.
+     * An AES 128/192/256 bit key. Causes the hash to be computed based on this key. A default key is generated for each DeidentifyDataset operation and is used wherever crypto_key is not specified.
      */
-    cryptoKey?: string | null;
+    cryptoKey?: string;
   }
   /**
    * A message representing a health dataset.  A health dataset represents a collection of healthcare data pertaining to one or more patients. This may include multiple modalities of healthcare data, such as electronic medical records or medical imaging data.
@@ -192,20 +194,20 @@ export namespace healthcare_v1beta1 {
     /**
      * Output only. Resource name of the dataset, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * The default timezone used by this dataset. Must be a either a valid IANA time zone name such as &quot;America/New_York&quot; or empty, which defaults to UTC. This is used for parsing times in resources, such as HL7 messages, where no explicit timezone is specified.
+     * The default timezone used by this dataset. Must be a either a valid IANA time zone name such as &quot;America/New_York&quot; or empty, which defaults to UTC. This is used for parsing times in resources (e.g., HL7 messages) where no explicit timezone is specified.
      */
-    timeZone?: string | null;
+    timeZone?: string;
   }
   /**
    * Shift a date forward or backward in time by a random amount which is consistent for a given patient and crypto key combination.
    */
   export interface Schema$DateShiftConfig {
     /**
-     * An AES 128/192/256 bit key. Causes the shift to be computed based on this key and the patient ID. A default key is generated for each Deidentify operation and is used wherever crypto_key is not specified.
+     * An AES 128/192/256 bit key. Causes the shift to be computed based on this key and the patient ID. A default key is generated for each DeidentifyDataset operation and is used wherever crypto_key is not specified.
      */
-    cryptoKey?: string | null;
+    cryptoKey?: string;
   }
   /**
    * Configures de-id options specific to different types of content. Each submessage customizes the handling of an https://tools.ietf.org/html/rfc6838 media type or subtype. Configs are applied in a nested manner at runtime.
@@ -237,81 +239,43 @@ export namespace healthcare_v1beta1 {
      */
     config?: Schema$DeidentifyConfig;
     /**
-     * The name of the dataset resource to create and write the redacted data to.   * The destination dataset must not exist.  * The destination dataset must be in the same project as the source    dataset. De-identifying data across multiple projects is not supported.
+     * The name of the dataset resource to create and write the redacted data to (e.g.,   * The destination dataset must not exist.  * The destination dataset must be in the same project as the source    dataset. De-identifying data across multiple projects is not supported.
      */
-    destinationDataset?: string | null;
-  }
-  /**
-   * Creates a new DICOM store with sensitive information de-identified.
-   */
-  export interface Schema$DeidentifyDicomStoreRequest {
-    /**
-     * De-identify configuration.
-     */
-    config?: Schema$DeidentifyConfig;
-    /**
-     * The name of the DICOM store to create and write the redacted data to. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.   * The destination dataset must exist.  * The source dataset and destination dataset must both reside in the same    project. De-identifying data across multiple projects is not supported.  * The destination DICOM store must not exist.  * The caller must have the necessary permissions to create the destination    DICOM store.
-     */
-    destinationStore?: string | null;
-    /**
-     * Filter configuration.
-     */
-    filterConfig?: Schema$DicomFilterConfig;
+    destinationDataset?: string;
   }
   /**
    * Contains the status of the Deidentify operation.
    */
   export interface Schema$DeidentifyErrorDetails {
     /**
-     * Number of resources that failed to process.
+     * Number of resources failed to process.
      */
-    failureResourceCount?: string | null;
+    failureResourceCount?: string;
     /**
-     * Number of stores that failed to process.
+     * Number of stores failed to process.
      */
-    failureStoreCount?: string | null;
+    failureStoreCount?: string;
     /**
      * Number of resources successfully processed.
      */
-    successResourceCount?: string | null;
+    successResourceCount?: string;
     /**
      * Number of stores successfully processed.
      */
-    successStoreCount?: string | null;
-  }
-  /**
-   * Creates a new FHIR store with sensitive information de-identified.
-   */
-  export interface Schema$DeidentifyFhirStoreRequest {
-    /**
-     * Deidentify configuration.
-     */
-    config?: Schema$DeidentifyConfig;
-    /**
-     * The name of the FHIR store to create and write the redacted data to. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.   * The destination dataset must exist.  * The source dataset and destination dataset must both reside in the same    project. De-identifying data across multiple projects is not supported.  * The destination FHIR store must not exist.  * The caller must have the necessary permissions to create the destination    FHIR store.
-     */
-    destinationStore?: string | null;
-    /**
-     * A filter specifying the resources to include in the output. If not specified, all resources are included in the output.
-     */
-    resourceFilter?: Schema$FhirFilter;
+    successStoreCount?: string;
   }
   /**
    * Contains a detailed summary of the Deidentify operation.
    */
   export interface Schema$DeidentifySummary {
     /**
-     * Number of resources that failed to process. The failures might be caused by:    * Invalid user input data   * Transient errors that could be skipped
-     */
-    failureResourceCount?: string | null;
-    /**
      * Number of resources successfully processed.
      */
-    successResourceCount?: string | null;
+    successResourceCount?: string;
     /**
      * Number of stores successfully processed.
      */
-    successStoreCount?: string | null;
+    successStoreCount?: string;
   }
   /**
    * Specifies the parameters needed for de-identification of DICOM stores.
@@ -320,7 +284,7 @@ export namespace healthcare_v1beta1 {
     /**
      * Tag filtering profile that determines which tags to keep/remove.
      */
-    filterProfile?: string | null;
+    filterProfile?: string;
     /**
      * List of tags to keep. Remove all other tags.
      */
@@ -329,19 +293,6 @@ export namespace healthcare_v1beta1 {
      * List of tags to remove. Keep all other tags.
      */
     removeList?: Schema$TagFilterList;
-    /**
-     * If true, skip replacing StudyInstanceUID, SeriesInstanceUID, SOPInstanceUID, and MediaStorageSOPInstanceUID and leave them untouched. The Cloud Healthcare API regenerates these UIDs by default based on the DICOM Standard&#39;s reasoning: &quot;Whilst these UIDs cannot be mapped directly to an individual out of context, given access to the original images, or to a database of the original images containing the UIDs, it would be possible to recover the individual&#39;s identity.&quot; http://dicom.nema.org/medical/dicom/current/output/chtml/part15/sect_E.3.9.html
-     */
-    skipIdRedaction?: boolean | null;
-  }
-  /**
-   * Specifies the filter configuration for DICOM resources.
-   */
-  export interface Schema$DicomFilterConfig {
-    /**
-     * The Cloud Storage location of the filter configuration file. The `gcs_uri` must be in the format `gs://bucket/path/to/object`. The filter configuration file must contain a list of resource paths separated by newline characters (x/ or \rx/). Each resource path must be in the format &quot;/studies/{studyUID}[/series/{seriesUID}[/instances/{instanceUID}]]&quot;  The Cloud Healthcare API service account must have the `roles/storage.objectViewer` Cloud IAM role for this Cloud Storage location.
-     */
-    resourcePathsGcsUri?: string | null;
   }
   /**
    * Represents a DICOM store.
@@ -350,11 +301,11 @@ export namespace healthcare_v1beta1 {
     /**
      * User-supplied key-value pairs used to organize DICOM stores.  Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}{0,62}  Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63}  No more than 64 labels can be associated with a given store.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Output only. Resource name of the DICOM store, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Notification destination for new DICOM instances. Supplied by the client.
      */
@@ -375,14 +326,14 @@ export namespace healthcare_v1beta1 {
     /**
      * The identifier of the resource.
      */
-    resource?: string | null;
+    resource?: string;
   }
   /**
-   * Exports data from the specified DICOM store. If a given resource, such as a DICOM object with the same SOPInstance UID, already exists in the output, it is overwritten with the version in the source dataset. Exported DICOM data persists when the DICOM store from which it was exported is deleted.
+   * Exports data from the specified DICOM store. If a given resource (e.g., a DICOM object with the same SOPInstance UID) already exists in the output, it is overwritten with the version in the source dataset. Exported DICOM data will persist when the DICOM store from which it was exported is deleted.
    */
   export interface Schema$ExportDicomDataRequest {
     /**
-     * The BigQuery output destination.  You can only export to a BigQuery dataset that&#39;s in the same project as the DICOM store you&#39;re exporting from.  The BigQuery location requires two IAM roles: `roles/bigquery.dataEditor` and `roles/bigquery.jobUser`.
+     * The BigQuery output destination.  For now, only exporting to a dataset in the current project is supported  The BigQuery location requires two IAM roles: `roles/bigquery.dataEditor` and `roles/bigquery.jobUser`.
      */
     bigqueryDestination?: Schema$GoogleCloudHealthcareV1beta1DicomBigQueryDestination;
     /**
@@ -410,70 +361,61 @@ export namespace healthcare_v1beta1 {
     /**
      * An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Textual representation of an expression in Common Expression Language syntax.  The application context of the containing message determines which well-known feature set of CEL is supported.
      */
-    expression?: string | null;
+    expression?: string;
     /**
      * An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
      */
-    location?: string | null;
+    location?: string;
     /**
      * An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
-   * Specifies how to handle de-identification of a FHIR store.
+   * Specifies how de-identification of a FHIR store should be handled.
    */
   export interface Schema$FhirConfig {
     /**
-     * Specifies FHIR paths to match and how to transform them. Any field that is not matched by a FieldMetadata is passed through to the output dataset unmodified. All extensions are removed in the output.
+     * Specifies FHIR paths to match and how to transform them. Any field that is not matched by a FieldMetadata will be passed through to the output dataset unmodified. All extensions are removed in the output.
      */
     fieldMetadataList?: Schema$FieldMetadata[];
-  }
-  /**
-   * Filter configuration.
-   */
-  export interface Schema$FhirFilter {
-    /**
-     * List of resources to include in the output. If this list is empty or not specified, all resources are included in the output.
-     */
-    resources?: Schema$Resources;
   }
   /**
    * Represents a FHIR store.
    */
   export interface Schema$FhirStore {
     /**
-     * Whether to disable referential integrity in this FHIR store. This field is immutable after FHIR store creation. The default value is false, meaning that the API enforces referential integrity and fails the requests that result in inconsistent state in the FHIR store. When this field is set to true, the API skips referential integrity checks. Consequently, operations that rely on references, such as GetPatientEverything, do not return all the results if broken references exist.
+     * Whether to disable referential integrity in this FHIR store. This field is immutable after FHIR store creation. The default value is false, meaning that the API will enforce referential integrity and fail the requests that will result in inconsistent state in the FHIR store. When this field is set to true, the API will skip referential integrity check. Consequently, operations that rely on references, such as GetPatientEverything, will not return all the results if broken references exist.
      */
-    disableReferentialIntegrity?: boolean | null;
+    disableReferentialIntegrity?: boolean;
     /**
-     * Whether to disable resource versioning for this FHIR store. This field can not be changed after the creation of FHIR store. If set to false, which is the default behavior, all write operations cause historical versions to be recorded automatically. The historical versions can be fetched through the history APIs, but cannot be updated. If set to true, no historical versions are kept. The server sends errors for attempts to read the historical versions.
+     * Whether to disable resource versioning for this FHIR store. This field can not be changed after the creation of FHIR store. If set to false, which is the default behavior, all write operations will cause historical versions to be recorded automatically. The historical versions can be fetched through the history APIs, but cannot be updated. If set to true, no historical versions will be kept. The server will send back errors for attempts to read the historical versions.
      */
-    disableResourceVersioning?: boolean | null;
+    disableResourceVersioning?: boolean;
     /**
-     * Whether this FHIR store has the [updateCreate capability](https://www.hl7.org/fhir/capabilitystatement-definitions.html#CapabilityStatement.rest.resource.updateCreate). This determines if the client can use an Update operation to create a new resource with a client-specified ID. If false, all IDs are server-assigned through the Create operation and attempts to update a non-existent resource return errors. Please treat the audit logs with appropriate levels of care if client-specified resource IDs contain sensitive data such as patient identifiers, those IDs are part of the FHIR resource path recorded in Cloud audit logs and Cloud Pub/Sub notifications.
+     * Whether to allow the bulk import API to accept history bundles and directly insert historical resource versions into the FHIR store. Importing resource histories creates resource interactions that appear to have occurred in the past, which clients may not want to allow. If set to false, history bundles within an import will fail with an error.
      */
-    enableUpdateCreate?: boolean | null;
+    enableHistoryImport?: boolean;
+    /**
+     * Whether this FHIR store has the [updateCreate capability](https://www.hl7.org/fhir/capabilitystatement-definitions.html#CapabilityStatement.rest.resource.updateCreate). This determines if the client can use an Update operation to create a new resource with a client-specified ID. If false, all IDs are server-assigned through the Create operation and attempts to Update a non-existent resource will return errors. Please treat the audit logs with appropriate levels of care if client-specified resource IDs contain sensitive data such as patient identifiers, those IDs will be part of the FHIR resource path recorded in Cloud audit logs and Cloud Pub/Sub notifications.
+     */
+    enableUpdateCreate?: boolean;
     /**
      * User-supplied key-value pairs used to organize FHIR stores.  Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}{0,62}  Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63}  No more than 64 labels can be associated with a given store.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Output only. Resource name of the FHIR store, of the form `projects/{project_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * If non-empty, publish all resource modifications of this FHIR store to this destination. The Cloud Pub/Sub message attributes contain a map with a string describing the action that has triggered the notification. For example, &quot;action&quot;:&quot;CreateResource&quot;.
+     * If non-empty, publish all resource modifications of this FHIR store to this destination. The Cloud Pub/Sub message attributes will contain a map with a string describing the action that has triggered the notification, e.g. &quot;action&quot;:&quot;CreateResource&quot;.
      */
     notificationConfig?: Schema$NotificationConfig;
-    /**
-     * The FHIR specification version that this FHIR store supports natively. This field is immutable after store creation. Requests are rejected if they contain FHIR resources of a different version. An empty value is treated as STU3.
-     */
-    version?: string | null;
   }
   /**
    * Specifies FHIR paths to match, and how to handle de-identification of matching fields.
@@ -482,59 +424,37 @@ export namespace healthcare_v1beta1 {
     /**
      * Deidentify action for one field.
      */
-    action?: string | null;
+    action?: string;
     /**
-     * List of paths to FHIR fields to be redacted. Each path is a period-separated list where each component is either a field name or FHIR type name, for example: Patient, HumanName. For &quot;choice&quot; types (those defined in the FHIR spec with the form: field[x]) we use two separate components. For example, &quot;deceasedAge.unit&quot; is matched by &quot;Deceased.Age.unit&quot;. Supported types are: AdministrativeGenderCode, Code, Date, DateTime, Decimal, HumanName, Id, LanguageCode, Markdown, Oid, String, Uri, Uuid, Xhtml.
+     * List of paths to FHIR fields to be redacted. Each path is a period-separated list where each component is either a field name or FHIR type name, for example: Patient, HumanName. For &quot;choice&quot; types (those defined in the FHIR spec with the form: field[x]) we use two separate components. e.g. &quot;deceasedAge.unit&quot; is matched by &quot;Deceased.Age.unit&quot;. Supported types are: AdministrativeGenderCode, Code, Date, DateTime, Decimal, HumanName, Id, LanguageCode, Markdown, MimeTypeCode, Oid, String, Uri, Uuid, Xhtml.
      */
-    paths?: string[] | null;
+    paths?: string[];
   }
   /**
-   * Contains a summary of the DeidentifyDicomStore operation.
-   */
-  export interface Schema$GoogleCloudHealthcareV1beta1DeidentifyDeidentifyDicomStoreSummary {
-    /**
-     * Number of objects that processing failed for.
-     */
-    failureResourceCount?: string | null;
-    /**
-     * Number of objects successfully processed.
-     */
-    successResourceCount?: string | null;
-  }
-  /**
-   * Contains a summary of the DeidentifyFhirStore operation.
-   */
-  export interface Schema$GoogleCloudHealthcareV1beta1DeidentifyDeidentifyFhirStoreSummary {
-    /**
-     * Number of resources successfully processed.
-     */
-    successResourceCount?: string | null;
-  }
-  /**
-   * The BigQuery table where the server writes the output.
+   * The BigQuery table where the output should be written.
    */
   export interface Schema$GoogleCloudHealthcareV1beta1DicomBigQueryDestination {
     /**
-     * If the destination table already exists and this flag is `TRUE`, the table is overwritten by the contents of the DICOM store. If the flag is not set and the destination table already exists, the export call returns an error.
+     * If the destination table already exists and this flag is `TRUE`, the table will be overwritten by the contents of the DICOM store. If the flag is not set and the destination table already exists, the export call returns an error.
      */
-    force?: boolean | null;
+    force?: boolean;
     /**
      * BigQuery URI to a table, up to 2000 characters long, in the format `bq://projectId.bqDatasetId.tableId`
      */
-    tableUri?: string | null;
+    tableUri?: string;
   }
   /**
-   * The Cloud Storage location where the server writes the output and the export configuration.
+   * The Cloud Storage location where the output should be written, and the export configuration.
    */
   export interface Schema$GoogleCloudHealthcareV1beta1DicomGcsDestination {
     /**
-     * MIME types supported by DICOM spec. Each file is written in the following format: `.../{study_id}/{series_id}/{instance_id}[/{frame_number}].{extension}` The frame_number component exists only for multi-frame instances.  Refer to the DICOM conformance statement for permissible MIME types: https://cloud.google.com/healthcare/docs/dicom#wado-rs  The following extensions are used for output files:   application/dicom -&gt; .dcm   image/jpeg -&gt; .jpg   image/png -&gt; .png  If unspecified, the instances are exported in their original DICOM format.
+     * MIME types supported by DICOM spec. Each file will be written in the following format: `.../{study_id}/{series_id}/{instance_id}[/{frame_number}].{extension}` The frame_number component will exist only for multi-frame instances.  Refer to the DICOM conformance statement for permissible MIME types: https://cloud.google.com/healthcare/docs/dicom#wado-rs  The following extensions will be used for output files:   application/dicom -&gt; .dcm   image/jpeg -&gt; .jpg   image/png -&gt; .png  If unspecified, the instances will be exported in their original DICOM format.
      */
-    mimeType?: string | null;
+    mimeType?: string;
     /**
-     * The Cloud Storage destination to export to.  URI for a Cloud Storage directory where the server writes the result files, in the format `gs://{bucket-id}/{path/to/destination/dir}`). If there is no trailing slash, the service appends one when composing the object path. The user is responsible for creating the Cloud Storage bucket referenced in `uri_prefix`.
+     * The Cloud Storage destination to export to.  URI for a Cloud Storage directory where result files should be written (in the format `gs://{bucket-id}/{path/to/destination/dir}`). If there is no trailing slash, the service will append one when composing the object path. The user is responsible for creating the Cloud Storage bucket referenced in `uri_prefix`.
      */
-    uriPrefix?: string | null;
+    uriPrefix?: string;
   }
   /**
    * Specifies the configuration for importing data from Cloud Storage.
@@ -543,7 +463,7 @@ export namespace healthcare_v1beta1 {
     /**
      * Points to a Cloud Storage URI containing file(s) with content only. The URI must be in the following format: `gs://{bucket_id}/{object_id}`. The URI can include wildcards in `object_id` and thus identify multiple files. Supported wildcards:  &#39;*&#39; to match 0 or more non-separator characters  &#39;**&#39; to match 0 or more characters (including separators). Must be used at       the end of a path and with no other wildcards in the       path. Can also be used with a file extension (such as .dcm), which       imports all files with the extension in the specified directory and       its sub-directories. For example,       `gs://my-bucket/my-directory/**.dcm` imports all files with .dcm       extensions in `my-directory/` and its sub-directories.  &#39;?&#39; to match 1 character All other URI formats are invalid. Files matching the wildcard are expected to contain content only, no metadata.
      */
-    uri?: string | null;
+    uri?: string;
   }
   /**
    * The configuration for exporting to BigQuery.
@@ -552,49 +472,24 @@ export namespace healthcare_v1beta1 {
     /**
      * BigQuery URI to a dataset, up to 2000 characters long, in the format `bq://projectId.bqDatasetId`
      */
-    datasetUri?: string | null;
-    /**
-     * If this flag is `TRUE`, all tables will be deleted from the dataset before the new exported tables are written. If the flag is not set and the destination dataset contains tables, the export call returns an error.
-     */
-    force?: boolean | null;
+    datasetUri?: string;
     /**
      * The configuration for the exported BigQuery schema.
      */
     schemaConfig?: Schema$SchemaConfig;
   }
   /**
-   * Response when errors occur while exporting resources. This structure is included in the error details to describe the detailed outcome. It is only included when the operation finishes with errors.
-   */
-  export interface Schema$GoogleCloudHealthcareV1beta1FhirRestExportResourcesErrorDetails {
-    /**
-     * The number of resources that had errors.
-     */
-    errorCount?: string | null;
-    /**
-     * The name of the FHIR store where resources have been exported, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
-     */
-    fhirStore?: string | null;
-    /**
-     * The total number of resources included in the export operation. This is the sum of the success and error counts.
-     */
-    resourceCount?: string | null;
-    /**
-     * The number of resources that were exported.
-     */
-    successCount?: string | null;
-  }
-  /**
-   * Response when all resources export successfully. This structure will be included in the response to describe the detailed outcome. It will only be included when the operation finishes successfully.
+   * Final response of exporting resources. This structure will be included in the response to describe the detailed outcome. It will only be included when the operation finishes.
    */
   export interface Schema$GoogleCloudHealthcareV1beta1FhirRestExportResourcesResponse {
     /**
      * The name of the FHIR store where resources have been exported, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
      */
-    fhirStore?: string | null;
+    fhirStore?: string;
     /**
      * The total number of resources exported from the requested FHIR store.
      */
-    resourceCount?: string | null;
+    resourceCount?: string;
   }
   /**
    * The configuration for exporting to Cloud Storage.
@@ -603,7 +498,7 @@ export namespace healthcare_v1beta1 {
     /**
      * URI for a Cloud Storage directory where result files should be written (in the format `gs://{bucket-id}/{path/to/destination/dir}`). If there is no trailing slash, the service will append one when composing the object path. The user is responsible for creating the Cloud Storage bucket referenced in `uri_prefix`.
      */
-    uriPrefix?: string | null;
+    uriPrefix?: string;
   }
   /**
    * Specifies the configuration for importing data from Cloud Storage.
@@ -612,7 +507,7 @@ export namespace healthcare_v1beta1 {
     /**
      * Points to a Cloud Storage URI containing file(s) to import.  The URI must be in the following format: `gs://{bucket_id}/{object_id}`. The URI can include wildcards in `object_id` and thus identify multiple files. Supported wildcards:  *  `*` to match 0 or more non-separator characters *  `**` to match 0 or more characters (including separators). Must be used at the end of a path and with no other wildcards in the path. Can also be used with a file extension (such as .ndjson), which imports all files with the extension in the specified directory and its sub-directories. For example, `gs://my-bucket/my-directory/**.ndjson` imports all files with `.ndjson` extensions in `my-directory/` and its sub-directories. *  `?` to match 1 character  Files matching the wildcard are expected to contain content only, no metadata.
      */
-    uri?: string | null;
+    uri?: string;
   }
   /**
    * Error response of importing resources. This structure will be included in the error details to describe the detailed error. It will only be included when the operation finishes with some failure.
@@ -621,19 +516,19 @@ export namespace healthcare_v1beta1 {
     /**
      * The number of resources that had errors.
      */
-    errorCount?: string | null;
+    errorCount?: string;
     /**
      * The name of the FHIR store where resources have been imported, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
      */
-    fhirStore?: string | null;
+    fhirStore?: string;
     /**
      * The total number of resources included in the source data. This is the sum of the success and error counts.
      */
-    inputSize?: string | null;
+    inputSize?: string;
     /**
      * The number of resources that have been imported.
      */
-    successCount?: string | null;
+    successCount?: string;
   }
   /**
    * Final response of importing resources. This structure will be included in the response to describe the detailed outcome. It will only be included when the operation finishes successfully.
@@ -642,11 +537,11 @@ export namespace healthcare_v1beta1 {
     /**
      * The name of the FHIR store where the resources have been imported, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
      */
-    fhirStore?: string | null;
+    fhirStore?: string;
     /**
      * The total number of resources included in the source data.
      */
-    inputSize?: string | null;
+    inputSize?: string;
   }
   /**
    * Represents an HL7v2 store.
@@ -655,13 +550,13 @@ export namespace healthcare_v1beta1 {
     /**
      * User-supplied key-value pairs used to organize HL7v2 stores.  Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}{0,62}  Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63}  No more than 64 labels can be associated with a given store.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Output only. Resource name of the HL7v2 store, of the form `projects/{project_id}/datasets/{dataset_id}/hl7V2Stores/{hl7v2_store_id}`.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * The notification destination all messages (both Ingest &amp; Create) are published on. Only the message name is sent as part of the notification. If this is unset, no notifications are sent. Supplied by the client.
+     * The notification destination all messages (both Ingest &amp; Create) are published on. Only the message name is sent as part of the notification. If this is unset, no notifications will be sent. Supplied by the client.
      */
     notificationConfig?: Schema$NotificationConfig;
     /**
@@ -676,36 +571,36 @@ export namespace healthcare_v1beta1 {
     /**
      * The HTTP Content-Type header value specifying the content type of the body.
      */
-    contentType?: string | null;
+    contentType?: string;
     /**
      * The HTTP request/response body as raw binary.
      */
-    data?: string | null;
+    data?: string;
     /**
      * Application specific response metadata. Must be set in the first response for streaming APIs.
      */
-    extensions?: Array<{[key: string]: any}> | null;
+    extensions?: Array<{[key: string]: any}>;
   }
   /**
-   * Specifies how to handle de-identification of image pixels.
+   * Specifies how de-identification of image pixel should be handled.
    */
   export interface Schema$ImageConfig {
     /**
      * Determines how to redact text from image.
      */
-    textRedactionMode?: string | null;
+    textRedactionMode?: string;
   }
   /**
    * Returns the errors encountered during DICOM store import.
    */
   export interface Schema$ImportDicomDataErrorDetails {
     /**
-     * Deprecated. Use only for debugging purposes.  Contains sample errors encountered in imports of individual resources. For example, a Cloud Storage object.
+     * Deprecated. Use only for debugging purposes.  Contains sample errors encountered in imports of individual resources (for example, a Cloud Storage object).
      */
     sampleErrors?: Schema$ErrorDetail[];
   }
   /**
-   * Imports data into the specified DICOM store. Returns an error if any of the files to import are not DICOM files. This API accepts duplicate DICOM instances by ignoring the newly-pushed instance. It does not overwrite.
+   * Imports data into the specified DICOM store. Returns an error if any of the files to import are not DICOM files. This API will accept duplicate DICOM instances, by simply ignoring the newly pushed instance (it will not overwrite).
    */
   export interface Schema$ImportDicomDataRequest {
     /**
@@ -718,11 +613,11 @@ export namespace healthcare_v1beta1 {
    */
   export interface Schema$ImportResourcesRequest {
     /**
-     * The content structure in the source location. If not specified, the server treats the input source files as BUNDLE.
+     * The content structure in the source location. The default is BUNDLE.
      */
-    contentStructure?: string | null;
+    contentStructure?: string;
     /**
-     * Cloud Storage source data location and import configuration.  The Cloud Storage location requires the `roles/storage.objectViewer` Cloud IAM role.  Each Cloud Storage object should be a text file that contains the format specified in ContentStructure.
+     * Cloud Storage source data location and import configuration.  The Cloud Storage location requires the `roles/storage.objectViewer` Cloud IAM role.  Each Cloud Storage object should be a text file that contains newline delimited JSON structures conforming to FHIR standard.  To improve performance, use multiple Cloud Storage objects where each object contains a subset of all of the newline-delimited JSON structures. You can select all of the objects using the uri as the prefix. The maximum number of objects is 1,000.
      */
     gcsSource?: Schema$GoogleCloudHealthcareV1beta1FhirRestGcsSource;
   }
@@ -745,7 +640,7 @@ export namespace healthcare_v1beta1 {
     /**
      * InfoTypes to apply this transformation to. If this is not specified, the transformation applies to any info_type.
      */
-    infoTypes?: string[] | null;
+    infoTypes?: string[];
     /**
      * Config for text redaction.
      */
@@ -771,7 +666,7 @@ export namespace healthcare_v1beta1 {
     /**
      * HL7v2 ACK message.
      */
-    hl7Ack?: string | null;
+    hl7Ack?: string;
     /**
      * Created message resource.
      */
@@ -788,7 +683,7 @@ export namespace healthcare_v1beta1 {
     /**
      * Token to retrieve the next page of results, or empty if there are no more results in the list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Lists the DICOM stores in the given dataset.
@@ -801,7 +696,7 @@ export namespace healthcare_v1beta1 {
     /**
      * Token to retrieve the next page of results or empty if there are no more results in the list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Lists the FHIR stores in the given dataset.
@@ -814,7 +709,7 @@ export namespace healthcare_v1beta1 {
     /**
      * Token to retrieve the next page of results or empty if there are no more results in the list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Lists the HL7v2 stores in the given dataset.
@@ -827,7 +722,7 @@ export namespace healthcare_v1beta1 {
     /**
      * Token to retrieve the next page of results or empty if there are no more results in the list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * The response message for Locations.ListLocations.
@@ -840,7 +735,7 @@ export namespace healthcare_v1beta1 {
     /**
      * The standard List next-page token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Lists the messages in the specified HL7v2 store.
@@ -849,11 +744,11 @@ export namespace healthcare_v1beta1 {
     /**
      * The returned message names. Won&#39;t be more values than the value of page_size in the request.
      */
-    messages?: string[] | null;
+    messages?: string[];
     /**
      * Token to retrieve the next page of results or empty if there are no more results in the list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * The response message for Operations.ListOperations.
@@ -862,7 +757,7 @@ export namespace healthcare_v1beta1 {
     /**
      * The standard List next-page token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * A list of operations that matches the specified filter in the request.
      */
@@ -875,50 +770,50 @@ export namespace healthcare_v1beta1 {
     /**
      * The friendly name for this location, typically a nearby city name. For example, &quot;Tokyo&quot;.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Cross-service attributes for the location. For example      {&quot;cloud.googleapis.com/region&quot;: &quot;us-east1&quot;}
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * The canonical id for this location. For example: `&quot;us-east1&quot;`.
      */
-    locationId?: string | null;
+    locationId?: string;
     /**
      * Service-specific metadata. For example the available capacity at the given location.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * Resource name for the location, which may vary between implementations. For example: `&quot;projects/example-project/locations/us-east1&quot;`
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * A complete HL7v2 message. See http://www.hl7.org/implement/standards/index.cfm?ref=common for details on the standard.
    */
   export interface Schema$Message {
     /**
-     * Output only. The datetime when the message was created. Set by the server.
+     * The datetime when the message was created. Set by the server.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Raw message bytes.
      */
-    data?: string | null;
+    data?: string;
     /**
      * User-supplied key-value pairs used to organize HL7v2 stores.  Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}{0,62}  Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63}  No more than 64 labels can be associated with a given store.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * The message type and trigger event for this message. MSH-9.
      */
-    messageType?: string | null;
+    messageType?: string;
     /**
      * Resource name of the Message, of the form `projects/{project_id}/datasets/{dataset_id}/hl7V2Stores/{hl7_v2_store_id}/messages/{message_id}`. Assigned by the server.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * Output only. The parsed version of the raw message data.
+     * The parsed version of the raw message data.
      */
     parsedData?: Schema$ParsedData;
     /**
@@ -928,20 +823,20 @@ export namespace healthcare_v1beta1 {
     /**
      * The hospital that this message came from. MSH-4.
      */
-    sendFacility?: string | null;
+    sendFacility?: string;
     /**
      * The datetime the sending application sent this message. MSH-7.
      */
-    sendTime?: string | null;
+    sendTime?: string;
   }
   /**
-   * Specifies where to send notifications upon changes to a data store.
+   * Specifies where notifications should be sent upon changes to a data store.
    */
   export interface Schema$NotificationConfig {
     /**
-     * The [Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/) topic that notifications of changes are published on. Supplied by the client. PubsubMessage.Data contains the resource name. PubsubMessage.MessageId is the ID of this message. It is guaranteed to be unique within the topic. PubsubMessage.PublishTime is the time at which the message was published. Notifications are only sent if the topic is non-empty. [Topic names](https://cloud.google.com/pubsub/docs/overview#names) must be scoped to a project. cloud-healthcare@system.gserviceaccount.com must have publisher permissions on the given Cloud Pub/Sub topic. Not having adequate permissions causes the calls that send notifications to fail.
+     * The [Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/) topic that notifications of changes are published on. Supplied by the client. PubsubMessage.Data will contain the resource name. PubsubMessage.MessageId is the ID of this message. It is guaranteed to be unique within the topic. PubsubMessage.PublishTime is the time at which the message was published. Notifications are only sent if the topic is non-empty. [Topic names](https://cloud.google.com/pubsub/docs/overview#names) must be scoped to a project. cloud-healthcare@system.gserviceaccount.com must have publisher permissions on the given Cloud Pub/Sub topic. Not having adequate permissions will cause the calls that send notifications to fail.
      */
-    pubsubTopic?: string | null;
+    pubsubTopic?: string;
   }
   /**
    * This resource represents a long-running operation that is the result of a network API call.
@@ -950,7 +845,7 @@ export namespace healthcare_v1beta1 {
     /**
      * If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * The error result of the operation in case of failure or cancellation.
      */
@@ -958,15 +853,15 @@ export namespace healthcare_v1beta1 {
     /**
      * Service-specific metadata associated with the operation.  It typically contains progress information and common metadata such as create time. Some services might not provide such metadata.  Any method that returns a long-running operation should document the metadata type, if any.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The normal response of the operation in case of success.  If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`.  If the original method is standard `Get`/`Create`/`Update`, the response should be the resource.  For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name.  For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
      */
-    response?: {[key: string]: any} | null;
+    response?: {[key: string]: any};
   }
   /**
    * OperationMetadata provides information about the operation execution. Returned in the long-running operation&#39;s metadata field.
@@ -975,16 +870,16 @@ export namespace healthcare_v1beta1 {
     /**
      * The name of the API method that initiated the operation.
      */
-    apiMethodName?: string | null;
+    apiMethodName?: string;
     counter?: Schema$ProgressCounter;
     /**
      * The time at which the operation was created by the API.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * The time at which execution was completed.
      */
-    endTime?: string | null;
+    endTime?: string;
   }
   /**
    * The content of a HL7v2 message in a structured format.
@@ -999,27 +894,27 @@ export namespace healthcare_v1beta1 {
     /**
      * Determines whether messages with no header are allowed.
      */
-    allowNullHeader?: boolean | null;
+    allowNullHeader?: boolean;
     /**
-     * Byte(s) to use as the segment terminator. If this is unset, &#39;\r&#39; is used as segment terminator.
+     * Byte(s) to be used as the segment terminator. If this is unset, &#39;\r&#39; will be used as segment terminator.
      */
-    segmentTerminator?: string | null;
+    segmentTerminator?: string;
   }
   /**
    * A patient identifier and associated type.
    */
   export interface Schema$PatientId {
     /**
-     * ID type. For example, MRN or NHS.
+     * ID type, e.g. MRN or NHS.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The patient&#39;s unique identifier.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
-   * An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources.   A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role.  Optionally, a `binding` can specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both.  **JSON example:**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationAdmin&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-project-id@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationViewer&quot;,           &quot;members&quot;: [&quot;user:eve@example.com&quot;],           &quot;condition&quot;: {             &quot;title&quot;: &quot;expirable access&quot;,             &quot;description&quot;: &quot;Does not grant access after Sep 2020&quot;,             &quot;expression&quot;: &quot;request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)&quot;,           }         }       ],       &quot;etag&quot;: &quot;BwWWja0YfJA=&quot;,       &quot;version&quot;: 3     }  **YAML example:**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-project-id@appspot.gserviceaccount.com       role: roles/resourcemanager.organizationAdmin     - members:       - user:eve@example.com       role: roles/resourcemanager.organizationViewer       condition:         title: expirable access         description: Does not grant access after Sep 2020         expression: request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)     - etag: BwWWja0YfJA=     - version: 3  For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).
+   * Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.   A `Policy` consists of a list of `bindings`. A `binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.  **JSON Example**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/owner&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-other-app@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/viewer&quot;,           &quot;members&quot;: [&quot;user:sean@example.com&quot;]         }       ]     }  **YAML Example**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-other-app@appspot.gserviceaccount.com       role: roles/owner     - members:       - user:sean@example.com       role: roles/viewer   For a description of IAM and its features, see the [IAM developer&#39;s guide](https://cloud.google.com/iam/docs).
    */
   export interface Schema$Policy {
     /**
@@ -1027,17 +922,17 @@ export namespace healthcare_v1beta1 {
      */
     auditConfigs?: Schema$AuditConfig[];
     /**
-     * Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
+     * Associates a list of `members` to a `role`. `bindings` with no members will result in an error.
      */
     bindings?: Schema$Binding[];
     /**
-     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.
+     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
      */
-    etag?: string | null;
+    etag?: string;
     /**
-     * Specifies the format of the policy.  Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected.  Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations:  * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy   that includes conditions  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.  If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset.
+     * Deprecated.
      */
-    version?: number | null;
+    version?: number;
   }
   /**
    * ProgressCounter provides counters to describe an operation&#39;s progress.
@@ -1046,18 +941,18 @@ export namespace healthcare_v1beta1 {
     /**
      * The number of units that failed in the operation.
      */
-    failure?: string | null;
+    failure?: string;
     /**
      * The number of units that are pending in the operation.
      */
-    pending?: string | null;
+    pending?: string;
     /**
      * The number of units that succeeded in the operation.
      */
-    success?: string | null;
+    success?: string;
   }
   /**
-   * Define how to redact sensitive values. Default behaviour is erase. For example, &quot;My name is Jake.&quot; becomes &quot;My name is .&quot;
+   * Define how to redact sensitive values. Default behaviour is erase, e.g. &quot;My name is Jake.&quot; becomes &quot;My name is .&quot;
    */
   export interface Schema$RedactConfig {}
   /**
@@ -1065,52 +960,43 @@ export namespace healthcare_v1beta1 {
    */
   export interface Schema$ReplaceWithInfoTypeConfig {}
   /**
-   * A list of FHIR resources.
-   */
-  export interface Schema$Resources {
-    /**
-     * List of resources IDs. For example, &quot;Patient/1234&quot;.
-     */
-    resources?: string[] | null;
-  }
-  /**
    * Configuration for the FHIR BigQuery schema. Determines how the server generates the schema.
    */
   export interface Schema$SchemaConfig {
     /**
-     * The depth for all recursive structures in the output analytics schema. For example, `concept` in the CodeSystem resource is a recursive structure; when the depth is 2, the CodeSystem table will have a column called `concept.concept` but not `concept.concept.concept`. If not specified or set to 0, the server will use the default value 2. The maximum depth allowed is 5.
+     * The depth for all recursive structures in the output analytics schema. For example, `concept` in the CodeSystem resource is a recursive structure; when the depth is 2, the CodeSystem table will have a column called `concept.concept` but not `concept.concept.concept`. If not specified or set to 0, the server will use the default value 2.
      */
-    recursiveStructureDepth?: string | null;
+    recursiveStructureDepth?: string;
     /**
      * Specifies the output schema type. If unspecified, the default is `LOSSLESS`.
      */
-    schemaType?: string | null;
+    schemaType?: string;
   }
   /**
    * Request to search the resources in the specified FHIR store.
    */
   export interface Schema$SearchResourcesRequest {
     /**
-     * The FHIR resource type to search, such as Patient or Observation. For a complete list, see the FHIR Resource Index ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html), [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html)).
+     * The FHIR resource type to search, such as Patient or Observation. For a complete list, see the [FHIR Resource Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html).
      */
-    resourceType?: string | null;
+    resourceType?: string;
   }
   /**
    * A segment in a structured format.
    */
   export interface Schema$Segment {
     /**
-     * A mapping from the positional location to the value. The key string uses zero-based indexes separated by dots to identify Fields, components and sub-components. A bracket notation is also used to identify different instances of a repeated field. Regex for key: (\d+)(\[\d+\])?(.\d+)?(.\d+)?  Examples of (key, value) pairs:  * (0.1, &quot;hemoglobin&quot;) denotes that the first component of Field 0 has the   value &quot;hemoglobin&quot;.  * (1.1.2, &quot;CBC&quot;) denotes that the second sub-component of the first   component of Field 1 has the value &quot;CBC&quot;.  * (1[0].1, &quot;HbA1c&quot;) denotes that the first component of the   first Instance of Field 1, which is repeated, has the value &quot;HbA1c&quot;.
+     * A mapping from the positional location to the value. The key string uses zero-based indexes separated by dots to identify Fields, components and sub-components. A bracket notation is also used to identify different instances of a repeated field. Regex for key: (\d+)(\[\d+\])?(.\d+)?(.\d+)?  Examples of (key, value) pairs: - (0.1, &quot;foo&quot;): Component 1 of Field 0 has the value &quot;foo&quot;. - (1.1.2, &quot;bar&quot;): Sub-component 2 of Component 1 of field 1 has the value &quot;bar&quot;. - (1[2].1, &quot;baz&quot;): Component 1 of Instance 2 of Field 1, which is repeated, has the value &quot;baz&quot;.
      */
-    fields?: {[key: string]: string} | null;
+    fields?: {[key: string]: string};
     /**
-     * A string that indicates the type of segment. For example, EVN or PID.
+     * A string that indicates the type of segment, e.g., EVN, PID.
      */
-    segmentId?: string | null;
+    segmentId?: string;
     /**
-     * Set ID for segments that can be in a set. This can be empty if it&#39;s missing or isn&#39;t applicable.
+     * Set ID for segments that can be in a set. This can be empty if it is missing or it is not applicable.
      */
-    setId?: string | null;
+    setId?: string;
   }
   /**
    * Request message for `SetIamPolicy` method.
@@ -1123,24 +1009,24 @@ export namespace healthcare_v1beta1 {
     /**
      * OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: paths: &quot;bindings, etag&quot; This field is only used by Cloud IAM.
      */
-    updateMask?: string | null;
+    updateMask?: string;
   }
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * List of tags to be filtered.
@@ -1149,7 +1035,7 @@ export namespace healthcare_v1beta1 {
     /**
      * Tags to be filtered. Tags must be DICOM Data Elements, File Meta Elements, or Directory Structuring Elements, as defined at: http://dicom.nema.org/medical/dicom/current/output/html/part06.html#table_6-1,. They may be provided by &quot;Keyword&quot; or &quot;Tag&quot;. For example &quot;PatientID&quot;, &quot;00100010&quot;.
      */
-    tags?: string[] | null;
+    tags?: string[];
   }
   /**
    * Request message for `TestIamPermissions` method.
@@ -1158,7 +1044,7 @@ export namespace healthcare_v1beta1 {
     /**
      * The set of permissions to check for the `resource`. Permissions with wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * Response message for `TestIamPermissions` method.
@@ -1167,7 +1053,7 @@ export namespace healthcare_v1beta1 {
     /**
      * A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   export interface Schema$TextConfig {
     /**
@@ -1196,52 +1082,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.get
      * @desc Gets information about a location.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Resource name for the location.
-     *     name: 'projects/my-project/locations/my-location',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.get(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.get
      * @memberOf! ()
      *
@@ -1311,65 +1151,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.list
      * @desc Lists information about the supported locations for this service.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The resource that owns the locations collection, if applicable.
-     *     name: 'projects/my-project',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   var handlePage = function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     var locationsPage = response['locations'];
-     *     if (!locationsPage) {
-     *       return;
-     *     }
-     *     for (var i = 0; i < locationsPage.length; i++) {
-     *       // TODO: Change code below to process each resource in `locationsPage`:
-     *       console.log(JSON.stringify(locationsPage[i], null, 2));
-     *     }
-     *
-     *     if (response.nextPageToken) {
-     *       request.pageToken = response.nextPageToken;
-     *       cloudHealthcare.projects.locations.list(request, handlePage);
-     *     }
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.list(request, handlePage);
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.list
      * @memberOf! ()
      *
@@ -1486,16 +1267,12 @@ export namespace healthcare_v1beta1 {
 
   export class Resource$Projects$Locations$Datasets {
     context: APIRequestContext;
-    annotationStores: Resource$Projects$Locations$Datasets$Annotationstores;
     dicomStores: Resource$Projects$Locations$Datasets$Dicomstores;
     fhirStores: Resource$Projects$Locations$Datasets$Fhirstores;
     hl7V2Stores: Resource$Projects$Locations$Datasets$Hl7v2stores;
     operations: Resource$Projects$Locations$Datasets$Operations;
     constructor(context: APIRequestContext) {
       this.context = context;
-      this.annotationStores = new Resource$Projects$Locations$Datasets$Annotationstores(
-        this.context
-      );
       this.dicomStores = new Resource$Projects$Locations$Datasets$Dicomstores(
         this.context
       );
@@ -1512,65 +1289,14 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.create
-     * @desc Creates a new health dataset. Results are returned through the Operation interface which returns either an `Operation.response` which contains a Dataset or `Operation.error`. The metadata field type is OperationMetadata. A Google Cloud Platform project can contain up to 500 datasets across all regions.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the project in which the dataset should be created (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}`).
-     *     parent: 'projects/my-project/locations/my-location',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.create(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Creates a new health dataset. Results are returned through the Operation interface which returns either an `Operation.response` which contains a Dataset or `Operation.error`. The metadata field type is OperationMetadata.
      * @alias healthcare.projects.locations.datasets.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string=} params.datasetId The ID of the dataset that is being created. The string must match the following regex: `[\p{L}\p{N}_\-\.]{1,256}`.
-     * @param {string} params.parent The name of the project where the server creates the dataset. For example, `projects/{project_id}/locations/{location_id}`.
-     * @param {().Dataset} params.requestBody Request body data
+     * @param {string} params.parent The name of the project in which the dataset should be created (e.g., `projects/{project_id}/locations/{location_id}`).
+     * @param {().Dataset} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1639,64 +1365,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.deidentify
-     * @desc Creates a new dataset containing de-identified data from the source dataset. The metadata field type is OperationMetadata. If the request is successful, the response field type is DeidentifySummary. If errors occur, error details field type is DeidentifyErrorDetails. Errors are also logged to Stackdriver Logging. For more information, see [Viewing logs](/healthcare/docs/how-tos/stackdriver-logging).
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Source dataset resource name. (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`).
-     *     sourceDataset: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.deidentify(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Creates a new dataset containing de-identified data from the source dataset. The metadata field type is OperationMetadata. If the request is successful, the response field type is DeidentifySummary. If errors occur, details field type is DeidentifyErrorDetails.
      * @alias healthcare.projects.locations.datasets.deidentify
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.sourceDataset Source dataset resource name. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
-     * @param {().DeidentifyDatasetRequest} params.requestBody Request body data
+     * @param {string} params.sourceDataset Source dataset resource name. (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`).
+     * @param {().DeidentifyDatasetRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1766,55 +1441,11 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.delete
      * @desc Deletes the specified health dataset and all data contained in the dataset. Deleting a dataset does not affect the sources from which the dataset was imported (if any).
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the dataset to delete (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`).
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.delete(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.delete
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name The name of the dataset to delete. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
+     * @param {string} params.name The name of the dataset to delete (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1879,58 +1510,11 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.get
      * @desc Gets any metadata associated with a dataset.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the dataset to read (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`).
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.get(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.get
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name The name of the dataset to read. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
+     * @param {string} params.name The name of the dataset to read (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1995,58 +1579,10 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.getIamPolicy
      * @desc Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy is being requested.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.getIamPolicy(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.getIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -2115,73 +1651,13 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.list
      * @desc Lists the health datasets in the current project.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the project whose datasets should be listed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}`).
-     *     parent: 'projects/my-project/locations/my-location',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   var handlePage = function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     var datasetsPage = response['datasets'];
-     *     if (!datasetsPage) {
-     *       return;
-     *     }
-     *     for (var i = 0; i < datasetsPage.length; i++) {
-     *       // TODO: Change code below to process each resource in `datasetsPage`:
-     *       console.log(JSON.stringify(datasetsPage[i], null, 2));
-     *     }
-     *
-     *     if (response.nextPageToken) {
-     *       request.pageToken = response.nextPageToken;
-     *       cloudHealthcare.projects.locations.datasets.list(request, handlePage);
-     *     }
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.list(request, handlePage);
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.list
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {integer=} params.pageSize The maximum number of items to return. Capped to 100 if not specified. May not be larger than 1000.
      * @param {string=} params.pageToken The next_page_token value returned from a previous List request, if any.
-     * @param {string} params.parent The name of the project whose datasets should be listed. For example, `projects/{project_id}/locations/{location_id}`.
+     * @param {string} params.parent The name of the project whose datasets should be listed (e.g., `projects/{project_id}/locations/{location_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2253,65 +1729,13 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.patch
      * @desc Updates dataset metadata.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Output only. Resource name of the dataset, of the form
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body. Only these properties
-     *       // will be changed.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.patch(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.patch
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Output only. Resource name of the dataset, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
      * @param {string=} params.updateMask The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-     * @param {().Dataset} params.requestBody Request body data
+     * @param {().Dataset} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2375,64 +1799,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy is being specified.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.setIamPolicy(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.
      * @alias healthcare.projects.locations.datasets.setIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2500,63 +1873,12 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.testIamPermissions
      * @desc Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.  Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy detail is being requested.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.testIamPermissions(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.testIamPermissions
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2643,7 +1965,7 @@ export namespace healthcare_v1beta1 {
      */
     datasetId?: string;
     /**
-     * The name of the project where the server creates the dataset. For example, `projects/{project_id}/locations/{location_id}`.
+     * The name of the project in which the dataset should be created (e.g., `projects/{project_id}/locations/{location_id}`).
      */
     parent?: string;
 
@@ -2660,7 +1982,7 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Source dataset resource name. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
+     * Source dataset resource name. (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`).
      */
     sourceDataset?: string;
 
@@ -2677,7 +1999,7 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The name of the dataset to delete. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
+     * The name of the dataset to delete (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`).
      */
     name?: string;
   }
@@ -2689,7 +2011,7 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The name of the dataset to read. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
+     * The name of the dataset to read (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`).
      */
     name?: string;
   }
@@ -2700,10 +2022,6 @@ export namespace healthcare_v1beta1 {
      */
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
-    /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
     /**
      * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      */
@@ -2725,7 +2043,7 @@ export namespace healthcare_v1beta1 {
      */
     pageToken?: string;
     /**
-     * The name of the project whose datasets should be listed. For example, `projects/{project_id}/locations/{location_id}`.
+     * The name of the project whose datasets should be listed (e.g., `projects/{project_id}/locations/{location_id}`).
      */
     parent?: string;
   }
@@ -2785,292 +2103,6 @@ export namespace healthcare_v1beta1 {
     requestBody?: Schema$TestIamPermissionsRequest;
   }
 
-  export class Resource$Projects$Locations$Datasets$Annotationstores {
-    context: APIRequestContext;
-    constructor(context: APIRequestContext) {
-      this.context = context;
-    }
-
-    /**
-     * healthcare.projects.locations.datasets.annotationStores.getIamPolicy
-     * @desc Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-     * @alias healthcare.projects.locations.datasets.annotationStores.getIamPolicy
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    getIamPolicy(
-      params?: Params$Resource$Projects$Locations$Datasets$Annotationstores$Getiampolicy,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$Policy>;
-    getIamPolicy(
-      params: Params$Resource$Projects$Locations$Datasets$Annotationstores$Getiampolicy,
-      options: MethodOptions | BodyResponseCallback<Schema$Policy>,
-      callback: BodyResponseCallback<Schema$Policy>
-    ): void;
-    getIamPolicy(
-      params: Params$Resource$Projects$Locations$Datasets$Annotationstores$Getiampolicy,
-      callback: BodyResponseCallback<Schema$Policy>
-    ): void;
-    getIamPolicy(callback: BodyResponseCallback<Schema$Policy>): void;
-    getIamPolicy(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Locations$Datasets$Annotationstores$Getiampolicy
-        | BodyResponseCallback<Schema$Policy>,
-      optionsOrCallback?: MethodOptions | BodyResponseCallback<Schema$Policy>,
-      callback?: BodyResponseCallback<Schema$Policy>
-    ): void | GaxiosPromise<Schema$Policy> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Locations$Datasets$Annotationstores$Getiampolicy;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Locations$Datasets$Annotationstores$Getiampolicy;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://healthcare.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1beta1/{+resource}:getIamPolicy').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'GET',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['resource'],
-        pathParams: ['resource'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$Policy>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$Policy>(parameters);
-      }
-    }
-
-    /**
-     * healthcare.projects.locations.datasets.annotationStores.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
-     * @alias healthcare.projects.locations.datasets.annotationStores.setIamPolicy
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    setIamPolicy(
-      params?: Params$Resource$Projects$Locations$Datasets$Annotationstores$Setiampolicy,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$Policy>;
-    setIamPolicy(
-      params: Params$Resource$Projects$Locations$Datasets$Annotationstores$Setiampolicy,
-      options: MethodOptions | BodyResponseCallback<Schema$Policy>,
-      callback: BodyResponseCallback<Schema$Policy>
-    ): void;
-    setIamPolicy(
-      params: Params$Resource$Projects$Locations$Datasets$Annotationstores$Setiampolicy,
-      callback: BodyResponseCallback<Schema$Policy>
-    ): void;
-    setIamPolicy(callback: BodyResponseCallback<Schema$Policy>): void;
-    setIamPolicy(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Locations$Datasets$Annotationstores$Setiampolicy
-        | BodyResponseCallback<Schema$Policy>,
-      optionsOrCallback?: MethodOptions | BodyResponseCallback<Schema$Policy>,
-      callback?: BodyResponseCallback<Schema$Policy>
-    ): void | GaxiosPromise<Schema$Policy> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Locations$Datasets$Annotationstores$Setiampolicy;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Locations$Datasets$Annotationstores$Setiampolicy;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://healthcare.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1beta1/{+resource}:setIamPolicy').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'POST',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['resource'],
-        pathParams: ['resource'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$Policy>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$Policy>(parameters);
-      }
-    }
-
-    /**
-     * healthcare.projects.locations.datasets.annotationStores.testIamPermissions
-     * @desc Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.  Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.
-     * @alias healthcare.projects.locations.datasets.annotationStores.testIamPermissions
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    testIamPermissions(
-      params?: Params$Resource$Projects$Locations$Datasets$Annotationstores$Testiampermissions,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$TestIamPermissionsResponse>;
-    testIamPermissions(
-      params: Params$Resource$Projects$Locations$Datasets$Annotationstores$Testiampermissions,
-      options:
-        | MethodOptions
-        | BodyResponseCallback<Schema$TestIamPermissionsResponse>,
-      callback: BodyResponseCallback<Schema$TestIamPermissionsResponse>
-    ): void;
-    testIamPermissions(
-      params: Params$Resource$Projects$Locations$Datasets$Annotationstores$Testiampermissions,
-      callback: BodyResponseCallback<Schema$TestIamPermissionsResponse>
-    ): void;
-    testIamPermissions(
-      callback: BodyResponseCallback<Schema$TestIamPermissionsResponse>
-    ): void;
-    testIamPermissions(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Locations$Datasets$Annotationstores$Testiampermissions
-        | BodyResponseCallback<Schema$TestIamPermissionsResponse>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$TestIamPermissionsResponse>,
-      callback?: BodyResponseCallback<Schema$TestIamPermissionsResponse>
-    ): void | GaxiosPromise<Schema$TestIamPermissionsResponse> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Locations$Datasets$Annotationstores$Testiampermissions;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Locations$Datasets$Annotationstores$Testiampermissions;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://healthcare.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1beta1/{+resource}:testIamPermissions').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'POST',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['resource'],
-        pathParams: ['resource'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$TestIamPermissionsResponse>(
-          parameters,
-          callback
-        );
-      } else {
-        return createAPIRequest<Schema$TestIamPermissionsResponse>(parameters);
-      }
-    }
-  }
-
-  export interface Params$Resource$Projects$Locations$Datasets$Annotationstores$Getiampolicy
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
-    /**
-     * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-     */
-    resource?: string;
-  }
-  export interface Params$Resource$Projects$Locations$Datasets$Annotationstores$Setiampolicy
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     */
-    resource?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$SetIamPolicyRequest;
-  }
-  export interface Params$Resource$Projects$Locations$Datasets$Annotationstores$Testiampermissions
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     */
-    resource?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$TestIamPermissionsRequest;
-  }
-
   export class Resource$Projects$Locations$Datasets$Dicomstores {
     context: APIRequestContext;
     studies: Resource$Projects$Locations$Datasets$Dicomstores$Studies;
@@ -3084,63 +2116,13 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.dicomStores.create
      * @desc Creates a new DICOM store within the parent dataset.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the dataset this DICOM store belongs to.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.create(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string=} params.dicomStoreId The ID of the DICOM store that is being created. Any string value up to 256 characters in length.
      * @param {string} params.parent The name of the dataset this DICOM store belongs to.
-     * @param {().DicomStore} params.requestBody Request body data
+     * @param {().DicomStore} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3208,126 +2190,8 @@ export namespace healthcare_v1beta1 {
     }
 
     /**
-     * healthcare.projects.locations.datasets.dicomStores.deidentify
-     * @desc Creates a new DICOM store containing de-identified data from the source store. The metadata field type is OperationMetadata. If the request is successful, the response field type is DeidentifyDicomStoreSummary. If errors occur, error details field type is DeidentifyErrorDetails. Errors are also logged to Stackdriver (see [Viewing logs](/healthcare/docs/how-tos/stackdriver-logging)).
-     * @alias healthcare.projects.locations.datasets.dicomStores.deidentify
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.sourceStore Source DICOM store resource name. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
-     * @param {().DeidentifyDicomStoreRequest} params.requestBody Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    deidentify(
-      params?: Params$Resource$Projects$Locations$Datasets$Dicomstores$Deidentify,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$Operation>;
-    deidentify(
-      params: Params$Resource$Projects$Locations$Datasets$Dicomstores$Deidentify,
-      options: MethodOptions | BodyResponseCallback<Schema$Operation>,
-      callback: BodyResponseCallback<Schema$Operation>
-    ): void;
-    deidentify(
-      params: Params$Resource$Projects$Locations$Datasets$Dicomstores$Deidentify,
-      callback: BodyResponseCallback<Schema$Operation>
-    ): void;
-    deidentify(callback: BodyResponseCallback<Schema$Operation>): void;
-    deidentify(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Locations$Datasets$Dicomstores$Deidentify
-        | BodyResponseCallback<Schema$Operation>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$Operation>,
-      callback?: BodyResponseCallback<Schema$Operation>
-    ): void | GaxiosPromise<Schema$Operation> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Locations$Datasets$Dicomstores$Deidentify;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Locations$Datasets$Dicomstores$Deidentify;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://healthcare.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1beta1/{+sourceStore}:deidentify').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'POST',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['sourceStore'],
-        pathParams: ['sourceStore'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$Operation>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$Operation>(parameters);
-      }
-    }
-
-    /**
      * healthcare.projects.locations.datasets.dicomStores.delete
      * @desc Deletes the specified DICOM store and removes all images that are contained within it.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The resource name of the DICOM store to delete.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.delete(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.delete
      * @memberOf! ()
      *
@@ -3397,63 +2261,12 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.dicomStores.export
      * @desc Exports data to the specified destination by copying it from the DICOM store. The metadata field type is OperationMetadata.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The DICOM store resource name from which the data should be exported (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.export(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.export
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name The DICOM store resource name from which to export the data. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
-     * @param {().ExportDicomDataRequest} params.requestBody Request body data
+     * @param {string} params.name The DICOM store resource name from which the data should be exported (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
+     * @param {().ExportDicomDataRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3523,52 +2336,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.dicomStores.get
      * @desc Gets the specified DICOM store.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The resource name of the DICOM store to get.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.get(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.get
      * @memberOf! ()
      *
@@ -3640,58 +2407,10 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.dicomStores.getIamPolicy
      * @desc Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy is being requested.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.getIamPolicy(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.getIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -3759,64 +2478,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.import
-     * @desc Imports data into the DICOM store by copying it from the specified source. For errors, the Operation is populated with error details (in the form of ImportDicomDataErrorDetails in error.details), which hold finer-grained error information. Errors are also logged to Stackdriver Logging. For more information, see [Viewing logs](/healthcare/docs/how-tos/stackdriver-logging). The metadata field type is OperationMetadata.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store resource into which the data is imported (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.import(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Imports data into the DICOM store by copying it from the specified source. For errors, the Operation will be populated with error details (in the form of ImportDicomDataErrorDetails in error.details), which will hold finer-grained error information. The metadata field type is OperationMetadata.
      * @alias healthcare.projects.locations.datasets.dicomStores.import
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name The name of the DICOM store resource into which the data is imported. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
-     * @param {().ImportDicomDataRequest} params.requestBody Request body data
+     * @param {string} params.name The name of the DICOM store resource into which the data is imported (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
+     * @param {().ImportDicomDataRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3886,70 +2554,11 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.dicomStores.list
      * @desc Lists the DICOM stores in the given dataset.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of the dataset.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   var handlePage = function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     var dicomStoresPage = response['dicomStores'];
-     *     if (!dicomStoresPage) {
-     *       return;
-     *     }
-     *     for (var i = 0; i < dicomStoresPage.length; i++) {
-     *       // TODO: Change code below to process each resource in `dicomStoresPage`:
-     *       console.log(JSON.stringify(dicomStoresPage[i], null, 2));
-     *     }
-     *
-     *     if (response.nextPageToken) {
-     *       request.pageToken = response.nextPageToken;
-     *       cloudHealthcare.projects.locations.datasets.dicomStores.list(request, handlePage);
-     *     }
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.list(request, handlePage);
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.list
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.filter Restricts stores returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings Only filtering on labels is supported. For example, `labels.key=value`.
+     * @param {string=} params.filter Restricts stores returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings Only filtering on labels is supported, for example `labels.key=value`.
      * @param {integer=} params.pageSize Limit on the number of DICOM stores to return in a single response. If zero the default page size of 100 is used.
      * @param {string=} params.pageToken The next_page_token value returned from the previous List request, if any.
      * @param {string} params.parent Name of the dataset.
@@ -4024,65 +2633,13 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.dicomStores.patch
      * @desc Updates the specified DICOM store.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Output only. Resource name of the DICOM store, of the form
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body. Only these properties
-     *       // will be changed.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.patch(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.patch
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Output only. Resource name of the DICOM store, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
      * @param {string=} params.updateMask The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-     * @param {().DicomStore} params.requestBody Request body data
+     * @param {().DicomStore} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4148,65 +2705,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.searchForInstances
-     * @desc SearchForInstances returns a list of matching instances. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.6.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the SearchForInstancesRequest DICOMweb request (e.g.,
-     *     // `instances` or `series/{series_uid}/instances` or
-     *     // `studies/{study_uid}/instances`).
-     *     dicomWebPath: 'instances',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.searchForInstances(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc SearchForInstances returns a list of matching instances. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.7
      * @alias healthcare.projects.locations.datasets.dicomStores.searchForInstances
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the SearchForInstancesRequest DICOMweb request. For example, `instances`, `series/{series_uid}/instances`, or `studies/{study_uid}/instances`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `instances`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4272,64 +2777,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.searchForSeries
-     * @desc SearchForSeries returns a list of matching series. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.6.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the SearchForSeries DICOMweb request(e.g., `series` or
-     *     // `studies/{study_uid}/series`).
-     *     dicomWebPath: 'series',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.searchForSeries(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc SearchForSeries returns a list of matching series. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.7
      * @alias healthcare.projects.locations.datasets.dicomStores.searchForSeries
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the SearchForSeries DICOMweb request. For example, `series` or `studies/{study_uid}/series`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `series`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4395,63 +2849,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.searchForStudies
-     * @desc SearchForStudies returns a list of matching studies. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.6.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the SearchForStudies DICOMweb request (e.g., `studies`).
-     *     dicomWebPath: 'studies',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.searchForStudies(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc SearchForStudies returns a list of matching studies. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.7
      * @alias healthcare.projects.locations.datasets.dicomStores.searchForStudies
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the SearchForStudies DICOMweb request. For example, `studies`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4517,64 +2921,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy is being specified.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.setIamPolicy(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.
      * @alias healthcare.projects.locations.datasets.dicomStores.setIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4641,69 +2994,14 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.storeInstances
-     * @desc StoreInstances stores DICOM instances associated with study instance unique identifiers (SUID). See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.5.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the StoreInstances DICOMweb request (e.g.,
-     *     // `studies/[{study_id}]`). Note that the `study_uid` is optional.
-     *     dicomWebPath: 'studies',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.storeInstances(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc StoreInstances stores DICOM instances associated with study instance unique identifiers (SUID). See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.6.1.
      * @alias healthcare.projects.locations.datasets.dicomStores.storeInstances
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the StoreInstances DICOMweb request. For example, `studies/[{study_uid}]`. Note that the `study_uid` is optional.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
-     * @param {().HttpBody} params.requestBody Request body data
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
+     * @param {().HttpBody} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4770,63 +3068,12 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.dicomStores.testIamPermissions
      * @desc Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.  Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy detail is being requested.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.testIamPermissions(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.testIamPermissions
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4922,23 +3169,6 @@ export namespace healthcare_v1beta1 {
      */
     requestBody?: Schema$DicomStore;
   }
-  export interface Params$Resource$Projects$Locations$Datasets$Dicomstores$Deidentify
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Source DICOM store resource name. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
-     */
-    sourceStore?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$DeidentifyDicomStoreRequest;
-  }
   export interface Params$Resource$Projects$Locations$Datasets$Dicomstores$Delete
     extends StandardParameters {
     /**
@@ -4959,7 +3189,7 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The DICOM store resource name from which to export the data. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The DICOM store resource name from which the data should be exported (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     name?: string;
 
@@ -4988,10 +3218,6 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
-    /**
      * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      */
     resource?: string;
@@ -5004,7 +3230,7 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The name of the DICOM store resource into which the data is imported. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store resource into which the data is imported (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     name?: string;
 
@@ -5021,7 +3247,7 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Restricts stores returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings Only filtering on labels is supported. For example, `labels.key=value`.
+     * Restricts stores returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings Only filtering on labels is supported, for example `labels.key=value`.
      */
     filter?: string;
     /**
@@ -5066,11 +3292,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the SearchForInstancesRequest DICOMweb request. For example, `instances`, `series/{series_uid}/instances`, or `studies/{study_uid}/instances`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `instances`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -5082,11 +3308,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the SearchForSeries DICOMweb request. For example, `series` or `studies/{study_uid}/series`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `series`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -5098,11 +3324,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the SearchForStudies DICOMweb request. For example, `studies`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -5131,11 +3357,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the StoreInstances DICOMweb request. For example, `studies/[{study_uid}]`. Note that the `study_uid` is optional.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
 
@@ -5175,59 +3401,12 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.delete
      * @desc DeleteStudy deletes all instances within the given study. Delete requests are equivalent to the GET requests specified in the WADO-RS standard.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the DeleteStudy request (e.g., `studies/{study_id}`).
-     *     dicomWebPath: 'studies/my-study',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.delete(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.delete
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the DeleteStudy request. For example, `studies/{study_uid}`.
-     * @param {string} params.parent
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5293,64 +3472,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.retrieveMetadata
-     * @desc RetrieveStudyMetadata returns instance associated with the given study presented as metadata with the bulk data removed. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the RetrieveStudyMetadata DICOMweb request (e.g.,
-     *     // `studies/{study_id}/metadata`).
-     *     dicomWebPath: 'studies/my-study/metadata',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.retrieveMetadata(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc RetrieveStudyMetadata returns instance associated with the given study presented as metadata with the bulk data removed. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.5.6.
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.retrieveMetadata
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the RetrieveStudyMetadata DICOMweb request. For example, `studies/{study_uid}/metadata`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/metadata`.
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5416,64 +3544,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.retrieveStudy
-     * @desc RetrieveStudy returns all instances within the given study. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the RetrieveStudy DICOMweb request (e.g.,
-     *     // `studies/{study_id}`).
-     *     dicomWebPath: 'studies/my-study',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.retrieveStudy(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc RetrieveStudy returns all instances within the given study. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.5.1.
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.retrieveStudy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the RetrieveStudy DICOMweb request. For example, `studies/{study_uid}`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5539,65 +3616,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.searchForInstances
-     * @desc SearchForInstances returns a list of matching instances. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.6.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the SearchForInstancesRequest DICOMweb request (e.g.,
-     *     // `instances` or `series/{series_uid}/instances` or
-     *     // `studies/{study_uid}/instances`).
-     *     dicomWebPath: 'studies/my-study/instances',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.searchForInstances(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc SearchForInstances returns a list of matching instances. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.7
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.searchForInstances
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the SearchForInstancesRequest DICOMweb request. For example, `instances`, `series/{series_uid}/instances`, or `studies/{study_uid}/instances`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `instances`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5663,64 +3688,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.searchForSeries
-     * @desc SearchForSeries returns a list of matching series. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.6.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the SearchForSeries DICOMweb request(e.g., `series` or
-     *     // `studies/{study_uid}/series`).
-     *     dicomWebPath: 'studies/my-study/series',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.searchForSeries(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc SearchForSeries returns a list of matching series. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.7
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.searchForSeries
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the SearchForSeries DICOMweb request. For example, `series` or `studies/{study_uid}/series`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `series`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5786,69 +3760,14 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.storeInstances
-     * @desc StoreInstances stores DICOM instances associated with study instance unique identifiers (SUID). See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.5.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the StoreInstances DICOMweb request (e.g.,
-     *     // `studies/[{study_id}]`). Note that the `study_uid` is optional.
-     *     dicomWebPath: 'studies/my-study',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.storeInstances(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc StoreInstances stores DICOM instances associated with study instance unique identifiers (SUID). See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.6.1.
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.storeInstances
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the StoreInstances DICOMweb request. For example, `studies/[{study_uid}]`. Note that the `study_uid` is optional.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
-     * @param {().HttpBody} params.requestBody Request body data
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
+     * @param {().HttpBody} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5921,11 +3840,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the DeleteStudy request. For example, `studies/{study_uid}`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}`).
      */
     dicomWebPath?: string;
     /**
-     *
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -5937,11 +3856,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the RetrieveStudyMetadata DICOMweb request. For example, `studies/{study_uid}/metadata`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/metadata`.
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -5953,11 +3872,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the RetrieveStudy DICOMweb request. For example, `studies/{study_uid}`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -5969,11 +3888,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the SearchForInstancesRequest DICOMweb request. For example, `instances`, `series/{series_uid}/instances`, or `studies/{study_uid}/instances`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `instances`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -5985,11 +3904,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the SearchForSeries DICOMweb request. For example, `series` or `studies/{study_uid}/series`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `series`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -6001,11 +3920,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the StoreInstances DICOMweb request. For example, `studies/[{study_uid}]`. Note that the `study_uid` is optional.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
 
@@ -6028,60 +3947,12 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.series.delete
      * @desc DeleteSeries deletes all instances within the given study and series. Delete requests are equivalent to the GET requests specified in the WADO-RS standard.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the DeleteSeries request (e.g.,
-     *     // `studies/{study_id}/series/{series_id}`).
-     *     dicomWebPath: 'studies/my-study/series/my-sery',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.series.delete(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.series.delete
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the DeleteSeries request. For example, `studies/{study_uid}/series/{series_uid}`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6147,64 +4018,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.series.retrieveMetadata
-     * @desc RetrieveSeriesMetadata returns instance associated with the given study and series, presented as metadata with the bulk data removed. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the RetrieveSeriesMetadata DICOMweb request (e.g.,
-     *     // `studies/{study_id}/series/{series_id}/metadata`).
-     *     dicomWebPath: 'studies/my-study/series/my-sery/metadata',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.series.retrieveMetadata(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc RetrieveSeriesMetadata returns instance associated with the given study and series, presented as metadata with the bulk data removed. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.5.6.
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.series.retrieveMetadata
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the RetrieveSeriesMetadata DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/metadata`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/metadata`.
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6270,64 +4090,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.series.retrieveSeries
-     * @desc RetrieveSeries returns all instances within the given study and series. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the RetrieveSeries DICOMweb request (e.g.,
-     *     // `studies/{study_id}/series/{series_id}`).
-     *     dicomWebPath: 'studies/my-study/series/my-sery',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.series.retrieveSeries(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc RetrieveSeries returns all instances within the given study and series. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.5.2.
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.series.retrieveSeries
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the RetrieveSeries DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6393,65 +4162,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.series.searchForInstances
-     * @desc SearchForInstances returns a list of matching instances. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.6.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the SearchForInstancesRequest DICOMweb request (e.g.,
-     *     // `instances` or `series/{series_uid}/instances` or
-     *     // `studies/{study_uid}/instances`).
-     *     dicomWebPath: 'studies/my-study/series/my-sery/instances',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.series.searchForInstances(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc SearchForInstances returns a list of matching instances. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.7
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.series.searchForInstances
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the SearchForInstancesRequest DICOMweb request. For example, `instances`, `series/{series_uid}/instances`, or `studies/{study_uid}/instances`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `instances`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6524,11 +4241,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the DeleteSeries request. For example, `studies/{study_uid}/series/{series_uid}`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -6540,11 +4257,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the RetrieveSeriesMetadata DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/metadata`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/metadata`.
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -6556,11 +4273,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the RetrieveSeries DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -6572,11 +4289,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the SearchForInstancesRequest DICOMweb request. For example, `instances`, `series/{series_uid}/instances`, or `studies/{study_uid}/instances`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `instances`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -6594,60 +4311,12 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.series.instances.delete
      * @desc DeleteInstance deletes an instance associated with the given study, series, and SOP Instance UID. Delete requests are equivalent to the GET requests specified in the WADO-RS standard.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the DeleteInstance request (e.g.,
-     *     // `studies/{study_id}/series/{series_id}/instances/{instance_id}`).
-     *     dicomWebPath: 'studies/my-study/series/my-sery/instances/my-instance',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.series.instances.delete(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.series.instances.delete
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the DeleteInstance request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instances/{instance_id}`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6713,64 +4382,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveInstance
-     * @desc RetrieveInstance returns instance associated with the given study, series, and SOP Instance UID. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the RetrieveInstance DICOMweb request (e.g.,
-     *     // `studies/{study_id}/series/{series_id}/instances/{instance_id}`).
-     *     dicomWebPath: 'studies/my-study/series/my-sery/instances/my-instance',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveInstance(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc RetrieveInstance returns instance associated with the given study, series, and SOP Instance UID. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.5.3.
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveInstance
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the RetrieveInstance DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instance/{instance_id}`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6836,64 +4454,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveMetadata
-     * @desc RetrieveInstanceMetadata returns instance associated with the given study, series, and SOP Instance UID presented as metadata with the bulk data removed. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the RetrieveInstanceMetadata DICOMweb request (e.g.,
-     *     // `studies/{study_id}/series/{series_id}/instances/{instance_id}/metadata`).
-     *     dicomWebPath: 'studies/my-study/series/my-sery/instances/my-instance/metadata',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveMetadata(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc RetrieveInstanceMetadata returns instance associated with the given study, series, and SOP Instance UID presented as metadata with the bulk data removed. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.5.6.
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveMetadata
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the RetrieveInstanceMetadata DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/metadata`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instances/{instance_id}/metadata`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6959,64 +4526,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveRendered
-     * @desc RetrieveRenderedInstance returns instance associated with the given study, series, and SOP Instance UID in an acceptable Rendered Media Type. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the RetrieveRenderedInstance DICOMweb request (e.g.,
-     *     // `studies/{study_id}/series/{series_id}/instances/{instance_id}/rendered`).
-     *     dicomWebPath: 'studies/my-study/series/my-sery/instances/my-instance/rendered',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveRendered(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc RetrieveRenderedInstance returns instance associated with the given study, series, and SOP Instance UID in an acceptable Rendered Media Type. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.5.8.
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveRendered
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the RetrieveRenderedInstance DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/rendered`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instance/{instance_id}/rendered`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7089,11 +4605,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the DeleteInstance request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instances/{instance_id}`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -7105,11 +4621,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the RetrieveInstance DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instance/{instance_id}`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -7121,11 +4637,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the RetrieveInstanceMetadata DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/metadata`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instances/{instance_id}/metadata`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -7137,11 +4653,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the RetrieveRenderedInstance DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/rendered`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instance/{instance_id}/rendered`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -7154,64 +4670,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveFrames
-     * @desc RetrieveFrames returns instances associated with the given study, series, SOP Instance UID and frame numbers. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the RetrieveFrames DICOMweb request (e.g.,
-     *     // `studies/{study_id}/series/{series_id}/instances/{instance_id}/frames/{frame_list}`).
-     *     dicomWebPath: 'studies/my-study/series/my-sery/instances/my-instance/frames/my-frame',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveFrames(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc RetrieveFrames returns instances associated with the given study, series, SOP Instance UID and frame numbers. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.5.4.
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveFrames
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the RetrieveFrames DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/frames/{frame_list}`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instance/{instance_id}/frames/{frame_list}`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7277,64 +4742,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveRendered
-     * @desc RetrieveRenderedFrames returns instances associated with the given study, series, SOP Instance UID and frame numbers in an acceptable Rendered Media Type. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.4.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the DICOM store that is being accessed (e.g.,
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/dicomStores/my-dicom-store',  // TODO: Update placeholder value.
-     *
-     *     // The path of the RetrieveRenderedFrames DICOMweb request (e.g.,
-     *     // `studies/{study_id}/series/{series_id}/instances/{instance_id}/frames/{frame_list}/rendered`).
-     *     dicomWebPath: 'studies/my-study/series/my-sery/instances/my-instance/frames/my-frame/rendered',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveRendered(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc RetrieveRenderedFrames returns instances associated with the given study, series, SOP Instance UID and frame numbers in an acceptable Rendered Media Type. See http://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_6.5.8.
      * @alias healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveRendered
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.dicomWebPath The path of the RetrieveRenderedFrames DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/frames/{frame_list}/rendered`.
-     * @param {string} params.parent The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * @param {string} params.dicomWebPath The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instance/{instance_id}/frames/{frame_list}/rendered`).
+     * @param {string} params.parent The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7407,11 +4821,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the RetrieveFrames DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/frames/{frame_list}`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instance/{instance_id}/frames/{frame_list}`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -7423,11 +4837,11 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * The path of the RetrieveRenderedFrames DICOMweb request. For example, `studies/{study_uid}/series/{series_uid}/instances/{instance_uid}/frames/{frame_list}/rendered`.
+     * The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS, or QIDO-RS standard (e.g., `studies/{study_id}/series/{series_id}/instance/{instance_id}/frames/{frame_list}/rendered`).
      */
     dicomWebPath?: string;
     /**
-     * The name of the DICOM store that is being accessed. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+     * The name of the DICOM store that is being accessed (e.g., `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`).
      */
     parent?: string;
   }
@@ -7445,63 +4859,13 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.fhirStores.create
      * @desc Creates a new FHIR store within the parent dataset.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the dataset this FHIR store belongs to.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.create(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.fhirStores.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string=} params.fhirStoreId The ID of the FHIR store that is being created. The string must match the following regex: `[\p{L}\p{N}_\-\.]{1,256}`.
      * @param {string} params.parent The name of the dataset this FHIR store belongs to.
-     * @param {().FhirStore} params.requestBody Request body data
+     * @param {().FhirStore} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7569,126 +4933,8 @@ export namespace healthcare_v1beta1 {
     }
 
     /**
-     * healthcare.projects.locations.datasets.fhirStores.deidentify
-     * @desc Creates a new FHIR store containing de-identified data from the source store. The metadata field type is OperationMetadata. If the request is successful, the response field type is DeidentifyFhirStoreSummary. If errors occur, error details field type is DeidentifyErrorDetails. Errors are also logged to Stackdriver (see [Viewing logs](/healthcare/docs/how-tos/stackdriver-logging)).
-     * @alias healthcare.projects.locations.datasets.fhirStores.deidentify
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.sourceStore Source FHIR store resource name. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
-     * @param {().DeidentifyFhirStoreRequest} params.requestBody Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    deidentify(
-      params?: Params$Resource$Projects$Locations$Datasets$Fhirstores$Deidentify,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$Operation>;
-    deidentify(
-      params: Params$Resource$Projects$Locations$Datasets$Fhirstores$Deidentify,
-      options: MethodOptions | BodyResponseCallback<Schema$Operation>,
-      callback: BodyResponseCallback<Schema$Operation>
-    ): void;
-    deidentify(
-      params: Params$Resource$Projects$Locations$Datasets$Fhirstores$Deidentify,
-      callback: BodyResponseCallback<Schema$Operation>
-    ): void;
-    deidentify(callback: BodyResponseCallback<Schema$Operation>): void;
-    deidentify(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Locations$Datasets$Fhirstores$Deidentify
-        | BodyResponseCallback<Schema$Operation>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$Operation>,
-      callback?: BodyResponseCallback<Schema$Operation>
-    ): void | GaxiosPromise<Schema$Operation> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Locations$Datasets$Fhirstores$Deidentify;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Locations$Datasets$Fhirstores$Deidentify;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://healthcare.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1beta1/{+sourceStore}:deidentify').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'POST',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['sourceStore'],
-        pathParams: ['sourceStore'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$Operation>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$Operation>(parameters);
-      }
-    }
-
-    /**
      * healthcare.projects.locations.datasets.fhirStores.delete
      * @desc Deletes the specified FHIR store and removes all resources within it.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The resource name of the FHIR store to delete.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.delete(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.fhirStores.delete
      * @memberOf! ()
      *
@@ -7757,65 +5003,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.export
-     * @desc Export resources from the FHIR store to the specified destination.  This method returns an Operation that can be used to track the status of the export by calling GetOperation.  Immediate fatal errors appear in the error field, errors are also logged to Stackdriver (see [Viewing logs](/healthcare/docs/how-tos/stackdriver-logging)). Otherwise, when the operation finishes, a detailed response of type ExportResourcesResponse is returned in the response field. The metadata field type for this operation is OperationMetadata.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the FHIR store to export resource from. The name should be in
-     *     // the format of
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.export(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Export resources from the FHIR store to the specified destination.  This method returns an Operation that can be used to track the status of the export by calling GetOperation.  Immediate fatal errors appear in the error field. Otherwise, when the operation finishes, a detailed response of type ExportResourcesResponse is returned in the response field. The metadata field type for this operation is OperationMetadata.
      * @alias healthcare.projects.locations.datasets.fhirStores.export
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The name of the FHIR store to export resource from. The name should be in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
-     * @param {().ExportResourcesRequest} params.requestBody Request body data
+     * @param {().ExportResourcesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7885,52 +5079,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.fhirStores.get
      * @desc Gets the configuration of the specified FHIR store.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The resource name of the FHIR store to get.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.get(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.fhirStores.get
      * @memberOf! ()
      *
@@ -8002,58 +5150,10 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.fhirStores.getIamPolicy
      * @desc Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy is being requested.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.getIamPolicy(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.fhirStores.getIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -8121,65 +5221,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.import
-     * @desc Import resources to the FHIR store by loading data from the specified sources. This method is optimized to load large quantities of data using import semantics that ignore some FHIR store configuration options and are not suitable for all use cases. It is primarily intended to load data into an empty FHIR store that is not being used by other clients. In cases where this method is not appropriate, consider using ExecuteBundle to load data.  Every resource in the input must contain a client-supplied ID, and will be stored using that ID regardless of the enable_update_create setting on the FHIR store.  The import process does not enforce referential integrity, regardless of the disable_referential_integrity setting on the FHIR store. This allows the import of resources with arbitrary interdependencies without considering grouping or ordering, but if the input data contains invalid references or if some resources fail to be imported, the FHIR store might be left in a state that violates referential integrity.  If a resource with the specified ID already exists, the most recent version of the resource is overwritten without creating a new historical version, regardless of the disable_resource_versioning setting on the FHIR store. If transient failures occur during the import, it is possible that successfully imported resources will be overwritten more than once.  The import operation is idempotent unless the input data contains multiple valid resources with the same ID but different contents. In that case, after the import completes, the store will contain exactly one resource with that ID but there is no ordering guarantee on which version of the contents it will have. The operation result counters do not count duplicate IDs as an error and will count one success for each resource in the input, which might result in a success count larger than the number of resources in the FHIR store. This often occurs when importing data organized in bundles produced by Patient-everything where each bundle contains its own copy of a resource such as Practitioner that might be referred to by many patients.  If some resources fail to import, for example due to parsing errors, successfully imported resources are not rolled back.  The location and format of the input data is specified by the parameters below. Note that if no format is specified, this method assumes the `BUNDLE` format. When using the `BUNDLE` format this method ignores the `Bundle.type` field, except that `history` bundles are rejected, and does not apply any of the bundle processing semantics for batch or transaction bundles. Unlike in ExecuteBundle, transaction bundles are not executed as a single transaction and bundle-internal references are not rewritten. The bundle is treated as a collection of resources to be written as provided in `Bundle.entry.resource`, ignoring `Bundle.entry.request`. As an example, this allows the import of `searchset` bundles produced by a FHIR search or Patient-everything operation.  This method returns an Operation that can be used to track the status of the import by calling GetOperation.  Immediate fatal errors appear in the error field, errors are also logged to Stackdriver (see [Viewing logs](/healthcare/docs/how-tos/stackdriver-logging)). Otherwise, when the operation finishes, a detailed response of type ImportResourcesResponse is returned in the response field. The metadata field type for this operation is OperationMetadata.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the FHIR store to import FHIR resources to. The name should be
-     *     // in the format of
-     *     // `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.import(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Import resources to the FHIR store by loading data from the specified sources. Each resource must have a client-supplied ID, which is retained by the server.  The import operation is idempotent. Upon retry, the most recent data (matching the client-supplied ID) is overwritten, without creating a new resource version. If partial failures occur during the import, successful changes are not rolled back.  If history imports are enabled (enable_history_import is set in the FHIR store's configuration), you can import historical versions of a resource by supplying a bundle of type `history`. The historical versions in the bundle must have `lastUpdated` timestamps. If a current or historical version with the supplied resource ID already exists, the bundle is rejected.  This method returns an Operation that can be used to track the status of the import by calling GetOperation.  Immediate fatal errors appear in the error field. Otherwise, when the operation finishes, a detailed response of type ImportResourcesResponse is returned in the response field. The metadata field type for this operation is OperationMetadata.
      * @alias healthcare.projects.locations.datasets.fhirStores.import
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The name of the FHIR store to import FHIR resources to. The name should be in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
-     * @param {().ImportResourcesRequest} params.requestBody Request body data
+     * @param {().ImportResourcesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8249,65 +5297,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.fhirStores.list
      * @desc Lists the FHIR stores in the given dataset.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of the dataset.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   var handlePage = function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     var fhirStoresPage = response['fhirStores'];
-     *     if (!fhirStoresPage) {
-     *       return;
-     *     }
-     *     for (var i = 0; i < fhirStoresPage.length; i++) {
-     *       // TODO: Change code below to process each resource in `fhirStoresPage`:
-     *       console.log(JSON.stringify(fhirStoresPage[i], null, 2));
-     *     }
-     *
-     *     if (response.nextPageToken) {
-     *       request.pageToken = response.nextPageToken;
-     *       cloudHealthcare.projects.locations.datasets.fhirStores.list(request, handlePage);
-     *     }
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.list(request, handlePage);
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.fhirStores.list
      * @memberOf! ()
      *
@@ -8387,65 +5376,13 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.fhirStores.patch
      * @desc Updates the configuration of the specified FHIR store.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Output only. Resource name of the FHIR store, of the form
-     *     // `projects/{project_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body. Only these properties
-     *       // will be changed.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.patch(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.fhirStores.patch
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Output only. Resource name of the FHIR store, of the form `projects/{project_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
      * @param {string=} params.updateMask The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-     * @param {().FhirStore} params.requestBody Request body data
+     * @param {().FhirStore} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8511,64 +5448,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy is being specified.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.setIamPolicy(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.
      * @alias healthcare.projects.locations.datasets.fhirStores.setIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8636,63 +5522,12 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.fhirStores.testIamPermissions
      * @desc Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.  Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy detail is being requested.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.testIamPermissions(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.fhirStores.testIamPermissions
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8788,23 +5623,6 @@ export namespace healthcare_v1beta1 {
      */
     requestBody?: Schema$FhirStore;
   }
-  export interface Params$Resource$Projects$Locations$Datasets$Fhirstores$Deidentify
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Source FHIR store resource name. For example, `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
-     */
-    sourceStore?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$DeidentifyFhirStoreRequest;
-  }
   export interface Params$Resource$Projects$Locations$Datasets$Fhirstores$Delete
     extends StandardParameters {
     /**
@@ -8853,10 +5671,6 @@ export namespace healthcare_v1beta1 {
      */
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
-    /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
     /**
      * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      */
@@ -8967,53 +5781,7 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.capabilities
-     * @desc Gets the FHIR capability statement ([STU3](http://hl7.org/implement/standards/fhir/STU3/capabilitystatement.html)), or the [conformance statement](http://hl7.org/implement/standards/fhir/DSTU2/conformance.html) in the DSTU2 case for the store, which contains a description of functionality supported by the server.  Implements the FHIR standard capabilities interaction ([STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#capabilities)), or the [conformance interaction](http://hl7.org/implement/standards/fhir/DSTU2/http.html#conformance) in the DSTU2 case.  On success, the response body will contain a JSON-encoded representation of a `CapabilityStatement` resource.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of the FHIR store to retrieve the capabilities for.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.capabilities(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Gets the FHIR [capability statement](http://hl7.org/implement/standards/fhir/STU3/capabilitystatement.html) for the store, which contains a description of functionality supported by the server.  Implements the FHIR standard [capabilities interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#capabilities).  On success, the response body will contain a JSON-encoded representation of a `CapabilityStatement` resource.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.capabilities
      * @memberOf! ()
      *
@@ -9085,61 +5853,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.conditionalDelete
-     * @desc Deletes FHIR resources that match a search query.  Implements the FHIR standard conditional delete interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#2.1.0.12.1), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#2.21.0.13.1)). If multiple resources match, all of them will be deleted.  Search terms are provided as query parameters following the same pattern as the search method.  Note: Unless resource versioning is disabled by setting the disable_resource_versioning flag on the FHIR store, the deleted resources will be moved to a history repository that can still be retrieved through vread and related methods, unless they are removed by the purge method.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the FHIR store this resource belongs to.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     // The FHIR resource type to delete, such as Patient or Observation. For a
-     *     // complete list, see the [FHIR Resource
-     *     // Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html).
-     *     type: 'my-type',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.conditionalDelete(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Deletes FHIR resources that match a search query.  Implements the FHIR standard [conditional delete interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#2.21.0.13.1). If multiple resources match, all of them will be deleted.  Search terms are provided as query parameters following the same pattern as the search method.  Note: Unless resource versioning is disabled by setting the disable_resource_versioning flag on the FHIR store, the deleted resources will be moved to a history repository that can still be retrieved through vread and related methods, unless they are removed by the purge method.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.conditionalDelete
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent The name of the FHIR store this resource belongs to.
-     * @param {string} params.type The FHIR resource type to delete, such as Patient or Observation. For a complete list, see the FHIR Resource Index ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html), [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html)).
+     * @param {string} params.type The FHIR resource type to delete, such as Patient or Observation. For a complete list, see the [FHIR Resource Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9206,70 +5926,14 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.conditionalPatch
-     * @desc If a resource is found based on the search criteria specified in the query parameters, updates part of that resource by applying the operations specified in a [JSON Patch](http://jsonpatch.com/) document.  Implements the FHIR standard conditional patch interaction ([STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#patch)).  DSTU2 doesn't define a conditional patch method, but the server supports it in the same way it supports STU3.  Search terms are provided as query parameters following the same pattern as the search method.  If the search criteria identify more than one match, the request will return a `412 Precondition Failed` error.  The request body must contain a JSON Patch document, and the request headers must contain `Content-Type: application/json-patch+json`.  On success, the response body will contain a JSON-encoded representation of the updated resource, including the server-assigned version ID. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the FHIR store this resource belongs to.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     // The FHIR resource type to update, such as Patient or Observation. For a
-     *     // complete list, see the [FHIR Resource
-     *     // Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html).
-     *     type: 'my-type',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body. Only these properties
-     *       // will be changed.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.conditionalPatch(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc If a resource is found based on the search criteria specified in the query parameters, updates part of that resource by applying the operations specified in a [JSON Patch](http://jsonpatch.com/) document.  Implements the FHIR standard [conditional patch interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#patch).  Search terms are provided as query parameters following the same pattern as the search method.  If the search criteria identify more than one match, the request will return a `412 Precondition Failed` error.  The request body must contain a JSON Patch document, and the request headers must contain `Content-Type: application/json-patch+json`.  On success, the response body will contain a JSON-encoded representation of the updated resource, including the server-assigned version ID. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.conditionalPatch
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent The name of the FHIR store this resource belongs to.
-     * @param {string} params.type The FHIR resource type to update, such as Patient or Observation. For a complete list, see the FHIR Resource Index ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html), [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html)).
-     * @param {().HttpBody} params.requestBody Request body data
+     * @param {string} params.type The FHIR resource type to update, such as Patient or Observation. For a complete list, see the [FHIR Resource Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html).
+     * @param {().HttpBody} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9336,71 +6000,14 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.conditionalUpdate
-     * @desc If a resource is found based on the search criteria specified in the query parameters, updates the entire contents of that resource.  Implements the FHIR standard conditional update interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#2.1.0.10.2), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#cond-update)).  Search terms are provided as query parameters following the same pattern as the search method.  If the search criteria identify more than one match, the request will return a `412 Precondition Failed` error. If the search criteria identify zero matches, and the supplied resource body contains an `id`, and the FHIR store has enable_update_create set, creates the resource with the client-specified ID. If the search criteria identify zero matches, and the supplied resource body does not contain an `id`, the resource will be created with a server-assigned ID as per the create method.  The request body must contain a JSON-encoded FHIR resource, and the request headers must contain `Content-Type: application/fhir+json`.  On success, the response body will contain a JSON-encoded representation of the updated resource, including the server-assigned version ID. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the FHIR store this resource belongs to.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     // The FHIR resource type to update, such as Patient or Observation. For a
-     *     // complete list, see the [FHIR Resource
-     *     // Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html).
-     *     // Must match the resource type in the provided content.
-     *     type: 'my-type',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body. All existing properties
-     *       // will be replaced.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.conditionalUpdate(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc If a resource is found based on the search criteria specified in the query parameters, updates the entire contents of that resource.  Implements the FHIR standard [conditional update interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#cond-update).  Search terms are provided as query parameters following the same pattern as the search method.  If the search criteria identify more than one match, the request will return a `412 Precondition Failed` error. If the search criteria identify zero matches, and the supplied resource body contains an `id`, and the FHIR store has enable_update_create set, creates the resource with the client-specified ID. If the search criteria identify zero matches, and the supplied resource body does not contain an `id`, the resource will be created with a server-assigned ID as per the create method.  The request body must contain a JSON-encoded FHIR resource, and the request headers must contain `Content-Type: application/fhir+json`.  On success, the response body will contain a JSON-encoded representation of the updated resource, including the server-assigned version ID. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.conditionalUpdate
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent The name of the FHIR store this resource belongs to.
-     * @param {string} params.type The FHIR resource type to update, such as Patient or Observation. For a complete list, see the FHIR Resource Index ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html), [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html)). Must match the resource type in the provided content.
-     * @param {().HttpBody} params.requestBody Request body data
+     * @param {string} params.type The FHIR resource type to update, such as Patient or Observation. For a complete list, see the [FHIR Resource Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html). Must match the resource type in the provided content.
+     * @param {().HttpBody} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9467,70 +6074,14 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.create
-     * @desc Creates a FHIR resource.  Implements the FHIR standard create interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#create), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#create)), which creates a new resource with a server-assigned resource ID.  Also supports the FHIR standard conditional create interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#ccreate), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#ccreate)), specified by supplying an `If-None-Exist` header containing a FHIR search query. If no resources match this search query, the server processes the create operation as normal.  The request body must contain a JSON-encoded FHIR resource, and the request headers must contain `Content-Type: application/fhir+json`.  On success, the response body will contain a JSON-encoded representation of the resource as it was created on the server, including the server-assigned resource ID and version ID. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the FHIR store this resource belongs to.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     // The FHIR resource type to create, such as Patient or Observation. For a
-     *     // complete list, see the [FHIR Resource
-     *     // Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html).
-     *     // Must match the resource type in the provided content.
-     *     type: 'my-type',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.create(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Creates a FHIR resource.  Implements the FHIR standard [create interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#create), which creates a new resource with a server-assigned resource ID.  Also supports the FHIR standard [conditional create interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#ccreate), specified by supplying an `If-None-Exist` header containing a FHIR search query. If no resources match this search query, the server processes the create operation as normal.  The request body must contain a JSON-encoded FHIR resource, and the request headers must contain `Content-Type: application/fhir+json`.  On success, the response body will contain a JSON-encoded representation of the resource as it was created on the server, including the server-assigned resource ID and version ID. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent The name of the FHIR store this resource belongs to.
-     * @param {string} params.type The FHIR resource type to create, such as Patient or Observation. For a complete list, see the FHIR Resource Index ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html), [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html)). Must match the resource type in the provided content.
-     * @param {().HttpBody} params.requestBody Request body data
+     * @param {string} params.type The FHIR resource type to create, such as Patient or Observation. For a complete list, see the [FHIR Resource Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html). Must match the resource type in the provided content.
+     * @param {().HttpBody} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9597,53 +6148,7 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.delete
-     * @desc Deletes a FHIR resource.  Implements the FHIR standard delete interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#delete), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#delete)).  Note: Unless resource versioning is disabled by setting the disable_resource_versioning flag on the FHIR store, the deleted resources will be moved to a history repository that can still be retrieved through vread and related methods, unless they are removed by the purge method.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the resource to delete.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.delete(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Deletes a FHIR resource.  Implements the FHIR standard [delete interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#delete).  Note: Unless resource versioning is disabled by setting the disable_resource_versioning flag on the FHIR store, the deleted resources will be moved to a history repository that can still be retrieved through vread and related methods, unless they are removed by the purge method.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.delete
      * @memberOf! ()
      *
@@ -9712,63 +6217,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.executeBundle
-     * @desc Executes all the requests in the given Bundle.  Implements the FHIR standard batch/transaction interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#transaction), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#transaction)).  Supports all interactions within a bundle, except search. This method accepts Bundles of type `batch` and `transaction`, processing them according to the batch processing rules ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#2.1.0.16.1), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#2.21.0.17.1)) and transaction processing rules ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#2.1.0.16.2), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#2.21.0.17.2)).  The request body must contain a JSON-encoded FHIR `Bundle` resource, and the request headers must contain `Content-Type: application/fhir+json`.  For a batch bundle or a successful transaction the response body will contain a JSON-encoded representation of a `Bundle` resource of type `batch-response` or `transaction-response` containing one entry for each entry in the request, with the outcome of processing the entry. In the case of an error for a transaction bundle, the response body will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of the FHIR store in which this bundle will be executed.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.executeBundle(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Executes all the requests in the given Bundle.  Implements the FHIR standard [batch/transaction interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#transaction).  Supports all interactions within a bundle, except search. This method accepts Bundles of type `batch` and `transaction`, processing them according to the [batch processing rules](http://hl7.org/implement/standards/fhir/STU3/http.html#2.21.0.17.1) and [transaction processing rules](http://hl7.org/implement/standards/fhir/STU3/http.html#2.21.0.17.2).  The request body must contain a JSON-encoded FHIR `Bundle` resource, and the request headers must contain `Content-Type: application/fhir+json`.  For a batch bundle or a successful transaction the response body will contain a JSON-encoded representation of a `Bundle` resource of type `batch-response` or `transaction-response` containing one entry for each entry in the request, with the outcome of processing the entry. In the case of an error for a transaction bundle, the response body will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.executeBundle
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Name of the FHIR store in which this bundle will be executed.
-     * @param {().HttpBody} params.requestBody Request body data
+     * @param {().HttpBody} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9835,62 +6290,16 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.history
-     * @desc Lists all the versions of a resource (including the current version and deleted versions) from the FHIR store.  Implements the per-resource form of the FHIR standard history interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#history), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#history)).  On success, the response body will contain a JSON-encoded representation of a `Bundle` resource of type `history`, containing the version history sorted from most recent to oldest versions. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the resource to retrieve.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.history(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Lists all the versions of a resource (including the current version and deleted versions) from the FHIR store.  Implements the per-resource form of the FHIR standard [history interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#history).  On success, the response body will contain a JSON-encoded representation of a `Bundle` resource of type `history`, containing the version history sorted from most recent to oldest versions. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.history
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
+     * @param {string=} params.at Only include resource versions that were current at some point during the time period specified in the date time value. The date parameter format is yyyy-mm-ddThh:mm:ss[Z|(+|-)hh:mm]  Clients may specify any of the following:  *  An entire year: `_at=2019` *  An entire month: `_at=2019-01` *  A specific day: `_at=2019-01-20` *  A specific second: `_at=2018-12-31T23:59:58Z`
+     * @param {integer=} params.count The maximum number of search results on a page. Defaults to 1000.
      * @param {string} params.name The name of the resource to retrieve.
-     * @param {string=} params._at Only include resource versions that were current at some point during the time period specified in the date time value. The date parameter format is yyyy-mm-ddThh:mm:ss[Z|(+|-)hh:mm]  Clients may specify any of the following:  *  An entire year: `_at=2019` *  An entire month: `_at=2019-01` *  A specific day: `_at=2019-01-20` *  A specific second: `_at=2018-12-31T23:59:58Z`
-     * @param {integer=} params._count The maximum number of search results on a page. Defaults to 1000.
-     * @param {string=} params._page_token Used to retrieve the first, previous, next, or last page of resource versions when using pagination. Value should be set to the value of `_page_token` set in next or previous page links' URLs. Next and previous page are returned in the response bundle's links field, where `link.relation` is "previous" or "next".  Omit `_page_token` if no previous request has been made.
-     * @param {string=} params._since Only include resource versions that were created at or after the given instant in time. The instant in time uses the format YYYY-MM-DDThh:mm:ss.sss+zz:zz (for example 2015-02-07T13:28:17.239+02:00 or 2017-01-01T00:00:00Z). The time must be specified to the second and include a time zone.
+     * @param {string=} params.page Used to retrieve the first, previous, next, or last page of resource versions when using pagination. Value should be set to the value of the `link.url` field returned in the response to the previous request, where `link.relation` is "first", "previous", "next" or "last".  Omit `page` if no previous request has been made.
+     * @param {string=} params.since Only include resource versions that were created at or after the given instant in time. The instant in time uses the format YYYY-MM-DDThh:mm:ss.sss+zz:zz (for example 2015-02-07T13:28:17.239+02:00 or 2017-01-01T00:00:00Z). The time must be specified to the second and include a time zone.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9957,53 +6366,7 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.Observation-lastn
-     * @desc Retrieves the N most recent `Observation` resources for a subject matching search criteria specified as query parameters, grouped by `Observation.code`, sorted from most recent to oldest.  Implements the FHIR extended operation Observation-lastn ([STU3](http://hl7.org/implement/standards/fhir/STU3/observation-operations.html#lastn)).  DSTU2 doesn't define the Observation-lastn method, but the server supports it the same way it supports STU3.  Search terms are provided as query parameters following the same pattern as the search method. The following search parameters must be provided:      - `subject` or `patient` to specify a subject for the Observation.     - `code`, `category` or any of the composite parameters that include       `code`.  Any other valid Observation search parameters can also be provided. This operation accepts an additional query parameter `max`, which specifies N, the maximum number of Observations to return from each group, with a default of 1.  Searches with over 1000 results are rejected. Results are counted before grouping and limiting the results with `max`. To stay within the limit, constrain these searches using Observation search parameters such as `_lastUpdated` or `date`.  On success, the response body will contain a JSON-encoded representation of a `Bundle` resource of type `searchset`, containing the results of the operation. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of the FHIR store to retrieve resources from.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.observationLastn(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Retrieves the N most recent `Observation` resources for a subject matching search criteria specified as query parameters, grouped by `Observation.code`, sorted from most recent to oldest.  Implements the FHIR extended operation [Observation-lastn](http://hl7.org/implement/standards/fhir/STU3/observation-operations.html#lastn).  Search terms are provided as query parameters following the same pattern as the search method. This operation accepts an additional query parameter `max`, which specifies N, the maximum number of Observations to return from each group, with a default of 1.  On success, the response body will contain a JSON-encoded representation of a `Bundle` resource of type `searchset`, containing the results of the operation. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.Observation-lastn
      * @memberOf! ()
      *
@@ -10074,64 +6437,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.patch
-     * @desc Updates part of an existing resource by applying the operations specified in a [JSON Patch](http://jsonpatch.com/) document.  Implements the FHIR standard patch interaction ([STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#patch)).  DSTU2 doesn't define a patch method, but the server supports it in the same way it supports STU3.  The request body must contain a JSON Patch document, and the request headers must contain `Content-Type: application/json-patch+json`.  On success, the response body will contain a JSON-encoded representation of the updated resource, including the server-assigned version ID. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the resource to update.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body. Only these properties
-     *       // will be changed.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.patch(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Updates part of an existing resource by applying the operations specified in a [JSON Patch](http://jsonpatch.com/) document.  Implements the FHIR standard [patch interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#patch).  The request body must contain a JSON Patch document, and the request headers must contain `Content-Type: application/json-patch+json`.  On success, the response body will contain a JSON-encoded representation of the updated resource, including the server-assigned version ID. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.patch
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The name of the resource to update.
-     * @param {().HttpBody} params.requestBody Request body data
+     * @param {().HttpBody} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10195,53 +6507,7 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.Patient-everything
-     * @desc On success, the response body will contain a JSON-encoded representation of a `Bundle` resource of type `searchset`, containing the results of the operation. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of the `Patient` resource for which the information is required.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.patientEverything(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Retrieves all the resources in the patient compartment for a `Patient` resource.  Implements the FHIR extended operation [Patient-everything](http://hl7.org/implement/standards/fhir/STU3/patient-operations.html#everything).  On success, the response body will contain a JSON-encoded representation of a `Bundle` resource of type `searchset`, containing the results of the operation. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.Patient-everything
      * @memberOf! ()
      *
@@ -10249,8 +6515,6 @@ export namespace healthcare_v1beta1 {
      * @param {string=} params.end The response includes records prior to the end date. If no end date is provided, all records subsequent to the start date are in scope.
      * @param {string} params.name Name of the `Patient` resource for which the information is required.
      * @param {string=} params.start The response includes records subsequent to the start date. If no start date is provided, all records prior to the end date are in scope.
-     * @param {integer=} params._count Maximum number of resources in a page. Defaults to 100.
-     * @param {string=} params._page_token Used to retrieve the next or previous page of results when using pagination. Value should be set to the value of page_token set in next or previous page links' urls. Next and previous page are returned in the response bundle's links field, where `link.relation` is "previous" or "next".  Omit `page_token` if no previous request has been made.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10317,53 +6581,7 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.read
-     * @desc Gets the contents of a FHIR resource.  Implements the FHIR standard read interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#read), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#read)).  Also supports the FHIR standard conditional read interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#cread), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#cread)) specified by supplying an `If-Modified-Since` header with a date/time value or an `If-None-Match` header with an ETag value.  On success, the response body will contain a JSON-encoded representation of the resource. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the resource to retrieve.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.read(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Gets the contents of a FHIR resource.  Implements the FHIR standard [read interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#read).  Also supports the FHIR standard [conditional read interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#cread) specified by supplying an `If-Modified-Since` header with a date/time value or an `If-None-Match` header with an ETag value.  On success, the response body will contain a JSON-encoded representation of the resource. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.read
      * @memberOf! ()
      *
@@ -10433,49 +6651,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.Resource-purge
      * @desc Deletes all the historical versions of a resource (excluding the current version) from the FHIR store. To remove all versions of a resource, first delete the current version and then call this method.  This is not a FHIR standard operation.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the resource to purge.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.resourcePurge(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.Resource-purge
      * @memberOf! ()
      *
@@ -10547,63 +6722,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.search
-     * @desc Searches for resources in the given FHIR store according to criteria specified as query parameters.  Implements the FHIR standard search interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#search), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#search)) using the search semantics described in the FHIR Search specification ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/search.html), [STU3](http://hl7.org/implement/standards/fhir/STU3/search.html)).  Supports three methods of search defined by the specification:  *  `GET [base]?[parameters]` to search across all resources. *  `GET [base]/[type]?[parameters]` to search resources of a specified type. *  `POST [base]/[type]/_search?[parameters]` as an alternate form having the same semantics as the `GET` method.  The `GET` methods do not support compartment searches. The `POST` method does not support `application/x-www-form-urlencoded` search parameters.  On success, the response body will contain a JSON-encoded representation of a `Bundle` resource of type `searchset`, containing the results of the search. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.  The server's capability statement, retrieved through capabilities, indicates what search parameters are supported on each FHIR resource. A list of all search parameters defined by the specification can be found in the FHIR Search Parameter Registry ([STU3](http://hl7.org/implement/standards/fhir/STU3/searchparameter-registry.html)). FHIR search parameters for DSTU2 can be found on each resource's definition page.  Supported search modifiers: `:missing`, `:exact`, `:contains`, `:text`, `:in`, `:not-in`, `:above`, `:below`, `:[type]`, `:not`, and `:recurse`.  Supported search result parameters: `_sort`, `_count`, `_include`, `_revinclude`, `_summary=text`, `_summary=data`, and `_elements`.  The maximum number of search results returned defaults to 100, which can be overridden by the `_count` parameter up to a maximum limit of 1000. If there are additional results, the returned `Bundle` will contain pagination links.  Resources with a total size larger than 5MB or a field count larger than 50,000 might not be fully searchable as the server might trim its generated search index in those cases.  Note: FHIR resources are indexed asynchronously, so there might be a slight delay between the time a resource is created or changes and when the change is reflected in search results.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of the FHIR store to retrieve resources from.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset/fhirStores/my-fhir-store',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.search(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Searches for resources in the given FHIR store according to criteria specified as query parameters.  Implements the FHIR standard [search interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#search) using the search semantics described in the [FHIR Search specification](http://hl7.org/implement/standards/fhir/STU3/search.html).  Supports three methods of search defined by the specification:  *  `GET [base]?[parameters]` to search across all resources. *  `GET [base]/[type]?[parameters]` to search resources of a specified type. *  `POST [base]/[type]/_search?[parameters]` as an alternate form having the same semantics as the `GET` method.  The `GET` methods do not support compartment searches. The `POST` method does not support `application/x-www-form-urlencoded` search parameters.  On success, the response body will contain a JSON-encoded representation of a `Bundle` resource of type `searchset`, containing the results of the search. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.  # Search Parameters  The server's capability statement, retrieved through capabilities, indicates what search parameters are supported on each FHIR resource. A list of all search parameters defined by the specification can be found in the [FHIR Search Parameter Registry](http://hl7.org/implement/standards/fhir/STU3/searchparameter-registry.html).  # Search Modifiers  Modifier   | Supported ----------- | --------- `:missing`  | Yes `:exact`    | Yes `:contains` | Yes `:text`     | Yes `:in`       | Yes `:not-in`   | Yes `:above`    | Yes `:below`    | Yes `:[type]`   | Yes `:not`      | Yes `:recurse`  | No
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.search
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Name of the FHIR store to retrieve resources from.
-     * @param {().SearchResourcesRequest} params.requestBody Request body data
+     * @param {().SearchResourcesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10670,64 +6795,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.update
-     * @desc Updates the entire contents of a resource.  Implements the FHIR standard update interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#update), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#update)).  If the specified resource does not exist and the FHIR store has enable_update_create set, creates the resource with the client-specified ID.  The request body must contain a JSON-encoded FHIR resource, and the request headers must contain `Content-Type: application/fhir+json`. The resource must contain an `id` element having an identical value to the ID in the REST path of the request.  On success, the response body will contain a JSON-encoded representation of the updated resource, including the server-assigned version ID. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the resource to update.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body. All existing properties
-     *       // will be replaced.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.update(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Updates the entire contents of a resource.  Implements the FHIR standard [update interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#update).  If the specified resource does not exist and the FHIR store has enable_update_create set, creates the resource with the client-specified ID.  The request body must contain a JSON-encoded FHIR resource, and the request headers must contain `Content-Type: application/fhir+json`. The resource must contain an `id` element having an identical value to the ID in the REST path of the request.  On success, the response body will contain a JSON-encoded representation of the updated resource, including the server-assigned version ID. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.update
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The name of the resource to update.
-     * @param {().HttpBody} params.requestBody Request body data
+     * @param {().HttpBody} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10791,53 +6865,7 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.fhirStores.fhir.vread
-     * @desc Gets the contents of a version (current or historical) of a FHIR resource by version ID.  Implements the FHIR standard vread interaction ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#vread), [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#vread).  On success, the response body will contain a JSON-encoded representation of the resource. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the resource version to retrieve.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.fhirStores.fhir.vread(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Gets the contents of a version (current or historical) of a FHIR resource by version ID.  Implements the FHIR standard [vread interaction](http://hl7.org/implement/standards/fhir/STU3/http.html#vread).  On success, the response body will contain a JSON-encoded representation of the resource. Errors generated by the FHIR store will contain a JSON-encoded `OperationOutcome` resource describing the reason for the error. If the request cannot be mapped to a valid API method on a FHIR store, a generic GCP error might be returned instead.
      * @alias healthcare.projects.locations.datasets.fhirStores.fhir.vread
      * @memberOf! ()
      *
@@ -10929,7 +6957,7 @@ export namespace healthcare_v1beta1 {
      */
     parent?: string;
     /**
-     * The FHIR resource type to delete, such as Patient or Observation. For a complete list, see the FHIR Resource Index ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html), [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html)).
+     * The FHIR resource type to delete, such as Patient or Observation. For a complete list, see the [FHIR Resource Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html).
      */
     type?: string;
   }
@@ -10945,7 +6973,7 @@ export namespace healthcare_v1beta1 {
      */
     parent?: string;
     /**
-     * The FHIR resource type to update, such as Patient or Observation. For a complete list, see the FHIR Resource Index ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html), [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html)).
+     * The FHIR resource type to update, such as Patient or Observation. For a complete list, see the [FHIR Resource Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html).
      */
     type?: string;
 
@@ -10966,7 +6994,7 @@ export namespace healthcare_v1beta1 {
      */
     parent?: string;
     /**
-     * The FHIR resource type to update, such as Patient or Observation. For a complete list, see the FHIR Resource Index ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html), [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html)). Must match the resource type in the provided content.
+     * The FHIR resource type to update, such as Patient or Observation. For a complete list, see the [FHIR Resource Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html). Must match the resource type in the provided content.
      */
     type?: string;
 
@@ -10987,7 +7015,7 @@ export namespace healthcare_v1beta1 {
      */
     parent?: string;
     /**
-     * The FHIR resource type to create, such as Patient or Observation. For a complete list, see the FHIR Resource Index ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html), [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html)). Must match the resource type in the provided content.
+     * The FHIR resource type to create, such as Patient or Observation. For a complete list, see the [FHIR Resource Index](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html). Must match the resource type in the provided content.
      */
     type?: string;
 
@@ -11033,25 +7061,25 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
+     * Only include resource versions that were current at some point during the time period specified in the date time value. The date parameter format is yyyy-mm-ddThh:mm:ss[Z|(+|-)hh:mm]  Clients may specify any of the following:  *  An entire year: `_at=2019` *  An entire month: `_at=2019-01` *  A specific day: `_at=2019-01-20` *  A specific second: `_at=2018-12-31T23:59:58Z`
+     */
+    at?: string;
+    /**
+     * The maximum number of search results on a page. Defaults to 1000.
+     */
+    count?: number;
+    /**
      * The name of the resource to retrieve.
      */
     name?: string;
     /**
-     * Only include resource versions that were current at some point during the time period specified in the date time value. The date parameter format is yyyy-mm-ddThh:mm:ss[Z|(+|-)hh:mm]  Clients may specify any of the following:  *  An entire year: `_at=2019` *  An entire month: `_at=2019-01` *  A specific day: `_at=2019-01-20` *  A specific second: `_at=2018-12-31T23:59:58Z`
+     * Used to retrieve the first, previous, next, or last page of resource versions when using pagination. Value should be set to the value of the `link.url` field returned in the response to the previous request, where `link.relation` is "first", "previous", "next" or "last".  Omit `page` if no previous request has been made.
      */
-    _at?: string;
-    /**
-     * The maximum number of search results on a page. Defaults to 1000.
-     */
-    _count?: number;
-    /**
-     * Used to retrieve the first, previous, next, or last page of resource versions when using pagination. Value should be set to the value of `_page_token` set in next or previous page links' URLs. Next and previous page are returned in the response bundle's links field, where `link.relation` is "previous" or "next".  Omit `_page_token` if no previous request has been made.
-     */
-    _page_token?: string;
+    page?: string;
     /**
      * Only include resource versions that were created at or after the given instant in time. The instant in time uses the format YYYY-MM-DDThh:mm:ss.sss+zz:zz (for example 2015-02-07T13:28:17.239+02:00 or 2017-01-01T00:00:00Z). The time must be specified to the second and include a time zone.
      */
-    _since?: string;
+    since?: string;
   }
   export interface Params$Resource$Projects$Locations$Datasets$Fhirstores$Fhir$Observationlastn
     extends StandardParameters {
@@ -11101,14 +7129,6 @@ export namespace healthcare_v1beta1 {
      * The response includes records subsequent to the start date. If no start date is provided, all records prior to the end date are in scope.
      */
     start?: string;
-    /**
-     * Maximum number of resources in a page. Defaults to 100.
-     */
-    _count?: number;
-    /**
-     * Used to retrieve the next or previous page of results when using pagination. Value should be set to the value of page_token set in next or previous page links' urls. Next and previous page are returned in the response bundle's links field, where `link.relation` is "previous" or "next".  Omit `page_token` if no previous request has been made.
-     */
-    _page_token?: string;
   }
   export interface Params$Resource$Projects$Locations$Datasets$Fhirstores$Fhir$Read
     extends StandardParameters {
@@ -11194,63 +7214,13 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.create
      * @desc Creates a new HL7v2 store within the parent dataset.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the dataset this HL7v2 store belongs to.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.create(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string=} params.hl7V2StoreId The ID of the HL7v2 store that is being created. The string must match the following regex: `[\p{L}\p{N}_\-\.]{1,256}`.
      * @param {string} params.parent The name of the dataset this HL7v2 store belongs to.
-     * @param {().Hl7V2Store} params.requestBody Request body data
+     * @param {().Hl7V2Store} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11320,49 +7290,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.delete
      * @desc Deletes the specified HL7v2 store and removes all messages that are contained within it.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The resource name of the HL7v2 store to delete.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.delete(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.delete
      * @memberOf! ()
      *
@@ -11432,52 +7359,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.get
      * @desc Gets the specified HL7v2 store.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The resource name of the HL7v2 store to get.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.get(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.get
      * @memberOf! ()
      *
@@ -11549,58 +7430,10 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.getIamPolicy
      * @desc Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy is being requested.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'my-resource',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.getIamPolicy(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.getIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -11669,70 +7502,11 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.list
      * @desc Lists the HL7v2 stores in the given dataset.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of the dataset.
-     *     parent: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   var handlePage = function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     var hl7V2StoresPage = response['hl7V2Stores'];
-     *     if (!hl7V2StoresPage) {
-     *       return;
-     *     }
-     *     for (var i = 0; i < hl7V2StoresPage.length; i++) {
-     *       // TODO: Change code below to process each resource in `hl7V2StoresPage`:
-     *       console.log(JSON.stringify(hl7V2StoresPage[i], null, 2));
-     *     }
-     *
-     *     if (response.nextPageToken) {
-     *       request.pageToken = response.nextPageToken;
-     *       cloudHealthcare.projects.locations.datasets.hl7V2Stores.list(request, handlePage);
-     *     }
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.list(request, handlePage);
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.list
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.filter Restricts stores returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings Only filtering on labels is supported. For example, `labels.key=value`.
+     * @param {string=} params.filter Restricts stores returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings Only filtering on labels is supported, for example `labels.key=value`.
      * @param {integer=} params.pageSize Limit on the number of HL7v2 stores to return in a single response. If zero the default page size of 100 is used.
      * @param {string=} params.pageToken The next_page_token value returned from the previous List request, if any.
      * @param {string} params.parent Name of the dataset.
@@ -11807,65 +7581,13 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.patch
      * @desc Updates the HL7v2 store.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Output only. Resource name of the HL7v2 store, of the form
-     *     // `projects/{project_id}/datasets/{dataset_id}/hl7V2Stores/{hl7v2_store_id}`.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body. Only these properties
-     *       // will be changed.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.patch(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.patch
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Output only. Resource name of the HL7v2 store, of the form `projects/{project_id}/datasets/{dataset_id}/hl7V2Stores/{hl7v2_store_id}`.
      * @param {string=} params.updateMask The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-     * @param {().Hl7V2Store} params.requestBody Request body data
+     * @param {().Hl7V2Store} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11931,64 +7653,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy is being specified.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'my-resource',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.setIamPolicy(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.setIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -12056,63 +7727,12 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.testIamPermissions
      * @desc Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.  Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // REQUIRED: The resource for which the policy detail is being requested.
-     *     // See the operation documentation for the appropriate value for this field.
-     *     resource_: 'my-resource',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.testIamPermissions(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.testIamPermissions
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -12240,10 +7860,6 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
-    /**
      * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      */
     resource?: string;
@@ -12256,7 +7872,7 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Restricts stores returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings Only filtering on labels is supported. For example, `labels.key=value`.
+     * Restricts stores returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings Only filtering on labels is supported, for example `labels.key=value`.
      */
     filter?: string;
     /**
@@ -12337,62 +7953,12 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.messages.create
      * @desc Creates a message and sends a notification to the Cloud Pub/Sub topic. If configured, the MLLP adapter listens to messages created by this method and sends those back to the hospital. A successful response indicates the message has been persisted to storage and a Cloud Pub/Sub notification has been sent. Sending to the hospital by the MLLP adapter happens asynchronously.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the dataset this message belongs to.
-     *     parent: 'my-parent',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.messages.create(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.messages.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent The name of the dataset this message belongs to.
-     * @param {().CreateMessageRequest} params.requestBody Request body data
+     * @param {().CreateMessageRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -12460,49 +8026,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.messages.delete
      * @desc Deletes an HL7v2 message.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The resource name of the HL7v2 message to delete.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.messages.delete(request, function(err) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.messages.delete
      * @memberOf! ()
      *
@@ -12572,58 +8095,12 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.messages.get
      * @desc Gets an HL7v2 message.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The resource name of the HL7v2 message to retrieve.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.messages.get(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.messages.get
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The resource name of the HL7v2 message to retrieve.
-     * @param {string=} params.view Specifies which parts of the Message resource to return in the response. When unspecified, equivalent to FULL.
+     * @param {string=} params.view Specifies which parts of the Message resource should be returned in the response.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -12687,63 +8164,13 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.messages.ingest
-     * @desc Ingests a new HL7v2 message from the hospital and sends a notification to the Cloud Pub/Sub topic. Return is an HL7v2 ACK message if the message was successfully stored. Otherwise an error is returned.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the HL7v2 store this message belongs to.
-     *     parent: 'my-parent',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.messages.ingest(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Ingests a new HL7v2 message from the hospital and sends a notification to the Cloud Pub/Sub topic. Return is an HL7v2 ACK message if the message was successfully stored. Otherwise an error is returned.  If an identical HL7v2 message is created twice only one resource is created on the server and no error is reported.
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.messages.ingest
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent The name of the HL7v2 store this message belongs to.
-     * @param {().IngestMessageRequest} params.requestBody Request body data
+     * @param {().IngestMessageRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -12814,71 +8241,12 @@ export namespace healthcare_v1beta1 {
 
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.messages.list
-     * @desc Lists all the messages in the given HL7v2 store with support for filtering.  Note: HL7v2 messages are indexed asynchronously, so there might be a slight delay between the time a message is created and when it can be found through a filter.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Name of the HL7v2 store to retrieve messages from.
-     *     parent: 'my-parent',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   var handlePage = function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     var messagesPage = response['messages'];
-     *     if (!messagesPage) {
-     *       return;
-     *     }
-     *     for (var i = 0; i < messagesPage.length; i++) {
-     *       // TODO: Change code below to process each resource in `messagesPage`:
-     *       console.log(JSON.stringify(messagesPage[i], null, 2));
-     *     }
-     *
-     *     if (response.nextPageToken) {
-     *       request.pageToken = response.nextPageToken;
-     *       cloudHealthcare.projects.locations.datasets.hl7V2Stores.messages.list(request, handlePage);
-     *     }
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.messages.list(request, handlePage);
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
+     * @desc Lists all the messages in the given HL7v2 store with support for filtering.
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.messages.list
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.filter Restricts messages returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings  Fields/functions available for filtering are:  *  `message_type`, from the MSH-9 segment. For example, `NOT message_type = "ADT"`. *  `send_date` or `sendDate`, the YYYY-MM-DD date the message was sent in the dataset's time_zone, from the MSH-7 segment. For example, `send_date < "2017-01-02"`. *  `send_time`, the timestamp when the message was sent, using the RFC3339 time format for comparisons, from the MSH-7 segment. For example, `send_time < "2017-01-02T00:00:00-05:00"`. *  `send_facility`, the care center that the message came from, from the MSH-4 segment. For example, `send_facility = "ABC"`. *  `PatientId(value, type)`, which matches if the message lists a patient having an ID of the given value and type in the PID-2, PID-3, or PID-4 segments. For example, `PatientId("123456", "MRN")`. *  `labels.x`, a string value of the label with key `x` as set using the Message.labels map. For example, `labels."priority"="high"`. The operator `:*` can be used to assert the existence of a label. For example, `labels."priority":*`.  Limitations on conjunctions:  *  Negation on the patient ID function or the labels field is not supported. For example, these queries are invalid: `NOT PatientId("123456", "MRN")`, `NOT labels."tag1":*`, `NOT labels."tag2"="val2"`. *  Conjunction of multiple patient ID functions is not supported, for example this query is invalid: `PatientId("123456", "MRN") AND PatientId("456789", "MRN")`. *  Conjunction of multiple labels fields is also not supported, for example this query is invalid: `labels."tag1":* AND labels."tag2"="val2"`. *  Conjunction of one patient ID function, one labels field and conditions on other fields is supported. For example, this query is valid: `PatientId("123456", "MRN") AND labels."tag1":* AND message_type = "ADT"`.
+     * @param {string=} params.filter Restricts messages returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings  Fields/functions available for filtering are:  *  `message_type`, from the MSH-9 segment; for example `NOT message_type = "ADT"` *  `send_date` or `sendDate`, the YYYY-MM-DD date the message was sent in the dataset's time_zone, from the MSH-7 segment; for example `send_date < "2017-01-02"` *  `send_time`, the timestamp of when the message was sent, using the RFC3339 time format for comparisons, from the MSH-7 segment; for example `send_time < "2017-01-02T00:00:00-05:00"` *  `send_facility`, the care center that the message came from, from the MSH-4 segment; for example `send_facility = "ABC"` *  `HL7RegExp(expr)`, which does regular expression matching of `expr` against the message payload using re2 (http://code.google.com/p/re2/) syntax; for example `HL7RegExp("^.*\|.*\|EMERG")` *  `PatientId(value, type)`, which matches if the message lists a patient having an ID of the given value and type in the PID-2, PID-3, or PID-4 segments; for example `PatientId("123456", "MRN")` *  `labels.x`, a string value of the label with key `x` as set using the Message.labels map, for example `labels."priority"="high"`. The operator `:*` can be used to assert the existence of a label, for example `labels."priority":*`.  Limitations on conjunctions:  *  Negation on the patient ID function or the labels field is not supported, for example these queries are invalid: `NOT PatientId("123456", "MRN")`, `NOT labels."tag1":*`, `NOT labels."tag2"="val2"`. *  Conjunction of multiple patient ID functions is not supported, for example this query is invalid: `PatientId("123456", "MRN") AND PatientId("456789", "MRN")`. *  Conjunction of multiple labels fields is also not supported, for example this query is invalid: `labels."tag1":* AND labels."tag2"="val2"`. *  Conjunction of one patient ID function, one labels field and conditions on other fields is supported, for example this query is valid: `PatientId("123456", "MRN") AND labels."tag1":* AND message_type = "ADT"`.
      * @param {string=} params.orderBy Orders messages returned by the specified order_by clause. Syntax: https://cloud.google.com/apis/design/design_patterns#sorting_order  Fields available for ordering are:  *  `send_time`
      * @param {integer=} params.pageSize Limit on the number of messages to return in a single response. If zero the default page size of 100 is used.
      * @param {string=} params.pageToken The next_page_token value returned from the previous List request, if any.
@@ -12954,66 +8322,13 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.hl7V2Stores.messages.patch
      * @desc Update the message.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // Resource name of the Message, of the form
-     *     // `projects/{project_id}/datasets/{dataset_id}/hl7V2Stores/{hl7_v2_store_id}/messages/{message_id}`.
-     *     // Assigned by the server.
-     *     name: 'my-name',  // TODO: Update placeholder value.
-     *
-     *     resource: {
-     *       // TODO: Add desired properties to the request body. Only these properties
-     *       // will be changed.
-     *     },
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.hl7V2Stores.messages.patch(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.hl7V2Stores.messages.patch
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Resource name of the Message, of the form `projects/{project_id}/datasets/{dataset_id}/hl7V2Stores/{hl7_v2_store_id}/messages/{message_id}`. Assigned by the server.
-     * @param {string=} params.updateMask The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask Only the `labels` field is allowed to be updated. The labels in the request are merged with the existing set of labels. Existing labels with the same keys are updated.
-     * @param {().Message} params.requestBody Request body data
+     * @param {string=} params.updateMask The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask Only the `labels` field is allowed to be updated. The labels in the request will be merged with the existing set of labels. Existing labels with the same keys will be updated.
+     * @param {().Message} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -13117,7 +8432,7 @@ export namespace healthcare_v1beta1 {
      */
     name?: string;
     /**
-     * Specifies which parts of the Message resource to return in the response. When unspecified, equivalent to FULL.
+     * Specifies which parts of the Message resource should be returned in the response.
      */
     view?: string;
   }
@@ -13146,7 +8461,7 @@ export namespace healthcare_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Restricts messages returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings  Fields/functions available for filtering are:  *  `message_type`, from the MSH-9 segment. For example, `NOT message_type = "ADT"`. *  `send_date` or `sendDate`, the YYYY-MM-DD date the message was sent in the dataset's time_zone, from the MSH-7 segment. For example, `send_date < "2017-01-02"`. *  `send_time`, the timestamp when the message was sent, using the RFC3339 time format for comparisons, from the MSH-7 segment. For example, `send_time < "2017-01-02T00:00:00-05:00"`. *  `send_facility`, the care center that the message came from, from the MSH-4 segment. For example, `send_facility = "ABC"`. *  `PatientId(value, type)`, which matches if the message lists a patient having an ID of the given value and type in the PID-2, PID-3, or PID-4 segments. For example, `PatientId("123456", "MRN")`. *  `labels.x`, a string value of the label with key `x` as set using the Message.labels map. For example, `labels."priority"="high"`. The operator `:*` can be used to assert the existence of a label. For example, `labels."priority":*`.  Limitations on conjunctions:  *  Negation on the patient ID function or the labels field is not supported. For example, these queries are invalid: `NOT PatientId("123456", "MRN")`, `NOT labels."tag1":*`, `NOT labels."tag2"="val2"`. *  Conjunction of multiple patient ID functions is not supported, for example this query is invalid: `PatientId("123456", "MRN") AND PatientId("456789", "MRN")`. *  Conjunction of multiple labels fields is also not supported, for example this query is invalid: `labels."tag1":* AND labels."tag2"="val2"`. *  Conjunction of one patient ID function, one labels field and conditions on other fields is supported. For example, this query is valid: `PatientId("123456", "MRN") AND labels."tag1":* AND message_type = "ADT"`.
+     * Restricts messages returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings  Fields/functions available for filtering are:  *  `message_type`, from the MSH-9 segment; for example `NOT message_type = "ADT"` *  `send_date` or `sendDate`, the YYYY-MM-DD date the message was sent in the dataset's time_zone, from the MSH-7 segment; for example `send_date < "2017-01-02"` *  `send_time`, the timestamp of when the message was sent, using the RFC3339 time format for comparisons, from the MSH-7 segment; for example `send_time < "2017-01-02T00:00:00-05:00"` *  `send_facility`, the care center that the message came from, from the MSH-4 segment; for example `send_facility = "ABC"` *  `HL7RegExp(expr)`, which does regular expression matching of `expr` against the message payload using re2 (http://code.google.com/p/re2/) syntax; for example `HL7RegExp("^.*\|.*\|EMERG")` *  `PatientId(value, type)`, which matches if the message lists a patient having an ID of the given value and type in the PID-2, PID-3, or PID-4 segments; for example `PatientId("123456", "MRN")` *  `labels.x`, a string value of the label with key `x` as set using the Message.labels map, for example `labels."priority"="high"`. The operator `:*` can be used to assert the existence of a label, for example `labels."priority":*`.  Limitations on conjunctions:  *  Negation on the patient ID function or the labels field is not supported, for example these queries are invalid: `NOT PatientId("123456", "MRN")`, `NOT labels."tag1":*`, `NOT labels."tag2"="val2"`. *  Conjunction of multiple patient ID functions is not supported, for example this query is invalid: `PatientId("123456", "MRN") AND PatientId("456789", "MRN")`. *  Conjunction of multiple labels fields is also not supported, for example this query is invalid: `labels."tag1":* AND labels."tag2"="val2"`. *  Conjunction of one patient ID function, one labels field and conditions on other fields is supported, for example this query is valid: `PatientId("123456", "MRN") AND labels."tag1":* AND message_type = "ADT"`.
      */
     filter?: string;
     /**
@@ -13178,7 +8493,7 @@ export namespace healthcare_v1beta1 {
      */
     name?: string;
     /**
-     * The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask Only the `labels` field is allowed to be updated. The labels in the request are merged with the existing set of labels. Existing labels with the same keys are updated.
+     * The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask Only the `labels` field is allowed to be updated. The labels in the request will be merged with the existing set of labels. Existing labels with the same keys will be updated.
      */
     updateMask?: string;
 
@@ -13197,52 +8512,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.operations.get
      * @desc Gets the latest state of a long-running operation.  Clients can use this method to poll the operation result at intervals as recommended by the API service.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the operation resource.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset/operations/my-operation',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.operations.get(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.operations.get
      * @memberOf! ()
      *
@@ -13314,65 +8583,6 @@ export namespace healthcare_v1beta1 {
     /**
      * healthcare.projects.locations.datasets.operations.list
      * @desc Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.  NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/x/operations`. To override the binding, API services can add a binding such as `"/v1/{name=users/x}/operations"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Healthcare API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/healthcare
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudHealthcare = google.cloudhealthcare('v1beta1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name of the operation's parent resource.
-     *     name: 'projects/my-project/locations/my-location/datasets/my-dataset',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   var handlePage = function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     var operationsPage = response['operations'];
-     *     if (!operationsPage) {
-     *       return;
-     *     }
-     *     for (var i = 0; i < operationsPage.length; i++) {
-     *       // TODO: Change code below to process each resource in `operationsPage`:
-     *       console.log(JSON.stringify(operationsPage[i], null, 2));
-     *     }
-     *
-     *     if (response.nextPageToken) {
-     *       request.pageToken = response.nextPageToken;
-     *       cloudHealthcare.projects.locations.datasets.operations.list(request, handlePage);
-     *     }
-     *   };
-     *
-     *   cloudHealthcare.projects.locations.datasets.operations.list(request, handlePage);
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias healthcare.projects.locations.datasets.operations.list
      * @memberOf! ()
      *

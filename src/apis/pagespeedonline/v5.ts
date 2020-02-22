@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -99,76 +101,71 @@ export namespace pagespeedonline_v5 {
     }
   }
 
-  export interface Schema$GoogleprotobufListValue {}
   export interface Schema$GoogleprotobufValue {}
   export interface Schema$LighthouseAuditResultV5 {
     /**
      * The description of the audit.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Freeform details section of the audit.
      */
-    details?: {[key: string]: any} | null;
+    details?: {[key: string]: any};
     /**
      * The value that should be displayed on the UI for this audit.
      */
-    displayValue?: string | null;
+    displayValue?: string;
     /**
      * An error message from a thrown error inside the audit.
      */
-    errorMessage?: string | null;
+    errorMessage?: string;
     /**
      * An explanation of the errors in the audit.
      */
-    explanation?: string | null;
+    explanation?: string;
     /**
      * The audit&#39;s id.
      */
-    id?: string | null;
-    /**
-     * A numeric value that has a meaning specific to the audit, e.g. the number of nodes in the DOM or the timestamp of a specific load event. More information can be found in the audit details, if present.
-     */
-    numericValue?: number | null;
-    score?: any | null;
+    id?: string;
+    score?: any;
     /**
      * The enumerated score display mode.
      */
-    scoreDisplayMode?: string | null;
+    scoreDisplayMode?: string;
     /**
      * The human readable title.
      */
-    title?: string | null;
-    warnings?: any | null;
+    title?: string;
+    warnings?: any;
   }
   export interface Schema$LighthouseCategoryV5 {
     /**
      * An array of references to all the audit members of this category.
      */
-    auditRefs?: Array<{group?: string; id?: string; weight?: number}> | null;
+    auditRefs?: Array<{group?: string; id?: string; weight?: number}>;
     /**
      * A more detailed description of the category and its importance.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The string identifier of the category.
      */
-    id?: string | null;
+    id?: string;
     /**
      * A description for the manual audits in the category.
      */
-    manualDescription?: string | null;
-    score?: any | null;
+    manualDescription?: string;
+    score?: any;
     /**
      * The human-friendly name of the category.
      */
-    title?: string | null;
+    title?: string;
   }
   export interface Schema$LighthouseResultV5 {
     /**
      * Map of audits in the LHR.
      */
-    audits?: {[key: string]: Schema$LighthouseAuditResultV5} | null;
+    audits?: {[key: string]: Schema$LighthouseAuditResultV5};
     /**
      * Map of categories in the LHR.
      */
@@ -178,13 +175,11 @@ export namespace pagespeedonline_v5 {
       performance?: Schema$LighthouseCategoryV5;
       pwa?: Schema$LighthouseCategoryV5;
       seo?: Schema$LighthouseCategoryV5;
-    } | null;
+    };
     /**
      * Map of category groups in the LHR.
      */
-    categoryGroups?: {
-      [key: string]: {description?: string; title?: string};
-    } | null;
+    categoryGroups?: {[key: string]: {description?: string; title?: string}};
     /**
      * The configuration settings for this LHR.
      */
@@ -192,7 +187,7 @@ export namespace pagespeedonline_v5 {
       emulatedFormFactor?: string;
       locale?: string;
       onlyCategories?: any;
-    } | null;
+    };
     /**
      * Environment settings that were used when making this LHR.
      */
@@ -200,15 +195,15 @@ export namespace pagespeedonline_v5 {
       benchmarkIndex?: number;
       hostUserAgent?: string;
       networkUserAgent?: string;
-    } | null;
+    };
     /**
      * The time that this run was fetched.
      */
-    fetchTime?: string | null;
+    fetchTime?: string;
     /**
      * The final resolved url that was audited.
      */
-    finalUrl?: string | null;
+    finalUrl?: string;
     /**
      * The internationalization strings that are required to render the LHR.
      */
@@ -231,23 +226,23 @@ export namespace pagespeedonline_v5 {
         varianceDisclaimer?: string;
         warningHeader?: string;
       };
-    } | null;
+    };
     /**
      * The lighthouse version that was used to generate this LHR.
      */
-    lighthouseVersion?: string | null;
+    lighthouseVersion?: string;
     /**
      * The original requested url.
      */
-    requestedUrl?: string | null;
+    requestedUrl?: string;
     /**
      * A top-level error message that, if present, indicates a serious enough problem that this Lighthouse result may need to be discarded.
      */
-    runtimeError?: {code?: string; message?: string} | null;
+    runtimeError?: {code?: string; message?: string};
     /**
      * List of all run warnings in the LHR. Will always output to at least `[]`.
      */
-    runWarnings?: Schema$GoogleprotobufListValue;
+    runWarnings?: any[];
     /**
      * The Stack Pack advice strings.
      */
@@ -256,22 +251,22 @@ export namespace pagespeedonline_v5 {
       iconDataURL?: string;
       id?: string;
       title?: string;
-    }> | null;
+    }>;
     /**
      * Timing information for this LHR.
      */
-    timing?: {total?: number} | null;
+    timing?: {total?: number};
     /**
      * The user agent that was used to run this LHR.
      */
-    userAgent?: string | null;
+    userAgent?: string;
   }
   export interface Schema$PagespeedApiLoadingExperienceV5 {
     /**
      * The url, pattern or origin which the metrics are on.
      */
-    id?: string | null;
-    initial_url?: string | null;
+    id?: string;
+    initial_url?: string;
     metrics?: {
       [key: string]: {
         category?: string;
@@ -282,26 +277,26 @@ export namespace pagespeedonline_v5 {
         }>;
         percentile?: number;
       };
-    } | null;
-    overall_category?: string | null;
+    };
+    overall_category?: string;
   }
   export interface Schema$PagespeedApiPagespeedResponseV5 {
     /**
      * The UTC timestamp of this analysis.
      */
-    analysisUTCTimestamp?: string | null;
+    analysisUTCTimestamp?: string;
     /**
      * The captcha verify result
      */
-    captchaResult?: string | null;
+    captchaResult?: string;
     /**
      * Canonicalized and final URL for the document, after following page redirects (if any).
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of result.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Lighthouse response for the audit url as an object.
      */
@@ -317,7 +312,7 @@ export namespace pagespeedonline_v5 {
     /**
      * The version of PageSpeed used to generate these results.
      */
-    version?: {major?: number; minor?: number} | null;
+    version?: {major?: number; minor?: number};
   }
 
   export class Resource$Pagespeedapi {

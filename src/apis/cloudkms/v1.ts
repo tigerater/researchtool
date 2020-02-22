@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -122,7 +124,7 @@ export namespace cloudkms_v1 {
     /**
      * Required. The data encrypted with the named CryptoKeyVersion&#39;s public key using OAEP.
      */
-    ciphertext?: string | null;
+    ciphertext?: string;
   }
   /**
    * Response message for KeyManagementService.AsymmetricDecrypt.
@@ -131,7 +133,7 @@ export namespace cloudkms_v1 {
     /**
      * The decrypted data originally encrypted with the matching public key.
      */
-    plaintext?: string | null;
+    plaintext?: string;
   }
   /**
    * Request message for KeyManagementService.AsymmetricSign.
@@ -149,10 +151,10 @@ export namespace cloudkms_v1 {
     /**
      * The created signature.
      */
-    signature?: string | null;
+    signature?: string;
   }
   /**
-   * Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.  If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.  Example Policy with multiple AuditConfigs:      {       &quot;audit_configs&quot;: [         {           &quot;service&quot;: &quot;allServices&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,               &quot;exempted_members&quot;: [                 &quot;user:jose@example.com&quot;               ]             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,             },             {               &quot;log_type&quot;: &quot;ADMIN_READ&quot;,             }           ]         },         {           &quot;service&quot;: &quot;sampleservice.googleapis.com&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,               &quot;exempted_members&quot;: [                 &quot;user:aliya@example.com&quot;               ]             }           ]         }       ]     }  For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts jose@example.com from DATA_READ logging, and aliya@example.com from DATA_WRITE logging.
+   * Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.  If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.  Example Policy with multiple AuditConfigs:      {       &quot;audit_configs&quot;: [         {           &quot;service&quot;: &quot;allServices&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,               &quot;exempted_members&quot;: [                 &quot;user:foo@gmail.com&quot;               ]             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,             },             {               &quot;log_type&quot;: &quot;ADMIN_READ&quot;,             }           ]         },         {           &quot;service&quot;: &quot;fooservice.googleapis.com&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,               &quot;exempted_members&quot;: [                 &quot;user:bar@gmail.com&quot;               ]             }           ]         }       ]     }  For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
    */
   export interface Schema$AuditConfig {
     /**
@@ -162,20 +164,20 @@ export namespace cloudkms_v1 {
     /**
      * Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    service?: string | null;
+    service?: string;
   }
   /**
-   * Provides the configuration for logging a type of permissions. Example:      {       &quot;audit_log_configs&quot;: [         {           &quot;log_type&quot;: &quot;DATA_READ&quot;,           &quot;exempted_members&quot;: [             &quot;user:jose@example.com&quot;           ]         },         {           &quot;log_type&quot;: &quot;DATA_WRITE&quot;,         }       ]     }  This enables &#39;DATA_READ&#39; and &#39;DATA_WRITE&#39; logging, while exempting jose@example.com from DATA_READ logging.
+   * Provides the configuration for logging a type of permissions. Example:      {       &quot;audit_log_configs&quot;: [         {           &quot;log_type&quot;: &quot;DATA_READ&quot;,           &quot;exempted_members&quot;: [             &quot;user:foo@gmail.com&quot;           ]         },         {           &quot;log_type&quot;: &quot;DATA_WRITE&quot;,         }       ]     }  This enables &#39;DATA_READ&#39; and &#39;DATA_WRITE&#39; logging, while exempting foo@gmail.com from DATA_READ logging.
    */
   export interface Schema$AuditLogConfig {
     /**
      * Specifies the identities that do not cause logging for this type of permission. Follows the same format of Binding.members.
      */
-    exemptedMembers?: string[] | null;
+    exemptedMembers?: string[];
     /**
      * The log type that this config enables.
      */
-    logType?: string | null;
+    logType?: string;
   }
   /**
    * Associates `members` with a `role`.
@@ -186,13 +188,13 @@ export namespace cloudkms_v1 {
      */
     condition?: Schema$Expr;
     /**
-     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@example.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.  * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a user that has been recently deleted. For    example, `alice@example.com?uid=123456789012345678901`. If the user is    recovered, this value reverts to `user:{emailid}` and the recovered user    retains the role in the binding.  * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus    unique identifier) representing a service account that has been recently    deleted. For example,    `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`.    If the service account is undeleted, this value reverts to    `serviceAccount:{emailid}` and the undeleted service account retains the    role in the binding.  * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a Google group that has been recently    deleted. For example, `admins@example.com?uid=123456789012345678901`. If    the group is recovered, this value reverts to `group:{emailid}` and the    recovered group retains the role in the binding.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@gmail.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
      */
-    members?: string[] | null;
+    members?: string[];
     /**
      * Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
      */
-    role?: string | null;
+    role?: string;
   }
   /**
    * A CryptoKey represents a logical key that can be used for cryptographic operations.  A CryptoKey is made up of one or more versions, which represent the actual key material used in cryptographic operations.
@@ -201,31 +203,31 @@ export namespace cloudkms_v1 {
     /**
      * Output only. The time at which this CryptoKey was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Labels with user-defined metadata. For more information, see [Labeling Keys](/kms/docs/labeling-keys).
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Output only. The resource name for this CryptoKey in the format `projects/x/locations/x/keyRings/x/cryptoKeys/x.
      */
-    name?: string | null;
+    name?: string;
     /**
      * At next_rotation_time, the Key Management Service will automatically:  1. Create a new version of this CryptoKey. 2. Mark the new version as primary.  Key rotations performed manually via CreateCryptoKeyVersion and UpdateCryptoKeyPrimaryVersion do not affect next_rotation_time.  Keys with purpose ENCRYPT_DECRYPT support automatic rotation. For other keys, this field must be omitted.
      */
-    nextRotationTime?: string | null;
+    nextRotationTime?: string;
     /**
-     * Output only. A copy of the &quot;primary&quot; CryptoKeyVersion that will be used by Encrypt when this CryptoKey is given in EncryptRequest.name.  The CryptoKey&#39;s primary version can be updated via UpdateCryptoKeyPrimaryVersion.  Keys with purpose ENCRYPT_DECRYPT may have a primary. For other keys, this field will be omitted.
+     * Output only. A copy of the &quot;primary&quot; CryptoKeyVersion that will be used by Encrypt when this CryptoKey is given in EncryptRequest.name.  The CryptoKey&#39;s primary version can be updated via UpdateCryptoKeyPrimaryVersion.  All keys with purpose ENCRYPT_DECRYPT have a primary. For other keys, this field will be omitted.
      */
     primary?: Schema$CryptoKeyVersion;
     /**
-     * Immutable. The immutable purpose of this CryptoKey.
+     * The immutable purpose of this CryptoKey.
      */
-    purpose?: string | null;
+    purpose?: string;
     /**
-     * next_rotation_time will be advanced by this period when the service automatically rotates a key. Must be at least 24 hours and at most 876,000 hours.  If rotation_period is set, next_rotation_time must also be set.  Keys with purpose ENCRYPT_DECRYPT support automatic rotation. For other keys, this field must be omitted.
+     * next_rotation_time will be advanced by this period when the service automatically rotates a key. Must be at least one day.  If rotation_period is set, next_rotation_time must also be set.  Keys with purpose ENCRYPT_DECRYPT support automatic rotation. For other keys, this field must be omitted.
      */
-    rotationPeriod?: string | null;
+    rotationPeriod?: string;
     /**
      * A template describing settings for new CryptoKeyVersion instances. The properties of new CryptoKeyVersion instances created by either CreateCryptoKeyVersion or auto-rotation are controlled by this template.
      */
@@ -238,7 +240,7 @@ export namespace cloudkms_v1 {
     /**
      * Output only. The CryptoKeyVersionAlgorithm that this CryptoKeyVersion supports.
      */
-    algorithm?: string | null;
+    algorithm?: string;
     /**
      * Output only. Statement that was generated and signed by the HSM at key creation time. Use this statement to verify attributes of the key as stored on the HSM, independently of Google. Only provided for key versions with protection_level HSM.
      */
@@ -246,47 +248,31 @@ export namespace cloudkms_v1 {
     /**
      * Output only. The time at which this CryptoKeyVersion was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Output only. The time this CryptoKeyVersion&#39;s key material was destroyed. Only present if state is DESTROYED.
      */
-    destroyEventTime?: string | null;
+    destroyEventTime?: string;
     /**
      * Output only. The time this CryptoKeyVersion&#39;s key material is scheduled for destruction. Only present if state is DESTROY_SCHEDULED.
      */
-    destroyTime?: string | null;
-    /**
-     * ExternalProtectionLevelOptions stores a group of additional fields for configuring a CryptoKeyVersion that are specific to the EXTERNAL protection level.
-     */
-    externalProtectionLevelOptions?: Schema$ExternalProtectionLevelOptions;
+    destroyTime?: string;
     /**
      * Output only. The time this CryptoKeyVersion&#39;s key material was generated.
      */
-    generateTime?: string | null;
-    /**
-     * Output only. The root cause of an import failure. Only present if state is IMPORT_FAILED.
-     */
-    importFailureReason?: string | null;
-    /**
-     * Output only. The name of the ImportJob used to import this CryptoKeyVersion. Only present if the underlying key material was imported.
-     */
-    importJob?: string | null;
-    /**
-     * Output only. The time at which this CryptoKeyVersion&#39;s key material was imported.
-     */
-    importTime?: string | null;
+    generateTime?: string;
     /**
      * Output only. The resource name for this CryptoKeyVersion in the format `projects/x/locations/x/keyRings/x/cryptoKeys/x/cryptoKeyVersions/x.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The ProtectionLevel describing how crypto operations are performed with this CryptoKeyVersion.
      */
-    protectionLevel?: string | null;
+    protectionLevel?: string;
     /**
      * The current state of the CryptoKeyVersion.
      */
-    state?: string | null;
+    state?: string;
   }
   /**
    * A CryptoKeyVersionTemplate specifies the properties to use when creating a new CryptoKeyVersion, either manually with CreateCryptoKeyVersion or automatically as a result of auto-rotation.
@@ -295,24 +281,24 @@ export namespace cloudkms_v1 {
     /**
      * Required. Algorithm to use when creating a CryptoKeyVersion based on this template.  For backwards compatibility, GOOGLE_SYMMETRIC_ENCRYPTION is implied if both this field is omitted and CryptoKey.purpose is ENCRYPT_DECRYPT.
      */
-    algorithm?: string | null;
+    algorithm?: string;
     /**
      * ProtectionLevel to use when creating a CryptoKeyVersion based on this template. Immutable. Defaults to SOFTWARE.
      */
-    protectionLevel?: string | null;
+    protectionLevel?: string;
   }
   /**
    * Request message for KeyManagementService.Decrypt.
    */
   export interface Schema$DecryptRequest {
     /**
-     * Optional. Optional data that must match the data originally supplied in EncryptRequest.additional_authenticated_data.
+     * Optional data that must match the data originally supplied in EncryptRequest.additional_authenticated_data.
      */
-    additionalAuthenticatedData?: string | null;
+    additionalAuthenticatedData?: string;
     /**
      * Required. The encrypted data originally returned in EncryptResponse.ciphertext.
      */
-    ciphertext?: string | null;
+    ciphertext?: string;
   }
   /**
    * Response message for KeyManagementService.Decrypt.
@@ -321,7 +307,7 @@ export namespace cloudkms_v1 {
     /**
      * The decrypted data originally supplied in EncryptRequest.plaintext.
      */
-    plaintext?: string | null;
+    plaintext?: string;
   }
   /**
    * Request message for KeyManagementService.DestroyCryptoKeyVersion.
@@ -334,28 +320,28 @@ export namespace cloudkms_v1 {
     /**
      * A message digest produced with the SHA-256 algorithm.
      */
-    sha256?: string | null;
+    sha256?: string;
     /**
      * A message digest produced with the SHA-384 algorithm.
      */
-    sha384?: string | null;
+    sha384?: string;
     /**
      * A message digest produced with the SHA-512 algorithm.
      */
-    sha512?: string | null;
+    sha512?: string;
   }
   /**
    * Request message for KeyManagementService.Encrypt.
    */
   export interface Schema$EncryptRequest {
     /**
-     * Optional. Optional data that, if specified, must also be provided during decryption through DecryptRequest.additional_authenticated_data.  The maximum size depends on the key version&#39;s protection_level. For SOFTWARE keys, the AAD must be no larger than 64KiB. For HSM keys, the combined length of the plaintext and additional_authenticated_data fields must be no larger than 8KiB.
+     * Optional data that, if specified, must also be provided during decryption through DecryptRequest.additional_authenticated_data.  The maximum size depends on the key version&#39;s protection_level. For SOFTWARE keys, the AAD must be no larger than 64KiB. For HSM keys, the combined length of the plaintext and additional_authenticated_data fields must be no larger than 8KiB.
      */
-    additionalAuthenticatedData?: string | null;
+    additionalAuthenticatedData?: string;
     /**
      * Required. The data to encrypt. Must be no larger than 64KiB.  The maximum size depends on the key version&#39;s protection_level. For SOFTWARE keys, the plaintext must be no larger than 64KiB. For HSM keys, the combined length of the plaintext and additional_authenticated_data fields must be no larger than 8KiB.
      */
-    plaintext?: string | null;
+    plaintext?: string;
   }
   /**
    * Response message for KeyManagementService.Encrypt.
@@ -364,11 +350,11 @@ export namespace cloudkms_v1 {
     /**
      * The encrypted data.
      */
-    ciphertext?: string | null;
+    ciphertext?: string;
     /**
-     * The resource name of the CryptoKeyVersion used in encryption. Check this field to verify that the intended resource was used for encryption.
+     * The resource name of the CryptoKeyVersion used in encryption.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Represents an expression text. Example:      title: &quot;User account presence&quot;     description: &quot;Determines whether the request has a user account&quot;     expression: &quot;size(request.user) &gt; 0&quot;
@@ -377,90 +363,19 @@ export namespace cloudkms_v1 {
     /**
      * An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Textual representation of an expression in Common Expression Language syntax.  The application context of the containing message determines which well-known feature set of CEL is supported.
      */
-    expression?: string | null;
+    expression?: string;
     /**
      * An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
      */
-    location?: string | null;
+    location?: string;
     /**
      * An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
      */
-    title?: string | null;
-  }
-  /**
-   * ExternalProtectionLevelOptions stores a group of additional fields for configuring a CryptoKeyVersion that are specific to the EXTERNAL protection level.
-   */
-  export interface Schema$ExternalProtectionLevelOptions {
-    /**
-     * The URI for an external resource that this CryptoKeyVersion represents.
-     */
-    externalKeyUri?: string | null;
-  }
-  /**
-   * Request message for KeyManagementService.ImportCryptoKeyVersion.
-   */
-  export interface Schema$ImportCryptoKeyVersionRequest {
-    /**
-     * Required. The algorithm of the key being imported. This does not need to match the version_template of the CryptoKey this version imports into.
-     */
-    algorithm?: string | null;
-    /**
-     * Required. The name of the ImportJob that was used to wrap this key material.
-     */
-    importJob?: string | null;
-    /**
-     * Wrapped key material produced with RSA_OAEP_3072_SHA1_AES_256 or RSA_OAEP_4096_SHA1_AES_256.  This field contains the concatenation of two wrapped keys: &lt;ol&gt;   &lt;li&gt;An ephemeral AES-256 wrapping key wrapped with the       public_key using RSAES-OAEP with SHA-1,       MGF1 with SHA-1, and an empty label.   &lt;/li&gt;   &lt;li&gt;The key to be imported, wrapped with the ephemeral AES-256 key       using AES-KWP (RFC 5649).   &lt;/li&gt; &lt;/ol&gt;  If importing symmetric key material, it is expected that the unwrapped key contains plain bytes. If importing asymmetric key material, it is expected that the unwrapped key is in PKCS#8-encoded DER format (the PrivateKeyInfo structure from RFC 5208).  This format is the same as the format produced by PKCS#11 mechanism CKM_RSA_AES_KEY_WRAP.
-     */
-    rsaAesWrappedKey?: string | null;
-  }
-  /**
-   * An ImportJob can be used to create CryptoKeys and CryptoKeyVersions using pre-existing key material, generated outside of Cloud KMS.  When an ImportJob is created, Cloud KMS will generate a &quot;wrapping key&quot;, which is a public/private key pair. You use the wrapping key to encrypt (also known as wrap) the pre-existing key material to protect it during the import process. The nature of the wrapping key depends on the choice of import_method. When the wrapping key generation is complete, the state will be set to ACTIVE and the public_key can be fetched. The fetched public key can then be used to wrap your pre-existing key material.  Once the key material is wrapped, it can be imported into a new CryptoKeyVersion in an existing CryptoKey by calling ImportCryptoKeyVersion. Multiple CryptoKeyVersions can be imported with a single ImportJob. Cloud KMS uses the private key portion of the wrapping key to unwrap the key material. Only Cloud KMS has access to the private key.  An ImportJob expires 3 days after it is created. Once expired, Cloud KMS will no longer be able to import or unwrap any key material that was wrapped with the ImportJob&#39;s public key.  For more information, see [Importing a key](https://cloud.google.com/kms/docs/importing-a-key).
-   */
-  export interface Schema$ImportJob {
-    /**
-     * Output only. Statement that was generated and signed by the key creator (for example, an HSM) at key creation time. Use this statement to verify attributes of the key as stored on the HSM, independently of Google. Only present if the chosen ImportMethod is one with a protection level of HSM.
-     */
-    attestation?: Schema$KeyOperationAttestation;
-    /**
-     * Output only. The time at which this ImportJob was created.
-     */
-    createTime?: string | null;
-    /**
-     * Output only. The time this ImportJob expired. Only present if state is EXPIRED.
-     */
-    expireEventTime?: string | null;
-    /**
-     * Output only. The time at which this ImportJob is scheduled for expiration and can no longer be used to import key material.
-     */
-    expireTime?: string | null;
-    /**
-     * Output only. The time this ImportJob&#39;s key material was generated.
-     */
-    generateTime?: string | null;
-    /**
-     * Required. Immutable. The wrapping method to be used for incoming key material.
-     */
-    importMethod?: string | null;
-    /**
-     * Output only. The resource name for this ImportJob in the format `projects/x/locations/x/keyRings/x/importJobs/x.
-     */
-    name?: string | null;
-    /**
-     * Required. Immutable. The protection level of the ImportJob. This must match the protection_level of the version_template on the CryptoKey you attempt to import into.
-     */
-    protectionLevel?: string | null;
-    /**
-     * Output only. The public key with which to wrap key material prior to import. Only returned if state is ACTIVE.
-     */
-    publicKey?: Schema$WrappingPublicKey;
-    /**
-     * Output only. The current state of the ImportJob, indicating if it can be used.
-     */
-    state?: string | null;
+    title?: string;
   }
   /**
    * Contains an HSM-generated attestation about a key operation. For more information, see [Verifying attestations] (https://cloud.google.com/kms/docs/attest-key).
@@ -469,11 +384,11 @@ export namespace cloudkms_v1 {
     /**
      * Output only. The attestation data provided by the HSM when the key operation was performed.
      */
-    content?: string | null;
+    content?: string;
     /**
      * Output only. The format of the attestation data.
      */
-    format?: string | null;
+    format?: string;
   }
   /**
    * A KeyRing is a toplevel logical grouping of CryptoKeys.
@@ -482,11 +397,11 @@ export namespace cloudkms_v1 {
     /**
      * Output only. The time at which this KeyRing was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Output only. The resource name for the KeyRing in the format `projects/x/locations/x/keyRings/x.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Response message for KeyManagementService.ListCryptoKeys.
@@ -499,11 +414,11 @@ export namespace cloudkms_v1 {
     /**
      * A token to retrieve next page of results. Pass this value in ListCryptoKeysRequest.page_token to retrieve the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total number of CryptoKeys that matched the query.
      */
-    totalSize?: number | null;
+    totalSize?: number;
   }
   /**
    * Response message for KeyManagementService.ListCryptoKeyVersions.
@@ -516,28 +431,11 @@ export namespace cloudkms_v1 {
     /**
      * A token to retrieve next page of results. Pass this value in ListCryptoKeyVersionsRequest.page_token to retrieve the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total number of CryptoKeyVersions that matched the query.
      */
-    totalSize?: number | null;
-  }
-  /**
-   * Response message for KeyManagementService.ListImportJobs.
-   */
-  export interface Schema$ListImportJobsResponse {
-    /**
-     * The list of ImportJobs.
-     */
-    importJobs?: Schema$ImportJob[];
-    /**
-     * A token to retrieve next page of results. Pass this value in ListImportJobsRequest.page_token to retrieve the next page of results.
-     */
-    nextPageToken?: string | null;
-    /**
-     * The total number of ImportJobs that matched the query.
-     */
-    totalSize?: number | null;
+    totalSize?: number;
   }
   /**
    * Response message for KeyManagementService.ListKeyRings.
@@ -550,11 +448,11 @@ export namespace cloudkms_v1 {
     /**
      * A token to retrieve next page of results. Pass this value in ListKeyRingsRequest.page_token to retrieve the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total number of KeyRings that matched the query.
      */
-    totalSize?: number | null;
+    totalSize?: number;
   }
   /**
    * The response message for Locations.ListLocations.
@@ -567,7 +465,7 @@ export namespace cloudkms_v1 {
     /**
      * The standard List next-page token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * A resource that represents Google Cloud Platform location.
@@ -576,23 +474,23 @@ export namespace cloudkms_v1 {
     /**
      * The friendly name for this location, typically a nearby city name. For example, &quot;Tokyo&quot;.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Cross-service attributes for the location. For example      {&quot;cloud.googleapis.com/region&quot;: &quot;us-east1&quot;}
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * The canonical id for this location. For example: `&quot;us-east1&quot;`.
      */
-    locationId?: string | null;
+    locationId?: string;
     /**
      * Service-specific metadata. For example the available capacity at the given location.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * Resource name for the location, which may vary between implementations. For example: `&quot;projects/example-project/locations/us-east1&quot;`
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Cloud KMS metadata for the given google.cloud.location.Location.
@@ -601,10 +499,10 @@ export namespace cloudkms_v1 {
     /**
      * Indicates whether CryptoKeys with protection_level HSM can be created in this location.
      */
-    hsmAvailable?: boolean | null;
+    hsmAvailable?: boolean;
   }
   /**
-   * An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources.   A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role.  Optionally, a `binding` can specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both.  **JSON example:**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationAdmin&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-project-id@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationViewer&quot;,           &quot;members&quot;: [&quot;user:eve@example.com&quot;],           &quot;condition&quot;: {             &quot;title&quot;: &quot;expirable access&quot;,             &quot;description&quot;: &quot;Does not grant access after Sep 2020&quot;,             &quot;expression&quot;: &quot;request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)&quot;,           }         }       ],       &quot;etag&quot;: &quot;BwWWja0YfJA=&quot;,       &quot;version&quot;: 3     }  **YAML example:**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-project-id@appspot.gserviceaccount.com       role: roles/resourcemanager.organizationAdmin     - members:       - user:eve@example.com       role: roles/resourcemanager.organizationViewer       condition:         title: expirable access         description: Does not grant access after Sep 2020         expression: request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)     - etag: BwWWja0YfJA=     - version: 3  For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).
+   * Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.   A `Policy` consists of a list of `bindings`. A `binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.  **JSON Example**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/owner&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-other-app@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/viewer&quot;,           &quot;members&quot;: [&quot;user:sean@example.com&quot;]         }       ]     }  **YAML Example**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-other-app@appspot.gserviceaccount.com       role: roles/owner     - members:       - user:sean@example.com       role: roles/viewer   For a description of IAM and its features, see the [IAM developer&#39;s guide](https://cloud.google.com/iam/docs).
    */
   export interface Schema$Policy {
     /**
@@ -612,17 +510,17 @@ export namespace cloudkms_v1 {
      */
     auditConfigs?: Schema$AuditConfig[];
     /**
-     * Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
+     * Associates a list of `members` to a `role`. `bindings` with no members will result in an error.
      */
     bindings?: Schema$Binding[];
     /**
-     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.
+     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
      */
-    etag?: string | null;
+    etag?: string;
     /**
-     * Specifies the format of the policy.  Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected.  Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations:  * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy   that includes conditions  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.  If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset.
+     * Deprecated.
      */
-    version?: number | null;
+    version?: number;
   }
   /**
    * The public key for a given CryptoKeyVersion. Obtained via GetPublicKey.
@@ -631,11 +529,11 @@ export namespace cloudkms_v1 {
     /**
      * The Algorithm associated with this key.
      */
-    algorithm?: string | null;
+    algorithm?: string;
     /**
      * The public key, encoded in PEM format. For more information, see the [RFC 7468](https://tools.ietf.org/html/rfc7468) sections for [General Considerations](https://tools.ietf.org/html/rfc7468#section-2) and [Textual Encoding of Subject Public Key Info] (https://tools.ietf.org/html/rfc7468#section-13).
      */
-    pem?: string | null;
+    pem?: string;
   }
   /**
    * Request message for KeyManagementService.RestoreCryptoKeyVersion.
@@ -652,7 +550,7 @@ export namespace cloudkms_v1 {
     /**
      * OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: paths: &quot;bindings, etag&quot; This field is only used by Cloud IAM.
      */
-    updateMask?: string | null;
+    updateMask?: string;
   }
   /**
    * Request message for `TestIamPermissions` method.
@@ -661,7 +559,7 @@ export namespace cloudkms_v1 {
     /**
      * The set of permissions to check for the `resource`. Permissions with wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * Response message for `TestIamPermissions` method.
@@ -670,25 +568,16 @@ export namespace cloudkms_v1 {
     /**
      * A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * Request message for KeyManagementService.UpdateCryptoKeyPrimaryVersion.
    */
   export interface Schema$UpdateCryptoKeyPrimaryVersionRequest {
     /**
-     * Required. The id of the child CryptoKeyVersion to use as primary.
+     * The id of the child CryptoKeyVersion to use as primary.
      */
-    cryptoKeyVersionId?: string | null;
-  }
-  /**
-   * The public key component of the wrapping key. For details of the type of key this public key corresponds to, see the ImportMethod.
-   */
-  export interface Schema$WrappingPublicKey {
-    /**
-     * The public key, encoded in PEM format. For more information, see the [RFC 7468](https://tools.ietf.org/html/rfc7468) sections for [General Considerations](https://tools.ietf.org/html/rfc7468#section-2) and [Textual Encoding of Subject Public Key Info] (https://tools.ietf.org/html/rfc7468#section-13).
-     */
-    pem?: string | null;
+    cryptoKeyVersionId?: string;
   }
 
   export class Resource$Projects {
@@ -917,7 +806,7 @@ export namespace cloudkms_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.keyRingId Required. It must be unique within a location and match the regular expression `[a-zA-Z0-9_-]{1,63}`
      * @param {string} params.parent Required. The resource name of the location associated with the KeyRings, in the format `projects/x/locations/x`.
-     * @param {().KeyRing} params.requestBody Request body data
+     * @param {().KeyRing} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -989,7 +878,7 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the KeyRing to get.
+     * @param {string} params.name The name of the KeyRing to get.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1058,7 +947,6 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1131,10 +1019,8 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.filter Optional. Only include resources that match the filter in the response. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     * @param {string=} params.orderBy Optional. Specify how the results should be sorted. If not specified, the results will be sorted in the default order.  For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     * @param {integer=} params.pageSize Optional. Optional limit on the number of KeyRings to include in the response.  Further KeyRings can subsequently be obtained by including the ListKeyRingsResponse.next_page_token in a subsequent request.  If unspecified, the server will pick an appropriate default.
-     * @param {string=} params.pageToken Optional. Optional pagination token, returned earlier via ListKeyRingsResponse.next_page_token.
+     * @param {integer=} params.pageSize Optional limit on the number of KeyRings to include in the response.  Further KeyRings can subsequently be obtained by including the ListKeyRingsResponse.next_page_token in a subsequent request.  If unspecified, the server will pick an appropriate default.
+     * @param {string=} params.pageToken Optional pagination token, returned earlier via ListKeyRingsResponse.next_page_token.
      * @param {string} params.parent Required. The resource name of the location associated with the KeyRings, in the format `projects/x/locations/x`.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1206,13 +1092,13 @@ export namespace cloudkms_v1 {
 
     /**
      * cloudkms.projects.locations.keyRings.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.
      * @alias cloudkms.projects.locations.keyRings.setIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1285,7 +1171,7 @@ export namespace cloudkms_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1389,7 +1275,7 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the KeyRing to get.
+     * The name of the KeyRing to get.
      */
     name?: string;
   }
@@ -1400,10 +1286,6 @@ export namespace cloudkms_v1 {
      */
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
-    /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
     /**
      * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      */
@@ -1417,19 +1299,11 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. Only include resources that match the filter in the response. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     */
-    filter?: string;
-    /**
-     * Optional. Specify how the results should be sorted. If not specified, the results will be sorted in the default order.  For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     */
-    orderBy?: string;
-    /**
-     * Optional. Optional limit on the number of KeyRings to include in the response.  Further KeyRings can subsequently be obtained by including the ListKeyRingsResponse.next_page_token in a subsequent request.  If unspecified, the server will pick an appropriate default.
+     * Optional limit on the number of KeyRings to include in the response.  Further KeyRings can subsequently be obtained by including the ListKeyRingsResponse.next_page_token in a subsequent request.  If unspecified, the server will pick an appropriate default.
      */
     pageSize?: number;
     /**
-     * Optional. Optional pagination token, returned earlier via ListKeyRingsResponse.next_page_token.
+     * Optional pagination token, returned earlier via ListKeyRingsResponse.next_page_token.
      */
     pageToken?: string;
     /**
@@ -1491,8 +1365,7 @@ export namespace cloudkms_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.cryptoKeyId Required. It must be unique within a KeyRing and match the regular expression `[a-zA-Z0-9_-]{1,63}`
      * @param {string} params.parent Required. The name of the KeyRing associated with the CryptoKeys.
-     * @param {boolean=} params.skipInitialVersionCreation If set to true, the request will create a CryptoKey without any CryptoKeyVersions. You must manually call CreateCryptoKeyVersion or ImportCryptoKeyVersion before you can use this CryptoKey.
-     * @param {().CryptoKey} params.requestBody Request body data
+     * @param {().CryptoKey} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1567,7 +1440,7 @@ export namespace cloudkms_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The resource name of the CryptoKey to use for decryption. The server will choose the appropriate version.
-     * @param {().DecryptRequest} params.requestBody Request body data
+     * @param {().DecryptRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1642,7 +1515,7 @@ export namespace cloudkms_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The resource name of the CryptoKey or CryptoKeyVersion to use for encryption.  If a CryptoKey is specified, the server will use its primary version.
-     * @param {().EncryptRequest} params.requestBody Request body data
+     * @param {().EncryptRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1716,7 +1589,7 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the CryptoKey to get.
+     * @param {string} params.name The name of the CryptoKey to get.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1787,7 +1660,6 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1860,10 +1732,8 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.filter Optional. Only include resources that match the filter in the response. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     * @param {string=} params.orderBy Optional. Specify how the results should be sorted. If not specified, the results will be sorted in the default order. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     * @param {integer=} params.pageSize Optional. Optional limit on the number of CryptoKeys to include in the response.  Further CryptoKeys can subsequently be obtained by including the ListCryptoKeysResponse.next_page_token in a subsequent request.  If unspecified, the server will pick an appropriate default.
-     * @param {string=} params.pageToken Optional. Optional pagination token, returned earlier via ListCryptoKeysResponse.next_page_token.
+     * @param {integer=} params.pageSize Optional limit on the number of CryptoKeys to include in the response.  Further CryptoKeys can subsequently be obtained by including the ListCryptoKeysResponse.next_page_token in a subsequent request.  If unspecified, the server will pick an appropriate default.
+     * @param {string=} params.pageToken Optional pagination token, returned earlier via ListCryptoKeysResponse.next_page_token.
      * @param {string} params.parent Required. The resource name of the KeyRing to list, in the format `projects/x/locations/x/keyRings/x`.
      * @param {string=} params.versionView The fields of the primary version to include in the response.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -1942,8 +1812,8 @@ export namespace cloudkms_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Output only. The resource name for this CryptoKey in the format `projects/x/locations/x/keyRings/x/cryptoKeys/x`.
-     * @param {string=} params.updateMask Required. List of fields to be updated in this request.
-     * @param {().CryptoKey} params.requestBody Request body data
+     * @param {string=} params.updateMask Required list of fields to be updated in this request.
+     * @param {().CryptoKey} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2009,13 +1879,13 @@ export namespace cloudkms_v1 {
 
     /**
      * cloudkms.projects.locations.keyRings.cryptoKeys.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.
      * @alias cloudkms.projects.locations.keyRings.cryptoKeys.setIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2088,7 +1958,7 @@ export namespace cloudkms_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2169,8 +2039,8 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The resource name of the CryptoKey to update.
-     * @param {().UpdateCryptoKeyPrimaryVersionRequest} params.requestBody Request body data
+     * @param {string} params.name The resource name of the CryptoKey to update.
+     * @param {().UpdateCryptoKeyPrimaryVersionRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2255,10 +2125,6 @@ export namespace cloudkms_v1 {
      * Required. The name of the KeyRing associated with the CryptoKeys.
      */
     parent?: string;
-    /**
-     * If set to true, the request will create a CryptoKey without any CryptoKeyVersions. You must manually call CreateCryptoKeyVersion or ImportCryptoKeyVersion before you can use this CryptoKey.
-     */
-    skipInitialVersionCreation?: boolean;
 
     /**
      * Request body metadata
@@ -2307,7 +2173,7 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the CryptoKey to get.
+     * The name of the CryptoKey to get.
      */
     name?: string;
   }
@@ -2318,10 +2184,6 @@ export namespace cloudkms_v1 {
      */
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
-    /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
     /**
      * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      */
@@ -2335,19 +2197,11 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. Only include resources that match the filter in the response. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     */
-    filter?: string;
-    /**
-     * Optional. Specify how the results should be sorted. If not specified, the results will be sorted in the default order. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     */
-    orderBy?: string;
-    /**
-     * Optional. Optional limit on the number of CryptoKeys to include in the response.  Further CryptoKeys can subsequently be obtained by including the ListCryptoKeysResponse.next_page_token in a subsequent request.  If unspecified, the server will pick an appropriate default.
+     * Optional limit on the number of CryptoKeys to include in the response.  Further CryptoKeys can subsequently be obtained by including the ListCryptoKeysResponse.next_page_token in a subsequent request.  If unspecified, the server will pick an appropriate default.
      */
     pageSize?: number;
     /**
-     * Optional. Optional pagination token, returned earlier via ListCryptoKeysResponse.next_page_token.
+     * Optional pagination token, returned earlier via ListCryptoKeysResponse.next_page_token.
      */
     pageToken?: string;
     /**
@@ -2371,7 +2225,7 @@ export namespace cloudkms_v1 {
      */
     name?: string;
     /**
-     * Required. List of fields to be updated in this request.
+     * Required list of fields to be updated in this request.
      */
     updateMask?: string;
 
@@ -2422,7 +2276,7 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The resource name of the CryptoKey to update.
+     * The resource name of the CryptoKey to update.
      */
     name?: string;
 
@@ -2446,7 +2300,7 @@ export namespace cloudkms_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The resource name of the CryptoKeyVersion to use for decryption.
-     * @param {().AsymmetricDecryptRequest} params.requestBody Request body data
+     * @param {().AsymmetricDecryptRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2528,7 +2382,7 @@ export namespace cloudkms_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The resource name of the CryptoKeyVersion to use for signing.
-     * @param {().AsymmetricSignRequest} params.requestBody Request body data
+     * @param {().AsymmetricSignRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2607,7 +2461,7 @@ export namespace cloudkms_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The name of the CryptoKey associated with the CryptoKeyVersions.
-     * @param {().CryptoKeyVersion} params.requestBody Request body data
+     * @param {().CryptoKeyVersion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2681,8 +2535,8 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The resource name of the CryptoKeyVersion to destroy.
-     * @param {().DestroyCryptoKeyVersionRequest} params.requestBody Request body data
+     * @param {string} params.name The resource name of the CryptoKeyVersion to destroy.
+     * @param {().DestroyCryptoKeyVersionRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2756,7 +2610,7 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the CryptoKeyVersion to get.
+     * @param {string} params.name The name of the CryptoKeyVersion to get.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2827,7 +2681,7 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the CryptoKeyVersion public key to get.
+     * @param {string} params.name The name of the CryptoKeyVersion public key to get.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2895,91 +2749,14 @@ export namespace cloudkms_v1 {
     }
 
     /**
-     * cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.import
-     * @desc Imports a new CryptoKeyVersion into an existing CryptoKey using the wrapped key material provided in the request.  The version ID will be assigned the next sequential id within the CryptoKey.
-     * @alias cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.import
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.parent Required. The name of the CryptoKey to be imported into.
-     * @param {().ImportCryptoKeyVersionRequest} params.requestBody Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    import(
-      params?: Params$Resource$Projects$Locations$Keyrings$Cryptokeys$Cryptokeyversions$Import,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$CryptoKeyVersion>;
-    import(
-      params: Params$Resource$Projects$Locations$Keyrings$Cryptokeys$Cryptokeyversions$Import,
-      options: MethodOptions | BodyResponseCallback<Schema$CryptoKeyVersion>,
-      callback: BodyResponseCallback<Schema$CryptoKeyVersion>
-    ): void;
-    import(
-      params: Params$Resource$Projects$Locations$Keyrings$Cryptokeys$Cryptokeyversions$Import,
-      callback: BodyResponseCallback<Schema$CryptoKeyVersion>
-    ): void;
-    import(callback: BodyResponseCallback<Schema$CryptoKeyVersion>): void;
-    import(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Locations$Keyrings$Cryptokeys$Cryptokeyversions$Import
-        | BodyResponseCallback<Schema$CryptoKeyVersion>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$CryptoKeyVersion>,
-      callback?: BodyResponseCallback<Schema$CryptoKeyVersion>
-    ): void | GaxiosPromise<Schema$CryptoKeyVersion> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Locations$Keyrings$Cryptokeys$Cryptokeyversions$Import;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Locations$Keyrings$Cryptokeys$Cryptokeyversions$Import;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://cloudkms.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1/{+parent}/cryptoKeyVersions:import').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'POST',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['parent'],
-        pathParams: ['parent'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$CryptoKeyVersion>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$CryptoKeyVersion>(parameters);
-      }
-    }
-
-    /**
      * cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.list
      * @desc Lists CryptoKeyVersions.
      * @alias cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.list
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.filter Optional. Only include resources that match the filter in the response. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     * @param {string=} params.orderBy Optional. Specify how the results should be sorted. If not specified, the results will be sorted in the default order. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     * @param {integer=} params.pageSize Optional. Optional limit on the number of CryptoKeyVersions to include in the response. Further CryptoKeyVersions can subsequently be obtained by including the ListCryptoKeyVersionsResponse.next_page_token in a subsequent request. If unspecified, the server will pick an appropriate default.
-     * @param {string=} params.pageToken Optional. Optional pagination token, returned earlier via ListCryptoKeyVersionsResponse.next_page_token.
+     * @param {integer=} params.pageSize Optional limit on the number of CryptoKeyVersions to include in the response. Further CryptoKeyVersions can subsequently be obtained by including the ListCryptoKeyVersionsResponse.next_page_token in a subsequent request. If unspecified, the server will pick an appropriate default.
+     * @param {string=} params.pageToken Optional pagination token, returned earlier via ListCryptoKeyVersionsResponse.next_page_token.
      * @param {string} params.parent Required. The resource name of the CryptoKey to list, in the format `projects/x/locations/x/keyRings/x/cryptoKeys/x`.
      * @param {string=} params.view The fields to include in the response.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -3065,8 +2842,8 @@ export namespace cloudkms_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Output only. The resource name for this CryptoKeyVersion in the format `projects/x/locations/x/keyRings/x/cryptoKeys/x/cryptoKeyVersions/x`.
-     * @param {string=} params.updateMask Required. List of fields to be updated in this request.
-     * @param {().CryptoKeyVersion} params.requestBody Request body data
+     * @param {string=} params.updateMask Required list of fields to be updated in this request.
+     * @param {().CryptoKeyVersion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3137,8 +2914,8 @@ export namespace cloudkms_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The resource name of the CryptoKeyVersion to restore.
-     * @param {().RestoreCryptoKeyVersionRequest} params.requestBody Request body data
+     * @param {string} params.name The resource name of the CryptoKeyVersion to restore.
+     * @param {().RestoreCryptoKeyVersionRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3265,7 +3042,7 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The resource name of the CryptoKeyVersion to destroy.
+     * The resource name of the CryptoKeyVersion to destroy.
      */
     name?: string;
 
@@ -3282,7 +3059,7 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the CryptoKeyVersion to get.
+     * The name of the CryptoKeyVersion to get.
      */
     name?: string;
   }
@@ -3294,26 +3071,9 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the CryptoKeyVersion public key to get.
+     * The name of the CryptoKeyVersion public key to get.
      */
     name?: string;
-  }
-  export interface Params$Resource$Projects$Locations$Keyrings$Cryptokeys$Cryptokeyversions$Import
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Required. The name of the CryptoKey to be imported into.
-     */
-    parent?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$ImportCryptoKeyVersionRequest;
   }
   export interface Params$Resource$Projects$Locations$Keyrings$Cryptokeys$Cryptokeyversions$List
     extends StandardParameters {
@@ -3323,19 +3083,11 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. Only include resources that match the filter in the response. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     */
-    filter?: string;
-    /**
-     * Optional. Specify how the results should be sorted. If not specified, the results will be sorted in the default order. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     */
-    orderBy?: string;
-    /**
-     * Optional. Optional limit on the number of CryptoKeyVersions to include in the response. Further CryptoKeyVersions can subsequently be obtained by including the ListCryptoKeyVersionsResponse.next_page_token in a subsequent request. If unspecified, the server will pick an appropriate default.
+     * Optional limit on the number of CryptoKeyVersions to include in the response. Further CryptoKeyVersions can subsequently be obtained by including the ListCryptoKeyVersionsResponse.next_page_token in a subsequent request. If unspecified, the server will pick an appropriate default.
      */
     pageSize?: number;
     /**
-     * Optional. Optional pagination token, returned earlier via ListCryptoKeyVersionsResponse.next_page_token.
+     * Optional pagination token, returned earlier via ListCryptoKeyVersionsResponse.next_page_token.
      */
     pageToken?: string;
     /**
@@ -3359,7 +3111,7 @@ export namespace cloudkms_v1 {
      */
     name?: string;
     /**
-     * Required. List of fields to be updated in this request.
+     * Required list of fields to be updated in this request.
      */
     updateMask?: string;
 
@@ -3376,7 +3128,7 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The resource name of the CryptoKeyVersion to restore.
+     * The resource name of the CryptoKeyVersion to restore.
      */
     name?: string;
 
@@ -3393,160 +3145,12 @@ export namespace cloudkms_v1 {
     }
 
     /**
-     * cloudkms.projects.locations.keyRings.importJobs.create
-     * @desc Create a new ImportJob within a KeyRing.  ImportJob.import_method is required.
-     * @alias cloudkms.projects.locations.keyRings.importJobs.create
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string=} params.importJobId Required. It must be unique within a KeyRing and match the regular expression `[a-zA-Z0-9_-]{1,63}`
-     * @param {string} params.parent Required. The name of the KeyRing associated with the ImportJobs.
-     * @param {().ImportJob} params.requestBody Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    create(
-      params?: Params$Resource$Projects$Locations$Keyrings$Importjobs$Create,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$ImportJob>;
-    create(
-      params: Params$Resource$Projects$Locations$Keyrings$Importjobs$Create,
-      options: MethodOptions | BodyResponseCallback<Schema$ImportJob>,
-      callback: BodyResponseCallback<Schema$ImportJob>
-    ): void;
-    create(
-      params: Params$Resource$Projects$Locations$Keyrings$Importjobs$Create,
-      callback: BodyResponseCallback<Schema$ImportJob>
-    ): void;
-    create(callback: BodyResponseCallback<Schema$ImportJob>): void;
-    create(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Locations$Keyrings$Importjobs$Create
-        | BodyResponseCallback<Schema$ImportJob>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$ImportJob>,
-      callback?: BodyResponseCallback<Schema$ImportJob>
-    ): void | GaxiosPromise<Schema$ImportJob> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Locations$Keyrings$Importjobs$Create;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Locations$Keyrings$Importjobs$Create;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://cloudkms.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1/{+parent}/importJobs').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'POST',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['parent'],
-        pathParams: ['parent'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$ImportJob>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$ImportJob>(parameters);
-      }
-    }
-
-    /**
-     * cloudkms.projects.locations.keyRings.importJobs.get
-     * @desc Returns metadata for a given ImportJob.
-     * @alias cloudkms.projects.locations.keyRings.importJobs.get
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the ImportJob to get.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    get(
-      params?: Params$Resource$Projects$Locations$Keyrings$Importjobs$Get,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$ImportJob>;
-    get(
-      params: Params$Resource$Projects$Locations$Keyrings$Importjobs$Get,
-      options: MethodOptions | BodyResponseCallback<Schema$ImportJob>,
-      callback: BodyResponseCallback<Schema$ImportJob>
-    ): void;
-    get(
-      params: Params$Resource$Projects$Locations$Keyrings$Importjobs$Get,
-      callback: BodyResponseCallback<Schema$ImportJob>
-    ): void;
-    get(callback: BodyResponseCallback<Schema$ImportJob>): void;
-    get(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Locations$Keyrings$Importjobs$Get
-        | BodyResponseCallback<Schema$ImportJob>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$ImportJob>,
-      callback?: BodyResponseCallback<Schema$ImportJob>
-    ): void | GaxiosPromise<Schema$ImportJob> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Locations$Keyrings$Importjobs$Get;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Locations$Keyrings$Importjobs$Get;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://cloudkms.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
-            method: 'GET',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['name'],
-        pathParams: ['name'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$ImportJob>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$ImportJob>(parameters);
-      }
-    }
-
-    /**
      * cloudkms.projects.locations.keyRings.importJobs.getIamPolicy
      * @desc Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
      * @alias cloudkms.projects.locations.keyRings.importJobs.getIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -3613,94 +3217,14 @@ export namespace cloudkms_v1 {
     }
 
     /**
-     * cloudkms.projects.locations.keyRings.importJobs.list
-     * @desc Lists ImportJobs.
-     * @alias cloudkms.projects.locations.keyRings.importJobs.list
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string=} params.filter Optional. Only include resources that match the filter in the response. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     * @param {string=} params.orderBy Optional. Specify how the results should be sorted. If not specified, the results will be sorted in the default order. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     * @param {integer=} params.pageSize Optional. Optional limit on the number of ImportJobs to include in the response. Further ImportJobs can subsequently be obtained by including the ListImportJobsResponse.next_page_token in a subsequent request. If unspecified, the server will pick an appropriate default.
-     * @param {string=} params.pageToken Optional. Optional pagination token, returned earlier via ListImportJobsResponse.next_page_token.
-     * @param {string} params.parent Required. The resource name of the KeyRing to list, in the format `projects/x/locations/x/keyRings/x`.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    list(
-      params?: Params$Resource$Projects$Locations$Keyrings$Importjobs$List,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$ListImportJobsResponse>;
-    list(
-      params: Params$Resource$Projects$Locations$Keyrings$Importjobs$List,
-      options:
-        | MethodOptions
-        | BodyResponseCallback<Schema$ListImportJobsResponse>,
-      callback: BodyResponseCallback<Schema$ListImportJobsResponse>
-    ): void;
-    list(
-      params: Params$Resource$Projects$Locations$Keyrings$Importjobs$List,
-      callback: BodyResponseCallback<Schema$ListImportJobsResponse>
-    ): void;
-    list(callback: BodyResponseCallback<Schema$ListImportJobsResponse>): void;
-    list(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Locations$Keyrings$Importjobs$List
-        | BodyResponseCallback<Schema$ListImportJobsResponse>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$ListImportJobsResponse>,
-      callback?: BodyResponseCallback<Schema$ListImportJobsResponse>
-    ): void | GaxiosPromise<Schema$ListImportJobsResponse> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Projects$Locations$Keyrings$Importjobs$List;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Locations$Keyrings$Importjobs$List;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://cloudkms.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1/{+parent}/importJobs').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'GET',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['parent'],
-        pathParams: ['parent'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$ListImportJobsResponse>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$ListImportJobsResponse>(parameters);
-      }
-    }
-
-    /**
      * cloudkms.projects.locations.keyRings.importJobs.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.
      * @alias cloudkms.projects.locations.keyRings.importJobs.setIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3773,7 +3297,7 @@ export namespace cloudkms_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3848,39 +3372,6 @@ export namespace cloudkms_v1 {
     }
   }
 
-  export interface Params$Resource$Projects$Locations$Keyrings$Importjobs$Create
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Required. It must be unique within a KeyRing and match the regular expression `[a-zA-Z0-9_-]{1,63}`
-     */
-    importJobId?: string;
-    /**
-     * Required. The name of the KeyRing associated with the ImportJobs.
-     */
-    parent?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$ImportJob;
-  }
-  export interface Params$Resource$Projects$Locations$Keyrings$Importjobs$Get
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Required. The name of the ImportJob to get.
-     */
-    name?: string;
-  }
   export interface Params$Resource$Projects$Locations$Keyrings$Importjobs$Getiampolicy
     extends StandardParameters {
     /**
@@ -3889,41 +3380,9 @@ export namespace cloudkms_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
-    /**
      * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      */
     resource?: string;
-  }
-  export interface Params$Resource$Projects$Locations$Keyrings$Importjobs$List
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Optional. Only include resources that match the filter in the response. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     */
-    filter?: string;
-    /**
-     * Optional. Specify how the results should be sorted. If not specified, the results will be sorted in the default order. For more information, see [Sorting and filtering list results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-     */
-    orderBy?: string;
-    /**
-     * Optional. Optional limit on the number of ImportJobs to include in the response. Further ImportJobs can subsequently be obtained by including the ListImportJobsResponse.next_page_token in a subsequent request. If unspecified, the server will pick an appropriate default.
-     */
-    pageSize?: number;
-    /**
-     * Optional. Optional pagination token, returned earlier via ListImportJobsResponse.next_page_token.
-     */
-    pageToken?: string;
-    /**
-     * Required. The resource name of the KeyRing to list, in the format `projects/x/locations/x/keyRings/x`.
-     */
-    parent?: string;
   }
   export interface Params$Resource$Projects$Locations$Keyrings$Importjobs$Setiampolicy
     extends StandardParameters {

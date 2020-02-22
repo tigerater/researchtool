@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -124,11 +126,11 @@ export namespace clouddebugger_v2 {
     /**
      * The alias kind.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The alias name.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Represents the breakpoint specification, status and results.
@@ -137,15 +139,15 @@ export namespace clouddebugger_v2 {
     /**
      * Action that the agent should perform when the code at the breakpoint location is hit.
      */
-    action?: string | null;
+    action?: string;
     /**
      * Condition that triggers the breakpoint. The condition is a compound boolean expression composed using expressions in a programming language at the source location.
      */
-    condition?: string | null;
+    condition?: string;
     /**
      * Time this breakpoint was created by the server in seconds resolution.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Values of evaluated expressions at breakpoint time. The evaluated expressions appear in exactly the same order they are listed in the `expressions` field. The `name` field holds the original expression text, the `value` or `members` field holds the result of the evaluated expression. If the expression cannot be evaluated, the `status` inside the `Variable` will indicate an error and contain the error text.
      */
@@ -153,23 +155,23 @@ export namespace clouddebugger_v2 {
     /**
      * List of read-only expressions to evaluate at the breakpoint location. The expressions are composed using expressions in the programming language at the source location. If the breakpoint action is `LOG`, the evaluated expressions are included in log statements.
      */
-    expressions?: string[] | null;
+    expressions?: string[];
     /**
      * Time this breakpoint was finalized as seen by the server in seconds resolution.
      */
-    finalTime?: string | null;
+    finalTime?: string;
     /**
      * Breakpoint identifier, unique in the scope of the debuggee.
      */
-    id?: string | null;
+    id?: string;
     /**
      * When true, indicates that this is a final result and the breakpoint state will not change from here on.
      */
-    isFinalState?: boolean | null;
+    isFinalState?: boolean;
     /**
      * A set of custom breakpoint properties, populated by the agent, to be displayed to the user.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Breakpoint source location.
      */
@@ -177,11 +179,11 @@ export namespace clouddebugger_v2 {
     /**
      * Indicates the severity of the log. Only relevant when action is `LOG`.
      */
-    logLevel?: string | null;
+    logLevel?: string;
     /**
      * Only relevant when action is `LOG`. Defines the message to log when the breakpoint hits. The message may include parameter placeholders `$0`, `$1`, etc. These placeholders are replaced with the evaluated value of the appropriate expression. Expressions not referenced in `log_message_format` are not logged.  Example: `Message received, id = $0, count = $1` with `expressions` = `[ message.id, message.count ]`.
      */
-    logMessageFormat?: string | null;
+    logMessageFormat?: string;
     /**
      * The stack at breakpoint time, where stack_frames[0] represents the most recently entered function.
      */
@@ -193,7 +195,7 @@ export namespace clouddebugger_v2 {
     /**
      * E-mail address of the user that created this breakpoint
      */
-    userEmail?: string | null;
+    userEmail?: string;
     /**
      * The `variable_table` exists to aid with computation, memory and network traffic optimization.  It enables storing a variable once and reference it from multiple variables, including variables stored in the `variable_table` itself. For example, the same `this` object, which may appear at many levels of the stack, can have all of its data stored once in this table.  The stack frame variables then would hold only a reference to it.  The variable `var_table_index` field is an index into this repeated field. The stored objects are nameless and get their name from the referencing variable. The effective variable is a merge of the referencing variable and the referenced variable.
      */
@@ -210,7 +212,7 @@ export namespace clouddebugger_v2 {
     /**
      * The name of an alias (branch, tag, etc.).
      */
-    aliasName?: string | null;
+    aliasName?: string;
     /**
      * The ID of the repo.
      */
@@ -218,7 +220,7 @@ export namespace clouddebugger_v2 {
     /**
      * A revision ID.
      */
-    revisionId?: string | null;
+    revisionId?: string;
   }
   /**
    * A CloudWorkspaceId is a unique identifier for a cloud workspace. A cloud workspace is a place associated with a repo where modified files can be stored before they are committed.
@@ -227,7 +229,7 @@ export namespace clouddebugger_v2 {
     /**
      * The unique name of the workspace within the repo.  This is the name chosen by the client in the Source API&#39;s CreateWorkspace method.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The ID of the repo containing the workspace.
      */
@@ -240,7 +242,7 @@ export namespace clouddebugger_v2 {
     /**
      * The ID of the snapshot. An empty snapshot_id refers to the most recent snapshot.
      */
-    snapshotId?: string | null;
+    snapshotId?: string;
     /**
      * The ID of the workspace.
      */
@@ -253,11 +255,11 @@ export namespace clouddebugger_v2 {
     /**
      * Version ID of the agent. Schema: `domain/language-platform/vmajor.minor` (for example `google.com/java-gcp/v1.1`).
      */
-    agentVersion?: string | null;
+    agentVersion?: string;
     /**
      * Human readable description of the debuggee. Including a human-readable project name, environment name and version information is recommended.
      */
-    description?: string | null;
+    description?: string;
     /**
      * References to the locations and revisions of the source code used in the deployed application.
      */
@@ -265,23 +267,23 @@ export namespace clouddebugger_v2 {
     /**
      * Unique identifier for the debuggee generated by the controller service.
      */
-    id?: string | null;
+    id?: string;
     /**
      * If set to `true`, indicates that the agent should disable itself and detach from the debuggee.
      */
-    isDisabled?: boolean | null;
+    isDisabled?: boolean;
     /**
      * If set to `true`, indicates that Controller service does not detect any activity from the debuggee agents and the application is possibly stopped.
      */
-    isInactive?: boolean | null;
+    isInactive?: boolean;
     /**
      * A set of custom debuggee properties, populated by the agent, to be displayed to the user.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Project the debuggee is associated with. Use project number or id when registering a Google Cloud Platform project.
      */
-    project?: string | null;
+    project?: string;
     /**
      * References to the locations and revisions of the source code used in the deployed application.
      */
@@ -293,7 +295,7 @@ export namespace clouddebugger_v2 {
     /**
      * Uniquifier to further distinguish the application. It is possible that different applications might have identical values in the debuggee message, thus, incorrectly identified as a single application by the Controller service. This field adds salt to further distinguish the application. Agents should consider seeding this field with value that identifies the code, binary, configuration and environment.
      */
-    uniquifier?: string | null;
+    uniquifier?: string;
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -310,7 +312,7 @@ export namespace clouddebugger_v2 {
     /**
      * Labels with user defined metadata.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
   }
   /**
    * Represents a message with parameters.
@@ -319,11 +321,11 @@ export namespace clouddebugger_v2 {
     /**
      * Format template for the message. The `format` uses placeholders `$0`, `$1`, etc. to reference parameters. `$$` can be used to denote the `$` character.  Examples:  *   `Failed to load &#39;$0&#39; which helps debug $1 the first time it     is loaded.  Again, $0 is very important.` *   `Please pay $$10 to use $0 instead of $1.`
      */
-    format?: string | null;
+    format?: string;
     /**
      * Optional parameters to be embedded into the message.
      */
-    parameters?: string[] | null;
+    parameters?: string[];
   }
   /**
    * A SourceContext referring to a Gerrit project.
@@ -336,19 +338,19 @@ export namespace clouddebugger_v2 {
     /**
      * The name of an alias (branch, tag, etc.).
      */
-    aliasName?: string | null;
+    aliasName?: string;
     /**
      * The full project name within the host. Projects may be nested, so &quot;project/subproject&quot; is a valid project name. The &quot;repo name&quot; is hostURI/project.
      */
-    gerritProject?: string | null;
+    gerritProject?: string;
     /**
      * The URI of a running Gerrit instance.
      */
-    hostUri?: string | null;
+    hostUri?: string;
     /**
      * A revision (commit) ID.
      */
-    revisionId?: string | null;
+    revisionId?: string;
   }
   /**
    * Response for getting breakpoint information.
@@ -366,11 +368,11 @@ export namespace clouddebugger_v2 {
     /**
      * Git commit hash. required.
      */
-    revisionId?: string | null;
+    revisionId?: string;
     /**
      * Git repository URL.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Response for listing active breakpoints.
@@ -383,11 +385,11 @@ export namespace clouddebugger_v2 {
     /**
      * A token that can be used in the next method call to block until the list of breakpoints changes.
      */
-    nextWaitToken?: string | null;
+    nextWaitToken?: string;
     /**
      * If set to `true`, indicates that there is no change to the list of active breakpoints and the server-selected timeout has expired. The `breakpoints` field would be empty and should be ignored.
      */
-    waitExpired?: boolean | null;
+    waitExpired?: boolean;
   }
   /**
    * Response for listing breakpoints.
@@ -400,7 +402,7 @@ export namespace clouddebugger_v2 {
     /**
      * A wait token that can be used in the next call to `list` (REST) or `ListBreakpoints` (RPC) to block until the list of breakpoints has changes.
      */
-    nextWaitToken?: string | null;
+    nextWaitToken?: string;
   }
   /**
    * Response for listing debuggees.
@@ -418,18 +420,18 @@ export namespace clouddebugger_v2 {
     /**
      * The ID of the project.
      */
-    projectId?: string | null;
+    projectId?: string;
     /**
      * The name of the repo. Leave empty for the default repo.
      */
-    repoName?: string | null;
+    repoName?: string;
   }
   /**
    * Request to register a debuggee.
    */
   export interface Schema$RegisterDebuggeeRequest {
     /**
-     * Required. Debuggee information to register. The fields `project`, `uniquifier`, `description` and `agent_version` of the debuggee must be set.
+     * Debuggee information to register. The fields `project`, `uniquifier`, `description` and `agent_version` of the debuggee must be set.
      */
     debuggee?: Schema$Debuggee;
   }
@@ -453,14 +455,14 @@ export namespace clouddebugger_v2 {
     /**
      * A server-assigned, globally unique identifier.
      */
-    uid?: string | null;
+    uid?: string;
   }
   /**
    * Response for setting a breakpoint.
    */
   export interface Schema$SetBreakpointResponse {
     /**
-     * Breakpoint resource. The field `id` is guaranteed to be set (in addition to the echoed fields).
+     * Breakpoint resource. The field `id` is guaranteed to be set (in addition to the echoed fileds).
      */
     breakpoint?: Schema$Breakpoint;
   }
@@ -492,15 +494,15 @@ export namespace clouddebugger_v2 {
     /**
      * Column within a line. The first column in a line as the value `1`. Agents that do not support setting breakpoints on specific columns ignore this field.
      */
-    column?: number | null;
+    column?: number;
     /**
      * Line inside the file. The first line in the file has the value `1`.
      */
-    line?: number | null;
+    line?: number;
     /**
      * Path to the source file within the source context of the target binary.
      */
-    path?: string | null;
+    path?: string;
   }
   /**
    * Represents a stack frame context.
@@ -513,7 +515,7 @@ export namespace clouddebugger_v2 {
     /**
      * Demangled function name at the call site.
      */
-    function?: string | null;
+    function?: string;
     /**
      * Set of local variables at the stack frame location. Note that this might not be populated for all stack frames.
      */
@@ -534,18 +536,18 @@ export namespace clouddebugger_v2 {
     /**
      * Distinguishes errors from informational messages.
      */
-    isError?: boolean | null;
+    isError?: boolean;
     /**
      * Reference to which the message applies.
      */
-    refersTo?: string | null;
+    refersTo?: string;
   }
   /**
    * Request to update an active breakpoint.
    */
   export interface Schema$UpdateActiveBreakpointRequest {
     /**
-     * Required. Updated breakpoint information. The field `id` must be set. The agent must echo all Breakpoint specification fields in the update.
+     * Updated breakpoint information. The field `id` must be set. The agent must echo all Breakpoint specification fields in the update.
      */
     breakpoint?: Schema$Breakpoint;
   }
@@ -564,7 +566,7 @@ export namespace clouddebugger_v2 {
     /**
      * Name of the variable, if any.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Status associated with the variable. This field will usually stay unset. A status of a single variable only applies to that variable or expression. The rest of breakpoint data still remains valid. Variables might be reported in error state even when breakpoint is not in final state.  The message may refer to variable name with `refers_to` set to `VARIABLE_NAME`. Alternatively `refers_to` will be set to `VARIABLE_VALUE`. In either case variable value and members will be unset.  Example of error message applied to name: `Invalid expression syntax`.  Example of information message applied to value: `Not captured`.  Examples of error message applied to value:  *   `Malformed string`, *   `Field f not found in class C` *   `Null pointer dereference`
      */
@@ -572,15 +574,15 @@ export namespace clouddebugger_v2 {
     /**
      * Variable type (e.g. `MyClass`). If the variable is split with `var_table_index`, `type` goes next to `value`. The interpretation of a type is agent specific. It is recommended to include the dynamic type rather than a static type of an object.
      */
-    type?: string | null;
+    type?: string;
     /**
      * Simple value of the variable.
      */
-    value?: string | null;
+    value?: string;
     /**
      * Reference to a variable in the shared variable table. More than one variable can reference the same variable in the table. The `var_table_index` field is an index into `variable_table` in Breakpoint.
      */
-    varTableIndex?: number | null;
+    varTableIndex?: number;
   }
 
   export class Resource$Controller {
@@ -620,7 +622,7 @@ export namespace clouddebugger_v2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudDebugger = google.clouddebugger('v2');
      *
      * authorize(function(authClient) {
@@ -644,19 +646,23 @@ export namespace clouddebugger_v2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias clouddebugger.controller.debuggees.register
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().RegisterDebuggeeRequest} params.requestBody Request body data
+     * @param {().RegisterDebuggeeRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -766,7 +772,7 @@ export namespace clouddebugger_v2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudDebugger = google.clouddebugger('v2');
      *
      * authorize(function(authClient) {
@@ -789,19 +795,23 @@ export namespace clouddebugger_v2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias clouddebugger.controller.debuggees.breakpoints.list
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.debuggeeId Required. Identifies the debuggee.
+     * @param {string} params.debuggeeId Identifies the debuggee.
      * @param {boolean=} params.successOnTimeout If set to `true` (recommended), returns `google.rpc.Code.OK` status and sets the `wait_expired` response field to `true` when the server-selected timeout has expired.  If set to `false` (deprecated), returns `google.rpc.Code.ABORTED` status when the server-selected timeout has expired.
      * @param {string=} params.waitToken A token that, if specified, blocks the method call until the list of active breakpoints has changed, or a server-selected timeout has expired. The value should be set from the `next_wait_token` field in the last response. The initial value should be set to `"init"`.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -897,7 +907,7 @@ export namespace clouddebugger_v2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudDebugger = google.clouddebugger('v2');
      *
      * authorize(function(authClient) {
@@ -928,21 +938,25 @@ export namespace clouddebugger_v2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias clouddebugger.controller.debuggees.breakpoints.update
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.debuggeeId Required. Identifies the debuggee being debugged.
+     * @param {string} params.debuggeeId Identifies the debuggee being debugged.
      * @param {string} params.id Breakpoint identifier, unique in the scope of the debuggee.
-     * @param {().UpdateActiveBreakpointRequest} params.requestBody Request body data
+     * @param {().UpdateActiveBreakpointRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1027,7 +1041,7 @@ export namespace clouddebugger_v2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. Identifies the debuggee.
+     * Identifies the debuggee.
      */
     debuggeeId?: string;
     /**
@@ -1047,7 +1061,7 @@ export namespace clouddebugger_v2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. Identifies the debuggee being debugged.
+     * Identifies the debuggee being debugged.
      */
     debuggeeId?: string;
     /**
@@ -1098,7 +1112,7 @@ export namespace clouddebugger_v2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudDebugger = google.clouddebugger('v2');
      *
      * authorize(function(authClient) {
@@ -1118,21 +1132,25 @@ export namespace clouddebugger_v2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias clouddebugger.debugger.debuggees.list
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.clientVersion Required. The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+     * @param {string=} params.clientVersion The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
      * @param {boolean=} params.includeInactive When set to `true`, the result includes all debuggees. Otherwise, the result includes only debuggees that are active.
-     * @param {string=} params.project Required. Project number of a Google Cloud project whose debuggees to list.
+     * @param {string=} params.project Project number of a Google Cloud project whose debuggees to list.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1211,7 +1229,7 @@ export namespace clouddebugger_v2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+     * The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
      */
     clientVersion?: string;
     /**
@@ -1219,7 +1237,7 @@ export namespace clouddebugger_v2 {
      */
     includeInactive?: boolean;
     /**
-     * Required. Project number of a Google Cloud project whose debuggees to list.
+     * Project number of a Google Cloud project whose debuggees to list.
      */
     project?: string;
   }
@@ -1248,7 +1266,7 @@ export namespace clouddebugger_v2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudDebugger = google.clouddebugger('v2');
      *
      * authorize(function(authClient) {
@@ -1271,21 +1289,25 @@ export namespace clouddebugger_v2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias clouddebugger.debugger.debuggees.breakpoints.delete
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.breakpointId Required. ID of the breakpoint to delete.
-     * @param {string=} params.clientVersion Required. The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
-     * @param {string} params.debuggeeId Required. ID of the debuggee whose breakpoint to delete.
+     * @param {string} params.breakpointId ID of the breakpoint to delete.
+     * @param {string=} params.clientVersion The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+     * @param {string} params.debuggeeId ID of the debuggee whose breakpoint to delete.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1369,7 +1391,7 @@ export namespace clouddebugger_v2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudDebugger = google.clouddebugger('v2');
      *
      * authorize(function(authClient) {
@@ -1395,21 +1417,25 @@ export namespace clouddebugger_v2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias clouddebugger.debugger.debuggees.breakpoints.get
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.breakpointId Required. ID of the breakpoint to get.
-     * @param {string=} params.clientVersion Required. The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
-     * @param {string} params.debuggeeId Required. ID of the debuggee whose breakpoint to get.
+     * @param {string} params.breakpointId ID of the breakpoint to get.
+     * @param {string=} params.clientVersion The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+     * @param {string} params.debuggeeId ID of the debuggee whose breakpoint to get.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1497,7 +1523,7 @@ export namespace clouddebugger_v2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudDebugger = google.clouddebugger('v2');
      *
      * authorize(function(authClient) {
@@ -1520,12 +1546,16 @@ export namespace clouddebugger_v2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias clouddebugger.debugger.debuggees.breakpoints.list
@@ -1533,8 +1563,8 @@ export namespace clouddebugger_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.action.value Only breakpoints with the specified action will pass the filter.
-     * @param {string=} params.clientVersion Required. The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
-     * @param {string} params.debuggeeId Required. ID of the debuggee whose breakpoints to list.
+     * @param {string=} params.clientVersion The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+     * @param {string} params.debuggeeId ID of the debuggee whose breakpoints to list.
      * @param {boolean=} params.includeAllUsers When set to `true`, the response includes the list of breakpoints set by any user. Otherwise, it includes only breakpoints set by the caller.
      * @param {boolean=} params.includeInactive When set to `true`, the response includes active and inactive breakpoints. Otherwise, it includes only active breakpoints.
      * @param {boolean=} params.stripResults This field is deprecated. The following fields are always stripped out of the result: `stack_frames`, `evaluated_expressions` and `variable_table`.
@@ -1625,7 +1655,7 @@ export namespace clouddebugger_v2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudDebugger = google.clouddebugger('v2');
      *
      * authorize(function(authClient) {
@@ -1652,21 +1682,25 @@ export namespace clouddebugger_v2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias clouddebugger.debugger.debuggees.breakpoints.set
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.clientVersion Required. The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
-     * @param {string} params.debuggeeId Required. ID of the debuggee where the breakpoint is to be set.
-     * @param {().Breakpoint} params.requestBody Request body data
+     * @param {string=} params.clientVersion The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+     * @param {string} params.debuggeeId ID of the debuggee where the breakpoint is to be set.
+     * @param {().Breakpoint} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1744,15 +1778,15 @@ export namespace clouddebugger_v2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. ID of the breakpoint to delete.
+     * ID of the breakpoint to delete.
      */
     breakpointId?: string;
     /**
-     * Required. The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+     * The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
      */
     clientVersion?: string;
     /**
-     * Required. ID of the debuggee whose breakpoint to delete.
+     * ID of the debuggee whose breakpoint to delete.
      */
     debuggeeId?: string;
   }
@@ -1764,15 +1798,15 @@ export namespace clouddebugger_v2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. ID of the breakpoint to get.
+     * ID of the breakpoint to get.
      */
     breakpointId?: string;
     /**
-     * Required. The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+     * The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
      */
     clientVersion?: string;
     /**
-     * Required. ID of the debuggee whose breakpoint to get.
+     * ID of the debuggee whose breakpoint to get.
      */
     debuggeeId?: string;
   }
@@ -1788,11 +1822,11 @@ export namespace clouddebugger_v2 {
      */
     'action.value'?: string;
     /**
-     * Required. The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+     * The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
      */
     clientVersion?: string;
     /**
-     * Required. ID of the debuggee whose breakpoints to list.
+     * ID of the debuggee whose breakpoints to list.
      */
     debuggeeId?: string;
     /**
@@ -1820,11 +1854,11 @@ export namespace clouddebugger_v2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+     * The client version making the call. Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
      */
     clientVersion?: string;
     /**
-     * Required. ID of the debuggee where the breakpoint is to be set.
+     * ID of the debuggee where the breakpoint is to be set.
      */
     debuggeeId?: string;
 

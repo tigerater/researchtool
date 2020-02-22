@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -130,7 +132,7 @@ export namespace script_v1 {
     /**
      * The script project&#39;s Drive ID.
      */
-    scriptId?: string | null;
+    scriptId?: string;
   }
   /**
    * Request to create a script project.
@@ -139,11 +141,11 @@ export namespace script_v1 {
     /**
      * The Drive ID of a parent file that the created script project is bound to. This is usually the ID of a Google Doc, Google Sheet, Google Form, or Google Slides file. If not set, a standalone script project is created.
      */
-    parentId?: string | null;
+    parentId?: string;
     /**
      * The title for the project.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Representation of a single script deployment.
@@ -156,7 +158,7 @@ export namespace script_v1 {
     /**
      * The deployment ID for this deployment.
      */
-    deploymentId?: string | null;
+    deploymentId?: string;
     /**
      * The deployment&#39;s entry points.
      */
@@ -164,7 +166,7 @@ export namespace script_v1 {
     /**
      * Last modified date time stamp.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * Metadata the defines how a deployment is configured.
@@ -173,19 +175,19 @@ export namespace script_v1 {
     /**
      * The description for this deployment.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The manifest file name for this deployment.
      */
-    manifestFileName?: string | null;
+    manifestFileName?: string;
     /**
      * The script project&#39;s Drive ID.
      */
-    scriptId?: string | null;
+    scriptId?: string;
     /**
      * The version number on which this deployment is based.
      */
-    versionNumber?: number | null;
+    versionNumber?: number;
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -202,7 +204,7 @@ export namespace script_v1 {
     /**
      * The type of the entry point.
      */
-    entryPointType?: string | null;
+    entryPointType?: string;
     /**
      * An entry point specification for Apps Script API execution calls.
      */
@@ -228,11 +230,11 @@ export namespace script_v1 {
     /**
      * The error message thrown by Apps Script, usually localized into the user&#39;s language.
      */
-    errorMessage?: string | null;
+    errorMessage?: string;
     /**
      * The error type, for example `TypeError` or `ReferenceError`. If the error type is unavailable, this field is not included.
      */
-    errorType?: string | null;
+    errorType?: string;
     /**
      * An array of objects that provide a stack trace through the script to show where the execution failed, with the deepest call first.
      */
@@ -245,19 +247,19 @@ export namespace script_v1 {
     /**
      * If `true` and the user is an owner of the script, the script runs at the most recently saved version rather than the version deployed for use with the Apps Script API. Optional; default is `false`.
      */
-    devMode?: boolean | null;
+    devMode?: boolean;
     /**
      * The name of the function to execute in the given script. The name does not include parentheses or parameters. It can reference a function in an included library such as `Library.libFunction1`.
      */
-    function?: string | null;
+    function?: string;
     /**
      * The parameters to be passed to the function being executed. The object type for each parameter should match the expected type in Apps Script. Parameters cannot be Apps Script-specific object types (such as a `Document` or a `Calendar`); they can only be primitive types such as `string`, `number`, `array`, `object`, or `boolean`. Optional.
      */
-    parameters?: any[] | null;
+    parameters?: any[];
     /**
      * &lt;b&gt;Deprecated&lt;/b&gt;. For use with Android add-ons only. An ID that represents the user&#39;s current session in the Android app for Google Docs or Sheets, included as extra data in the [Intent](https://developer.android.com/guide/components/intents-filters.html) that launches the add-on. When an Android add-on is run with a session state, it gains the privileges of a [bound](https://developers.google.com/apps-script/guides/bound) script&amp;mdash;that is, it can access information like the user&#39;s current cursor position (in Docs) or selected cell (in Sheets). To retrieve the state, call `Intent.getStringExtra(&quot;com.google.android.apps.docs.addons.SessionState&quot;)`. Optional.
      */
-    sessionState?: string | null;
+    sessionState?: string;
   }
   /**
    * An object that provides the return value of a function executed using the Apps Script API. If the script function returns successfully, the response body&#39;s response field contains this `ExecutionResponse` object.
@@ -266,7 +268,7 @@ export namespace script_v1 {
     /**
      * The return value of the script function. The type matches the object type returned in Apps Script. Functions called using the Apps Script API cannot return Apps Script-specific objects (such as a `Document` or a `Calendar`); they can only return primitive types such as a `string`, `number`, `array`, `object`, or `boolean`.
      */
-    result?: any | null;
+    result?: any;
   }
   /**
    * An individual file within a script project. A file is a third-party source code created by one or more developers. It can be a server-side JS code, HTML, or a configuration file. Each script project can contain multiple files.
@@ -275,7 +277,7 @@ export namespace script_v1 {
     /**
      * Creation date timestamp. This read-only field is only visible to users who have WRITER permission for the script project.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * The defined set of functions in the script file, if any.
      */
@@ -287,19 +289,19 @@ export namespace script_v1 {
     /**
      * The name of the file. The file extension is not part of the file name, which can be identified from the type field.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The file content.
      */
-    source?: string | null;
+    source?: string;
     /**
      * The type of the file.
      */
-    type?: string | null;
+    type?: string;
     /**
      * Last modified date timestamp. This read-only field is only visible to users who have WRITER permission for the script project.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * An add-on entry point.
@@ -308,27 +310,27 @@ export namespace script_v1 {
     /**
      * The add-on&#39;s required list of supported container types.
      */
-    addOnType?: string | null;
+    addOnType?: string;
     /**
      * The add-on&#39;s optional description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The add-on&#39;s optional help URL.
      */
-    helpUrl?: string | null;
+    helpUrl?: string;
     /**
      * The add-on&#39;s required post install tip URL.
      */
-    postInstallTipUrl?: string | null;
+    postInstallTipUrl?: string;
     /**
      * The add-on&#39;s optional report issue URL.
      */
-    reportIssueUrl?: string | null;
+    reportIssueUrl?: string;
     /**
      * The add-on&#39;s required title.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * API executable entry point configuration.
@@ -337,7 +339,7 @@ export namespace script_v1 {
     /**
      * Who has permission to run the API executable.
      */
-    access?: string | null;
+    access?: string;
   }
   /**
    * An API executable entry point.
@@ -355,7 +357,7 @@ export namespace script_v1 {
     /**
      * The function name in the script project.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * A set of functions. No duplicates are permitted.
@@ -373,31 +375,31 @@ export namespace script_v1 {
     /**
      * Duration the execution spent executing.
      */
-    duration?: string | null;
+    duration?: string;
     /**
      * Name of the function the started the execution.
      */
-    functionName?: string | null;
+    functionName?: string;
     /**
      * The executions status.
      */
-    processStatus?: string | null;
+    processStatus?: string;
     /**
      * The executions type.
      */
-    processType?: string | null;
+    processType?: string;
     /**
      * Name of the script being executed.
      */
-    projectName?: string | null;
+    projectName?: string;
     /**
      * Time the execution started.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * The executing users access level to the script.
      */
-    userAccessLevel?: string | null;
+    userAccessLevel?: string;
   }
   /**
    * A simple user profile resource.
@@ -406,19 +408,19 @@ export namespace script_v1 {
     /**
      * The user&#39;s domain.
      */
-    domain?: string | null;
+    domain?: string;
     /**
      * The user&#39;s identifying email address.
      */
-    email?: string | null;
+    email?: string;
     /**
      * The user&#39;s display name.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The user&#39;s photo.
      */
-    photoUrl?: string | null;
+    photoUrl?: string;
   }
   /**
    * Web app entry point configuration.
@@ -427,11 +429,11 @@ export namespace script_v1 {
     /**
      * Who has permission to run the web app.
      */
-    access?: string | null;
+    access?: string;
     /**
      * Who to execute the web app as.
      */
-    executeAs?: string | null;
+    executeAs?: string;
   }
   /**
    * A web application entry point.
@@ -444,7 +446,7 @@ export namespace script_v1 {
     /**
      * The URL for the web application.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Response with the list of deployments for the specified Apps Script project.
@@ -457,7 +459,7 @@ export namespace script_v1 {
     /**
      * The token that can be used in the next call to get the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response with the list of Process resources.
@@ -466,7 +468,7 @@ export namespace script_v1 {
     /**
      * Token for the next page of results. If empty, there are no more pages remaining.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * List of processes matching request parameters.
      */
@@ -479,7 +481,7 @@ export namespace script_v1 {
     /**
      * Token for the next page of results. If empty, there are no more pages remaining.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * List of processes matching request parameters.
      */
@@ -501,7 +503,7 @@ export namespace script_v1 {
     /**
      * The token use to fetch the next page of records. if not exist in the response, that means no more versions to list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of versions.
      */
@@ -531,15 +533,15 @@ export namespace script_v1 {
     /**
      * Required field indicating the end time of the interval.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * Required field indicating the start time of the interval.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * Indicates the number of executions counted.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A representation of an execution of an Apps Script function started with run. The execution response does not arrive until the function finishes executing. The maximum execution runtime is listed in the [Apps Script quotas guide](/apps-script/guides/services/quotas#current_limitations). &lt;p&gt;After execution has started, it can have one of four outcomes:&lt;/p&gt; &lt;ul&gt; &lt;li&gt; If the script function returns successfully, the   response field contains an   ExecutionResponse object   with the function&#39;s return value in the object&#39;s `result` field.&lt;/li&gt; &lt;li&gt; If the script function (or Apps Script itself) throws an exception, the   error field contains a   Status object. The `Status` object&#39;s `details`   field contains an array with a single   ExecutionError object that   provides information about the nature of the error.&lt;/li&gt; &lt;li&gt; If the execution has not yet completed,   the done field is `false` and   the neither the `response` nor `error` fields are present.&lt;/li&gt; &lt;li&gt; If the `run` call itself fails (for example, because of a   malformed request or an authorization error), the method returns an HTTP   response code in the 4XX range with a different format for the response   body. Client libraries automatically convert a 4XX response into an   exception class.&lt;/li&gt; &lt;/ul&gt;
@@ -548,7 +550,7 @@ export namespace script_v1 {
     /**
      * This field indicates whether the script execution has completed. A completed execution has a populated `response` field containing the ExecutionResponse from function that was executed.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * If a `run` call succeeds but the script function (or Apps Script itself) throws an exception, this field contains a Status object. The `Status` object&#39;s `details` field contains an array with a single ExecutionError object that provides information about the nature of the error.
      */
@@ -556,7 +558,7 @@ export namespace script_v1 {
     /**
      * If the script function returns successfully, this field contains an ExecutionResponse object with the function&#39;s return value.
      */
-    response?: {[key: string]: any} | null;
+    response?: {[key: string]: any};
   }
   /**
    * The script project resource.
@@ -565,7 +567,7 @@ export namespace script_v1 {
     /**
      * When the script was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * User who originally created the script.
      */
@@ -577,19 +579,19 @@ export namespace script_v1 {
     /**
      * The parent&#39;s Drive ID that the script will be attached to. This is usually the ID of a Google Document or Google Sheet. This filed is optional, and if not set, a stand-alone script will be created.
      */
-    parentId?: string | null;
+    parentId?: string;
     /**
      * The script project&#39;s Drive ID.
      */
-    scriptId?: string | null;
+    scriptId?: string;
     /**
      * The title for the project.
      */
-    title?: string | null;
+    title?: string;
     /**
      * When the script was last updated.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * The result of an execution Based on ScriptExecutionResult at: google3/apps/maestro/api/frontend_execution_common.proto?q=message%5c%20ScriptExecutionResult
@@ -607,11 +609,11 @@ export namespace script_v1 {
     /**
      * The name of the function that failed.
      */
-    function?: string | null;
+    function?: string;
     /**
      * The line number where the script failed.
      */
-    lineNumber?: number | null;
+    lineNumber?: number;
   }
   /**
    * If a `run` call succeeds but the script function (or Apps Script itself) throws an exception, the response body&#39;s error field contains this `Status` object.
@@ -620,15 +622,15 @@ export namespace script_v1 {
     /**
      * The status code. For this API, this value either: &lt;ul&gt; &lt;li&gt; 10, indicating a `SCRIPT_TIMEOUT` error,&lt;/li&gt; &lt;li&gt; 3, indicating an `INVALID_ARGUMENT` error, or&lt;/li&gt; &lt;li&gt; 1, indicating a `CANCELLED` execution.&lt;/li&gt; &lt;/ul&gt;
      */
-    code?: number | null;
+    code?: number;
     /**
      * An array that contains a single ExecutionError object that provides information about the nature of the error.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which is in English. Any user-facing error message is localized and sent in the details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * `Struct` represents a structured data value, consisting of fields which map to dynamically typed values. Based on Struct at: google3/apps/maestro/api/struct.proto?q=message%5c%20Struct
@@ -637,7 +639,7 @@ export namespace script_v1 {
     /**
      * Unordered map of dynamically typed values.
      */
-    fields?: {[key: string]: Schema$Value} | null;
+    fields?: {[key: string]: Schema$Value};
   }
   /**
    * Request with deployment information to update an existing deployment.
@@ -655,15 +657,15 @@ export namespace script_v1 {
     /**
      * Represents a boolean value.
      */
-    boolValue?: boolean | null;
+    boolValue?: boolean;
     /**
      * Represents raw byte values.
      */
-    bytesValue?: string | null;
+    bytesValue?: string;
     /**
      * Represents a date in ms since the epoch.
      */
-    dateValue?: string | null;
+    dateValue?: string;
     /**
      * Represents a repeated `Value`.
      */
@@ -671,19 +673,19 @@ export namespace script_v1 {
     /**
      * Represents a null value.
      */
-    nullValue?: string | null;
+    nullValue?: string;
     /**
      * Represents a double value.
      */
-    numberValue?: number | null;
+    numberValue?: number;
     /**
      * Represents a structured proto value.
      */
-    protoValue?: {[key: string]: any} | null;
+    protoValue?: {[key: string]: any};
     /**
      * Represents a string value.
      */
-    stringValue?: string | null;
+    stringValue?: string;
     /**
      * Represents a structured value.
      */
@@ -696,19 +698,19 @@ export namespace script_v1 {
     /**
      * When the version was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * The description for this version.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The script project&#39;s Drive ID.
      */
-    scriptId?: string | null;
+    scriptId?: string;
     /**
      * The incremental ID that is created by Apps Script when a version is created. This is system assigned number and is immutable once created.
      */
-    versionNumber?: number | null;
+    versionNumber?: number;
   }
 
   export class Resource$Processes {
@@ -1012,7 +1014,7 @@ export namespace script_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().CreateProjectRequest} params.requestBody Request body data
+     * @param {().CreateProjectRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1299,7 +1301,7 @@ export namespace script_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.scriptId The script project's Drive ID.
-     * @param {().Content} params.requestBody Request body data
+     * @param {().Content} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1455,7 +1457,7 @@ export namespace script_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.scriptId The script project's Drive ID.
-     * @param {().DeploymentConfig} params.requestBody Request body data
+     * @param {().DeploymentConfig} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1755,7 +1757,7 @@ export namespace script_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.deploymentId The deployment ID for this deployment.
      * @param {string} params.scriptId The script project's Drive ID.
-     * @param {().UpdateDeploymentRequest} params.requestBody Request body data
+     * @param {().UpdateDeploymentRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1927,7 +1929,7 @@ export namespace script_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.scriptId The script project's Drive ID.
-     * @param {().Version} params.requestBody Request body data
+     * @param {().Version} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2205,13 +2207,13 @@ export namespace script_v1 {
 
     /**
      * script.scripts.run
-     * @desc Runs a function in an Apps Script project. The script project must be deployed for use with the Apps Script API and the calling application must share the same Cloud Platform project.  This method requires authorization with an OAuth 2.0 token that includes at least one of the scopes listed in the [Authorization](#authorization-scopes) section; script projects that do not require authorization cannot be executed through this API. To find the correct scopes to include in the authentication token, open the project in the script editor, then select **File > Project properties** and click the **Scopes** tab.  The error `403, PERMISSION_DENIED: The caller does not have permission` indicates that the Cloud Platform project used to authorize the request is not the same as the one used by the script.
+     * @desc Runs a function in an Apps Script project. The script project must be deployed for use with the Apps Script API and the calling application must share the same Cloud Platform project.  This method requires authorization with an OAuth 2.0 token that includes at least one of the scopes listed in the [Authorization](#authorization) section; script projects that do not require authorization cannot be executed through this API. To find the correct scopes to include in the authentication token, open the project in the script editor, then select **File > Project properties** and click the **Scopes** tab.  The error `403, PERMISSION_DENIED: The caller does not have permission` indicates that the Cloud Platform project used to authorize the request is not the same as the one used by the script.
      * @alias script.scripts.run
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.scriptId The script ID of the script to be executed. To find the script ID, open the project in the script editor and select **File > Project properties**.
-     * @param {().ExecutionRequest} params.requestBody Request body data
+     * @param {().ExecutionRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

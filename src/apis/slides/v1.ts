@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -122,31 +124,31 @@ export namespace slides_v1 {
     /**
      * The X coordinate scaling element.
      */
-    scaleX?: number | null;
+    scaleX?: number;
     /**
      * The Y coordinate scaling element.
      */
-    scaleY?: number | null;
+    scaleY?: number;
     /**
      * The X coordinate shearing element.
      */
-    shearX?: number | null;
+    shearX?: number;
     /**
      * The Y coordinate shearing element.
      */
-    shearY?: number | null;
+    shearY?: number;
     /**
      * The X coordinate translation element.
      */
-    translateX?: number | null;
+    translateX?: number;
     /**
      * The Y coordinate translation element.
      */
-    translateY?: number | null;
+    translateY?: number;
     /**
      * The units for translate elements.
      */
-    unit?: string | null;
+    unit?: string;
   }
   /**
    * A TextElement kind that represents auto text.
@@ -155,7 +157,7 @@ export namespace slides_v1 {
     /**
      * The rendered content of this auto text, if available.
      */
-    content?: string | null;
+    content?: string;
     /**
      * The styling applied to this auto text.
      */
@@ -163,7 +165,7 @@ export namespace slides_v1 {
     /**
      * The type of this auto text.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Request message for PresentationsService.BatchUpdatePresentation.
@@ -185,7 +187,7 @@ export namespace slides_v1 {
     /**
      * The presentation the updates were applied to.
      */
-    presentationId?: string | null;
+    presentationId?: string;
     /**
      * The reply of the updates.  This maps 1:1 with the updates, although replies to some requests may be empty.
      */
@@ -206,15 +208,15 @@ export namespace slides_v1 {
     /**
      * The rendered bullet glyph for this paragraph.
      */
-    glyph?: string | null;
+    glyph?: string;
     /**
      * The ID of the list this paragraph belongs to.
      */
-    listId?: string | null;
+    listId?: string;
     /**
      * The nesting level of this paragraph in the list.
      */
-    nestingLevel?: number | null;
+    nestingLevel?: number;
   }
   /**
    * The palette of predefined colors for a page.
@@ -232,7 +234,7 @@ export namespace slides_v1 {
     /**
      * The alpha value of this color in the gradient band. Defaults to 1.0, fully opaque.
      */
-    alpha?: number | null;
+    alpha?: number;
     /**
      * The color of the gradient stop.
      */
@@ -240,7 +242,7 @@ export namespace slides_v1 {
     /**
      * The relative position of the color stop in the gradient band measured in percentage. The value should be in the interval [0.0, 1.0].
      */
-    position?: number | null;
+    position?: number;
   }
   /**
    * Creates an image.
@@ -253,11 +255,11 @@ export namespace slides_v1 {
     /**
      * A user-supplied object ID.  If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex `[a-zA-Z0-9_]`); remaining characters may include those as well as a hyphen or colon (matches regex `[a-zA-Z0-9_-:]`). The length of the ID must not be less than 5 or greater than 50.  If you don&#39;t specify an ID, a unique one is generated.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The image URL.  The image is fetched once at insertion time and a copy is stored for display inside the presentation. Images must be less than 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format.  The provided URL can be at most 2 kB in length. The URL itself is saved with the image, and exposed via the Image.source_url field.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * The result of creating an image.
@@ -266,7 +268,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the created image.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Creates a line.
@@ -275,7 +277,7 @@ export namespace slides_v1 {
     /**
      * The category of the line to be created.  The exact line type created is determined based on the category and how it&#39;s routed to connect to other page elements.  If you specify both a `category` and a `line_category`, the `category` takes precedence.  If you do not specify a value for `category`, but specify a value for `line_category`, then the specified `line_category` value is used.  If you do not specify either, then STRAIGHT is used.
      */
-    category?: string | null;
+    category?: string;
     /**
      * The element properties for the line.
      */
@@ -283,11 +285,11 @@ export namespace slides_v1 {
     /**
      * The category of the line to be created.  &lt;b&gt;Deprecated&lt;/b&gt;: use `category` instead.  The exact line type created is determined based on the category and how it&#39;s routed to connect to other page elements.  If you specify both a `category` and a `line_category`, the `category` takes precedence.
      */
-    lineCategory?: string | null;
+    lineCategory?: string;
     /**
      * A user-supplied object ID.  If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex `[a-zA-Z0-9_]`); remaining characters may include those as well as a hyphen or colon (matches regex `[a-zA-Z0-9_-:]`). The length of the ID must not be less than 5 or greater than 50.  If you don&#39;t specify an ID, a unique one is generated.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * The result of creating a line.
@@ -296,7 +298,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the created line.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Creates bullets for all of the paragraphs that overlap with the given text index range.  The nesting level of each paragraph will be determined by counting leading tabs in front of each paragraph. To avoid excess space between the bullet and the corresponding paragraph, these leading tabs are removed by this request. This may change the indices of parts of the text.  If the paragraph immediately before paragraphs being updated is in a list with a matching preset, the paragraphs being updated are added to that preceding list.
@@ -305,7 +307,7 @@ export namespace slides_v1 {
     /**
      * The kinds of bullet glyphs to be used. Defaults to the `BULLET_DISC_CIRCLE_SQUARE` preset.
      */
-    bulletPreset?: string | null;
+    bulletPreset?: string;
     /**
      * The optional table cell location if the text to be modified is in a table cell. If present, the object_id must refer to a table.
      */
@@ -313,7 +315,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the shape or table containing the text to add bullets to.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The range of text to apply the bullet presets to, based on TextElement indexes.
      */
@@ -330,11 +332,11 @@ export namespace slides_v1 {
     /**
      * A user-supplied object ID.  If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex `[a-zA-Z0-9_]`); remaining characters may include those as well as a hyphen or colon (matches regex `[a-zA-Z0-9_-:]`). The length of the ID must not be less than 5 or greater than 50. If empty, a unique identifier will be generated.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The shape type.
      */
-    shapeType?: string | null;
+    shapeType?: string;
   }
   /**
    * The result of creating a shape.
@@ -343,7 +345,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the created shape.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Creates an embedded Google Sheets chart.  NOTE: Chart creation requires at least one of the spreadsheets.readonly, spreadsheets, drive.readonly, drive.file, or drive OAuth scopes.
@@ -352,7 +354,7 @@ export namespace slides_v1 {
     /**
      * The ID of the specific chart in the Google Sheets spreadsheet.
      */
-    chartId?: number | null;
+    chartId?: number;
     /**
      * The element properties for the chart.  When the aspect ratio of the provided size does not match the chart aspect ratio, the chart is scaled and centered with respect to the size in order to maintain aspect ratio. The provided transform is applied after this operation.
      */
@@ -360,15 +362,15 @@ export namespace slides_v1 {
     /**
      * The mode with which the chart is linked to the source spreadsheet. When not specified, the chart will be an image that is not linked.
      */
-    linkingMode?: string | null;
+    linkingMode?: string;
     /**
      * A user-supplied object ID.  If specified, the ID must be unique among all pages and page elements in the presentation. The ID should start with a word character [a-zA-Z0-9_] and then followed by any number of the following characters [a-zA-Z0-9_-:]. The length of the ID should not be less than 5 or greater than 50. If empty, a unique identifier will be generated.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The ID of the Google Sheets spreadsheet that contains the chart.
      */
-    spreadsheetId?: string | null;
+    spreadsheetId?: string;
   }
   /**
    * The result of creating an embedded Google Sheets chart.
@@ -377,7 +379,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the created chart.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Creates a new slide.
@@ -386,11 +388,11 @@ export namespace slides_v1 {
     /**
      * The optional zero-based index indicating where to insert the slides.  If you don&#39;t specify an index, the new slide is created at the end.
      */
-    insertionIndex?: number | null;
+    insertionIndex?: number;
     /**
      * A user-supplied object ID.  If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex `[a-zA-Z0-9_]`); remaining characters may include those as well as a hyphen or colon (matches regex `[a-zA-Z0-9_-:]`). The length of the ID must not be less than 5 or greater than 50.  If you don&#39;t specify an ID, a unique one is generated.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * An optional list of object ID mappings from the placeholder(s) on the layout to the placeholder(s) that will be created on the new slide from that specified layout. Can only be used when `slide_layout_reference` is specified.
      */
@@ -407,7 +409,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the created slide.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Creates a new table.
@@ -416,7 +418,7 @@ export namespace slides_v1 {
     /**
      * Number of columns in the table.
      */
-    columns?: number | null;
+    columns?: number;
     /**
      * The element properties for the table.  The table will be created at the provided size, subject to a minimum size. If no size is provided, the table will be automatically sized.  Table transforms must have a scale of 1 and no shear components. If no transform is provided, the table will be centered on the page.
      */
@@ -424,11 +426,11 @@ export namespace slides_v1 {
     /**
      * A user-supplied object ID.  If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex `[a-zA-Z0-9_]`); remaining characters may include those as well as a hyphen or colon (matches regex `[a-zA-Z0-9_-:]`). The length of the ID must not be less than 5 or greater than 50.  If you don&#39;t specify an ID, a unique one is generated.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * Number of rows in the table.
      */
-    rows?: number | null;
+    rows?: number;
   }
   /**
    * The result of creating a table.
@@ -437,7 +439,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the created table.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Creates a video.  NOTE: Creating a video from Google Drive requires that the requesting app have at least one of the drive, drive.readonly, or drive.file OAuth scopes.
@@ -450,15 +452,15 @@ export namespace slides_v1 {
     /**
      * The video source&#39;s unique identifier for this video.  e.g. For YouTube video https://www.youtube.com/watch?v=7U3axjORYZ0, the ID is 7U3axjORYZ0. For a Google Drive video https://drive.google.com/file/d/1xCgQLFTJi5_Xl8DgW_lcUYq5e-q6Hi5Q the ID is 1xCgQLFTJi5_Xl8DgW_lcUYq5e-q6Hi5Q.
      */
-    id?: string | null;
+    id?: string;
     /**
      * A user-supplied object ID.  If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex `[a-zA-Z0-9_]`); remaining characters may include those as well as a hyphen or colon (matches regex `[a-zA-Z0-9_-:]`). The length of the ID must not be less than 5 or greater than 50.  If you don&#39;t specify an ID, a unique one is generated.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The video source.
      */
-    source?: string | null;
+    source?: string;
   }
   /**
    * The result of creating a video.
@@ -467,7 +469,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the created video.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * The crop properties of an object enclosed in a container. For example, an Image.  The crop properties is represented by the offsets of four edges which define a crop rectangle. The offsets are measured in percentage from the corresponding edges of the object&#39;s original bounding rectangle towards inside, relative to the object&#39;s original dimensions.  - If the offset is in the interval (0, 1), the corresponding edge of crop rectangle is positioned inside of the object&#39;s original bounding rectangle. - If the offset is negative or greater than 1, the corresponding edge of crop rectangle is positioned outside of the object&#39;s original bounding rectangle. - If the left edge of the crop rectangle is on the right side of its right edge, the object will be flipped horizontally. - If the top edge of the crop rectangle is below its bottom edge, the object will be flipped vertically. - If all offsets and rotation angle is 0, the object is not cropped.  After cropping, the content in the crop rectangle will be stretched to fit its container.
@@ -476,23 +478,23 @@ export namespace slides_v1 {
     /**
      * The rotation angle of the crop window around its center, in radians. Rotation angle is applied after the offset.
      */
-    angle?: number | null;
+    angle?: number;
     /**
      * The offset specifies the bottom edge of the crop rectangle that is located above the original bounding rectangle bottom edge, relative to the object&#39;s original height.
      */
-    bottomOffset?: number | null;
+    bottomOffset?: number;
     /**
      * The offset specifies the left edge of the crop rectangle that is located to the right of the original bounding rectangle left edge, relative to the object&#39;s original width.
      */
-    leftOffset?: number | null;
+    leftOffset?: number;
     /**
      * The offset specifies the right edge of the crop rectangle that is located to the left of the original bounding rectangle right edge, relative to the object&#39;s original width.
      */
-    rightOffset?: number | null;
+    rightOffset?: number;
     /**
      * The offset specifies the top edge of the crop rectangle that is located below the original bounding rectangle top edge, relative to the object&#39;s original height.
      */
-    topOffset?: number | null;
+    topOffset?: number;
   }
   /**
    * Deletes an object, either pages or page elements, from the presentation.
@@ -501,7 +503,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the page or page element to delete.  If after a delete operation a group contains only 1 or no page elements, the group is also deleted.  If a placeholder is deleted on a layout, any empty inheriting shapes are also deleted.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Deletes bullets from all of the paragraphs that overlap with the given text index range.  The nesting level of each paragraph will be visually preserved by adding indent to the start of the corresponding paragraph.
@@ -514,7 +516,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the shape or table containing the text to delete bullets from.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The range of text to delete bullets from, based on TextElement indexes.
      */
@@ -531,7 +533,7 @@ export namespace slides_v1 {
     /**
      * The table to delete columns from.
      */
-    tableObjectId?: string | null;
+    tableObjectId?: string;
   }
   /**
    * Deletes a row from a table.
@@ -544,7 +546,7 @@ export namespace slides_v1 {
     /**
      * The table to delete rows from.
      */
-    tableObjectId?: string | null;
+    tableObjectId?: string;
   }
   /**
    * Deletes text from a shape or a table cell.
@@ -557,7 +559,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the shape or table from which the text will be deleted.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The range of text to delete, based on TextElement indexes.  There is always an implicit newline character at the end of a shape&#39;s or table cell&#39;s text that cannot be deleted. `Range.Type.ALL` will use the correct bounds, but care must be taken when specifying explicit bounds for range types `FROM_START_INDEX` and `FIXED_RANGE`. For example, if the text is &quot;ABC&quot;, followed by an implicit newline, then the maximum value is 2 for `text_range.start_index` and 3 for `text_range.end_index`.  Deleting text that crosses a paragraph boundary may result in changes to paragraph styles and lists as the two paragraphs are merged.  Ranges that include only one code unit of a surrogate pair are expanded to include both code units.
      */
@@ -570,11 +572,11 @@ export namespace slides_v1 {
     /**
      * The magnitude.
      */
-    magnitude?: number | null;
+    magnitude?: number;
     /**
      * The units for magnitude.
      */
-    unit?: string | null;
+    unit?: string;
   }
   /**
    * Duplicates a slide or page element.  When duplicating a slide, the duplicate slide will be created immediately following the specified slide. When duplicating a page element, the duplicate will be placed on the same page at the same position as the original.
@@ -583,11 +585,11 @@ export namespace slides_v1 {
     /**
      * The ID of the object to duplicate.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The object being duplicated may contain other objects, for example when duplicating a slide or a group page element. This map defines how the IDs of duplicated objects are generated: the keys are the IDs of the original objects and its values are the IDs that will be assigned to the corresponding duplicate object. The ID of the source object&#39;s duplicate may be specified in this map as well, using the same value of the `object_id` field as a key and the newly desired ID as the value.  All keys must correspond to existing IDs in the presentation. All values must be unique in the presentation and must start with an alphanumeric character or an underscore (matches regex `[a-zA-Z0-9_]`); remaining characters may include those as well as a hyphen or colon (matches regex `[a-zA-Z0-9_-:]`). The length of the new ID must not be less than 5 or greater than 50.  If any IDs of source objects are omitted from the map, a new random ID will be assigned. If the map is empty or unset, all duplicate objects will receive a new random ID.
      */
-    objectIds?: {[key: string]: string} | null;
+    objectIds?: {[key: string]: string};
   }
   /**
    * The response of duplicating an object.
@@ -596,7 +598,7 @@ export namespace slides_v1 {
     /**
      * The ID of the new duplicate object.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * A PageElement kind representing a joined collection of PageElements.
@@ -614,11 +616,11 @@ export namespace slides_v1 {
     /**
      * The object IDs of the objects to group.  Only page elements can be grouped. There should be at least two page elements on the same page that are not already in another group. Some page elements, such as videos, tables and placeholder shapes cannot be grouped.
      */
-    childrenObjectIds?: string[] | null;
+    childrenObjectIds?: string[];
     /**
      * A user-supplied object ID for the group to be created.  If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex `[a-zA-Z0-9_]`); remaining characters may include those as well as a hyphen or colon (matches regex `[a-zA-Z0-9_-:]`). The length of the ID must not be less than 5 or greater than 50.  If you don&#39;t specify an ID, a unique one is generated.
      */
-    groupObjectId?: string | null;
+    groupObjectId?: string;
   }
   /**
    * The result of grouping objects.
@@ -627,7 +629,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the created group.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * A PageElement kind representing an image.
@@ -636,7 +638,7 @@ export namespace slides_v1 {
     /**
      * An URL to an image with a default lifetime of 30 minutes. This URL is tagged with the account of the requester. Anyone with the URL effectively accesses the image as the original requester. Access to the image may be lost if the presentation&#39;s sharing settings change.
      */
-    contentUrl?: string | null;
+    contentUrl?: string;
     /**
      * The properties of the image.
      */
@@ -644,7 +646,7 @@ export namespace slides_v1 {
     /**
      * The source URL is the URL used to insert the image. The source URL can be empty.
      */
-    sourceUrl?: string | null;
+    sourceUrl?: string;
   }
   /**
    * The properties of the Image.
@@ -653,11 +655,11 @@ export namespace slides_v1 {
     /**
      * The brightness effect of the image. The value should be in the interval [-1.0, 1.0], where 0 means no effect. This property is read-only.
      */
-    brightness?: number | null;
+    brightness?: number;
     /**
      * The contrast effect of the image. The value should be in the interval [-1.0, 1.0], where 0 means no effect. This property is read-only.
      */
-    contrast?: number | null;
+    contrast?: number;
     /**
      * The crop properties of the image. If not set, the image is not cropped. This property is read-only.
      */
@@ -681,7 +683,7 @@ export namespace slides_v1 {
     /**
      * The transparency effect of the image. The value should be in the interval [0.0, 1.0], where 0 means no effect and 1 means completely transparent. This property is read-only.
      */
-    transparency?: number | null;
+    transparency?: number;
   }
   /**
    * Inserts columns into a table.  Other columns in the table will be resized to fit the new column.
@@ -694,15 +696,15 @@ export namespace slides_v1 {
     /**
      * Whether to insert new columns to the right of the reference cell location.  - `True`: insert to the right. - `False`: insert to the left.
      */
-    insertRight?: boolean | null;
+    insertRight?: boolean;
     /**
      * The number of columns to be inserted. Maximum 20 per request.
      */
-    number?: number | null;
+    number?: number;
     /**
      * The table to insert columns into.
      */
-    tableObjectId?: string | null;
+    tableObjectId?: string;
   }
   /**
    * Inserts rows into a table.
@@ -715,15 +717,15 @@ export namespace slides_v1 {
     /**
      * Whether to insert new rows below the reference cell location.  - `True`: insert below the cell. - `False`: insert above the cell.
      */
-    insertBelow?: boolean | null;
+    insertBelow?: boolean;
     /**
      * The number of rows to be inserted. Maximum 20 per request.
      */
-    number?: number | null;
+    number?: number;
     /**
      * The table to insert rows into.
      */
-    tableObjectId?: string | null;
+    tableObjectId?: string;
   }
   /**
    * Inserts text into a shape or a table cell.
@@ -736,15 +738,15 @@ export namespace slides_v1 {
     /**
      * The index where the text will be inserted, in Unicode code units, based on TextElement indexes.  The index is zero-based and is computed from the start of the string. The index may be adjusted to prevent insertions inside Unicode grapheme clusters. In these cases, the text will be inserted immediately after the grapheme cluster.
      */
-    insertionIndex?: number | null;
+    insertionIndex?: number;
     /**
      * The object ID of the shape or table where the text will be inserted.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The text to be inserted.  Inserting a newline character will implicitly create a new ParagraphMarker at that index. The paragraph style of the new paragraph will be copied from the paragraph at the current insertion index, including lists and bullets.  Text styles for inserted text will be determined automatically, generally preserving the styling of neighboring text. In most cases, the text will be added to the TextRun that exists at the insertion index.  Some control characters (U+0000-U+0008, U+000C-U+001F) and characters from the Unicode Basic Multilingual Plane Private Use Area (U+E000-U+F8FF) will be stripped out of the inserted text.
      */
-    text?: string | null;
+    text?: string;
   }
   /**
    * The user-specified ID mapping for a placeholder that will be created on a slide from a specified layout.
@@ -757,11 +759,11 @@ export namespace slides_v1 {
     /**
      * The object ID of the placeholder on a layout that will be applied to a slide.
      */
-    layoutPlaceholderObjectId?: string | null;
+    layoutPlaceholderObjectId?: string;
     /**
      * A user-supplied object ID for the placeholder identified above that to be created onto a slide.  If you specify an ID, it must be unique among all pages and page elements in the presentation. The ID must start with an alphanumeric character or an underscore (matches regex `[a-zA-Z0-9_]`); remaining characters may include those as well as a hyphen or colon (matches regex `[a-zA-Z0-9_-:]`). The length of the ID must not be less than 5 or greater than 50.  If you don&#39;t specify an ID, a unique one is generated.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * The properties of Page are only relevant for pages with page_type LAYOUT.
@@ -770,15 +772,15 @@ export namespace slides_v1 {
     /**
      * The human-readable name of the layout.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The object ID of the master that this layout is based on.
      */
-    masterObjectId?: string | null;
+    masterObjectId?: string;
     /**
      * The name of the layout.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Slide layout reference. This may reference either:  - A predefined layout - One of the layouts in the presentation.
@@ -787,11 +789,11 @@ export namespace slides_v1 {
     /**
      * Layout ID: the object ID of one of the layouts in the presentation.
      */
-    layoutId?: string | null;
+    layoutId?: string;
     /**
      * Predefined layout.
      */
-    predefinedLayout?: string | null;
+    predefinedLayout?: string;
   }
   /**
    * A PageElement kind representing a non-connector line, straight connector, curved connector, or bent connector.
@@ -800,7 +802,7 @@ export namespace slides_v1 {
     /**
      * The category of the line.  It matches the `category` specified in CreateLineRequest, and can be updated with UpdateLineCategoryRequest.
      */
-    lineCategory?: string | null;
+    lineCategory?: string;
     /**
      * The properties of the line.
      */
@@ -808,7 +810,7 @@ export namespace slides_v1 {
     /**
      * The type of the line.
      */
-    lineType?: string | null;
+    lineType?: string;
   }
   /**
    * The properties for one end of a Line connection.
@@ -817,11 +819,11 @@ export namespace slides_v1 {
     /**
      * The object ID of the connected page element.  Some page elements, such as groups, tables, and lines do not have connection sites and therefore cannot be connected to a connector line.
      */
-    connectedObjectId?: string | null;
+    connectedObjectId?: string;
     /**
      * The index of the connection site on the connected page element.  In most cases, it corresponds to the predefined connection site index from the ECMA-376 standard. More information on those connection sites can be found in the description of the &quot;cnx&quot; attribute in section 20.1.9.9 and Annex H. &quot;Predefined DrawingML Shape and Text Geometries&quot; of &quot;Office Open XML File Formats-Fundamentals and Markup Language Reference&quot;, part 1 of [ECMA-376 5th edition] (http://www.ecma-international.org/publications/standards/Ecma-376.htm).  The position of each connection site can also be viewed from Slides editor.
      */
-    connectionSiteIndex?: number | null;
+    connectionSiteIndex?: number;
   }
   /**
    * The fill of the line.
@@ -839,11 +841,11 @@ export namespace slides_v1 {
     /**
      * The dash style of the line.
      */
-    dashStyle?: string | null;
+    dashStyle?: string;
     /**
      * The style of the arrow at the end of the line.
      */
-    endArrow?: string | null;
+    endArrow?: string;
     /**
      * The connection at the end of the line. If unset, there is no connection.  Only lines with a Type indicating it is a &quot;connector&quot; can have an `end_connection`.
      */
@@ -859,7 +861,7 @@ export namespace slides_v1 {
     /**
      * The style of the arrow at the beginning of the line.
      */
-    startArrow?: string | null;
+    startArrow?: string;
     /**
      * The connection at the beginning of the line. If unset, there is no connection.  Only lines with a Type indicating it is a &quot;connector&quot; can have a `start_connection`.
      */
@@ -876,19 +878,19 @@ export namespace slides_v1 {
     /**
      * If set, indicates this is a link to the specific page in this presentation with this ID. A page with this ID may not exist.
      */
-    pageObjectId?: string | null;
+    pageObjectId?: string;
     /**
      * If set, indicates this is a link to a slide in this presentation, addressed by its position.
      */
-    relativeLink?: string | null;
+    relativeLink?: string;
     /**
      * If set, indicates this is a link to the slide at this zero-based index in the presentation. There may not be a slide at this index.
      */
-    slideIndex?: number | null;
+    slideIndex?: number;
     /**
      * If set, indicates this is a link to the external web page at this URL.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * A List describes the look and feel of bullets belonging to paragraphs associated with a list. A paragraph that is part of a list has an implicit reference to that list&#39;s ID.
@@ -897,11 +899,11 @@ export namespace slides_v1 {
     /**
      * The ID of the list.
      */
-    listId?: string | null;
+    listId?: string;
     /**
      * A map of nesting levels to the properties of bullets at the associated level. A list has at most nine levels of nesting, so the possible values for the keys of this map are 0 through 8, inclusive.
      */
-    nestingLevel?: {[key: string]: Schema$NestingLevel} | null;
+    nestingLevel?: {[key: string]: Schema$NestingLevel};
   }
   /**
    * The properties of Page that are only relevant for pages with page_type MASTER.
@@ -910,7 +912,7 @@ export namespace slides_v1 {
     /**
      * The human-readable name of the master.
      */
-    displayName?: string | null;
+    displayName?: string;
   }
   /**
    * Merges cells in a Table.
@@ -919,7 +921,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the table.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The table range specifying which cells of the table to merge.  Any text in the cells being merged will be concatenated and stored in the upper-left (&quot;head&quot;) cell of the range. If the range is non-rectangular (which can occur in some cases where the range covers cells that are already merged), a 400 bad request error is returned.
      */
@@ -941,7 +943,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the shape on this notes page that contains the speaker notes for the corresponding slide. The actual shape may not always exist on the notes page. Inserting text using this object ID will automatically create the shape. In this case, the actual shape may have different object ID. The `GetPresentation` or `GetPage` action will always return the latest object ID.
      */
-    speakerNotesObjectId?: string | null;
+    speakerNotesObjectId?: string;
   }
   /**
    * A themeable solid color value.
@@ -954,7 +956,7 @@ export namespace slides_v1 {
     /**
      * An opaque theme color.
      */
-    themeColor?: string | null;
+    themeColor?: string;
   }
   /**
    * A color that can either be fully opaque or fully transparent.
@@ -972,7 +974,7 @@ export namespace slides_v1 {
     /**
      * The dash style of the outline.
      */
-    dashStyle?: string | null;
+    dashStyle?: string;
     /**
      * The fill of the outline.
      */
@@ -980,7 +982,7 @@ export namespace slides_v1 {
     /**
      * The outline property state.  Updating the outline on a page element will implicitly update this field to `RENDERED`, unless another value is specified in the same request. To have no outline on a page element, set this field to `NOT_RENDERED`. In this case, any other outline fields set in the same request will be ignored.
      */
-    propertyState?: string | null;
+    propertyState?: string;
     /**
      * The thickness of the outline.
      */
@@ -1014,7 +1016,7 @@ export namespace slides_v1 {
     /**
      * The object ID for this page. Object IDs used by Page and PageElement share the same namespace.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The page elements rendered on the page.
      */
@@ -1026,11 +1028,11 @@ export namespace slides_v1 {
     /**
      * The type of the page.
      */
-    pageType?: string | null;
+    pageType?: string;
     /**
      * The revision ID of the presentation containing this page. Can be used in update requests to assert that the presentation revision hasn&#39;t changed since the last read operation. Only populated if the user has edit access to the presentation.  The format of the revision ID may change over time, so it should be treated opaquely. A returned revision ID is only guaranteed to be valid for 24 hours after it has been returned and cannot be shared across users. If the revision ID is unchanged between calls, then the presentation has not changed. Conversely, a changed ID (for the same presentation and user) usually means the presentation has been updated; however, a changed ID can also be due to internal factors such as ID format changes.
      */
-    revisionId?: string | null;
+    revisionId?: string;
     /**
      * Slide specific properties. Only set if page_type = SLIDE.
      */
@@ -1043,7 +1045,7 @@ export namespace slides_v1 {
     /**
      * The background fill property state.  Updating the fill on a page will implicitly update this field to `RENDERED`, unless another value is specified in the same request. To have no fill on a page, set this field to `NOT_RENDERED`. In this case, any other fill fields set in the same request will be ignored.
      */
-    propertyState?: string | null;
+    propertyState?: string;
     /**
      * Solid color fill.
      */
@@ -1060,7 +1062,7 @@ export namespace slides_v1 {
     /**
      * The description of the page element. Combined with title to display alt text.
      */
-    description?: string | null;
+    description?: string;
     /**
      * A collection of page elements joined as a single unit.
      */
@@ -1076,7 +1078,7 @@ export namespace slides_v1 {
     /**
      * The object ID for this page element. Object IDs used by google.apps.slides.v1.Page and google.apps.slides.v1.PageElement share the same namespace.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * A generic shape.
      */
@@ -1096,7 +1098,7 @@ export namespace slides_v1 {
     /**
      * The title of the page element. Combined with description to display alt text.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The transform of the page element.  The visual appearance of the page element is determined by its absolute transform. To compute the absolute transform, preconcatenate a page element&#39;s transform with the transforms of all of its parent groups. If the page element is not in a group, its absolute transform is the same as the value in this field.  The initial transform for the newly created Group is always the identity transform.
      */
@@ -1117,7 +1119,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the page where the element is located.
      */
-    pageObjectId?: string | null;
+    pageObjectId?: string;
     /**
      * The size of the element.
      */
@@ -1132,7 +1134,7 @@ export namespace slides_v1 {
    */
   export interface Schema$PageProperties {
     /**
-     * The color scheme of the page. If unset, the color scheme is inherited from a parent page. If the page has no parent, the color scheme uses a default Slides color scheme, matching the defaults in the Slides editor.  Only the concrete colors of the first 12 ThemeColorTypes are editable. In addition, only the color scheme on `Master` pages can be updated. To update the field, a color scheme containing mappings from all the first 12 ThemeColorTypes to their concrete colors must be provided. Colors for the remaining ThemeColorTypes will be ignored.
+     * The color scheme of the page. If unset, the color scheme is inherited from a parent page. If the page has no parent, the color scheme uses a default Slides color scheme. This field is read-only.
      */
     colorScheme?: Schema$ColorScheme;
     /**
@@ -1160,11 +1162,11 @@ export namespace slides_v1 {
     /**
      * The text alignment for this paragraph.
      */
-    alignment?: string | null;
+    alignment?: string;
     /**
      * The text direction of this paragraph. If unset, the value defaults to LEFT_TO_RIGHT since text direction is not inherited.
      */
-    direction?: string | null;
+    direction?: string;
     /**
      * The amount indentation for the paragraph on the side that corresponds to the end of the text, based on the current text direction. If unset, the value is inherited from the parent.
      */
@@ -1180,7 +1182,7 @@ export namespace slides_v1 {
     /**
      * The amount of space between lines, as a percentage of normal, where normal is represented as 100.0. If unset, the value is inherited from the parent.
      */
-    lineSpacing?: number | null;
+    lineSpacing?: number;
     /**
      * The amount of extra space above the paragraph. If unset, the value is inherited from the parent.
      */
@@ -1192,7 +1194,7 @@ export namespace slides_v1 {
     /**
      * The spacing mode for the paragraph.
      */
-    spacingMode?: string | null;
+    spacingMode?: string;
   }
   /**
    * The placeholder information that uniquely identifies a placeholder shape.
@@ -1201,15 +1203,15 @@ export namespace slides_v1 {
     /**
      * The index of the placeholder. If the same placeholder types are present in the same page, they would have different index values.
      */
-    index?: number | null;
+    index?: number;
     /**
      * The object ID of this shape&#39;s parent placeholder. If unset, the parent placeholder shape does not exist, so the shape does not inherit properties from any other shape.
      */
-    parentObjectId?: string | null;
+    parentObjectId?: string;
     /**
      * The type of the placeholder.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * A Google Slides presentation.
@@ -1222,7 +1224,7 @@ export namespace slides_v1 {
     /**
      * The locale of the presentation, as an IETF BCP 47 language tag.
      */
-    locale?: string | null;
+    locale?: string;
     /**
      * The slide masters in the presentation. A slide master contains all common page elements and the common properties for a set of layouts. They serve three purposes:  - Placeholder shapes on a master contain the default text styles and shape   properties of all placeholder shapes on pages that use that master. - The master page properties define the common page properties inherited by   its layouts. - Any other shapes on the master slide will appear on all slides using that   master, regardless of their layout.
      */
@@ -1238,11 +1240,11 @@ export namespace slides_v1 {
     /**
      * The ID of the presentation.
      */
-    presentationId?: string | null;
+    presentationId?: string;
     /**
      * The revision ID of the presentation. Can be used in update requests to assert that the presentation revision hasn&#39;t changed since the last read operation. Only populated if the user has edit access to the presentation.  The format of the revision ID may change over time, so it should be treated opaquely. A returned revision ID is only guaranteed to be valid for 24 hours after it has been returned and cannot be shared across users. If the revision ID is unchanged between calls, then the presentation has not changed. Conversely, a changed ID (for the same presentation and user) usually means the presentation has been updated; however, a changed ID can also be due to internal factors such as ID format changes.
      */
-    revisionId?: string | null;
+    revisionId?: string;
     /**
      * The slides in the presentation. A slide inherits properties from a slide layout.
      */
@@ -1250,7 +1252,7 @@ export namespace slides_v1 {
     /**
      * The title of the presentation.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Specifies a contiguous range of an indexed collection, such as characters in text.
@@ -1259,15 +1261,15 @@ export namespace slides_v1 {
     /**
      * The optional zero-based index of the end of the collection. Required for `FIXED_RANGE` ranges.
      */
-    endIndex?: number | null;
+    endIndex?: number;
     /**
      * The optional zero-based index of the beginning of the collection. Required for `FIXED_RANGE` and `FROM_START_INDEX` ranges.
      */
-    startIndex?: number | null;
+    startIndex?: number;
     /**
      * The type of range.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * A recolor effect applied on an image.
@@ -1276,7 +1278,7 @@ export namespace slides_v1 {
     /**
      * The name of the recolor effect.  The name is determined from the `recolor_stops` by matching the gradient against the colors in the page&#39;s current color scheme. This property is read-only.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The recolor effect is represented by a gradient, which is a list of color stops.  The colors in the gradient will replace the corresponding colors at the same position in the color palette and apply to the image. This property is read-only.
      */
@@ -1289,7 +1291,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the chart to refresh.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Replaces all shapes that match the given criteria with the provided image.  The images replacing the shapes are rectangular after being inserted into the presentation and do not take on the forms of the shapes.
@@ -1302,19 +1304,19 @@ export namespace slides_v1 {
     /**
      * The image replace method.  If you specify both a `replace_method` and an `image_replace_method`, the `image_replace_method` takes precedence.  If you do not specify a value for `image_replace_method`, but specify a value for `replace_method`, then the specified `replace_method` value is used.  If you do not specify either, then CENTER_INSIDE is used.
      */
-    imageReplaceMethod?: string | null;
+    imageReplaceMethod?: string;
     /**
      * The image URL.  The image is fetched once at insertion time and a copy is stored for display inside the presentation. Images must be less than 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format.  The provided URL can be at most 2 kB in length. The URL itself is saved with the image, and exposed via the Image.source_url field.
      */
-    imageUrl?: string | null;
+    imageUrl?: string;
     /**
      * If non-empty, limits the matches to page elements only on the given pages.  Returns a 400 bad request error if given the page object ID of a notes page or a notes master, or if a page with that object ID doesn&#39;t exist in the presentation.
      */
-    pageObjectIds?: string[] | null;
+    pageObjectIds?: string[];
     /**
      * The replace method.  &lt;b&gt;Deprecated&lt;/b&gt;: use `image_replace_method` instead.  If you specify both a `replace_method` and an `image_replace_method`, the `image_replace_method` takes precedence.
      */
-    replaceMethod?: string | null;
+    replaceMethod?: string;
   }
   /**
    * The result of replacing shapes with an image.
@@ -1323,7 +1325,7 @@ export namespace slides_v1 {
     /**
      * The number of shapes replaced with images.
      */
-    occurrencesChanged?: number | null;
+    occurrencesChanged?: number;
   }
   /**
    * Replaces all shapes that match the given criteria with the provided Google Sheets chart. The chart will be scaled and centered to fit within the bounds of the original shape.  NOTE: Replacing shapes with a chart requires at least one of the spreadsheets.readonly, spreadsheets, drive.readonly, or drive OAuth scopes.
@@ -1332,7 +1334,7 @@ export namespace slides_v1 {
     /**
      * The ID of the specific chart in the Google Sheets spreadsheet.
      */
-    chartId?: number | null;
+    chartId?: number;
     /**
      * The criteria that the shapes must match in order to be replaced. The request will replace all of the shapes that contain the given text.
      */
@@ -1340,15 +1342,15 @@ export namespace slides_v1 {
     /**
      * The mode with which the chart is linked to the source spreadsheet. When not specified, the chart will be an image that is not linked.
      */
-    linkingMode?: string | null;
+    linkingMode?: string;
     /**
      * If non-empty, limits the matches to page elements only on the given pages.  Returns a 400 bad request error if given the page object ID of a notes page or a notes master, or if a page with that object ID doesn&#39;t exist in the presentation.
      */
-    pageObjectIds?: string[] | null;
+    pageObjectIds?: string[];
     /**
      * The ID of the Google Sheets spreadsheet that contains the chart.
      */
-    spreadsheetId?: string | null;
+    spreadsheetId?: string;
   }
   /**
    * The result of replacing shapes with a Google Sheets chart.
@@ -1357,7 +1359,7 @@ export namespace slides_v1 {
     /**
      * The number of shapes replaced with charts.
      */
-    occurrencesChanged?: number | null;
+    occurrencesChanged?: number;
   }
   /**
    * Replaces all instances of text matching a criteria with replace text.
@@ -1370,11 +1372,11 @@ export namespace slides_v1 {
     /**
      * If non-empty, limits the matches to page elements only on the given pages.  Returns a 400 bad request error if given the page object ID of a notes master, or if a page with that object ID doesn&#39;t exist in the presentation.
      */
-    pageObjectIds?: string[] | null;
+    pageObjectIds?: string[];
     /**
      * The text that will replace the matched text.
      */
-    replaceText?: string | null;
+    replaceText?: string;
   }
   /**
    * The result of replacing text.
@@ -1383,7 +1385,7 @@ export namespace slides_v1 {
     /**
      * The number of occurrences changed by replacing all text.
      */
-    occurrencesChanged?: number | null;
+    occurrencesChanged?: number;
   }
   /**
    * Replaces an existing image with a new image.  Replacing an image removes some image effects from the existing image.
@@ -1392,15 +1394,15 @@ export namespace slides_v1 {
     /**
      * The ID of the existing image that will be replaced.
      */
-    imageObjectId?: string | null;
+    imageObjectId?: string;
     /**
      * The replacement method.
      */
-    imageReplaceMethod?: string | null;
+    imageReplaceMethod?: string;
     /**
-     * The image URL.  The image is fetched once at insertion time and a copy is stored for display inside the presentation. Images must be less than 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format.  The provided URL can be at most 2 kB in length. The URL itself is saved with the image, and exposed via the Image.source_url field.
+     * The URL of the new image.  The image is fetched once at insertion time and a copy is stored for display inside the presentation. Images must be less than 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format.  The provided URL can be at most 2 kB in length. The URL itself is saved with the image, and exposed via the Image.source_url field.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * A single kind of update to apply to a presentation.
@@ -1586,7 +1588,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the line to reroute.  Only a line with a category indicating it is a &quot;connector&quot; can be rerouted. The start and end connections of the line must be on different page elements.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * A single response from an update.
@@ -1648,15 +1650,15 @@ export namespace slides_v1 {
     /**
      * The blue component of the color, from 0.0 to 1.0.
      */
-    blue?: number | null;
+    blue?: number;
     /**
      * The green component of the color, from 0.0 to 1.0.
      */
-    green?: number | null;
+    green?: number;
     /**
      * The red component of the color, from 0.0 to 1.0.
      */
-    red?: number | null;
+    red?: number;
   }
   /**
    * The shadow properties of a page element.  If these fields are unset, they may be inherited from a parent placeholder if it exists. If there is no parent, the fields will default to the value used for new page elements created in the Slides editor, which may depend on the page element kind.
@@ -1665,11 +1667,11 @@ export namespace slides_v1 {
     /**
      * The alignment point of the shadow, that sets the origin for translate, scale and skew of the shadow. This property is read-only.
      */
-    alignment?: string | null;
+    alignment?: string;
     /**
      * The alpha of the shadow&#39;s color, from 0.0 to 1.0.
      */
-    alpha?: number | null;
+    alpha?: number;
     /**
      * The radius of the shadow blur. The larger the radius, the more diffuse the shadow becomes.
      */
@@ -1681,11 +1683,11 @@ export namespace slides_v1 {
     /**
      * The shadow property state.  Updating the shadow on a page element will implicitly update this field to `RENDERED`, unless another value is specified in the same request. To have no shadow on a page element, set this field to `NOT_RENDERED`. In this case, any other shadow fields set in the same request will be ignored.
      */
-    propertyState?: string | null;
+    propertyState?: string;
     /**
      * Whether the shadow should rotate with the shape. This property is read-only.
      */
-    rotateWithShape?: boolean | null;
+    rotateWithShape?: boolean;
     /**
      * Transform that encodes the translate, scale, and skew of the shadow, relative to the alignment position.
      */
@@ -1693,7 +1695,7 @@ export namespace slides_v1 {
     /**
      * The type of the shadow. This property is read-only.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * A PageElement kind representing a generic shape that does not have a more specific classification.
@@ -1710,7 +1712,7 @@ export namespace slides_v1 {
     /**
      * The type of the shape.
      */
-    shapeType?: string | null;
+    shapeType?: string;
     /**
      * The text content of the shape.
      */
@@ -1723,7 +1725,7 @@ export namespace slides_v1 {
     /**
      * The background fill property state.  Updating the fill on a shape will implicitly update this field to `RENDERED`, unless another value is specified in the same request. To have no fill on a shape, set this field to `NOT_RENDERED`. In this case, any other fill fields set in the same request will be ignored.
      */
-    propertyState?: string | null;
+    propertyState?: string;
     /**
      * Solid color fill.
      */
@@ -1736,7 +1738,7 @@ export namespace slides_v1 {
     /**
      * The alignment of the content in the shape. If unspecified, the alignment is inherited from a parent placeholder if it exists. If the shape has no parent, the default alignment matches the alignment for new shapes created in the Slides editor.
      */
-    contentAlignment?: string | null;
+    contentAlignment?: string;
     /**
      * The hyperlink destination of the shape. If unset, there is no link. Links are not inherited from parent placeholders.
      */
@@ -1761,11 +1763,11 @@ export namespace slides_v1 {
     /**
      * The ID of the specific chart in the Google Sheets spreadsheet that is embedded.
      */
-    chartId?: number | null;
+    chartId?: number;
     /**
      * The URL of an image of the embedded chart, with a default lifetime of 30 minutes. This URL is tagged with the account of the requester. Anyone with the URL effectively accesses the image as the original requester. Access to the image may be lost if the presentation&#39;s sharing settings change.
      */
-    contentUrl?: string | null;
+    contentUrl?: string;
     /**
      * The properties of the Sheets chart.
      */
@@ -1773,7 +1775,7 @@ export namespace slides_v1 {
     /**
      * The ID of the Google Sheets spreadsheet that contains the source chart.
      */
-    spreadsheetId?: string | null;
+    spreadsheetId?: string;
   }
   /**
    * The properties of the SheetsChart.
@@ -1804,11 +1806,11 @@ export namespace slides_v1 {
     /**
      * The object ID of the layout that this slide is based on. This property is read-only.
      */
-    layoutObjectId?: string | null;
+    layoutObjectId?: string;
     /**
      * The object ID of the master that this slide is based on. This property is read-only.
      */
-    masterObjectId?: string | null;
+    masterObjectId?: string;
     /**
      * The notes page that this slide is associated with. It defines the visual appearance of a notes page when printing or exporting slides with speaker notes. A notes page inherits properties from the notes master. The placeholder shape with type BODY on the notes page contains the speaker notes for this slide. The ID of this shape is identified by the speakerNotesObjectId field. The notes page is read-only except for the text content and styles of the speaker notes shape. This property is read-only.
      */
@@ -1821,7 +1823,7 @@ export namespace slides_v1 {
     /**
      * The fraction of this `color` that should be applied to the pixel. That is, the final pixel color is defined by the equation:    pixel color = alpha * (color) + (1.0 - alpha) * (background color)  This means that a value of 1.0 corresponds to a solid color, whereas a value of 0.0 corresponds to a completely transparent color.
      */
-    alpha?: number | null;
+    alpha?: number;
     /**
      * The color value of the solid fill.
      */
@@ -1834,7 +1836,7 @@ export namespace slides_v1 {
     /**
      * Reading the content_url:  An URL to a picture with a default lifetime of 30 minutes. This URL is tagged with the account of the requester. Anyone with the URL effectively accesses the picture as the original requester. Access to the picture may be lost if the presentation&#39;s sharing settings change.  Writing the content_url:  The picture is fetched once at insertion time and a copy is stored for display inside the presentation. Pictures must be less than 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format.  The provided URL can be at most 2 kB in length.
      */
-    contentUrl?: string | null;
+    contentUrl?: string;
     /**
      * The original size of the picture fill. This field is read-only.
      */
@@ -1847,11 +1849,11 @@ export namespace slides_v1 {
     /**
      * Indicates whether the search should respect case:  - `True`: the search is case sensitive. - `False`: the search is case insensitive.
      */
-    matchCase?: boolean | null;
+    matchCase?: boolean;
     /**
      * The text to search for in the shape or table.
      */
-    text?: string | null;
+    text?: string;
   }
   /**
    * A PageElement kind representing a table.
@@ -1860,7 +1862,7 @@ export namespace slides_v1 {
     /**
      * Number of columns in the table.
      */
-    columns?: number | null;
+    columns?: number;
     /**
      * Properties of horizontal cell borders.  A table&#39;s horizontal cell borders are represented as a grid. The grid has one more row than the number of rows in the table and the same number of columns as the table. For example, if the table is 3 x 3, its horizontal borders will be represented as a grid with 4 rows and 3 columns.
      */
@@ -1868,7 +1870,7 @@ export namespace slides_v1 {
     /**
      * Number of rows in the table.
      */
-    rows?: number | null;
+    rows?: number;
     /**
      * Properties of each column.
      */
@@ -1911,7 +1913,7 @@ export namespace slides_v1 {
     /**
      * The dash style of the border.
      */
-    dashStyle?: string | null;
+    dashStyle?: string;
     /**
      * The fill of the table border.
      */
@@ -1937,7 +1939,7 @@ export namespace slides_v1 {
     /**
      * Column span of the cell.
      */
-    columnSpan?: number | null;
+    columnSpan?: number;
     /**
      * The location of the cell within the table.
      */
@@ -1945,7 +1947,7 @@ export namespace slides_v1 {
     /**
      * Row span of the cell.
      */
-    rowSpan?: number | null;
+    rowSpan?: number;
     /**
      * The properties of the table cell.
      */
@@ -1962,7 +1964,7 @@ export namespace slides_v1 {
     /**
      * The background fill property state.  Updating the fill on a table cell will implicitly update this field to `RENDERED`, unless another value is specified in the same request. To have no fill on a table cell, set this field to `NOT_RENDERED`. In this case, any other fill fields set in the same request will be ignored.
      */
-    propertyState?: string | null;
+    propertyState?: string;
     /**
      * Solid color fill.
      */
@@ -1975,11 +1977,11 @@ export namespace slides_v1 {
     /**
      * The 0-based column index.
      */
-    columnIndex?: number | null;
+    columnIndex?: number;
     /**
      * The 0-based row index.
      */
-    rowIndex?: number | null;
+    rowIndex?: number;
   }
   /**
    * The properties of the TableCell.
@@ -1988,7 +1990,7 @@ export namespace slides_v1 {
     /**
      * The alignment of the content in the table cell. The default alignment matches the alignment for newly created table cells in the Slides editor.
      */
-    contentAlignment?: string | null;
+    contentAlignment?: string;
     /**
      * The background fill of the table cell. The default fill matches the fill for newly created table cells in the Slides editor.
      */
@@ -2010,7 +2012,7 @@ export namespace slides_v1 {
     /**
      * The column span of the table range.
      */
-    columnSpan?: number | null;
+    columnSpan?: number;
     /**
      * The starting location of the table range.
      */
@@ -2018,7 +2020,7 @@ export namespace slides_v1 {
     /**
      * The row span of the table range.
      */
-    rowSpan?: number | null;
+    rowSpan?: number;
   }
   /**
    * Properties and contents of each row in a table.
@@ -2053,7 +2055,7 @@ export namespace slides_v1 {
     /**
      * The bulleted lists contained in this text, keyed by list ID.
      */
-    lists?: {[key: string]: Schema$List} | null;
+    lists?: {[key: string]: Schema$List};
     /**
      * The text contents broken down into its component parts, including styling information. This property is read-only.
      */
@@ -2070,7 +2072,7 @@ export namespace slides_v1 {
     /**
      * The zero-based end index of this text element, exclusive, in Unicode code units.
      */
-    endIndex?: number | null;
+    endIndex?: number;
     /**
      * A marker representing the beginning of a new paragraph.  The `start_index` and `end_index` of this TextElement represent the range of the paragraph. Other TextElements with an index range contained inside this paragraph&#39;s range are considered to be part of this paragraph. The range of indices of two separate paragraphs will never overlap.
      */
@@ -2078,7 +2080,7 @@ export namespace slides_v1 {
     /**
      * The zero-based start index of this text element, in Unicode code units.
      */
-    startIndex?: number | null;
+    startIndex?: number;
     /**
      * A TextElement representing a run of text where all of the characters in the run have the same TextStyle.  The `start_index` and `end_index` of TextRuns will always be fully contained in the index range of a single `paragraph_marker` TextElement. In other words, a TextRun will never span multiple paragraphs.
      */
@@ -2091,7 +2093,7 @@ export namespace slides_v1 {
     /**
      * The text of this run.
      */
-    content?: string | null;
+    content?: string;
     /**
      * The styling applied to this run.
      */
@@ -2108,15 +2110,15 @@ export namespace slides_v1 {
     /**
      * The text&#39;s vertical offset from its normal position.  Text with `SUPERSCRIPT` or `SUBSCRIPT` baseline offsets is automatically rendered in a smaller font size, computed based on the `font_size` field. The `font_size` itself is not affected by changes in this field.
      */
-    baselineOffset?: string | null;
+    baselineOffset?: string;
     /**
      * Whether or not the text is rendered as bold.
      */
-    bold?: boolean | null;
+    bold?: boolean;
     /**
      * The font family of the text.  The font family can be any font from the Font menu in Slides or from [Google Fonts] (https://fonts.google.com/). If the font name is unrecognized, the text is rendered in `Arial`.  Some fonts can affect the weight of the text. If an update request specifies values for both `font_family` and `bold`, the explicitly-set `bold` value is used.
      */
-    fontFamily?: string | null;
+    fontFamily?: string;
     /**
      * The size of the text&#39;s font. When read, the `font_size` will specified in points.
      */
@@ -2128,7 +2130,7 @@ export namespace slides_v1 {
     /**
      * Whether or not the text is italicized.
      */
-    italic?: boolean | null;
+    italic?: boolean;
     /**
      * The hyperlink destination of the text. If unset, there is no link. Links are not inherited from parent text.  Changing the link in an update request causes some other changes to the text style of the range:  * When setting a link, the text foreground color will be set to   ThemeColorType.HYPERLINK and the text will   be underlined. If these fields are modified in the same   request, those values will be used instead of the link defaults. * Setting a link on a text range that overlaps with an existing link will   also update the existing link to point to the new URL. * Links are not settable on newline characters. As a result, setting a link   on a text range that crosses a paragraph boundary, such as `&quot;ABCx/123&quot;`,   will separate the newline character(s) into their own text runs. The   link will be applied separately to the runs before and after the newline. * Removing a link will update the text style of the range to match the   style of the preceding text (or the default text styles if the preceding   text is another link) unless different styles are being set in the same   request.
      */
@@ -2136,15 +2138,15 @@ export namespace slides_v1 {
     /**
      * Whether or not the text is in small capital letters.
      */
-    smallCaps?: boolean | null;
+    smallCaps?: boolean;
     /**
      * Whether or not the text is struck through.
      */
-    strikethrough?: boolean | null;
+    strikethrough?: boolean;
     /**
      * Whether or not the text is underlined.
      */
-    underline?: boolean | null;
+    underline?: boolean;
     /**
      * The font family and rendered weight of the text.  This field is an extension of `font_family` meant to support explicit font weights without breaking backwards compatibility. As such, when reading the style of a range of text, the value of `weighted_font_family#font_family` will always be equal to that of `font_family`. However, when writing, if both fields are included in the field mask (either explicitly or through the wildcard `&quot;*&quot;`), their values are reconciled as follows:  * If `font_family` is set and `weighted_font_family` is not, the value of   `font_family` is applied with weight `400` (&quot;normal&quot;). * If both fields are set, the value of `font_family` must match that of   `weighted_font_family#font_family`. If so, the font family and weight of   `weighted_font_family` is applied. Otherwise, a 400 bad request error is   returned. * If `weighted_font_family` is set and `font_family` is not, the font   family and weight of `weighted_font_family` is applied. * If neither field is set, the font family and weight of the text inherit   from the parent. Note that these properties cannot inherit separately   from each other.  If an update request specifies values for both `weighted_font_family` and `bold`, the `weighted_font_family` is applied first, then `bold`.  If `weighted_font_family#weight` is not set, it defaults to `400`.  If `weighted_font_family` is set, then `weighted_font_family#font_family` must also be set with a non-empty value. Otherwise, a 400 bad request error is returned.
      */
@@ -2161,7 +2163,7 @@ export namespace slides_v1 {
     /**
      * The type of the theme color.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * The thumbnail of a page.
@@ -2170,15 +2172,15 @@ export namespace slides_v1 {
     /**
      * The content URL of the thumbnail image.  The URL to the image has a default lifetime of 30 minutes. This URL is tagged with the account of the requester. Anyone with the URL effectively accesses the image as the original requester. Access to the image may be lost if the presentation&#39;s sharing settings change. The mime type of the thumbnail image is the same as specified in the `GetPageThumbnailRequest`.
      */
-    contentUrl?: string | null;
+    contentUrl?: string;
     /**
      * The positive height in pixels of the thumbnail image.
      */
-    height?: number | null;
+    height?: number;
     /**
      * The positive width in pixels of the thumbnail image.
      */
-    width?: number | null;
+    width?: number;
   }
   /**
    * Ungroups objects, such as groups.
@@ -2187,7 +2189,7 @@ export namespace slides_v1 {
     /**
      * The object IDs of the objects to ungroup.  Only groups that are not inside other groups can be ungrouped. All the groups should be on the same page. The group itself is deleted. The visual sizes and positions of all the children are preserved.
      */
-    objectIds?: string[] | null;
+    objectIds?: string[];
   }
   /**
    * Unmerges cells in a Table.
@@ -2196,7 +2198,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the table.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The table range specifying which cells of the table to unmerge.  All merged cells in this range will be unmerged, and cells that are already unmerged will not be affected. If the range has no merged cells, the request will do nothing. If there is text in any of the merged cells, the text will remain in the upper-left (&quot;head&quot;) cell of the resulting block of unmerged cells.
      */
@@ -2209,7 +2211,7 @@ export namespace slides_v1 {
     /**
      * The fields that should be updated.  At least one field must be specified. The root `imageProperties` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example to update the image outline color, set `fields` to `&quot;outline.outlineFill.solidFill.color&quot;`.  To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The image properties to update.
      */
@@ -2217,7 +2219,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the image the updates are applied to.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Updates the category of a line.
@@ -2226,11 +2228,11 @@ export namespace slides_v1 {
     /**
      * The line category to update to.  The exact line type is determined based on the category to update to and how it&#39;s routed to connect to other page elements.
      */
-    lineCategory?: string | null;
+    lineCategory?: string;
     /**
      * The object ID of the line the update is applied to.  Only a line with a category indicating it is a &quot;connector&quot; can be updated.  The line may be rerouted after updating its category.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Updates the properties of a Line.
@@ -2239,7 +2241,7 @@ export namespace slides_v1 {
     /**
      * The fields that should be updated.  At least one field must be specified. The root `lineProperties` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example to update the line solid fill color, set `fields` to `&quot;lineFill.solidFill.color&quot;`.  To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The line properties to update.
      */
@@ -2247,7 +2249,7 @@ export namespace slides_v1 {
     /**
      * The object ID of the line the update is applied to.
      */
-    objectId?: string | null;
+    objectId?: string;
   }
   /**
    * Updates the alt text title and/or description of a page element.
@@ -2256,15 +2258,15 @@ export namespace slides_v1 {
     /**
      * The updated alt text description of the page element. If unset the existing value will be maintained. The description is exposed to screen readers and other accessibility interfaces. Only use human readable values related to the content of the page element.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The object ID of the page element the updates are applied to.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The updated alt text title of the page element. If unset the existing value will be maintained. The title is exposed to screen readers and other accessibility interfaces. Only use human readable values related to the content of the page element.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Updates the Z-order of page elements. Z-order is an ordering of the elements on the page from back to front. The page element in the front may cover the elements that are behind it.
@@ -2273,11 +2275,11 @@ export namespace slides_v1 {
     /**
      * The Z-order operation to apply on the page elements.  When applying the operation on multiple page elements, the relative Z-orders within these page elements before the operation is maintained.
      */
-    operation?: string | null;
+    operation?: string;
     /**
      * The object IDs of the page elements to update.  All the page elements must be on the same page and must not be grouped.
      */
-    pageElementObjectIds?: string[] | null;
+    pageElementObjectIds?: string[];
   }
   /**
    * Updates the transform of a page element.  Updating the transform of a group will change the absolute transform of the page elements in that group, which can change their visual appearance. See the documentation for PageElement.transform for more details.
@@ -2286,11 +2288,11 @@ export namespace slides_v1 {
     /**
      * The apply mode of the transform update.
      */
-    applyMode?: string | null;
+    applyMode?: string;
     /**
      * The object ID of the page element to update.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The input transform matrix used to update the page element.
      */
@@ -2303,11 +2305,11 @@ export namespace slides_v1 {
     /**
      * The fields that should be updated.  At least one field must be specified. The root `pageProperties` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example to update the page background solid fill color, set `fields` to `&quot;pageBackgroundFill.solidFill.color&quot;`.  To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The object ID of the page the update is applied to.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The page properties to update.
      */
@@ -2324,11 +2326,11 @@ export namespace slides_v1 {
     /**
      * The fields that should be updated.  At least one field must be specified. The root `style` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example, to update the paragraph alignment, set `fields` to `&quot;alignment&quot;`.  To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The object ID of the shape or table with the text to be styled.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The paragraph&#39;s style.
      */
@@ -2345,11 +2347,11 @@ export namespace slides_v1 {
     /**
      * The fields that should be updated.  At least one field must be specified. The root `shapeProperties` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example to update the shape background solid fill color, set `fields` to `&quot;shapeBackgroundFill.solidFill.color&quot;`.  To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The object ID of the shape the updates are applied to.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The shape properties to update.
      */
@@ -2362,11 +2364,11 @@ export namespace slides_v1 {
     /**
      * The index where the slides should be inserted, based on the slide arrangement before the move takes place. Must be between zero and the number of slides in the presentation, inclusive.
      */
-    insertionIndex?: number | null;
+    insertionIndex?: number;
     /**
      * The IDs of the slides in the presentation that should be moved. The slides in this list must be in existing presentation order, without duplicates.
      */
-    slideObjectIds?: string[] | null;
+    slideObjectIds?: string[];
   }
   /**
    * Updates the properties of the table borders in a Table.
@@ -2375,15 +2377,15 @@ export namespace slides_v1 {
     /**
      * The border position in the table range the updates should apply to. If a border position is not specified, the updates will apply to all borders in the table range.
      */
-    borderPosition?: string | null;
+    borderPosition?: string;
     /**
      * The fields that should be updated.  At least one field must be specified. The root `tableBorderProperties` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example to update the table border solid fill color, set `fields` to `&quot;tableBorderFill.solidFill.color&quot;`.  To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The object ID of the table.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The table border properties to update.
      */
@@ -2400,11 +2402,11 @@ export namespace slides_v1 {
     /**
      * The fields that should be updated.  At least one field must be specified. The root `tableCellProperties` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example to update the table cell background solid fill color, set `fields` to `&quot;tableCellBackgroundFill.solidFill.color&quot;`.  To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The object ID of the table.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The table cell properties to update.
      */
@@ -2421,15 +2423,15 @@ export namespace slides_v1 {
     /**
      * The list of zero-based indices specifying which columns to update. If no indices are provided, all columns in the table will be updated.
      */
-    columnIndices?: number[] | null;
+    columnIndices?: number[];
     /**
      * The fields that should be updated.  At least one field must be specified. The root `tableColumnProperties` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example to update the column width, set `fields` to `&quot;column_width&quot;`.  If &#39;&quot;column_width&quot;&#39; is included in the field mask but the property is left unset, the column width will default to 406,400 EMU (32 points).
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The object ID of the table.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The table column properties to update.  If the value of `table_column_properties#column_width` in the request is less than 406,400 EMU (32 points), a 400 bad request error is returned.
      */
@@ -2442,15 +2444,15 @@ export namespace slides_v1 {
     /**
      * The fields that should be updated.  At least one field must be specified. The root `tableRowProperties` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example to update the minimum row height, set `fields` to `&quot;min_row_height&quot;`.  If &#39;&quot;min_row_height&quot;&#39; is included in the field mask but the property is left unset, the minimum row height will default to 0.
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The object ID of the table.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The list of zero-based indices specifying which rows to update. If no indices are provided, all rows in the table will be updated.
      */
-    rowIndices?: number[] | null;
+    rowIndices?: number[];
     /**
      * The table row properties to update.
      */
@@ -2467,11 +2469,11 @@ export namespace slides_v1 {
     /**
      * The fields that should be updated.  At least one field must be specified. The root `style` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example, to update the text style to bold, set `fields` to `&quot;bold&quot;`.  To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The object ID of the shape or table with the text to be styled.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The style(s) to set on the text.  If the value for a particular style matches that of the parent, that style will be set to inherit.  Certain text style changes may cause other changes meant to mirror the behavior of the Slides editor. See the documentation of TextStyle for more information.
      */
@@ -2488,11 +2490,11 @@ export namespace slides_v1 {
     /**
      * The fields that should be updated.  At least one field must be specified. The root `videoProperties` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.  For example to update the video outline color, set `fields` to `&quot;outline.outlineFill.solidFill.color&quot;`.  To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
      */
-    fields?: string | null;
+    fields?: string;
     /**
      * The object ID of the video the updates are applied to.
      */
-    objectId?: string | null;
+    objectId?: string;
     /**
      * The video properties to update.
      */
@@ -2505,15 +2507,15 @@ export namespace slides_v1 {
     /**
      * The video source&#39;s unique identifier for this video.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The video source.
      */
-    source?: string | null;
+    source?: string;
     /**
      * An URL to a video. The URL is valid as long as the source video exists and sharing settings do not change.
      */
-    url?: string | null;
+    url?: string;
     /**
      * The properties of the video.
      */
@@ -2526,15 +2528,15 @@ export namespace slides_v1 {
     /**
      * Whether to enable video autoplay when the page is displayed in present mode. Defaults to false.
      */
-    autoPlay?: boolean | null;
+    autoPlay?: boolean;
     /**
      * The time at which to end playback, measured in seconds from the beginning of the video. If set, the end time should be after the start time. If not set or if you set this to a value that exceeds the video&#39;s length, the video will be played until its end.
      */
-    end?: number | null;
+    end?: number;
     /**
      * Whether to mute the audio during video playback. Defaults to false.
      */
-    mute?: boolean | null;
+    mute?: boolean;
     /**
      * The outline of the video. The default outline matches the defaults for new videos created in the Slides editor.
      */
@@ -2542,7 +2544,7 @@ export namespace slides_v1 {
     /**
      * The time at which to start playback, measured in seconds from the beginning of the video. If set, the start time should be before the end time. If you set this to a value that exceeds the video&#39;s length in seconds, the video will be played from the last second. If not set, the video will be played from the beginning.
      */
-    start?: number | null;
+    start?: number;
   }
   /**
    * Represents a font family and weight used to style a TextRun.
@@ -2551,11 +2553,11 @@ export namespace slides_v1 {
     /**
      * The font family of the text.  The font family can be any font from the Font menu in Slides or from [Google Fonts] (https://fonts.google.com/). If the font name is unrecognized, the text is rendered in `Arial`.
      */
-    fontFamily?: string | null;
+    fontFamily?: string;
     /**
      * The rendered weight of the text. This field can have any value that is a multiple of `100` between `100` and `900`, inclusive. This range corresponds to the numerical values described in the CSS 2.1 Specification, [section 15.6](https://www.w3.org/TR/CSS21/fonts.html#font-boldness), with non-numerical values disallowed. Weights greater than or equal to `700` are considered bold, and weights less than `700`are not bold. The default value is `400` (&quot;normal&quot;).
      */
-    weight?: number | null;
+    weight?: number;
   }
   /**
    * A PageElement kind representing word art.
@@ -2564,7 +2566,7 @@ export namespace slides_v1 {
     /**
      * The text rendered as word art.
      */
-    renderedText?: string | null;
+    renderedText?: string;
   }
   /**
    * Provides control over how write requests are executed.
@@ -2573,7 +2575,7 @@ export namespace slides_v1 {
     /**
      * The revision ID of the presentation required for the write request. If specified and the `required_revision_id` doesn&#39;t exactly match the presentation&#39;s current `revision_id`, the request will not be processed and will return a 400 bad request error.
      */
-    requiredRevisionId?: string | null;
+    requiredRevisionId?: string;
   }
 
   export class Resource$Presentations {
@@ -2592,7 +2594,7 @@ export namespace slides_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.presentationId The presentation to apply the updates to.
-     * @param {().BatchUpdatePresentationRequest} params.requestBody Request body data
+     * @param {().BatchUpdatePresentationRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2674,7 +2676,7 @@ export namespace slides_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Presentation} params.requestBody Request body data
+     * @param {().Presentation} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

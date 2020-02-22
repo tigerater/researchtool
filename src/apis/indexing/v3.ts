@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -131,15 +133,15 @@ export namespace indexing_v3 {
     /**
      * Creation timestamp for this notification. Users should _not_ specify it, the field is ignored at the request time.
      */
-    notifyTime?: string | null;
+    notifyTime?: string;
     /**
      * The URL life cycle event that Google is being notified about.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The object of this notification. The URL must be owned by the publisher of this notification and, in case of `URL_UPDATED` notifications, it _must_ be crawlable by Google.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Summary of the most recent Indexing API notifications successfully received, for a given URL.
@@ -156,7 +158,7 @@ export namespace indexing_v3 {
     /**
      * URL to which this metadata refers.
      */
-    url?: string | null;
+    url?: string;
   }
 
   export class Resource$Urlnotifications {
@@ -250,7 +252,7 @@ export namespace indexing_v3 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().UrlNotification} params.requestBody Request body data
+     * @param {().UrlNotification} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

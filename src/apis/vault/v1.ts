@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -104,7 +106,6 @@ export namespace vault_v1 {
   export class Vault {
     context: APIRequestContext;
     matters: Resource$Matters;
-    operations: Resource$Operations;
 
     constructor(options: GlobalOptions, google?: GoogleConfigurable) {
       this.context = {
@@ -113,7 +114,6 @@ export namespace vault_v1 {
       };
 
       this.matters = new Resource$Matters(this.context);
-      this.operations = new Resource$Operations(this.context);
     }
   }
 
@@ -124,7 +124,7 @@ export namespace vault_v1 {
     /**
      * A set of accounts to search.
      */
-    emails?: string[] | null;
+    emails?: string[];
   }
   /**
    * A status detailing the status of each account creation, and the HeldAccount, if successful.
@@ -146,11 +146,11 @@ export namespace vault_v1 {
     /**
      * Account ids to identify which accounts to add. Only account_ids or only emails should be specified, but not both.
      */
-    accountIds?: string[] | null;
+    accountIds?: string[];
     /**
      * Emails to identify which accounts to add. Only emails or only account_ids should be specified, but not both.
      */
-    emails?: string[] | null;
+    emails?: string[];
   }
   /**
    * Response for batch create held accounts.
@@ -168,7 +168,7 @@ export namespace vault_v1 {
     /**
      * Only relevant if send_emails is true. True to CC requestor in the email message. False to not CC requestor.
      */
-    ccMe?: boolean | null;
+    ccMe?: boolean;
     /**
      * The MatterPermission to add.
      */
@@ -176,7 +176,7 @@ export namespace vault_v1 {
     /**
      * True to send notification email to the added account. False to not send notification email.
      */
-    sendEmails?: boolean | null;
+    sendEmails?: boolean;
   }
   /**
    * Close a matter by ID.
@@ -198,19 +198,19 @@ export namespace vault_v1 {
     /**
      * The cloud storage bucket name of this export file. Can be used in cloud storage JSON/XML API.
      */
-    bucketName?: string | null;
+    bucketName?: string;
     /**
      * The md5 hash of the file.
      */
-    md5Hash?: string | null;
+    md5Hash?: string;
     /**
      * The cloud storage object name of this export file. Can be used in cloud storage JSON/XML API.
      */
-    objectName?: string | null;
+    objectName?: string;
     /**
      * The size of the export file.
      */
-    size?: string | null;
+    size?: string;
   }
   /**
    * Export sink for cloud storage files.
@@ -249,24 +249,20 @@ export namespace vault_v1 {
     /**
      * Set to true to include access level information for users with &lt;a href=&quot;https://support.google.com/vault/answer/6099459#metadata&quot;&gt;indirect access&lt;/a&gt; to files.
      */
-    includeAccessInfo?: boolean | null;
+    includeAccessInfo?: boolean;
   }
   /**
    * Drive search advanced options
    */
   export interface Schema$DriveOptions {
     /**
-     * Set to true to include shared drive.
-     */
-    includeSharedDrives?: boolean | null;
-    /**
      * Set to true to include Team Drive.
      */
-    includeTeamDrives?: boolean | null;
+    includeTeamDrives?: boolean;
     /**
      * Search the versions of the Drive file as of the reference date. These timestamps are in GMT and rounded down to the given date.
      */
-    versionDate?: string | null;
+    versionDate?: string;
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -283,7 +279,7 @@ export namespace vault_v1 {
     /**
      * Output only. The time when the export was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Advanced options of the export.
      */
@@ -291,15 +287,15 @@ export namespace vault_v1 {
     /**
      * Output only. The generated export ID.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Output only. The matter ID.
      */
-    matterId?: string | null;
+    matterId?: string;
     /**
      * The export name.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The search query being exported.
      */
@@ -315,7 +311,7 @@ export namespace vault_v1 {
     /**
      * Output only. The export status.
      */
-    status?: string | null;
+    status?: string;
   }
   /**
    * Export advanced options
@@ -340,7 +336,7 @@ export namespace vault_v1 {
     /**
      * The requested export location.
      */
-    region?: string | null;
+    region?: string;
   }
   /**
    * Stats of an export.
@@ -349,15 +345,15 @@ export namespace vault_v1 {
     /**
      * The number of documents already processed by the export.
      */
-    exportedArtifactCount?: string | null;
+    exportedArtifactCount?: string;
     /**
      * The size of export in bytes.
      */
-    sizeInBytes?: string | null;
+    sizeInBytes?: string;
     /**
      * The number of documents to be exported.
      */
-    totalArtifactCount?: string | null;
+    totalArtifactCount?: string;
   }
   /**
    * The options for groups export.
@@ -366,7 +362,7 @@ export namespace vault_v1 {
     /**
      * The export format for groups export.
      */
-    exportFormat?: string | null;
+    exportFormat?: string;
   }
   /**
    * The options for hangouts chat export.
@@ -375,7 +371,7 @@ export namespace vault_v1 {
     /**
      * The export format for hangouts chat export.
      */
-    exportFormat?: string | null;
+    exportFormat?: string;
   }
   /**
    * Accounts to search
@@ -384,7 +380,7 @@ export namespace vault_v1 {
     /**
      * A set of rooms to search.
      */
-    roomId?: string[] | null;
+    roomId?: string[];
   }
   /**
    * Hangouts chat search advanced options
@@ -393,7 +389,7 @@ export namespace vault_v1 {
     /**
      * Set to true to include rooms.
      */
-    includeRooms?: boolean | null;
+    includeRooms?: boolean;
   }
   /**
    * An account being held in a particular hold. This structure is immutable. This can be either a single user or a google group, depending on the corpus.
@@ -402,36 +398,32 @@ export namespace vault_v1 {
     /**
      * The account&#39;s ID as provided by the &lt;a href=&quot;https://developers.google.com/admin-sdk/&quot;&gt;Admin SDK&lt;/a&gt;.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * The primary email address of the account. If used as an input, this takes precedence over account ID.
      */
-    email?: string | null;
+    email?: string;
     /**
      * Output only. The first name of the account holder.
      */
-    firstName?: string | null;
+    firstName?: string;
     /**
      * Output only. When the account was put on hold.
      */
-    holdTime?: string | null;
+    holdTime?: string;
     /**
      * Output only. The last name of the account holder.
      */
-    lastName?: string | null;
+    lastName?: string;
   }
   /**
    * Query options for Drive holds.
    */
   export interface Schema$HeldDriveQuery {
     /**
-     * If true, include files in shared drives in the hold.
-     */
-    includeSharedDriveFiles?: boolean | null;
-    /**
      * If true, include files in Team Drives in the hold.
      */
-    includeTeamDriveFiles?: boolean | null;
+    includeTeamDriveFiles?: boolean;
   }
   /**
    * Query options for group holds.
@@ -440,15 +432,15 @@ export namespace vault_v1 {
     /**
      * The end time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * The start time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * The search terms for the hold.
      */
-    terms?: string | null;
+    terms?: string;
   }
   /**
    * Query options for hangouts chat holds.
@@ -457,7 +449,7 @@ export namespace vault_v1 {
     /**
      * If true, include rooms the user has participated in.
      */
-    includeRooms?: boolean | null;
+    includeRooms?: boolean;
   }
   /**
    * Query options for mail holds.
@@ -466,15 +458,15 @@ export namespace vault_v1 {
     /**
      * The end time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * The start time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * The search terms for the hold.
      */
-    terms?: string | null;
+    terms?: string;
   }
   /**
    * A organizational unit being held in a particular hold. This structure is immutable.
@@ -483,11 +475,11 @@ export namespace vault_v1 {
     /**
      * When the org unit was put on hold. This property is immutable.
      */
-    holdTime?: string | null;
+    holdTime?: string;
     /**
      * The org unit&#39;s immutable ID as provided by the Admin SDK.
      */
-    orgUnitId?: string | null;
+    orgUnitId?: string;
   }
   /**
    * Represents a hold within Vault. A hold restricts purging of artifacts based on the combination of the query and accounts restrictions. A hold can be configured to either apply to an explicitly configured set of accounts, or can be applied to all members of an organizational unit.
@@ -500,15 +492,15 @@ export namespace vault_v1 {
     /**
      * The corpus to be searched.
      */
-    corpus?: string | null;
+    corpus?: string;
     /**
      * The unique immutable ID of the hold. Assigned during creation.
      */
-    holdId?: string | null;
+    holdId?: string;
     /**
      * The name of the hold.
      */
-    name?: string | null;
+    name?: string;
     /**
      * If set, the hold applies to all members of the organizational unit and accounts must be empty. This property is mutable. For groups holds, set the accounts field.
      */
@@ -520,7 +512,7 @@ export namespace vault_v1 {
     /**
      * The last time this hold was modified.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * The holds for a matter.
@@ -533,7 +525,7 @@ export namespace vault_v1 {
     /**
      * Page token to retrieve the next page of results in the list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Returns a list of held accounts for a hold.
@@ -555,7 +547,7 @@ export namespace vault_v1 {
     /**
      * Page token to retrieve the next page of results in the list. If this is empty, then there are no more holds to list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Provides the list of matters.
@@ -568,7 +560,7 @@ export namespace vault_v1 {
     /**
      * Page token to retrieve the next page of results in the list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Definition of the response for method ListSaveQuery.
@@ -577,7 +569,7 @@ export namespace vault_v1 {
     /**
      * Page token to retrieve the next page of results in the list. If this is empty, then there are no more saved queries to list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * List of output saved queries.
      */
@@ -590,11 +582,11 @@ export namespace vault_v1 {
     /**
      * The export file format.
      */
-    exportFormat?: string | null;
+    exportFormat?: string;
     /**
      * Set to true to export confidential mode content.
      */
-    showConfidentialModeContent?: boolean | null;
+    showConfidentialModeContent?: boolean;
   }
   /**
    * Mail search advanced options
@@ -603,7 +595,7 @@ export namespace vault_v1 {
     /**
      * Set to true to exclude drafts.
      */
-    excludeDrafts?: boolean | null;
+    excludeDrafts?: boolean;
   }
   /**
    * Represents a matter.
@@ -612,11 +604,11 @@ export namespace vault_v1 {
     /**
      * The description of the matter.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The matter ID which is generated by the server. Should be blank when creating a new matter.
      */
-    matterId?: string | null;
+    matterId?: string;
     /**
      * List of users and access to the matter. Currently there is no programmer defined limit on the number of permissions a matter can have.
      */
@@ -624,11 +616,11 @@ export namespace vault_v1 {
     /**
      * The name of the matter.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The state of the matter.
      */
-    state?: string | null;
+    state?: string;
   }
   /**
    * Currently each matter only has one owner, and all others are collaborators. When an account is purged, its corresponding MatterPermission resources cease to exist.
@@ -637,11 +629,11 @@ export namespace vault_v1 {
     /**
      * The account id, as provided by &lt;a href=&quot;https://developers.google.com/admin-sdk/&quot;&gt;Admin SDK&lt;/a&gt;.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * The user&#39;s role in this matter.
      */
-    role?: string | null;
+    role?: string;
   }
   /**
    * Org Unit to search
@@ -650,7 +642,7 @@ export namespace vault_v1 {
     /**
      * Org unit to search, as provided by the &lt;a href=&quot;https://developers.google.com/admin-sdk/directory/&quot;&gt;Admin SDK Directory API&lt;/a&gt;.
      */
-    orgUnitId?: string | null;
+    orgUnitId?: string;
   }
   /**
    * A query definition relevant for search &amp; export.
@@ -663,11 +655,11 @@ export namespace vault_v1 {
     /**
      * The corpus to search.
      */
-    corpus?: string | null;
+    corpus?: string;
     /**
      * The data source to search from.
      */
-    dataScope?: string | null;
+    dataScope?: string;
     /**
      * For Drive search, specify more options in this field.
      */
@@ -675,7 +667,7 @@ export namespace vault_v1 {
     /**
      * The end time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * When &#39;ROOM&#39; is chosen as search method, hangout_chats_info needs to be specified. (read-only)
      */
@@ -689,25 +681,17 @@ export namespace vault_v1 {
      */
     mailOptions?: Schema$MailOptions;
     /**
-     * The search method to use. This field is similar to the search_method field but is introduced to support shared drives. It supports all search method types. In case the search_method is TEAM_DRIVE the response of this field will be SHARED_DRIVE only.
-     */
-    method?: string | null;
-    /**
      * When &#39;ORG_UNIT&#39; is chosen as as search method, org_unit_info needs to be specified.
      */
     orgUnitInfo?: Schema$OrgUnitInfo;
     /**
      * The search method to use.
      */
-    searchMethod?: string | null;
-    /**
-     * When &#39;SHARED_DRIVE&#39; is chosen as search method, shared_drive_info needs to be specified.
-     */
-    sharedDriveInfo?: Schema$SharedDriveInfo;
+    searchMethod?: string;
     /**
      * The start time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * When &#39;TEAM_DRIVE&#39; is chosen as search method, team_drive_info needs to be specified.
      */
@@ -715,11 +699,11 @@ export namespace vault_v1 {
     /**
      * The corpus-specific &lt;a href=&quot;https://support.google.com/vault/answer/2474474&quot;&gt;search operators&lt;/a&gt; used to generate search results.
      */
-    terms?: string | null;
+    terms?: string;
     /**
      * The time zone name. It should be an IANA TZ name, such as &quot;America/Los_Angeles&quot;. For more information, see &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_tz_database_time_zones&quot;&gt;Time Zone&lt;/a&gt;.
      */
-    timeZone?: string | null;
+    timeZone?: string;
   }
   /**
    * Remove a list of accounts from a hold.
@@ -728,7 +712,7 @@ export namespace vault_v1 {
     /**
      * Account ids to identify HeldAccounts to remove.
      */
-    accountIds?: string[] | null;
+    accountIds?: string[];
   }
   /**
    * Response for batch delete held accounts.
@@ -746,7 +730,7 @@ export namespace vault_v1 {
     /**
      * The account ID.
      */
-    accountId?: string | null;
+    accountId?: string;
   }
   /**
    * Reopen a matter by ID.
@@ -768,15 +752,15 @@ export namespace vault_v1 {
     /**
      * Output only. The server generated timestamp at which saved query was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Name of the saved query.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Output only. The matter id of the associated matter. The server does not look at this field during create and always uses matter id in the URL.
      */
-    matterId?: string | null;
+    matterId?: string;
     /**
      * The underlying Query object which contains all the information of the saved query.
      */
@@ -784,33 +768,24 @@ export namespace vault_v1 {
     /**
      * A unique identifier for the saved query.
      */
-    savedQueryId?: string | null;
+    savedQueryId?: string;
   }
   /**
-   * Shared drives to search
-   */
-  export interface Schema$SharedDriveInfo {
-    /**
-     * List of Shared drive ids, as provided by &lt;a href=&quot;https://developers.google.com/drive&quot;&gt;Drive API&lt;/a&gt;.
-     */
-    sharedDriveIds?: string[] | null;
-  }
-  /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * Team Drives to search
@@ -819,7 +794,7 @@ export namespace vault_v1 {
     /**
      * List of Team Drive ids, as provided by &lt;a href=&quot;https://developers.google.com/drive&quot;&gt;Drive API&lt;/a&gt;.
      */
-    teamDriveIds?: string[] | null;
+    teamDriveIds?: string[];
   }
   /**
    * Undelete a matter by ID.
@@ -832,11 +807,11 @@ export namespace vault_v1 {
     /**
      * The displayed name of the user.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The email address of the user.
      */
-    email?: string | null;
+    email?: string;
   }
 
   export class Resource$Matters {
@@ -859,7 +834,7 @@ export namespace vault_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.matterId The matter ID.
-     * @param {().AddMatterPermissionsRequest} params.requestBody Request body data
+     * @param {().AddMatterPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -936,7 +911,7 @@ export namespace vault_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.matterId The matter ID.
-     * @param {().CloseMatterRequest} params.requestBody Request body data
+     * @param {().CloseMatterRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1009,7 +984,7 @@ export namespace vault_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Matter} params.requestBody Request body data
+     * @param {().Matter} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1294,7 +1269,7 @@ export namespace vault_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.matterId The matter ID.
-     * @param {().RemoveMatterPermissionsRequest} params.requestBody Request body data
+     * @param {().RemoveMatterPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1367,7 +1342,7 @@ export namespace vault_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.matterId The matter ID.
-     * @param {().ReopenMatterRequest} params.requestBody Request body data
+     * @param {().ReopenMatterRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1443,7 +1418,7 @@ export namespace vault_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.matterId The matter ID.
-     * @param {().UndeleteMatterRequest} params.requestBody Request body data
+     * @param {().UndeleteMatterRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1515,7 +1490,7 @@ export namespace vault_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.matterId The matter ID.
-     * @param {().Matter} params.requestBody Request body data
+     * @param {().Matter} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1753,7 +1728,7 @@ export namespace vault_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.matterId The matter ID.
-     * @param {().Export} params.requestBody Request body data
+     * @param {().Export} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2126,7 +2101,7 @@ export namespace vault_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.holdId The hold ID.
      * @param {string} params.matterId The matter ID.
-     * @param {().AddHeldAccountsRequest} params.requestBody Request body data
+     * @param {().AddHeldAccountsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2204,7 +2179,7 @@ export namespace vault_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.matterId The matter ID.
-     * @param {().Hold} params.requestBody Request body data
+     * @param {().Hold} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2502,7 +2477,7 @@ export namespace vault_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.holdId The hold ID.
      * @param {string} params.matterId The matter ID.
-     * @param {().RemoveHeldAccountsRequest} params.requestBody Request body data
+     * @param {().RemoveHeldAccountsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2585,7 +2560,7 @@ export namespace vault_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.holdId The ID of the hold.
      * @param {string} params.matterId The matter ID.
-     * @param {().Hold} params.requestBody Request body data
+     * @param {().Hold} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2807,7 +2782,7 @@ export namespace vault_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.holdId The hold ID.
      * @param {string} params.matterId The matter ID.
-     * @param {().HeldAccount} params.requestBody Request body data
+     * @param {().HeldAccount} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3096,7 +3071,7 @@ export namespace vault_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.matterId The matter id of the parent matter for which the saved query is to be created.
-     * @param {().SavedQuery} params.requestBody Request body data
+     * @param {().SavedQuery} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3456,94 +3431,5 @@ export namespace vault_v1 {
      * The pagination token as returned in the previous response. An empty token means start from the beginning.
      */
     pageToken?: string;
-  }
-
-  export class Resource$Operations {
-    context: APIRequestContext;
-    constructor(context: APIRequestContext) {
-      this.context = context;
-    }
-
-    /**
-     * vault.operations.delete
-     * @desc Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-     * @alias vault.operations.delete
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.name The name of the operation resource to be deleted.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    delete(
-      params?: Params$Resource$Operations$Delete,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$Empty>;
-    delete(
-      params: Params$Resource$Operations$Delete,
-      options: MethodOptions | BodyResponseCallback<Schema$Empty>,
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    delete(
-      params: Params$Resource$Operations$Delete,
-      callback: BodyResponseCallback<Schema$Empty>
-    ): void;
-    delete(callback: BodyResponseCallback<Schema$Empty>): void;
-    delete(
-      paramsOrCallback?:
-        | Params$Resource$Operations$Delete
-        | BodyResponseCallback<Schema$Empty>,
-      optionsOrCallback?: MethodOptions | BodyResponseCallback<Schema$Empty>,
-      callback?: BodyResponseCallback<Schema$Empty>
-    ): void | GaxiosPromise<Schema$Empty> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$Operations$Delete;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Operations$Delete;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://vault.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
-            method: 'DELETE',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['name'],
-        pathParams: ['name'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$Empty>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$Empty>(parameters);
-      }
-    }
-  }
-
-  export interface Params$Resource$Operations$Delete
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * The name of the operation resource to be deleted.
-     */
-    name?: string;
   }
 }

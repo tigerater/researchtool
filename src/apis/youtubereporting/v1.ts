@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -130,23 +132,23 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    blobGeneration?: string | null;
+    blobGeneration?: string;
     /**
      * gdata
      */
-    blobId?: string | null;
+    blobId?: string;
     /**
      * gdata
      */
-    downloadReadHandle?: string | null;
+    downloadReadHandle?: string;
     /**
      * gdata
      */
-    readToken?: string | null;
+    readToken?: string;
     /**
      * gdata
      */
-    uploadMetadataContainer?: string | null;
+    uploadMetadataContainer?: string;
   }
   /**
    * gdata
@@ -155,7 +157,7 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    blobRef?: string | null;
+    blobRef?: string;
     /**
      * gdata
      */
@@ -163,23 +165,23 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    cosmoBinaryReference?: string | null;
+    cosmoBinaryReference?: string;
     /**
      * gdata
      */
-    crc32cHash?: number | null;
+    crc32cHash?: number;
     /**
      * gdata
      */
-    inline?: string | null;
+    inline?: string;
     /**
      * gdata
      */
-    length?: string | null;
+    length?: string;
     /**
      * gdata
      */
-    md5Hash?: string | null;
+    md5Hash?: string;
     /**
      * gdata
      */
@@ -187,15 +189,15 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    path?: string | null;
+    path?: string;
     /**
      * gdata
      */
-    referenceType?: string | null;
+    referenceType?: string;
     /**
      * gdata
      */
-    sha1Hash?: string | null;
+    sha1Hash?: string;
   }
   /**
    * gdata
@@ -204,23 +206,23 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    bestGuess?: string | null;
+    bestGuess?: string;
     /**
      * gdata
      */
-    fromBytes?: string | null;
+    fromBytes?: string;
     /**
      * gdata
      */
-    fromFileName?: string | null;
+    fromFileName?: string;
     /**
      * gdata
      */
-    fromHeader?: string | null;
+    fromHeader?: string;
     /**
      * gdata
      */
-    fromUrlPath?: string | null;
+    fromUrlPath?: string;
   }
   /**
    * gdata
@@ -233,7 +235,7 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    chunkSizeBytes?: string | null;
+    chunkSizeBytes?: string;
     /**
      * gdata
      */
@@ -241,11 +243,11 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    objectSizeBytes?: string | null;
+    objectSizeBytes?: string;
     /**
      * gdata
      */
-    objectVersion?: string | null;
+    objectVersion?: string;
   }
   /**
    * gdata
@@ -271,7 +273,7 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    objectVersion?: string | null;
+    objectVersion?: string;
   }
   /**
    * gdata
@@ -280,7 +282,7 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    objectVersion?: string | null;
+    objectVersion?: string;
     /**
      * gdata
      */
@@ -293,11 +295,11 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    objectSizeBytes?: string | null;
+    objectSizeBytes?: string;
     /**
      * gdata
      */
-    objectVersion?: string | null;
+    objectVersion?: string;
   }
   /**
    * gdata
@@ -306,11 +308,11 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    allowGzipCompression?: boolean | null;
+    allowGzipCompression?: boolean;
     /**
      * gdata
      */
-    ignoreRange?: boolean | null;
+    ignoreRange?: boolean;
   }
   /**
    * gdata
@@ -319,15 +321,15 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    algorithm?: string | null;
+    algorithm?: string;
     /**
      * gdata
      */
-    bigstoreObjectRef?: string | null;
+    bigstoreObjectRef?: string;
     /**
      * gdata
      */
-    blobRef?: string | null;
+    blobRef?: string;
     /**
      * gdata
      */
@@ -339,7 +341,7 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    contentType?: string | null;
+    contentType?: string;
     /**
      * gdata
      */
@@ -347,11 +349,11 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    cosmoBinaryReference?: string | null;
+    cosmoBinaryReference?: string;
     /**
      * gdata
      */
-    crc32cHash?: number | null;
+    crc32cHash?: number;
     /**
      * gdata
      */
@@ -379,35 +381,35 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    filename?: string | null;
+    filename?: string;
     /**
      * gdata
      */
-    hash?: string | null;
+    hash?: string;
     /**
      * gdata
      */
-    hashVerified?: boolean | null;
+    hashVerified?: boolean;
     /**
      * gdata
      */
-    inline?: string | null;
+    inline?: string;
     /**
      * gdata
      */
-    isPotentialRetry?: boolean | null;
+    isPotentialRetry?: boolean;
     /**
      * gdata
      */
-    length?: string | null;
+    length?: string;
     /**
      * gdata
      */
-    md5Hash?: string | null;
+    md5Hash?: string;
     /**
      * gdata
      */
-    mediaId?: string | null;
+    mediaId?: string;
     /**
      * gdata
      */
@@ -415,27 +417,27 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    path?: string | null;
+    path?: string;
     /**
      * gdata
      */
-    referenceType?: string | null;
+    referenceType?: string;
     /**
      * gdata
      */
-    sha1Hash?: string | null;
+    sha1Hash?: string;
     /**
      * gdata
      */
-    sha256Hash?: string | null;
+    sha256Hash?: string;
     /**
      * gdata
      */
-    timestamp?: string | null;
+    timestamp?: string;
     /**
      * gdata
      */
-    token?: string | null;
+    token?: string;
   }
   /**
    * gdata
@@ -444,15 +446,15 @@ export namespace youtubereporting_v1 {
     /**
      * gdata
      */
-    bucketName?: string | null;
+    bucketName?: string;
     /**
      * gdata
      */
-    generation?: string | null;
+    generation?: string;
     /**
      * gdata
      */
-    objectName?: string | null;
+    objectName?: string;
   }
   /**
    * A job creating reports of a specific type.
@@ -461,27 +463,27 @@ export namespace youtubereporting_v1 {
     /**
      * The creation date/time of the job.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * The date/time when this job will expire/expired. After a job expired, no new reports are generated.
      */
-    expireTime?: string | null;
+    expireTime?: string;
     /**
      * The server-generated ID of the job (max. 40 characters).
      */
-    id?: string | null;
+    id?: string;
     /**
      * The name of the job (max. 100 characters).
      */
-    name?: string | null;
+    name?: string;
     /**
      * The type of reports this job creates. Corresponds to the ID of a ReportType.
      */
-    reportTypeId?: string | null;
+    reportTypeId?: string;
     /**
      * True if this a system-managed job that cannot be modified by the user; otherwise false.
      */
-    systemManaged?: boolean | null;
+    systemManaged?: boolean;
   }
   /**
    * Response message for ReportingService.ListJobs.
@@ -494,7 +496,7 @@ export namespace youtubereporting_v1 {
     /**
      * A token to retrieve next page of results. Pass this value in the ListJobsRequest.page_token field in the subsequent call to `ListJobs` method to retrieve the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for ReportingService.ListReports.
@@ -503,7 +505,7 @@ export namespace youtubereporting_v1 {
     /**
      * A token to retrieve next page of results. Pass this value in the ListReportsRequest.page_token field in the subsequent call to `ListReports` method to retrieve the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of report types.
      */
@@ -516,7 +518,7 @@ export namespace youtubereporting_v1 {
     /**
      * A token to retrieve next page of results. Pass this value in the ListReportTypesRequest.page_token field in the subsequent call to `ListReportTypes` method to retrieve the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of report types.
      */
@@ -529,31 +531,31 @@ export namespace youtubereporting_v1 {
     /**
      * The date/time when this report was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * The URL from which the report can be downloaded (max. 1000 characters).
      */
-    downloadUrl?: string | null;
+    downloadUrl?: string;
     /**
      * The end of the time period that the report instance covers. The value is exclusive.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * The server-generated ID of the report.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The date/time when the job this report belongs to will expire/expired.
      */
-    jobExpireTime?: string | null;
+    jobExpireTime?: string;
     /**
      * The ID of the job that created this report.
      */
-    jobId?: string | null;
+    jobId?: string;
     /**
      * The start of the time period that the report instance covers. The value is inclusive.
      */
-    startTime?: string | null;
+    startTime?: string;
   }
   /**
    * A report type.
@@ -562,19 +564,19 @@ export namespace youtubereporting_v1 {
     /**
      * The date/time when this report type was/will be deprecated.
      */
-    deprecateTime?: string | null;
+    deprecateTime?: string;
     /**
      * The ID of the report type (max. 100 characters).
      */
-    id?: string | null;
+    id?: string;
     /**
      * The name of the report type (max. 100 characters).
      */
-    name?: string | null;
+    name?: string;
     /**
      * True if this a system-managed report type; otherwise false. Reporting jobs for system-managed report types are created automatically and can thus not be used in the `CreateJob` method.
      */
-    systemManaged?: boolean | null;
+    systemManaged?: boolean;
   }
 
   export class Resource$Jobs {
@@ -593,7 +595,7 @@ export namespace youtubereporting_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.onBehalfOfContentOwner The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
-     * @param {().Job} params.requestBody Request body data
+     * @param {().Job} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

@@ -1,10 +1,9 @@
-// Copyright 2019 Google LLC
-//
+// Copyright 2013-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//    http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,70 +12,20 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
 import {APIEndpoint} from 'googleapis-common';
 import * as nock from 'nock';
-import {AuthPlus} from '../src/googleapis';
-import {GoogleApis, google} from '../src';
+import {GoogleApis} from '../src';
 import {Utils} from './utils';
 
 async function testHeaders(drive: APIEndpoint) {
-  const req = nock(Utils.baseUrl)
+  nock(Utils.baseUrl)
     .post('/drive/v2/files/a/comments')
-    .reply(200, function() {
-      const headers = this.req.headers;
-      // ensure that the x-goog-user-project is loaded from default credentials:
-      assert.strictEqual(headers['x-goog-user-project'][0], 'my-quota-project');
-
-      // ensure that the x-goog-api-client header is populated by
-      // googleapis-common:
-      assert.ok(
-        /gdcl\/[0-9]+\.[\w-.]+ gl-node\/[0-9]+\.[\w-.]+ auth\/[0-9]+\.[\w-.]+/.test(
-          headers['x-goog-api-client'][0]
-        )
-      );
-    });
-  const auth = getAuthClientMock();
+    .reply(200);
   const res = await drive.comments.insert({
     fileId: 'a',
     headers: {'If-None-Match': '12345'},
-    auth: await auth.getClient(),
   });
-  req.done();
-  auth.done();
   assert.strictEqual(res.config.headers['If-None-Match'], '12345');
-}
-
-// Returns an auth client that fakes loading application default credentials
-// from a fixtures directory:
-function getAuthClientMock() {
-  // mock environment variables such that default credentials are loaded.
-  const projectOriginal = process.env.GCLOUD_PROJECT;
-  process.env.GCLOUD_PROJECT = 'my-fake-project';
-  const homeOriginal = process.env.HOME;
-  process.env.HOME = './test/fixtures/';
-  const appdataOriginal = process.env.APPDATA;
-  process.env.APPDATA = './test/fixtures/.config';
-
-  // an attempt will be made to fetch access token on first request.
-  const req = nock('https://oauth2.googleapis.com')
-    .post('/token')
-    .reply(200, {});
-
-  // An "AuthPlus" client with an added "done" method for resetting mocks.
-  class AuthMock extends AuthPlus {
-    done() {
-      process.env.GCLOUD_PROJECT = projectOriginal;
-      process.env.HOME = homeOriginal;
-      process.env.APPDATA = appdataOriginal;
-      req.done();
-    }
-  }
-  const auth = new AuthMock({
-    // Scopes can be specified either as an array or as a single, space-delimited string.
-    scopes: 'https://www.googleapis.com/auth/drive',
-  });
-  return auth;
 }
 
 async function testContentType(drive: APIEndpoint) {
@@ -140,10 +89,13 @@ function testNotObjectError(oauth2: APIEndpoint, cb: (err?: Error) => void) {
   });
 }
 
-function testBackendError(blogger: APIEndpoint, cb: (err?: Error) => void) {
+function testBackendError(
+  urlshortener: APIEndpoint,
+  cb: (err?: Error) => void
+) {
   const obj = {longUrl: 'http://google.com/'};
-  blogger.posts.publish(
-    {resource: obj, blogId: 'abc123', postId: 'abc123'},
+  urlshortener.url.insert(
+    {resource: obj},
     (err: NodeJS.ErrnoException, result: {}) => {
       assert(err instanceof Error);
       assert.strictEqual(Number(err.code), 500);
@@ -159,16 +111,16 @@ describe('Transporters', () => {
   let remoteDrive: APIEndpoint;
   let localOauth2: APIEndpoint;
   let remoteOauth2: APIEndpoint;
-  let localBlogger: APIEndpoint;
-  let remoteBlogger: APIEndpoint;
+  let localUrlshortener: APIEndpoint;
+  let remoteUrlshortener: APIEndpoint;
   before(async () => {
     nock.cleanAll();
     const google = new GoogleApis();
     nock.enableNetConnect();
-    [remoteDrive, remoteOauth2, remoteBlogger] = await Promise.all([
+    [remoteDrive, remoteOauth2, remoteUrlshortener] = await Promise.all([
       Utils.loadApi(google, 'drive', 'v2'),
       Utils.loadApi(google, 'oauth2', 'v2'),
-      Utils.loadApi(google, 'blogger', 'v3'),
+      Utils.loadApi(google, 'urlshortener', 'v1'),
     ]);
     nock.disableNetConnect();
   });
@@ -179,7 +131,7 @@ describe('Transporters', () => {
     const google = new GoogleApis();
     localDrive = google.drive('v2');
     localOauth2 = google.oauth2('v2');
-    localBlogger = google.blogger('v3');
+    localUrlshortener = google.urlshortener('v1');
   });
 
   it('should add headers to the request from params', async () => {
@@ -244,12 +196,12 @@ describe('Transporters', () => {
 
   it('should return 5xx responses as errors', done => {
     const scope = nock(Utils.baseUrl)
-      .post('/blogger/v3/blogs/abc123/posts/abc123/publish')
+      .post('/urlshortener/v1/url')
       .times(2)
       .reply(500, 'There was an error!');
 
-    testBackendError(localBlogger, () => {
-      testBackendError(remoteBlogger, () => {
+    testBackendError(localUrlshortener, () => {
+      testBackendError(remoteUrlshortener, () => {
         scope.done();
         done();
       });
@@ -266,14 +218,14 @@ describe('Transporters', () => {
 
   it('should handle 5xx responses that include errors', done => {
     const scope = nock(Utils.baseUrl)
-      .post('/blogger/v3/blogs/abc123/posts/abc123/publish')
+      .post('/urlshortener/v1/url')
       .times(2)
       .reply(500, {
         error: {message: 'There was an error!'},
       });
 
-    testBackendError(localBlogger, () => {
-      testBackendError(remoteBlogger, () => {
+    testBackendError(localUrlshortener, () => {
+      testBackendError(remoteUrlshortener, () => {
         scope.done();
         done();
       });
@@ -282,7 +234,7 @@ describe('Transporters', () => {
 
   it('should handle a Backend Error', done => {
     const scope = nock(Utils.baseUrl)
-      .post('/blogger/v3/blogs/abc123/posts/abc123/publish')
+      .post('/urlshortener/v1/url')
       .times(2)
       .reply(500, {
         error: {
@@ -298,8 +250,8 @@ describe('Transporters', () => {
         },
       });
 
-    testBackendError(localBlogger, () => {
-      testBackendError(remoteBlogger, () => {
+    testBackendError(localUrlshortener, () => {
+      testBackendError(remoteUrlshortener, () => {
         scope.done();
         done();
       });

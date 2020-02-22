@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -120,12 +122,12 @@ export namespace cloudtasks_v2beta2 {
    */
   export interface Schema$AcknowledgeTaskRequest {
     /**
-     * Required. The task&#39;s current schedule time, available in the schedule_time returned by LeaseTasks response or RenewLease response. This restriction is to ensure that your worker currently holds the lease.
+     * Required.  The task&#39;s current schedule time, available in the schedule_time returned by LeaseTasks response or RenewLease response. This restriction is to ensure that your worker currently holds the lease.
      */
-    scheduleTime?: string | null;
+    scheduleTime?: string;
   }
   /**
-   * App Engine HTTP request.  The message defines the HTTP request that is sent to an App Engine app when the task is dispatched.  This proto can only be used for tasks in a queue which has app_engine_http_target set.  Using AppEngineHttpRequest requires [`appengine.applications.get`](https://cloud.google.com/appengine/docs/admin-api/access-control) Google IAM permission for the project and the following scope:  `https://www.googleapis.com/auth/cloud-platform`  The task will be delivered to the App Engine app which belongs to the same project as the queue. For more information, see [How Requests are Routed](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed) and how routing is affected by [dispatch files](https://cloud.google.com/appengine/docs/python/config/dispatchref). Traffic is encrypted during transport and never leaves Google datacenters. Because this traffic is carried over a communication mechanism internal to Google, you cannot explicitly set the protocol (for example, HTTP or HTTPS). The request to the handler, however, will appear to have used the HTTP protocol.  The AppEngineRouting used to construct the URL that the task is delivered to can be set at the queue-level or task-level:  * If set,    app_engine_routing_override    is used for all tasks in the queue, no matter what the setting    is for the    task-level app_engine_routing.   The `url` that the task will be sent to is:  * `url =` host `+`   relative_url  Tasks can be dispatched to secure app handlers, unsecure app handlers, and URIs restricted with [`login: admin`](https://cloud.google.com/appengine/docs/standard/python/config/appref). Because tasks are not run as any user, they cannot be dispatched to URIs restricted with [`login: required`](https://cloud.google.com/appengine/docs/standard/python/config/appref) Task dispatches also do not follow redirects.  The task attempt has succeeded if the app&#39;s request handler returns an HTTP response code in the range [`200` - `299`]. The task attempt has failed if the app&#39;s handler returns a non-2xx response code or Cloud Tasks does not receive response before the deadline. Failed tasks will be retried according to the retry configuration. `503` (Service Unavailable) is considered an App Engine system error instead of an application error and will cause Cloud Tasks&#39; traffic congestion control to temporarily throttle the queue&#39;s dispatches. Unlike other types of task targets, a `429` (Too Many Requests) response from an app handler does not cause traffic congestion control to throttle the queue.
+   * App Engine HTTP request.  The message defines the HTTP request that is sent to an App Engine app when the task is dispatched.  This proto can only be used for tasks in a queue which has app_engine_http_target set.  Using AppEngineHttpRequest requires [`appengine.applications.get`](https://cloud.google.com/appengine/docs/admin-api/access-control) Google IAM permission for the project and the following scope:  `https://www.googleapis.com/auth/cloud-platform`  The task will be delivered to the App Engine app which belongs to the same project as the queue. For more information, see [How Requests are Routed](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed) and how routing is affected by [dispatch files](https://cloud.google.com/appengine/docs/python/config/dispatchref). Traffic is encrypted during transport and never leaves Google datacenters. Because this traffic is carried over a communication mechanism internal to Google, you cannot explicitly set the protocol (for example, HTTP or HTTPS). The request to the handler, however, will appear to have used the HTTP protocol.  The AppEngineRouting used to construct the URL that the task is delivered to can be set at the queue-level or task-level:  * If set,    app_engine_routing_override    is used for all tasks in the queue, no matter what the setting    is for the    task-level app_engine_routing.   The `url` that the task will be sent to is:  * `url =` host `+`   relative_url  Tasks can be dispatched to secure app handlers, unsecure app handlers, and URIs restricted with [`login: admin`](https://cloud.google.com/appengine/docs/standard/python/config/appref). Because tasks are not run as any user, they cannot be dispatched to URIs restricted with [`login: required`](https://cloud.google.com/appengine/docs/standard/python/config/appref) Task dispatches also do not follow redirects.  The task attempt has succeeded if the app&#39;s request handler returns an HTTP response code in the range [`200` - `299`]. `503` is considered an App Engine system error instead of an application error. Requests returning error `503` will be retried regardless of retry configuration and not counted against retry counts. Any other response code or a failure to receive a response before the deadline is a failed attempt.
    */
   export interface Schema$AppEngineHttpRequest {
     /**
@@ -135,19 +137,19 @@ export namespace cloudtasks_v2beta2 {
     /**
      * HTTP request headers.  This map contains the header field names and values. Headers can be set when the task is created. Repeated headers are not supported but a header value can contain commas.  Cloud Tasks sets some headers to default values:  * `User-Agent`: By default, this header is   `&quot;AppEngine-Google; (+http://code.google.com/appengine)&quot;`.   This header can be modified, but Cloud Tasks will append   `&quot;AppEngine-Google; (+http://code.google.com/appengine)&quot;` to the   modified `User-Agent`.  If the task has a payload, Cloud Tasks sets the following headers:  * `Content-Type`: By default, the `Content-Type` header is set to   `&quot;application/octet-stream&quot;`. The default can be overridden by explicitly   setting `Content-Type` to a particular media type when the   task is created.   For example, `Content-Type` can be set to `&quot;application/json&quot;`. * `Content-Length`: This is computed by Cloud Tasks. This value is   output only.   It cannot be changed.  The headers below cannot be set or overridden:  * `Host` * `X-Google-*` * `X-AppEngine-*`  In addition, Cloud Tasks sets some headers when the task is dispatched, such as headers containing information about the task; see [request headers](https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers). These headers are set only when the task is dispatched, so they are not visible when the task is returned in a Cloud Tasks response.  Although there is no specific limit for the maximum number of headers or the size, there is a limit on the maximum size of the Task. For more information, see the CreateTask documentation.
      */
-    headers?: {[key: string]: string} | null;
+    headers?: {[key: string]: string};
     /**
      * The HTTP method to use for the request. The default is POST.  The app&#39;s request handler for the task&#39;s target URL must be able to handle HTTP requests with this http_method, otherwise the task attempt will fail with error code 405 (Method Not Allowed). See [Writing a push task request handler](https://cloud.google.com/appengine/docs/java/taskqueue/push/creating-handlers#writing_a_push_task_request_handler) and the documentation for the request handlers in the language your app is written in e.g. [Python Request Handler](https://cloud.google.com/appengine/docs/python/tools/webapp/requesthandlerclass).
      */
-    httpMethod?: string | null;
+    httpMethod?: string;
     /**
      * Payload.  The payload will be sent as the HTTP message body. A message body, and thus a payload, is allowed only if the HTTP method is POST or PUT. It is an error to set a data payload on a task with an incompatible HttpMethod.
      */
-    payload?: string | null;
+    payload?: string;
     /**
      * The relative URL.  The relative URL must begin with &quot;/&quot; and must be a valid HTTP relative URL. It can contain a path and query string arguments. If the relative URL is empty, then the root path &quot;/&quot; will be used. No spaces are allowed, and the maximum length allowed is 2083 characters.
      */
-    relativeUrl?: string | null;
+    relativeUrl?: string;
   }
   /**
    * App Engine HTTP target.  The task will be delivered to the App Engine application hostname specified by its AppEngineHttpTarget and AppEngineHttpRequest. The documentation for AppEngineHttpRequest explains how the task&#39;s host URL is constructed.  Using AppEngineHttpTarget requires [`appengine.applications.get`](https://cloud.google.com/appengine/docs/admin-api/access-control) Google IAM permission for the project and the following scope:  `https://www.googleapis.com/auth/cloud-platform`
@@ -165,19 +167,19 @@ export namespace cloudtasks_v2beta2 {
     /**
      * Output only. The host that the task is sent to.  For more information, see [How Requests are Routed](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed).  The host is constructed as:   * `host = [application_domain_name]`&lt;/br&gt;   `| [service] + &#39;.&#39; + [application_domain_name]`&lt;/br&gt;   `| [version] + &#39;.&#39; + [application_domain_name]`&lt;/br&gt;   `| [version_dot_service]+ &#39;.&#39; + [application_domain_name]`&lt;/br&gt;   `| [instance] + &#39;.&#39; + [application_domain_name]`&lt;/br&gt;   `| [instance_dot_service] + &#39;.&#39; + [application_domain_name]`&lt;/br&gt;   `| [instance_dot_version] + &#39;.&#39; + [application_domain_name]`&lt;/br&gt;   `| [instance_dot_version_dot_service] + &#39;.&#39; + [application_domain_name]`  * `application_domain_name` = The domain name of the app, for   example &lt;app-id&gt;.appspot.com, which is associated with the   queue&#39;s project ID. Some tasks which were created using the App Engine   SDK use a custom domain name.  * `service =` service  * `version =` version  * `version_dot_service =`   version `+ &#39;.&#39; +`   service  * `instance =` instance  * `instance_dot_service =`   instance `+ &#39;.&#39; +`   service  * `instance_dot_version =`   instance `+ &#39;.&#39; +`   version  * `instance_dot_version_dot_service =`   instance `+ &#39;.&#39; +`   version `+ &#39;.&#39; +`   service  If service is empty, then the task will be sent to the service which is the default service when the task is attempted.  If version is empty, then the task will be sent to the version which is the default version when the task is attempted.  If instance is empty, then the task will be sent to an instance which is available when the task is attempted.  If service, version, or instance is invalid, then the task will be sent to the default version of the default service when the task is attempted.
      */
-    host?: string | null;
+    host?: string;
     /**
      * App instance.  By default, the task is sent to an instance which is available when the task is attempted.  Requests can only be sent to a specific instance if [manual scaling is used in App Engine Standard](https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine?hl=en_US#scaling_types_and_instance_classes). App Engine Flex does not support instances. For more information, see [App Engine Standard request routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed) and [App Engine Flex request routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
      */
-    instance?: string | null;
+    instance?: string;
     /**
      * App service.  By default, the task is sent to the service which is the default service when the task is attempted.  For some queues or tasks which were created using the App Engine Task Queue API, host is not parsable into service, version, and instance. For example, some tasks which were created using the App Engine SDK use a custom domain name; custom domains are not parsed by Cloud Tasks. If host is not parsable, then service, version, and instance are the empty string.
      */
-    service?: string | null;
+    service?: string;
     /**
      * App version.  By default, the task is sent to the version which is the default version when the task is attempted.  For some queues or tasks which were created using the App Engine Task Queue API, host is not parsable into service, version, and instance. For example, some tasks which were created using the App Engine SDK use a custom domain name; custom domains are not parsed by Cloud Tasks. If host is not parsable, then service, version, and instance are the empty string.
      */
-    version?: string | null;
+    version?: string;
   }
   /**
    * The status of a task attempt.
@@ -186,7 +188,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * Output only. The time that this attempt was dispatched.  `dispatch_time` will be truncated to the nearest microsecond.
      */
-    dispatchTime?: string | null;
+    dispatchTime?: string;
     /**
      * Output only. The response from the target for this attempt.  If the task has not been attempted or the task is currently running then the response status is unset.
      */
@@ -194,11 +196,11 @@ export namespace cloudtasks_v2beta2 {
     /**
      * Output only. The time that this attempt response was received.  `response_time` will be truncated to the nearest microsecond.
      */
-    responseTime?: string | null;
+    responseTime?: string;
     /**
      * Output only. The time that this attempt was scheduled.  `schedule_time` will be truncated to the nearest microsecond.
      */
-    scheduleTime?: string | null;
+    scheduleTime?: string;
   }
   /**
    * Associates `members` with a `role`.
@@ -209,13 +211,13 @@ export namespace cloudtasks_v2beta2 {
      */
     condition?: Schema$Expr;
     /**
-     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@example.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.  * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a user that has been recently deleted. For    example, `alice@example.com?uid=123456789012345678901`. If the user is    recovered, this value reverts to `user:{emailid}` and the recovered user    retains the role in the binding.  * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus    unique identifier) representing a service account that has been recently    deleted. For example,    `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`.    If the service account is undeleted, this value reverts to    `serviceAccount:{emailid}` and the undeleted service account retains the    role in the binding.  * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a Google group that has been recently    deleted. For example, `admins@example.com?uid=123456789012345678901`. If    the group is recovered, this value reverts to `group:{emailid}` and the    recovered group retains the role in the binding.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@gmail.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
      */
-    members?: string[] | null;
+    members?: string[];
     /**
      * Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
      */
-    role?: string | null;
+    role?: string;
   }
   /**
    * Request message for canceling a lease using CancelLease.
@@ -224,11 +226,11 @@ export namespace cloudtasks_v2beta2 {
     /**
      * The response_view specifies which subset of the Task will be returned.  By default response_view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains.  Authorization for FULL requires `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the Task resource.
      */
-    responseView?: string | null;
+    responseView?: string;
     /**
-     * Required. The task&#39;s current schedule time, available in the schedule_time returned by LeaseTasks response or RenewLease response. This restriction is to ensure that your worker currently holds the lease.
+     * Required.  The task&#39;s current schedule time, available in the schedule_time returned by LeaseTasks response or RenewLease response. This restriction is to ensure that your worker currently holds the lease.
      */
-    scheduleTime?: string | null;
+    scheduleTime?: string;
   }
   /**
    * Request message for CreateTask.
@@ -237,9 +239,9 @@ export namespace cloudtasks_v2beta2 {
     /**
      * The response_view specifies which subset of the Task will be returned.  By default response_view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains.  Authorization for FULL requires `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the Task resource.
      */
-    responseView?: string | null;
+    responseView?: string;
     /**
-     * Required. The task to add.  Task names have the following format: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`. The user can optionally specify a task name. If a name is not specified then the system will generate a random unique task id, which will be set in the task returned in the response.  If schedule_time is not set or is in the past then Cloud Tasks will set it to the current time.  Task De-duplication:  Explicitly specifying a task ID enables task de-duplication.  If a task&#39;s ID is identical to that of an existing task or a task that was deleted or completed recently then the call will fail with ALREADY_EXISTS. If the task&#39;s queue was created using Cloud Tasks, then another task with the same name can&#39;t be created for ~1hour after the original task was deleted or completed. If the task&#39;s queue was created using queue.yaml or queue.xml, then another task with the same name can&#39;t be created for ~9days after the original task was deleted or completed.  Because there is an extra lookup cost to identify duplicate task names, these CreateTask calls have significantly increased latency. Using hashed strings for the task id or for the prefix of the task id is recommended. Choosing task ids that are sequential or have sequential prefixes, for example using a timestamp, causes an increase in latency and error rates in all task commands. The infrastructure relies on an approximately uniform distribution of task ids to store and serve tasks efficiently.
+     * Required.  The task to add.  Task names have the following format: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`. The user can optionally specify a task name. If a name is not specified then the system will generate a random unique task id, which will be set in the task returned in the response.  If schedule_time is not set or is in the past then Cloud Tasks will set it to the current time.  Task De-duplication:  Explicitly specifying a task ID enables task de-duplication.  If a task&#39;s ID is identical to that of an existing task or a task that was deleted or completed recently then the call will fail with ALREADY_EXISTS. If the task&#39;s queue was created using Cloud Tasks, then another task with the same name can&#39;t be created for ~1hour after the original task was deleted or completed. If the task&#39;s queue was created using queue.yaml or queue.xml, then another task with the same name can&#39;t be created for ~9days after the original task was deleted or completed.  Because there is an extra lookup cost to identify duplicate task names, these CreateTask calls have significantly increased latency. Using hashed strings for the task id or for the prefix of the task id is recommended. Choosing task ids that are sequential or have sequential prefixes, for example using a timestamp, causes an increase in latency and error rates in all task commands. The infrastructure relies on an approximately uniform distribution of task ids to store and serve tasks efficiently.
      */
     task?: Schema$Task;
   }
@@ -254,38 +256,24 @@ export namespace cloudtasks_v2beta2 {
     /**
      * An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Textual representation of an expression in Common Expression Language syntax.  The application context of the containing message determines which well-known feature set of CEL is supported.
      */
-    expression?: string | null;
+    expression?: string;
     /**
      * An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
      */
-    location?: string | null;
+    location?: string;
     /**
      * An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Request message for `GetIamPolicy` method.
    */
-  export interface Schema$GetIamPolicyRequest {
-    /**
-     * OPTIONAL: A `GetPolicyOptions` object for specifying options to `GetIamPolicy`. This field is only used by Cloud IAM.
-     */
-    options?: Schema$GetPolicyOptions;
-  }
-  /**
-   * Encapsulates settings provided to GetIamPolicy.
-   */
-  export interface Schema$GetPolicyOptions {
-    /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    requestedPolicyVersion?: number | null;
-  }
+  export interface Schema$GetIamPolicyRequest {}
   /**
    * Request message for leasing tasks using LeaseTasks.
    */
@@ -293,19 +281,19 @@ export namespace cloudtasks_v2beta2 {
     /**
      * `filter` can be used to specify a subset of tasks to lease.  When `filter` is set to `tag=&lt;my-tag&gt;` then the response will contain only tasks whose tag is equal to `&lt;my-tag&gt;`. `&lt;my-tag&gt;` must be less than 500 characters.  When `filter` is set to `tag_function=oldest_tag()`, only tasks which have the same tag as the task with the oldest schedule_time will be returned.  Grammar Syntax:  * `filter = &quot;tag=&quot; tag | &quot;tag_function=&quot; function`  * `tag = string`  * `function = &quot;oldest_tag()&quot;`  The `oldest_tag()` function returns tasks which have the same tag as the oldest task (ordered by schedule time).  SDK compatibility: Although the SDK allows tags to be either string or [bytes](https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-), only UTF-8 encoded tags can be used in Cloud Tasks. Tag which aren&#39;t UTF-8 encoded can&#39;t be used in the filter and the task&#39;s tag will be displayed as empty in Cloud Tasks.
      */
-    filter?: string | null;
+    filter?: string;
     /**
-     * Required. The duration of the lease.  Each task returned in the response will have its schedule_time set to the current time plus the `lease_duration`. The task is leased until its schedule_time; thus, the task will not be returned to another LeaseTasks call before its schedule_time.   After the worker has successfully finished the work associated with the task, the worker must call via AcknowledgeTask before the schedule_time. Otherwise the task will be returned to a later LeaseTasks call so that another worker can retry it.  The maximum lease duration is 1 week. `lease_duration` will be truncated to the nearest second.
+     *  After the worker has successfully finished the work associated with the task, the worker must call via AcknowledgeTask before the schedule_time. Otherwise the task will be returned to a later LeaseTasks call so that another worker can retry it.  The maximum lease duration is 1 week. `lease_duration` will be truncated to the nearest second.
      */
-    leaseDuration?: string | null;
+    leaseDuration?: string;
     /**
      * The maximum number of tasks to lease.  The system will make a best effort to return as close to as `max_tasks` as possible.  The largest that `max_tasks` can be is 1000.  The maximum total size of a lease tasks response is 32 MB. If the sum of all task sizes requested reaches this limit, fewer tasks than requested are returned.
      */
-    maxTasks?: number | null;
+    maxTasks?: number;
     /**
      * The response_view specifies which subset of the Task will be returned.  By default response_view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains.  Authorization for FULL requires `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the Task resource.
      */
-    responseView?: string | null;
+    responseView?: string;
   }
   /**
    * Response message for leasing tasks using LeaseTasks.
@@ -327,7 +315,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * The standard List next-page token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for ListQueues.
@@ -336,7 +324,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * A token to retrieve next page of results.  To return the next page of results, call ListQueues with this value as the page_token.  If the next_page_token is empty, there are no more results.  The page token is valid for only 2 hours.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of queues.
      */
@@ -349,7 +337,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * A token to retrieve next page of results.  To return the next page of results, call ListTasks with this value as the page_token.  If the next_page_token is empty, there are no more results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of tasks.
      */
@@ -362,44 +350,44 @@ export namespace cloudtasks_v2beta2 {
     /**
      * The friendly name for this location, typically a nearby city name. For example, &quot;Tokyo&quot;.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Cross-service attributes for the location. For example      {&quot;cloud.googleapis.com/region&quot;: &quot;us-east1&quot;}
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * The canonical id for this location. For example: `&quot;us-east1&quot;`.
      */
-    locationId?: string | null;
+    locationId?: string;
     /**
      * Service-specific metadata. For example the available capacity at the given location.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * Resource name for the location, which may vary between implementations. For example: `&quot;projects/example-project/locations/us-east1&quot;`
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Request message for PauseQueue.
    */
   export interface Schema$PauseQueueRequest {}
   /**
-   * An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources.   A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role.  Optionally, a `binding` can specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both.  **JSON example:**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationAdmin&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-project-id@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationViewer&quot;,           &quot;members&quot;: [&quot;user:eve@example.com&quot;],           &quot;condition&quot;: {             &quot;title&quot;: &quot;expirable access&quot;,             &quot;description&quot;: &quot;Does not grant access after Sep 2020&quot;,             &quot;expression&quot;: &quot;request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)&quot;,           }         }       ],       &quot;etag&quot;: &quot;BwWWja0YfJA=&quot;,       &quot;version&quot;: 3     }  **YAML example:**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-project-id@appspot.gserviceaccount.com       role: roles/resourcemanager.organizationAdmin     - members:       - user:eve@example.com       role: roles/resourcemanager.organizationViewer       condition:         title: expirable access         description: Does not grant access after Sep 2020         expression: request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)     - etag: BwWWja0YfJA=     - version: 3  For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).
+   * Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.   A `Policy` consists of a list of `bindings`. A `binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.  **JSON Example**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/owner&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-other-app@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/viewer&quot;,           &quot;members&quot;: [&quot;user:sean@example.com&quot;]         }       ]     }  **YAML Example**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-other-app@appspot.gserviceaccount.com       role: roles/owner     - members:       - user:sean@example.com       role: roles/viewer   For a description of IAM and its features, see the [IAM developer&#39;s guide](https://cloud.google.com/iam/docs).
    */
   export interface Schema$Policy {
     /**
-     * Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
+     * Associates a list of `members` to a `role`. `bindings` with no members will result in an error.
      */
     bindings?: Schema$Binding[];
     /**
-     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.
+     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
      */
-    etag?: string | null;
+    etag?: string;
     /**
-     * Specifies the format of the policy.  Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected.  Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations:  * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy   that includes conditions  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.  If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset.
+     * Deprecated.
      */
-    version?: number | null;
+    version?: number;
   }
   /**
    * The pull message contains data that can be used by the caller of LeaseTasks to process the task.  This proto can only be used for tasks in a queue which has pull_target set.
@@ -408,11 +396,11 @@ export namespace cloudtasks_v2beta2 {
     /**
      * A data payload consumed by the worker to execute the task.
      */
-    payload?: string | null;
+    payload?: string;
     /**
      * The task&#39;s tag.  Tags allow similar tasks to be processed in a batch. If you label tasks with a tag, your worker can lease tasks with the same tag using filter. For example, if you want to aggregate the events associated with a specific user once a day, you could tag tasks with the user ID.  The task&#39;s tag can only be set when the task is created.  The tag must be less than 500 characters.  SDK compatibility: Although the SDK allows tags to be either string or [bytes](https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-), only UTF-8 encoded tags can be used in Cloud Tasks. If a tag isn&#39;t UTF-8 encoded, the tag will be empty when the task is returned by Cloud Tasks.
      */
-    tag?: string | null;
+    tag?: string;
   }
   /**
    * Pull target.
@@ -433,7 +421,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * Caller-specified and required in CreateQueue, after which it becomes output only.  The queue name.  The queue name must have the following format: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`  * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),    hyphens (-), colons (:), or periods (.).    For more information, see    [Identifying    projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) * `LOCATION_ID` is the canonical ID for the queue&#39;s location.    The list of available locations can be obtained by calling    ListLocations.    For more information, see https://cloud.google.com/about/locations/. * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or   hyphens (-). The maximum length is 100 characters.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Pull target.  A pull queue is a queue that has a PullTarget.
      */
@@ -441,7 +429,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * Output only. The last time this queue was purged.  All tasks that were created before this time were purged.  A queue can be purged using PurgeQueue, the [App Engine Task Queue SDK, or the Cloud Console](https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue).  Purge time will be truncated to the nearest microsecond. Purge time will be unset if the queue has never been purged.
      */
-    purgeTime?: string | null;
+    purgeTime?: string;
     /**
      * Rate limits for task dispatches.  rate_limits and retry_config are related because they both control task attempts however they control how tasks are attempted in different ways:  * rate_limits controls the total rate of   dispatches from a queue (i.e. all traffic dispatched from the   queue, regardless of whether the dispatch is from a first   attempt or a retry). * retry_config controls what happens to   particular a task after its first attempt fails. That is,   retry_config controls task retries (the   second attempt, third attempt, etc).
      */
@@ -453,7 +441,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * Output only. The state of the queue.  `state` can only be changed by called PauseQueue, ResumeQueue, or uploading [queue.yaml/xml](https://cloud.google.com/appengine/docs/python/config/queueref). UpdateQueue cannot be used to change `state`.
      */
-    state?: string | null;
+    state?: string;
   }
   /**
    * Rate limits.  This message determines the maximum rate that tasks can be dispatched by a queue, regardless of whether the dispatch is a first task attempt or a retry.  Note: The debugging command, RunTask, will run a task even if the queue has reached its RateLimits.
@@ -462,32 +450,32 @@ export namespace cloudtasks_v2beta2 {
     /**
      * Output only. The max burst size.  Max burst size limits how fast tasks in queue are processed when many tasks are in the queue and the rate is high. This field allows the queue to have a high rate so processing starts shortly after a task is enqueued, but still limits resource usage when many tasks are enqueued in a short period of time.  The [token bucket](https://wikipedia.org/wiki/Token_Bucket) algorithm is used to control the rate of task dispatches. Each queue has a token bucket that holds tokens, up to the maximum specified by `max_burst_size`. Each time a task is dispatched, a token is removed from the bucket. Tasks will be dispatched until the queue&#39;s bucket runs out of tokens. The bucket will be continuously refilled with new tokens based on max_tasks_dispatched_per_second.  Cloud Tasks will pick the value of `max_burst_size` based on the value of max_tasks_dispatched_per_second.  For App Engine queues that were created or updated using `queue.yaml/xml`, `max_burst_size` is equal to [bucket_size](https://cloud.google.com/appengine/docs/standard/python/config/queueref#bucket_size). Since `max_burst_size` is output only, if UpdateQueue is called on a queue created by `queue.yaml/xml`, `max_burst_size` will be reset based on the value of max_tasks_dispatched_per_second, regardless of whether max_tasks_dispatched_per_second is updated.
      */
-    maxBurstSize?: number | null;
+    maxBurstSize?: number;
     /**
      * The maximum number of concurrent tasks that Cloud Tasks allows to be dispatched for this queue. After this threshold has been reached, Cloud Tasks stops dispatching tasks until the number of concurrent requests decreases.  If unspecified when the queue is created, Cloud Tasks will pick the default.   The maximum allowed value is 5,000.  This field is output only for pull queues and always -1, which indicates no limit. No other queue types can have `max_concurrent_tasks` set to -1.   This field has the same meaning as [max_concurrent_requests in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#max_concurrent_requests).
      */
-    maxConcurrentTasks?: number | null;
+    maxConcurrentTasks?: number;
     /**
      * The maximum rate at which tasks are dispatched from this queue.  If unspecified when the queue is created, Cloud Tasks will pick the default.  * For App Engine queues, the maximum allowed value   is 500. * This field is output only   for pull queues. In addition to the   `max_tasks_dispatched_per_second` limit, a maximum of 10 QPS of   LeaseTasks requests are allowed per pull queue.   This field has the same meaning as [rate in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#rate).
      */
-    maxTasksDispatchedPerSecond?: number | null;
+    maxTasksDispatchedPerSecond?: number;
   }
   /**
    * Request message for renewing a lease using RenewLease.
    */
   export interface Schema$RenewLeaseRequest {
     /**
-     * Required. The desired new lease duration, starting from now.   The maximum lease duration is 1 week. `lease_duration` will be truncated to the nearest second.
+     * Required.  The desired new lease duration, starting from now.   The maximum lease duration is 1 week. `lease_duration` will be truncated to the nearest second.
      */
-    leaseDuration?: string | null;
+    leaseDuration?: string;
     /**
      * The response_view specifies which subset of the Task will be returned.  By default response_view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains.  Authorization for FULL requires `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the Task resource.
      */
-    responseView?: string | null;
+    responseView?: string;
     /**
-     * Required. The task&#39;s current schedule time, available in the schedule_time returned by LeaseTasks response or RenewLease response. This restriction is to ensure that your worker currently holds the lease.
+     * Required.  The task&#39;s current schedule time, available in the schedule_time returned by LeaseTasks response or RenewLease response. This restriction is to ensure that your worker currently holds the lease.
      */
-    scheduleTime?: string | null;
+    scheduleTime?: string;
   }
   /**
    * Request message for ResumeQueue.
@@ -500,27 +488,27 @@ export namespace cloudtasks_v2beta2 {
     /**
      * The maximum number of attempts for a task.  Cloud Tasks will attempt the task `max_attempts` times (that is, if the first attempt fails, then there will be `max_attempts - 1` retries).  Must be &gt; 0.
      */
-    maxAttempts?: number | null;
+    maxAttempts?: number;
     /**
      * A task will be scheduled for retry between min_backoff and max_backoff duration after it fails, if the queue&#39;s RetryConfig specifies that the task should be retried.  If unspecified when the queue is created, Cloud Tasks will pick the default.  This field is output only for pull queues.   `max_backoff` will be truncated to the nearest second.  This field has the same meaning as [max_backoff_seconds in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
      */
-    maxBackoff?: string | null;
+    maxBackoff?: string;
     /**
      * The time between retries will double `max_doublings` times.  A task&#39;s retry interval starts at min_backoff, then doubles `max_doublings` times, then increases linearly, and finally retries retries at intervals of max_backoff up to max_attempts times.  For example, if min_backoff is 10s, max_backoff is 300s, and `max_doublings` is 3, then the a task will first be retried in 10s. The retry interval will double three times, and then increase linearly by 2^3 * 10s.  Finally, the task will retry at intervals of max_backoff until the task has been attempted max_attempts times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, ....  If unspecified when the queue is created, Cloud Tasks will pick the default.  This field is output only for pull queues.   This field has the same meaning as [max_doublings in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
      */
-    maxDoublings?: number | null;
+    maxDoublings?: number;
     /**
      * If positive, `max_retry_duration` specifies the time limit for retrying a failed task, measured from when the task was first attempted. Once `max_retry_duration` time has passed *and* the task has been attempted max_attempts times, no further attempts will be made and the task will be deleted.  If zero, then the task age is unlimited.  If unspecified when the queue is created, Cloud Tasks will pick the default.  This field is output only for pull queues.   `max_retry_duration` will be truncated to the nearest second.  This field has the same meaning as [task_age_limit in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
      */
-    maxRetryDuration?: string | null;
+    maxRetryDuration?: string;
     /**
      * A task will be scheduled for retry between min_backoff and max_backoff duration after it fails, if the queue&#39;s RetryConfig specifies that the task should be retried.  If unspecified when the queue is created, Cloud Tasks will pick the default.  This field is output only for pull queues.   `min_backoff` will be truncated to the nearest second.  This field has the same meaning as [min_backoff_seconds in queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
      */
-    minBackoff?: string | null;
+    minBackoff?: string;
     /**
      * If true, then the number of attempts is unlimited.
      */
-    unlimitedAttempts?: boolean | null;
+    unlimitedAttempts?: boolean;
   }
   /**
    * Request message for forcing a task to run now using RunTask.
@@ -529,7 +517,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * The response_view specifies which subset of the Task will be returned.  By default response_view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains.  Authorization for FULL requires `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the Task resource.
      */
-    responseView?: string | null;
+    responseView?: string;
   }
   /**
    * Request message for `SetIamPolicy` method.
@@ -541,21 +529,21 @@ export namespace cloudtasks_v2beta2 {
     policy?: Schema$Policy;
   }
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * A unit of scheduled work.
@@ -568,11 +556,11 @@ export namespace cloudtasks_v2beta2 {
     /**
      * Output only. The time that the task was created.  `create_time` will be truncated to the nearest second.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Optionally caller-specified in CreateTask.  The task name.  The task name must have the following format: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`  * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),    hyphens (-), colons (:), or periods (.).    For more information, see    [Identifying    projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) * `LOCATION_ID` is the canonical ID for the task&#39;s location.    The list of available locations can be obtained by calling    ListLocations.    For more information, see https://cloud.google.com/about/locations/. * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or   hyphens (-). The maximum length is 100 characters. * `TASK_ID` can contain only letters ([A-Za-z]), numbers ([0-9]),   hyphens (-), or underscores (_). The maximum length is 500 characters.
      */
-    name?: string | null;
+    name?: string;
     /**
      * LeaseTasks to process the task. Can be set only if pull_target is set on the queue.  A pull task is a task that has PullMessage set.
      */
@@ -580,7 +568,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * The time when the task is scheduled to be attempted.  For App Engine queues, this is when the task will be attempted or retried.  For pull queues, this is the time when the task is available to be leased; if a task is currently leased, this is the time when the current lease expires, that is, the time that the task was leased plus the lease_duration.  `schedule_time` will be truncated to the nearest microsecond.
      */
-    scheduleTime?: string | null;
+    scheduleTime?: string;
     /**
      * Output only. The task status.
      */
@@ -588,7 +576,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * Output only. The view specifies which subset of the Task has been returned.
      */
-    view?: string | null;
+    view?: string;
   }
   /**
    * Status of the task.
@@ -597,11 +585,11 @@ export namespace cloudtasks_v2beta2 {
     /**
      * Output only. The number of attempts dispatched.  This count includes attempts which have been dispatched but haven&#39;t received a response.
      */
-    attemptDispatchCount?: number | null;
+    attemptDispatchCount?: number;
     /**
      * Output only. The number of attempts which have received a response.  This field is not calculated for pull tasks.
      */
-    attemptResponseCount?: number | null;
+    attemptResponseCount?: number;
     /**
      * Output only. The status of the task&#39;s first attempt.  Only dispatch_time will be set. The other AttemptStatus information is not retained by Cloud Tasks.  This field is not calculated for pull tasks.
      */
@@ -618,7 +606,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * The set of permissions to check for the `resource`. Permissions with wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * Response message for `TestIamPermissions` method.
@@ -627,7 +615,7 @@ export namespace cloudtasks_v2beta2 {
     /**
      * A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
 
   export class Resource$Projects {
@@ -1020,8 +1008,8 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.parent Required. The location name in which the queue will be created. For example: `projects/PROJECT_ID/locations/LOCATION_ID`  The list of allowed locations can be obtained by calling Cloud Tasks' implementation of ListLocations.
-     * @param {().Queue} params.requestBody Request body data
+     * @param {string} params.parent Required.  The location name in which the queue will be created. For example: `projects/PROJECT_ID/locations/LOCATION_ID`  The list of allowed locations can be obtained by calling Cloud Tasks' implementation of ListLocations.
+     * @param {().Queue} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1142,7 +1130,7 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+     * @param {string} params.name Required.  The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1263,7 +1251,7 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The resource name of the queue. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+     * @param {string} params.name Required.  The resource name of the queue. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1388,7 +1376,7 @@ export namespace cloudtasks_v2beta2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().GetIamPolicyRequest} params.requestBody Request body data
+     * @param {().GetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1528,7 +1516,7 @@ export namespace cloudtasks_v2beta2 {
      * @param {string=} params.filter `filter` can be used to specify a subset of queues. Any Queue field can be used as a filter and several operators as supported. For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as described in [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).  Sample filter "app_engine_http_target: *".  Note that using filters might cause fewer queues than the requested_page size to be returned.
      * @param {integer=} params.pageSize Requested page size.  The maximum page size is 9800. If unspecified, the page size will be the maximum. Fewer queues than requested might be returned, even if more queues exist; use the next_page_token in the response to determine if more queues exist.
      * @param {string=} params.pageToken A token identifying the page of results to return.  To request the first page results, page_token must be empty. To request the next page of results, page_token must be the value of next_page_token returned from the previous call to ListQueues method. It is an error to switch the value of the filter while iterating through pages.
-     * @param {string} params.parent Required. The location name. For example: `projects/PROJECT_ID/locations/LOCATION_ID`
+     * @param {string} params.parent Required.  The location name. For example: `projects/PROJECT_ID/locations/LOCATION_ID`
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1670,7 +1658,7 @@ export namespace cloudtasks_v2beta2 {
      * @param {object} params Parameters for request
      * @param {string} params.name Caller-specified and required in CreateQueue, after which it becomes output only.  The queue name.  The queue name must have the following format: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`  * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),    hyphens (-), colons (:), or periods (.).    For more information, see    [Identifying    projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) * `LOCATION_ID` is the canonical ID for the queue's location.    The list of available locations can be obtained by calling    ListLocations.    For more information, see https://cloud.google.com/about/locations/. * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or   hyphens (-). The maximum length is 100 characters.
      * @param {string=} params.updateMask A mask used to specify which fields of the queue are being updated.  If empty, then all fields will be updated.
-     * @param {().Queue} params.requestBody Request body data
+     * @param {().Queue} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1795,8 +1783,8 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
-     * @param {().PauseQueueRequest} params.requestBody Request body data
+     * @param {string} params.name Required.  The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
+     * @param {().PauseQueueRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1924,8 +1912,8 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
-     * @param {().PurgeQueueRequest} params.requestBody Request body data
+     * @param {string} params.name Required.  The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
+     * @param {().PurgeQueueRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2053,8 +2041,8 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
-     * @param {().ResumeQueueRequest} params.requestBody Request body data
+     * @param {string} params.name Required.  The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
+     * @param {().ResumeQueueRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2182,7 +2170,7 @@ export namespace cloudtasks_v2beta2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2310,7 +2298,7 @@ export namespace cloudtasks_v2beta2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2393,7 +2381,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The location name in which the queue will be created. For example: `projects/PROJECT_ID/locations/LOCATION_ID`  The list of allowed locations can be obtained by calling Cloud Tasks' implementation of ListLocations.
+     * Required.  The location name in which the queue will be created. For example: `projects/PROJECT_ID/locations/LOCATION_ID`  The list of allowed locations can be obtained by calling Cloud Tasks' implementation of ListLocations.
      */
     parent?: string;
 
@@ -2410,7 +2398,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+     * Required.  The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
      */
     name?: string;
   }
@@ -2422,7 +2410,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The resource name of the queue. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+     * Required.  The resource name of the queue. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
      */
     name?: string;
   }
@@ -2463,7 +2451,7 @@ export namespace cloudtasks_v2beta2 {
      */
     pageToken?: string;
     /**
-     * Required. The location name. For example: `projects/PROJECT_ID/locations/LOCATION_ID`
+     * Required.  The location name. For example: `projects/PROJECT_ID/locations/LOCATION_ID`
      */
     parent?: string;
   }
@@ -2496,7 +2484,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
+     * Required.  The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
      */
     name?: string;
 
@@ -2513,7 +2501,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
+     * Required.  The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
      */
     name?: string;
 
@@ -2530,7 +2518,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
+     * Required.  The queue name. For example: `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
      */
     name?: string;
 
@@ -2640,8 +2628,8 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
-     * @param {().AcknowledgeTaskRequest} params.requestBody Request body data
+     * @param {string} params.name Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * @param {().AcknowledgeTaskRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2769,8 +2757,8 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
-     * @param {().CancelLeaseRequest} params.requestBody Request body data
+     * @param {string} params.name Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * @param {().CancelLeaseRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2899,8 +2887,8 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.parent Required. The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`  The queue must already exist.
-     * @param {().CreateTaskRequest} params.requestBody Request body data
+     * @param {string} params.parent Required.  The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`  The queue must already exist.
+     * @param {().CreateTaskRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3021,7 +3009,7 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * @param {string} params.name Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3142,7 +3130,7 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * @param {string} params.name Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
      * @param {string=} params.responseView The response_view specifies which subset of the Task will be returned.  By default response_view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains.  Authorization for FULL requires `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the Task resource.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -3212,8 +3200,8 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.parent Required. The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
-     * @param {().LeaseTasksRequest} params.requestBody Request body data
+     * @param {string} params.parent Required.  The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+     * @param {().LeaseTasksRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3352,9 +3340,9 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.pageSize Maximum page size.  Fewer tasks than requested might be returned, even if more tasks exist; use next_page_token in the response to determine if more tasks exist.  The maximum page size is 1000. If unspecified, the page size will be the maximum.
+     * @param {integer=} params.pageSize Requested page size. Fewer tasks than requested might be returned.  The maximum page size is 1000. If unspecified, the page size will be the maximum. Fewer tasks than requested might be returned, even if more tasks exist; use next_page_token in the response to determine if more tasks exist.
      * @param {string=} params.pageToken A token identifying the page of results to return.  To request the first page results, page_token must be empty. To request the next page of results, page_token must be the value of next_page_token returned from the previous call to ListTasks method.  The page token is valid for only 2 hours.
-     * @param {string} params.parent Required. The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+     * @param {string} params.parent Required.  The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
      * @param {string=} params.responseView The response_view specifies which subset of the Task will be returned.  By default response_view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains.  Authorization for FULL requires `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/) permission on the Task resource.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -3485,8 +3473,8 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
-     * @param {().RenewLeaseRequest} params.requestBody Request body data
+     * @param {string} params.name Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * @param {().RenewLeaseRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3614,8 +3602,8 @@ export namespace cloudtasks_v2beta2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
-     * @param {().RunTaskRequest} params.requestBody Request body data
+     * @param {string} params.name Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * @param {().RunTaskRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3689,7 +3677,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
      */
     name?: string;
 
@@ -3706,7 +3694,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
      */
     name?: string;
 
@@ -3723,7 +3711,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`  The queue must already exist.
+     * Required.  The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`  The queue must already exist.
      */
     parent?: string;
 
@@ -3740,7 +3728,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
      */
     name?: string;
   }
@@ -3752,7 +3740,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
      */
     name?: string;
     /**
@@ -3768,7 +3756,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+     * Required.  The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
      */
     parent?: string;
 
@@ -3785,7 +3773,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Maximum page size.  Fewer tasks than requested might be returned, even if more tasks exist; use next_page_token in the response to determine if more tasks exist.  The maximum page size is 1000. If unspecified, the page size will be the maximum.
+     * Requested page size. Fewer tasks than requested might be returned.  The maximum page size is 1000. If unspecified, the page size will be the maximum. Fewer tasks than requested might be returned, even if more tasks exist; use next_page_token in the response to determine if more tasks exist.
      */
     pageSize?: number;
     /**
@@ -3793,7 +3781,7 @@ export namespace cloudtasks_v2beta2 {
      */
     pageToken?: string;
     /**
-     * Required. The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+     * Required.  The queue name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
      */
     parent?: string;
     /**
@@ -3809,7 +3797,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
      */
     name?: string;
 
@@ -3826,7 +3814,7 @@ export namespace cloudtasks_v2beta2 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+     * Required.  The task name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
      */
     name?: string;
 

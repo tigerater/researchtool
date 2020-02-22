@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -119,15 +121,15 @@ export namespace appsactivity_v1 {
     /**
      * Additional event types. Some events may have multiple types when multiple actions are part of a single event. For example, creating a document, renaming it, and sharing it may be part of a single file-creation event.
      */
-    additionalEventTypes?: string[] | null;
+    additionalEventTypes?: string[];
     /**
      * The time at which the event occurred formatted as Unix time in milliseconds.
      */
-    eventTimeMillis?: string | null;
+    eventTimeMillis?: string;
     /**
      * Whether this event is caused by a user being deleted.
      */
-    fromUserDeletion?: boolean | null;
+    fromUserDeletion?: boolean;
     /**
      * Extra information for move type events, such as changes in an object&#39;s parents.
      */
@@ -139,7 +141,7 @@ export namespace appsactivity_v1 {
     /**
      * The main type of event that occurred.
      */
-    primaryEventType?: string | null;
+    primaryEventType?: string;
     /**
      * Extra information for rename type events, such as the old and new names.
      */
@@ -164,7 +166,7 @@ export namespace appsactivity_v1 {
     /**
      * Token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Contains information about changes in an object&#39;s parents as a result of a move type event.
@@ -186,15 +188,15 @@ export namespace appsactivity_v1 {
     /**
      * The parent&#39;s ID.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Whether this is the root folder.
      */
-    isRoot?: boolean | null;
+    isRoot?: boolean;
     /**
      * The parent&#39;s title.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Contains information about the permissions and type of access allowed with regards to a Google Drive object. This is a subset of the fields contained in a corresponding Drive Permissions object.
@@ -203,19 +205,19 @@ export namespace appsactivity_v1 {
     /**
      * The name of the user or group the permission applies to.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The ID for this permission. Corresponds to the Drive API&#39;s permission ID returned as part of the Drive Permissions resource.
      */
-    permissionId?: string | null;
+    permissionId?: string;
     /**
      * Indicates the Google Drive permissions role. The role determines a user&#39;s ability to read, write, or comment on the file.
      */
-    role?: string | null;
+    role?: string;
     /**
      * Indicates how widely permissions are granted.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The user&#39;s information if the type is USER.
      */
@@ -223,7 +225,7 @@ export namespace appsactivity_v1 {
     /**
      * Whether the permission requires a link to the file.
      */
-    withLink?: boolean | null;
+    withLink?: boolean;
   }
   /**
    * Contains information about a Drive object&#39;s permissions that changed as a result of a permissionChange type event.
@@ -245,7 +247,7 @@ export namespace appsactivity_v1 {
     /**
      * The URL of the photo.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Contains information about a renametype event.
@@ -254,11 +256,11 @@ export namespace appsactivity_v1 {
     /**
      * The new title.
      */
-    newTitle?: string | null;
+    newTitle?: string;
     /**
      * The old title.
      */
-    oldTitle?: string | null;
+    oldTitle?: string;
   }
   /**
    * Information about the object modified by the event.
@@ -267,15 +269,15 @@ export namespace appsactivity_v1 {
     /**
      * The ID of the target. For example, in Google Drive, this is the file or folder ID.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The MIME type of the target.
      */
-    mimeType?: string | null;
+    mimeType?: string;
     /**
      * The name of the target. For example, in Google Drive, this is the title of the file.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * A representation of a user.
@@ -284,19 +286,19 @@ export namespace appsactivity_v1 {
     /**
      * A boolean which indicates whether the specified User was deleted. If true, name, photo and permission_id will be omitted.
      */
-    isDeleted?: boolean | null;
+    isDeleted?: boolean;
     /**
      * Whether the user is the authenticated user.
      */
-    isMe?: boolean | null;
+    isMe?: boolean;
     /**
      * The displayable name of the user.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The permission ID associated with this user. Equivalent to the Drive API&#39;s permission ID for this user, returned as part of the Drive Permissions resource.
      */
-    permissionId?: string | null;
+    permissionId?: string;
     /**
      * The profile photo of the user. Not present if the user has no profile photo.
      */

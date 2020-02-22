@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -133,7 +135,7 @@ export namespace cloudresourcemanager_v1 {
     resourceId?: Schema$ResourceId;
   }
   /**
-   * Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.  If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.  Example Policy with multiple AuditConfigs:      {       &quot;audit_configs&quot;: [         {           &quot;service&quot;: &quot;allServices&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,               &quot;exempted_members&quot;: [                 &quot;user:jose@example.com&quot;               ]             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,             },             {               &quot;log_type&quot;: &quot;ADMIN_READ&quot;,             }           ]         },         {           &quot;service&quot;: &quot;sampleservice.googleapis.com&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,               &quot;exempted_members&quot;: [                 &quot;user:aliya@example.com&quot;               ]             }           ]         }       ]     }  For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts jose@example.com from DATA_READ logging, and aliya@example.com from DATA_WRITE logging.
+   * Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.  If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.  Example Policy with multiple AuditConfigs:      {       &quot;audit_configs&quot;: [         {           &quot;service&quot;: &quot;allServices&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,               &quot;exempted_members&quot;: [                 &quot;user:foo@gmail.com&quot;               ]             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,             },             {               &quot;log_type&quot;: &quot;ADMIN_READ&quot;,             }           ]         },         {           &quot;service&quot;: &quot;fooservice.googleapis.com&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,               &quot;exempted_members&quot;: [                 &quot;user:bar@gmail.com&quot;               ]             }           ]         }       ]     }  For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
    */
   export interface Schema$AuditConfig {
     /**
@@ -143,20 +145,20 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    service?: string | null;
+    service?: string;
   }
   /**
-   * Provides the configuration for logging a type of permissions. Example:      {       &quot;audit_log_configs&quot;: [         {           &quot;log_type&quot;: &quot;DATA_READ&quot;,           &quot;exempted_members&quot;: [             &quot;user:jose@example.com&quot;           ]         },         {           &quot;log_type&quot;: &quot;DATA_WRITE&quot;,         }       ]     }  This enables &#39;DATA_READ&#39; and &#39;DATA_WRITE&#39; logging, while exempting jose@example.com from DATA_READ logging.
+   * Provides the configuration for logging a type of permissions. Example:      {       &quot;audit_log_configs&quot;: [         {           &quot;log_type&quot;: &quot;DATA_READ&quot;,           &quot;exempted_members&quot;: [             &quot;user:foo@gmail.com&quot;           ]         },         {           &quot;log_type&quot;: &quot;DATA_WRITE&quot;,         }       ]     }  This enables &#39;DATA_READ&#39; and &#39;DATA_WRITE&#39; logging, while exempting foo@gmail.com from DATA_READ logging.
    */
   export interface Schema$AuditLogConfig {
     /**
      * Specifies the identities that do not cause logging for this type of permission. Follows the same format of Binding.members.
      */
-    exemptedMembers?: string[] | null;
+    exemptedMembers?: string[];
     /**
      * The log type that this config enables.
      */
-    logType?: string | null;
+    logType?: string;
   }
   /**
    * Associates `members` with a `role`.
@@ -167,13 +169,13 @@ export namespace cloudresourcemanager_v1 {
      */
     condition?: Schema$Expr;
     /**
-     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@example.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.  * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a user that has been recently deleted. For    example, `alice@example.com?uid=123456789012345678901`. If the user is    recovered, this value reverts to `user:{emailid}` and the recovered user    retains the role in the binding.  * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus    unique identifier) representing a service account that has been recently    deleted. For example,    `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`.    If the service account is undeleted, this value reverts to    `serviceAccount:{emailid}` and the undeleted service account retains the    role in the binding.  * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a Google group that has been recently    deleted. For example, `admins@example.com?uid=123456789012345678901`. If    the group is recovered, this value reverts to `group:{emailid}` and the    recovered group retains the role in the binding.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@gmail.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
      */
-    members?: string[] | null;
+    members?: string[];
     /**
      * Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
      */
-    role?: string | null;
+    role?: string;
   }
   /**
    * A `Constraint` that is either enforced or not.  For example a constraint `constraints/compute.disableSerialPortAccess`. If it is enforced on a VM instance, serial port connections will not be opened to that instance.
@@ -186,7 +188,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * If `true`, then the `Policy` is enforced. If `false`, then any configuration is acceptable.  Suppose you have a `Constraint` `constraints/compute.disableSerialPortAccess` with `constraint_default` set to `ALLOW`. A `Policy` for that `Constraint` exhibits the following behavior:   - If the `Policy` at this resource has enforced set to `false`, serial     port connection attempts will be allowed.   - If the `Policy` at this resource has enforced set to `true`, serial     port connection attempts will be refused.   - If the `Policy` at this resource is `RestoreDefault`, serial port     connection attempts will be allowed.   - If no `Policy` is set at this resource or anywhere higher in the     resource hierarchy, serial port connection attempts will be allowed.   - If no `Policy` is set at this resource, but one exists higher in the     resource hierarchy, the behavior is as if the`Policy` were set at     this resource.  The following examples demonstrate the different possible layerings:  Example 1 (nearest `Constraint` wins):   `organizations/foo` has a `Policy` with:     {enforced: false}   `projects/bar` has no `Policy` set. The constraint at `projects/bar` and `organizations/foo` will not be enforced.  Example 2 (enforcement gets replaced):   `organizations/foo` has a `Policy` with:     {enforced: false}   `projects/bar` has a `Policy` with:     {enforced: true} The constraint at `organizations/foo` is not enforced. The constraint at `projects/bar` is enforced.  Example 3 (RestoreDefault):   `organizations/foo` has a `Policy` with:     {enforced: true}   `projects/bar` has a `Policy` with:     {RestoreDefault: {}} The constraint at `organizations/foo` is enforced. The constraint at `projects/bar` is not enforced, because `constraint_default` for the `Constraint` is `ALLOW`.
      */
-    enforced?: boolean | null;
+    enforced?: boolean;
   }
   /**
    * The request sent to the ClearOrgPolicy method.
@@ -195,11 +197,11 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Name of the `Constraint` of the `Policy` to clear.
      */
-    constraint?: string | null;
+    constraint?: string;
     /**
      * The current version, for concurrency control. Not sending an `etag` will cause the `Policy` to be cleared blindly.
      */
-    etag?: string | null;
+    etag?: string;
   }
   /**
    * A `Constraint` describes a way in which a resource&#39;s configuration can be restricted. For example, it controls which cloud services can be activated across an organization, or whether a Compute Engine instance can have serial port connections established. `Constraints` can be configured by the organization&#39;s policy adminstrator to fit the needs of the organzation by setting Policies for `Constraints` at different locations in the organization&#39;s resource hierarchy. Policies are inherited down the resource hierarchy from higher levels, but can also be overridden. For details about the inheritance rules please read about Policies.  `Constraints` have a default behavior determined by the `constraint_default` field, which is the enforcement behavior that is used in the absence of a `Policy` being defined or inherited for the resource in question.
@@ -212,15 +214,15 @@ export namespace cloudresourcemanager_v1 {
     /**
      * The evaluation behavior of this constraint in the absense of &#39;Policy&#39;.
      */
-    constraintDefault?: string | null;
+    constraintDefault?: string;
     /**
      * Detailed description of what this `Constraint` controls as well as how and where it is enforced.  Mutable.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The human readable name.  Mutable.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Defines this constraint as being a ListConstraint.
      */
@@ -228,11 +230,11 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Immutable value, required to globally be unique. For example, `constraints/serviceuser.services`
      */
-    name?: string | null;
+    name?: string;
     /**
      * Version of the `Constraint`. Default version is 0;
      */
-    version?: number | null;
+    version?: number;
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -245,19 +247,19 @@ export namespace cloudresourcemanager_v1 {
     /**
      * An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Textual representation of an expression in Common Expression Language syntax.  The application context of the containing message determines which well-known feature set of CEL is supported.
      */
-    expression?: string | null;
+    expression?: string;
     /**
      * An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
      */
-    location?: string | null;
+    location?: string;
     /**
      * An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Metadata describing a long running folder operation
@@ -266,19 +268,19 @@ export namespace cloudresourcemanager_v1 {
     /**
      * The resource name of the folder or organization we are either creating the folder under or moving the folder to.
      */
-    destinationParent?: string | null;
+    destinationParent?: string;
     /**
      * The display name of the folder.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The type of this operation.
      */
-    operationType?: string | null;
+    operationType?: string;
     /**
      * The resource name of the folder&#39;s parent. Only applicable when the operation_type is MOVE.
      */
-    sourceParent?: string | null;
+    sourceParent?: string;
   }
   /**
    * A classification of the Folder Operation error.
@@ -287,7 +289,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * The type of operation error experienced.
      */
-    errorMessageId?: string | null;
+    errorMessageId?: string;
   }
   /**
    * The request sent to the GetAncestry method.
@@ -309,17 +311,12 @@ export namespace cloudresourcemanager_v1 {
     /**
      * The name of the `Constraint` to compute the effective `Policy`.
      */
-    constraint?: string | null;
+    constraint?: string;
   }
   /**
    * Request message for `GetIamPolicy` method.
    */
-  export interface Schema$GetIamPolicyRequest {
-    /**
-     * OPTIONAL: A `GetPolicyOptions` object for specifying options to `GetIamPolicy`. This field is only used by Cloud IAM.
-     */
-    options?: Schema$GetPolicyOptions;
-  }
+  export interface Schema$GetIamPolicyRequest {}
   /**
    * The request sent to the GetOrgPolicy method.
    */
@@ -327,16 +324,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Name of the `Constraint` to get the `Policy`.
      */
-    constraint?: string | null;
-  }
-  /**
-   * Encapsulates settings provided to GetIamPolicy.
-   */
-  export interface Schema$GetPolicyOptions {
-    /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    requestedPolicyVersion?: number | null;
+    constraint?: string;
   }
   /**
    * A Lien represents an encumbrance on the actions that can be performed on a resource.
@@ -345,27 +333,27 @@ export namespace cloudresourcemanager_v1 {
     /**
      * The creation time of this Lien.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * A system-generated unique identifier for this Lien.  Example: `liens/1234abcd`
      */
-    name?: string | null;
+    name?: string;
     /**
      * A stable, user-visible/meaningful string identifying the origin of the Lien, intended to be inspected programmatically. Maximum length of 200 characters.  Example: &#39;compute.googleapis.com&#39;
      */
-    origin?: string | null;
+    origin?: string;
     /**
      * A reference to the resource this Lien is attached to. The server will validate the parent against those for which Liens are supported.  Example: `projects/1234`
      */
-    parent?: string | null;
+    parent?: string;
     /**
      * Concise user-visible strings indicating why an action cannot be performed on a resource. Maximum length of 200 characters.  Example: &#39;Holds production API key&#39;
      */
-    reason?: string | null;
+    reason?: string;
     /**
      * The types of operations which should be blocked as a result of this Lien. Each value should correspond to an IAM permission. The server will validate the permissions against those for which Liens are supported.  An empty list is meaningless and will be rejected.  Example: [&#39;resourcemanager.projects.delete&#39;]
      */
-    restrictions?: string[] | null;
+    restrictions?: string[];
   }
   /**
    * The request sent to the [ListAvailableOrgPolicyConstraints] google.cloud.OrgPolicy.v1.ListAvailableOrgPolicyConstraints] method.
@@ -374,11 +362,11 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Size of the pages to be returned. This is currently unsupported and will be ignored. The server may at any point start using this field to limit page size.
      */
-    pageSize?: number | null;
+    pageSize?: number;
     /**
      * Page token used to retrieve the next page. This is currently unsupported and will be ignored. The server may at any point start using this field.
      */
-    pageToken?: string | null;
+    pageToken?: string;
   }
   /**
    * The response returned from the ListAvailableOrgPolicyConstraints method. Returns all `Constraints` that could be set at this level of the hierarchy (contrast with the response from `ListPolicies`, which returns all policies which are set).
@@ -391,7 +379,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Page token used to retrieve the next page. This is currently not used.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * A `Constraint` that allows or disallows a list of string values, which are configured by an Organization&#39;s policy administrator with a `Policy`.
@@ -400,11 +388,11 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Optional. The Google Cloud Console will try to default to a configuration that matches the value specified in this `Constraint`.
      */
-    suggestedValue?: string | null;
+    suggestedValue?: string;
     /**
      * Indicates whether subtrees of Cloud Resource Manager resource hierarchy can be used in `Policy.allowed_values` and `Policy.denied_values`. For example, `&quot;under:folders/123&quot;` would match any resource under the &#39;folders/123&#39; folder.
      */
-    supportsUnder?: boolean | null;
+    supportsUnder?: boolean;
   }
   /**
    * The response message for Liens.ListLiens.
@@ -417,7 +405,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Token to retrieve the next page of results, or empty if there are no more results in the list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * The request sent to the ListOrgPolicies method.
@@ -426,11 +414,11 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Size of the pages to be returned. This is currently unsupported and will be ignored. The server may at any point start using this field to limit page size.
      */
-    pageSize?: number | null;
+    pageSize?: number;
     /**
      * Page token used to retrieve the next page. This is currently unsupported and will be ignored. The server may at any point start using this field.
      */
-    pageToken?: string | null;
+    pageToken?: string;
   }
   /**
    * The response returned from the ListOrgPolicies method. It will be empty if no `Policies` are set on the resource.
@@ -439,36 +427,36 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Page token used to retrieve the next page. This is currently not used, but the server may at any point start supplying a valid token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The `Policies` that are set on the resource. It will be empty if no `Policies` are set.
      */
     policies?: Schema$OrgPolicy[];
   }
   /**
-   * Used in `policy_type` to specify how `list_policy` behaves at this resource.  `ListPolicy` can define specific values and subtrees of Cloud Resource Manager resource hierarchy (`Organizations`, `Folders`, `Projects`) that are allowed or denied by setting the `allowed_values` and `denied_values` fields. This is achieved by using the `under:` and optional `is:` prefixes. The `under:` prefix is used to denote resource subtree values. The `is:` prefix is used to denote specific values, and is required only if the value contains a &quot;:&quot;. Values prefixed with &quot;is:&quot; are treated the same as values with no prefix. Ancestry subtrees must be in one of the following formats:     - &quot;projects/&lt;project-id&gt;&quot;, e.g. &quot;projects/tokyo-rain-123&quot;     - &quot;folders/&lt;folder-id&gt;&quot;, e.g. &quot;folders/1234&quot;     - &quot;organizations/&lt;organization-id&gt;&quot;, e.g. &quot;organizations/1234&quot; The `supports_under` field of the associated `Constraint`  defines whether ancestry prefixes can be used. You can set `allowed_values` and `denied_values` in the same `Policy` if `all_values` is `ALL_VALUES_UNSPECIFIED`. `ALLOW` or `DENY` are used to allow or deny all values. If `all_values` is set to either `ALLOW` or `DENY`, `allowed_values` and `denied_values` must be unset.
+   * Used in `policy_type` to specify how `list_policy` behaves at this resource.  `ListPolicy` can define specific values and subtrees of Cloud Resource Manager resource hierarchy (`Organizations`, `Folders`, `Projects`) that are allowed or denied by setting the `allowed_values` and `denied_values` fields. This is achieved by using the `under:` and optional `is:` prefixes. The `under:` prefix is used to denote resource subtree values. The `is:` prefix is used to denote specific values, and is required only if the value contains a &quot;:&quot;. Values prefixed with &quot;is:&quot; are treated the same as values with no prefix. Ancestry subtrees must be in one of the following formats:     - “projects/&lt;project-id&gt;”, e.g. “projects/tokyo-rain-123”     - “folders/&lt;folder-id&gt;”, e.g. “folders/1234”     - “organizations/&lt;organization-id&gt;”, e.g. “organizations/1234” The `supports_under` field of the associated `Constraint`  defines whether ancestry prefixes can be used. You can set `allowed_values` and `denied_values` in the same `Policy` if `all_values` is `ALL_VALUES_UNSPECIFIED`. `ALLOW` or `DENY` are used to allow or deny all values. If `all_values` is set to either `ALLOW` or `DENY`, `allowed_values` and `denied_values` must be unset.
    */
   export interface Schema$ListPolicy {
     /**
      * List of values allowed  at this resource. Can only be set if `all_values` is set to `ALL_VALUES_UNSPECIFIED`.
      */
-    allowedValues?: string[] | null;
+    allowedValues?: string[];
     /**
      * The policy all_values state.
      */
-    allValues?: string | null;
+    allValues?: string;
     /**
      * List of values denied at this resource. Can only be set if `all_values` is set to `ALL_VALUES_UNSPECIFIED`.
      */
-    deniedValues?: string[] | null;
+    deniedValues?: string[];
     /**
-     * Determines the inheritance behavior for this `Policy`.  By default, a `ListPolicy` set at a resource supercedes any `Policy` set anywhere up the resource hierarchy. However, if `inherit_from_parent` is set to `true`, then the values from the effective `Policy` of the parent resource are inherited, meaning the values set in this `Policy` are added to the values inherited up the hierarchy.  Setting `Policy` hierarchies that inherit both allowed values and denied values isn&#39;t recommended in most circumstances to keep the configuration simple and understandable. However, it is possible to set a `Policy` with `allowed_values` set that inherits a `Policy` with `denied_values` set. In this case, the values that are allowed must be in `allowed_values` and not present in `denied_values`.  For example, suppose you have a `Constraint` `constraints/serviceuser.services`, which has a `constraint_type` of `list_constraint`, and with `constraint_default` set to `ALLOW`. Suppose that at the Organization level, a `Policy` is applied that restricts the allowed API activations to {`E1`, `E2`}. Then, if a `Policy` is applied to a project below the Organization that has `inherit_from_parent` set to `false` and field all_values set to DENY, then an attempt to activate any API will be denied.  The following examples demonstrate different possible layerings for `projects/bar` parented by `organizations/foo`:  Example 1 (no inherited values):   `organizations/foo` has a `Policy` with values:     {allowed_values: &quot;E1&quot; allowed_values:&quot;E2&quot;}   `projects/bar` has `inherit_from_parent` `false` and values:     {allowed_values: &quot;E3&quot; allowed_values: &quot;E4&quot;} The accepted values at `organizations/foo` are `E1`, `E2`. The accepted values at `projects/bar` are `E3`, and `E4`.  Example 2 (inherited values):   `organizations/foo` has a `Policy` with values:     {allowed_values: &quot;E1&quot; allowed_values:&quot;E2&quot;}   `projects/bar` has a `Policy` with values:     {value: &quot;E3&quot; value: &quot;E4&quot; inherit_from_parent: true} The accepted values at `organizations/foo` are `E1`, `E2`. The accepted values at `projects/bar` are `E1`, `E2`, `E3`, and `E4`.  Example 3 (inheriting both allowed and denied values):   `organizations/foo` has a `Policy` with values:     {allowed_values: &quot;E1&quot; allowed_values: &quot;E2&quot;}   `projects/bar` has a `Policy` with:     {denied_values: &quot;E1&quot;} The accepted values at `organizations/foo` are `E1`, `E2`. The value accepted at `projects/bar` is `E2`.  Example 4 (RestoreDefault):   `organizations/foo` has a `Policy` with values:     {allowed_values: &quot;E1&quot; allowed_values:&quot;E2&quot;}   `projects/bar` has a `Policy` with values:     {RestoreDefault: {}} The accepted values at `organizations/foo` are `E1`, `E2`. The accepted values at `projects/bar` are either all or none depending on the value of `constraint_default` (if `ALLOW`, all; if `DENY`, none).  Example 5 (no policy inherits parent policy):   `organizations/foo` has no `Policy` set.   `projects/bar` has no `Policy` set. The accepted values at both levels are either all or none depending on the value of `constraint_default` (if `ALLOW`, all; if `DENY`, none).  Example 6 (ListConstraint allowing all):   `organizations/foo` has a `Policy` with values:     {allowed_values: &quot;E1&quot; allowed_values: &quot;E2&quot;}   `projects/bar` has a `Policy` with:     {all: ALLOW} The accepted values at `organizations/foo` are `E1`, E2`. Any value is accepted at `projects/bar`.  Example 7 (ListConstraint allowing none):   `organizations/foo` has a `Policy` with values:     {allowed_values: &quot;E1&quot; allowed_values: &quot;E2&quot;}   `projects/bar` has a `Policy` with:     {all: DENY} The accepted values at `organizations/foo` are `E1`, E2`. No value is accepted at `projects/bar`.  Example 10 (allowed and denied subtrees of Resource Manager hierarchy): Given the following resource hierarchy   O1-&gt;{F1, F2}; F1-&gt;{P1}; F2-&gt;{P2, P3},   `organizations/foo` has a `Policy` with values:     {allowed_values: &quot;under:organizations/O1&quot;}   `projects/bar` has a `Policy` with:     {allowed_values: &quot;under:projects/P3&quot;}     {denied_values: &quot;under:folders/F2&quot;} The accepted values at `organizations/foo` are `organizations/O1`,   `folders/F1`, `folders/F2`, `projects/P1`, `projects/P2`,   `projects/P3`. The accepted values at `projects/bar` are `organizations/O1`,   `folders/F1`, `projects/P1`.
+     * Determines the inheritance behavior for this `Policy`.  By default, a `ListPolicy` set at a resource supercedes any `Policy` set anywhere up the resource hierarchy. However, if `inherit_from_parent` is set to `true`, then the values from the effective `Policy` of the parent resource are inherited, meaning the values set in this `Policy` are added to the values inherited up the hierarchy.  Setting `Policy` hierarchies that inherit both allowed values and denied values isn&#39;t recommended in most circumstances to keep the configuration simple and understandable. However, it is possible to set a `Policy` with `allowed_values` set that inherits a `Policy` with `denied_values` set. In this case, the values that are allowed must be in `allowed_values` and not present in `denied_values`.  For example, suppose you have a `Constraint` `constraints/serviceuser.services`, which has a `constraint_type` of `list_constraint`, and with `constraint_default` set to `ALLOW`. Suppose that at the Organization level, a `Policy` is applied that restricts the allowed API activations to {`E1`, `E2`}. Then, if a `Policy` is applied to a project below the Organization that has `inherit_from_parent` set to `false` and field all_values set to DENY, then an attempt to activate any API will be denied.  The following examples demonstrate different possible layerings for `projects/bar` parented by `organizations/foo`:  Example 1 (no inherited values):   `organizations/foo` has a `Policy` with values:     {allowed_values: “E1” allowed_values:”E2”}   `projects/bar` has `inherit_from_parent` `false` and values:     {allowed_values: &quot;E3&quot; allowed_values: &quot;E4&quot;} The accepted values at `organizations/foo` are `E1`, `E2`. The accepted values at `projects/bar` are `E3`, and `E4`.  Example 2 (inherited values):   `organizations/foo` has a `Policy` with values:     {allowed_values: “E1” allowed_values:”E2”}   `projects/bar` has a `Policy` with values:     {value: “E3” value: ”E4” inherit_from_parent: true} The accepted values at `organizations/foo` are `E1`, `E2`. The accepted values at `projects/bar` are `E1`, `E2`, `E3`, and `E4`.  Example 3 (inheriting both allowed and denied values):   `organizations/foo` has a `Policy` with values:     {allowed_values: &quot;E1&quot; allowed_values: &quot;E2&quot;}   `projects/bar` has a `Policy` with:     {denied_values: &quot;E1&quot;} The accepted values at `organizations/foo` are `E1`, `E2`. The value accepted at `projects/bar` is `E2`.  Example 4 (RestoreDefault):   `organizations/foo` has a `Policy` with values:     {allowed_values: “E1” allowed_values:”E2”}   `projects/bar` has a `Policy` with values:     {RestoreDefault: {}} The accepted values at `organizations/foo` are `E1`, `E2`. The accepted values at `projects/bar` are either all or none depending on the value of `constraint_default` (if `ALLOW`, all; if `DENY`, none).  Example 5 (no policy inherits parent policy):   `organizations/foo` has no `Policy` set.   `projects/bar` has no `Policy` set. The accepted values at both levels are either all or none depending on the value of `constraint_default` (if `ALLOW`, all; if `DENY`, none).  Example 6 (ListConstraint allowing all):   `organizations/foo` has a `Policy` with values:     {allowed_values: “E1” allowed_values: ”E2”}   `projects/bar` has a `Policy` with:     {all: ALLOW} The accepted values at `organizations/foo` are `E1`, E2`. Any value is accepted at `projects/bar`.  Example 7 (ListConstraint allowing none):   `organizations/foo` has a `Policy` with values:     {allowed_values: “E1” allowed_values: ”E2”}   `projects/bar` has a `Policy` with:     {all: DENY} The accepted values at `organizations/foo` are `E1`, E2`. No value is accepted at `projects/bar`.  Example 10 (allowed and denied subtrees of Resource Manager hierarchy): Given the following resource hierarchy   O1-&gt;{F1, F2}; F1-&gt;{P1}; F2-&gt;{P2, P3},   `organizations/foo` has a `Policy` with values:     {allowed_values: &quot;under:organizations/O1&quot;}   `projects/bar` has a `Policy` with:     {allowed_values: &quot;under:projects/P3&quot;}     {denied_values: &quot;under:folders/F2&quot;} The accepted values at `organizations/foo` are `organizations/O1`,   `folders/F1`, `folders/F2`, `projects/P1`, `projects/P2`,   `projects/P3`. The accepted values at `projects/bar` are `organizations/O1`,   `folders/F1`, `projects/P1`.
      */
-    inheritFromParent?: boolean | null;
+    inheritFromParent?: boolean;
     /**
      * Optional. The Google Cloud Console will try to default to a configuration that matches the value specified in this `Policy`. If `suggested_value` is not set, it will inherit the value specified higher in the hierarchy, unless `inherit_from_parent` is `false`.
      */
-    suggestedValue?: string | null;
+    suggestedValue?: string;
   }
   /**
    * A page of the response received from the ListProjects method.  A paginated response where more pages are available has `next_page_token` set. This token can be used in a subsequent request to retrieve the next request page.
@@ -477,7 +465,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Pagination token.  If the result set is too large to fit in a single response, this token is returned. It encodes the position of the current result cursor. Feeding this value into a new list request with the `page_token` parameter gives the next page of the results.  When `next_page_token` is not filled in, there is no next page and the list returned is the last page in the result set.  Pagination tokens have a limited lifetime.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of Projects that matched the list filter. This list can be paginated.
      */
@@ -490,7 +478,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * The error result of the operation in case of failure or cancellation.
      */
@@ -498,36 +486,36 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Service-specific metadata associated with the operation.  It typically contains progress information and common metadata such as create time. Some services might not provide such metadata.  Any method that returns a long-running operation should document the metadata type, if any.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
-     * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+     * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should have the format of `operations/some/unique/name`.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The normal response of the operation in case of success.  If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`.  If the original method is standard `Get`/`Create`/`Update`, the response should be the resource.  For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name.  For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
      */
-    response?: {[key: string]: any} | null;
+    response?: {[key: string]: any};
   }
   /**
    * The root node in the resource hierarchy to which a particular entity&#39;s (e.g., company) resources belong.
    */
   export interface Schema$Organization {
     /**
-     * Timestamp when the Organization was created. Assigned by the server.
+     * Timestamp when the Organization was created. Assigned by the server. @OutputOnly
      */
-    creationTime?: string | null;
+    creationTime?: string;
     /**
-     * A human-readable string that refers to the Organization in the GCP Console UI. This string is set by the server and cannot be changed. The string will be set to the primary domain (for example, &quot;google.com&quot;) of the G Suite customer that owns the organization.
+     * A human-readable string that refers to the Organization in the GCP Console UI. This string is set by the server and cannot be changed. The string will be set to the primary domain (for example, &quot;google.com&quot;) of the G Suite customer that owns the organization. @OutputOnly
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
-     * The organization&#39;s current lifecycle state. Assigned by the server.
+     * The organization&#39;s current lifecycle state. Assigned by the server. @OutputOnly
      */
-    lifecycleState?: string | null;
+    lifecycleState?: string;
     /**
-     * Output only. The resource name of the organization. This is the organization&#39;s relative path in the API. Its format is &quot;organizations/[organization_id]&quot;. For example, &quot;organizations/1234&quot;.
+     * Output Only. The resource name of the organization. This is the organization&#39;s relative path in the API. Its format is &quot;organizations/[organization_id]&quot;. For example, &quot;organizations/1234&quot;.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The owner of this Organization. The owner should be specified on creation. Once set, it cannot be changed. This field is required.
      */
@@ -540,7 +528,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * The G Suite customer id used in the Directory API.
      */
-    directoryCustomerId?: string | null;
+    directoryCustomerId?: string;
   }
   /**
    * Defines a Cloud Organization `Policy` which is used to specify `Constraints` for configurations of Cloud Platform resources.
@@ -553,11 +541,11 @@ export namespace cloudresourcemanager_v1 {
     /**
      * The name of the `Constraint` the `Policy` is configuring, for example, `constraints/serviceuser.services`.  Immutable after creation.
      */
-    constraint?: string | null;
+    constraint?: string;
     /**
      * An opaque tag indicating the current version of the `Policy`, used for concurrency control.  When the `Policy` is returned from either a `GetPolicy` or a `ListOrgPolicy` request, this `etag` indicates the version of the current `Policy` to use when executing a read-modify-write loop.  When the `Policy` is returned from a `GetEffectivePolicy` request, the `etag` will be unset.  When the `Policy` is used in a `SetOrgPolicy` method, use the `etag` value that was returned from a `GetOrgPolicy` request as part of a read-modify-write loop for concurrency control. Not setting the `etag`in a `SetOrgPolicy` request will result in an unconditional write of the `Policy`.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * List of values either allowed or disallowed.
      */
@@ -569,14 +557,14 @@ export namespace cloudresourcemanager_v1 {
     /**
      * The time stamp the `Policy` was previously updated. This is set by the server, not specified by the caller, and represents the last time a call to `SetOrgPolicy` was made for that `Policy`. Any value set by the client will be ignored.
      */
-    updateTime?: string | null;
+    updateTime?: string;
     /**
      * Version of the `Policy`. Default version is 0;
      */
-    version?: number | null;
+    version?: number;
   }
   /**
-   * An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources.   A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role.  Optionally, a `binding` can specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both.  **JSON example:**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationAdmin&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-project-id@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationViewer&quot;,           &quot;members&quot;: [&quot;user:eve@example.com&quot;],           &quot;condition&quot;: {             &quot;title&quot;: &quot;expirable access&quot;,             &quot;description&quot;: &quot;Does not grant access after Sep 2020&quot;,             &quot;expression&quot;: &quot;request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)&quot;,           }         }       ],       &quot;etag&quot;: &quot;BwWWja0YfJA=&quot;,       &quot;version&quot;: 3     }  **YAML example:**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-project-id@appspot.gserviceaccount.com       role: roles/resourcemanager.organizationAdmin     - members:       - user:eve@example.com       role: roles/resourcemanager.organizationViewer       condition:         title: expirable access         description: Does not grant access after Sep 2020         expression: request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)     - etag: BwWWja0YfJA=     - version: 3  For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).
+   * Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.   A `Policy` consists of a list of `bindings`. A `binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.  **JSON Example**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/owner&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-other-app@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/viewer&quot;,           &quot;members&quot;: [&quot;user:sean@example.com&quot;]         }       ]     }  **YAML Example**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-other-app@appspot.gserviceaccount.com       role: roles/owner     - members:       - user:sean@example.com       role: roles/viewer   For a description of IAM and its features, see the [IAM developer&#39;s guide](https://cloud.google.com/iam/docs).
    */
   export interface Schema$Policy {
     /**
@@ -584,17 +572,17 @@ export namespace cloudresourcemanager_v1 {
      */
     auditConfigs?: Schema$AuditConfig[];
     /**
-     * Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
+     * Associates a list of `members` to a `role`. `bindings` with no members will result in an error.
      */
     bindings?: Schema$Binding[];
     /**
-     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.
+     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
      */
-    etag?: string | null;
+    etag?: string;
     /**
-     * Specifies the format of the policy.  Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected.  Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations:  * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy   that includes conditions  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.  If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset.
+     * Deprecated.
      */
-    version?: number | null;
+    version?: number;
   }
   /**
    * A Project is a high-level Google Cloud Platform entity.  It is a container for ACLs, APIs, App Engine Apps, VMs, and other Google Cloud Platform resources.
@@ -603,19 +591,19 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Creation time.  Read-only.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * The labels associated with this Project.  Label keys must be between 1 and 63 characters long and must conform to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?.  Label values must be between 0 and 63 characters long and must conform to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?. A label value can be empty.  No more than 256 labels can be associated with a given resource.  Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed.  Example: &lt;code&gt;&quot;environment&quot; : &quot;dev&quot;&lt;/code&gt; Read-write.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * The Project lifecycle state.  Read-only.
      */
-    lifecycleState?: string | null;
+    lifecycleState?: string;
     /**
      * The optional user-assigned display name of the Project. When present it must be between 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, single-quote, double-quote, space, and exclamation point.  Example: &lt;code&gt;My Project&lt;/code&gt; Read-write.
      */
-    name?: string | null;
+    name?: string;
     /**
      * An optional reference to a parent Resource.  Supported parent types include &quot;organization&quot; and &quot;folder&quot;. Once set, the parent cannot be cleared. The `parent` can be set on creation or using the `UpdateProject` method; the end user must have the `resourcemanager.projects.create` permission on the parent.  Read-write.
      */
@@ -623,11 +611,11 @@ export namespace cloudresourcemanager_v1 {
     /**
      * The unique, user-assigned ID of the Project. It must be 6 to 30 lowercase letters, digits, or hyphens. It must start with a letter. Trailing hyphens are prohibited.  Example: &lt;code&gt;tokyo-rain-123&lt;/code&gt; Read-only after creation.
      */
-    projectId?: string | null;
+    projectId?: string;
     /**
      * The number uniquely identifying the project.  Example: &lt;code&gt;415104041262&lt;/code&gt; Read-only.
      */
-    projectNumber?: string | null;
+    projectNumber?: string;
   }
   /**
    * A status object which is used as the `metadata` field for the Operation returned by CreateProject. It provides insight for when significant phases of Project creation have completed.
@@ -636,15 +624,15 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Creation time of the project creation workflow.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * True if the project can be retrieved using GetProject. No other operations on the project are guaranteed to work until the project creation is complete.
      */
-    gettable?: boolean | null;
+    gettable?: boolean;
     /**
      * True if the project creation process is complete.
      */
-    ready?: boolean | null;
+    ready?: boolean;
   }
   /**
    * A container to reference an id for any resource type. A `resource` in Google Cloud Platform is a generic term for something you (a developer) may want to interact with through one of our API&#39;s. Some examples are an App Engine app, a Compute Engine instance, a Cloud SQL database, and so on.
@@ -653,11 +641,11 @@ export namespace cloudresourcemanager_v1 {
     /**
      * Required field for the type-specific id. This should correspond to the id used in the type-specific API&#39;s.
      */
-    id?: string | null;
+    id?: string;
     /**
-     * Required field representing the resource type this id is for. At present, the valid types are: &quot;organization&quot;, &quot;folder&quot;, and &quot;project&quot;.
+     * Required field representing the resource type this id is for. At present, the valid types are: &quot;organization&quot; and &quot;folder&quot;.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Ignores policies set above this resource and restores the `constraint_default` enforcement behavior of the specific `Constraint` at this resource.  Suppose that `constraint_default` is set to `ALLOW` for the `Constraint` `constraints/serviceuser.services`. Suppose that organization foo.com sets a `Policy` at their Organization resource node that restricts the allowed service activations to deny all service activations. They could then set a `Policy` with the `policy_type` `restore_default` on several experimental projects, restoring the `constraint_default` enforcement of the `Constraint` for only those projects, allowing those projects to have all services activated.
@@ -668,17 +656,17 @@ export namespace cloudresourcemanager_v1 {
    */
   export interface Schema$SearchOrganizationsRequest {
     /**
-     * An optional query string used to filter the Organizations to return in the response. Filter rules are case-insensitive.   Organizations may be filtered by `owner.directoryCustomerId` or by `domain`, where the domain is a G Suite domain, for example:  * Filter `owner.directorycustomerid:123456789` returns Organization resources with `owner.directory_customer_id` equal to `123456789`. * Filter `domain:google.com` returns Organization resources corresponding to the domain `google.com`.  This field is optional.
+     * An optional query string used to filter the Organizations to return in the response. Filter rules are case-insensitive.   Organizations may be filtered by `owner.directoryCustomerId` or by `domain`, where the domain is a G Suite domain, for example:  | Filter                              | Description                      | |-------------------------------------|----------------------------------| | owner.directorycustomerid:123456789 | Organizations with `owner.directory_customer_id` equal to `123456789`.| | domain:google.com                   | Organizations corresponding to the domain `google.com`.|  This field is optional.
      */
-    filter?: string | null;
+    filter?: string;
     /**
      * The maximum number of Organizations to return in the response. This field is optional.
      */
-    pageSize?: number | null;
+    pageSize?: number;
     /**
      * A pagination token returned from a previous call to `SearchOrganizations` that indicates from where listing should continue. This field is optional.
      */
-    pageToken?: string | null;
+    pageToken?: string;
   }
   /**
    * The response returned from the `SearchOrganizations` method.
@@ -687,7 +675,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * A pagination token to be used to retrieve the next page of results. If the result is too large to fit within the page size specified in the request, this field will be set with a token that can be used to fetch the next page of results. If this field is empty, it indicates that this response contains the last page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of Organizations that matched the search query, possibly paginated.
      */
@@ -704,7 +692,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: paths: &quot;bindings, etag&quot; This field is only used by Cloud IAM.
      */
-    updateMask?: string | null;
+    updateMask?: string;
   }
   /**
    * The request sent to the SetOrgPolicyRequest method.
@@ -716,21 +704,21 @@ export namespace cloudresourcemanager_v1 {
     policy?: Schema$OrgPolicy;
   }
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * Request message for `TestIamPermissions` method.
@@ -739,7 +727,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * The set of permissions to check for the `resource`. Permissions with wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * Response message for `TestIamPermissions` method.
@@ -748,7 +736,7 @@ export namespace cloudresourcemanager_v1 {
     /**
      * A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * The request sent to the UndeleteProject method.
@@ -767,7 +755,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -779,7 +767,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -803,12 +791,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.folders.clearOrgPolicy
@@ -816,7 +808,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource for the `Policy` to clear.
-     * @param {().ClearOrgPolicyRequest} params.requestBody Request body data
+     * @param {().ClearOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -888,7 +880,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -900,7 +892,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -927,12 +919,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.folders.getEffectiveOrgPolicy
@@ -940,7 +936,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ The name of the resource to start computing the effective `Policy`.
-     * @param {().GetEffectiveOrgPolicyRequest} params.requestBody Request body data
+     * @param {().GetEffectiveOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1016,7 +1012,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -1028,7 +1024,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -1055,12 +1051,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.folders.getOrgPolicy
@@ -1068,7 +1068,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource the `Policy` is set on.
-     * @param {().GetOrgPolicyRequest} params.requestBody Request body data
+     * @param {().GetOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1142,7 +1142,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -1154,7 +1154,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -1194,12 +1194,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.folders.listAvailableOrgPolicyConstraints
@@ -1207,7 +1211,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource to list `Constraints` for.
-     * @param {().ListAvailableOrgPolicyConstraintsRequest} params.requestBody Request body data
+     * @param {().ListAvailableOrgPolicyConstraintsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1303,7 +1307,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -1315,7 +1319,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -1355,12 +1359,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.folders.listOrgPolicies
@@ -1368,7 +1376,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource to list Policies for.
-     * @param {().ListOrgPoliciesRequest} params.requestBody Request body data
+     * @param {().ListOrgPoliciesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1446,7 +1454,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -1458,7 +1466,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -1485,12 +1493,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.folders.setOrgPolicy
@@ -1498,7 +1510,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Resource name of the resource to attach the `Policy`.
-     * @param {().SetOrgPolicyRequest} params.requestBody Request body data
+     * @param {().SetOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1682,7 +1694,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -1694,7 +1706,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -1718,19 +1730,23 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.liens.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Lien} params.requestBody Request body data
+     * @param {().Lien} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1798,7 +1814,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -1810,7 +1826,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -1830,12 +1846,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.liens.delete
@@ -1907,52 +1927,6 @@ export namespace cloudresourcemanager_v1 {
     /**
      * cloudresourcemanager.liens.get
      * @desc Retrieve a Lien by `name`.  Callers of this method will require permission on the `parent` resource. For example, a Lien with a `parent` of `projects/1234` requires permission requires permission `resourcemanager.projects.get` or `resourcemanager.projects.updateLiens`.
-     * @example
-     * * // BEFORE RUNNING:
-     * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
-     * //    and check the quota for your project at
-     * //    https://console.developers.google.com/apis/api/cloudresourcemanager
-     * // 2. This sample uses Application Default Credentials for authentication.
-     * //    If not already done, install the gcloud CLI from
-     * //    https://cloud.google.com/sdk and run
-     * //    `gcloud beta auth application-default login`.
-     * //    For more information, see
-     * //    https://developers.google.com/identity/protocols/application-default-credentials
-     * // 3. Install the Node.js client library by running
-     * //    `npm install googleapis --save`
-     *
-     * const {google} = require('googleapis');
-     * var cloudResourceManager = google.cloudresourcemanager('v1');
-     *
-     * authorize(function(authClient) {
-     *   var request = {
-     *     // The name/identifier of the Lien.
-     *     name: 'liens/my-lien',  // TODO: Update placeholder value.
-     *
-     *     auth: authClient,
-     *   };
-     *
-     *   cloudResourceManager.liens.get(request, function(err, response) {
-     *     if (err) {
-     *       console.error(err);
-     *       return;
-     *     }
-     *
-     *     // TODO: Change code below to process the `response` object:
-     *     console.log(JSON.stringify(response, null, 2));
-     *   });
-     * });
-     *
-     * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
-     *   });
-     * }
      * @alias cloudresourcemanager.liens.get
      * @memberOf! ()
      *
@@ -2025,7 +1999,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -2037,7 +2011,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -2070,12 +2044,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.liens.list
@@ -2214,7 +2192,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -2226,7 +2204,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -2249,12 +2227,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.operations.get
@@ -2350,7 +2332,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -2362,7 +2344,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -2386,12 +2368,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.clearOrgPolicy
@@ -2399,7 +2385,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource for the `Policy` to clear.
-     * @param {().ClearOrgPolicyRequest} params.requestBody Request body data
+     * @param {().ClearOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2471,7 +2457,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -2483,14 +2469,12 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
      *   var request = {
-     *     // The resource name of the Organization to fetch. This is the organization's
-     *     // relative path in the API, formatted as "organizations/[organizationId]".
-     *     // For example, "organizations/1234".
+     *     // The resource name of the Organization to fetch, e.g. "organizations/1234".
      *     name: 'organizations/my-organization',  // TODO: Update placeholder value.
      *
      *     auth: authClient,
@@ -2508,12 +2492,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.get
@@ -2591,7 +2579,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -2603,7 +2591,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -2630,12 +2618,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.getEffectiveOrgPolicy
@@ -2643,7 +2635,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ The name of the resource to start computing the effective `Policy`.
-     * @param {().GetEffectiveOrgPolicyRequest} params.requestBody Request body data
+     * @param {().GetEffectiveOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2719,7 +2711,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -2731,7 +2723,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -2759,12 +2751,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.getIamPolicy
@@ -2772,7 +2768,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().GetIamPolicyRequest} params.requestBody Request body data
+     * @param {().GetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2844,7 +2840,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -2856,7 +2852,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -2883,12 +2879,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.getOrgPolicy
@@ -2896,7 +2896,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource the `Policy` is set on.
-     * @param {().GetOrgPolicyRequest} params.requestBody Request body data
+     * @param {().GetOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2970,7 +2970,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -2982,7 +2982,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -3022,12 +3022,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.listAvailableOrgPolicyConstraints
@@ -3035,7 +3039,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource to list `Constraints` for.
-     * @param {().ListAvailableOrgPolicyConstraintsRequest} params.requestBody Request body data
+     * @param {().ListAvailableOrgPolicyConstraintsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3131,7 +3135,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -3143,7 +3147,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -3183,12 +3187,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.listOrgPolicies
@@ -3196,7 +3204,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource to list Policies for.
-     * @param {().ListOrgPoliciesRequest} params.requestBody Request body data
+     * @param {().ListOrgPoliciesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3274,7 +3282,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -3286,7 +3294,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -3323,19 +3331,23 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.search
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().SearchOrganizationsRequest} params.requestBody Request body data
+     * @param {().SearchOrganizationsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3416,7 +3428,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -3428,7 +3440,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -3456,12 +3468,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.setIamPolicy
@@ -3469,7 +3485,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3541,7 +3557,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -3553,7 +3569,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -3580,12 +3596,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.setOrgPolicy
@@ -3593,7 +3613,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Resource name of the resource to attach the `Policy`.
-     * @param {().SetOrgPolicyRequest} params.requestBody Request body data
+     * @param {().SetOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3667,7 +3687,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -3679,7 +3699,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -3707,12 +3727,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.organizations.testIamPermissions
@@ -3720,7 +3744,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3986,7 +4010,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -3998,7 +4022,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -4022,12 +4046,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.clearOrgPolicy
@@ -4035,7 +4063,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource for the `Policy` to clear.
-     * @param {().ClearOrgPolicyRequest} params.requestBody Request body data
+     * @param {().ClearOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4103,11 +4131,11 @@ export namespace cloudresourcemanager_v1 {
 
     /**
      * cloudresourcemanager.projects.create
-     * @desc Request that a new Project be created. The result is an Operation which can be used to track the creation process. This process usually takes a few seconds, but can sometimes take much longer. The tracking Operation is automatically deleted after a few hours, so there is no need to call DeleteOperation.  Authorization requires the Google IAM permission `resourcemanager.projects.create` on the specified parent for the new project. The parent is identified by a specified ResourceId, which must include both an ID and a type, such as organization.  This method does not associate the new project with a billing account. You can set or update the billing account associated with a project using the [`projects.updateBillingInfo`] (/billing/reference/rest/v1/projects/updateBillingInfo) method.
+     * @desc Request that a new Project be created. The result is an Operation which can be used to track the creation process. It is automatically deleted after a few hours, so there is no need to call DeleteOperation.  Our SLO permits Project creation to take up to 30 seconds at the 90th percentile. As of 2016-08-29, we are observing 6 seconds 50th percentile latency. 95th percentile latency is around 11 seconds. We recommend polling at the 5th second with an exponential backoff.  Authorization requires the Google IAM permission `resourcemanager.projects.create` on the specified parent for the new project. The parent is identified by a specified ResourceId, which must include both an ID and a type, such as organization.  This method does not associate the new project with a billing account. You can set or update the billing account associated with a project using the [`projects.updateBillingInfo`] (/billing/reference/rest/v1/projects/updateBillingInfo) method.
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -4119,7 +4147,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -4143,19 +4171,23 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Project} params.requestBody Request body data
+     * @param {().Project} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4225,7 +4257,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -4237,7 +4269,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -4258,12 +4290,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.delete
@@ -4341,7 +4377,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -4353,7 +4389,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -4377,12 +4413,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.get
@@ -4460,7 +4500,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -4472,7 +4512,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -4500,12 +4540,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.getAncestry
@@ -4513,7 +4557,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.projectId The Project ID (for example, `my-project-123`).  Required.
-     * @param {().GetAncestryRequest} params.requestBody Request body data
+     * @param {().GetAncestryRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4589,7 +4633,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -4601,7 +4645,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -4628,12 +4672,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.getEffectiveOrgPolicy
@@ -4641,7 +4689,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ The name of the resource to start computing the effective `Policy`.
-     * @param {().GetEffectiveOrgPolicyRequest} params.requestBody Request body data
+     * @param {().GetEffectiveOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4717,7 +4765,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -4729,7 +4777,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -4757,12 +4805,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.getIamPolicy
@@ -4770,7 +4822,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().GetIamPolicyRequest} params.requestBody Request body data
+     * @param {().GetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4842,7 +4894,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -4854,7 +4906,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -4881,12 +4933,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.getOrgPolicy
@@ -4894,7 +4950,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource the `Policy` is set on.
-     * @param {().GetOrgPolicyRequest} params.requestBody Request body data
+     * @param {().GetOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4968,7 +5024,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -4980,7 +5036,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -5013,12 +5069,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.list
@@ -5099,7 +5159,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -5111,7 +5171,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -5151,12 +5211,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.listAvailableOrgPolicyConstraints
@@ -5164,7 +5228,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource to list `Constraints` for.
-     * @param {().ListAvailableOrgPolicyConstraintsRequest} params.requestBody Request body data
+     * @param {().ListAvailableOrgPolicyConstraintsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5260,7 +5324,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -5272,7 +5336,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -5312,12 +5376,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.listOrgPolicies
@@ -5325,7 +5393,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Name of the resource to list Policies for.
-     * @param {().ListOrgPoliciesRequest} params.requestBody Request body data
+     * @param {().ListOrgPoliciesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5399,11 +5467,11 @@ export namespace cloudresourcemanager_v1 {
 
     /**
      * cloudresourcemanager.projects.setIamPolicy
-     * @desc Sets the IAM access control policy for the specified Project. Overwrites any existing policy.  The following constraints apply when using `setIamPolicy()`:  + Project does not support `allUsers` and `allAuthenticatedUsers` as `members` in a `Binding` of a `Policy`.  + The owner role can be granted to a `user`, `serviceAccount`, or a group that is part of an organization. For example, group@myownpersonaldomain.com could be added as an owner to a project in the myownpersonaldomain.com organization, but not the examplepetstore.com organization.  + Service accounts can be made owners of a project directly without any restrictions. However, to be added as an owner, a user must be invited via Cloud Platform console and must accept the invitation.  + A user cannot be granted the owner role using `setIamPolicy()`. The user must be granted the owner role using the Cloud Platform Console and must explicitly accept the invitation.  + You can only grant ownership of a project to a member by using the GCP Console. Inviting a member will deliver an invitation email that they must accept. An invitation email is not generated if you are granting a role other than owner, or if both the member you are inviting and the project are part of your organization.  + Membership changes that leave the project without any owners that have accepted the Terms of Service (ToS) will be rejected.  + If the project is not part of an organization, there must be at least one owner who has accepted the Terms of Service (ToS) agreement in the policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner from the policy will fail. This restriction also applies to legacy projects that no longer have owners who have accepted the ToS. Edits to IAM policies will be rejected until the lack of a ToS-accepting owner is rectified.  + This method will replace the existing policy, and cannot be used to append additional IAM settings.  Note: Removing service accounts from policies or changing their roles can render services completely inoperable. It is important to understand how the service account is being used before removing or updating its roles.  Authorization requires the Google IAM permission `resourcemanager.projects.setIamPolicy` on the project
+     * @desc Sets the IAM access control policy for the specified Project. Overwrites any existing policy.  The following constraints apply when using `setIamPolicy()`:  + Project does not support `allUsers` and `allAuthenticatedUsers` as `members` in a `Binding` of a `Policy`.  + The owner role can be granted only to `user` and `serviceAccount`.  + Service accounts can be made owners of a project directly without any restrictions. However, to be added as an owner, a user must be invited via Cloud Platform console and must accept the invitation.  + A user cannot be granted the owner role using `setIamPolicy()`. The user must be granted the owner role using the Cloud Platform Console and must explicitly accept the invitation.  + You can only grant ownership of a project to a member by using the GCP Console. Inviting a member will deliver an invitation email that they must accept. An invitation email is not generated if you are granting a role other than owner, or if both the member you are inviting and the project are part of your organization.  + Membership changes that leave the project without any owners that have accepted the Terms of Service (ToS) will be rejected.  + If the project is not part of an organization, there must be at least one owner who has accepted the Terms of Service (ToS) agreement in the policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner from the policy will fail. This restriction also applies to legacy projects that no longer have owners who have accepted the ToS. Edits to IAM policies will be rejected until the lack of a ToS-accepting owner is rectified.  + This method will replace the existing policy, and cannot be used to append additional IAM settings.  Note: Removing service accounts from policies or changing their roles can render services completely inoperable. It is important to understand how the service account is being used before removing or updating its roles.  Authorization requires the Google IAM permission `resourcemanager.projects.setIamPolicy` on the project
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -5415,7 +5483,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -5443,12 +5511,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.setIamPolicy
@@ -5456,7 +5528,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5528,7 +5600,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -5540,7 +5612,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -5567,12 +5639,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.setOrgPolicy
@@ -5580,7 +5656,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ Resource name of the resource to attach the `Policy`.
-     * @param {().SetOrgPolicyRequest} params.requestBody Request body data
+     * @param {().SetOrgPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5654,7 +5730,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -5666,7 +5742,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -5694,12 +5770,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.testIamPermissions
@@ -5707,7 +5787,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5787,7 +5867,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -5799,7 +5879,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -5824,12 +5904,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.undelete
@@ -5837,7 +5921,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.projectId The project ID (for example, `foo-bar-123`).  Required.
-     * @param {().UndeleteProjectRequest} params.requestBody Request body data
+     * @param {().UndeleteProjectRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5909,7 +5993,7 @@ export namespace cloudresourcemanager_v1 {
      * @example
      * * // BEFORE RUNNING:
      * // ---------------
-     * // 1. If not already done, enable the Cloud Resource Manager API
+     * // 1. If not already done, enable the Google Cloud Resource Manager API
      * //    and check the quota for your project at
      * //    https://console.developers.google.com/apis/api/cloudresourcemanager
      * // 2. This sample uses Application Default Credentials for authentication.
@@ -5921,7 +6005,7 @@ export namespace cloudresourcemanager_v1 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var cloudResourceManager = google.cloudresourcemanager('v1');
      *
      * authorize(function(authClient) {
@@ -5950,12 +6034,16 @@ export namespace cloudresourcemanager_v1 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias cloudresourcemanager.projects.update
@@ -5963,7 +6051,7 @@ export namespace cloudresourcemanager_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.projectId The project ID (for example, `my-project-123`).  Required.
-     * @param {().Project} params.requestBody Request body data
+     * @param {().Project} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

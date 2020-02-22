@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -106,19 +108,19 @@ export namespace androidpublisher_v1 {
     /**
      * Whether the subscription will automatically be renewed when it reaches its current expiry time.
      */
-    autoRenewing?: boolean | null;
+    autoRenewing?: boolean;
     /**
      * Time at which the subscription was granted, in milliseconds since the Epoch.
      */
-    initiationTimestampMsec?: string | null;
+    initiationTimestampMsec?: string;
     /**
      * This kind represents a subscriptionPurchase object in the androidpublisher service.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Time at which the subscription will expire, in milliseconds since the Epoch.
      */
-    validUntilTimestampMsec?: string | null;
+    validUntilTimestampMsec?: string;
   }
 
   export class Resource$Purchases {

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -122,15 +124,15 @@ export namespace acceleratedmobilepageurl_v1 {
     /**
      * The AMP URL pointing to the publisher&#39;s web server.
      */
-    ampUrl?: string | null;
+    ampUrl?: string;
     /**
      * The [AMP Cache URL](/amp/cache/overview#amp-cache-url-format) pointing to the cached document in the Google AMP Cache.
      */
-    cdnAmpUrl?: string | null;
+    cdnAmpUrl?: string;
     /**
      * The original non-AMP URL.
      */
-    originalUrl?: string | null;
+    originalUrl?: string;
   }
   /**
    * AMP URL Error resource for a requested URL that couldn&#39;t be found.
@@ -139,15 +141,15 @@ export namespace acceleratedmobilepageurl_v1 {
     /**
      * The error code of an API call.
      */
-    errorCode?: string | null;
+    errorCode?: string;
     /**
      * An optional descriptive error message.
      */
-    errorMessage?: string | null;
+    errorMessage?: string;
     /**
      * The original non-AMP URL.
      */
-    originalUrl?: string | null;
+    originalUrl?: string;
   }
   /**
    * AMP URL request for a batch of URLs.
@@ -156,11 +158,11 @@ export namespace acceleratedmobilepageurl_v1 {
     /**
      * The lookup_strategy being requested.
      */
-    lookupStrategy?: string | null;
+    lookupStrategy?: string;
     /**
      * List of URLs to look up for the paired AMP URLs. The URLs are case-sensitive. Up to 50 URLs per lookup (see [Usage Limits](/amp/cache/reference/limits)).
      */
-    urls?: string[] | null;
+    urls?: string[];
   }
   /**
    * Batch AMP URL response.
@@ -189,7 +191,7 @@ export namespace acceleratedmobilepageurl_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().BatchGetAmpUrlsRequest} params.requestBody Request body data
+     * @param {().BatchGetAmpUrlsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

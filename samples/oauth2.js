@@ -1,4 +1,4 @@
-// Copyright 2012 Google LLC
+// Copyright 2012-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -65,7 +65,7 @@ async function authenticate(scopes) {
             res.end('Authentication successful! Please return to the console.');
             server.destroy();
             const {tokens} = await oauth2Client.getToken(qs.get('code'));
-            oauth2Client.credentials = tokens; // eslint-disable-line require-atomic-updates
+            oauth2Client.credentials = tokens;
             resolve(oauth2Client);
           }
         } catch (e) {

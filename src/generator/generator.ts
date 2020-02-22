@@ -1,4 +1,4 @@
-// Copyright 2014 Google LLC
+// Copyright 2014-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -25,11 +25,10 @@ import {
 } from 'googleapis-common';
 import * as mkdirp from 'mkdirp';
 import * as nunjucks from 'nunjucks';
+import Q = require('p-queue');
 import * as path from 'path';
 import * as url from 'url';
 import * as util from 'util';
-// there is a typings issue with p-queue and TypeScript 3.6.4.
-const {default: Q} = require('p-queue');
 
 const writeFile = util.promisify(fs.writeFile);
 const readDir = util.promisify(fs.readdir);
@@ -237,7 +236,7 @@ export class Generator {
     const queue = new Q({concurrency: 10});
     console.log(`Generating ${apis.length} APIs...`);
     queue.addAll(
-      apis.map((api: {[key: string]: string}) => {
+      apis.map(api => {
         return async () => {
           this.log('Generating API for %s...', api.id);
           this.logResult(
@@ -245,7 +244,7 @@ export class Generator {
             'Attempting first generateAPI call...'
           );
           try {
-            await this.generateAPI(api.discoveryRestUrl);
+            const results = await this.generateAPI(api.discoveryRestUrl);
             this.logResult(api.discoveryRestUrl, `GenerateAPI call success!`);
           } catch (e) {
             this.logResult(
@@ -366,7 +365,7 @@ export class Generator {
                 fragment = fragment.replace(/`\*/gi, '`<');
                 fragment = fragment.replace(/\*`/gi, '>`');
                 const lines = fragment.split('\n');
-                lines.forEach((line: string, i: number) => {
+                lines.forEach((line, i) => {
                   lines[i] = '*' + (line ? ' ' + lines[i] : '');
                 });
                 fragment = lines.join('\n');
@@ -439,7 +438,7 @@ export class Generator {
     await Promise.all(tasks.map(t => t()));
     this.logResult(apiDiscoveryUrl, `Step 2...`);
     const contents = this.env.render(API_TEMPLATE, {api: schema});
-    await mkdirp(path.dirname(exportFilename));
+    await util.promisify(mkdirp)(path.dirname(exportFilename));
     this.logResult(apiDiscoveryUrl, `Step 3...`);
     await writeFile(exportFilename, contents, {encoding: 'utf8'});
     this.logResult(apiDiscoveryUrl, `Template generation complete.`);

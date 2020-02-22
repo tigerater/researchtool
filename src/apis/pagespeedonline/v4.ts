@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -119,45 +121,40 @@ export namespace pagespeedonline_v4 {
       }>;
       type?: string;
       value?: string;
-    }> | null;
+    }>;
     /**
      * A localized format string with {{FOO}} placeholders, where &#39;FOO&#39; is the key of the argument whose value should be substituted. For HYPERLINK arguments, the format string will instead contain {{BEGIN_FOO}} and {{END_FOO}} for the argument with key &#39;FOO&#39;.
      */
-    format?: string | null;
+    format?: string;
   }
   export interface Schema$PagespeedApiImageV4 {
     /**
      * Image data base64 encoded.
      */
-    data?: string | null;
+    data?: string;
     /**
      * Height of screenshot in pixels.
      */
-    height?: number | null;
+    height?: number;
     /**
      * Unique string key, if any, identifying this image.
      */
-    key?: string | null;
+    key?: string;
     /**
      * Mime type of image data (e.g. &quot;image/jpeg&quot;).
      */
-    mime_type?: string | null;
-    page_rect?: {
-      height?: number;
-      left?: number;
-      top?: number;
-      width?: number;
-    } | null;
+    mime_type?: string;
+    page_rect?: {height?: number; left?: number; top?: number; width?: number};
     /**
      * Width of screenshot in pixels.
      */
-    width?: number | null;
+    width?: number;
   }
   export interface Schema$PagespeedApiPagespeedResponseV4 {
     /**
      * The captcha verify result
      */
-    captchaResult?: string | null;
+    captchaResult?: string;
     /**
      * Localized PageSpeed results. Contains a ruleResults entry for each PageSpeed rule instantiated and run by the server.
      */
@@ -179,19 +176,19 @@ export namespace pagespeedonline_v4 {
           }>;
         };
       };
-    } | null;
+    };
     /**
      * Canonicalized and final URL for the document, after following page redirects (if any).
      */
-    id?: string | null;
+    id?: string;
     /**
      * List of rules that were specified in the request, but which the server did not know how to instantiate.
      */
-    invalidRules?: string[] | null;
+    invalidRules?: string[];
     /**
      * Kind of result.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Metrics of end users&#39; page loading experience.
      */
@@ -210,7 +207,7 @@ export namespace pagespeedonline_v4 {
         };
       };
       overall_category?: string;
-    } | null;
+    };
     /**
      * Summary statistics for the page, such as number of JavaScript bytes, number of HTML bytes, etc.
      */
@@ -236,15 +233,15 @@ export namespace pagespeedonline_v4 {
       textResponseBytes?: string;
       totalRequestBytes?: string;
       transientFetchFailureUrls?: string[];
-    } | null;
+    };
     /**
      * Response code for the document. 200 indicates a normal page load. 4xx/5xx indicates an error.
      */
-    responseCode?: number | null;
+    responseCode?: number;
     /**
      * A map with one entry for each rule group in these results.
      */
-    ruleGroups?: {[key: string]: {pass?: boolean; score?: number}} | null;
+    ruleGroups?: {[key: string]: {pass?: boolean; score?: number}};
     /**
      * Base64-encoded screenshot of the page that was analyzed.
      */
@@ -256,11 +253,11 @@ export namespace pagespeedonline_v4 {
     /**
      * Title of the page, as displayed in the browser&#39;s title bar.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The version of PageSpeed used to generate these results.
      */
-    version?: {major?: number; minor?: number} | null;
+    version?: {major?: number; minor?: number};
   }
 
   export class Resource$Pagespeedapi {

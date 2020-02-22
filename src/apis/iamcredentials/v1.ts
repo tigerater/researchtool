@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -119,85 +121,105 @@ export namespace iamcredentials_v1 {
     /**
      * The sequence of service accounts in a delegation chain. Each service account must be granted the `roles/iam.serviceAccountTokenCreator` role on its next service account in the chain. The last service account in the chain must be granted the `roles/iam.serviceAccountTokenCreator` role on the service account that is specified in the `name` field of the request.  The delegates must have the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
      */
-    delegates?: string[] | null;
+    delegates?: string[];
     /**
      * The desired lifetime duration of the access token in seconds. Must be set to a value less than or equal to 3600 (1 hour). If a value is not specified, the token&#39;s lifetime will be set to a default value of one hour.
      */
-    lifetime?: string | null;
+    lifetime?: string;
     /**
-     * Required. Code to identify the scopes to be included in the OAuth 2.0 access token. See https://developers.google.com/identity/protocols/googlescopes for more information. At least one value required.
+     * Code to identify the scopes to be included in the OAuth 2.0 access token. See https://developers.google.com/identity/protocols/googlescopes for more information. At least one value required.
      */
-    scope?: string[] | null;
+    scope?: string[];
   }
   export interface Schema$GenerateAccessTokenResponse {
     /**
      * The OAuth 2.0 access token.
      */
-    accessToken?: string | null;
+    accessToken?: string;
     /**
      * Token expiration time. The expiration time is always set.
      */
-    expireTime?: string | null;
+    expireTime?: string;
+  }
+  export interface Schema$GenerateIdentityBindingAccessTokenRequest {
+    /**
+     * Required. Input token. Must be in JWT format according to RFC7523 (https://tools.ietf.org/html/rfc7523) and must have &#39;kid&#39; field in the header. Supported signing algorithms: RS256 (RS512, ES256, ES512 coming soon). Mandatory payload fields (along the lines of RFC 7523, section 3): - iss: issuer of the token. Must provide a discovery document at        $iss/.well-known/openid-configuration . The document needs to be        formatted according to section 4.2 of the OpenID Connect Discovery        1.0 specification. - iat: Issue time in seconds since epoch. Must be in the past. - exp: Expiration time in seconds since epoch. Must be less than 48 hours        after iat. We recommend to create tokens that last shorter than 6        hours to improve security unless business reasons mandate longer        expiration times. Shorter token lifetimes are generally more secure        since tokens that have been exfiltrated by attackers can be used for        a shorter time. you can configure the maximum lifetime of the        incoming token in the configuration of the mapper.        The resulting Google token will expire within an hour or at &quot;exp&quot;,        whichever is earlier. - sub: JWT subject, identity asserted in the JWT. - aud: Configured in the mapper policy. By default the service account        email.  Claims from the incoming token can be transferred into the output token accoding to the mapper configuration. The outgoing claim size is limited. Outgoing claims size must be less than 4kB serialized as JSON without whitespace.  Example header: {   &quot;alg&quot;: &quot;RS256&quot;,   &quot;kid&quot;: &quot;92a4265e14ab04d4d228a48d10d4ca31610936f8&quot; } Example payload: {   &quot;iss&quot;: &quot;https://accounts.google.com&quot;,   &quot;iat&quot;: 1517963104,   &quot;exp&quot;: 1517966704,   &quot;aud&quot;:   &quot;https://iamcredentials.googleapis.com/google.iam.credentials.v1.CloudGaia&quot;,   &quot;sub&quot;: &quot;113475438248934895348&quot;,   &quot;my_claims&quot;: {     &quot;additional_claim&quot;: &quot;value&quot;   } }
+     */
+    jwt?: string;
+    /**
+     * Code to identify the scopes to be included in the OAuth 2.0 access token. See https://developers.google.com/identity/protocols/googlescopes for more information. At least one value required.
+     */
+    scope?: string[];
+  }
+  export interface Schema$GenerateIdentityBindingAccessTokenResponse {
+    /**
+     * The OAuth 2.0 access token.
+     */
+    accessToken?: string;
+    /**
+     * Token expiration time. The expiration time is always set.
+     */
+    expireTime?: string;
   }
   export interface Schema$GenerateIdTokenRequest {
     /**
-     * Required. The audience for the token, such as the API or account that this token grants access to.
+     * The audience for the token, such as the API or account that this token grants access to.
      */
-    audience?: string | null;
+    audience?: string;
     /**
      * The sequence of service accounts in a delegation chain. Each service account must be granted the `roles/iam.serviceAccountTokenCreator` role on its next service account in the chain. The last service account in the chain must be granted the `roles/iam.serviceAccountTokenCreator` role on the service account that is specified in the `name` field of the request.  The delegates must have the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
      */
-    delegates?: string[] | null;
+    delegates?: string[];
     /**
      * Include the service account email in the token. If set to `true`, the token will contain `email` and `email_verified` claims.
      */
-    includeEmail?: boolean | null;
+    includeEmail?: boolean;
   }
   export interface Schema$GenerateIdTokenResponse {
     /**
      * The OpenId Connect ID token.
      */
-    token?: string | null;
+    token?: string;
   }
   export interface Schema$SignBlobRequest {
     /**
      * The sequence of service accounts in a delegation chain. Each service account must be granted the `roles/iam.serviceAccountTokenCreator` role on its next service account in the chain. The last service account in the chain must be granted the `roles/iam.serviceAccountTokenCreator` role on the service account that is specified in the `name` field of the request.  The delegates must have the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
      */
-    delegates?: string[] | null;
+    delegates?: string[];
     /**
-     * Required. The bytes to sign.
+     * The bytes to sign.
      */
-    payload?: string | null;
+    payload?: string;
   }
   export interface Schema$SignBlobResponse {
     /**
      * The ID of the key used to sign the blob.
      */
-    keyId?: string | null;
+    keyId?: string;
     /**
      * The signed blob.
      */
-    signedBlob?: string | null;
+    signedBlob?: string;
   }
   export interface Schema$SignJwtRequest {
     /**
      * The sequence of service accounts in a delegation chain. Each service account must be granted the `roles/iam.serviceAccountTokenCreator` role on its next service account in the chain. The last service account in the chain must be granted the `roles/iam.serviceAccountTokenCreator` role on the service account that is specified in the `name` field of the request.  The delegates must have the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
      */
-    delegates?: string[] | null;
+    delegates?: string[];
     /**
-     * Required. The JWT payload to sign: a JSON object that contains a JWT Claims Set.
+     * The JWT payload to sign: a JSON object that contains a JWT Claims Set.
      */
-    payload?: string | null;
+    payload?: string;
   }
   export interface Schema$SignJwtResponse {
     /**
      * The ID of the key used to sign the JWT.
      */
-    keyId?: string | null;
+    keyId?: string;
     /**
      * The signed JWT.
      */
-    signedJwt?: string | null;
+    signedJwt?: string;
   }
 
   export class Resource$Projects {
@@ -224,8 +246,8 @@ export namespace iamcredentials_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
-     * @param {().GenerateAccessTokenRequest} params.requestBody Request body data
+     * @param {string} params.name The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
+     * @param {().GenerateAccessTokenRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -301,14 +323,111 @@ export namespace iamcredentials_v1 {
     }
 
     /**
+     * iamcredentials.projects.serviceAccounts.generateIdentityBindingAccessToken
+     * @alias iamcredentials.projects.serviceAccounts.generateIdentityBindingAccessToken
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string} params.name The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
+     * @param {().GenerateIdentityBindingAccessTokenRequest} params.resource Request body data
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    generateIdentityBindingAccessToken(
+      params?: Params$Resource$Projects$Serviceaccounts$Generateidentitybindingaccesstoken,
+      options?: MethodOptions
+    ): GaxiosPromise<Schema$GenerateIdentityBindingAccessTokenResponse>;
+    generateIdentityBindingAccessToken(
+      params: Params$Resource$Projects$Serviceaccounts$Generateidentitybindingaccesstoken,
+      options:
+        | MethodOptions
+        | BodyResponseCallback<
+            Schema$GenerateIdentityBindingAccessTokenResponse
+          >,
+      callback: BodyResponseCallback<
+        Schema$GenerateIdentityBindingAccessTokenResponse
+      >
+    ): void;
+    generateIdentityBindingAccessToken(
+      params: Params$Resource$Projects$Serviceaccounts$Generateidentitybindingaccesstoken,
+      callback: BodyResponseCallback<
+        Schema$GenerateIdentityBindingAccessTokenResponse
+      >
+    ): void;
+    generateIdentityBindingAccessToken(
+      callback: BodyResponseCallback<
+        Schema$GenerateIdentityBindingAccessTokenResponse
+      >
+    ): void;
+    generateIdentityBindingAccessToken(
+      paramsOrCallback?:
+        | Params$Resource$Projects$Serviceaccounts$Generateidentitybindingaccesstoken
+        | BodyResponseCallback<
+            Schema$GenerateIdentityBindingAccessTokenResponse
+          >,
+      optionsOrCallback?:
+        | MethodOptions
+        | BodyResponseCallback<
+            Schema$GenerateIdentityBindingAccessTokenResponse
+          >,
+      callback?: BodyResponseCallback<
+        Schema$GenerateIdentityBindingAccessTokenResponse
+      >
+    ): void | GaxiosPromise<Schema$GenerateIdentityBindingAccessTokenResponse> {
+      let params = (paramsOrCallback ||
+        {}) as Params$Resource$Projects$Serviceaccounts$Generateidentitybindingaccesstoken;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Projects$Serviceaccounts$Generateidentitybindingaccesstoken;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl =
+        options.rootUrl || 'https://iamcredentials.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+          {
+            url: (
+              rootUrl + '/v1/{+name}:generateIdentityBindingAccessToken'
+            ).replace(/([^:]\/)\/+/g, '$1'),
+            method: 'POST',
+          },
+          options
+        ),
+        params,
+        requiredParams: ['name'],
+        pathParams: ['name'],
+        context: this.context,
+      };
+      if (callback) {
+        createAPIRequest<Schema$GenerateIdentityBindingAccessTokenResponse>(
+          parameters,
+          callback
+        );
+      } else {
+        return createAPIRequest<
+          Schema$GenerateIdentityBindingAccessTokenResponse
+        >(parameters);
+      }
+    }
+
+    /**
      * iamcredentials.projects.serviceAccounts.generateIdToken
      * @desc Generates an OpenID Connect ID token for a service account.
      * @alias iamcredentials.projects.serviceAccounts.generateIdToken
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
-     * @param {().GenerateIdTokenRequest} params.requestBody Request body data
+     * @param {string} params.name The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
+     * @param {().GenerateIdTokenRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -387,8 +506,8 @@ export namespace iamcredentials_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
-     * @param {().SignBlobRequest} params.requestBody Request body data
+     * @param {string} params.name The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
+     * @param {().SignBlobRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -463,8 +582,8 @@ export namespace iamcredentials_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
-     * @param {().SignJwtRequest} params.requestBody Request body data
+     * @param {string} params.name The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
+     * @param {().SignJwtRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -541,7 +660,7 @@ export namespace iamcredentials_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
+     * The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
      */
     name?: string;
 
@@ -549,6 +668,23 @@ export namespace iamcredentials_v1 {
      * Request body metadata
      */
     requestBody?: Schema$GenerateAccessTokenRequest;
+  }
+  export interface Params$Resource$Projects$Serviceaccounts$Generateidentitybindingaccesstoken
+    extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+
+    /**
+     * The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
+     */
+    name?: string;
+
+    /**
+     * Request body metadata
+     */
+    requestBody?: Schema$GenerateIdentityBindingAccessTokenRequest;
   }
   export interface Params$Resource$Projects$Serviceaccounts$Generateidtoken
     extends StandardParameters {
@@ -558,7 +694,7 @@ export namespace iamcredentials_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
+     * The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
      */
     name?: string;
 
@@ -575,7 +711,7 @@ export namespace iamcredentials_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
+     * The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
      */
     name?: string;
 
@@ -592,7 +728,7 @@ export namespace iamcredentials_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
+     * The resource name of the service account for which the credentials are requested, in the following format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard character is required; replacing it with a project ID is invalid.
      */
     name?: string;
 

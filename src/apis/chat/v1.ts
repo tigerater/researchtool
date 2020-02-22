@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -122,11 +124,11 @@ export namespace chat_v1 {
     /**
      * The name of the parameter for the action script.
      */
-    key?: string | null;
+    key?: string;
     /**
      * The value of the parameter.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * Parameters that a bot can use to configure how it&#39;s response is posted.
@@ -135,11 +137,11 @@ export namespace chat_v1 {
     /**
      * The type of bot response.
      */
-    type?: string | null;
+    type?: string;
     /**
      * URL for users to auth or config. (Only for REQUEST_CONFIG response types.)
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Annotations associated with the plain-text body of the message.  Example plain-text message body: ``` Hello @FooBot how are you!&quot; ```  The corresponding annotations metadata: ``` &quot;annotations&quot;:[{   &quot;type&quot;:&quot;USER_MENTION&quot;,   &quot;startIndex&quot;:6,   &quot;length&quot;:7,   &quot;userMention&quot;: {     &quot;user&quot;: {       &quot;name&quot;:&quot;users/107946847022116401880&quot;,       &quot;displayName&quot;:&quot;FooBot&quot;,       &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;,       &quot;type&quot;:&quot;BOT&quot;     },     &quot;type&quot;:&quot;MENTION&quot;    } }] ```
@@ -148,15 +150,15 @@ export namespace chat_v1 {
     /**
      * Length of the substring in the plain-text message body this annotation corresponds to.
      */
-    length?: number | null;
+    length?: number;
     /**
      * Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
      */
-    startIndex?: number | null;
+    startIndex?: number;
     /**
      * The type of this annotation.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The metadata of user mention.
      */
@@ -190,7 +192,7 @@ export namespace chat_v1 {
     /**
      * Name of the card.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Sections are separated by a line divider.
      */
@@ -203,7 +205,7 @@ export namespace chat_v1 {
     /**
      * The label used to be displayed in the action menu item.
      */
-    actionLabel?: string | null;
+    actionLabel?: string;
     /**
      * The onclick action for this action item.
      */
@@ -213,19 +215,19 @@ export namespace chat_v1 {
     /**
      * The image&#39;s type (e.g. square border or circular border).
      */
-    imageStyle?: string | null;
+    imageStyle?: string;
     /**
      * The URL of the image in the card header.
      */
-    imageUrl?: string | null;
+    imageUrl?: string;
     /**
      * The subtitle of the card header.
      */
-    subtitle?: string | null;
+    subtitle?: string;
     /**
      * The title must be specified. The header has a fixed height: if both a title and subtitle is specified, each will take up 1 line. If only the title is specified, it will take up both lines.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Hangouts Chat events.
@@ -238,11 +240,11 @@ export namespace chat_v1 {
     /**
      * The URL the bot should redirect the user to after they have completed an authorization or configuration flow outside of Hangouts Chat. See the [Authorizing access to 3p services guide](/hangouts/chat/how-tos/auth-3p) for more information.
      */
-    configCompleteRedirectUrl?: string | null;
+    configCompleteRedirectUrl?: string;
     /**
      * The timestamp indicating when the event was dispatched.
      */
-    eventTime?: string | null;
+    eventTime?: string;
     /**
      * The message that triggered the event, if applicable.
      */
@@ -254,15 +256,15 @@ export namespace chat_v1 {
     /**
      * The bot-defined key for the thread related to the event. See the thread_key field of the `spaces.message.create` request for more information.
      */
-    threadKey?: string | null;
+    threadKey?: string;
     /**
      * A secret value that bots can use to verify if a request is from Google. The token is randomly generated by Google, remains static, and can be obtained from the Hangouts Chat API configuration page in the Cloud Console. Developers can revoke/regenerate it if needed from the same page.
      */
-    token?: string | null;
+    token?: string;
     /**
      * The type of the event.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The user that triggered the event.
      */
@@ -279,7 +281,7 @@ export namespace chat_v1 {
     /**
      * Apps Script function to invoke when the containing element is clicked/activated.
      */
-    actionMethodName?: string | null;
+    actionMethodName?: string;
     /**
      * List of action parameters.
      */
@@ -292,11 +294,11 @@ export namespace chat_v1 {
     /**
      * The aspect ratio of this image (width/height).
      */
-    aspectRatio?: number | null;
+    aspectRatio?: number;
     /**
      * The URL of the image.
      */
-    imageUrl?: string | null;
+    imageUrl?: string;
     /**
      * The onclick action.
      */
@@ -309,15 +311,15 @@ export namespace chat_v1 {
     /**
      * The icon specified by an enum that indices to an icon provided by Chat API.
      */
-    icon?: string | null;
+    icon?: string;
     /**
      * The icon specified by a URL.
      */
-    iconUrl?: string | null;
+    iconUrl?: string;
     /**
      * The name of this image_button which will be used for accessibility. Default value will be provided if developers don&#39;t specify.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The onclick action.
      */
@@ -330,7 +332,7 @@ export namespace chat_v1 {
     /**
      * The text of the bottom label. Formatted text supported.
      */
-    bottomLabel?: string | null;
+    bottomLabel?: string;
     /**
      * A button that can be clicked to trigger an action.
      */
@@ -338,19 +340,19 @@ export namespace chat_v1 {
     /**
      * The text of the content. Formatted text supported and always required.
      */
-    content?: string | null;
+    content?: string;
     /**
      * If the content should be multiline.
      */
-    contentMultiline?: boolean | null;
+    contentMultiline?: boolean;
     /**
      * An enum value that will be replaced by the Chat API with the corresponding icon image.
      */
-    icon?: string | null;
+    icon?: string;
     /**
      * The icon specified by a URL.
      */
-    iconUrl?: string | null;
+    iconUrl?: string;
     /**
      * The onclick action. Only the top label, bottom label and content region are clickable.
      */
@@ -358,7 +360,7 @@ export namespace chat_v1 {
     /**
      * The text of the top label. Formatted text supported.
      */
-    topLabel?: string | null;
+    topLabel?: string;
   }
   export interface Schema$ListMembershipsResponse {
     /**
@@ -368,13 +370,13 @@ export namespace chat_v1 {
     /**
      * Continuation token to retrieve the next page of results. It will be empty for the last page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$ListSpacesResponse {
     /**
      * Continuation token to retrieve the next page of results. It will be empty for the last page of results. Tokens expire in an hour. An error is thrown if an expired token is passed.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * List of spaces in the requested (or first) page.
      */
@@ -387,7 +389,7 @@ export namespace chat_v1 {
     /**
      * The creation time of the membership a.k.a the time at which the member joined the space, if applicable.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Member details.
      */
@@ -395,11 +397,11 @@ export namespace chat_v1 {
     /**
      * Resource name of the membership, in the form &quot;spaces/x/members/*&quot;.  Example: spaces/AAAAMpdlehY/members/105115627578887013105
      */
-    name?: string | null;
+    name?: string;
     /**
      * State of the membership.
      */
-    state?: string | null;
+    state?: string;
   }
   /**
    * A message in Hangouts Chat.
@@ -416,7 +418,7 @@ export namespace chat_v1 {
     /**
      * Plain-text body of the message with all bot mentions stripped out.
      */
-    argumentText?: string | null;
+    argumentText?: string;
     /**
      * Rich, formatted and interactive cards that can be used to display UI elements such as: formatted texts, buttons, clickable images. Cards are normally displayed below the plain-text body of the message.
      */
@@ -424,19 +426,19 @@ export namespace chat_v1 {
     /**
      * Output only. The time at which the message was created in Hangouts Chat server.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * A plain-text description of the message&#39;s cards, used when the actual cards cannot be displayed (e.g. mobile notifications).
      */
-    fallbackText?: string | null;
+    fallbackText?: string;
     /**
      * Resource name, in the form &quot;spaces/x/messages/*&quot;.  Example: spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4
      */
-    name?: string | null;
+    name?: string;
     /**
      * Text for generating preview chips. This text will not be displayed to the user, but any links to images, web pages, videos, etc. included here will generate preview chips.
      */
-    previewText?: string | null;
+    previewText?: string;
     /**
      * The user who created the message.
      */
@@ -448,7 +450,7 @@ export namespace chat_v1 {
     /**
      * Plain-text body of the message.
      */
-    text?: string | null;
+    text?: string;
     /**
      * The thread the message belongs to.
      */
@@ -474,7 +476,7 @@ export namespace chat_v1 {
     /**
      * The URL to open.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * A section contains a collection of widgets that are rendered (vertically) in the order that they are specified. Across all platforms, cards have a narrow fixed width, so there is currently no need for layout properties (e.g. float).
@@ -483,7 +485,7 @@ export namespace chat_v1 {
     /**
      * The header of the section, text formatted supported.
      */
-    header?: string | null;
+    header?: string;
     /**
      * A section must contain at least 1 widget.
      */
@@ -496,15 +498,15 @@ export namespace chat_v1 {
     /**
      * Output only. The display name (only if the space is a room).
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Resource name of the space, in the form &quot;spaces/*&quot;.  Example: spaces/AAAAMpdlehYs
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The type of a space.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * A button with text and onclick action.
@@ -517,13 +519,13 @@ export namespace chat_v1 {
     /**
      * The text of the button.
      */
-    text?: string | null;
+    text?: string;
   }
   /**
    * A paragraph of text. Formatted text supported.
    */
   export interface Schema$TextParagraph {
-    text?: string | null;
+    text?: string;
   }
   /**
    * A thread in Hangouts Chat.
@@ -532,7 +534,7 @@ export namespace chat_v1 {
     /**
      * Resource name, in the form &quot;spaces/x/threads/*&quot;.  Example: spaces/AAAAMpdlehY/threads/UMxbHmzDlr4
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * A user in Hangouts Chat.
@@ -541,15 +543,15 @@ export namespace chat_v1 {
     /**
      * The user&#39;s display name.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Resource name, in the format &quot;users/*&quot;.
      */
-    name?: string | null;
+    name?: string;
     /**
      * User type.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Annotation metadata for user mentions (@).
@@ -558,7 +560,7 @@ export namespace chat_v1 {
     /**
      * The type of user mention.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The user mentioned.
      */
@@ -967,7 +969,7 @@ export namespace chat_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. Space resource name, in the form "spaces/x". Example: spaces/AAAAMpdlehY
      * @param {string=} params.threadKey Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Hangouts Chat thread ID of a thread (created earlier by them) to post further updates to it.  Has no effect if thread field, corresponding to an existing thread, is set in message.
-     * @param {().Message} params.requestBody Request body data
+     * @param {().Message} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1178,8 +1180,8 @@ export namespace chat_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Resource name, in the form "spaces/x/messages/x".  Example: spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4
-     * @param {string=} params.updateMask Required. The field paths to be updated, comma separated if there are multiple.  Currently supported field paths: * text * cards
-     * @param {().Message} params.requestBody Request body data
+     * @param {string=} params.updateMask Required. The field paths to be updated.  Currently supported field paths: "text", "cards".
+     * @param {().Message} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1299,7 +1301,7 @@ export namespace chat_v1 {
      */
     name?: string;
     /**
-     * Required. The field paths to be updated, comma separated if there are multiple.  Currently supported field paths: * text * cards
+     * Required. The field paths to be updated.  Currently supported field paths: "text", "cards".
      */
     updateMask?: string;
 

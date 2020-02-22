@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -89,7 +91,7 @@ export namespace logging_v2 {
   /**
    * Stackdriver Logging API
    *
-   * Writes log entries and manages your Stackdriver Logging configuration. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the &lt;a href=https://cloud.google.com/logging/docs&gt;Stackdriver Logging documentation&lt;/a&gt;.
+   * Writes log entries and manages your Logging configuration.
    *
    * @example
    * const {google} = require('googleapis');
@@ -134,15 +136,6 @@ export namespace logging_v2 {
   }
 
   /**
-   * Options that change functionality of a sink exporting data to BigQuery.
-   */
-  export interface Schema$BigQueryOptions {
-    /**
-     * Optional. Whether to use BigQuery&#39;s partition tables. By default, Logging creates dated tables based on the log entries&#39; timestamps, e.g. syslog_20170523. With partitioned tables the date suffix is no longer present and special query syntax has to be used instead. In both cases, tables are sharded based on UTC timezone.
-     */
-    usePartitionedTables?: boolean | null;
-  }
-  /**
    * BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.
    */
   export interface Schema$BucketOptions {
@@ -170,7 +163,7 @@ export namespace logging_v2 {
     /**
      * The values must be monotonically increasing.
      */
-    bounds?: number[] | null;
+    bounds?: number[];
   }
   /**
    * Specifies an exponential sequence of buckets that have a width that is proportional to the value of the lower bound. Each bucket represents a constant relative uncertainty on a specific value in the bucket.There are num_finite_buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 &lt;= i &lt; N-1): scale * (growth_factor ^ i).  Lower bound (1 &lt;= i &lt; N): scale * (growth_factor ^ (i - 1)).
@@ -179,15 +172,15 @@ export namespace logging_v2 {
     /**
      * Must be greater than 1.
      */
-    growthFactor?: number | null;
+    growthFactor?: number;
     /**
      * Must be greater than 0.
      */
-    numFiniteBuckets?: number | null;
+    numFiniteBuckets?: number;
     /**
      * Must be greater than 0.
      */
-    scale?: number | null;
+    scale?: number;
   }
   /**
    * A common proto for logging HTTP requests. Only contains semantics defined by the HTTP specification. Product-specific logging information MUST be defined in a separate message.
@@ -196,63 +189,63 @@ export namespace logging_v2 {
     /**
      * The number of HTTP response bytes inserted into cache. Set only when a cache fill was attempted.
      */
-    cacheFillBytes?: string | null;
+    cacheFillBytes?: string;
     /**
      * Whether or not an entity was served from cache (with or without validation).
      */
-    cacheHit?: boolean | null;
+    cacheHit?: boolean;
     /**
      * Whether or not a cache lookup was attempted.
      */
-    cacheLookup?: boolean | null;
+    cacheLookup?: boolean;
     /**
      * Whether or not the response was validated with the origin server before being served from cache. This field is only meaningful if cache_hit is True.
      */
-    cacheValidatedWithOriginServer?: boolean | null;
+    cacheValidatedWithOriginServer?: boolean;
     /**
      * The request processing latency on the server, from the time the request was received until the response was sent.
      */
-    latency?: string | null;
+    latency?: string;
     /**
      * Protocol used for the request. Examples: &quot;HTTP/1.1&quot;, &quot;HTTP/2&quot;, &quot;websocket&quot;
      */
-    protocol?: string | null;
+    protocol?: string;
     /**
      * The referer URL of the request, as defined in HTTP/1.1 Header Field Definitions (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
      */
-    referer?: string | null;
+    referer?: string;
     /**
      * The IP address (IPv4 or IPv6) of the client that issued the HTTP request. Examples: &quot;192.168.1.1&quot;, &quot;FE80::0202:B3FF:FE1E:8329&quot;.
      */
-    remoteIp?: string | null;
+    remoteIp?: string;
     /**
      * The request method. Examples: &quot;GET&quot;, &quot;HEAD&quot;, &quot;PUT&quot;, &quot;POST&quot;.
      */
-    requestMethod?: string | null;
+    requestMethod?: string;
     /**
      * The size of the HTTP request message in bytes, including the request headers and the request body.
      */
-    requestSize?: string | null;
+    requestSize?: string;
     /**
      * The scheme (http, https), the host name, the path and the query portion of the URL that was requested. Example: &quot;http://example.com/some/info?color=red&quot;.
      */
-    requestUrl?: string | null;
+    requestUrl?: string;
     /**
      * The size of the HTTP response message sent back to the client, in bytes, including the response headers and the response body.
      */
-    responseSize?: string | null;
+    responseSize?: string;
     /**
      * The IP address (IPv4 or IPv6) of the origin server that the request was sent to.
      */
-    serverIp?: string | null;
+    serverIp?: string;
     /**
      * The response code indicating the status of response. Examples: 200, 404.
      */
-    status?: number | null;
+    status?: number;
     /**
      * The user agent sent by the client. Example: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)&quot;.
      */
-    userAgent?: string | null;
+    userAgent?: string;
   }
   /**
    * A description of a label.
@@ -261,15 +254,15 @@ export namespace logging_v2 {
     /**
      * A human-readable description for the label.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The label key.
      */
-    key?: string | null;
+    key?: string;
     /**
      * The type of data that can be assigned to the label.
      */
-    valueType?: string | null;
+    valueType?: string;
   }
   /**
    * Specifies a linear sequence of buckets that all have the same width (except overflow and underflow). Each bucket represents a constant absolute uncertainty on the specific value in the bucket.There are num_finite_buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 &lt;= i &lt; N-1): offset + (width * i).  Lower bound (1 &lt;= i &lt; N): offset + (width * (i - 1)).
@@ -278,15 +271,15 @@ export namespace logging_v2 {
     /**
      * Must be greater than 0.
      */
-    numFiniteBuckets?: number | null;
+    numFiniteBuckets?: number;
     /**
      * Lower bound of the first bucket.
      */
-    offset?: number | null;
+    offset?: number;
     /**
      * Must be greater than 0.
      */
-    width?: number | null;
+    width?: number;
   }
   /**
    * Result returned from ListExclusions.
@@ -299,36 +292,36 @@ export namespace logging_v2 {
     /**
      * If there might be more results than appear in this response, then nextPageToken is included. To get the next set of results, call the same method again using the value of nextPageToken as pageToken.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * The parameters to ListLogEntries.
    */
   export interface Schema$ListLogEntriesRequest {
     /**
-     * Optional. A filter that chooses which log entries to return. See Advanced Logs Queries. Only log entries that match the filter are returned. An empty filter matches all log entries in the resources listed in resource_names. Referencing a parent resource that is not listed in resource_names will cause the filter to return no results. The maximum length of the filter is 20000 characters.
+     * Optional. A filter that chooses which log entries to return. See Advanced Logs Filters. Only log entries that match the filter are returned. An empty filter matches all log entries in the resources listed in resource_names. Referencing a parent resource that is not listed in resource_names will cause the filter to return no results. The maximum length of the filter is 20000 characters.
      */
-    filter?: string | null;
+    filter?: string;
     /**
      * Optional. How the results should be sorted. Presently, the only permitted values are &quot;timestamp asc&quot; (default) and &quot;timestamp desc&quot;. The first option returns entries in order of increasing values of LogEntry.timestamp (oldest first), and the second option returns entries in order of decreasing timestamps (newest first). Entries with equal timestamps are returned in order of their insert_id values.
      */
-    orderBy?: string | null;
+    orderBy?: string;
     /**
      * Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of next_page_token in the response indicates that more results might be available.
      */
-    pageSize?: number | null;
+    pageSize?: number;
     /**
      * Optional. If present, then retrieve the next batch of results from the preceding call to this method. page_token must be the value of next_page_token from the previous response. The values of other method parameters should be identical to those in the previous call.
      */
-    pageToken?: string | null;
+    pageToken?: string;
     /**
      * Deprecated. Use resource_names instead. One or more project identifiers or project numbers from which to retrieve log entries. Example: &quot;my-project-1A&quot;.
      */
-    projectIds?: string[] | null;
+    projectIds?: string[];
     /**
      * Required. Names of one or more parent resources from which to retrieve log entries: &quot;projects/[PROJECT_ID]&quot; &quot;organizations/[ORGANIZATION_ID]&quot; &quot;billingAccounts/[BILLING_ACCOUNT_ID]&quot; &quot;folders/[FOLDER_ID]&quot; Projects listed in the project_ids field are added to this list.
      */
-    resourceNames?: string[] | null;
+    resourceNames?: string[];
   }
   /**
    * Result returned from ListLogEntries.
@@ -341,7 +334,7 @@ export namespace logging_v2 {
     /**
      * If there might be more results than those appearing in this response, then nextPageToken is included. To get the next set of results, call this method again using the value of nextPageToken as pageToken.If a value for next_page_token appears and the entries field is empty, it means that the search found no log entries so far but it did not have time to search all the possible log entries. Retry the method with this value for page_token to continue the search. Alternatively, consider speeding up the search by changing your filter to specify a single log name or resource type, or to narrow the time range of the search.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Result returned from ListLogMetrics.
@@ -354,20 +347,20 @@ export namespace logging_v2 {
     /**
      * If there might be more results than appear in this response, then nextPageToken is included. To get the next set of results, call this method again using the value of nextPageToken as pageToken.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Result returned from ListLogs.
    */
   export interface Schema$ListLogsResponse {
     /**
-     * A list of log names. For example, &quot;projects/my-project/logs/syslog&quot; or &quot;organizations/123/logs/cloudresourcemanager.googleapis.com%2Factivity&quot;.
+     * A list of log names. For example, &quot;projects/my-project/syslog&quot; or &quot;organizations/123/cloudresourcemanager.googleapis.com%2Factivity&quot;.
      */
-    logNames?: string[] | null;
+    logNames?: string[];
     /**
      * If there might be more results than those appearing in this response, then nextPageToken is included. To get the next set of results, call this method again using the value of nextPageToken as pageToken.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Result returned from ListMonitoredResourceDescriptors.
@@ -376,7 +369,7 @@ export namespace logging_v2 {
     /**
      * If there might be more results than those appearing in this response, then nextPageToken is included. To get the next set of results, call this method again using the value of nextPageToken as pageToken.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * A list of resource descriptors.
      */
@@ -389,7 +382,7 @@ export namespace logging_v2 {
     /**
      * If there might be more results than appear in this response, then nextPageToken is included. To get the next set of results, call the same method again using the value of nextPageToken as pageToken.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * A list of sinks.
      */
@@ -406,19 +399,19 @@ export namespace logging_v2 {
     /**
      * Optional. A unique identifier for the log entry. If you provide a value, then Logging considers other log entries in the same project, with the same timestamp, and with the same insert_id to be duplicates which can be removed. If omitted in new log entries, then Logging assigns its own unique identifier. The insert_id is also used to order log entries that have the same timestamp value.
      */
-    insertId?: string | null;
+    insertId?: string;
     /**
      * The log entry payload, represented as a structure that is expressed as a JSON object.
      */
-    jsonPayload?: {[key: string]: any} | null;
+    jsonPayload?: {[key: string]: any};
     /**
      * Optional. A set of user-defined (key, value) data that provides additional information about the log entry.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Required. The resource name of the log to which this log entry belongs: &quot;projects/[PROJECT_ID]/logs/[LOG_ID]&quot; &quot;organizations/[ORGANIZATION_ID]/logs/[LOG_ID]&quot; &quot;billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]&quot; &quot;folders/[FOLDER_ID]/logs/[LOG_ID]&quot; A project number may optionally be used in place of PROJECT_ID. The project number is translated to its corresponding PROJECT_ID internally and the log_name field will contain PROJECT_ID in queries and exports.[LOG_ID] must be URL-encoded within log_name. Example: &quot;organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity&quot;. [LOG_ID] must be less than 512 characters long and can only include the following characters: upper and lower case alphanumeric characters, forward-slash, underscore, hyphen, and period.For backward compatibility, if log_name begins with a forward-slash, such as /projects/..., then the log entry is ingested as usual but the forward-slash is removed. Listing the log entry will not show the leading slash and filtering for a log name with a leading slash will never return any results.
      */
-    logName?: string | null;
+    logName?: string;
     /**
      * Deprecated. Output only. Additional metadata about the monitored resource.Only k8s_container, k8s_pod, and k8s_node MonitoredResources have this field populated for GKE versions older than 1.12.6. For GKE versions 1.12.6 and above, the metadata field has been deprecated. The Kubernetes pod labels that used to be in metadata.userLabels will now be present in the labels field with a key prefix of k8s-pod/. The Stackdriver system labels that were present in the metadata.systemLabels field will no longer be available in the LogEntry.
      */
@@ -428,21 +421,21 @@ export namespace logging_v2 {
      */
     operation?: Schema$LogEntryOperation;
     /**
-     * The log entry payload, represented as a protocol buffer. Some Google Cloud Platform services use this field for their log entry payloads.The following protocol buffer types are supported; user-defined types are not supported:&quot;type.googleapis.com/google.cloud.audit.AuditLog&quot;  &quot;type.googleapis.com/google.appengine.logging.v1.RequestLog&quot;
+     * The log entry payload, represented as a protocol buffer. Some Google Cloud Platform services use this field for their log entry payloads.
      */
-    protoPayload?: {[key: string]: any} | null;
+    protoPayload?: {[key: string]: any};
     /**
      * Output only. The time the log entry was received by Logging.
      */
-    receiveTimestamp?: string | null;
+    receiveTimestamp?: string;
     /**
-     * Required. The monitored resource that produced this log entry.Example: a log entry that reports a database error would be associated with the monitored resource designating the particular database that reported the error.
+     * Required. The primary monitored resource associated with this log entry.Example: a log entry that reports a database error would be associated with the monitored resource designating the particular database that reported the error.
      */
     resource?: Schema$MonitoredResource;
     /**
      * Optional. The severity of the log entry. The default value is LogSeverity.DEFAULT.
      */
-    severity?: string | null;
+    severity?: string;
     /**
      * Optional. Source code location information associated with the log entry, if any.
      */
@@ -450,23 +443,23 @@ export namespace logging_v2 {
     /**
      * Optional. The span ID within the trace associated with the log entry.For Trace spans, this is the same format that the Trace API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such as &lt;code&gt;&quot;000000000000004a&quot;&lt;/code&gt;.
      */
-    spanId?: string | null;
+    spanId?: string;
     /**
      * The log entry payload, represented as a Unicode string (UTF-8).
      */
-    textPayload?: string | null;
+    textPayload?: string;
     /**
      * Optional. The time the event described by the log entry occurred. This time is used to compute the log entry&#39;s age and to enforce the logs retention period. If this field is omitted in a new log entry, then Logging assigns it the current time. Timestamps have nanosecond accuracy, but trailing zeros in the fractional seconds might be omitted when the timestamp is displayed.Incoming log entries should have timestamps that are no more than the logs retention period in the past, and no more than 24 hours in the future. Log entries outside those time boundaries will not be available when calling entries.list, but those log entries can still be exported with LogSinks.
      */
-    timestamp?: string | null;
+    timestamp?: string;
     /**
      * Optional. Resource name of the trace associated with the log entry, if any. If it contains a relative resource name, the name is assumed to be relative to //tracing.googleapis.com. Example: projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824
      */
-    trace?: string | null;
+    trace?: string;
     /**
      * Optional. The sampling decision of the trace associated with the log entry.True means that the trace resource name in the trace field was sampled for storage in a trace backend. False means that the trace was not sampled for storage when this log entry was written, or the sampling decision was unknown at the time. A non-sampled trace value is still useful as a request correlation identifier. The default is False.
      */
-    traceSampled?: boolean | null;
+    traceSampled?: boolean;
   }
   /**
    * Additional information about a potentially long-running operation with which a log entry is associated.
@@ -475,19 +468,19 @@ export namespace logging_v2 {
     /**
      * Optional. Set this to True if this is the first log entry in the operation.
      */
-    first?: boolean | null;
+    first?: boolean;
     /**
      * Optional. An arbitrary operation identifier. Log entries with the same identifier are assumed to be part of the same operation.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Optional. Set this to True if this is the last log entry in the operation.
      */
-    last?: boolean | null;
+    last?: boolean;
     /**
      * Optional. An arbitrary producer identifier. The combination of id and producer must be globally unique. Examples for producer: &quot;MyDivision.MyBigCompany.com&quot;, &quot;github.com/MyProject/MyApplication&quot;.
      */
-    producer?: string | null;
+    producer?: string;
   }
   /**
    * Additional information about the source code location that produced the log entry.
@@ -496,44 +489,44 @@ export namespace logging_v2 {
     /**
      * Optional. Source file name. Depending on the runtime environment, this might be a simple name or a fully-qualified name.
      */
-    file?: string | null;
+    file?: string;
     /**
      * Optional. Human-readable name of the function or method being invoked, with optional context such as the class or package name. This information may be used in contexts such as the logs viewer, where a file and line number are less meaningful. The format can vary by language. For example: qual.if.ied.Class.method (Java), dir/package.func (Go), function (Python).
      */
-    function?: string | null;
+    function?: string;
     /**
      * Optional. Line within the source file. 1-based; 0 indicates no line number available.
      */
-    line?: string | null;
+    line?: string;
   }
   /**
-   * Specifies a set of log entries that are not to be stored in Logging. If your GCP resource receives a large volume of logs, you can use exclusions to reduce your chargeable logs. Exclusions are processed after log sinks, so you can export log entries before they are excluded. Note that organization-level and folder-level exclusions don&#39;t apply to child resources, and that you can&#39;t exclude audit log entries.
+   * Specifies a set of log entries that are not to be stored in Logging. If your project receives a large volume of logs, you might be able to use exclusions to reduce your chargeable logs. Exclusions are processed after log sinks, so you can export log entries before they are excluded. Audit log entries and log entries from Amazon Web Services are never excluded.
    */
   export interface Schema$LogExclusion {
     /**
      * Output only. The creation timestamp of the exclusion.This field may not be present for older exclusions.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Optional. A description of this exclusion.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Optional. If set to True, then this exclusion is disabled and it does not exclude any log entries. You can update an exclusion to change the value of this field.
      */
-    disabled?: boolean | null;
+    disabled?: boolean;
     /**
-     * Required. An advanced logs filter that matches the log entries to be excluded. By using the sample function, you can exclude less than 100% of the matching log entries. For example, the following query matches 99% of low-severity log entries from Google Cloud Storage buckets:&quot;resource.type=gcs_bucket severity&lt;ERROR sample(insertId, 0.99)&quot;
+     * Required. An advanced logs filter that matches the log entries to be excluded. By using the sample function, you can exclude less than 100% of the matching log entries. For example, the following filter matches 99% of low-severity log entries from load balancers:&quot;resource.type=http_load_balancer severity&lt;ERROR sample(insertId, 0.99)&quot;
      */
-    filter?: string | null;
+    filter?: string;
     /**
-     * Required. A client-assigned identifier, such as &quot;load-balancer-exclusion&quot;. Identifiers are limited to 100 characters and can include only letters, digits, underscores, hyphens, and periods. First character has to be alphanumeric.
+     * Required. A client-assigned identifier, such as &quot;load-balancer-exclusion&quot;. Identifiers are limited to 100 characters and can include only letters, digits, underscores, hyphens, and periods.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The last update timestamp of the exclusion.This field may not be present for older exclusions.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * Application log line emitted while processing a request.
@@ -542,11 +535,11 @@ export namespace logging_v2 {
     /**
      * App-provided log message.
      */
-    logMessage?: string | null;
+    logMessage?: string;
     /**
      * Severity of this log entry.
      */
-    severity?: string | null;
+    severity?: string;
     /**
      * Where in the source code this log message was written.
      */
@@ -554,7 +547,7 @@ export namespace logging_v2 {
     /**
      * Approximate time when this log entry was made.
      */
-    time?: string | null;
+    time?: string;
   }
   /**
    * Describes a logs-based metric. The value of the metric is the number of log entries that match a logs filter in a given time interval.Logs-based metric can also be used to extract values from logs and create a a distribution of the values. The distribution records the statistics of the extracted values along with an optional histogram of the values as specified by the bucket options.
@@ -567,19 +560,19 @@ export namespace logging_v2 {
     /**
      * Output only. The creation timestamp of the metric.This field may not be present for older metrics.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Optional. A description of this metric, which is used in documentation. The maximum length of the description is 8000 characters.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Required. An advanced logs filter which is used to match log entries. Example: &quot;resource.type=gae_app AND severity&gt;=ERROR&quot; The maximum length of the filter is 20000 characters.
      */
-    filter?: string | null;
+    filter?: string;
     /**
      * Optional. A map from a label key string to an extractor expression which is used to extract data from a log entry field and assign as the label value. Each label key specified in the LabelDescriptor must have an associated extractor expression in this map. The syntax of the extractor expression is the same as for the value_extractor field.The extracted value is converted to the type defined in the label descriptor. If the either the extraction or the type conversion fails, the label will have a default value. The default value for a string label is an empty string, for an integer label its 0, and for a boolean label its false.Note that there are upper bounds on the maximum number of labels and the number of active time series that are allowed in a project.
      */
-    labelExtractors?: {[key: string]: string} | null;
+    labelExtractors?: {[key: string]: string};
     /**
      * Optional. The metric descriptor associated with the logs-based metric. If unspecified, it uses a default metric descriptor with a DELTA metric kind, INT64 value type, with no labels and a unit of &quot;1&quot;. Such a metric counts the number of log entries matching the filter expression.The name, type, and description fields in the metric_descriptor are output only, and is constructed using the name and description field in the LogMetric.To create a logs-based metric that records a distribution of log values, a DELTA metric kind with a DISTRIBUTION value type must be used along with a value_extractor expression in the LogMetric.Each label in the metric descriptor must have a matching label name as the key and an extractor expression as the value in the label_extractors map.The metric_kind and value_type fields in the metric_descriptor cannot be updated once initially configured. New labels can be added in the metric_descriptor, but existing labels cannot be modified except for their description.
      */
@@ -587,76 +580,56 @@ export namespace logging_v2 {
     /**
      * Required. The client-assigned metric identifier. Examples: &quot;error_count&quot;, &quot;nginx/requests&quot;.Metric identifiers are limited to 100 characters and can include only the following characters: A-Z, a-z, 0-9, and the special characters _-.,+!*&#39;,()%/. The forward-slash character (/) denotes a hierarchy of name pieces, and it cannot be the first character of the name.The metric identifier in this field must not be URL-encoded (https://en.wikipedia.org/wiki/Percent-encoding). However, when the metric identifier appears as the [METRIC_ID] part of a metric_name API parameter, then the metric identifier must be URL-encoded. Example: &quot;projects/my-project/metrics/nginx%2Frequests&quot;.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The last update timestamp of the metric.This field may not be present for older metrics.
      */
-    updateTime?: string | null;
+    updateTime?: string;
     /**
      * Optional. A value_extractor is required when using a distribution logs-based metric to extract the values to record from a log entry. Two functions are supported for value extraction: EXTRACT(field) or REGEXP_EXTRACT(field, regex). The argument are:  1. field: The name of the log entry field from which the value is to be  extracted.  2. regex: A regular expression using the Google RE2 syntax  (https://github.com/google/re2/wiki/Syntax) with a single capture  group to extract data from the specified log entry field. The value  of the field is converted to a string before applying the regex.  It is an error to specify a regex that does not include exactly one  capture group.The result of the extraction must be convertible to a double type, as the distribution always records double values. If either the extraction or the conversion to double fails, then those values are not recorded in the distribution.Example: REGEXP_EXTRACT(jsonPayload.request, &quot;.*quantity=(\d+).*&quot;)
      */
-    valueExtractor?: string | null;
+    valueExtractor?: string;
     /**
      * Deprecated. The API version that created or updated this metric. The v2 format is used by default and cannot be changed.
      */
-    version?: string | null;
+    version?: string;
   }
   /**
    * Describes a sink used to export log entries to one of the following destinations in any project: a Cloud Storage bucket, a BigQuery dataset, or a Cloud Pub/Sub topic. A logs filter controls which log entries are exported. The sink must be created within a project, organization, billing account, or folder.
    */
   export interface Schema$LogSink {
     /**
-     * Optional. Options that affect sinks exporting data to BigQuery.
-     */
-    bigqueryOptions?: Schema$BigQueryOptions;
-    /**
      * Output only. The creation timestamp of the sink.This field may not be present for older sinks.
      */
-    createTime?: string | null;
-    /**
-     * Optional. A description of this sink. The maximum length of the description is 8000 characters.
-     */
-    description?: string | null;
+    createTime?: string;
     /**
      * Required. The export destination: &quot;storage.googleapis.com/[GCS_BUCKET]&quot; &quot;bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET]&quot; &quot;pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]&quot; The sink&#39;s writer_identity, set when the sink is created, must have permission to write to the destination or else the log entries are not exported. For more information, see Exporting Logs with Sinks.
      */
-    destination?: string | null;
-    /**
-     * Optional. If set to True, then this sink is disabled and it does not export any log entries.
-     */
-    disabled?: boolean | null;
-    /**
-     * Do not use. This field is ignored.
-     */
-    endTime?: string | null;
+    destination?: string;
     /**
      * Optional. An advanced logs filter. The only exported log entries are those that are in the resource owning the sink and that match the filter. For example: logName=&quot;projects/[PROJECT_ID]/logs/[LOG_ID]&quot; AND severity&gt;=ERROR
      */
-    filter?: string | null;
+    filter?: string;
     /**
      * Optional. This field applies only to sinks owned by organizations and folders. If the field is false, the default, only the logs owned by the sink&#39;s parent resource are available for export. If the field is true, then logs from all the projects, folders, and billing accounts contained in the sink&#39;s parent resource are also available for export. Whether a particular log entry from the children is exported depends on the sink&#39;s filter expression. For example, if this field is true, then the filter resource.type=gce_instance would export all Compute Engine VM instance log entries from all projects in the sink&#39;s parent. To only export entries from certain child projects, filter on the project part of the log name: logName:(&quot;projects/test-project1/&quot; OR &quot;projects/test-project2/&quot;) AND resource.type=gce_instance
      */
-    includeChildren?: boolean | null;
+    includeChildren?: boolean;
     /**
-     * Required. The client-assigned sink identifier, unique within the project. Example: &quot;my-syslog-errors-to-pubsub&quot;. Sink identifiers are limited to 100 characters and can include only the following characters: upper and lower-case alphanumeric characters, underscores, hyphens, and periods. First character has to be alphanumeric.
+     * Required. The client-assigned sink identifier, unique within the project. Example: &quot;my-syslog-errors-to-pubsub&quot;. Sink identifiers are limited to 100 characters and can include only the following characters: upper and lower-case alphanumeric characters, underscores, hyphens, and periods.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Deprecated. The log entry format to use for this sink&#39;s exported log entries. The v2 format is used by default and cannot be changed.
      */
-    outputVersionFormat?: string | null;
-    /**
-     * Do not use. This field is ignored.
-     */
-    startTime?: string | null;
+    outputVersionFormat?: string;
     /**
      * Output only. The last update timestamp of the sink.This field may not be present for older sinks.
      */
-    updateTime?: string | null;
+    updateTime?: string;
     /**
      * Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under which Logging writes the exported log entries to the sink&#39;s destination. This field is set by sinks.create and sinks.update based on the value of unique_writer_identity in those methods.Until you grant this identity write-access to the destination, log entry exports from this sink will fail. For more information, see Granting Access for a Resource. Consult the destination service&#39;s documentation to determine the appropriate IAM roles to assign to the identity.
      */
-    writerIdentity?: string | null;
+    writerIdentity?: string;
   }
   /**
    * Defines a metric type and its schema. Once a metric descriptor is created, deleting or altering it stops data collection and makes the metric type&#39;s existing data unusable.
@@ -665,19 +638,15 @@ export namespace logging_v2 {
     /**
      * A detailed description of the metric, which can be used in documentation.
      */
-    description?: string | null;
+    description?: string;
     /**
      * A concise name for the metric, which can be displayed in user interfaces. Use sentence case without an ending period, for example &quot;Request count&quot;. This field is optional but it is recommended to be set for any metrics associated with user-visible concepts, such as Quota.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The set of labels that can be used to describe a specific instance of this metric type. For example, the appengine.googleapis.com/http/server/response_latencies metric type has a label for the HTTP response code, response_code, so you can look at latencies for successful responses or just for responses that failed.
      */
     labels?: Schema$LabelDescriptor[];
-    /**
-     * Optional. The launch stage of the metric definition.
-     */
-    launchStage?: string | null;
     /**
      * Optional. Metadata which can be used to guide usage of the metric.
      */
@@ -685,27 +654,23 @@ export namespace logging_v2 {
     /**
      * Whether the metric records instantaneous values, changes to a value, etc. Some combinations of metric_kind and value_type might not be supported.
      */
-    metricKind?: string | null;
-    /**
-     * Read-only. If present, then a time series, which is identified partially by a metric type and a MonitoredResourceDescriptor, that is associated with this metric type can only be associated with one of the monitored resource types listed here.
-     */
-    monitoredResourceTypes?: string[] | null;
+    metricKind?: string;
     /**
      * The resource name of the metric descriptor.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The metric type, including its DNS name prefix. The type is not URL-encoded. All user-defined metric types have the DNS name custom.googleapis.com or external.googleapis.com. Metric types should use a natural hierarchical grouping. For example: &quot;custom.googleapis.com/invoice/paid/amount&quot; &quot;external.googleapis.com/prometheus/up&quot; &quot;appengine.googleapis.com/http/server/response_latencies&quot;
      */
-    type?: string | null;
+    type?: string;
     /**
-     * Ki kibi (2^10) Mi mebi (2^20) Gi gibi (2^30) Ti tebi (2^40) Pi pebi (2^50)GrammarThe grammar also includes these connectors: / division or ratio (as an infix operator). For examples,  kBy/{email} or MiBy/10ms (although you should almost never  have /s in a metric unit; rates should always be computed at  query time from the underlying cumulative or delta value). . multiplication or composition (as an infix operator). For  examples, GBy.d or k{watt}.h.The grammar for a unit is as follows: Expression = Component { &quot;.&quot; Component } { &quot;/&quot; Component } ;  Component = ( [ PREFIX ] UNIT | &quot;%&quot; ) [ Annotation ]           | Annotation           | &quot;1&quot;           ;  Annotation = &quot;{&quot; NAME &quot;}&quot; ; Notes: Annotation is just a comment if it follows a UNIT. If the annotation  is used alone, then the unit is equivalent to 1. For examples,  {request}/s == 1/s, By{transmitted}/s == By/s. NAME is a sequence of non-blank printable ASCII characters not  containing { or }. 1 represents a unitary dimensionless  unit (https://en.wikipedia.org/wiki/Dimensionless_quantity) of 1, such  as in 1/s. It is typically used when none of the basic units are  appropriate. For example, &quot;new users per day&quot; can be represented as  1/d or {new-users}/d (and a metric value 5 would mean &quot;5 new  users). Alternatively, &quot;thousands of page views per day&quot; would be  represented as 1000/d or k1/d or k{page_views}/d (and a metric  value of 5.3 would mean &quot;5300 page views per day&quot;). % represents dimensionless value of 1/100, and annotates values giving  a percentage (so the metric values are typically in the range of 0..100,  and a metric value 3 means &quot;3 percent&quot;). 10^2.% indicates a metric contains a ratio, typically in the range  0..1, that will be multiplied by 100 and displayed as a percentage  (so a metric value 0.03 means &quot;3 percent&quot;).
+     * The unit in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The supported units are a subset of The Unified Code for Units of Measure (http://unitsofmeasure.org/ucum.html) standard:Basic units (UNIT) bit bit By byte s second min minute h hour d dayPrefixes (PREFIX) k kilo (10**3) M mega (10**6) G giga (10**9) T tera (10**12) P peta (10**15) E exa (10**18) Z zetta (10**21) Y yotta (10**24) m milli (10**-3) u micro (10**-6) n nano (10**-9) p pico (10**-12) f femto (10**-15) a atto (10**-18) z zepto (10**-21) y yocto (10**-24) Ki kibi (2**10) Mi mebi (2**20) Gi gibi (2**30) Ti tebi (2**40)GrammarThe grammar also includes these connectors: / division (as an infix operator, e.g. 1/s). . multiplication (as an infix operator, e.g. GBy.d)The grammar for a unit is as follows: Expression = Component { &quot;.&quot; Component } { &quot;/&quot; Component } ;  Component = ( [ PREFIX ] UNIT | &quot;%&quot; ) [ Annotation ]           | Annotation           | &quot;1&quot;           ;  Annotation = &quot;{&quot; NAME &quot;}&quot; ; Notes: Annotation is just a comment if it follows a UNIT and is  equivalent to 1 if it is used alone. For examples,  {requests}/s == 1/s, By{transmitted}/s == By/s. NAME is a sequence of non-blank printable ASCII characters not  containing &#39;{&#39; or &#39;}&#39;. 1 represents dimensionless value 1, such as in 1/s. % represents dimensionless value 1/100, and annotates values giving  a percentage.
      */
-    unit?: string | null;
+    unit?: string;
     /**
      * Whether the measurement is an integer, a floating-point number, etc. Some combinations of metric_kind and value_type might not be supported.
      */
-    valueType?: string | null;
+    valueType?: string;
   }
   /**
    * Additional annotations that can be used to guide the usage of a metric.
@@ -714,15 +679,15 @@ export namespace logging_v2 {
     /**
      * The delay of data points caused by ingestion. Data points older than this age are guaranteed to be ingested and available to be read, excluding data loss due to errors.
      */
-    ingestDelay?: string | null;
+    ingestDelay?: string;
     /**
-     * Deprecated. Must use the MetricDescriptor.launch_stage instead.
+     * The launch stage of the metric definition.
      */
-    launchStage?: string | null;
+    launchStage?: string;
     /**
      * The sampling period of metric data points. For metrics which are written periodically, consecutive data points are stored at this time interval, excluding data loss due to errors. Metrics with a higher granularity have a smaller sampling period.
      */
-    samplePeriod?: string | null;
+    samplePeriod?: string;
   }
   /**
    * An object representing a resource that can be used for monitoring, logging, billing, or other purposes. Examples include virtual machine instances, databases, and storage devices such as disks. The type field identifies a MonitoredResourceDescriptor object that describes the resource&#39;s schema. Information in the labels field identifies the actual resource and its attributes according to the schema. For example, a particular Compute Engine VM instance could be represented by the following object, because the MonitoredResourceDescriptor for &quot;gce_instance&quot; has labels &quot;instance_id&quot; and &quot;zone&quot;: { &quot;type&quot;: &quot;gce_instance&quot;,   &quot;labels&quot;: { &quot;instance_id&quot;: &quot;12345678901234&quot;,               &quot;zone&quot;: &quot;us-central1-a&quot; }}
@@ -731,11 +696,11 @@ export namespace logging_v2 {
     /**
      * Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Compute Engine VM instances use the labels &quot;project_id&quot;, &quot;instance_id&quot;, and &quot;zone&quot;.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Compute Engine VM instance is gce_instance.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of &quot;gce_instance&quot; and specifies the use of the labels &quot;instance_id&quot; and &quot;zone&quot; to identify particular VM instances.Different APIs can support different monitored resource types. APIs generally provide a list method that returns the monitored resource descriptors used by the API.
@@ -744,11 +709,11 @@ export namespace logging_v2 {
     /**
      * Optional. A detailed description of the monitored resource type that might be used in documentation.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Optional. A concise name for the monitored resource type that might be displayed in user interfaces. It should be a Title Cased Noun Phrase, without any article or other determiners. For example, &quot;Google Cloud SQL Database&quot;.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Required. A set of labels used to describe instances of this monitored resource type. For example, an individual Google Cloud SQL database is identified by values for the labels &quot;database_id&quot; and &quot;zone&quot;.
      */
@@ -756,15 +721,15 @@ export namespace logging_v2 {
     /**
      * Optional. The launch stage of the monitored resource definition.
      */
-    launchStage?: string | null;
+    launchStage?: string;
     /**
      * Optional. The resource name of the monitored resource descriptor: &quot;projects/{project_id}/monitoredResourceDescriptors/{type}&quot; where {type} is the value of the type field in this object and {project_id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format &quot;monitoredResourceDescriptors/{type}&quot;.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Required. The monitored resource type. For example, the type &quot;cloudsql_database&quot; represents databases in Google Cloud SQL. The maximum length of this value is 256 characters.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Auxiliary metadata for a MonitoredResource object. MonitoredResource objects contain the minimum set of information to uniquely identify a monitored resource instance. There is some other useful auxiliary metadata. Monitoring and Logging use an ingestion pipeline to extract metadata for cloud resources of all types, and store the metadata in this message.
@@ -773,11 +738,11 @@ export namespace logging_v2 {
     /**
      * Output only. Values for predefined system metadata labels. System labels are a kind of metadata extracted by Google, including &quot;machine_image&quot;, &quot;vpc&quot;, &quot;subnet_id&quot;, &quot;security_group&quot;, &quot;name&quot;, etc. System label values can be only strings, Boolean values, or a list of strings. For example: { &quot;name&quot;: &quot;my-test-instance&quot;,   &quot;security_group&quot;: [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;],   &quot;spot_instance&quot;: false }
      */
-    systemLabels?: {[key: string]: any} | null;
+    systemLabels?: {[key: string]: any};
     /**
      * Output only. A map of user-defined metadata labels.
      */
-    userLabels?: {[key: string]: string} | null;
+    userLabels?: {[key: string]: string};
   }
   /**
    * Complete log information about a single HTTP request to an App Engine application.
@@ -786,51 +751,51 @@ export namespace logging_v2 {
     /**
      * App Engine release version.
      */
-    appEngineRelease?: string | null;
+    appEngineRelease?: string;
     /**
      * Application that handled this request.
      */
-    appId?: string | null;
+    appId?: string;
     /**
      * An indication of the relative cost of serving this request.
      */
-    cost?: number | null;
+    cost?: number;
     /**
      * Time when the request finished.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * Whether this request is finished or active.
      */
-    finished?: boolean | null;
+    finished?: boolean;
     /**
      * Whether this is the first RequestLog entry for this request. If an active request has several RequestLog entries written to Stackdriver Logging, then this field will be set for one of them.
      */
-    first?: boolean | null;
+    first?: boolean;
     /**
      * Internet host and port number of the resource being requested.
      */
-    host?: string | null;
+    host?: string;
     /**
      * HTTP version of request. Example: &quot;HTTP/1.1&quot;.
      */
-    httpVersion?: string | null;
+    httpVersion?: string;
     /**
      * An identifier for the instance that handled the request.
      */
-    instanceId?: string | null;
+    instanceId?: string;
     /**
      * If the instance processing this request belongs to a manually scaled module, then this is the 0-based index of the instance. Otherwise, this value is -1.
      */
-    instanceIndex?: number | null;
+    instanceIndex?: number;
     /**
      * Origin IP address.
      */
-    ip?: string | null;
+    ip?: string;
     /**
      * Latency of the request.
      */
-    latency?: string | null;
+    latency?: string;
     /**
      * A list of log lines emitted by the application while serving this request.
      */
@@ -838,39 +803,39 @@ export namespace logging_v2 {
     /**
      * Number of CPU megacycles used to process request.
      */
-    megaCycles?: string | null;
+    megaCycles?: string;
     /**
      * Request method. Example: &quot;GET&quot;, &quot;HEAD&quot;, &quot;PUT&quot;, &quot;POST&quot;, &quot;DELETE&quot;.
      */
-    method?: string | null;
+    method?: string;
     /**
      * Module of the application that handled this request.
      */
-    moduleId?: string | null;
+    moduleId?: string;
     /**
      * The logged-in user who made the request.Most likely, this is the part of the user&#39;s email before the @ sign. The field value is the same for different requests from the same user, but different users can have similar names. This information is also available to the application via the App Engine Users API.This field will be populated starting with App Engine 1.9.21.
      */
-    nickname?: string | null;
+    nickname?: string;
     /**
      * Time this request spent in the pending request queue.
      */
-    pendingTime?: string | null;
+    pendingTime?: string;
     /**
      * Referrer URL of request.
      */
-    referrer?: string | null;
+    referrer?: string;
     /**
      * Globally unique identifier for a request, which is based on the request start time. Request IDs for requests which started later will compare greater as strings than those for requests which started earlier.
      */
-    requestId?: string | null;
+    requestId?: string;
     /**
      * Contains the path and query portion of the URL that was requested. For example, if the URL was &quot;http://example.com/app?name=val&quot;, the resource would be &quot;/app?name=val&quot;. The fragment identifier, which is identified by the # character, is not included.
      */
-    resource?: string | null;
+    resource?: string;
     /**
      * Size in bytes sent back to client by request.
      */
-    responseSize?: string | null;
+    responseSize?: string;
     /**
      * Source code for the application that handled this request. There can be more than one source reference per deployed application if source code is distributed among multiple repositories.
      */
@@ -878,43 +843,43 @@ export namespace logging_v2 {
     /**
      * Time when the request started.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * HTTP response status code. Example: 200, 404.
      */
-    status?: number | null;
+    status?: number;
     /**
      * Task name of the request, in the case of an offline request.
      */
-    taskName?: string | null;
+    taskName?: string;
     /**
      * Queue name of the request, in the case of an offline request.
      */
-    taskQueueName?: string | null;
+    taskQueueName?: string;
     /**
      * Stackdriver Trace identifier for this request.
      */
-    traceId?: string | null;
+    traceId?: string;
     /**
      * If true, the value in the &#39;trace_id&#39; field was sampled for storage in a trace backend.
      */
-    traceSampled?: boolean | null;
+    traceSampled?: boolean;
     /**
      * File or class that handled the request.
      */
-    urlMapEntry?: string | null;
+    urlMapEntry?: string;
     /**
      * User agent that made the request.
      */
-    userAgent?: string | null;
+    userAgent?: string;
     /**
      * Version of the application that handled this request.
      */
-    versionId?: string | null;
+    versionId?: string;
     /**
      * Whether this was a loading request for the instance.
      */
-    wasLoadingRequest?: boolean | null;
+    wasLoadingRequest?: boolean;
   }
   /**
    * Specifies a location in a source code file.
@@ -923,15 +888,15 @@ export namespace logging_v2 {
     /**
      * Source file name. Depending on the runtime environment, this might be a simple name or a fully-qualified name.
      */
-    file?: string | null;
+    file?: string;
     /**
      * Human-readable name of the function or method being invoked, with optional context such as the class or package name. This information is used in contexts such as the logs viewer, where a file and line number are less meaningful. The format can vary by language. For example: qual.if.ied.Class.method (Java), dir/package.func (Go), function (Python).
      */
-    functionName?: string | null;
+    functionName?: string;
     /**
      * Line within the source file.
      */
-    line?: string | null;
+    line?: string;
   }
   /**
    * A reference to a particular snapshot of the source tree used to build and deploy an application.
@@ -940,11 +905,11 @@ export namespace logging_v2 {
     /**
      * Optional. A URI string identifying the repository. Example: &quot;https://github.com/GoogleCloudPlatform/kubernetes.git&quot;
      */
-    repository?: string | null;
+    repository?: string;
     /**
      * The canonical and persistent identifier of the deployed revision. Example (git): &quot;0035781c50ec7aa23385dc841529ce8a4b70db1b&quot;
      */
-    revisionId?: string | null;
+    revisionId?: string;
   }
   /**
    * The parameters to WriteLogEntries.
@@ -953,7 +918,7 @@ export namespace logging_v2 {
     /**
      * Optional. If true, the request should expect normal response, but the entries won&#39;t be persisted nor exported. Useful for checking whether the logging API endpoints are working properly before sending valuable data.
      */
-    dryRun?: boolean | null;
+    dryRun?: boolean;
     /**
      * Required. The log entries to send to Logging. The order of log entries in this list does not matter. Values supplied in this method&#39;s log_name, resource, and labels fields are copied into those log entries in this list that do not include values for their corresponding fields. For more information, see the LogEntry type.If the timestamp or insert_id fields are missing in log entries, then this method supplies the current time or a unique identifier, respectively. The supplied values are chosen so that, among the log entries that did not supply their own values, the entries earlier in the list will sort before the entries later in the list. See the entries.list method.Log entries with timestamps that are more than the logs retention period in the past or more than 24 hours in the future will not be available when calling entries.list. However, those log entries can still be exported with LogSinks.To improve throughput and to avoid exceeding the quota limit for calls to entries.write, you should try to include several log entries in this list, rather than calling this method for each individual log entry.
      */
@@ -961,15 +926,15 @@ export namespace logging_v2 {
     /**
      * Optional. Default labels that are added to the labels field of all log entries in entries. If a log entry already has a label with the same key as a label in this parameter, then the log entry&#39;s label is not changed. See LogEntry.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Optional. A default log resource name that is assigned to all log entries in entries that do not specify a value for log_name: &quot;projects/[PROJECT_ID]/logs/[LOG_ID]&quot; &quot;organizations/[ORGANIZATION_ID]/logs/[LOG_ID]&quot; &quot;billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]&quot; &quot;folders/[FOLDER_ID]/logs/[LOG_ID]&quot; [LOG_ID] must be URL-encoded. For example: &quot;projects/my-project-id/logs/syslog&quot; &quot;organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity&quot; The permission &lt;code&gt;logging.logEntries.create&lt;/code&gt; is needed on each project, organization, billing account, or folder that is receiving new log entries, whether the resource is specified in &lt;code&gt;logName&lt;/code&gt; or in an individual log entry.
      */
-    logName?: string | null;
+    logName?: string;
     /**
      * Optional. Whether valid entries should be written even if some other entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any entry is not written, then the response status is the error associated with one of the failed entries and the response includes error details keyed by the entries&#39; zero-based index in the entries.write method.
      */
-    partialSuccess?: boolean | null;
+    partialSuccess?: boolean;
     /**
      * Optional. A default monitored resource object that is assigned to all log entries in entries that do not specify a value for resource. Example: { &quot;type&quot;: &quot;gce_instance&quot;,   &quot;labels&quot;: {     &quot;zone&quot;: &quot;us-central1-a&quot;, &quot;instance_id&quot;: &quot;00000000000000000000&quot; }} See LogEntry.
      */
@@ -1007,7 +972,7 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The parent resource in which to create the exclusion: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" Examples: "projects/my-logging-project", "organizations/123456789".
-     * @param {().LogExclusion} params.requestBody Request body data
+     * @param {().LogExclusion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1300,8 +1265,8 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The resource name of the exclusion to update: "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]" "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]" "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]" Example: "projects/my-project-id/exclusions/my-exclusion-id".
-     * @param {string=} params.updateMask Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
-     * @param {().LogExclusion} params.requestBody Request body data
+     * @param {string=} params.updateMask Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
+     * @param {().LogExclusion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1439,7 +1404,7 @@ export namespace logging_v2 {
      */
     name?: string;
     /**
-     * Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
+     * Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
      */
     updateMask?: string;
 
@@ -1457,7 +1422,7 @@ export namespace logging_v2 {
 
     /**
      * logging.billingAccounts.logs.delete
-     * @desc Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.
+     * @desc Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
      * @alias logging.billingAccounts.logs.delete
      * @memberOf! ()
      *
@@ -1646,7 +1611,7 @@ export namespace logging_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The resource in which to create the sink: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" Examples: "projects/my-logging-project", "organizations/123456789".
      * @param {boolean=} params.uniqueWriterIdentity Optional. Determines the kind of IAM identity returned as writer_identity in the new sink. If this value is omitted or set to false, and if the sink's parent is a project, then the value returned as writer_identity is the same group or service account used by Logging before the addition of writer identities to this API. The sink's destination must be in the same project as the sink itself.If this field is set to true, or if the sink is owned by a non-project resource such as an organization, then the value of writer_identity will be a unique service account used only for exports from the new sink. For more information, see writer_identity in LogSink.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1935,7 +1900,7 @@ export namespace logging_v2 {
      * @param {string} params.sinkName Required. The full resource name of the sink to update, including the parent resource and the sink identifier: "projects/[PROJECT_ID]/sinks/[SINK_ID]" "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]" "folders/[FOLDER_ID]/sinks/[SINK_ID]" Example: "projects/my-project-id/sinks/my-sink-id".
      * @param {boolean=} params.uniqueWriterIdentity Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field: If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity. If the old value is false and the new value is true, then writer_identity is changed to a unique service account. It is an error if the old value is true and the new value is set to false or defaulted to false.
      * @param {string=} params.updateMask Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskExample: updateMask=filter.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2007,7 +1972,7 @@ export namespace logging_v2 {
      * @param {string} params.sinkName Required. The full resource name of the sink to update, including the parent resource and the sink identifier: "projects/[PROJECT_ID]/sinks/[SINK_ID]" "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]" "folders/[FOLDER_ID]/sinks/[SINK_ID]" Example: "projects/my-project-id/sinks/my-sink-id".
      * @param {boolean=} params.uniqueWriterIdentity Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field: If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity. If the old value is false and the new value is true, then writer_identity is changed to a unique service account. It is an error if the old value is true and the new value is set to false or defaulted to false.
      * @param {string=} params.updateMask Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskExample: updateMask=filter.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2199,7 +2164,7 @@ export namespace logging_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().ListLogEntriesRequest} params.requestBody Request body data
+     * @param {().ListLogEntriesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2271,7 +2236,7 @@ export namespace logging_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().WriteLogEntriesRequest} params.requestBody Request body data
+     * @param {().WriteLogEntriesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2374,7 +2339,7 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The parent resource in which to create the exclusion: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" Examples: "projects/my-logging-project", "organizations/123456789".
-     * @param {().LogExclusion} params.requestBody Request body data
+     * @param {().LogExclusion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2665,8 +2630,8 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The resource name of the exclusion to update: "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]" "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]" "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]" Example: "projects/my-project-id/exclusions/my-exclusion-id".
-     * @param {string=} params.updateMask Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
-     * @param {().LogExclusion} params.requestBody Request body data
+     * @param {string=} params.updateMask Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
+     * @param {().LogExclusion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2800,7 +2765,7 @@ export namespace logging_v2 {
      */
     name?: string;
     /**
-     * Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
+     * Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
      */
     updateMask?: string;
 
@@ -2837,7 +2802,7 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The parent resource in which to create the exclusion: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" Examples: "projects/my-logging-project", "organizations/123456789".
-     * @param {().LogExclusion} params.requestBody Request body data
+     * @param {().LogExclusion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3130,8 +3095,8 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The resource name of the exclusion to update: "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]" "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]" "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]" Example: "projects/my-project-id/exclusions/my-exclusion-id".
-     * @param {string=} params.updateMask Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
-     * @param {().LogExclusion} params.requestBody Request body data
+     * @param {string=} params.updateMask Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
+     * @param {().LogExclusion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3269,7 +3234,7 @@ export namespace logging_v2 {
      */
     name?: string;
     /**
-     * Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
+     * Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
      */
     updateMask?: string;
 
@@ -3287,7 +3252,7 @@ export namespace logging_v2 {
 
     /**
      * logging.folders.logs.delete
-     * @desc Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.
+     * @desc Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
      * @alias logging.folders.logs.delete
      * @memberOf! ()
      *
@@ -3476,7 +3441,7 @@ export namespace logging_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The resource in which to create the sink: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" Examples: "projects/my-logging-project", "organizations/123456789".
      * @param {boolean=} params.uniqueWriterIdentity Optional. Determines the kind of IAM identity returned as writer_identity in the new sink. If this value is omitted or set to false, and if the sink's parent is a project, then the value returned as writer_identity is the same group or service account used by Logging before the addition of writer identities to this API. The sink's destination must be in the same project as the sink itself.If this field is set to true, or if the sink is owned by a non-project resource such as an organization, then the value of writer_identity will be a unique service account used only for exports from the new sink. For more information, see writer_identity in LogSink.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3765,7 +3730,7 @@ export namespace logging_v2 {
      * @param {string} params.sinkName Required. The full resource name of the sink to update, including the parent resource and the sink identifier: "projects/[PROJECT_ID]/sinks/[SINK_ID]" "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]" "folders/[FOLDER_ID]/sinks/[SINK_ID]" Example: "projects/my-project-id/sinks/my-sink-id".
      * @param {boolean=} params.uniqueWriterIdentity Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field: If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity. If the old value is false and the new value is true, then writer_identity is changed to a unique service account. It is an error if the old value is true and the new value is set to false or defaulted to false.
      * @param {string=} params.updateMask Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskExample: updateMask=filter.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3837,7 +3802,7 @@ export namespace logging_v2 {
      * @param {string} params.sinkName Required. The full resource name of the sink to update, including the parent resource and the sink identifier: "projects/[PROJECT_ID]/sinks/[SINK_ID]" "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]" "folders/[FOLDER_ID]/sinks/[SINK_ID]" Example: "projects/my-project-id/sinks/my-sink-id".
      * @param {boolean=} params.uniqueWriterIdentity Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field: If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity. If the old value is false and the new value is true, then writer_identity is changed to a unique service account. It is an error if the old value is true and the new value is set to false or defaulted to false.
      * @param {string=} params.updateMask Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskExample: updateMask=filter.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4024,7 +3989,7 @@ export namespace logging_v2 {
 
     /**
      * logging.logs.delete
-     * @desc Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.
+     * @desc Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
      * @alias logging.logs.delete
      * @memberOf! ()
      *
@@ -4337,7 +4302,7 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The parent resource in which to create the exclusion: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" Examples: "projects/my-logging-project", "organizations/123456789".
-     * @param {().LogExclusion} params.requestBody Request body data
+     * @param {().LogExclusion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4630,8 +4595,8 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The resource name of the exclusion to update: "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]" "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]" "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]" Example: "projects/my-project-id/exclusions/my-exclusion-id".
-     * @param {string=} params.updateMask Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
-     * @param {().LogExclusion} params.requestBody Request body data
+     * @param {string=} params.updateMask Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
+     * @param {().LogExclusion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4769,7 +4734,7 @@ export namespace logging_v2 {
      */
     name?: string;
     /**
-     * Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
+     * Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
      */
     updateMask?: string;
 
@@ -4787,7 +4752,7 @@ export namespace logging_v2 {
 
     /**
      * logging.organizations.logs.delete
-     * @desc Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.
+     * @desc Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
      * @alias logging.organizations.logs.delete
      * @memberOf! ()
      *
@@ -4976,7 +4941,7 @@ export namespace logging_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The resource in which to create the sink: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" Examples: "projects/my-logging-project", "organizations/123456789".
      * @param {boolean=} params.uniqueWriterIdentity Optional. Determines the kind of IAM identity returned as writer_identity in the new sink. If this value is omitted or set to false, and if the sink's parent is a project, then the value returned as writer_identity is the same group or service account used by Logging before the addition of writer identities to this API. The sink's destination must be in the same project as the sink itself.If this field is set to true, or if the sink is owned by a non-project resource such as an organization, then the value of writer_identity will be a unique service account used only for exports from the new sink. For more information, see writer_identity in LogSink.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5265,7 +5230,7 @@ export namespace logging_v2 {
      * @param {string} params.sinkName Required. The full resource name of the sink to update, including the parent resource and the sink identifier: "projects/[PROJECT_ID]/sinks/[SINK_ID]" "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]" "folders/[FOLDER_ID]/sinks/[SINK_ID]" Example: "projects/my-project-id/sinks/my-sink-id".
      * @param {boolean=} params.uniqueWriterIdentity Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field: If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity. If the old value is false and the new value is true, then writer_identity is changed to a unique service account. It is an error if the old value is true and the new value is set to false or defaulted to false.
      * @param {string=} params.updateMask Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskExample: updateMask=filter.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5337,7 +5302,7 @@ export namespace logging_v2 {
      * @param {string} params.sinkName Required. The full resource name of the sink to update, including the parent resource and the sink identifier: "projects/[PROJECT_ID]/sinks/[SINK_ID]" "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]" "folders/[FOLDER_ID]/sinks/[SINK_ID]" Example: "projects/my-project-id/sinks/my-sink-id".
      * @param {boolean=} params.uniqueWriterIdentity Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field: If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity. If the old value is false and the new value is true, then writer_identity is changed to a unique service account. It is an error if the old value is true and the new value is set to false or defaulted to false.
      * @param {string=} params.updateMask Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskExample: updateMask=filter.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5545,7 +5510,7 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The parent resource in which to create the exclusion: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" Examples: "projects/my-logging-project", "organizations/123456789".
-     * @param {().LogExclusion} params.requestBody Request body data
+     * @param {().LogExclusion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5838,8 +5803,8 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The resource name of the exclusion to update: "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]" "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]" "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]" Example: "projects/my-project-id/exclusions/my-exclusion-id".
-     * @param {string=} params.updateMask Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
-     * @param {().LogExclusion} params.requestBody Request body data
+     * @param {string=} params.updateMask Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
+     * @param {().LogExclusion} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5977,7 +5942,7 @@ export namespace logging_v2 {
      */
     name?: string;
     /**
-     * Required. A non-empty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
+     * Required. A nonempty list of fields to change in the existing exclusion. New values for the fields are taken from the corresponding fields in the LogExclusion included in this request. Fields not mentioned in update_mask are not changed and are ignored in the request.For example, to change the filter and description of an exclusion, specify an update_mask of "filter,description".
      */
     updateMask?: string;
 
@@ -5995,7 +5960,7 @@ export namespace logging_v2 {
 
     /**
      * logging.projects.logs.delete
-     * @desc Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.
+     * @desc Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
      * @alias logging.projects.logs.delete
      * @memberOf! ()
      *
@@ -6183,7 +6148,7 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent The resource name of the project in which to create the metric: "projects/[PROJECT_ID]" The new metric must be provided in the request.
-     * @param {().LogMetric} params.requestBody Request body data
+     * @param {().LogMetric} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6476,7 +6441,7 @@ export namespace logging_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.metricName The resource name of the metric to update: "projects/[PROJECT_ID]/metrics/[METRIC_ID]" The updated metric must be provided in the request and it's name field must be the same as [METRIC_ID] If the metric does not exist in [PROJECT_ID], then a new metric is created.
-     * @param {().LogMetric} params.requestBody Request body data
+     * @param {().LogMetric} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6635,7 +6600,7 @@ export namespace logging_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The resource in which to create the sink: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" Examples: "projects/my-logging-project", "organizations/123456789".
      * @param {boolean=} params.uniqueWriterIdentity Optional. Determines the kind of IAM identity returned as writer_identity in the new sink. If this value is omitted or set to false, and if the sink's parent is a project, then the value returned as writer_identity is the same group or service account used by Logging before the addition of writer identities to this API. The sink's destination must be in the same project as the sink itself.If this field is set to true, or if the sink is owned by a non-project resource such as an organization, then the value of writer_identity will be a unique service account used only for exports from the new sink. For more information, see writer_identity in LogSink.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6924,7 +6889,7 @@ export namespace logging_v2 {
      * @param {string} params.sinkName Required. The full resource name of the sink to update, including the parent resource and the sink identifier: "projects/[PROJECT_ID]/sinks/[SINK_ID]" "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]" "folders/[FOLDER_ID]/sinks/[SINK_ID]" Example: "projects/my-project-id/sinks/my-sink-id".
      * @param {boolean=} params.uniqueWriterIdentity Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field: If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity. If the old value is false and the new value is true, then writer_identity is changed to a unique service account. It is an error if the old value is true and the new value is set to false or defaulted to false.
      * @param {string=} params.updateMask Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskExample: updateMask=filter.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6996,7 +6961,7 @@ export namespace logging_v2 {
      * @param {string} params.sinkName Required. The full resource name of the sink to update, including the parent resource and the sink identifier: "projects/[PROJECT_ID]/sinks/[SINK_ID]" "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]" "folders/[FOLDER_ID]/sinks/[SINK_ID]" Example: "projects/my-project-id/sinks/my-sink-id".
      * @param {boolean=} params.uniqueWriterIdentity Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field: If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity. If the old value is false and the new value is true, then writer_identity is changed to a unique service account. It is an error if the old value is true and the new value is set to false or defaulted to false.
      * @param {string=} params.updateMask Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskExample: updateMask=filter.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7190,7 +7155,7 @@ export namespace logging_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The resource in which to create the sink: "projects/[PROJECT_ID]" "organizations/[ORGANIZATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]" "folders/[FOLDER_ID]" Examples: "projects/my-logging-project", "organizations/123456789".
      * @param {boolean=} params.uniqueWriterIdentity Optional. Determines the kind of IAM identity returned as writer_identity in the new sink. If this value is omitted or set to false, and if the sink's parent is a project, then the value returned as writer_identity is the same group or service account used by Logging before the addition of writer identities to this API. The sink's destination must be in the same project as the sink itself.If this field is set to true, or if the sink is owned by a non-project resource such as an organization, then the value of writer_identity will be a unique service account used only for exports from the new sink. For more information, see writer_identity in LogSink.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7475,7 +7440,7 @@ export namespace logging_v2 {
      * @param {string} params.sinkName Required. The full resource name of the sink to update, including the parent resource and the sink identifier: "projects/[PROJECT_ID]/sinks/[SINK_ID]" "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]" "folders/[FOLDER_ID]/sinks/[SINK_ID]" Example: "projects/my-project-id/sinks/my-sink-id".
      * @param {boolean=} params.uniqueWriterIdentity Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field: If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity. If the old value is false and the new value is true, then writer_identity is changed to a unique service account. It is an error if the old value is true and the new value is set to false or defaulted to false.
      * @param {string=} params.updateMask Optional. Field mask that specifies the fields in sink that need an update. A sink field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.An empty updateMask is temporarily treated as using the following mask for backwards compatibility purposes:  destination,filter,includeChildren At some point in the future, behavior will be removed and specifying an empty updateMask will be an error.For a detailed FieldMask definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskExample: updateMask=filter.
-     * @param {().LogSink} params.requestBody Request body data
+     * @param {().LogSink} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

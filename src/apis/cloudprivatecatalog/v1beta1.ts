@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -126,23 +128,23 @@ export namespace cloudprivatecatalog_v1beta1 {
     /**
      * Output only. The time when the catalog was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Output only. The description of the catalog.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Output only. The descriptive name of the catalog as it appears in UIs.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * Output only. The resource name of the target catalog, in the format of `catalogs/{catalog_id}&#39;.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The time when the catalog was last updated.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * The readonly representation of a product computed with a given resource context.
@@ -151,27 +153,27 @@ export namespace cloudprivatecatalog_v1beta1 {
     /**
      * Output only. The type of the product asset. It can be one of the following values:  * `google.deploymentmanager.Template` * `google.cloudprivatecatalog.ListingOnly`
      */
-    assetType?: string | null;
+    assetType?: string;
     /**
      * Output only. The time when the product was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Output only. The display metadata to describe the product. The JSON schema of the metadata differs by Product.asset_type. When the type is `google.deploymentmanager.Template`, the schema is as follows:  ``` &quot;$schema&quot;: http://json-schema.org/draft-04/schema# type: object properties:   name:     type: string     minLength: 1     maxLength: 64   description:     type: string     minLength: 1     maxLength: 2048   tagline:     type: string     minLength: 1     maxLength: 100   support_info:     type: string     minLength: 1     maxLength: 2048   creator:     type: string     minLength: 1     maxLength: 100   documentation:     type: array     items:       type: object       properties:         url:           type: string           pattern:           &quot;^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]&quot;         title:           type: string           minLength: 1           maxLength: 64         description:           type: string           minLength: 1           maxLength: 2048 required: - name - description additionalProperties: false  ```  When the asset type is `google.cloudprivatecatalog.ListingOnly`, the schema is as follows:  ``` &quot;$schema&quot;: http://json-schema.org/draft-04/schema# type: object properties:   name:     type: string     minLength: 1     maxLength: 64   description:     type: string     minLength: 1     maxLength: 2048   tagline:     type: string     minLength: 1     maxLength: 100   support_info:     type: string     minLength: 1     maxLength: 2048   creator:     type: string     minLength: 1     maxLength: 100   documentation:     type: array     items:       type: object       properties:         url:           type: string           pattern:           &quot;^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]&quot;         title:           type: string           minLength: 1           maxLength: 64         description:           type: string           minLength: 1           maxLength: 2048   signup_url:     type: string     pattern:     &quot;^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]&quot; required: - name - description - signup_url additionalProperties: false ```
      */
-    displayMetadata?: {[key: string]: any} | null;
+    displayMetadata?: {[key: string]: any};
     /**
      * Output only. The icon URI of the product.
      */
-    iconUri?: string | null;
+    iconUri?: string;
     /**
      * Output only. The resource name of the target product, in the format of `products/a-z*[a-z0-9]&#39;.  A unique identifier for the product under a catalog.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The time when the product was last updated.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * Response message for PrivateCatalog.SearchCatalogs.
@@ -184,7 +186,7 @@ export namespace cloudprivatecatalog_v1beta1 {
     /**
      * A pagination token returned from a previous call to SearchCatalogs that indicates from where listing should continue. This field is optional.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for PrivateCatalog.SearchProducts.
@@ -193,7 +195,7 @@ export namespace cloudprivatecatalog_v1beta1 {
     /**
      * A pagination token returned from a previous call to SearchProducts that indicates from where listing should continue. This field is optional.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The `Product` resources computed from the resource context.
      */
@@ -206,7 +208,7 @@ export namespace cloudprivatecatalog_v1beta1 {
     /**
      * A pagination token returned from a previous call to SearchVersions that indicates from where the listing should continue. This field is optional.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The `Version` resources computed from the resource context.
      */
@@ -219,23 +221,23 @@ export namespace cloudprivatecatalog_v1beta1 {
     /**
      * Output only. The asset which has been validated and is ready to be provisioned. See google.cloud.privatecatalogproducer.v1beta.Version.asset for details.
      */
-    asset?: {[key: string]: any} | null;
+    asset?: {[key: string]: any};
     /**
      * Output only. The time when the version was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Output only. The user-supplied description of the version. Maximum of 256 characters.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Output only. The resource name of the version, in the format `catalogs/{catalog_id}/products/{product_id}/versions/a-z*[a-z0-9]&#39;.  A unique identifier for the version under a product.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The time when the version was last updated.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
 
   export class Resource$Folders {

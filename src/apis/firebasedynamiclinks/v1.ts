@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -139,19 +141,19 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Link to open on Android if the app is not installed.
      */
-    androidFallbackLink?: string | null;
+    androidFallbackLink?: string;
     /**
      * If specified, this overrides the ‘link’ parameter on Android.
      */
-    androidLink?: string | null;
+    androidLink?: string;
     /**
      * Minimum version code for the Android app. If the installed app’s version code is lower, then the user is taken to the Play Store.
      */
-    androidMinPackageVersionCode?: string | null;
+    androidMinPackageVersionCode?: string;
     /**
      * Android package name of the app.
      */
-    androidPackageName?: string | null;
+    androidPackageName?: string;
   }
   /**
    * Request to create a managed Short Dynamic Link.
@@ -164,15 +166,15 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Full long Dynamic Link URL with desired query parameters specified. For example, &quot;https://sample.app.goo.gl/?link=http://www.google.com&amp;apn=com.sample&quot;, [Learn more](https://firebase.google.com/docs/reference/dynamic-links/link-shortener).
      */
-    longDynamicLink?: string | null;
+    longDynamicLink?: string;
     /**
      * Link name to associate with the link. It&#39;s used for marketer to identify manually-created links in the Firebase console (https://console.firebase.google.com/). Links must be named to be tracked.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Google SDK version. Version takes the form &quot;$major.$minor.$patch&quot;
      */
-    sdkVersion?: string | null;
+    sdkVersion?: string;
     /**
      * Short Dynamic Link suffix. Optional.
      */
@@ -189,7 +191,7 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Preview link to show the link flow chart. (debug info.)
      */
-    previewLink?: string | null;
+    previewLink?: string;
     /**
      * Information about potential warnings on link creation.
      */
@@ -206,11 +208,11 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Full long Dynamic Link URL with desired query parameters specified. For example, &quot;https://sample.app.goo.gl/?link=http://www.google.com&amp;apn=com.sample&quot;, [Learn more](https://firebase.google.com/docs/reference/dynamic-links/link-shortener).
      */
-    longDynamicLink?: string | null;
+    longDynamicLink?: string;
     /**
      * Google SDK version. Version takes the form &quot;$major.$minor.$patch&quot;
      */
-    sdkVersion?: string | null;
+    sdkVersion?: string;
     /**
      * Short Dynamic Link suffix. Optional.
      */
@@ -223,11 +225,11 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Preview link to show the link flow chart. (debug info.)
      */
-    previewLink?: string | null;
+    previewLink?: string;
     /**
      * Short Dynamic Link value. e.g. https://abcd.app.goo.gl/wxyz
      */
-    shortLink?: string | null;
+    shortLink?: string;
     /**
      * Information about potential warnings on link creation.
      */
@@ -240,7 +242,7 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Link to open on desktop.
      */
-    desktopFallbackLink?: string | null;
+    desktopFallbackLink?: string;
   }
   /**
    * Signals associated with the device making the request.
@@ -249,31 +251,31 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Device model name.
      */
-    deviceModelName?: string | null;
+    deviceModelName?: string;
     /**
      * Device language code setting.
      */
-    languageCode?: string | null;
+    languageCode?: string;
     /**
      * Device language code setting obtained by executing JavaScript code in WebView.
      */
-    languageCodeFromWebview?: string | null;
+    languageCodeFromWebview?: string;
     /**
      * Device language code raw setting. iOS does returns language code in different format than iOS WebView. For example WebView returns en_US, but iOS returns en-US. Field below will return raw value returned by iOS.
      */
-    languageCodeRaw?: string | null;
+    languageCodeRaw?: string;
     /**
      * Device display resolution height.
      */
-    screenResolutionHeight?: string | null;
+    screenResolutionHeight?: string;
     /**
      * Device display resolution width.
      */
-    screenResolutionWidth?: string | null;
+    screenResolutionWidth?: string;
     /**
      * Device timezone setting.
      */
-    timezone?: string | null;
+    timezone?: string;
   }
   /**
    * Dynamic Link event stat.
@@ -282,15 +284,15 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * The number of times this event occurred.
      */
-    count?: string | null;
+    count?: string;
     /**
      * Link event.
      */
-    event?: string | null;
+    event?: string;
     /**
      * Requested platform.
      */
-    platform?: string | null;
+    platform?: string;
   }
   /**
    * Information about a Dynamic Link.
@@ -311,11 +313,11 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * E.g. https://maps.app.goo.gl, https://maps.page.link, https://g.co/maps More examples can be found in description of getNormalizedUriPrefix in j/c/g/firebase/dynamiclinks/uri/DdlDomain.java  Will fallback to dynamic_link_domain is this field is missing
      */
-    domainUriPrefix?: string | null;
+    domainUriPrefix?: string;
     /**
      * Dynamic Links domain that the project owns, e.g. abcd.app.goo.gl [Learn more](https://firebase.google.com/docs/dynamic-links/android/receive) on how to set up Dynamic Link domain associated with your Firebase project.  Required if missing domain_uri_prefix.
      */
-    dynamicLinkDomain?: string | null;
+    dynamicLinkDomain?: string;
     /**
      * iOS related information. See iOS related parameters in the [documentation](https://firebase.google.com/docs/dynamic-links/create-manually).
      */
@@ -323,7 +325,7 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * The link your app will open, You can specify any URL your app can handle. This link must be a well-formatted URL, be properly URL-encoded, and use the HTTP or HTTPS scheme. See &#39;link&#39; parameters in the [documentation](https://firebase.google.com/docs/dynamic-links/create-manually).  Required.
      */
-    link?: string | null;
+    link?: string;
     /**
      * Information of navigation behavior of a Firebase Dynamic Links.
      */
@@ -349,15 +351,15 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * The warning code.
      */
-    warningCode?: string | null;
+    warningCode?: string;
     /**
      * The document describing the warning, and helps resolve.
      */
-    warningDocumentLink?: string | null;
+    warningDocumentLink?: string;
     /**
      * The warning message to help developers improve their requests.
      */
-    warningMessage?: string | null;
+    warningMessage?: string;
   }
   /**
    * Request for iSDK to execute strong match flow for post-install attribution. This is meant for iOS requests only. Requests from other platforms will not be honored.
@@ -366,11 +368,11 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * App installation epoch time (https://en.wikipedia.org/wiki/Unix_time). This is a client signal for a more accurate weak match.
      */
-    appInstallationTime?: string | null;
+    appInstallationTime?: string;
     /**
      * APP bundle ID.
      */
-    bundleId?: string | null;
+    bundleId?: string;
     /**
      * Device information.
      */
@@ -378,23 +380,23 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * iOS version, ie: 9.3.5. Consider adding &quot;build&quot;.
      */
-    iosVersion?: string | null;
+    iosVersion?: string;
     /**
      * App post install attribution retrieval information. Disambiguates mechanism (iSDK or developer invoked) to retrieve payload from clicked link.
      */
-    retrievalMethod?: string | null;
+    retrievalMethod?: string;
     /**
      * Google SDK version. Version takes the form &quot;$major.$minor.$patch&quot;
      */
-    sdkVersion?: string | null;
+    sdkVersion?: string;
     /**
      * Possible unique matched link that server need to check before performing fingerprint match. If passed link is short server need to expand the link. If link is long server need to vslidate the link.
      */
-    uniqueMatchLinkToCheck?: string | null;
+    uniqueMatchLinkToCheck?: string;
     /**
      * Strong match page information. Disambiguates between default UI and custom page to present when strong match succeeds/fails to find cookie.
      */
-    visualStyle?: string | null;
+    visualStyle?: string;
   }
   /**
    * Response for iSDK to execute strong match flow for post-install attribution.
@@ -403,67 +405,67 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * The minimum version for app, specified by dev through ?imv= parameter. Return to iSDK to allow app to evaluate if current version meets this.
      */
-    appMinimumVersion?: string | null;
+    appMinimumVersion?: string;
     /**
      * The confidence of the returned attribution.
      */
-    attributionConfidence?: string | null;
+    attributionConfidence?: string;
     /**
      * The deep-link attributed post-install via one of several techniques (fingerprint, copy unique).
      */
-    deepLink?: string | null;
+    deepLink?: string;
     /**
      * User-agent specific custom-scheme URIs for iSDK to open. This will be set according to the user-agent tha the click was originally made in. There is no Safari-equivalent custom-scheme open URLs. ie: googlechrome://www.example.com ie: firefox://open-url?url=http://www.example.com ie: opera-http://example.com
      */
-    externalBrowserDestinationLink?: string | null;
+    externalBrowserDestinationLink?: string;
     /**
      * The link to navigate to update the app if min version is not met. This is either (in order): 1) fallback link (from ?ifl= parameter, if specified by developer) or 2) AppStore URL (from ?isi= parameter, if specified), or 3) the payload link (from required link= parameter).
      */
-    fallbackLink?: string | null;
+    fallbackLink?: string;
     /**
      * Invitation ID attributed post-install via one of several techniques (fingerprint, copy unique).
      */
-    invitationId?: string | null;
+    invitationId?: string;
     /**
      * Instruction for iSDK to attemmpt to perform strong match. For instance, if browser does not support/allow cookie or outside of support browsers, this will be false.
      */
-    isStrongMatchExecutable?: boolean | null;
+    isStrongMatchExecutable?: boolean;
     /**
      * Describes why match failed, ie: &quot;discarded due to low confidence&quot;. This message will be publicly visible.
      */
-    matchMessage?: string | null;
+    matchMessage?: string;
     /**
      * Entire FDL (short or long) attributed post-install via one of several techniques (fingerprint, copy unique).
      */
-    requestedLink?: string | null;
+    requestedLink?: string;
     /**
      * Which IP version the request was made from.
      */
-    requestIpVersion?: string | null;
+    requestIpVersion?: string;
     /**
      * The entire FDL, expanded from a short link. It is the same as the requested_link, if it is long. Parameters from this should not be used directly (ie: server can default utm_[campaign|medium|source] to a value when requested_link lack them, server determine the best fallback_link when requested_link specifies &gt;1 fallback links).
      */
-    resolvedLink?: string | null;
+    resolvedLink?: string;
     /**
      * Scion campaign value to be propagated by iSDK to Scion at post-install.
      */
-    utmCampaign?: string | null;
+    utmCampaign?: string;
     /**
      * Scion content value to be propagated by iSDK to Scion at app-reopen.
      */
-    utmContent?: string | null;
+    utmContent?: string;
     /**
      * Scion medium value to be propagated by iSDK to Scion at post-install.
      */
-    utmMedium?: string | null;
+    utmMedium?: string;
     /**
      * Scion source value to be propagated by iSDK to Scion at post-install.
      */
-    utmSource?: string | null;
+    utmSource?: string;
     /**
      * Scion term value to be propagated by iSDK to Scion at app-reopen.
      */
-    utmTerm?: string | null;
+    utmTerm?: string;
   }
   /**
    * Request for iSDK to get reopen attribution for app universal link open deeplinking. This endpoint is meant for only iOS requests.
@@ -472,15 +474,15 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * APP bundle ID.
      */
-    bundleId?: string | null;
+    bundleId?: string;
     /**
      * FDL link to be verified from an app universal link open. The FDL link can be one of: 1) short FDL. e.g. &lt;app_code&gt;.page.link/&lt;ddl_id&gt;, or 2) long FDL. e.g. &lt;app_code&gt;.page.link/?{query params}, or 3) Invite FDL. e.g. &lt;app_code&gt;.page.link/i/&lt;invite_id_or_alias&gt;
      */
-    requestedLink?: string | null;
+    requestedLink?: string;
     /**
      * Google SDK version. Version takes the form &quot;$major.$minor.$patch&quot;
      */
-    sdkVersion?: string | null;
+    sdkVersion?: string;
   }
   /**
    * Response for iSDK to get reopen attribution for app universal link open deeplinking. This endpoint is meant for only iOS requests.
@@ -489,39 +491,39 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * The deep-link attributed the app universal link open. For both regular FDL links and invite FDL links.
      */
-    deepLink?: string | null;
+    deepLink?: string;
     /**
      * Optional invitation ID, for only invite typed requested FDL links.
      */
-    invitationId?: string | null;
+    invitationId?: string;
     /**
      * FDL input value of the &quot;&amp;imv=&quot; parameter, minimum app version to be returned to Google Firebase SDK running on iOS-9.
      */
-    iosMinAppVersion?: string | null;
+    iosMinAppVersion?: string;
     /**
      * The entire FDL, expanded from a short link. It is the same as the requested_link, if it is long.
      */
-    resolvedLink?: string | null;
+    resolvedLink?: string;
     /**
      * Scion campaign value to be propagated by iSDK to Scion at app-reopen.
      */
-    utmCampaign?: string | null;
+    utmCampaign?: string;
     /**
      * Scion content value to be propagated by iSDK to Scion at app-reopen.
      */
-    utmContent?: string | null;
+    utmContent?: string;
     /**
      * Scion medium value to be propagated by iSDK to Scion at app-reopen.
      */
-    utmMedium?: string | null;
+    utmMedium?: string;
     /**
      * Scion source value to be propagated by iSDK to Scion at app-reopen.
      */
-    utmSource?: string | null;
+    utmSource?: string;
     /**
      * Scion term value to be propagated by iSDK to Scion at app-reopen.
      */
-    utmTerm?: string | null;
+    utmTerm?: string;
   }
   /**
    * Parameters for Google Play Campaign Measurements. [Learn more](https://developers.google.com/analytics/devguides/collection/android/v4/campaigns#campaign-params)
@@ -530,27 +532,27 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * [AdWords autotagging parameter](https://support.google.com/analytics/answer/1033981?hl=en); used to measure Google AdWords ads. This value is generated dynamically and should never be modified.
      */
-    gclid?: string | null;
+    gclid?: string;
     /**
      * Campaign name; used for keyword analysis to identify a specific product promotion or strategic campaign.
      */
-    utmCampaign?: string | null;
+    utmCampaign?: string;
     /**
      * Campaign content; used for A/B testing and content-targeted ads to differentiate ads or links that point to the same URL.
      */
-    utmContent?: string | null;
+    utmContent?: string;
     /**
      * Campaign medium; used to identify a medium such as email or cost-per-click.
      */
-    utmMedium?: string | null;
+    utmMedium?: string;
     /**
      * Campaign source; used to identify a search engine, newsletter, or other source.
      */
-    utmSource?: string | null;
+    utmSource?: string;
     /**
      * Campaign term; used with paid search to supply the keywords for ads.
      */
-    utmTerm?: string | null;
+    utmTerm?: string;
   }
   /**
    * iOS related attributes to the Dynamic Link..
@@ -559,31 +561,31 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * iOS App Store ID.
      */
-    iosAppStoreId?: string | null;
+    iosAppStoreId?: string;
     /**
      * iOS bundle ID of the app.
      */
-    iosBundleId?: string | null;
+    iosBundleId?: string;
     /**
      * Custom (destination) scheme to use for iOS. By default, we’ll use the bundle ID as the custom scheme. Developer can override this behavior using this param.
      */
-    iosCustomScheme?: string | null;
+    iosCustomScheme?: string;
     /**
      * Link to open on iOS if the app is not installed.
      */
-    iosFallbackLink?: string | null;
+    iosFallbackLink?: string;
     /**
      * iPad bundle ID of the app.
      */
-    iosIpadBundleId?: string | null;
+    iosIpadBundleId?: string;
     /**
      * If specified, this overrides the ios_fallback_link value on iPads.
      */
-    iosIpadFallbackLink?: string | null;
+    iosIpadFallbackLink?: string;
     /**
      * iOS minimum version.
      */
-    iosMinimumVersion?: string | null;
+    iosMinimumVersion?: string;
   }
   /**
    * Parameters for iTunes Connect App Analytics.
@@ -592,19 +594,19 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Affiliate token used to create affiliate-coded links.
      */
-    at?: string | null;
+    at?: string;
     /**
      * Campaign text that developers can optionally add to any link in order to track sales from a specific marketing campaign.
      */
-    ct?: string | null;
+    ct?: string;
     /**
      * iTune media types, including music, podcasts, audiobooks and so on.
      */
-    mt?: string | null;
+    mt?: string;
     /**
      * Provider token that enables analytics for Dynamic Links from within iTunes Connect.
      */
-    pt?: string | null;
+    pt?: string;
   }
   /**
    * Managed Short Link.
@@ -613,11 +615,11 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Creation timestamp of the short link.
      */
-    creationTime?: string | null;
+    creationTime?: string;
     /**
      * Attributes that have been flagged about this short url.
      */
-    flaggedAttribute?: string[] | null;
+    flaggedAttribute?: string[];
     /**
      * Full Dyamic Link info
      */
@@ -625,15 +627,15 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Short durable link url, for example, &quot;https://sample.app.goo.gl/xyz123&quot;.  Required.
      */
-    link?: string | null;
+    link?: string;
     /**
      * Link name defined by the creator.  Required.
      */
-    linkName?: string | null;
+    linkName?: string;
     /**
      * Visibility status of link.
      */
-    visibility?: string | null;
+    visibility?: string;
   }
   /**
    * Information of navigation behavior.
@@ -642,7 +644,7 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * If this option is on, FDL click will be forced to redirect rather than show an interstitial page.
      */
-    enableForcedRedirect?: boolean | null;
+    enableForcedRedirect?: boolean;
   }
   /**
    * Parameters for social meta tag params. Used to set meta tag data for link previews on social sites.
@@ -651,15 +653,15 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * A short description of the link. Optional.
      */
-    socialDescription?: string | null;
+    socialDescription?: string;
     /**
      * An image url string. Optional.
      */
-    socialImageLink?: string | null;
+    socialImageLink?: string;
     /**
      * Title to be displayed. Optional.
      */
-    socialTitle?: string | null;
+    socialTitle?: string;
   }
   /**
    * Short Dynamic Link suffix.
@@ -668,11 +670,11 @@ export namespace firebasedynamiclinks_v1 {
     /**
      * Only applies to Option.CUSTOM.
      */
-    customSuffix?: string | null;
+    customSuffix?: string;
     /**
      * Suffix option.
      */
-    option?: string | null;
+    option?: string;
   }
 
   export class Resource$Managedshortlinks {
@@ -688,7 +690,7 @@ export namespace firebasedynamiclinks_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().CreateManagedShortLinkRequest} params.requestBody Request body data
+     * @param {().CreateManagedShortLinkRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -792,7 +794,7 @@ export namespace firebasedynamiclinks_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().CreateShortDynamicLinkRequest} params.requestBody Request body data
+     * @param {().CreateShortDynamicLinkRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -969,7 +971,7 @@ export namespace firebasedynamiclinks_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().GetIosPostInstallAttributionRequest} params.requestBody Request body data
+     * @param {().GetIosPostInstallAttributionRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1061,7 +1063,7 @@ export namespace firebasedynamiclinks_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().GetIosReopenAttributionRequest} params.requestBody Request body data
+     * @param {().GetIosReopenAttributionRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -17,7 +17,6 @@
  * This is used by several samples to easily provide an oauth2 workflow.
  */
 
-// [START auth_oauth2_workflow]
 const {google} = require('googleapis');
 const http = require('http');
 const url = require('url');
@@ -108,5 +107,5 @@ class SampleClient {
     });
   }
 }
-// [END auth_oauth2_workflow]
+
 module.exports = new SampleClient();

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -87,7 +89,7 @@ export namespace ml_v1 {
   }
 
   /**
-   * AI Platform Training &amp; Prediction API
+   * Cloud Machine Learning Engine
    *
    * An API to enable creating and using machine learning models.
    *
@@ -103,6 +105,7 @@ export namespace ml_v1 {
    */
   export class Ml {
     context: APIRequestContext;
+    operations: Resource$Operations;
     projects: Resource$Projects;
 
     constructor(options: GlobalOptions, google?: GoogleConfigurable) {
@@ -111,6 +114,7 @@ export namespace ml_v1 {
         google,
       };
 
+      this.operations = new Resource$Operations(this.context);
       this.projects = new Resource$Projects(this.context);
     }
   }
@@ -122,15 +126,15 @@ export namespace ml_v1 {
     /**
      * The HTTP Content-Type header value specifying the content type of the body.
      */
-    contentType?: string | null;
+    contentType?: string;
     /**
      * The HTTP request/response body as raw binary.
      */
-    data?: string | null;
+    data?: string;
     /**
      * Application specific response metadata. Must be set in the first response for streaming APIs.
      */
-    extensions?: Array<{[key: string]: any}> | null;
+    extensions?: Array<{[key: string]: any}>;
   }
   /**
    * An observed value of a metric.
@@ -139,33 +143,33 @@ export namespace ml_v1 {
     /**
      * The objective value at this training step.
      */
-    objectiveValue?: number | null;
+    objectiveValue?: number;
     /**
      * The global training step for this metric.
      */
-    trainingStep?: string | null;
+    trainingStep?: string;
   }
   /**
-   * Represents a hardware accelerator request config. Note that the AcceleratorConfig can be used in both Jobs and Versions. Learn more about [accelerators for training](/ml-engine/docs/using-gpus) and [accelerators for online prediction](/ml-engine/docs/machine-types-online-prediction#gpus).
+   * Represents a hardware accelerator request config.
    */
   export interface Schema$GoogleCloudMlV1__AcceleratorConfig {
     /**
      * The number of accelerators to attach to each machine running the job.
      */
-    count?: string | null;
+    count?: string;
     /**
      * The type of accelerator to use.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Options for automatically scaling a model.
    */
   export interface Schema$GoogleCloudMlV1__AutoScaling {
     /**
-     * Optional. The minimum number of nodes to allocate for this model. These nodes are always up, starting from the time the model is deployed. Therefore, the cost of operating this model will be at least `rate` * `min_nodes` * number of hours since last billing cycle, where `rate` is the cost per node-hour as documented in the [pricing guide](/ml-engine/docs/pricing), even if no predictions are performed. There is additional cost for each prediction performed.  Unlike manual scaling, if the load gets too heavy for the nodes that are up, the service will automatically add nodes to handle the increased load as well as scale back as traffic drops, always maintaining at least `min_nodes`. You will be charged for the time in which additional nodes are used.  If `min_nodes` is not specified and AutoScaling is used with a [legacy (MLS1) machine type](/ml-engine/docs/machine-types-online-prediction), `min_nodes` defaults to 0, in which case, when traffic to a model stops (and after a cool-down period), nodes will be shut down and no charges will be incurred until traffic to the model resumes.  If `min_nodes` is not specified and AutoScaling is used with a [Compute Engine (N1) machine type](/ml-engine/docs/machine-types-online-prediction), `min_nodes` defaults to 1. `min_nodes` must be at least 1 for use with a Compute Engine machine type.  Note that you cannot use AutoScaling if your version uses [GPUs](#Version.FIELDS.accelerator_config). Instead, you must use ManualScaling.  You can set `min_nodes` when creating the model version, and you can also update `min_nodes` for an existing version: &lt;pre&gt; update_body.json: {   &#39;autoScaling&#39;: {     &#39;minNodes&#39;: 5   } } &lt;/pre&gt; HTTP request: &lt;pre style=&quot;max-width: 626px;&quot;&gt; PATCH https://ml.googleapis.com/v1/{name=projects/x/models/x/versions/*}?update_mask=autoScaling.minNodes -d @./update_body.json &lt;/pre&gt;
+     * Optional. The minimum number of nodes to allocate for this model. These nodes are always up, starting from the time the model is deployed. Therefore, the cost of operating this model will be at least `rate` * `min_nodes` * number of hours since last billing cycle, where `rate` is the cost per node-hour as documented in the [pricing guide](/ml-engine/docs/pricing), even if no predictions are performed. There is additional cost for each prediction performed.  Unlike manual scaling, if the load gets too heavy for the nodes that are up, the service will automatically add nodes to handle the increased load as well as scale back as traffic drops, always maintaining at least `min_nodes`. You will be charged for the time in which additional nodes are used.  If not specified, `min_nodes` defaults to 0, in which case, when traffic to a model stops (and after a cool-down period), nodes will be shut down and no charges will be incurred until traffic to the model resumes.  You can set `min_nodes` when creating the model version, and you can also update `min_nodes` for an existing version: &lt;pre&gt; update_body.json: {   &#39;autoScaling&#39;: {     &#39;minNodes&#39;: 5   } } &lt;/pre&gt; HTTP request: &lt;pre&gt; PATCH https://ml.googleapis.com/v1/{name=projects/x/models/x/versions/*}?update_mask=autoScaling.minNodes -d @./update_body.json &lt;/pre&gt;
      */
-    minNodes?: number | null;
+    minNodes?: number;
   }
   /**
    * Represents output related to a built-in algorithm Job.
@@ -174,19 +178,19 @@ export namespace ml_v1 {
     /**
      * Framework on which the built-in algorithm was trained.
      */
-    framework?: string | null;
+    framework?: string;
     /**
      * The Cloud Storage path to the `model/` directory where the training job saves the trained model. Only set for successful jobs that don&#39;t use hyperparameter tuning.
      */
-    modelPath?: string | null;
+    modelPath?: string;
     /**
      * Python version on which the built-in algorithm was trained.
      */
-    pythonVersion?: string | null;
+    pythonVersion?: string;
     /**
-     * AI Platform runtime version on which the built-in algorithm was trained.
+     * Cloud ML Engine runtime version on which the built-in algorithm was trained.
      */
-    runtimeVersion?: string | null;
+    runtimeVersion?: string;
   }
   /**
    * Request message for the CancelJob method.
@@ -196,30 +200,14 @@ export namespace ml_v1 {
     /**
      * Available accelerators for the capability.
      */
-    availableAccelerators?: string[] | null;
-    type?: string | null;
+    availableAccelerators?: string[];
+    type?: string;
   }
   export interface Schema$GoogleCloudMlV1__Config {
     /**
      * The service account Cloud ML uses to run on TPU node.
      */
-    tpuServiceAccount?: string | null;
-  }
-  /**
-   * Request for explanations to be issued against a trained model.
-   */
-  export interface Schema$GoogleCloudMlV1__ExplainRequest {
-    /**
-     * Required. The explanation request body.
-     */
-    httpBody?: Schema$GoogleApi__HttpBody;
-  }
-  /**
-   * Message holding configuration options for explaining model predictions. There are two feature attribution methods supported for TensorFlow models: integrated gradients and sampled Shapley. &lt;a href=&quot;/ml-engine/docs/ai-explanations/overview&quot;&gt;Learn more about feature attributions&lt;/a&gt;.
-   */
-  export interface Schema$GoogleCloudMlV1__ExplanationConfig {
-    integratedGradientsAttribution?: Schema$GoogleCloudMlV1__IntegratedGradientsAttribution;
-    sampledShapleyAttribution?: Schema$GoogleCloudMlV1__SampledShapleyAttribution;
+    tpuServiceAccount?: string;
   }
   /**
    * Returns service account information associated with a project.
@@ -229,11 +217,11 @@ export namespace ml_v1 {
     /**
      * The service account Cloud ML uses to access resources in the project.
      */
-    serviceAccount?: string | null;
+    serviceAccount?: string;
     /**
      * The project number for `service_account`.
      */
-    serviceAccountProject?: string | null;
+    serviceAccountProject?: string;
   }
   /**
    * Represents the result of a single hyperparameter tuning trial from a training job. The TrainingOutput object that is returned on successful completion of a training job with hyperparameter tuning includes a list of HyperparameterOutput objects, one for each successful trial.
@@ -248,66 +236,54 @@ export namespace ml_v1 {
      */
     builtInAlgorithmOutput?: Schema$GoogleCloudMlV1__BuiltInAlgorithmOutput;
     /**
-     * Output only. End time for the trial.
-     */
-    endTime?: string | null;
-    /**
      * The final objective metric seen for this trial.
      */
     finalMetric?: Schema$GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric;
     /**
      * The hyperparameters given to this trial.
      */
-    hyperparameters?: {[key: string]: string} | null;
+    hyperparameters?: {[key: string]: string};
     /**
      * True if the trial is stopped early.
      */
-    isTrialStoppedEarly?: boolean | null;
-    /**
-     * Output only. Start time for the trial.
-     */
-    startTime?: string | null;
-    /**
-     * Output only. The detailed state of the trial.
-     */
-    state?: string | null;
+    isTrialStoppedEarly?: boolean;
     /**
      * The trial id for these results.
      */
-    trialId?: string | null;
+    trialId?: string;
   }
   /**
    * Represents a set of hyperparameters to optimize.
    */
   export interface Schema$GoogleCloudMlV1__HyperparameterSpec {
     /**
-     * Optional. The search algorithm specified for the hyperparameter tuning job. Uses the default AI Platform hyperparameter tuning algorithm if unspecified.
+     * Optional. The search algorithm specified for the hyperparameter tuning job. Uses the default CloudML Engine hyperparameter tuning algorithm if unspecified.
      */
-    algorithm?: string | null;
+    algorithm?: string;
     /**
      * Optional. Indicates if the hyperparameter tuning job enables auto trial early stopping.
      */
-    enableTrialEarlyStopping?: boolean | null;
+    enableTrialEarlyStopping?: boolean;
     /**
      * Required. The type of goal to use for tuning. Available types are `MAXIMIZE` and `MINIMIZE`.  Defaults to `MAXIMIZE`.
      */
-    goal?: string | null;
+    goal?: string;
     /**
-     * Optional. The TensorFlow summary tag name to use for optimizing trials. For current versions of TensorFlow, this tag name should exactly match what is shown in TensorBoard, including all scopes.  For versions of TensorFlow prior to 0.12, this should be only the tag passed to tf.Summary. By default, &quot;training/hptuning/metric&quot; will be used.
+     * Optional. The Tensorflow summary tag name to use for optimizing trials. For current versions of Tensorflow, this tag name should exactly match what is shown in Tensorboard, including all scopes.  For versions of Tensorflow prior to 0.12, this should be only the tag passed to tf.Summary. By default, &quot;training/hptuning/metric&quot; will be used.
      */
-    hyperparameterMetricTag?: string | null;
+    hyperparameterMetricTag?: string;
     /**
-     * Optional. The number of failed trials that need to be seen before failing the hyperparameter tuning job. You can specify this field to override the default failing criteria for AI Platform hyperparameter tuning jobs.  Defaults to zero, which means the service decides when a hyperparameter job should fail.
+     * Optional. The number of failed trials that need to be seen before failing the hyperparameter tuning job. You can specify this field to override the default failing criteria for Cloud ML Engine hyperparameter tuning jobs.  Defaults to zero, which means the service decides when a hyperparameter job should fail.
      */
-    maxFailedTrials?: number | null;
+    maxFailedTrials?: number;
     /**
      * Optional. The number of training trials to run concurrently. You can reduce the time it takes to perform hyperparameter tuning by adding trials in parallel. However, each trail only benefits from the information gained in completed trials. That means that a trial does not get access to the results of trials running at the same time, which could reduce the quality of the overall optimization.  Each trial will use the same scale tier and machine types.  Defaults to one.
      */
-    maxParallelTrials?: number | null;
+    maxParallelTrials?: number;
     /**
      * Optional. How many training trials should be attempted to optimize the specified hyperparameters.  Defaults to one.
      */
-    maxTrials?: number | null;
+    maxTrials?: number;
     /**
      * Required. The set of parameters to tune.
      */
@@ -315,16 +291,7 @@ export namespace ml_v1 {
     /**
      * Optional. The prior hyperparameter tuning job id that users hope to continue with. The job id will be used to find the corresponding vizier study guid and resume the study.
      */
-    resumePreviousJobId?: string | null;
-  }
-  /**
-   * Attributes credit by computing the Aumann-Shapley value taking advantage of the model&#39;s fully differentiable structure. Refer to this paper for more details: http://proceedings.mlr.press/v70/sundararajan17a.html
-   */
-  export interface Schema$GoogleCloudMlV1__IntegratedGradientsAttribution {
-    /**
-     * Number of steps for approximating the path integral. A good value to start is 50 and gradually increase until the sum to diff property is met within the desired error range.
-     */
-    numIntegralSteps?: number | null;
+    resumePreviousJobId?: string;
   }
   /**
    * Represents a training or prediction job.
@@ -333,27 +300,27 @@ export namespace ml_v1 {
     /**
      * Output only. When the job was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Output only. When the job processing was completed.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * Output only. The details of a failure or a cancellation.
      */
-    errorMessage?: string | null;
+    errorMessage?: string;
     /**
      * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a job from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform job updates in order to avoid race conditions: An `etag` is returned in the response to `GetJob`, and systems are expected to put that etag in the request to `UpdateJob` to ensure that their change will be applied to the same version of the job.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Required. The user-specified id of the job.
      */
-    jobId?: string | null;
+    jobId?: string;
     /**
      * Optional. One or more labels that you can add, to organize your jobs. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on &lt;a href=&quot;/ml-engine/docs/tensorflow/resource-labels&quot;&gt;using labels&lt;/a&gt;.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Input parameters to create a prediction job.
      */
@@ -365,11 +332,11 @@ export namespace ml_v1 {
     /**
      * Output only. When the job processing was started.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * Output only. The detailed state of a job.
      */
-    state?: string | null;
+    state?: string;
     /**
      * Input parameters to create a training job.
      */
@@ -390,7 +357,7 @@ export namespace ml_v1 {
     /**
      * Optional. Pass this token as the `page_token` field of the request for a subsequent call.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$GoogleCloudMlV1__ListLocationsResponse {
     /**
@@ -400,7 +367,7 @@ export namespace ml_v1 {
     /**
      * Optional. Pass this token as the `page_token` field of the request for a subsequent call.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for the ListModels method.
@@ -413,7 +380,7 @@ export namespace ml_v1 {
     /**
      * Optional. Pass this token as the `page_token` field of the request for a subsequent call.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for the ListVersions method.
@@ -422,7 +389,7 @@ export namespace ml_v1 {
     /**
      * Optional. Pass this token as the `page_token` field of the request for a subsequent call.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of versions.
      */
@@ -433,7 +400,7 @@ export namespace ml_v1 {
      * Capabilities available in the location.
      */
     capabilities?: Schema$GoogleCloudMlV1__Capability[];
-    name?: string | null;
+    name?: string;
   }
   /**
    * Options for manually scaling a model.
@@ -442,44 +409,44 @@ export namespace ml_v1 {
     /**
      * The number of nodes to allocate for this model. These nodes are always up, starting from the time the model is deployed, so the cost of operating this model will be proportional to `nodes` * number of hours since last billing cycle plus the cost for each prediction performed.
      */
-    nodes?: number | null;
+    nodes?: number;
   }
   /**
    * Represents a machine learning solution.  A model can have multiple versions, each of which is a deployed, trained model ready to receive prediction requests. The model itself is just a container.
    */
   export interface Schema$GoogleCloudMlV1__Model {
     /**
-     * Output only. The default version of the model. This version will be used to handle prediction requests that do not specify a version.  You can change the default version by calling projects.models.versions.setDefault.
+     * Output only. The default version of the model. This version will be used to handle prediction requests that do not specify a version.  You can change the default version by calling [projects.methods.versions.setDefault](/ml-engine/reference/rest/v1/projects.models.versions/setDefault).
      */
     defaultVersion?: Schema$GoogleCloudMlV1__Version;
     /**
      * Optional. The description specified for the model when it was created.
      */
-    description?: string | null;
+    description?: string;
     /**
      * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a model from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform model updates in order to avoid race conditions: An `etag` is returned in the response to `GetModel`, and systems are expected to put that etag in the request to `UpdateModel` to ensure that their change will be applied to the model as intended.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Optional. One or more labels that you can add, to organize your models. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on &lt;a href=&quot;/ml-engine/docs/tensorflow/resource-labels&quot;&gt;using labels&lt;/a&gt;.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Required. The name specified for the model when it was created.  The model name must be unique within the project it is created in.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * Optional. If true, online prediction nodes send `stderr` and `stdout` streams to Stackdriver Logging. These can be more verbose than the standard access logs (see `onlinePredictionLogging`) and can incur higher cost. However, they are helpful for debugging. Note that [Stackdriver logs may incur a cost](/stackdriver/pricing), especially if your project receives prediction requests at a high QPS. Estimate your costs before enabling this option.  Default is false.
+     * Optional. If true, enables logging of stderr and stdout streams for online prediction in Stackdriver Logging. These can be more verbose than the standard access logs (see `online_prediction_logging`) and thus can incur higher cost. However, they are helpful for debugging. Note that since Stackdriver logs may incur a cost, particularly if the total QPS in your project is high, be sure to estimate your costs before enabling this flag.  Default is false.
      */
-    onlinePredictionConsoleLogging?: boolean | null;
+    onlinePredictionConsoleLogging?: boolean;
     /**
-     * Optional. If true, online prediction access logs are sent to StackDriver Logging. These logs are like standard server access logs, containing information like timestamp and latency for each request. Note that [Stackdriver logs may incur a cost](/stackdriver/pricing), especially if your project receives prediction requests at a high queries per second rate (QPS). Estimate your costs before enabling this option.  Default is false.
+     * Optional. If true, online prediction access logs are sent to StackDriver Logging. These logs are like standard server access logs, containing information like timestamp and latency for each request. Note that Stackdriver logs may incur a cost, particular if the total QPS in your project is high.  Default is false.
      */
-    onlinePredictionLogging?: boolean | null;
+    onlinePredictionLogging?: boolean;
     /**
-     * Optional. The list of regions where the model is going to be deployed. Currently only one region per model is supported. Defaults to &#39;us-central1&#39; if nothing is set. See the &lt;a href=&quot;/ml-engine/docs/tensorflow/regions&quot;&gt;available regions&lt;/a&gt; for AI Platform services. Note: *   No matter where a model is deployed, it can always be accessed by     users from anywhere, both for online and batch prediction. *   The region for a batch prediction job is set by the region field when     submitting the batch prediction job and does not take its value from     this field.
+     * Optional. The list of regions where the model is going to be deployed. Currently only one region per model is supported. Defaults to &#39;us-central1&#39; if nothing is set. See the &lt;a href=&quot;/ml-engine/docs/tensorflow/regions&quot;&gt;available regions&lt;/a&gt; for ML Engine services. Note: *   No matter where a model is deployed, it can always be accessed by     users from anywhere, both for online and batch prediction. *   The region for a batch prediction job is set by the region field when     submitting the batch prediction job and does not take its value from     this field.
      */
-    regions?: string[] | null;
+    regions?: string[];
   }
   /**
    * Represents the metadata of the long-running operation.
@@ -488,35 +455,35 @@ export namespace ml_v1 {
     /**
      * The time the operation was submitted.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * The time operation processing completed.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * Indicates whether a request to cancel this operation has been made.
      */
-    isCancellationRequested?: boolean | null;
+    isCancellationRequested?: boolean;
     /**
      * The user labels, inherited from the model or the model version being operated on.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Contains the name of the model associated with the operation.
      */
-    modelName?: string | null;
+    modelName?: string;
     /**
      * The operation type.
      */
-    operationType?: string | null;
+    operationType?: string;
     /**
      * Contains the project number associated with the operation.
      */
-    projectNumber?: string | null;
+    projectNumber?: string;
     /**
      * The time operation processing started.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * Contains the version associated with the operation.
      */
@@ -529,31 +496,31 @@ export namespace ml_v1 {
     /**
      * Required if type is `CATEGORICAL`. The list of possible categories.
      */
-    categoricalValues?: string[] | null;
+    categoricalValues?: string[];
     /**
      * Required if type is `DISCRETE`. A list of feasible points. The list should be in strictly increasing order. For instance, this parameter might have possible settings of 1.5, 2.5, and 4.0. This list should not contain more than 1,000 values.
      */
-    discreteValues?: number[] | null;
+    discreteValues?: number[];
     /**
      * Required if type is `DOUBLE` or `INTEGER`. This field should be unset if type is `CATEGORICAL`. This value should be integers if type is `INTEGER`.
      */
-    maxValue?: number | null;
+    maxValue?: number;
     /**
      * Required if type is `DOUBLE` or `INTEGER`. This field should be unset if type is `CATEGORICAL`. This value should be integers if type is INTEGER.
      */
-    minValue?: number | null;
+    minValue?: number;
     /**
      * Required. The parameter name must be unique amongst all ParameterConfigs in a HyperparameterSpec message. E.g., &quot;learning_rate&quot;.
      */
-    parameterName?: string | null;
+    parameterName?: string;
     /**
      * Optional. How the parameter should be scaled to the hypercube. Leave unset for categorical parameters. Some kind of scaling is strongly recommended for real or integral parameters (e.g., `UNIT_LINEAR_SCALE`).
      */
-    scaleType?: string | null;
+    scaleType?: string;
     /**
      * Required. The type of the parameter.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Represents input parameters for a prediction job.
@@ -562,51 +529,51 @@ export namespace ml_v1 {
     /**
      * Optional. Number of records per batch, defaults to 64. The service will buffer batch_size number of records in memory before invoking one Tensorflow prediction call internally. So take the record size and memory available into consideration when setting this parameter.
      */
-    batchSize?: string | null;
+    batchSize?: string;
     /**
      * Required. The format of the input data files.
      */
-    dataFormat?: string | null;
+    dataFormat?: string;
     /**
      * Required. The Cloud Storage location of the input data files. May contain &lt;a href=&quot;/storage/docs/gsutil/addlhelp/WildcardNames&quot;&gt;wildcards&lt;/a&gt;.
      */
-    inputPaths?: string[] | null;
+    inputPaths?: string[];
     /**
      * Optional. The maximum number of workers to be used for parallel processing. Defaults to 10 if not specified.
      */
-    maxWorkerCount?: string | null;
+    maxWorkerCount?: string;
     /**
      * Use this field if you want to use the default version for the specified model. The string must use the following format:  `&quot;projects/YOUR_PROJECT/models/YOUR_MODEL&quot;`
      */
-    modelName?: string | null;
+    modelName?: string;
     /**
      * Optional. Format of the output data files, defaults to JSON.
      */
-    outputDataFormat?: string | null;
+    outputDataFormat?: string;
     /**
      * Required. The output Google Cloud Storage location.
      */
-    outputPath?: string | null;
+    outputPath?: string;
     /**
-     * Required. The Google Compute Engine region to run the prediction job in. See the &lt;a href=&quot;/ml-engine/docs/tensorflow/regions&quot;&gt;available regions&lt;/a&gt; for AI Platform services.
+     * Required. The Google Compute Engine region to run the prediction job in. See the &lt;a href=&quot;/ml-engine/docs/tensorflow/regions&quot;&gt;available regions&lt;/a&gt; for ML Engine services.
      */
-    region?: string | null;
+    region?: string;
     /**
-     * Optional. The AI Platform runtime version to use for this batch prediction. If not set, AI Platform will pick the runtime version used during the CreateVersion request for this model version, or choose the latest stable version when model version information is not available such as when the model is specified by uri.
+     * Optional. The Cloud ML Engine runtime version to use for this batch prediction. If not set, Cloud ML Engine will pick the runtime version used during the CreateVersion request for this model version, or choose the latest stable version when model version information is not available such as when the model is specified by uri.
      */
-    runtimeVersion?: string | null;
+    runtimeVersion?: string;
     /**
      * Optional. The name of the signature defined in the SavedModel to use for this job. Please refer to [SavedModel](https://tensorflow.github.io/serving/serving_basic.html) for information about how to use signatures.  Defaults to [DEFAULT_SERVING_SIGNATURE_DEF_KEY](https://www.tensorflow.org/api_docs/python/tf/saved_model/signature_constants) , which is &quot;serving_default&quot;.
      */
-    signatureName?: string | null;
+    signatureName?: string;
     /**
      * Use this field if you want to specify a Google Cloud Storage path for the model to use.
      */
-    uri?: string | null;
+    uri?: string;
     /**
      * Use this field if you want to specify a version of the model to use. The string is formatted the same way as `model_version`, with the addition of the version information:  `&quot;projects/YOUR_PROJECT/models/YOUR_MODEL/versions/YOUR_VERSION&quot;`
      */
-    versionName?: string | null;
+    versionName?: string;
   }
   /**
    * Represents results of a prediction job.
@@ -615,26 +582,26 @@ export namespace ml_v1 {
     /**
      * The number of data instances which resulted in errors.
      */
-    errorCount?: string | null;
+    errorCount?: string;
     /**
      * Node hours used by the batch prediction job.
      */
-    nodeHours?: number | null;
+    nodeHours?: number;
     /**
      * The output Google Cloud Storage location provided at the job creation time.
      */
-    outputPath?: string | null;
+    outputPath?: string;
     /**
      * The number of generated predictions.
      */
-    predictionCount?: string | null;
+    predictionCount?: string;
   }
   /**
    * Request for predictions to be issued against a trained model.
    */
   export interface Schema$GoogleCloudMlV1__PredictRequest {
     /**
-     *  Required. The prediction request body. Refer to the [request body details section](#request-body-details) for more information on how to structure your request.
+     *  Required. The prediction request body.
      */
     httpBody?: Schema$GoogleApi__HttpBody;
   }
@@ -649,33 +616,7 @@ export namespace ml_v1 {
     /**
      * The Docker image to run on the replica. This image must be in Container Registry. Learn more about [configuring custom containers](/ml-engine/docs/distributed-training-containers).
      */
-    imageUri?: string | null;
-    /**
-     * The AI Platform runtime version that includes a TensorFlow version matching the one used in the custom container. This field is required if the replica is a TPU worker that uses a custom container. Otherwise, do not specify this field. This must be a [runtime version that currently supports training with TPUs](/ml-engine/docs/tensorflow/runtime-version-list#tpu-support).  Note that the version of TensorFlow included in a runtime version may differ from the numbering of the runtime version itself, because it may have a different [patch version](https://www.tensorflow.org/guide/version_compat#semantic_versioning_20). In this field, you must specify the runtime version (TensorFlow minor version). For example, if your custom container runs TensorFlow `1.x.y`, specify `1.x`.
-     */
-    tpuTfVersion?: string | null;
-  }
-  /**
-   * Configuration for logging request-response pairs to a BigQuery table. Online prediction requests to a model version and the responses to these requests are converted to raw strings and saved to the specified BigQuery table. Logging is constrained by [BigQuery quotas and limits](/bigquery/quotas). If your project exceeds BigQuery quotas or limits, AI Platform Prediction does not log request-response pairs, but it continues to serve predictions.  If you are using [continuous evaluation](/ml-engine/docs/continuous-evaluation/), you do not need to specify this configuration manually. Setting up continuous evaluation automatically enables logging of request-response pairs.
-   */
-  export interface Schema$GoogleCloudMlV1__RequestLoggingConfig {
-    /**
-     * Required. Fully qualified BigQuery table name in the following format: &quot;&lt;var&gt;project_id&lt;/var&gt;.&lt;var&gt;dataset_name&lt;/var&gt;.&lt;var&gt;table_name&lt;/var&gt;&quot;  The specifcied table must already exist, and the &quot;Cloud ML Service Agent&quot; for your project must have permission to write to it. The table must have the following [schema](/bigquery/docs/schemas):  &lt;table&gt;   &lt;tr&gt;&lt;th&gt;Field name&lt;/th&gt;&lt;th style=&quot;display: table-cell&quot;&gt;Type&lt;/th&gt;     &lt;th style=&quot;display: table-cell&quot;&gt;Mode&lt;/th&gt;&lt;/tr&gt;   &lt;tr&gt;&lt;td&gt;model&lt;/td&gt;&lt;td&gt;STRING&lt;/td&gt;&lt;td&gt;REQUIRED&lt;/td&gt;&lt;/tr&gt;   &lt;tr&gt;&lt;td&gt;model_version&lt;/td&gt;&lt;td&gt;STRING&lt;/td&gt;&lt;td&gt;REQUIRED&lt;/td&gt;&lt;/tr&gt;   &lt;tr&gt;&lt;td&gt;time&lt;/td&gt;&lt;td&gt;TIMESTAMP&lt;/td&gt;&lt;td&gt;REQUIRED&lt;/td&gt;&lt;/tr&gt;   &lt;tr&gt;&lt;td&gt;raw_data&lt;/td&gt;&lt;td&gt;STRING&lt;/td&gt;&lt;td&gt;REQUIRED&lt;/td&gt;&lt;/tr&gt;   &lt;tr&gt;&lt;td&gt;raw_prediction&lt;/td&gt;&lt;td&gt;STRING&lt;/td&gt;&lt;td&gt;NULLABLE&lt;/td&gt;&lt;/tr&gt;   &lt;tr&gt;&lt;td&gt;groundtruth&lt;/td&gt;&lt;td&gt;STRING&lt;/td&gt;&lt;td&gt;NULLABLE&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt;
-     */
-    bigqueryTableName?: string | null;
-    /**
-     * Percentage of requests to be logged, expressed as a fraction from 0 to 1. For example, if you want to log 10% of requests, enter `0.1`. The sampling window is the lifetime of the model version. Defaults to 0.
-     */
-    samplingPercentage?: number | null;
-  }
-  /**
-   * An attribution method that approximates Shapley values for features that contribute to the label being predicted. A sampling strategy is used to approximate the value rather than considering all subsets of features.
-   */
-  export interface Schema$GoogleCloudMlV1__SampledShapleyAttribution {
-    /**
-     * The number of feature permutations to consider when approximating the Shapley values.
-     */
-    numPaths?: number | null;
+    imageUri?: string;
   }
   /**
    * Request message for the SetDefaultVersion request.
@@ -688,7 +629,7 @@ export namespace ml_v1 {
     /**
      * Optional. Command line arguments to pass to the program.
      */
-    args?: string[] | null;
+    args?: string[];
     /**
      * Optional. The set of Hyperparameters to tune.
      */
@@ -696,67 +637,63 @@ export namespace ml_v1 {
     /**
      * Optional. A Google Cloud Storage path in which to store training outputs and other data needed for training. This path is passed to your TensorFlow program as the &#39;--job-dir&#39; command-line argument. The benefit of specifying this field is that Cloud ML validates the path for use in training.
      */
-    jobDir?: string | null;
+    jobDir?: string;
     /**
      * Optional. The configuration for your master worker.  You should only set `masterConfig.acceleratorConfig` if `masterType` is set to a Compute Engine machine type. Learn about [restrictions on accelerator configurations for training.](/ml-engine/docs/tensorflow/using-gpus#compute-engine-machine-types-with-gpu)  Set `masterConfig.imageUri` only if you build a custom image. Only one of `masterConfig.imageUri` and `runtimeVersion` should be set. Learn more about [configuring custom containers](/ml-engine/docs/distributed-training-containers).
      */
     masterConfig?: Schema$GoogleCloudMlV1__ReplicaConfig;
     /**
-     * Optional. Specifies the type of virtual machine to use for your training job&#39;s master worker. You must specify this field when `scaleTier` is set to `CUSTOM`.  You can use certain Compute Engine machine types directly in this field. The following types are supported:  - `n1-standard-4` - `n1-standard-8` - `n1-standard-16` - `n1-standard-32` - `n1-standard-64` - `n1-standard-96` - `n1-highmem-2` - `n1-highmem-4` - `n1-highmem-8` - `n1-highmem-16` - `n1-highmem-32` - `n1-highmem-64` - `n1-highmem-96` - `n1-highcpu-16` - `n1-highcpu-32` - `n1-highcpu-64` - `n1-highcpu-96`  Learn more about [using Compute Engine machine types](/ml-engine/docs/machine-types#compute-engine-machine-types).  Alternatively, you can use the following legacy machine types:  - `standard` - `large_model` - `complex_model_s` - `complex_model_m` - `complex_model_l` - `standard_gpu` - `complex_model_m_gpu` - `complex_model_l_gpu` - `standard_p100` - `complex_model_m_p100` - `standard_v100` - `large_model_v100` - `complex_model_m_v100` - `complex_model_l_v100`  Learn more about [using legacy machine types](/ml-engine/docs/machine-types#legacy-machine-types).  Finally, if you want to use a TPU for training, specify `cloud_tpu` in this field. Learn more about the [special configuration options for training with TPUs](/ml-engine/docs/tensorflow/using-tpus#configuring_a_custom_tpu_machine).
+     * Optional. Specifies the type of virtual machine to use for your training job&#39;s master worker.  The following types are supported:  &lt;dl&gt;   &lt;dt&gt;standard&lt;/dt&gt;   &lt;dd&gt;   A basic machine configuration suitable for training simple models with   small to moderate datasets.   &lt;/dd&gt;   &lt;dt&gt;large_model&lt;/dt&gt;   &lt;dd&gt;   A machine with a lot of memory, specially suited for parameter servers   when your model is large (having many hidden layers or layers with very   large numbers of nodes).   &lt;/dd&gt;   &lt;dt&gt;complex_model_s&lt;/dt&gt;   &lt;dd&gt;   A machine suitable for the master and workers of the cluster when your   model requires more computation than the standard machine can handle   satisfactorily.   &lt;/dd&gt;   &lt;dt&gt;complex_model_m&lt;/dt&gt;   &lt;dd&gt;   A machine with roughly twice the number of cores and roughly double the   memory of &lt;i&gt;complex_model_s&lt;/i&gt;.   &lt;/dd&gt;   &lt;dt&gt;complex_model_l&lt;/dt&gt;   &lt;dd&gt;   A machine with roughly twice the number of cores and roughly double the   memory of &lt;i&gt;complex_model_m&lt;/i&gt;.   &lt;/dd&gt;   &lt;dt&gt;standard_gpu&lt;/dt&gt;   &lt;dd&gt;   A machine equivalent to &lt;i&gt;standard&lt;/i&gt; that   also includes a single NVIDIA Tesla K80 GPU. See more about   &lt;a href=&quot;/ml-engine/docs/tensorflow/using-gpus&quot;&gt;using GPUs to   train your model&lt;/a&gt;.   &lt;/dd&gt;   &lt;dt&gt;complex_model_m_gpu&lt;/dt&gt;   &lt;dd&gt;   A machine equivalent to &lt;i&gt;complex_model_m&lt;/i&gt; that also includes   four NVIDIA Tesla K80 GPUs.   &lt;/dd&gt;   &lt;dt&gt;complex_model_l_gpu&lt;/dt&gt;   &lt;dd&gt;   A machine equivalent to &lt;i&gt;complex_model_l&lt;/i&gt; that also includes   eight NVIDIA Tesla K80 GPUs.   &lt;/dd&gt;   &lt;dt&gt;standard_p100&lt;/dt&gt;   &lt;dd&gt;   A machine equivalent to &lt;i&gt;standard&lt;/i&gt; that   also includes a single NVIDIA Tesla P100 GPU.   &lt;/dd&gt;   &lt;dt&gt;complex_model_m_p100&lt;/dt&gt;   &lt;dd&gt;   A machine equivalent to &lt;i&gt;complex_model_m&lt;/i&gt; that also includes   four NVIDIA Tesla P100 GPUs.   &lt;/dd&gt;   &lt;dt&gt;standard_v100&lt;/dt&gt;   &lt;dd&gt;   A machine equivalent to &lt;i&gt;standard&lt;/i&gt; that   also includes a single NVIDIA Tesla V100 GPU.   &lt;/dd&gt;   &lt;dt&gt;large_model_v100&lt;/dt&gt;   &lt;dd&gt;   A machine equivalent to &lt;i&gt;large_model&lt;/i&gt; that   also includes a single NVIDIA Tesla V100 GPU.   &lt;/dd&gt;   &lt;dt&gt;complex_model_m_v100&lt;/dt&gt;   &lt;dd&gt;   A machine equivalent to &lt;i&gt;complex_model_m&lt;/i&gt; that   also includes four NVIDIA Tesla V100 GPUs.   &lt;/dd&gt;   &lt;dt&gt;complex_model_l_v100&lt;/dt&gt;   &lt;dd&gt;   A machine equivalent to &lt;i&gt;complex_model_l&lt;/i&gt; that   also includes eight NVIDIA Tesla V100 GPUs.   &lt;/dd&gt;   &lt;dt&gt;cloud_tpu&lt;/dt&gt;   &lt;dd&gt;   A TPU VM including one Cloud TPU. See more about   &lt;a href=&quot;/ml-engine/docs/tensorflow/using-tpus&quot;&gt;using TPUs to train   your model&lt;/a&gt;.   &lt;/dd&gt; &lt;/dl&gt;  You may also use certain Compute Engine machine types directly in this field. The following types are supported:  - `n1-standard-4` - `n1-standard-8` - `n1-standard-16` - `n1-standard-32` - `n1-standard-64` - `n1-standard-96` - `n1-highmem-2` - `n1-highmem-4` - `n1-highmem-8` - `n1-highmem-16` - `n1-highmem-32` - `n1-highmem-64` - `n1-highmem-96` - `n1-highcpu-16` - `n1-highcpu-32` - `n1-highcpu-64` - `n1-highcpu-96`  See more about [using Compute Engine machine types](/ml-engine/docs/tensorflow/machine-types#compute-engine-machine-types).  You must set this value when `scaleTier` is set to `CUSTOM`.
      */
-    masterType?: string | null;
+    masterType?: string;
     /**
      * Required. The Google Cloud Storage location of the packages with the training program and any additional dependencies. The maximum number of package URIs is 100.
      */
-    packageUris?: string[] | null;
+    packageUris?: string[];
     /**
-     * Optional. The configuration for parameter servers.  You should only set `parameterServerConfig.acceleratorConfig` if `parameterServerConfigType` is set to a Compute Engine machine type. [Learn about restrictions on accelerator configurations for training.](/ml-engine/docs/tensorflow/using-gpus#compute-engine-machine-types-with-gpu)  Set `parameterServerConfig.imageUri` only if you build a custom image for your parameter server. If `parameterServerConfig.imageUri` has not been set, AI Platform uses the value of `masterConfig.imageUri`. Learn more about [configuring custom containers](/ml-engine/docs/distributed-training-containers).
+     * Optional. The configuration for parameter servers.  You should only set `parameterServerConfig.acceleratorConfig` if `parameterServerConfigType` is set to a Compute Engine machine type. [Learn about restrictions on accelerator configurations for training.](/ml-engine/docs/tensorflow/using-gpus#compute-engine-machine-types-with-gpu)  Set `parameterServerConfig.imageUri` only if you build a custom image for your parameter server. If `parameterServerConfig.imageUri` has not been set, Cloud ML Engine uses the value of `masterConfig.imageUri`. Learn more about [configuring custom containers](/ml-engine/docs/distributed-training-containers).
      */
     parameterServerConfig?: Schema$GoogleCloudMlV1__ReplicaConfig;
     /**
      * Optional. The number of parameter server replicas to use for the training job. Each replica in the cluster will be of the type specified in `parameter_server_type`.  This value can only be used when `scale_tier` is set to `CUSTOM`.If you set this value, you must also set `parameter_server_type`.  The default value is zero.
      */
-    parameterServerCount?: string | null;
+    parameterServerCount?: string;
     /**
-     * Optional. Specifies the type of virtual machine to use for your training job&#39;s parameter server.  The supported values are the same as those described in the entry for `master_type`.  This value must be consistent with the category of machine type that `masterType` uses. In other words, both must be Compute Engine machine types or both must be legacy machine types.  This value must be present when `scaleTier` is set to `CUSTOM` and `parameter_server_count` is greater than zero.
+     * Optional. Specifies the type of virtual machine to use for your training job&#39;s parameter server.  The supported values are the same as those described in the entry for `master_type`.  This value must be consistent with the category of machine type that `masterType` uses. In other words, both must be Cloud ML Engine machine types or both must be Compute Engine machine types.  This value must be present when `scaleTier` is set to `CUSTOM` and `parameter_server_count` is greater than zero.
      */
-    parameterServerType?: string | null;
+    parameterServerType?: string;
     /**
      * Required. The Python module name to run after installing the packages.
      */
-    pythonModule?: string | null;
+    pythonModule?: string;
     /**
-     * Optional. The version of Python used in training. If not set, the default version is &#39;2.7&#39;. Starting [January 13, 2020](/ml-engine/docs/release-notes#december_10_2019), this field is required.  The following Python versions are available:  * Python &#39;3.7&#39; is available when `runtime_version` is set to &#39;1.15&#39; or   later. * Python &#39;3.5&#39; is available when `runtime_version` is set to a version   from &#39;1.4&#39; to &#39;1.14&#39;. * Python &#39;2.7&#39; is available when `runtime_version` is set to &#39;1.15&#39; or   earlier. (Runtime versions released [after January 1,   2020](/ml-engine/docs/release-notes#december_10_2019) do not support   Python 2.7.)  Read more about the Python versions available for [each runtime version](/ml-engine/docs/runtime-version-list).
+     * Optional. The version of Python used in training. If not set, the default version is &#39;2.7&#39;. Python &#39;3.5&#39; is available when `runtime_version` is set to &#39;1.4&#39; and above. Python &#39;2.7&#39; works with all supported &lt;a href=&quot;/ml-engine/docs/runtime-version-list&quot;&gt;runtime versions&lt;/a&gt;.
      */
-    pythonVersion?: string | null;
+    pythonVersion?: string;
     /**
-     * Required. The Google Compute Engine region to run the training job in. See the &lt;a href=&quot;/ml-engine/docs/tensorflow/regions&quot;&gt;available regions&lt;/a&gt; for AI Platform services.
+     * Required. The Google Compute Engine region to run the training job in. See the &lt;a href=&quot;/ml-engine/docs/tensorflow/regions&quot;&gt;available regions&lt;/a&gt; for ML Engine services.
      */
-    region?: string | null;
+    region?: string;
     /**
-     * Optional. The AI Platform runtime version to use for training. If not set, AI Platform uses the default stable version, 1.0. Starting [January 13, 2020](/ml-engine/docs/release-notes#december_10_2019), this field is required.  For more information, see the &lt;a href=&quot;/ml-engine/docs/runtime-version-list&quot;&gt;runtime version list&lt;/a&gt; and &lt;a href=&quot;/ml-engine/docs/versioning&quot;&gt;how to manage runtime versions&lt;/a&gt;.
+     * Optional. The Cloud ML Engine runtime version to use for training. If not set, Cloud ML Engine uses the default stable version, 1.0. For more information, see the &lt;a href=&quot;/ml-engine/docs/runtime-version-list&quot;&gt;runtime version list&lt;/a&gt; and &lt;a href=&quot;/ml-engine/docs/versioning&quot;&gt;how to manage runtime versions&lt;/a&gt;.
      */
-    runtimeVersion?: string | null;
+    runtimeVersion?: string;
     /**
      * Required. Specifies the machine types, the number of replicas for workers and parameter servers.
      */
-    scaleTier?: string | null;
+    scaleTier?: string;
     /**
-     * Optional. Use &#39;chief&#39; instead of &#39;master&#39; in TF_CONFIG when Custom Container is used and evaluator is not specified.  Defaults to false.
-     */
-    useChiefInTfConfig?: boolean | null;
-    /**
-     * Optional. The configuration for workers.  You should only set `workerConfig.acceleratorConfig` if `workerType` is set to a Compute Engine machine type. [Learn about restrictions on accelerator configurations for training.](/ml-engine/docs/tensorflow/using-gpus#compute-engine-machine-types-with-gpu)  Set `workerConfig.imageUri` only if you build a custom image for your worker. If `workerConfig.imageUri` has not been set, AI Platform uses the value of `masterConfig.imageUri`. Learn more about [configuring custom containers](/ml-engine/docs/distributed-training-containers).
+     * Optional. The configuration for workers.  You should only set `workerConfig.acceleratorConfig` if `workerType` is set to a Compute Engine machine type. [Learn about restrictions on accelerator configurations for training.](/ml-engine/docs/tensorflow/using-gpus#compute-engine-machine-types-with-gpu)  Set `workerConfig.imageUri` only if you build a custom image for your worker. If `workerConfig.imageUri` has not been set, Cloud ML Engine uses the value of `masterConfig.imageUri`. Learn more about [configuring custom containers](/ml-engine/docs/distributed-training-containers).
      */
     workerConfig?: Schema$GoogleCloudMlV1__ReplicaConfig;
     /**
      * Optional. The number of worker replicas to use for the training job. Each replica in the cluster will be of the type specified in `worker_type`.  This value can only be used when `scale_tier` is set to `CUSTOM`. If you set this value, you must also set `worker_type`.  The default value is zero.
      */
-    workerCount?: string | null;
+    workerCount?: string;
     /**
-     * Optional. Specifies the type of virtual machine to use for your training job&#39;s worker nodes.  The supported values are the same as those described in the entry for `masterType`.  This value must be consistent with the category of machine type that `masterType` uses. In other words, both must be Compute Engine machine types or both must be legacy machine types.  If you use `cloud_tpu` for this value, see special instructions for [configuring a custom TPU machine](/ml-engine/docs/tensorflow/using-tpus#configuring_a_custom_tpu_machine).  This value must be present when `scaleTier` is set to `CUSTOM` and `workerCount` is greater than zero.
+     * Optional. Specifies the type of virtual machine to use for your training job&#39;s worker nodes.  The supported values are the same as those described in the entry for `masterType`.  This value must be consistent with the category of machine type that `masterType` uses. In other words, both must be Cloud ML Engine machine types or both must be Compute Engine machine types.  If you use `cloud_tpu` for this value, see special instructions for [configuring a custom TPU machine](/ml-engine/docs/tensorflow/using-tpus#configuring_a_custom_tpu_machine).  This value must be present when `scaleTier` is set to `CUSTOM` and `workerCount` is greater than zero.
      */
-    workerType?: string | null;
+    workerType?: string;
   }
   /**
    * Represents results of a training job. Output only.
@@ -769,123 +706,103 @@ export namespace ml_v1 {
     /**
      * The number of hyperparameter tuning trials that completed successfully. Only set for hyperparameter tuning jobs.
      */
-    completedTrialCount?: string | null;
+    completedTrialCount?: string;
     /**
      * The amount of ML units consumed by the job.
      */
-    consumedMLUnits?: number | null;
-    /**
-     * The TensorFlow summary tag name used for optimizing hyperparameter tuning trials. See [`HyperparameterSpec.hyperparameterMetricTag`](#HyperparameterSpec.FIELDS.hyperparameter_metric_tag) for more information. Only set for hyperparameter tuning jobs.
-     */
-    hyperparameterMetricTag?: string | null;
+    consumedMLUnits?: number;
     /**
      * Whether this job is a built-in Algorithm job.
      */
-    isBuiltInAlgorithmJob?: boolean | null;
+    isBuiltInAlgorithmJob?: boolean;
     /**
      * Whether this job is a hyperparameter tuning job.
      */
-    isHyperparameterTuningJob?: boolean | null;
+    isHyperparameterTuningJob?: boolean;
     /**
      * Results for individual Hyperparameter trials. Only set for hyperparameter tuning jobs.
      */
     trials?: Schema$GoogleCloudMlV1__HyperparameterOutput[];
   }
   /**
-   * Represents a version of the model.  Each version is a trained model deployed in the cloud, ready to handle prediction requests. A model can have multiple versions. You can get information about all of the versions of a given model by calling projects.models.versions.list.
+   * Represents a version of the model.  Each version is a trained model deployed in the cloud, ready to handle prediction requests. A model can have multiple versions. You can get information about all of the versions of a given model by calling [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list). Next ID: 30
    */
   export interface Schema$GoogleCloudMlV1__Version {
     /**
-     * Optional. Accelerator config for using GPUs for online prediction (beta). Only specify this field if you have specified a Compute Engine (N1) machine type in the `machineType` field. Learn more about [using GPUs for online prediction](/ml-engine/docs/machine-types-online-prediction#gpus).
-     */
-    acceleratorConfig?: Schema$GoogleCloudMlV1__AcceleratorConfig;
-    /**
-     * Automatically scale the number of nodes used to serve the model in response to increases and decreases in traffic. Care should be taken to ramp up traffic according to the model&#39;s ability to scale or you will start seeing increases in latency and 429 response codes.  Note that you cannot use AutoScaling if your version uses [GPUs](#Version.FIELDS.accelerator_config). Instead, you must use specify `manual_scaling`.
+     * Automatically scale the number of nodes used to serve the model in response to increases and decreases in traffic. Care should be taken to ramp up traffic according to the model&#39;s ability to scale or you will start seeing increases in latency and 429 response codes.
      */
     autoScaling?: Schema$GoogleCloudMlV1__AutoScaling;
     /**
      * Output only. The time the version was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
-     * Required. The Cloud Storage location of the trained model used to create the version. See the [guide to model deployment](/ml-engine/docs/tensorflow/deploying-models) for more information.  When passing Version to projects.models.versions.create the model service uses the specified location as the source of the model. Once deployed, the model version is hosted by the prediction service, so this location is useful only as a historical record. The total number of model files can&#39;t exceed 1000.
+     * Required. The Google Cloud Storage location of the trained model used to create the version. See the [guide to model deployment](/ml-engine/docs/tensorflow/deploying-models) for more information.  When passing Version to [projects.models.versions.create](/ml-engine/reference/rest/v1/projects.models.versions/create) the model service uses the specified location as the source of the model. Once deployed, the model version is hosted by the prediction service, so this location is useful only as a historical record. The total number of model files can&#39;t exceed 1000.
      */
-    deploymentUri?: string | null;
+    deploymentUri?: string;
     /**
      * Optional. The description specified for the version when it was created.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Output only. The details of a failure or a cancellation.
      */
-    errorMessage?: string | null;
+    errorMessage?: string;
     /**
      * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a model from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform model updates in order to avoid race conditions: An `etag` is returned in the response to `GetVersion`, and systems are expected to put that etag in the request to `UpdateVersion` to ensure that their change will be applied to the model as intended.
      */
-    etag?: string | null;
+    etag?: string;
     /**
-     * Optional. Configures explainability features on the model&#39;s version. Some explanation features require additional metadata to be loaded as part of the model payload.
+     * Optional. The machine learning framework Cloud ML Engine uses to train this version of the model. Valid values are `TENSORFLOW`, `SCIKIT_LEARN`, `XGBOOST`. If you do not specify a framework, Cloud ML Engine will analyze files in the deployment_uri to determine a framework. If you choose `SCIKIT_LEARN` or `XGBOOST`, you must also set the runtime version of the model to 1.4 or greater.
      */
-    explanationConfig?: Schema$GoogleCloudMlV1__ExplanationConfig;
+    framework?: string;
     /**
-     * Optional. The machine learning framework AI Platform uses to train this version of the model. Valid values are `TENSORFLOW`, `SCIKIT_LEARN`, `XGBOOST`. If you do not specify a framework, AI Platform will analyze files in the deployment_uri to determine a framework. If you choose `SCIKIT_LEARN` or `XGBOOST`, you must also set the runtime version of the model to 1.4 or greater.  Do **not** specify a framework if you&#39;re deploying a [custom prediction routine](/ml-engine/docs/tensorflow/custom-prediction-routines).  If you specify a [Compute Engine (N1) machine type](/ml-engine/docs/machine-types-online-prediction) in the `machineType` field, you must specify `TENSORFLOW` for the framework.
+     * Output only. If true, this version will be used to handle prediction requests that do not specify a version.  You can change the default version by calling [projects.methods.versions.setDefault](/ml-engine/reference/rest/v1/projects.models.versions/setDefault).
      */
-    framework?: string | null;
-    /**
-     * Output only. If true, this version will be used to handle prediction requests that do not specify a version.  You can change the default version by calling projects.methods.versions.setDefault.
-     */
-    isDefault?: boolean | null;
+    isDefault?: boolean;
     /**
      * Optional. One or more labels that you can add, to organize your model versions. Each label is a key-value pair, where both the key and the value are arbitrary strings that you supply. For more information, see the documentation on &lt;a href=&quot;/ml-engine/docs/tensorflow/resource-labels&quot;&gt;using labels&lt;/a&gt;.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Output only. The time the version was last used for prediction.
      */
-    lastUseTime?: string | null;
+    lastUseTime?: string;
     /**
-     * Optional. The type of machine on which to serve the model. Currently only applies to online prediction service. If this field is not specified, it defaults to `mls1-c1-m2`.  Online prediction supports the following machine types:  * `mls1-c1-m2` * `mls1-c4-m2` * `n1-standard-2` * `n1-standard-4` * `n1-standard-8` * `n1-standard-16` * `n1-standard-32` * `n1-highmem-2` * `n1-highmem-4` * `n1-highmem-8` * `n1-highmem-16` * `n1-highmem-32` * `n1-highcpu-2` * `n1-highcpu-4` * `n1-highcpu-8` * `n1-highcpu-16` * `n1-highcpu-32`  `mls1-c1-m2` is generally available. All other machine types are available in beta. Learn more about the [differences between machine types](/ml-engine/docs/machine-types-online-prediction).
+     * Optional. The type of machine on which to serve the model. Currently only applies to online prediction service. &lt;dl&gt;   &lt;dt&gt;mls1-c1-m2&lt;/dt&gt;   &lt;dd&gt;   The &lt;b&gt;default&lt;/b&gt; machine type, with 1 core and 2 GB RAM. The deprecated   name for this machine type is &quot;mls1-highmem-1&quot;.   &lt;/dd&gt;   &lt;dt&gt;mls1-c4-m2&lt;/dt&gt;   &lt;dd&gt;   In &lt;b&gt;Beta&lt;/b&gt;. This machine type has 4 cores and 2 GB RAM. The   deprecated name for this machine type is &quot;mls1-highcpu-4&quot;.   &lt;/dd&gt; &lt;/dl&gt;
      */
-    machineType?: string | null;
+    machineType?: string;
     /**
      * Manually select the number of nodes to use for serving the model. You should generally use `auto_scaling` with an appropriate `min_nodes` instead, but this option is available if you want more predictable billing. Beware that latency and error rates will increase if the traffic exceeds that capability of the system to serve it based on the selected number of nodes.
      */
     manualScaling?: Schema$GoogleCloudMlV1__ManualScaling;
     /**
-     * Required. The name specified for the version when it was created.  The version name must be unique within the model it is created in.
+     * Required.The name specified for the version when it was created.  The version name must be unique within the model it is created in.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * Optional. Cloud Storage paths (`gs://…`) of packages for [custom prediction routines](/ml-engine/docs/tensorflow/custom-prediction-routines) or [scikit-learn pipelines with custom code](/ml-engine/docs/scikit/exporting-for-prediction#custom-pipeline-code).  For a custom prediction routine, one of these packages must contain your Predictor class (see [`predictionClass`](#Version.FIELDS.prediction_class)). Additionally, include any dependencies used by your Predictor or scikit-learn pipeline uses that are not already included in your selected [runtime version](/ml-engine/docs/tensorflow/runtime-version-list).  If you specify this field, you must also set [`runtimeVersion`](#Version.FIELDS.runtime_version) to 1.4 or greater.
+     * Optional. The Google Cloud Storage location of the packages for custom prediction and any additional dependencies.
      */
-    packageUris?: string[] | null;
+    packageUris?: string[];
     /**
-     * Optional. The fully qualified name (&lt;var&gt;module_name&lt;/var&gt;.&lt;var&gt;class_name&lt;/var&gt;) of a class that implements the Predictor interface described in this reference field. The module containing this class should be included in a package provided to the [`packageUris` field](#Version.FIELDS.package_uris).  Specify this field if and only if you are deploying a [custom prediction routine (beta)](/ml-engine/docs/tensorflow/custom-prediction-routines). If you specify this field, you must set [`runtimeVersion`](#Version.FIELDS.runtime_version) to 1.4 or greater and you must set `machineType` to a [legacy (MLS1) machine type](/ml-engine/docs/machine-types-online-prediction).  The following code sample provides the Predictor interface:  &lt;pre style=&quot;max-width: 626px;&quot;&gt; class Predictor(object): &quot;&quot;&quot;Interface for constructing custom predictors.&quot;&quot;&quot;  def predict(self, instances, **kwargs):     &quot;&quot;&quot;Performs custom prediction.      Instances are the decoded values from the request. They have already     been deserialized from JSON.      Args:         instances: A list of prediction input instances.         **kwargs: A dictionary of keyword args provided as additional             fields on the predict request body.      Returns:         A list of outputs containing the prediction results. This list must         be JSON serializable.     &quot;&quot;&quot;     raise NotImplementedError()  @classmethod def from_path(cls, model_dir):     &quot;&quot;&quot;Creates an instance of Predictor using the given path.      Loading of the predictor should be done in this method.      Args:         model_dir: The local directory that contains the exported model             file along with any additional files uploaded when creating the             version resource.      Returns:         An instance implementing this Predictor class.     &quot;&quot;&quot;     raise NotImplementedError() &lt;/pre&gt;  Learn more about [the Predictor interface and custom prediction routines](/ml-engine/docs/tensorflow/custom-prediction-routines).
+     * class PredictionClass(object):   &quot;&quot;&quot;A Model performs predictions on a given list of instances.    The input instances are the raw values sent by the user. It is the   responsibility of a Model to translate these instances into   actual predictions.    The input instances and the output use python data types. The input   instances have been decoded prior to being passed to the predict   method. The output, which should use python data types is   encoded after being returned from the predict method.   &quot;&quot;&quot;    def predict(self, instances, **kwargs):     &quot;&quot;&quot;Returns predictions for the provided instances.      Instances are the decoded values from the request. Clients need not     worry about decoding json nor base64 decoding.      Args:       instances: A list of instances, as described in the API.       **kwargs: Additional keyword arguments, will be passed into the           client&#39;s predict method.      Returns:       A list of outputs containing the prediction results.     &quot;&quot;&quot;    @classmethod   def from_path(cls, model_path):     &quot;&quot;&quot;Creates a model using the given model path.      Path is useful, e.g., to load files from the exported directory     containing the model.      Args:       model_path: The local directory that contains the exported model           file along with any additional files uploaded when creating the           version resource.      Returns:       An instance implementing this Model class.     &quot;&quot;&quot;
      */
-    predictionClass?: string | null;
+    predictionClass?: string;
     /**
-     * Optional. The version of Python used in prediction. If not set, the default version is &#39;2.7&#39;. Starting [January 13, 2020](/ml-engine/docs/release-notes#december_10_2019), this field is required.  The following Python versions are available:  * Python &#39;3.7&#39; is available when `runtime_version` is set to &#39;1.15&#39; or   later. * Python &#39;3.5&#39; is available when `runtime_version` is set to a version   from &#39;1.4&#39; to &#39;1.14&#39;. * Python &#39;2.7&#39; is available when `runtime_version` is set to &#39;1.15&#39; or   earlier. (Runtime versions released [after January 1,   2020](/ml-engine/docs/release-notes#december_10_2019) do not support   Python 2.7.)  Read more about the Python versions available for [each runtime version](/ml-engine/docs/runtime-version-list).
+     * Optional. The version of Python used in prediction. If not set, the default version is &#39;2.7&#39;. Python &#39;3.5&#39; is available when `runtime_version` is set to &#39;1.4&#39; and above. Python &#39;2.7&#39; works with all supported runtime versions.
      */
-    pythonVersion?: string | null;
+    pythonVersion?: string;
     /**
-     * Optional. *Only* specify this field in a projects.models.versions.patch request. Specifying it in a projects.models.versions.create request has no effect.  Configures the request-response pair logging on predictions from this Version.
+     * Optional. The Cloud ML Engine runtime version to use for this deployment. If not set, Cloud ML Engine uses the default stable version, 1.0. For more information, see the [runtime version list](/ml-engine/docs/runtime-version-list) and [how to manage runtime versions](/ml-engine/docs/versioning).
      */
-    requestLoggingConfig?: Schema$GoogleCloudMlV1__RequestLoggingConfig;
-    /**
-     * Optional. The AI Platform runtime version to use for this deployment. If not set, AI Platform uses the default stable version, 1.0. Starting [January 13, 2020](/ml-engine/docs/release-notes#december_10_2019), this field is required.  For more information, see the [runtime version list](/ml-engine/docs/runtime-version-list) and [how to manage runtime versions](/ml-engine/docs/versioning).
-     */
-    runtimeVersion?: string | null;
-    /**
-     * Optional. Specifies the service account for resource access control.
-     */
-    serviceAccount?: string | null;
+    runtimeVersion?: string;
     /**
      * Output only. The state of a version.
      */
-    state?: string | null;
+    state?: string;
   }
   /**
-   * Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.  If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.  Example Policy with multiple AuditConfigs:      {       &quot;audit_configs&quot;: [         {           &quot;service&quot;: &quot;allServices&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,               &quot;exempted_members&quot;: [                 &quot;user:jose@example.com&quot;               ]             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,             },             {               &quot;log_type&quot;: &quot;ADMIN_READ&quot;,             }           ]         },         {           &quot;service&quot;: &quot;sampleservice.googleapis.com&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,               &quot;exempted_members&quot;: [                 &quot;user:aliya@example.com&quot;               ]             }           ]         }       ]     }  For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts jose@example.com from DATA_READ logging, and aliya@example.com from DATA_WRITE logging.
+   * Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.  If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.  Example Policy with multiple AuditConfigs:      {       &quot;audit_configs&quot;: [         {           &quot;service&quot;: &quot;allServices&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,               &quot;exempted_members&quot;: [                 &quot;user:foo@gmail.com&quot;               ]             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,             },             {               &quot;log_type&quot;: &quot;ADMIN_READ&quot;,             }           ]         },         {           &quot;service&quot;: &quot;fooservice.googleapis.com&quot;           &quot;audit_log_configs&quot;: [             {               &quot;log_type&quot;: &quot;DATA_READ&quot;,             },             {               &quot;log_type&quot;: &quot;DATA_WRITE&quot;,               &quot;exempted_members&quot;: [                 &quot;user:bar@gmail.com&quot;               ]             }           ]         }       ]     }  For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
    */
   export interface Schema$GoogleIamV1__AuditConfig {
     /**
@@ -895,20 +812,20 @@ export namespace ml_v1 {
     /**
      * Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    service?: string | null;
+    service?: string;
   }
   /**
-   * Provides the configuration for logging a type of permissions. Example:      {       &quot;audit_log_configs&quot;: [         {           &quot;log_type&quot;: &quot;DATA_READ&quot;,           &quot;exempted_members&quot;: [             &quot;user:jose@example.com&quot;           ]         },         {           &quot;log_type&quot;: &quot;DATA_WRITE&quot;,         }       ]     }  This enables &#39;DATA_READ&#39; and &#39;DATA_WRITE&#39; logging, while exempting jose@example.com from DATA_READ logging.
+   * Provides the configuration for logging a type of permissions. Example:      {       &quot;audit_log_configs&quot;: [         {           &quot;log_type&quot;: &quot;DATA_READ&quot;,           &quot;exempted_members&quot;: [             &quot;user:foo@gmail.com&quot;           ]         },         {           &quot;log_type&quot;: &quot;DATA_WRITE&quot;,         }       ]     }  This enables &#39;DATA_READ&#39; and &#39;DATA_WRITE&#39; logging, while exempting foo@gmail.com from DATA_READ logging.
    */
   export interface Schema$GoogleIamV1__AuditLogConfig {
     /**
      * Specifies the identities that do not cause logging for this type of permission. Follows the same format of Binding.members.
      */
-    exemptedMembers?: string[] | null;
+    exemptedMembers?: string[];
     /**
      * The log type that this config enables.
      */
-    logType?: string | null;
+    logType?: string;
   }
   /**
    * Associates `members` with a `role`.
@@ -919,16 +836,16 @@ export namespace ml_v1 {
      */
     condition?: Schema$GoogleType__Expr;
     /**
-     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@example.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.  * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a user that has been recently deleted. For    example, `alice@example.com?uid=123456789012345678901`. If the user is    recovered, this value reverts to `user:{emailid}` and the recovered user    retains the role in the binding.  * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus    unique identifier) representing a service account that has been recently    deleted. For example,    `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`.    If the service account is undeleted, this value reverts to    `serviceAccount:{emailid}` and the undeleted service account retains the    role in the binding.  * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a Google group that has been recently    deleted. For example, `admins@example.com?uid=123456789012345678901`. If    the group is recovered, this value reverts to `group:{emailid}` and the    recovered group retains the role in the binding.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@gmail.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
      */
-    members?: string[] | null;
+    members?: string[];
     /**
      * Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
      */
-    role?: string | null;
+    role?: string;
   }
   /**
-   * An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources.   A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role.  Optionally, a `binding` can specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both.  **JSON example:**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationAdmin&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-project-id@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationViewer&quot;,           &quot;members&quot;: [&quot;user:eve@example.com&quot;],           &quot;condition&quot;: {             &quot;title&quot;: &quot;expirable access&quot;,             &quot;description&quot;: &quot;Does not grant access after Sep 2020&quot;,             &quot;expression&quot;: &quot;request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)&quot;,           }         }       ],       &quot;etag&quot;: &quot;BwWWja0YfJA=&quot;,       &quot;version&quot;: 3     }  **YAML example:**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-project-id@appspot.gserviceaccount.com       role: roles/resourcemanager.organizationAdmin     - members:       - user:eve@example.com       role: roles/resourcemanager.organizationViewer       condition:         title: expirable access         description: Does not grant access after Sep 2020         expression: request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)     - etag: BwWWja0YfJA=     - version: 3  For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).
+   * Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.   A `Policy` consists of a list of `bindings`. A `binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.  **JSON Example**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/owner&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-other-app@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/viewer&quot;,           &quot;members&quot;: [&quot;user:sean@example.com&quot;]         }       ]     }  **YAML Example**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-other-app@appspot.gserviceaccount.com       role: roles/owner     - members:       - user:sean@example.com       role: roles/viewer   For a description of IAM and its features, see the [IAM developer&#39;s guide](https://cloud.google.com/iam/docs).
    */
   export interface Schema$GoogleIamV1__Policy {
     /**
@@ -936,17 +853,17 @@ export namespace ml_v1 {
      */
     auditConfigs?: Schema$GoogleIamV1__AuditConfig[];
     /**
-     * Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
+     * Associates a list of `members` to a `role`. `bindings` with no members will result in an error.
      */
     bindings?: Schema$GoogleIamV1__Binding[];
     /**
-     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.
+     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
      */
-    etag?: string | null;
+    etag?: string;
     /**
-     * Specifies the format of the policy.  Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected.  Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations:  * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy   that includes conditions  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.  If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset.
+     * Deprecated.
      */
-    version?: number | null;
+    version?: number;
   }
   /**
    * Request message for `SetIamPolicy` method.
@@ -959,7 +876,7 @@ export namespace ml_v1 {
     /**
      * OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: paths: &quot;bindings, etag&quot; This field is only used by Cloud IAM.
      */
-    updateMask?: string | null;
+    updateMask?: string;
   }
   /**
    * Request message for `TestIamPermissions` method.
@@ -968,7 +885,7 @@ export namespace ml_v1 {
     /**
      * The set of permissions to check for the `resource`. Permissions with wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * Response message for `TestIamPermissions` method.
@@ -977,7 +894,7 @@ export namespace ml_v1 {
     /**
      * A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * The response message for Operations.ListOperations.
@@ -986,7 +903,7 @@ export namespace ml_v1 {
     /**
      * The standard List next-page token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * A list of operations that matches the specified filter in the request.
      */
@@ -999,7 +916,7 @@ export namespace ml_v1 {
     /**
      * If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * The error result of the operation in case of failure or cancellation.
      */
@@ -1007,36 +924,36 @@ export namespace ml_v1 {
     /**
      * Service-specific metadata associated with the operation.  It typically contains progress information and common metadata such as create time. Some services might not provide such metadata.  Any method that returns a long-running operation should document the metadata type, if any.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
-     * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+     * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should have the format of `operations/some/unique/name`.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The normal response of the operation in case of success.  If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`.  If the original method is standard `Get`/`Create`/`Update`, the response should be the resource.  For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name.  For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
      */
-    response?: {[key: string]: any} | null;
+    response?: {[key: string]: any};
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
    */
   export interface Schema$GoogleProtobuf__Empty {}
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$GoogleRpc__Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * Represents an expression text. Example:      title: &quot;User account presence&quot;     description: &quot;Determines whether the request has a user account&quot;     expression: &quot;size(request.user) &gt; 0&quot;
@@ -1045,19 +962,112 @@ export namespace ml_v1 {
     /**
      * An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Textual representation of an expression in Common Expression Language syntax.  The application context of the containing message determines which well-known feature set of CEL is supported.
      */
-    expression?: string | null;
+    expression?: string;
     /**
      * An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
      */
-    location?: string | null;
+    location?: string;
     /**
      * An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
      */
-    title?: string | null;
+    title?: string;
+  }
+
+  export class Resource$Operations {
+    context: APIRequestContext;
+    constructor(context: APIRequestContext) {
+      this.context = context;
+    }
+
+    /**
+     * ml.operations.delete
+     * @desc Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
+     * @alias ml.operations.delete
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string} params.name The name of the operation resource to be deleted.
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    delete(
+      params?: Params$Resource$Operations$Delete,
+      options?: MethodOptions
+    ): GaxiosPromise<Schema$GoogleProtobuf__Empty>;
+    delete(
+      params: Params$Resource$Operations$Delete,
+      options:
+        | MethodOptions
+        | BodyResponseCallback<Schema$GoogleProtobuf__Empty>,
+      callback: BodyResponseCallback<Schema$GoogleProtobuf__Empty>
+    ): void;
+    delete(
+      params: Params$Resource$Operations$Delete,
+      callback: BodyResponseCallback<Schema$GoogleProtobuf__Empty>
+    ): void;
+    delete(callback: BodyResponseCallback<Schema$GoogleProtobuf__Empty>): void;
+    delete(
+      paramsOrCallback?:
+        | Params$Resource$Operations$Delete
+        | BodyResponseCallback<Schema$GoogleProtobuf__Empty>,
+      optionsOrCallback?:
+        | MethodOptions
+        | BodyResponseCallback<Schema$GoogleProtobuf__Empty>,
+      callback?: BodyResponseCallback<Schema$GoogleProtobuf__Empty>
+    ): void | GaxiosPromise<Schema$GoogleProtobuf__Empty> {
+      let params = (paramsOrCallback ||
+        {}) as Params$Resource$Operations$Delete;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Operations$Delete;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://ml.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+          {
+            url: (rootUrl + '/v1/{+name}').replace(/([^:]\/)\/+/g, '$1'),
+            method: 'DELETE',
+          },
+          options
+        ),
+        params,
+        requiredParams: ['name'],
+        pathParams: ['name'],
+        context: this.context,
+      };
+      if (callback) {
+        createAPIRequest<Schema$GoogleProtobuf__Empty>(parameters, callback);
+      } else {
+        return createAPIRequest<Schema$GoogleProtobuf__Empty>(parameters);
+      }
+    }
+  }
+
+  export interface Params$Resource$Operations$Delete
+    extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+
+    /**
+     * The name of the operation resource to be deleted.
+     */
+    name?: string;
   }
 
   export class Resource$Projects {
@@ -1072,80 +1082,6 @@ export namespace ml_v1 {
       this.locations = new Resource$Projects$Locations(this.context);
       this.models = new Resource$Projects$Models(this.context);
       this.operations = new Resource$Projects$Operations(this.context);
-    }
-
-    /**
-     * ml.projects.explain
-     * @desc Performs explanation on the data in the request. AI Platform implements a custom `explain` verb on top of an HTTP POST method.
-     * @alias ml.projects.explain
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.name Required. The resource name of a model or a version.  Authorization: requires the `predict` permission on the specified resource.
-     * @param {().GoogleCloudMlV1__ExplainRequest} params.requestBody Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    explain(
-      params?: Params$Resource$Projects$Explain,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$GoogleApi__HttpBody>;
-    explain(
-      params: Params$Resource$Projects$Explain,
-      options: MethodOptions | BodyResponseCallback<Schema$GoogleApi__HttpBody>,
-      callback: BodyResponseCallback<Schema$GoogleApi__HttpBody>
-    ): void;
-    explain(
-      params: Params$Resource$Projects$Explain,
-      callback: BodyResponseCallback<Schema$GoogleApi__HttpBody>
-    ): void;
-    explain(callback: BodyResponseCallback<Schema$GoogleApi__HttpBody>): void;
-    explain(
-      paramsOrCallback?:
-        | Params$Resource$Projects$Explain
-        | BodyResponseCallback<Schema$GoogleApi__HttpBody>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$GoogleApi__HttpBody>,
-      callback?: BodyResponseCallback<Schema$GoogleApi__HttpBody>
-    ): void | GaxiosPromise<Schema$GoogleApi__HttpBody> {
-      let params = (paramsOrCallback || {}) as Params$Resource$Projects$Explain;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Projects$Explain;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://ml.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1/{+name}:explain').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'POST',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['name'],
-        pathParams: ['name'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$GoogleApi__HttpBody>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$GoogleApi__HttpBody>(parameters);
-      }
     }
 
     /**
@@ -1233,13 +1169,13 @@ export namespace ml_v1 {
 
     /**
      * ml.projects.predict
-     * @desc Performs online prediction on the data in the request.  <div>{% dynamic include "/ai-platform/includes/___predict-request" %}</div>
+     * @desc Performs prediction on the data in the request. Cloud ML Engine implements a custom `predict` verb on top of an HTTP POST method. <p>For details of the request and response format, see the **guide to the [predict request format](/ml-engine/docs/v1/predict-request)**.
      * @alias ml.projects.predict
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The resource name of a model or a version.  Authorization: requires the `predict` permission on the specified resource.
-     * @param {().GoogleCloudMlV1__PredictRequest} params.requestBody Request body data
+     * @param {().GoogleCloudMlV1__PredictRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1306,22 +1242,6 @@ export namespace ml_v1 {
     }
   }
 
-  export interface Params$Resource$Projects$Explain extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Required. The resource name of a model or a version.  Authorization: requires the `predict` permission on the specified resource.
-     */
-    name?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$GoogleCloudMlV1__ExplainRequest;
-  }
   export interface Params$Resource$Projects$Getconfig
     extends StandardParameters {
     /**
@@ -1365,7 +1285,7 @@ export namespace ml_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The name of the job to cancel.
-     * @param {().GoogleCloudMlV1__CancelJobRequest} params.requestBody Request body data
+     * @param {().GoogleCloudMlV1__CancelJobRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1439,7 +1359,7 @@ export namespace ml_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The project name.
-     * @param {().GoogleCloudMlV1__Job} params.requestBody Request body data
+     * @param {().GoogleCloudMlV1__Job} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1585,7 +1505,6 @@ export namespace ml_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -1747,7 +1666,7 @@ export namespace ml_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The job name.
      * @param {string=} params.updateMask Required. Specifies the path, relative to `Job`, of the field to update. To adopt etag mechanism, include `etag` field in the mask, and include the `etag` value in your job resource.  For example, to change the labels of a job, the `update_mask` parameter would be specified as `labels`, `etag`, and the `PATCH` request body would specify the new value, as follows:     {       "labels": {          "owner": "Google",          "color": "Blue"       }       "etag": "33a64df551425fcc55e4d42a148795d9f25f89d4"     } If `etag` matches the one on the server, the labels of the job will be replaced with the given ones, and the server end `etag` will be recalculated.  Currently the only supported update masks are `labels` and `etag`.
-     * @param {().GoogleCloudMlV1__Job} params.requestBody Request body data
+     * @param {().GoogleCloudMlV1__Job} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1815,13 +1734,13 @@ export namespace ml_v1 {
 
     /**
      * ml.projects.jobs.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.
      * @alias ml.projects.jobs.setIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().GoogleIamV1__SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().GoogleIamV1__SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1898,7 +1817,7 @@ export namespace ml_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().GoogleIamV1__TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().GoogleIamV1__TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2036,10 +1955,6 @@ export namespace ml_v1 {
      */
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
-    /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
     /**
      * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      */
@@ -2344,13 +2259,13 @@ export namespace ml_v1 {
 
     /**
      * ml.projects.models.create
-     * @desc Creates a model which will later contain one or more versions.  You must add at least one version before you can request predictions from the model. Add versions by calling projects.models.versions.create.
+     * @desc Creates a model which will later contain one or more versions.  You must add at least one version before you can request predictions from the model. Add versions by calling [projects.models.versions.create](/ml-engine/reference/rest/v1/projects.models.versions/create).
      * @alias ml.projects.models.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The project name.
-     * @param {().GoogleCloudMlV1__Model} params.requestBody Request body data
+     * @param {().GoogleCloudMlV1__Model} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2421,7 +2336,7 @@ export namespace ml_v1 {
 
     /**
      * ml.projects.models.delete
-     * @desc Deletes a model.  You can only delete a model if there are no versions in it. You can delete versions by calling projects.models.versions.delete.
+     * @desc Deletes a model.  You can only delete a model if there are no versions in it. You can delete versions by calling [projects.models.versions.delete](/ml-engine/reference/rest/v1/projects.models.versions/delete).
      * @alias ml.projects.models.delete
      * @memberOf! ()
      *
@@ -2579,7 +2494,6 @@ export namespace ml_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -2746,7 +2660,7 @@ export namespace ml_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The project name.
      * @param {string=} params.updateMask Required. Specifies the path, relative to `Model`, of the field to update.  For example, to change the description of a model to "foo" and set its default version to "version_1", the `update_mask` parameter would be specified as `description`, `default_version.name`, and the `PATCH` request body would specify the new value, as follows:     {       "description": "foo",       "defaultVersion": {         "name":"version_1"       }     }  Currently the supported update masks are `description` and `default_version.name`.
-     * @param {().GoogleCloudMlV1__Model} params.requestBody Request body data
+     * @param {().GoogleCloudMlV1__Model} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2821,13 +2735,13 @@ export namespace ml_v1 {
 
     /**
      * ml.projects.models.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.
      * @alias ml.projects.models.setIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().GoogleIamV1__SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().GoogleIamV1__SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2904,7 +2818,7 @@ export namespace ml_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().GoogleIamV1__TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().GoogleIamV1__TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3038,10 +2952,6 @@ export namespace ml_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
-    /**
      * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      */
     resource?: string;
@@ -3134,13 +3044,13 @@ export namespace ml_v1 {
 
     /**
      * ml.projects.models.versions.create
-     * @desc Creates a new version of a model from a trained TensorFlow model.  If the version created in the cloud by this call is the first deployed version of the specified model, it will be made the default version of the model. When you add a version to a model that already has one or more versions, the default version does not automatically change. If you want a new version to be the default, you must call projects.models.versions.setDefault.
+     * @desc Creates a new version of a model from a trained TensorFlow model.  If the version created in the cloud by this call is the first deployed version of the specified model, it will be made the default version of the model. When you add a version to a model that already has one or more versions, the default version does not automatically change. If you want a new version to be the default, you must call [projects.models.versions.setDefault](/ml-engine/reference/rest/v1/projects.models.versions/setDefault).
      * @alias ml.projects.models.versions.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The name of the model.
-     * @param {().GoogleCloudMlV1__Version} params.requestBody Request body data
+     * @param {().GoogleCloudMlV1__Version} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3223,7 +3133,7 @@ export namespace ml_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the version. You can get the names of all the versions of a model by calling projects.models.versions.list.
+     * @param {string} params.name Required. The name of the version. You can get the names of all the versions of a model by calling [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3298,7 +3208,7 @@ export namespace ml_v1 {
 
     /**
      * ml.projects.models.versions.get
-     * @desc Gets information about a model version.  Models can have multiple versions. You can call projects.models.versions.list to get the same information that this method returns for all of the versions of a model.
+     * @desc Gets information about a model version.  Models can have multiple versions. You can call [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list) to get the same information that this method returns for all of the versions of a model.
      * @alias ml.projects.models.versions.get
      * @memberOf! ()
      *
@@ -3465,14 +3375,14 @@ export namespace ml_v1 {
 
     /**
      * ml.projects.models.versions.patch
-     * @desc Updates the specified Version resource.  Currently the only update-able fields are `description`, `requestLoggingConfig`, `autoScaling.minNodes`, and `manualScaling.nodes`.
+     * @desc Updates the specified Version resource.  Currently the only update-able fields are `description` and `autoScaling.minNodes`.
      * @alias ml.projects.models.versions.patch
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Required. The name of the model.
-     * @param {string=} params.updateMask Required. Specifies the path, relative to `Version`, of the field to update. Must be present and non-empty.  For example, to change the description of a version to "foo", the `update_mask` parameter would be specified as `description`, and the `PATCH` request body would specify the new value, as follows:  ``` {   "description": "foo" } ```  Currently the only supported update mask fields are `description`, `requestLoggingConfig`, `autoScaling.minNodes`, and `manualScaling.nodes`. However, you can only update `manualScaling.nodes` if the version uses a [Compute Engine (N1) machine type](/ml-engine/docs/machine-types-online-prediction).
-     * @param {().GoogleCloudMlV1__Version} params.requestBody Request body data
+     * @param {string=} params.updateMask Required. Specifies the path, relative to `Version`, of the field to update. Must be present and non-empty.  For example, to change the description of a version to "foo", the `update_mask` parameter would be specified as `description`, and the `PATCH` request body would specify the new value, as follows:     {       "description": "foo"     }  Currently the only supported update mask fields are `description` and `autoScaling.minNodes`.
+     * @param {().GoogleCloudMlV1__Version} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3552,8 +3462,8 @@ export namespace ml_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the version to make the default for the model. You can get the names of all the versions of a model by calling projects.models.versions.list.
-     * @param {().GoogleCloudMlV1__SetDefaultVersionRequest} params.requestBody Request body data
+     * @param {string} params.name Required. The name of the version to make the default for the model. You can get the names of all the versions of a model by calling [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
+     * @param {().GoogleCloudMlV1__SetDefaultVersionRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3650,7 +3560,7 @@ export namespace ml_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the version. You can get the names of all the versions of a model by calling projects.models.versions.list.
+     * Required. The name of the version. You can get the names of all the versions of a model by calling [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
      */
     name?: string;
   }
@@ -3702,7 +3612,7 @@ export namespace ml_v1 {
      */
     name?: string;
     /**
-     * Required. Specifies the path, relative to `Version`, of the field to update. Must be present and non-empty.  For example, to change the description of a version to "foo", the `update_mask` parameter would be specified as `description`, and the `PATCH` request body would specify the new value, as follows:  ``` {   "description": "foo" } ```  Currently the only supported update mask fields are `description`, `requestLoggingConfig`, `autoScaling.minNodes`, and `manualScaling.nodes`. However, you can only update `manualScaling.nodes` if the version uses a [Compute Engine (N1) machine type](/ml-engine/docs/machine-types-online-prediction).
+     * Required. Specifies the path, relative to `Version`, of the field to update. Must be present and non-empty.  For example, to change the description of a version to "foo", the `update_mask` parameter would be specified as `description`, and the `PATCH` request body would specify the new value, as follows:     {       "description": "foo"     }  Currently the only supported update mask fields are `description` and `autoScaling.minNodes`.
      */
     updateMask?: string;
 
@@ -3719,7 +3629,7 @@ export namespace ml_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the version to make the default for the model. You can get the names of all the versions of a model by calling projects.models.versions.list.
+     * Required. The name of the version to make the default for the model. You can get the names of all the versions of a model by calling [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
      */
     name?: string;
 

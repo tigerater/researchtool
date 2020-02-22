@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -126,29 +128,12 @@ export namespace firebaserules_v1 {
     /**
      * Argument exactly matches value provided.
      */
-    exactValue?: any | null;
+    exactValue?: any;
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
    */
   export interface Schema$Empty {}
-  /**
-   * Describes where in a file an expression is found and what it was evaluated to over the course of its use.
-   */
-  export interface Schema$ExpressionReport {
-    /**
-     * Subexpressions
-     */
-    children?: Schema$ExpressionReport[];
-    /**
-     * Position of expression in original rules source.
-     */
-    sourcePosition?: Schema$SourcePosition;
-    /**
-     * Values that this expression evaluated to when encountered.
-     */
-    values?: Schema$ValueCount[];
-  }
   /**
    * `File` containing source content.
    */
@@ -156,15 +141,15 @@ export namespace firebaserules_v1 {
     /**
      * Textual Content.
      */
-    content?: string | null;
+    content?: string;
     /**
      * Fingerprint (e.g. github sha) associated with the `File`.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
      * File name.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Represents a service-defined function call that was invoked during test execution.
@@ -173,11 +158,11 @@ export namespace firebaserules_v1 {
     /**
      * The arguments that were provided to the function.
      */
-    args?: any[] | null;
+    args?: any[];
     /**
      * Name of the function invoked.
      */
-    function?: string | null;
+    function?: string;
   }
   /**
    * Mock function definition.  Mocks must refer to a function declared by the target service. The type of the function args and result will be inferred at test time. If either the arg or result values are not compatible with function type declaration, the request will be considered invalid.  More than one `FunctionMock` may be provided for a given function name so long as the `Arg` matchers are distinct. There may be only one function for a given overload where all `Arg` values are `Arg.any_value`.
@@ -190,7 +175,7 @@ export namespace firebaserules_v1 {
     /**
      * The name of the function.  The function name must match one provided by a service declaration.
      */
-    function?: string | null;
+    function?: string;
     /**
      * The mock result of the function call.
      */
@@ -203,27 +188,27 @@ export namespace firebaserules_v1 {
     /**
      * Executable view of the `Ruleset` referenced by the `Release`.
      */
-    executable?: string | null;
+    executable?: string;
     /**
      * The Rules runtime version of the executable.
      */
-    executableVersion?: string | null;
+    executableVersion?: string;
     /**
      * `Language` used to generate the executable bytes.
      */
-    language?: string | null;
+    language?: string;
     /**
      * `Ruleset` name associated with the `Release` executable.
      */
-    rulesetName?: string | null;
+    rulesetName?: string;
     /**
      * Optional, indicates the freshness of the result. The response is guaranteed to be the latest within an interval up to the sync_time (inclusive).
      */
-    syncTime?: string | null;
+    syncTime?: string;
     /**
      * Timestamp for the most recent `Release.update_time`.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * Issues include warnings, errors, and deprecation notices.
@@ -232,11 +217,11 @@ export namespace firebaserules_v1 {
     /**
      * Short error description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The severity of the issue.
      */
-    severity?: string | null;
+    severity?: string;
     /**
      * Position of the issue in the `Source`.
      */
@@ -249,7 +234,7 @@ export namespace firebaserules_v1 {
     /**
      * The pagination token to retrieve the next page of results. If the value is empty, no further results remain.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * List of `Release` instances.
      */
@@ -262,20 +247,11 @@ export namespace firebaserules_v1 {
     /**
      * The pagination token to retrieve the next page of results. If the value is empty, no further results remain.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * List of `Ruleset` instances.
      */
     rulesets?: Schema$Ruleset[];
-  }
-  /**
-   * Metadata for a Ruleset.
-   */
-  export interface Schema$Metadata {
-    /**
-     * Services that this ruleset has declarations for (e.g., &quot;cloud.firestore&quot;). There may be 0+ of these.
-     */
-    services?: string[] | null;
   }
   /**
    * `Release` is a named reference to a `Ruleset`. Once a `Release` refers to a `Ruleset`, rules-enabled services will be able to enforce the `Ruleset`.
@@ -284,19 +260,19 @@ export namespace firebaserules_v1 {
     /**
      * Time the release was created. Output only.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Resource name for the `Release`.  `Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2` which affords developers a great deal of flexibility in mapping the name to the style that best fits their existing development practices. For example, a name could refer to an environment, an app, a version, or some combination of three.  In the table below, for the project name `projects/foo`, the following relative release paths show how flat and structured names might be chosen to match a desired development / deployment strategy.  Use Case     | Flat Name           | Structured Name -------------|---------------------|---------------- Environments | releases/qa         | releases/qa Apps         | releases/app1_qa    | releases/app1/qa Versions     | releases/app1_v2_qa | releases/app1/v2/qa  The delimiter between the release name path elements can be almost anything and it should work equally well with the release name list filter, but in many ways the structured paths provide a clearer picture of the relationship between `Release` instances.  Format: `projects/{project_id}/releases/{release_id}`
      */
-    name?: string | null;
+    name?: string;
     /**
      * Name of the `Ruleset` referred to by this `Release`. The `Ruleset` must exist the `Release` to be created.
      */
-    rulesetName?: string | null;
+    rulesetName?: string;
     /**
      * Time the release was updated. Output only.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * Possible result values from the function mock invocation.
@@ -309,7 +285,7 @@ export namespace firebaserules_v1 {
     /**
      * The result is an actual value. The type of the value must match that of the type declared by the service.
      */
-    value?: any | null;
+    value?: any;
   }
   /**
    * `Ruleset` is an immutable copy of `Source` with a globally unique identifier and a creation time.
@@ -318,15 +294,11 @@ export namespace firebaserules_v1 {
     /**
      * Time the `Ruleset` was created. Output only.
      */
-    createTime?: string | null;
-    /**
-     * The metadata for this ruleset. Output only.
-     */
-    metadata?: Schema$Metadata;
+    createTime?: string;
     /**
      * Name of the `Ruleset`. The ruleset_id is auto generated by the service. Format: `projects/{project_id}/rulesets/{ruleset_id}` Output only.
      */
-    name?: string | null;
+    name?: string;
     /**
      * `Source` for the `Ruleset`.
      */
@@ -348,15 +320,15 @@ export namespace firebaserules_v1 {
     /**
      * First column on the source line associated with the source fragment.
      */
-    column?: number | null;
+    column?: number;
     /**
      * Name of the `File`.
      */
-    fileName?: string | null;
+    fileName?: string;
     /**
      * Line number of the source fragment. 1-based.
      */
-    line?: number | null;
+    line?: number;
   }
   /**
    * `TestCase` messages provide the request context and an expectation as to whether the given context will be allowed or denied. Test cases may specify the `request`, `resource`, and `function_mocks` to mock a function call to a service-provided function.  The `request` object represents context present at request-time.  The `resource` is the value of the target resource as it appears in persistent storage before the request is executed.
@@ -365,27 +337,19 @@ export namespace firebaserules_v1 {
     /**
      * Test expectation.
      */
-    expectation?: string | null;
-    /**
-     * Specifies what should be included in the response.
-     */
-    expressionReportLevel?: string | null;
+    expectation?: string;
     /**
      * Optional function mocks for service-defined functions. If not set, any service defined function is expected to return an error, which may or may not influence the test outcome.
      */
     functionMocks?: Schema$FunctionMock[];
     /**
-     * Specifies whether paths (such as request.path) are encoded and how.
-     */
-    pathEncoding?: string | null;
-    /**
      * Request context.  The exact format of the request context is service-dependent. See the appropriate service documentation for information about the supported fields and types on the request. Minimally, all services support the following fields and types:  Request field  | Type ---------------|----------------- auth.uid       | `string` auth.token     | `map&lt;string, string&gt;` headers        | `map&lt;string, string&gt;` method         | `string` params         | `map&lt;string, string&gt;` path           | `string` time           | `google.protobuf.Timestamp`  If the request value is not well-formed for the service, the request will be rejected as an invalid argument.
      */
-    request?: any | null;
+    request?: any;
     /**
      * Optional resource value as it appears in persistent storage before the request is fulfilled.  The resource type depends on the `request.path` value.
      */
-    resource?: any | null;
+    resource?: any;
   }
   /**
    * Test result message containing the state of the test as well as a description and source position for test failures.
@@ -394,15 +358,11 @@ export namespace firebaserules_v1 {
     /**
      * Debug messages related to test execution issues encountered during evaluation.  Debug messages may be related to too many or too few invocations of function mocks or to runtime errors that occur during evaluation.  For example: ```Unable to read variable [name: &quot;resource&quot;]```
      */
-    debugMessages?: string[] | null;
+    debugMessages?: string[];
     /**
      * Position in the `Source` or `Ruleset` where the principle runtime error occurs.  Evaluation of an expression may result in an error. Rules are deny by default, so a `DENY` expectation when an error is generated is valid. When there is a `DENY` with an error, the `SourcePosition` is returned.  E.g. `error_position { line: 19 column: 37 }`
      */
     errorPosition?: Schema$SourcePosition;
-    /**
-     * The mapping from expression in the ruleset AST to the values they were evaluated to. Partially-nested to mirror AST structure. Note that this field is actually tracking expressions and not permission statements in contrast to the &quot;visited_expressions&quot; field above. Literal expressions are omitted.
-     */
-    expressionReports?: Schema$ExpressionReport[];
     /**
      * The set of function calls made to service-defined methods.  Function calls are included in the order in which they are encountered during evaluation, are provided for both mocked and unmocked functions, and included on the response regardless of the test `state`.
      */
@@ -410,7 +370,7 @@ export namespace firebaserules_v1 {
     /**
      * State of the test.
      */
-    state?: string | null;
+    state?: string;
     /**
      * The set of visited permission expressions for a given test. This returns the positions and evaluation results of all visited permission expressions which were relevant to the test case, e.g. ``` match /path {   allow read if: &lt;expr&gt; } ``` For a detailed report of the intermediate evaluation states, see the `expression_reports` field
      */
@@ -462,20 +422,7 @@ export namespace firebaserules_v1 {
     /**
      * Specifies which fields to update.
      */
-    updateMask?: string | null;
-  }
-  /**
-   * Tuple for how many times an Expression was evaluated to a particular ExpressionValue.
-   */
-  export interface Schema$ValueCount {
-    /**
-     * The amount of times that expression returned.
-     */
-    count?: number | null;
-    /**
-     * The return value of the expression
-     */
-    value?: any | null;
+    updateMask?: string;
   }
   /**
    * Store the position and access outcome for an expression visited in rules.
@@ -488,7 +435,7 @@ export namespace firebaserules_v1 {
     /**
      * The evaluated value for the visited expression, e.g. true/false
      */
-    value?: any | null;
+    value?: any;
   }
 
   export class Resource$Projects {
@@ -509,7 +456,7 @@ export namespace firebaserules_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Tests may either provide `source` or a `Ruleset` resource name.  For tests against `source`, the resource name must refer to the project: Format: `projects/{project_id}`  For tests against a `Ruleset`, this must be the `Ruleset` resource name: Format: `projects/{project_id}/rulesets/{ruleset_id}`
-     * @param {().TestRulesetRequest} params.requestBody Request body data
+     * @param {().TestRulesetRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -605,7 +552,7 @@ export namespace firebaserules_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Resource name for the project which owns this `Release`.  Format: `projects/{project_id}`
-     * @param {().Release} params.requestBody Request body data
+     * @param {().Release} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -984,7 +931,7 @@ export namespace firebaserules_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Resource name for the project which owns this `Release`.  Format: `projects/{project_id}`
-     * @param {().UpdateReleaseRequest} params.requestBody Request body data
+     * @param {().UpdateReleaseRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1161,7 +1108,7 @@ export namespace firebaserules_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name Resource name for Project which owns this `Ruleset`.  Format: `projects/{project_id}`
-     * @param {().Ruleset} params.requestBody Request body data
+     * @param {().Ruleset} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

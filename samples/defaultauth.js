@@ -1,4 +1,4 @@
-// Copyright 2014 Google LLC
+// Copyright 2014-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -36,13 +36,13 @@ const compute = google.compute('v1');
 // Get the appropriate type of credential client, depending upon the runtime environment.
 async function main() {
   // The `getClient` method will choose a service based authentication model
-  const auth = new google.auth.GoogleAuth({
+  const auth = await google.auth.getClient({
     // Scopes can be specified either as an array or as a single, space-delimited string.
     scopes: ['https://www.googleapis.com/auth/compute'],
   });
 
   // Obtain the current project Id
-  const project = await auth.getProjectId();
+  const project = await google.auth.getProjectId();
 
   // Get the list of available compute zones for your project
   const res = await compute.zones.list({project, auth});

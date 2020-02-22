@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -103,21 +105,21 @@ export namespace siteVerification_v1 {
     /**
      * The site for which a verification token will be generated.
      */
-    site?: {identifier?: string; type?: string} | null;
+    site?: {identifier?: string; type?: string};
     /**
      * The verification method that will be used to verify this site. For sites, &#39;FILE&#39; or &#39;META&#39; methods may be used. For domains, only &#39;DNS&#39; may be used.
      */
-    verificationMethod?: string | null;
+    verificationMethod?: string;
   }
   export interface Schema$SiteVerificationWebResourceGettokenResponse {
     /**
      * The verification method to use in conjunction with this token. For FILE, the token should be placed in the top-level directory of the site, stored inside a file of the same name. For META, the token should be placed in the HEAD tag of the default page that is loaded for the site. For DNS, the token should be placed in a TXT record of the domain.
      */
-    method?: string | null;
+    method?: string;
     /**
      * The verification token. The token must be placed appropriately in order for verification to succeed.
      */
-    token?: string | null;
+    token?: string;
   }
   export interface Schema$SiteVerificationWebResourceListResponse {
     /**
@@ -129,15 +131,15 @@ export namespace siteVerification_v1 {
     /**
      * The string used to identify this site. This value should be used in the &quot;id&quot; portion of the REST URL for the Get, Update, and Delete operations.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The email addresses of all verified owners.
      */
-    owners?: string[] | null;
+    owners?: string[];
     /**
      * The address and type of a site that is verified or will be verified.
      */
-    site?: {identifier?: string; type?: string} | null;
+    site?: {identifier?: string; type?: string};
   }
 
   export class Resource$Webresource {
@@ -309,7 +311,7 @@ export namespace siteVerification_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().SiteVerificationWebResourceGettokenRequest} params.requestBody Request body data
+     * @param {().SiteVerificationWebResourceGettokenRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -409,7 +411,7 @@ export namespace siteVerification_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.verificationMethod The method to use for verifying a site or domain.
-     * @param {().SiteVerificationWebResourceResource} params.requestBody Request body data
+     * @param {().SiteVerificationWebResourceResource} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -584,7 +586,7 @@ export namespace siteVerification_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.id The id of a verified site or domain.
-     * @param {().SiteVerificationWebResourceResource} params.requestBody Request body data
+     * @param {().SiteVerificationWebResourceResource} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -670,7 +672,7 @@ export namespace siteVerification_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.id The id of a verified site or domain.
-     * @param {().SiteVerificationWebResourceResource} params.requestBody Request body data
+     * @param {().SiteVerificationWebResourceResource} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -126,7 +128,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Required. The ID of the customer for whom the device is being claimed.
      */
-    customerId?: string | null;
+    customerId?: string;
     /**
      * Required. The device identifier of the device to claim.
      */
@@ -138,7 +140,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Required. The section type of the device&#39;s provisioning record.
      */
-    sectionType?: string | null;
+    sectionType?: string;
   }
   /**
    * Response message containing device id of the claim.
@@ -147,11 +149,11 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * The device ID of the claimed device.
      */
-    deviceId?: string | null;
+    deviceId?: string;
     /**
      * The resource name of the device in the format `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.
      */
-    deviceName?: string | null;
+    deviceName?: string;
   }
   /**
    * Request to claim devices asynchronously in batch. Claiming a device adds the device to zero-touch enrollment and shows the device in the customer&#39;s view of the portal.
@@ -167,29 +169,29 @@ export namespace androiddeviceprovisioning_v1 {
    */
   export interface Schema$Company {
     /**
-     * Optional. Input only. Email address of customer&#39;s users in the admin role. Each email address must be associated with a Google Account.
+     * Input only. Optional. Email address of customer&#39;s users in the admin role. Each email address must be associated with a Google Account.
      */
-    adminEmails?: string[] | null;
+    adminEmails?: string[];
     /**
      * Output only. The ID of the company. Assigned by the server.
      */
-    companyId?: string | null;
+    companyId?: string;
     /**
      * Required. The name of the company. For example _XYZ Corp_. Displayed to the company&#39;s employees in the zero-touch enrollment portal.
      */
-    companyName?: string | null;
+    companyName?: string;
     /**
      * Output only. The API resource name of the company. The resource name is one of the following formats:  * `partners/[PARTNER_ID]/customers/[CUSTOMER_ID]` * `partners/[PARTNER_ID]/vendors/[VENDOR_ID]` * `partners/[PARTNER_ID]/vendors/[VENDOR_ID]/customers/[CUSTOMER_ID]`  Assigned by the server.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Input only. Email address of customer&#39;s users in the owner role. At least one `owner_email` is required. Each email address must be associated with a Google Account. Owners share the same access as admins but can also add, delete, and edit your organization&#39;s portal users.
      */
-    ownerEmails?: string[] | null;
+    ownerEmails?: string[];
     /**
      * Output only. Whether any user from the company has accepted the latest Terms of Service (ToS). See TermsStatus.
      */
-    termsStatus?: string | null;
+    termsStatus?: string;
   }
   /**
    * A configuration collects the provisioning options for Android devices. Each configuration combines the following:  * The EMM device policy controller (DPC) installed on the devices. * EMM policies enforced on the devices. * Metadata displayed on the device to help users during setup.  Customers can add as many configurations as they need. However, zero-touch enrollment works best when a customer sets a default configuration that&#39;s applied to any new devices the organization purchases.
@@ -198,43 +200,43 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Required. The name of the organization. Zero-touch enrollment shows this organization name to device users during device provisioning.
      */
-    companyName?: string | null;
+    companyName?: string;
     /**
      * Output only. The ID of the configuration. Assigned by the server.
      */
-    configurationId?: string | null;
+    configurationId?: string;
     /**
      * Required. A short name that describes the configuration&#39;s purpose. For example, _Sales team_ or _Temporary employees_. The zero-touch enrollment portal displays this name to IT admins.
      */
-    configurationName?: string | null;
+    configurationName?: string;
     /**
      * Required. The email address that device users can contact to get help. Zero-touch enrollment shows this email address to device users before device provisioning. The value is validated on input.
      */
-    contactEmail?: string | null;
+    contactEmail?: string;
     /**
      * Required. The telephone number that device users can call, using another device, to get help. Zero-touch enrollment shows this number to device users before device provisioning. Accepts numerals, spaces, the plus sign, hyphens, and parentheses.
      */
-    contactPhone?: string | null;
+    contactPhone?: string;
     /**
      * A message, containing one or two sentences, to help device users get help or give them more details about what’s happening to their device. Zero-touch enrollment shows this message before the device is provisioned.
      */
-    customMessage?: string | null;
+    customMessage?: string;
     /**
      * The JSON-formatted EMM provisioning extras that are passed to the DPC.
      */
-    dpcExtras?: string | null;
+    dpcExtras?: string;
     /**
      * Required. The resource name of the selected DPC (device policy controller) in the format `customers/[CUSTOMER_ID]/dpcs/x. To list the supported DPCs, call `customers.dpcs.list`.
      */
-    dpcResourcePath?: string | null;
+    dpcResourcePath?: string;
     /**
      * Required. Whether this is the default configuration that zero-touch enrollment applies to any new devices the organization purchases in the future. Only one customer configuration can be the default. Setting this value to `true`, changes the previous default configuration&#39;s `isDefault` value to `false`.
      */
-    isDefault?: boolean | null;
+    isDefault?: boolean;
     /**
      * Output only. The API resource name in the format `customers/[CUSTOMER_ID]/configurations/[CONFIGURATION_ID]`. Assigned by the server.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Request message to create a customer.
@@ -252,7 +254,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Required. The configuration applied to the device in the format `customers/[CUSTOMER_ID]/configurations/[CONFIGURATION_ID]`.
      */
-    configuration?: string | null;
+    configuration?: string;
     /**
      * Required. The device the configuration is applied to.
      */
@@ -278,7 +280,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * A token used to access the next page of results. Omitted if no further results are available.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message of customer&#39;s liting devices.
@@ -291,7 +293,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * A token used to access the next page of results. Omitted if no further results are available.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message of customer&#39;s listing DPCs.
@@ -331,11 +333,11 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Not available to resellers.
      */
-    configuration?: string | null;
+    configuration?: string;
     /**
      * Output only. The ID of the device. Assigned by the server.
      */
-    deviceId?: string | null;
+    deviceId?: string;
     /**
      * The hardware IDs that identify a manufactured device. To learn more, read [Identifiers](/zero-touch/guides/identifiers).
      */
@@ -347,7 +349,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Output only. The API resource name in the format `partners/[PARTNER_ID]/devices/[DEVICE_ID]`. Assigned by the server.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * A record of a device claimed by a reseller for a customer. Devices claimed for zero-touch enrollment have a claim with the type `SECTION_TYPE_ZERO_TOUCH`. To learn more, read [Claim devices for customers](/zero-touch/guides/how-it-works#claim).
@@ -356,23 +358,23 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * The ID of the Customer that purchased the device.
      */
-    ownerCompanyId?: string | null;
+    ownerCompanyId?: string;
     /**
      * The ID of the reseller that claimed the device.
      */
-    resellerId?: string | null;
+    resellerId?: string;
     /**
      * Output only. The type of claim made on the device.
      */
-    sectionType?: string | null;
+    sectionType?: string;
     /**
      * The timestamp when the device will exit ‘vacation mode’. This value is present iff the device is in &#39;vacation mode&#39;.
      */
-    vacationModeExpireTime?: string | null;
+    vacationModeExpireTime?: string;
     /**
      * The timestamp when the device was put into ‘vacation mode’. This value is present iff the device is in &#39;vacation mode&#39;.
      */
-    vacationModeStartTime?: string | null;
+    vacationModeStartTime?: string;
   }
   /**
    * Encapsulates hardware and product IDs to identify a manufactured device. To understand requirements on identifier sets, read [Identifiers](/zero-touch/guides/identifiers).
@@ -381,23 +383,23 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * The device’s IMEI number. Validated on input.
      */
-    imei?: string | null;
+    imei?: string;
     /**
      * The device manufacturer’s name. Matches the device&#39;s built-in value returned from `android.os.Build.MANUFACTURER`. Allowed values are listed in [manufacturers](/zero-touch/resources/manufacturer-names#manufacturers-names).
      */
-    manufacturer?: string | null;
+    manufacturer?: string;
     /**
      * The device’s MEID number.
      */
-    meid?: string | null;
+    meid?: string;
     /**
      * The device model&#39;s name. Matches the device&#39;s built-in value returned from `android.os.Build.MODEL`. Allowed values are listed in [models](/zero-touch/resources/manufacturer-names#model-names).
      */
-    model?: string | null;
+    model?: string;
     /**
      * The manufacturer&#39;s serial number for the device. This value might not be unique across different device models.
      */
-    serialNumber?: string | null;
+    serialNumber?: string;
   }
   /**
    * Metadata entries that can be attached to a `Device`. To learn more, read [Device metadata](/zero-touch/guides/metadata).
@@ -406,7 +408,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Metadata entries recorded as key-value pairs.
      */
-    entries?: {[key: string]: string} | null;
+    entries?: {[key: string]: string};
   }
   /**
    * A `DeviceReference` is an API abstraction that lets you supply a _device_ argument to a method using one of the following identifier types:  * A numeric API resource ID. * Real-world hardware IDs, such as IMEI number, belonging to the manufactured   device.  Methods that operate on devices take a `DeviceReference` as a parameter type because it&#39;s more flexible for the caller. To learn more about device identifiers, read [Identifiers](/zero-touch/guides/identifiers).
@@ -415,7 +417,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * The ID of the device.
      */
-    deviceId?: string | null;
+    deviceId?: string;
     /**
      * The hardware IDs of the device.
      */
@@ -428,15 +430,15 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * The number of metadata updates in the operation. This might be different from the number of updates in the request if the API can&#39;t parse some of the updates.
      */
-    devicesCount?: number | null;
+    devicesCount?: number;
     /**
      * The processing status of the operation.
      */
-    processingStatus?: string | null;
+    processingStatus?: string;
     /**
      * The processing progress of the operation. Measured as a number from 0 to 100. A value of 10O doesnt always mean the operation completed—check for the inclusion of a `done` field.
      */
-    progress?: number | null;
+    progress?: number;
   }
   /**
    * Tracks the status of a long-running operation to claim, unclaim, or attach metadata to devices. To learn more, read [Long‑running batch operations](/zero-touch/guides/how-it-works#operations).
@@ -449,7 +451,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * A summary of how many items in the operation the server processed successfully. Updated as the operation progresses.
      */
-    successCount?: number | null;
+    successCount?: number;
   }
   /**
    * An EMM&#39;s DPC ([device policy controller](http://developer.android.com/work/dpc/build-dpc.html)). Zero-touch enrollment installs a DPC (listed in the `Configuration`) on a device to maintain the customer&#39;s mobile policies. All the DPCs listed by the API support zero-touch enrollment and are available in Google Play.
@@ -458,15 +460,15 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Output only. The title of the DPC app in Google Play. For example, _Google Apps Device Policy_. Useful in an application&#39;s user interface.
      */
-    dpcName?: string | null;
+    dpcName?: string;
     /**
      * Output only. The API resource name in the format `customers/[CUSTOMER_ID]/dpcs/[DPC_ID]`. Assigned by the server. To maintain a reference to a DPC across customer accounts, persist and match the last path component (`DPC_ID`).
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The DPC&#39;s Android application ID that looks like a Java package name. Zero-touch enrollment installs the DPC app onto a device using this identifier.
      */
-    packageName?: string | null;
+    packageName?: string;
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -483,11 +485,11 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Required. The maximum number of devices to show in a page of results. Must be between 1 and 100 inclusive.
      */
-    limit?: string | null;
+    limit?: string;
     /**
      * A token specifying which result page to return.
      */
-    pageToken?: string | null;
+    pageToken?: string;
   }
   /**
    * Response containing found devices.
@@ -500,11 +502,11 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * A token used to access the next page of results. Omitted if no further results are available.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total count of items in the list irrespective of pagination.
      */
-    totalSize?: number | null;
+    totalSize?: number;
   }
   /**
    * Request to find devices by customers.
@@ -513,19 +515,19 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Required. The list of customer IDs to search for.
      */
-    customerId?: string[] | null;
+    customerId?: string[];
     /**
      * Required. The maximum number of devices to show in a page of results. Must be between 1 and 100 inclusive.
      */
-    limit?: string | null;
+    limit?: string;
     /**
      * A token specifying which result page to return.
      */
-    pageToken?: string | null;
+    pageToken?: string;
     /**
      * Required. The section type of the device&#39;s provisioning record.
      */
-    sectionType?: string | null;
+    sectionType?: string;
   }
   /**
    * Response containing found devices.
@@ -538,11 +540,11 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * A token used to access the next page of results. Omitted if no further results are available.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total count of items in the list irrespective of pagination.
      */
-    totalSize?: number | null;
+    totalSize?: number;
   }
   /**
    * Response message of all customers related to this partner.
@@ -555,11 +557,11 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * A token to retrieve the next page of results. Omitted if no further results are available.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total count of items in the list irrespective of pagination.
      */
-    totalSize?: number | null;
+    totalSize?: number;
   }
   /**
    * Response message to list customers of the vendor.
@@ -572,11 +574,11 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * A token to retrieve the next page of results. Omitted if no further results are available.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total count of items in the list irrespective of pagination.
      */
-    totalSize?: number | null;
+    totalSize?: number;
   }
   /**
    * Response message to list vendors of the partner.
@@ -585,11 +587,11 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * A token to retrieve the next page of results. Omitted if no further results are available.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total count of items in the list irrespective of pagination.
      */
-    totalSize?: number | null;
+    totalSize?: number;
     /**
      * List of vendors of the reseller partner. Fields `name`, `companyId` and `companyName` are populated to the Company object.
      */
@@ -602,7 +604,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * This field will always be not set if the operation is created by `claimAsync`, `unclaimAsync`, or `updateMetadataAsync`. In this case, error information for each device is set in `response.perDeviceStatus.result.status`.
      */
@@ -610,15 +612,15 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * This field will contain a `DevicesLongRunningOperationMetadata` object if the operation is created by `claimAsync`, `unclaimAsync`, or `updateMetadataAsync`.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
      */
-    name?: string | null;
+    name?: string;
     /**
      * This field will contain a `DevicesLongRunningOperationResponse` object if the operation is created by `claimAsync`, `unclaimAsync`, or `updateMetadataAsync`.
      */
-    response?: {[key: string]: any} | null;
+    response?: {[key: string]: any};
   }
   /**
    * A task for each device in the operation. Corresponds to each device change in the request.
@@ -648,7 +650,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Required. The ID of the customer for whom the device is being claimed.
      */
-    customerId?: string | null;
+    customerId?: string;
     /**
      * Required. Device identifier of the device.
      */
@@ -660,7 +662,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Required. The section type of the device&#39;s provisioning record.
      */
-    sectionType?: string | null;
+    sectionType?: string;
   }
   /**
    * Identifies one unclaim request.
@@ -669,7 +671,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Device ID of the device.
      */
-    deviceId?: string | null;
+    deviceId?: string;
     /**
      * Device identifier of the device.
      */
@@ -677,15 +679,15 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Required. The section type of the device&#39;s provisioning record.
      */
-    sectionType?: string | null;
+    sectionType?: string;
     /**
      * The duration of the vacation unlock starting from when the request is processed. (1 day is treated as 24 hours)
      */
-    vacationModeDays?: number | null;
+    vacationModeDays?: number;
     /**
      * The expiration time of the vacation unlock.
      */
-    vacationModeExpireTime?: string | null;
+    vacationModeExpireTime?: string;
   }
   /**
    * Captures the processing status for each device in the operation.
@@ -694,36 +696,36 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * If processing succeeds, the device ID of the device.
      */
-    deviceId?: string | null;
+    deviceId?: string;
     /**
      * If processing fails, the error type.
      */
-    errorIdentifier?: string | null;
+    errorIdentifier?: string;
     /**
      * If processing fails, a developer message explaining what went wrong.
      */
-    errorMessage?: string | null;
+    errorMessage?: string;
     /**
      * The result status of the device after processing.
      */
-    status?: string | null;
+    status?: string;
   }
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * Request message to unclaim a device.
@@ -732,7 +734,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * The device ID returned by `ClaimDevice`.
      */
-    deviceId?: string | null;
+    deviceId?: string;
     /**
      * The device identifier you used when you claimed this device.
      */
@@ -740,15 +742,15 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Required. The section type of the device&#39;s provisioning record.
      */
-    sectionType?: string | null;
+    sectionType?: string;
     /**
      * The duration of the vacation unlock starting from when the request is processed. (1 day is treated as 24 hours)
      */
-    vacationModeDays?: number | null;
+    vacationModeDays?: number;
     /**
      * The expiration time of the vacation unlock.
      */
-    vacationModeExpireTime?: string | null;
+    vacationModeExpireTime?: string;
   }
   /**
    * Request to unclaim devices asynchronously in batch.
@@ -784,7 +786,7 @@ export namespace androiddeviceprovisioning_v1 {
     /**
      * Device ID of the device.
      */
-    deviceId?: string | null;
+    deviceId?: string;
     /**
      * Device identifier.
      */
@@ -919,7 +921,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The customer that manages the configuration. An API resource name in the format `customers/[CUSTOMER_ID]`.
-     * @param {().Configuration} params.requestBody Request body data
+     * @param {().Configuration} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1222,7 +1224,7 @@ export namespace androiddeviceprovisioning_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.name Output only. The API resource name in the format `customers/[CUSTOMER_ID]/configurations/[CONFIGURATION_ID]`. Assigned by the server.
      * @param {string=} params.updateMask Required. The field mask applied to the target `Configuration` before updating the fields. To learn more about using field masks, read [FieldMask](/protocol-buffers/docs/reference/google.protobuf#fieldmask) in the Protocol Buffers documentation.
-     * @param {().Configuration} params.requestBody Request body data
+     * @param {().Configuration} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1377,7 +1379,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The customer managing the device. An API resource name in the format `customers/[CUSTOMER_ID]`.
-     * @param {().CustomerApplyConfigurationRequest} params.requestBody Request body data
+     * @param {().CustomerApplyConfigurationRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1605,7 +1607,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The customer managing the device in the format `customers/[CUSTOMER_ID]`.
-     * @param {().CustomerRemoveConfigurationRequest} params.requestBody Request body data
+     * @param {().CustomerRemoveConfigurationRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1678,7 +1680,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The customer managing the device. An API resource name in the format `customers/[CUSTOMER_ID]`.
-     * @param {().CustomerUnclaimDeviceRequest} params.requestBody Request body data
+     * @param {().CustomerUnclaimDeviceRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2040,7 +2042,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent Required. The parent resource ID in the format `partners/[PARTNER_ID]` that identifies the reseller.
-     * @param {().CreateCustomerRequest} params.requestBody Request body data
+     * @param {().CreateCustomerRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2238,7 +2240,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.partnerId Required. The ID of the reseller partner.
-     * @param {().ClaimDeviceRequest} params.requestBody Request body data
+     * @param {().ClaimDeviceRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2314,7 +2316,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.partnerId Required. The ID of the reseller partner.
-     * @param {().ClaimDevicesRequest} params.requestBody Request body data
+     * @param {().ClaimDevicesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2389,7 +2391,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.partnerId Required. The ID of the reseller partner.
-     * @param {().FindDevicesByDeviceIdentifierRequest} params.requestBody Request body data
+     * @param {().FindDevicesByDeviceIdentifierRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2481,7 +2483,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.partnerId Required. The ID of the reseller partner.
-     * @param {().FindDevicesByOwnerRequest} params.requestBody Request body data
+     * @param {().FindDevicesByOwnerRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2634,7 +2636,7 @@ export namespace androiddeviceprovisioning_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.deviceId Required. The ID of the device.
      * @param {string} params.metadataOwnerId Required. The owner of the newly set metadata. Set this to the partner ID.
-     * @param {().UpdateDeviceMetadataRequest} params.requestBody Request body data
+     * @param {().UpdateDeviceMetadataRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2710,7 +2712,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.partnerId Required. The ID of the reseller partner.
-     * @param {().UnclaimDeviceRequest} params.requestBody Request body data
+     * @param {().UnclaimDeviceRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2783,7 +2785,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.partnerId Required. The reseller partner ID.
-     * @param {().UnclaimDevicesRequest} params.requestBody Request body data
+     * @param {().UnclaimDevicesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2858,7 +2860,7 @@ export namespace androiddeviceprovisioning_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.partnerId Required. The reseller partner ID.
-     * @param {().UpdateDeviceMetadataInBatchRequest} params.requestBody Request body data
+     * @param {().UpdateDeviceMetadataInBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

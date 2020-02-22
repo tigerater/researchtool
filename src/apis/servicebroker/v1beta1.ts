@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -124,35 +126,35 @@ export namespace servicebroker_v1beta1 {
     /**
      * The id of the binding. Must be unique within GCP project. Maximum length is 64, GUID recommended. Required.
      */
-    binding_id?: string | null;
+    binding_id?: string;
     /**
      * A JSON object that contains data for platform resources associated with the binding to be created.
      */
-    bind_resource?: {[key: string]: any} | null;
+    bind_resource?: {[key: string]: any};
     /**
      * Output only. Timestamp for when the binding was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Output only. String containing the Deployment Manager deployment name that was created for this binding,
      */
-    deploymentName?: string | null;
+    deploymentName?: string;
     /**
      * Configuration options for the service binding.
      */
-    parameters?: {[key: string]: any} | null;
+    parameters?: {[key: string]: any};
     /**
      * The ID of the plan. See `Service` and `Plan` resources for details. Maximum length is 64, GUID recommended. Required.
      */
-    plan_id?: string | null;
+    plan_id?: string;
     /**
      * Output only. The resource name of the binding, e.g. projects/project_id/brokers/broker_id/service_instances/instance_id/bindings/binding_id.
      */
-    resourceName?: string | null;
+    resourceName?: string;
     /**
      * The id of the service. Must be a valid identifier of a service contained in the list from a `ListServices()` call. Maximum length is 64, GUID recommended. Required.
      */
-    service_id?: string | null;
+    service_id?: string;
   }
   /**
    * Broker represents a consumable collection of Service Registry catalogs exposed as an OSB Broker.
@@ -161,19 +163,19 @@ export namespace servicebroker_v1beta1 {
     /**
      * Output only. Timestamp for when the broker was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Name of the broker in the format: &lt;projects&gt;/&lt;project-id&gt;/brokers/&lt;broker&gt;. This allows for multiple brokers per project which can be used to enable having custom brokers per GKE cluster, for example.
      */
-    name?: string | null;
+    name?: string;
     /**
      * User friendly title of the broker. Limited to 1024 characters. Requests with longer titles will be rejected.
      */
-    title?: string | null;
+    title?: string;
     /**
      * Output only. URL of the broker OSB-compliant endpoint, for example: https://servicebroker.googleapis.com/projects/&lt;project&gt;/brokers/&lt;broker&gt;
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Response for the `CreateBinding()` method.
@@ -182,27 +184,27 @@ export namespace servicebroker_v1beta1 {
     /**
      * Credentials to use the binding.
      */
-    credentials?: {[key: string]: any} | null;
+    credentials?: {[key: string]: any};
     /**
      * Used to communicate description of the response. Usually for non-standard error codes. https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
      */
-    description?: string | null;
+    description?: string;
     /**
      * If broker executes operation asynchronously, this is the operation ID that can be polled to check the completion status of said operation. This broker always executes all create/delete operations asynchronously.
      */
-    operation?: string | null;
+    operation?: string;
     /**
      * A URL to which the platform may proxy requests for the address sent with bind_resource.route
      */
-    route_service_url?: string | null;
+    route_service_url?: string;
     /**
      * From where to read system logs.
      */
-    syslog_drain_url?: string | null;
+    syslog_drain_url?: string;
     /**
      * An array of configuration for mounting volumes.
      */
-    volume_mounts?: Array<{[key: string]: any}> | null;
+    volume_mounts?: Array<{[key: string]: any}>;
   }
   /**
    * Response for the `CreateServiceInstance()` method.
@@ -211,11 +213,11 @@ export namespace servicebroker_v1beta1 {
     /**
      * Used to communicate description of the response. Usually for non-standard error codes. https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
      */
-    description?: string | null;
+    description?: string;
     /**
      * If broker executes operation asynchronously, this is the operation ID that can be polled to check the completion status of said operation. This broker always will return a non-empty operation on success.
      */
-    operation?: string | null;
+    operation?: string;
   }
   /**
    * Message containing information required to activate Dashboard SSO feature.
@@ -224,15 +226,15 @@ export namespace servicebroker_v1beta1 {
     /**
      * The id of the Oauth client that the dashboard will use.
      */
-    id?: string | null;
+    id?: string;
     /**
      * A URI for the service dashboard. Validated by the OAuth token server when the dashboard requests a token.
      */
-    redirect_uri?: string | null;
+    redirect_uri?: string;
     /**
      * A secret for the dashboard client.
      */
-    secret?: string | null;
+    secret?: string;
   }
   /**
    * Response for the `DeleteBinding()` method.
@@ -241,11 +243,11 @@ export namespace servicebroker_v1beta1 {
     /**
      * Used to communicate description of the response. Usually for non-standard error codes. https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
      */
-    description?: string | null;
+    description?: string;
     /**
      * If broker executes operation asynchronously, this is the operation ID that can be polled to check the completion status of said operation.
      */
-    operation?: string | null;
+    operation?: string;
   }
   /**
    * Response for the `DeleteServiceInstance()` method.
@@ -254,11 +256,11 @@ export namespace servicebroker_v1beta1 {
     /**
      * Used to communicate description of the response. Usually for non-standard error codes. https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
      */
-    description?: string | null;
+    description?: string;
     /**
      * If broker executes operation asynchronously, this is the operation ID that can be polled to check the completion status of said operation.
      */
-    operation?: string | null;
+    operation?: string;
   }
   /**
    * Response for the `GetBinding()` method.
@@ -267,31 +269,31 @@ export namespace servicebroker_v1beta1 {
     /**
      * Credentials to use the binding.
      */
-    credentials?: {[key: string]: any} | null;
+    credentials?: {[key: string]: any};
     /**
      * String containing the Deployment Manager deployment name that was created for this binding,
      */
-    deploymentName?: string | null;
+    deploymentName?: string;
     /**
      * Used to communicate description of the response. Usually for non-standard error codes. https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
      */
-    description?: string | null;
+    description?: string;
     /**
      * Output only. The resource name of the binding, e.g. projects/project_id/brokers/broker_id/service_instances/instance_id/bindings/binding_id.
      */
-    resourceName?: string | null;
+    resourceName?: string;
     /**
      * A URL to which the platform may proxy requests for the address sent with bind_resource.route
      */
-    route_service_url?: string | null;
+    route_service_url?: string;
     /**
      * From where to read system logs.
      */
-    syslog_drain_url?: string | null;
+    syslog_drain_url?: string;
     /**
      * An array of configurations for mounting volumes.
      */
-    volume_mounts?: Array<{[key: string]: any}> | null;
+    volume_mounts?: Array<{[key: string]: any}>;
   }
   /**
    * The response for the `ListBindings()` method.
@@ -304,11 +306,11 @@ export namespace servicebroker_v1beta1 {
     /**
      * Used to communicate description of the response. Usually for non-standard error codes. https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
      */
-    description?: string | null;
+    description?: string;
     /**
      * This token allows you to get the next page of results for list requests. If the number of results is larger than `pageSize`, use the `nextPageToken` as a value for the query parameter `pageToken` in the next list request. Subsequent list requests will have their own `nextPageToken` to continue paging through the results
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * The response for the `ListBrokers()` method.
@@ -321,7 +323,7 @@ export namespace servicebroker_v1beta1 {
     /**
      * This token allows you to get the next page of results for list requests. If the number of results is larger than `pageSize`, use the `nextPageToken` as a value for the query parameter `pageToken` in the next list request. Subsequent list requests will have their own `nextPageToken` to continue paging through the results
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for the `ListCatalog()` method.
@@ -330,11 +332,11 @@ export namespace servicebroker_v1beta1 {
     /**
      * Used to communicate description of the response. Usually for non-standard error codes. https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
      */
-    description?: string | null;
+    description?: string;
     /**
      * This token allows you to get the next page of results for list requests. If the number of results is larger than `pageSize`, use the `nextPageToken` as a value for the query parameter `pageToken` in the next list request. Subsequent list requests will have their own `nextPageToken` to continue paging through the results
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The services available for the requested GCP project.
      */
@@ -347,7 +349,7 @@ export namespace servicebroker_v1beta1 {
     /**
      * Used to communicate description of the response. Usually for non-standard error codes. https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
      */
-    description?: string | null;
+    description?: string;
     /**
      * The list of instances in the broker.
      */
@@ -355,7 +357,7 @@ export namespace servicebroker_v1beta1 {
     /**
      * This token allows you to get the next page of results for list requests. If the number of results is larger than `pageSize`, use the `nextPageToken` as a value for the query parameter `pageToken` in the next list request. Subsequent list requests will have their own `nextPageToken` to continue paging through the results
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Describes a long running operation, which conforms to OpenService API.
@@ -364,11 +366,11 @@ export namespace servicebroker_v1beta1 {
     /**
      * Optional description of the Operation state.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The state of the operation. Valid values are: &quot;in progress&quot;, &quot;succeeded&quot;, and &quot;failed&quot;.
      */
-    state?: string | null;
+    state?: string;
   }
   /**
    * Plan message describes a Service Plan.
@@ -377,31 +379,31 @@ export namespace servicebroker_v1beta1 {
     /**
      * Specifies whether instances of the service can be bound to applications. If not specified, `Service.bindable` will be presumed.
      */
-    bindable?: boolean | null;
+    bindable?: boolean;
     /**
      * Textual description of the plan. Optional.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Whether the service is free.
      */
-    free?: boolean | null;
+    free?: boolean;
     /**
      * ID is a globally unique identifier used to uniquely identify the plan. User must make no presumption about the format of this field.
      */
-    id?: string | null;
+    id?: string;
     /**
      * A list of metadata for a service offering. Metadata is an arbitrary JSON object.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * User friendly name of the plan. The name must be globally unique within GCP project. Note, which is different from (&quot;This must be globally unique within a platform marketplace&quot;).
      */
-    name?: string | null;
+    name?: string;
     /**
      * Schema definitions for service instances and bindings for the plan.
      */
-    schemas?: {[key: string]: any} | null;
+    schemas?: {[key: string]: any};
   }
   /**
    * The resource model mostly follows the Open Service Broker API, as described here: https://github.com/openservicebrokerapi/servicebroker/blob/master/_spec.md Though due to Google Specifics it has additional optional fields.
@@ -410,15 +412,15 @@ export namespace servicebroker_v1beta1 {
     /**
      * Specifies whether instances of the service can be bound to applications. Required.
      */
-    bindable?: boolean | null;
+    bindable?: boolean;
     /**
      * Whether the service provides an endpoint to get service bindings.
      */
-    bindings_retrievable?: boolean | null;
+    bindings_retrievable?: boolean;
     /**
      * Whether the service provides an endpoint to get service bindings.
      */
-    binding_retrievable?: boolean | null;
+    binding_retrievable?: boolean;
     /**
      * Information to activate Dashboard SSO feature.
      */
@@ -426,23 +428,23 @@ export namespace servicebroker_v1beta1 {
     /**
      * Textual description of the service. Required.
      */
-    description?: string | null;
+    description?: string;
     /**
      * ID is a globally unique identifier used to uniquely identify the service. ID is an opaque string.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Whether the service provides an endpoint to get service instances.
      */
-    instances_retrievable?: boolean | null;
+    instances_retrievable?: boolean;
     /**
      * A list of metadata for a service offering. Metadata is an arbitrary JSON object.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * User friendly service name. Name must match [a-z0-9]+ regexp. The name must be globally unique within GCP project. Note, which is different from (&quot;This must be globally unique within a platform marketplace&quot;). Required.
      */
-    name?: string | null;
+    name?: string;
     /**
      * A list of plans for this service. At least one plan is required.
      */
@@ -450,11 +452,11 @@ export namespace servicebroker_v1beta1 {
     /**
      * Whether the service supports upgrade/downgrade for some plans.
      */
-    plan_updateable?: boolean | null;
+    plan_updateable?: boolean;
     /**
      * Tags provide a flexible mechanism to expose a classification, attribute, or base technology of a service.
      */
-    tags?: string[] | null;
+    tags?: string[];
   }
   /**
    * Message describing inputs to Provision and Update Service instance requests.
@@ -463,51 +465,51 @@ export namespace servicebroker_v1beta1 {
     /**
      * Platform specific contextual information under which the service instance is to be provisioned. This replaces organization_guid and space_guid. But can also contain anything. Currently only used for logging context information.
      */
-    context?: {[key: string]: any} | null;
+    context?: {[key: string]: any};
     /**
      * Output only. Timestamp for when the instance was created.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * Output only. String containing the Deployment Manager deployment name that was created for this instance,
      */
-    deploymentName?: string | null;
+    deploymentName?: string;
     /**
      * To return errors when GetInstance call is done via HTTP to be unified with other methods.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The id of the service instance. Must be unique within GCP project. Maximum length is 64, GUID recommended. Required.
      */
-    instance_id?: string | null;
+    instance_id?: string;
     /**
      * The platform GUID for the organization under which the service is to be provisioned. Required.
      */
-    organization_guid?: string | null;
+    organization_guid?: string;
     /**
      * Configuration options for the service instance. Parameters is JSON object serialized to string.
      */
-    parameters?: {[key: string]: any} | null;
+    parameters?: {[key: string]: any};
     /**
      * The ID of the plan. See `Service` and `Plan` resources for details. Maximum length is 64, GUID recommended. Required.
      */
-    plan_id?: string | null;
+    plan_id?: string;
     /**
      * Used only in UpdateServiceInstance request to optionally specify previous fields.
      */
-    previous_values?: {[key: string]: any} | null;
+    previous_values?: {[key: string]: any};
     /**
      * Output only. The resource name of the instance, e.g. projects/project_id/brokers/broker_id/service_instances/instance_id
      */
-    resourceName?: string | null;
+    resourceName?: string;
     /**
      * The id of the service. Must be a valid identifier of a service contained in the list from a `ListServices()` call. Maximum length is 64, GUID recommended. Required.
      */
-    service_id?: string | null;
+    service_id?: string;
     /**
      * The identifier for the project space within the platform organization. Required.
      */
-    space_guid?: string | null;
+    space_guid?: string;
   }
   /**
    * Response for the `UpdateServiceInstance()` method.
@@ -516,11 +518,11 @@ export namespace servicebroker_v1beta1 {
     /**
      * Used to communicate description of the response. Usually for non-standard error codes. https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
      */
-    description?: string | null;
+    description?: string;
     /**
      * If broker executes operation asynchronously, this is the operation ID that can be polled to check the completion status of said operation.
      */
-    operation?: string | null;
+    operation?: string;
   }
   /**
    * Associates `members` with a `role`.
@@ -531,30 +533,30 @@ export namespace servicebroker_v1beta1 {
      */
     condition?: Schema$GoogleType__Expr;
     /**
-     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@example.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.  * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a user that has been recently deleted. For    example, `alice@example.com?uid=123456789012345678901`. If the user is    recovered, this value reverts to `user:{emailid}` and the recovered user    retains the role in the binding.  * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus    unique identifier) representing a service account that has been recently    deleted. For example,    `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`.    If the service account is undeleted, this value reverts to    `serviceAccount:{emailid}` and the undeleted service account retains the    role in the binding.  * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique    identifier) representing a Google group that has been recently    deleted. For example, `admins@example.com?uid=123456789012345678901`. If    the group is recovered, this value reverts to `group:{emailid}` and the    recovered group retains the role in the binding.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
+     * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is    on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone    who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google    account. For example, `alice@gmail.com` .   * `serviceAccount:{emailid}`: An email address that represents a service    account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group.    For example, `admins@example.com`.   * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
      */
-    members?: string[] | null;
+    members?: string[];
     /**
      * Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
      */
-    role?: string | null;
+    role?: string;
   }
   /**
-   * An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources.   A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role.  Optionally, a `binding` can specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both.  **JSON example:**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationAdmin&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-project-id@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/resourcemanager.organizationViewer&quot;,           &quot;members&quot;: [&quot;user:eve@example.com&quot;],           &quot;condition&quot;: {             &quot;title&quot;: &quot;expirable access&quot;,             &quot;description&quot;: &quot;Does not grant access after Sep 2020&quot;,             &quot;expression&quot;: &quot;request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)&quot;,           }         }       ],       &quot;etag&quot;: &quot;BwWWja0YfJA=&quot;,       &quot;version&quot;: 3     }  **YAML example:**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-project-id@appspot.gserviceaccount.com       role: roles/resourcemanager.organizationAdmin     - members:       - user:eve@example.com       role: roles/resourcemanager.organizationViewer       condition:         title: expirable access         description: Does not grant access after Sep 2020         expression: request.time &lt; timestamp(&#39;2020-10-01T00:00:00.000Z&#39;)     - etag: BwWWja0YfJA=     - version: 3  For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).
+   * Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.   A `Policy` consists of a list of `bindings`. A `binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.  **JSON Example**      {       &quot;bindings&quot;: [         {           &quot;role&quot;: &quot;roles/owner&quot;,           &quot;members&quot;: [             &quot;user:mike@example.com&quot;,             &quot;group:admins@example.com&quot;,             &quot;domain:google.com&quot;,             &quot;serviceAccount:my-other-app@appspot.gserviceaccount.com&quot;           ]         },         {           &quot;role&quot;: &quot;roles/viewer&quot;,           &quot;members&quot;: [&quot;user:sean@example.com&quot;]         }       ]     }  **YAML Example**      bindings:     - members:       - user:mike@example.com       - group:admins@example.com       - domain:google.com       - serviceAccount:my-other-app@appspot.gserviceaccount.com       role: roles/owner     - members:       - user:sean@example.com       role: roles/viewer   For a description of IAM and its features, see the [IAM developer&#39;s guide](https://cloud.google.com/iam/docs).
    */
   export interface Schema$GoogleIamV1__Policy {
     /**
-     * Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
+     * Associates a list of `members` to a `role`. `bindings` with no members will result in an error.
      */
     bindings?: Schema$GoogleIamV1__Binding[];
     /**
-     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.
+     * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
      */
-    etag?: string | null;
+    etag?: string;
     /**
-     * Specifies the format of the policy.  Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected.  Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations:  * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy   that includes conditions  **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.  If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset.
+     * Deprecated.
      */
-    version?: number | null;
+    version?: number;
   }
   /**
    * Request message for `SetIamPolicy` method.
@@ -572,7 +574,7 @@ export namespace servicebroker_v1beta1 {
     /**
      * The set of permissions to check for the `resource`. Permissions with wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * Response message for `TestIamPermissions` method.
@@ -581,7 +583,7 @@ export namespace servicebroker_v1beta1 {
     /**
      * A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -594,19 +596,19 @@ export namespace servicebroker_v1beta1 {
     /**
      * An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Textual representation of an expression in Common Expression Language syntax.  The application context of the containing message determines which well-known feature set of CEL is supported.
      */
-    expression?: string | null;
+    expression?: string;
     /**
      * An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
      */
-    location?: string | null;
+    location?: string;
     /**
      * An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
      */
-    title?: string | null;
+    title?: string;
   }
 
   export class Resource$Projects {
@@ -636,7 +638,7 @@ export namespace servicebroker_v1beta1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.parent The project in which to create broker.
-     * @param {().GoogleCloudServicebrokerV1beta1__Broker} params.requestBody Request body data
+     * @param {().GoogleCloudServicebrokerV1beta1__Broker} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1737,7 +1739,7 @@ export namespace servicebroker_v1beta1 {
      * @param {boolean=} params.acceptsIncomplete Value indicating that API client supports asynchronous operations. If Broker cannot execute the request synchronously HTTP 422 code will be returned to HTTP clients along with FAILED_PRECONDITION error. If true and broker will execute request asynchronously 202 HTTP code will be returned. This broker always requires this to be true as all mutator operations are asynchronous.
      * @param {string} params.instance_id The id of the service instance. Must be unique within GCP project. Maximum length is 64, GUID recommended. Required.
      * @param {string} params.parent Parent must match `projects/[PROJECT_ID]/brokers/[BROKER_ID]`.
-     * @param {().GoogleCloudServicebrokerV1beta1__ServiceInstance} params.requestBody Request body data
+     * @param {().GoogleCloudServicebrokerV1beta1__ServiceInstance} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2137,7 +2139,7 @@ export namespace servicebroker_v1beta1 {
      * @param {object} params Parameters for request
      * @param {boolean=} params.acceptsIncomplete See CreateServiceInstanceRequest for details.
      * @param {string} params.name Name must match `projects/[PROJECT_ID]/brokers/[BROKER_ID]/v2/service_instances/[INSTANCE_ID]`.
-     * @param {().GoogleCloudServicebrokerV1beta1__ServiceInstance} params.requestBody Request body data
+     * @param {().GoogleCloudServicebrokerV1beta1__ServiceInstance} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2352,7 +2354,7 @@ export namespace servicebroker_v1beta1 {
      * @param {boolean=} params.acceptsIncomplete See CreateServiceInstanceRequest for details.
      * @param {string} params.binding_id The id of the binding. Must be unique within GCP project. Maximum length is 64, GUID recommended. Required.
      * @param {string} params.parent The GCP container. Must match `projects/[PROJECT_ID]/brokers/[BROKER_ID]/v2/service_instances/[INSTANCE_ID]`.
-     * @param {().GoogleCloudServicebrokerV1beta1__Binding} params.requestBody Request body data
+     * @param {().GoogleCloudServicebrokerV1beta1__Binding} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2855,7 +2857,6 @@ export namespace servicebroker_v1beta1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.options.requestedPolicyVersion Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -2928,13 +2929,13 @@ export namespace servicebroker_v1beta1 {
 
     /**
      * servicebroker.setIamPolicy
-     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.  Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
+     * @desc Sets the access control policy on the specified resource. Replaces any existing policy.
      * @alias servicebroker.setIamPolicy
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
-     * @param {().GoogleIamV1__SetIamPolicyRequest} params.requestBody Request body data
+     * @param {().GoogleIamV1__SetIamPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3012,7 +3013,7 @@ export namespace servicebroker_v1beta1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resource_ REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.
-     * @param {().GoogleIamV1__TestIamPermissionsRequest} params.requestBody Request body data
+     * @param {().GoogleIamV1__TestIamPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3105,10 +3106,6 @@ export namespace servicebroker_v1beta1 {
      */
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
-    /**
-     * Optional. The policy format version to be returned.  Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.  Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.
-     */
-    'options.requestedPolicyVersion'?: number;
     /**
      * REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
      */

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -128,19 +130,19 @@ export namespace genomics_v1alpha2 {
     /**
      * The names of the disks that were created for this pipeline.
      */
-    diskNames?: string[] | null;
+    diskNames?: string[];
     /**
      * The instance on which the operation is running.
      */
-    instanceName?: string | null;
+    instanceName?: string;
     /**
      * The machine type of the instance.
      */
-    machineType?: string | null;
+    machineType?: string;
     /**
      * The availability zone in which the instance resides.
      */
-    zone?: string | null;
+    zone?: string;
   }
   /**
    * An event generated when a container is forcibly terminated by the worker. Currently, this only occurs when the container outlives the timeout specified by the user.
@@ -149,7 +151,7 @@ export namespace genomics_v1alpha2 {
     /**
      * The numeric ID of the action that started the container.
      */
-    actionId?: number | null;
+    actionId?: number;
   }
   /**
    * An event generated when a container starts.
@@ -158,15 +160,15 @@ export namespace genomics_v1alpha2 {
     /**
      * The numeric ID of the action that started this container.
      */
-    actionId?: number | null;
+    actionId?: number;
     /**
      * The public IP address that can be used to connect to the container. This field is only populated when at least one port mapping is present. If the instance was created with a private address, this field will be empty even if port mappings exist.
      */
-    ipAddress?: string | null;
+    ipAddress?: string;
     /**
      * The container-to-host port mappings installed for this container. This set will contain any ports exposed using the `PUBLISH_EXPOSED_PORTS` flag as well as any specified in the `Action` definition.
      */
-    portMappings?: {[key: string]: number} | null;
+    portMappings?: {[key: string]: number};
   }
   /**
    * An event generated when a container exits.
@@ -175,28 +177,28 @@ export namespace genomics_v1alpha2 {
     /**
      * The numeric ID of the action that started this container.
      */
-    actionId?: number | null;
+    actionId?: number;
     /**
      * The exit status of the container.
      */
-    exitStatus?: number | null;
+    exitStatus?: number;
     /**
      * The tail end of any content written to standard error by the container. If the content emits large amounts of debugging noise or contains sensitive information, you can prevent the content from being printed by setting the `DISABLE_STANDARD_ERROR_CAPTURE` flag.  Note that only a small amount of the end of the stream is captured here. The entire stream is stored in the `/google/logs` directory mounted into each action, and can be copied off the machine as described elsewhere.
      */
-    stderr?: string | null;
+    stderr?: string;
   }
   /**
    * Stores the information that the controller will fetch from the server in order to run. Should only be used by VMs created by the Pipelines Service and not by end users.
    */
   export interface Schema$ControllerConfig {
-    cmd?: string | null;
-    disks?: {[key: string]: string} | null;
-    gcsLogPath?: string | null;
-    gcsSinks?: {[key: string]: Schema$RepeatedString} | null;
-    gcsSources?: {[key: string]: Schema$RepeatedString} | null;
-    image?: string | null;
-    machineType?: string | null;
-    vars?: {[key: string]: string} | null;
+    cmd?: string;
+    disks?: {[key: string]: string};
+    gcsLogPath?: string;
+    gcsSinks?: {[key: string]: Schema$RepeatedString};
+    gcsSources?: {[key: string]: Schema$RepeatedString};
+    image?: string;
+    machineType?: string;
+    vars?: {[key: string]: string};
   }
   /**
    * An event generated whenever a resource limitation or transient error delays execution of a pipeline that was otherwise ready to run.
@@ -205,11 +207,11 @@ export namespace genomics_v1alpha2 {
     /**
      * A textual description of the cause of the delay. The string can change without notice because it is often generated by another service (such as Compute Engine).
      */
-    cause?: string | null;
+    cause?: string;
     /**
      * If the delay was caused by a resource shortage, this field lists the Compute Engine metrics that are preventing this operation from running (for example, `CPUS` or `INSTANCES`). If the particular metric is not known, a single `UNKNOWN` metric will be present.
      */
-    metrics?: string[] | null;
+    metrics?: string[];
   }
   /**
    * A Google Compute Engine disk resource specification.
@@ -218,31 +220,31 @@ export namespace genomics_v1alpha2 {
     /**
      * Deprecated. Disks created by the Pipelines API will be deleted at the end of the pipeline run, regardless of what this field is set to.
      */
-    autoDelete?: boolean | null;
+    autoDelete?: boolean;
     /**
      * Required at create time and cannot be overridden at run time. Specifies the path in the docker container where files on this disk should be located. For example, if `mountPoint` is `/mnt/disk`, and the parameter has `localPath` `inputs/file.txt`, the docker container can access the data at `/mnt/disk/inputs/file.txt`.
      */
-    mountPoint?: string | null;
+    mountPoint?: string;
     /**
      * Required. The name of the disk that can be used in the pipeline parameters. Must be 1 - 63 characters. The name &quot;boot&quot; is reserved for system use.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Specifies how a sourced-base persistent disk will be mounted. See https://cloud.google.com/compute/docs/disks/persistent-disks#use_multi_instances for more details. Can only be set at create time.
      */
-    readOnly?: boolean | null;
+    readOnly?: boolean;
     /**
      * The size of the disk. Defaults to 500 (GB). This field is not applicable for local SSD.
      */
-    sizeGb?: number | null;
+    sizeGb?: number;
     /**
      * The full or partial URL of the persistent disk to attach. See https://cloud.google.com/compute/docs/reference/latest/instances#resource and https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots for more details.
      */
-    source?: string | null;
+    source?: string;
     /**
      * Required. The type of the disk to create.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * The Docker execuctor specification.
@@ -251,11 +253,11 @@ export namespace genomics_v1alpha2 {
     /**
      * Required. The command or newline delimited script to run. The command string will be executed within a bash shell.  If the command exits with a non-zero exit code, output parameter de-localization will be skipped and the pipeline operation&#39;s `error` field will be populated.  Maximum command string length is 16384.
      */
-    cmd?: string | null;
+    cmd?: string;
     /**
      * Required. Image name from either Docker Hub or Google Container Registry. Users that run pipelines must have READ access to the image.
      */
-    imageName?: string | null;
+    imageName?: string;
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -268,15 +270,15 @@ export namespace genomics_v1alpha2 {
     /**
      * A human-readable description of the event. Note that these strings can change at any time without notice. Any application logic must use the information in the `details` field.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Machine-readable details about the event.
      */
-    details?: {[key: string]: any} | null;
+    details?: {[key: string]: any};
     /**
      * The time at which the event occurred.
      */
-    timestamp?: string | null;
+    timestamp?: string;
   }
   /**
    * An event generated when the execution of a pipeline has failed. Note that other events can continue to occur after this event.
@@ -285,11 +287,11 @@ export namespace genomics_v1alpha2 {
     /**
      * The human-readable description of the cause of the failure.
      */
-    cause?: string | null;
+    cause?: string;
     /**
      * The Google standard error code that best describes this failure.
      */
-    code?: string | null;
+    code?: string;
   }
   /**
    * The response message for Operations.ListOperations.
@@ -298,7 +300,7 @@ export namespace genomics_v1alpha2 {
     /**
      * The standard List next-page token.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * A list of operations that matches the specified filter in the request.
      */
@@ -311,7 +313,7 @@ export namespace genomics_v1alpha2 {
     /**
      * The token to use to get the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The matched pipelines.
      */
@@ -324,11 +326,11 @@ export namespace genomics_v1alpha2 {
     /**
      * Required. The name of the disk where this parameter is located. Can be the name of one of the disks specified in the Resources field, or &quot;boot&quot;, which represents the Docker instance&#39;s boot disk and has a mount point of `/`.
      */
-    disk?: string | null;
+    disk?: string;
     /**
      * Required. The path within the user&#39;s docker container where this input should be localized to and from, relative to the specified disk&#39;s mount point. For example: file.txt,
      */
-    path?: string | null;
+    path?: string;
   }
   /**
    * The logging options for the pipeline run.
@@ -337,7 +339,7 @@ export namespace genomics_v1alpha2 {
     /**
      * The location in Google Cloud Storage to which the pipeline logs will be copied. Can be specified as a fully qualified directory path, in which case logs will be output with a unique identifier as the filename in that directory, or as a fully specified path, which must end in `.log`, in which case that path will be used, and the user must ensure that logs are not overwritten. Stdout and stderr logs from the run are also generated and output as `-stdout.log` and `-stderr.log`.
      */
-    gcsPath?: string | null;
+    gcsPath?: string;
   }
   /**
    * This resource represents a long-running operation that is the result of a network API call.
@@ -346,7 +348,7 @@ export namespace genomics_v1alpha2 {
     /**
      * If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * The error result of the operation in case of failure or cancellation.
      */
@@ -354,15 +356,15 @@ export namespace genomics_v1alpha2 {
     /**
      * An OperationMetadata or Metadata object. This will always be returned with the Operation.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * The server-assigned name, which is only unique within the same service that originally returns it. For example&amp;#58; `operations/CJHU7Oi_ChDrveSpBRjfuL-qzoWAgEw`
      */
-    name?: string | null;
+    name?: string;
     /**
      * An Empty object.
      */
-    response?: {[key: string]: any} | null;
+    response?: {[key: string]: any};
   }
   /**
    * An event that occurred during an Operation.
@@ -371,15 +373,15 @@ export namespace genomics_v1alpha2 {
     /**
      * Required description of event.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Optional time of when event finished. An event can have a start time and no finish time. If an event has a finish time, there must be a start time.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * Optional time of when event started.
      */
-    startTime?: string | null;
+    startTime?: string;
   }
   /**
    * Metadata describing an Operation.
@@ -388,15 +390,15 @@ export namespace genomics_v1alpha2 {
     /**
      * This field is deprecated. Use `labels` instead. Optionally provided by the caller when submitting the request that creates the operation.
      */
-    clientId?: string | null;
+    clientId?: string;
     /**
      * The time at which the job was submitted to the Genomics service.
      */
-    createTime?: string | null;
+    createTime?: string;
     /**
      * The time at which the job stopped running.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * Optional event messages that were generated during the job&#39;s execution. This also contains any warnings that were generated during import or export.
      */
@@ -404,23 +406,23 @@ export namespace genomics_v1alpha2 {
     /**
      * Optionally provided by the caller when submitting the request that creates the operation.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * The Google Cloud Project in which the job is scoped.
      */
-    projectId?: string | null;
+    projectId?: string;
     /**
      * The original request that started the operation. Note that this will be in current version of the API. If the operation was started with v1beta2 API and a GetOperation is performed on v1 API, a v1 request will be returned.
      */
-    request?: {[key: string]: any} | null;
+    request?: {[key: string]: any};
     /**
      * Runtime metadata on this Operation.
      */
-    runtimeMetadata?: {[key: string]: any} | null;
+    runtimeMetadata?: {[key: string]: any};
     /**
      * The time at which the job began to run.
      */
-    startTime?: string | null;
+    startTime?: string;
   }
   /**
    * The pipeline object. Represents a transformation from a set of input parameters to a set of output parameters. The transformation is defined as a docker image and command to run within that image. Each pipeline is run on a Google Compute Engine VM. A pipeline can be created with the `create` method and then later run with the `run` method, or a pipeline can be defined and run all at once with the `run` method.
@@ -429,7 +431,7 @@ export namespace genomics_v1alpha2 {
     /**
      * User-specified description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Specifies the docker run information.
      */
@@ -441,7 +443,7 @@ export namespace genomics_v1alpha2 {
     /**
      * Required. A user specified pipeline name that does not have to be unique. This name can be used for filtering Pipelines in ListPipelines.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output parameters of the pipeline.
      */
@@ -449,11 +451,11 @@ export namespace genomics_v1alpha2 {
     /**
      * Unique pipeline id that is generated by the service when CreatePipeline is called. Cannot be specified in the Pipeline used in the CreatePipelineRequest, and will be populated in the response to CreatePipeline and all subsequent Get and List calls. Indicates that the service has registered this pipeline.
      */
-    pipelineId?: string | null;
+    pipelineId?: string;
     /**
      * Required. The project in which to create the pipeline. The caller must have WRITE access.
      */
-    projectId?: string | null;
+    projectId?: string;
     /**
      * Required. Specifies resource requirements for the pipeline run. Required fields:  * minimumCpuCores  * minimumRamGb
      */
@@ -466,11 +468,11 @@ export namespace genomics_v1alpha2 {
     /**
      * The default value for this parameter. Can be overridden at runtime. If `localCopy` is present, then this must be a Google Cloud Storage path beginning with `gs://`.
      */
-    defaultValue?: string | null;
+    defaultValue?: string;
     /**
      * Human-readable description.
      */
-    description?: string | null;
+    description?: string;
     /**
      * If present, this parameter is marked for copying to and from the VM. `LocalCopy` indicates where on the VM the file should be. The value given to this parameter (either at runtime or using `defaultValue`) must be the remote path where the file should be.
      */
@@ -478,7 +480,7 @@ export namespace genomics_v1alpha2 {
     /**
      * Required. Name of the parameter - the pipeline runner uses this string as the key to the input and output maps in RunPipeline.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * The system resources for the pipeline run.
@@ -487,15 +489,15 @@ export namespace genomics_v1alpha2 {
     /**
      * Optional. The number of accelerators of the specified type to attach. By specifying this parameter, you will download and install the following third-party software onto your managed Compute Engine instances: NVIDIA® Tesla® drivers and NVIDIA® CUDA toolkit.
      */
-    acceleratorCount?: string | null;
+    acceleratorCount?: string;
     /**
      * Optional. The Compute Engine defined accelerator type. By specifying this parameter, you will download and install the following third-party software onto your managed Compute Engine instances: NVIDIA® Tesla® drivers and NVIDIA® CUDA toolkit. Please see https://cloud.google.com/compute/docs/gpus/ for a list of available accelerator types.
      */
-    acceleratorType?: string | null;
+    acceleratorType?: string;
     /**
      * The size of the boot disk. Defaults to 10 (GB).
      */
-    bootDiskSizeGb?: number | null;
+    bootDiskSizeGb?: number;
     /**
      * Disks to attach.
      */
@@ -503,23 +505,23 @@ export namespace genomics_v1alpha2 {
     /**
      * The minimum number of cores to use. Defaults to 1.
      */
-    minimumCpuCores?: number | null;
+    minimumCpuCores?: number;
     /**
      * The minimum amount of RAM to use. Defaults to 3.75 (GB)
      */
-    minimumRamGb?: number | null;
+    minimumRamGb?: number;
     /**
      * Whether to assign an external IP to the instance. This is an experimental feature that may go away. Defaults to false. Corresponds to `--no_address` flag for [gcloud compute instances create] (https://cloud.google.com/sdk/gcloud/reference/compute/instances/create). In order to use this, must be true for both create time and run time. Cannot be true at run time if false at create time. If you need to ssh into a private IP VM for debugging, you can ssh to a public VM and then ssh into the private VM&#39;s Internal IP.  If noAddress is set, this pipeline run may only load docker images from Google Container Registry and not Docker Hub. Before using this, you must [configure access to Google services from internal IPs](https://cloud.google.com/compute/docs/configure-private-google-access#configuring_access_to_google_services_from_internal_ips).
      */
-    noAddress?: boolean | null;
+    noAddress?: boolean;
     /**
      * Whether to use preemptible VMs. Defaults to `false`. In order to use this, must be true for both create time and run time. Cannot be true at run time if false at create time.
      */
-    preemptible?: boolean | null;
+    preemptible?: boolean;
     /**
      * List of Google Compute Engine availability zones to which resource creation will restricted. If empty, any zone may be chosen.
      */
-    zones?: string[] | null;
+    zones?: string[];
   }
   /**
    * An event generated when the worker starts pulling an image.
@@ -528,7 +530,7 @@ export namespace genomics_v1alpha2 {
     /**
      * The URI of the image that was pulled.
      */
-    imageUri?: string | null;
+    imageUri?: string;
   }
   /**
    * An event generated when the worker stops pulling an image.
@@ -537,10 +539,10 @@ export namespace genomics_v1alpha2 {
     /**
      * The URI of the image that was pulled.
      */
-    imageUri?: string | null;
+    imageUri?: string;
   }
   export interface Schema$RepeatedString {
-    values?: string[] | null;
+    values?: string[];
   }
   /**
    * The pipeline run arguments.
@@ -549,19 +551,19 @@ export namespace genomics_v1alpha2 {
     /**
      * This field is deprecated. Use `labels` instead. Client-specified pipeline operation identifier.
      */
-    clientId?: string | null;
+    clientId?: string;
     /**
      * Pipeline input arguments; keys are defined in the pipeline documentation. All input parameters that do not have default values  must be specified. If parameters with defaults are specified here, the defaults will be overridden.
      */
-    inputs?: {[key: string]: string} | null;
+    inputs?: {[key: string]: string};
     /**
      * How long to keep the VM up after a failure (for example docker command failed, copying input or output files failed, etc). While the VM is up, one can ssh into the VM to debug. Default is 0; maximum allowed value is 1 day.
      */
-    keepVmAliveOnFailureDuration?: string | null;
+    keepVmAliveOnFailureDuration?: string;
     /**
      * Labels to apply to this pipeline run. Labels will also be applied to compute resources (VM, disks) created by this pipeline run. When listing operations, operations can filtered by labels. Label keys may not be empty; label values may be empty. Non-empty labels must be 1-63 characters long, and comply with [RFC1035] (https://www.ietf.org/rfc/rfc1035.txt). Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
      */
-    labels?: {[key: string]: string} | null;
+    labels?: {[key: string]: string};
     /**
      * Required. Logging options. Used by the service to communicate results to the user.
      */
@@ -569,11 +571,11 @@ export namespace genomics_v1alpha2 {
     /**
      * Pipeline output arguments; keys are defined in the pipeline documentation.  All output parameters of without default values must be specified.  If parameters with defaults are specified here, the defaults will be overridden.
      */
-    outputs?: {[key: string]: string} | null;
+    outputs?: {[key: string]: string};
     /**
      * Required. The project in which to run the pipeline. The caller must have WRITER access to all Google Cloud services and resources (e.g. Google Compute Engine) will be used.
      */
-    projectId?: string | null;
+    projectId?: string;
     /**
      * Specifies resource requirements/overrides for the pipeline run.
      */
@@ -598,7 +600,7 @@ export namespace genomics_v1alpha2 {
     /**
      * The already created pipeline to run.
      */
-    pipelineId?: string | null;
+    pipelineId?: string;
   }
   /**
    * The response to the RunPipeline method, returned in the operation&#39;s result field on success.
@@ -620,38 +622,38 @@ export namespace genomics_v1alpha2 {
     /**
      * Email address of the service account. Defaults to `default`, which uses the compute service account associated with the project.
      */
-    email?: string | null;
+    email?: string;
     /**
      * List of scopes to be enabled for this service account on the VM. The following scopes are automatically included:  * https://www.googleapis.com/auth/compute * https://www.googleapis.com/auth/devstorage.full_control * https://www.googleapis.com/auth/genomics * https://www.googleapis.com/auth/logging.write * https://www.googleapis.com/auth/monitoring.write
      */
-    scopes?: string[] | null;
+    scopes?: string[];
   }
   /**
    * Request to set operation status. Should only be used by VMs created by the Pipelines Service and not by end users.
    */
   export interface Schema$SetOperationStatusRequest {
-    errorCode?: string | null;
-    errorMessage?: string | null;
-    operationId?: string | null;
+    errorCode?: string;
+    errorMessage?: string;
+    operationId?: string;
     timestampEvents?: Schema$TimestampEvent[];
-    validationToken?: string | null;
+    validationToken?: string;
   }
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * Stores the list of events and times they occured for major events in job execution.
@@ -660,11 +662,11 @@ export namespace genomics_v1alpha2 {
     /**
      * String indicating the type of event
      */
-    description?: string | null;
+    description?: string;
     /**
      * The time this event occured.
      */
-    timestamp?: string | null;
+    timestamp?: string;
   }
   /**
    * An event generated when the execution of a container results in a non-zero exit status that was not otherwise ignored. Execution will continue, but only actions that are flagged as `ALWAYS_RUN` will be executed. Other actions will be skipped.
@@ -673,11 +675,11 @@ export namespace genomics_v1alpha2 {
     /**
      * The numeric ID of the action that started the container.
      */
-    actionId?: number | null;
+    actionId?: number;
     /**
      * The exit status of the container.
      */
-    exitStatus?: number | null;
+    exitStatus?: number;
   }
   /**
    * An event generated after a worker VM has been assigned to run the pipeline.
@@ -686,15 +688,11 @@ export namespace genomics_v1alpha2 {
     /**
      * The worker&#39;s instance name.
      */
-    instance?: string | null;
-    /**
-     * The machine type that was assigned for the worker.
-     */
-    machineType?: string | null;
+    instance?: string;
     /**
      * The zone the worker is running in.
      */
-    zone?: string | null;
+    zone?: string;
   }
   /**
    * An event generated when the worker VM that was assigned to the pipeline has been released (deleted).
@@ -703,11 +701,11 @@ export namespace genomics_v1alpha2 {
     /**
      * The worker&#39;s instance name.
      */
-    instance?: string | null;
+    instance?: string;
     /**
      * The zone the worker was running in.
      */
-    zone?: string | null;
+    zone?: string;
   }
 
   export class Resource$Operations {
@@ -734,7 +732,7 @@ export namespace genomics_v1alpha2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var genomics = google.genomics('v1alpha2');
      *
      * authorize(function(authClient) {
@@ -758,12 +756,16 @@ export namespace genomics_v1alpha2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias genomics.operations.cancel
@@ -771,7 +773,7 @@ export namespace genomics_v1alpha2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.name The name of the operation resource to be cancelled.
-     * @param {().CancelOperationRequest} params.requestBody Request body data
+     * @param {().CancelOperationRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -854,7 +856,7 @@ export namespace genomics_v1alpha2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var genomics = google.genomics('v1alpha2');
      *
      * authorize(function(authClient) {
@@ -877,12 +879,16 @@ export namespace genomics_v1alpha2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias genomics.operations.get
@@ -970,7 +976,7 @@ export namespace genomics_v1alpha2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var genomics = google.genomics('v1alpha2');
      *
      * authorize(function(authClient) {
@@ -1006,12 +1012,16 @@ export namespace genomics_v1alpha2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias genomics.operations.list
@@ -1163,7 +1173,7 @@ export namespace genomics_v1alpha2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var genomics = google.genomics('v1alpha2');
      *
      * authorize(function(authClient) {
@@ -1187,19 +1197,23 @@ export namespace genomics_v1alpha2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias genomics.pipelines.create
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Pipeline} params.requestBody Request body data
+     * @param {().Pipeline} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1281,7 +1295,7 @@ export namespace genomics_v1alpha2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var genomics = google.genomics('v1alpha2');
      *
      * authorize(function(authClient) {
@@ -1302,12 +1316,16 @@ export namespace genomics_v1alpha2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias genomics.pipelines.delete
@@ -1396,7 +1414,7 @@ export namespace genomics_v1alpha2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var genomics = google.genomics('v1alpha2');
      *
      * authorize(function(authClient) {
@@ -1420,12 +1438,16 @@ export namespace genomics_v1alpha2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias genomics.pipelines.get
@@ -1514,7 +1536,7 @@ export namespace genomics_v1alpha2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var genomics = google.genomics('v1alpha2');
      *
      * authorize(function(authClient) {
@@ -1534,12 +1556,16 @@ export namespace genomics_v1alpha2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias genomics.pipelines.getControllerConfig
@@ -1634,7 +1660,7 @@ export namespace genomics_v1alpha2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var genomics = google.genomics('v1alpha2');
      *
      * authorize(function(authClient) {
@@ -1667,12 +1693,16 @@ export namespace genomics_v1alpha2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias genomics.pipelines.list
@@ -1768,7 +1798,7 @@ export namespace genomics_v1alpha2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var genomics = google.genomics('v1alpha2');
      *
      * authorize(function(authClient) {
@@ -1792,19 +1822,23 @@ export namespace genomics_v1alpha2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias genomics.pipelines.run
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().RunPipelineRequest} params.requestBody Request body data
+     * @param {().RunPipelineRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1888,7 +1922,7 @@ export namespace genomics_v1alpha2 {
      * // 3. Install the Node.js client library by running
      * //    `npm install googleapis --save`
      *
-     * const {google} = require('googleapis');
+     * var google = require('googleapis');
      * var genomics = google.genomics('v1alpha2');
      *
      * authorize(function(authClient) {
@@ -1910,19 +1944,23 @@ export namespace genomics_v1alpha2 {
      * });
      *
      * function authorize(callback) {
-     *   google.auth.getClient({
-     *     scopes: ['https://www.googleapis.com/auth/cloud-platform']
-     *   }).then(client => {
-     *     callback(client);
-     *   }).catch(err => {
-     *     console.error('authentication failed: ', err);
+     *   google.auth.getApplicationDefault(function(err, authClient) {
+     *     if (err) {
+     *       console.error('authentication failed: ', err);
+     *       return;
+     *     }
+     *     if (authClient.createScopedRequired && authClient.createScopedRequired()) {
+     *       var scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+     *       authClient = authClient.createScoped(scopes);
+     *     }
+     *     callback(authClient);
      *   });
      * }
      * @alias genomics.pipelines.setOperationStatus
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().SetOperationStatusRequest} params.requestBody Request body data
+     * @param {().SetOperationStatusRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

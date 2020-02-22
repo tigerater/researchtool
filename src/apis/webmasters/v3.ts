@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -104,26 +106,26 @@ export namespace webmasters_v3 {
   }
 
   export interface Schema$ApiDataRow {
-    clicks?: number | null;
-    ctr?: number | null;
-    impressions?: number | null;
-    keys?: string[] | null;
-    position?: number | null;
+    clicks?: number;
+    ctr?: number;
+    impressions?: number;
+    keys?: string[];
+    position?: number;
   }
   export interface Schema$ApiDimensionFilter {
-    dimension?: string | null;
-    expression?: string | null;
-    operator?: string | null;
+    dimension?: string;
+    expression?: string;
+    operator?: string;
   }
   export interface Schema$ApiDimensionFilterGroup {
     filters?: Schema$ApiDimensionFilter[];
-    groupType?: string | null;
+    groupType?: string;
   }
   export interface Schema$SearchAnalyticsQueryRequest {
     /**
      * [Optional; Default is &quot;auto&quot;] How data is aggregated. If aggregated by property, all data for the same property is aggregated; if aggregated by page, all data is aggregated by canonical URI. If you filter or group by page, choose AUTO; otherwise you can aggregate either by property or by page, depending on how you want your data calculated; see  the help documentation to learn how data is calculated differently by site versus by page.  Note: If you group or filter by page, you cannot aggregate by property.  If you specify any value other than AUTO, the aggregation type in the result will match the requested type, or if you request an invalid type, you will get an error. The API will never change your aggregation type if the requested type is invalid.
      */
-    aggregationType?: string | null;
+    aggregationType?: string;
     /**
      * [Optional] Zero or more filters to apply to the dimension grouping values; for example, &#39;query contains &quot;buy&quot;&#39; to see only data where the query string contains the substring &quot;buy&quot; (not case-sensitive). You can filter by a dimension without grouping by it.
      */
@@ -131,27 +133,27 @@ export namespace webmasters_v3 {
     /**
      * [Optional] Zero or more dimensions to group results by. Dimensions are the group-by values in the Search Analytics page. Dimensions are combined to create a unique row key for each row. Results are grouped in the order that you supply these dimensions.
      */
-    dimensions?: string[] | null;
+    dimensions?: string[];
     /**
      * [Required] End date of the requested date range, in YYYY-MM-DD format, in PST (UTC - 8:00). Must be greater than or equal to the start date. This value is included in the range.
      */
-    endDate?: string | null;
+    endDate?: string;
     /**
      * [Optional; Default is 1000] The maximum number of rows to return. Must be a number from 1 to 5,000 (inclusive).
      */
-    rowLimit?: number | null;
+    rowLimit?: number;
     /**
      * [Optional; Default is &quot;web&quot;] The search type to filter for.
      */
-    searchType?: string | null;
+    searchType?: string;
     /**
      * [Required] Start date of the requested date range, in YYYY-MM-DD format, in PST time (UTC - 8:00). Must be less than or equal to the end date. This value is included in the range.
      */
-    startDate?: string | null;
+    startDate?: string;
     /**
      * [Optional; Default is 0] Zero-based index of the first row in the response. Must be a non-negative number.
      */
-    startRow?: number | null;
+    startRow?: number;
   }
   /**
    * A list of rows, one per result, grouped by key. Metrics in each row are aggregated for all data grouped by that key either by page or property, as specified by the aggregation type parameter.
@@ -160,7 +162,7 @@ export namespace webmasters_v3 {
     /**
      * How the results were aggregated.
      */
-    responseAggregationType?: string | null;
+    responseAggregationType?: string;
     /**
      * A list of rows grouped by the key values in the order given in the query.
      */
@@ -191,11 +193,11 @@ export namespace webmasters_v3 {
     /**
      * The user&#39;s permission level for the site.
      */
-    permissionLevel?: string | null;
+    permissionLevel?: string;
     /**
      * The URL of the site.
      */
-    siteUrl?: string | null;
+    siteUrl?: string;
   }
   /**
    * Contains detailed information about a specific URL submitted as a sitemap.
@@ -208,35 +210,35 @@ export namespace webmasters_v3 {
     /**
      * Number of errors in the sitemap. These are issues with the sitemap itself that need to be fixed before it can be processed correctly.
      */
-    errors?: string | null;
+    errors?: string;
     /**
      * If true, the sitemap has not been processed.
      */
-    isPending?: boolean | null;
+    isPending?: boolean;
     /**
      * If true, the sitemap is a collection of sitemaps.
      */
-    isSitemapsIndex?: boolean | null;
+    isSitemapsIndex?: boolean;
     /**
      * Date &amp; time in which this sitemap was last downloaded. Date format is in RFC 3339 format (yyyy-mm-dd).
      */
-    lastDownloaded?: string | null;
+    lastDownloaded?: string;
     /**
      * Date &amp; time in which this sitemap was submitted. Date format is in RFC 3339 format (yyyy-mm-dd).
      */
-    lastSubmitted?: string | null;
+    lastSubmitted?: string;
     /**
      * The url of the sitemap.
      */
-    path?: string | null;
+    path?: string;
     /**
      * The type of the sitemap. For example: rssFeed.
      */
-    type?: string | null;
+    type?: string;
     /**
      * Number of warnings for the sitemap. These are generally non-critical issues with URLs in the sitemaps.
      */
-    warnings?: string | null;
+    warnings?: string;
   }
   /**
    * Information about the various content types in the sitemap.
@@ -245,15 +247,15 @@ export namespace webmasters_v3 {
     /**
      * The number of URLs from the sitemap that were indexed (of the content type).
      */
-    indexed?: string | null;
+    indexed?: string;
     /**
      * The number of URLs in the sitemap (of the content type).
      */
-    submitted?: string | null;
+    submitted?: string;
     /**
      * The specific type of content in this sitemap. For example: web.
      */
-    type?: string | null;
+    type?: string;
   }
 
   export class Resource$Searchanalytics {
@@ -270,7 +272,7 @@ export namespace webmasters_v3 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.siteUrl The site's URL, including protocol. For example: http://www.example.com/
-     * @param {().SearchAnalyticsQueryRequest} params.requestBody Request body data
+     * @param {().SearchAnalyticsQueryRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

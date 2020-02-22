@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -117,59 +119,55 @@ export namespace blogger_v3 {
     /**
      * The JSON custom meta-data for the Blog
      */
-    customMetaData?: string | null;
+    customMetaData?: string;
     /**
      * The description of this blog. This is displayed underneath the title.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The identifier for this resource.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of this entry. Always blogger#blog
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The locale this Blog is set to.
      */
-    locale?: {country?: string; language?: string; variant?: string} | null;
+    locale?: {country?: string; language?: string; variant?: string};
     /**
      * The name of this blog. This is displayed as the title.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The container of pages in this blog.
      */
-    pages?: {selfLink?: string; totalItems?: number} | null;
+    pages?: {selfLink?: string; totalItems?: number};
     /**
      * The container of posts in this blog.
      */
-    posts?: {
-      items?: Schema$Post[];
-      selfLink?: string;
-      totalItems?: number;
-    } | null;
+    posts?: {items?: Schema$Post[]; selfLink?: string; totalItems?: number};
     /**
      * RFC 3339 date-time when this blog was published.
      */
-    published?: string | null;
+    published?: string;
     /**
      * The API REST URL to fetch this resource from.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The status of the blog.
      */
-    status?: string | null;
+    status?: string;
     /**
      * RFC 3339 date-time when this blog was last updated.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The URL where this blog is published.
      */
-    url?: string | null;
+    url?: string;
   }
   export interface Schema$BlogList {
     /**
@@ -183,33 +181,33 @@ export namespace blogger_v3 {
     /**
      * The kind of this entity. Always blogger#blogList
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$BlogPerUserInfo {
     /**
      * ID of the Blog resource
      */
-    blogId?: string | null;
+    blogId?: string;
     /**
      * True if the user has Admin level access to the blog.
      */
-    hasAdminAccess?: boolean | null;
+    hasAdminAccess?: boolean;
     /**
      * The kind of this entity. Always blogger#blogPerUserInfo
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The Photo Album Key for the user when adding photos to the blog
      */
-    photosAlbumKey?: string | null;
+    photosAlbumKey?: string;
     /**
      * Access permissions that the user has for the blog (ADMIN, AUTHOR, or READER).
      */
-    role?: string | null;
+    role?: string;
     /**
      * ID of the User
      */
-    userId?: string | null;
+    userId?: string;
   }
   export interface Schema$BlogUserInfo {
     /**
@@ -223,7 +221,7 @@ export namespace blogger_v3 {
     /**
      * The kind of this entity. Always blogger#blogUserInfo
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$Comment {
     /**
@@ -234,53 +232,53 @@ export namespace blogger_v3 {
       id?: string;
       image?: {url?: string};
       url?: string;
-    } | null;
+    };
     /**
      * Data about the blog containing this comment.
      */
-    blog?: {id?: string} | null;
+    blog?: {id?: string};
     /**
      * The actual content of the comment. May include HTML markup.
      */
-    content?: string | null;
+    content?: string;
     /**
      * The identifier for this resource.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Data about the comment this is in reply to.
      */
-    inReplyTo?: {id?: string} | null;
+    inReplyTo?: {id?: string};
     /**
      * The kind of this entry. Always blogger#comment
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Data about the post containing this comment.
      */
-    post?: {id?: string} | null;
+    post?: {id?: string};
     /**
      * RFC 3339 date-time when this comment was published.
      */
-    published?: string | null;
+    published?: string;
     /**
      * The API REST URL to fetch this resource from.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The status of the comment (only populated for admin users)
      */
-    status?: string | null;
+    status?: string;
     /**
      * RFC 3339 date-time when this comment was last updated.
      */
-    updated?: string | null;
+    updated?: string;
   }
   export interface Schema$CommentList {
     /**
      * Etag of the response.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The List of Comments for a Post.
      */
@@ -288,15 +286,15 @@ export namespace blogger_v3 {
     /**
      * The kind of this entry. Always blogger#commentList
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Pagination token to fetch the next page, if one exists.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Pagination token to fetch the previous page, if one exists.
      */
-    prevPageToken?: string | null;
+    prevPageToken?: string;
   }
   export interface Schema$Page {
     /**
@@ -307,57 +305,57 @@ export namespace blogger_v3 {
       id?: string;
       image?: {url?: string};
       url?: string;
-    } | null;
+    };
     /**
      * Data about the blog containing this Page.
      */
-    blog?: {id?: string} | null;
+    blog?: {id?: string};
     /**
      * The body content of this Page, in HTML.
      */
-    content?: string | null;
+    content?: string;
     /**
      * Etag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The identifier for this resource.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of this entity. Always blogger#page
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * RFC 3339 date-time when this Page was published.
      */
-    published?: string | null;
+    published?: string;
     /**
      * The API REST URL to fetch this resource from.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The status of the page for admin resources (either LIVE or DRAFT).
      */
-    status?: string | null;
+    status?: string;
     /**
      * The title of this entity. This is the name displayed in the Admin user interface.
      */
-    title?: string | null;
+    title?: string;
     /**
      * RFC 3339 date-time when this Page was last updated.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The URL that this Page is displayed at.
      */
-    url?: string | null;
+    url?: string;
   }
   export interface Schema$PageList {
     /**
      * Etag of the response.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The list of Pages for a Blog.
      */
@@ -365,25 +363,25 @@ export namespace blogger_v3 {
     /**
      * The kind of this entity. Always blogger#pageList
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Pagination token to fetch the next page, if one exists.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$Pageviews {
     /**
      * Blog Id
      */
-    blogId?: string | null;
+    blogId?: string;
     /**
      * The container of posts in this blog.
      */
-    counts?: Array<{count?: string; timeRange?: string}> | null;
+    counts?: Array<{count?: string; timeRange?: string}>;
     /**
      * The kind of this entry. Always blogger#page_views
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$Post {
     /**
@@ -394,56 +392,51 @@ export namespace blogger_v3 {
       id?: string;
       image?: {url?: string};
       url?: string;
-    } | null;
+    };
     /**
      * Data about the blog containing this Post.
      */
-    blog?: {id?: string} | null;
+    blog?: {id?: string};
     /**
      * The content of the Post. May contain HTML markup.
      */
-    content?: string | null;
+    content?: string;
     /**
      * The JSON meta-data for the Post.
      */
-    customMetaData?: string | null;
+    customMetaData?: string;
     /**
      * Etag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The identifier of this Post.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Display image for the Post.
      */
-    images?: Array<{url?: string}> | null;
+    images?: Array<{url?: string}>;
     /**
      * The kind of this entity. Always blogger#post
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The list of labels this Post was tagged with.
      */
-    labels?: string[] | null;
+    labels?: string[];
     /**
      * The location for geotagged posts.
      */
-    location?: {
-      lat?: number;
-      lng?: number;
-      name?: string;
-      span?: string;
-    } | null;
+    location?: {lat?: number; lng?: number; name?: string; span?: string};
     /**
      * RFC 3339 date-time when this Post was published.
      */
-    published?: string | null;
+    published?: string;
     /**
      * Comment control and display setting for readers of this post.
      */
-    readerComments?: string | null;
+    readerComments?: string;
     /**
      * The container of comments on this Post.
      */
@@ -451,37 +444,37 @@ export namespace blogger_v3 {
       items?: Schema$Comment[];
       selfLink?: string;
       totalItems?: string;
-    } | null;
+    };
     /**
      * The API REST URL to fetch this resource from.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * Status of the post. Only set for admin-level requests
      */
-    status?: string | null;
+    status?: string;
     /**
      * The title of the Post.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The title link URL, similar to atom&#39;s related link.
      */
-    titleLink?: string | null;
+    titleLink?: string;
     /**
      * RFC 3339 date-time when this Post was last updated.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The URL where this Post is displayed.
      */
-    url?: string | null;
+    url?: string;
   }
   export interface Schema$PostList {
     /**
      * Etag of the response.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The list of Posts for this Blog.
      */
@@ -489,39 +482,39 @@ export namespace blogger_v3 {
     /**
      * The kind of this entity. Always blogger#postList
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Pagination token to fetch the next page, if one exists.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$PostPerUserInfo {
     /**
      * ID of the Blog that the post resource belongs to.
      */
-    blogId?: string | null;
+    blogId?: string;
     /**
      * True if the user has Author level access to the post.
      */
-    hasEditAccess?: boolean | null;
+    hasEditAccess?: boolean;
     /**
      * The kind of this entity. Always blogger#postPerUserInfo
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * ID of the Post resource.
      */
-    postId?: string | null;
+    postId?: string;
     /**
      * ID of the User.
      */
-    userId?: string | null;
+    userId?: string;
   }
   export interface Schema$PostUserInfo {
     /**
      * The kind of this entity. Always blogger#postUserInfo
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The Post resource.
      */
@@ -539,49 +532,49 @@ export namespace blogger_v3 {
     /**
      * The kind of this entity. Always blogger#postList
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Pagination token to fetch the next page, if one exists.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$User {
     /**
      * Profile summary information.
      */
-    about?: string | null;
+    about?: string;
     /**
      * The container of blogs for this user.
      */
-    blogs?: {selfLink?: string} | null;
+    blogs?: {selfLink?: string};
     /**
      * The timestamp of when this profile was created, in seconds since epoch.
      */
-    created?: string | null;
+    created?: string;
     /**
      * The display name.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The identifier for this User.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The kind of this entity. Always blogger#user
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * This user&#39;s locale
      */
-    locale?: {country?: string; language?: string; variant?: string} | null;
+    locale?: {country?: string; language?: string; variant?: string};
     /**
      * The API REST URL to fetch this resource from.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The user&#39;s profile page.
      */
-    url?: string | null;
+    url?: string;
   }
 
   export class Resource$Blogs {
@@ -745,7 +738,7 @@ export namespace blogger_v3 {
      * @param {boolean=} params.fetchUserInfo Whether the response is a list of blogs with per-user information instead of just blogs.
      * @param {string=} params.role User access types for blogs to include in the results, e.g. AUTHOR will return blogs where the user has author level access. If no roles are specified, defaults to ADMIN and AUTHOR roles.
      * @param {string=} params.status Blog statuses to include in the result (default: Live blogs only). Note that ADMIN access is required to view deleted blogs.
-     * @param {string} params.userId ID of the user whose blogs are to be fetched. Either the word 'self' or the user's profile identifier.
+     * @param {string} params.userId ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
      * @param {string=} params.view Access level with which to view the blogs. Note that some fields require elevated access.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -864,7 +857,7 @@ export namespace blogger_v3 {
      */
     status?: string[];
     /**
-     * ID of the user whose blogs are to be fetched. Either the word 'self' or the user's profile identifier.
+     * ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
      */
     userId?: string;
     /**
@@ -888,7 +881,7 @@ export namespace blogger_v3 {
      * @param {object} params Parameters for request
      * @param {string} params.blogId The ID of the blog to get.
      * @param {integer=} params.maxPosts Maximum number of posts to pull back with the blog.
-     * @param {string} params.userId ID of the user whose blogs are to be fetched. Either the word 'self' or the user's profile identifier.
+     * @param {string} params.userId ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -971,7 +964,7 @@ export namespace blogger_v3 {
      */
     maxPosts?: number;
     /**
-     * ID of the user whose blogs are to be fetched. Either the word 'self' or the user's profile identifier.
+     * ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
      */
     userId?: string;
   }
@@ -1850,7 +1843,7 @@ export namespace blogger_v3 {
      * @param {object} params Parameters for request
      * @param {string} params.blogId ID of the blog to add the page to.
      * @param {boolean=} params.isDraft Whether to create the page as a draft (default: false).
-     * @param {().Page} params.requestBody Request body data
+     * @param {().Page} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2001,7 +1994,7 @@ export namespace blogger_v3 {
      * @param {string} params.pageId The ID of the Page.
      * @param {boolean=} params.publish Whether a publish action should be performed when the page is updated (default: false).
      * @param {boolean=} params.revert Whether a revert action should be performed when the page is updated (default: false).
-     * @param {().Page} params.requestBody Request body data
+     * @param {().Page} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2217,7 +2210,7 @@ export namespace blogger_v3 {
      * @param {string} params.pageId The ID of the Page.
      * @param {boolean=} params.publish Whether a publish action should be performed when the page is updated (default: false).
      * @param {boolean=} params.revert Whether a revert action should be performed when the page is updated (default: false).
-     * @param {().Page} params.requestBody Request body data
+     * @param {().Page} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2787,7 +2780,7 @@ export namespace blogger_v3 {
      * @param {boolean=} params.fetchBody Whether the body content of the post is included with the result (default: true).
      * @param {boolean=} params.fetchImages Whether image URL metadata for each post is included in the returned result (default: false).
      * @param {boolean=} params.isDraft Whether to create the post as a draft (default: false).
-     * @param {().Post} params.requestBody Request body data
+     * @param {().Post} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2946,7 +2939,7 @@ export namespace blogger_v3 {
      * @param {string} params.postId The ID of the Post.
      * @param {boolean=} params.publish Whether a publish action should be performed when the post is updated (default: false).
      * @param {boolean=} params.revert Whether a revert action should be performed when the post is updated (default: false).
-     * @param {().Post} params.requestBody Request body data
+     * @param {().Post} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3240,7 +3233,7 @@ export namespace blogger_v3 {
      * @param {string} params.postId The ID of the Post.
      * @param {boolean=} params.publish Whether a publish action should be performed when the post is updated (default: false).
      * @param {boolean=} params.revert Whether a revert action should be performed when the post is updated (default: false).
-     * @param {().Post} params.requestBody Request body data
+     * @param {().Post} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3606,7 +3599,7 @@ export namespace blogger_v3 {
      * @param {string} params.blogId The ID of the blog.
      * @param {integer=} params.maxComments Maximum number of comments to pull back on a post.
      * @param {string} params.postId The ID of the post to get.
-     * @param {string} params.userId ID of the user for the per-user information to be fetched. Either the word 'self' or the user's profile identifier.
+     * @param {string} params.userId ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3689,7 +3682,7 @@ export namespace blogger_v3 {
      * @param {string=} params.pageToken Continuation token if the request is paged.
      * @param {string=} params.startDate Earliest post date to fetch, a date-time with RFC 3339 formatting.
      * @param {string=} params.status
-     * @param {string} params.userId ID of the user for the per-user information to be fetched. Either the word 'self' or the user's profile identifier.
+     * @param {string} params.userId ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
      * @param {string=} params.view Access level with which to view the returned result. Note that some fields require elevated access.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -3777,7 +3770,7 @@ export namespace blogger_v3 {
      */
     postId?: string;
     /**
-     * ID of the user for the per-user information to be fetched. Either the word 'self' or the user's profile identifier.
+     * ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
      */
     userId?: string;
   }
@@ -3825,7 +3818,7 @@ export namespace blogger_v3 {
      */
     status?: string[];
     /**
-     * ID of the user for the per-user information to be fetched. Either the word 'self' or the user's profile identifier.
+     * ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
      */
     userId?: string;
     /**

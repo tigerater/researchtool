@@ -1,4 +1,4 @@
-// Copyright 2013 Google LLC
+// Copyright 2013-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,7 +12,6 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
 import {OAuth2Client} from 'google-auth-library';
 import {APIEndpoint} from 'googleapis-common';
 import * as nock from 'nock';
@@ -51,15 +50,18 @@ describe('Compute client', () => {
   });
 });
 
-async function testNoTokens(blogger: APIEndpoint, client: OAuth2Client) {
+async function testNoTokens(urlshortener: APIEndpoint, client: OAuth2Client) {
   await assertRejects(
-    blogger.pages.get({blogId: '123', pageId: '123', auth: client}),
+    urlshortener.url.get({shortUrl: '123', auth: client}),
     /No access, refresh token or API key is set./
   );
 }
 
-async function testNoBearer(blogger: APIEndpoint, oauth2client: OAuth2Client) {
-  await blogger.pages.list({blogId: 'abc123', auth: oauth2client});
+async function testNoBearer(
+  urlshortener: APIEndpoint,
+  oauth2client: OAuth2Client
+) {
+  await urlshortener.url.list({auth: oauth2client});
   assert.strictEqual(oauth2client.credentials.token_type, 'Bearer');
 }
 
@@ -100,15 +102,15 @@ async function testNoAccessToken(
 
 describe('OAuth2 client', () => {
   let localDrive: APIEndpoint, remoteDrive: APIEndpoint;
-  let localBlogger: APIEndpoint, remoteBlogger: APIEndpoint;
+  let localUrlshortener: APIEndpoint, remoteUrlshortener: APIEndpoint;
 
   before(async () => {
     nock.cleanAll();
     const google = new GoogleApis();
     nock.enableNetConnect();
-    [remoteDrive, remoteBlogger] = await Promise.all([
+    [remoteDrive, remoteUrlshortener] = await Promise.all([
       Utils.loadApi(google, 'drive', 'v2'),
-      Utils.loadApi(google, 'blogger', 'v3'),
+      Utils.loadApi(google, 'urlshortener', 'v1'),
     ]);
     nock.disableNetConnect();
   });
@@ -118,7 +120,7 @@ describe('OAuth2 client', () => {
     nock.disableNetConnect();
     const google = new GoogleApis();
     localDrive = google.drive('v2');
-    localBlogger = google.blogger('v3');
+    localUrlshortener = google.urlshortener('v1');
   });
 
   const CLIENT_ID = 'CLIENT_ID';
@@ -131,8 +133,8 @@ describe('OAuth2 client', () => {
       CLIENT_SECRET,
       REDIRECT_URI
     );
-    await testNoTokens(localBlogger, oauth2client);
-    await testNoTokens(remoteBlogger, oauth2client);
+    await testNoTokens(localUrlshortener, oauth2client);
+    await testNoTokens(remoteUrlshortener, oauth2client);
   });
 
   it('should not error if only refresh token is set', () => {
@@ -143,9 +145,9 @@ describe('OAuth2 client', () => {
     );
     oauth2client.credentials = {refresh_token: 'refresh_token'};
     assert.doesNotThrow(() => {
-      const options = {auth: oauth2client, blogId: '...'};
-      localBlogger.pages.get(options, Utils.noop);
-      remoteBlogger.pages.get(options, Utils.noop);
+      const options = {auth: oauth2client, shortUrl: '...'};
+      localUrlshortener.url.get(options, Utils.noop);
+      remoteUrlshortener.url.get(options, Utils.noop);
     });
   });
 
@@ -157,12 +159,12 @@ describe('OAuth2 client', () => {
     );
     oauth2client.credentials = {access_token: 'foo', refresh_token: ''};
     const scope = nock(Utils.baseUrl)
-      .get('/blogger/v3/blogs/abc123/pages')
+      .get('/urlshortener/v1/url/history')
       .times(2)
       .reply(200);
 
-    await testNoBearer(localBlogger, oauth2client);
-    await testNoBearer(remoteBlogger, oauth2client);
+    await testNoBearer(localUrlshortener, oauth2client);
+    await testNoBearer(remoteUrlshortener, oauth2client);
   });
 
   it('should refresh if access token is expired', async () => {

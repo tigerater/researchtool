@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -36,7 +38,7 @@ import {GaxiosPromise} from 'gaxios';
 
 export namespace adexchangebuyer_v1_2 {
   export interface Options extends GlobalOptions {
-    version: 'v1.2';
+    version: 'v1_2';
   }
 
   interface StandardParameters {
@@ -112,35 +114,35 @@ export namespace adexchangebuyer_v1_2 {
       maximumQps?: number;
       region?: string;
       url?: string;
-    }> | null;
+    }>;
     /**
      * The nid parameter value used in cookie match requests. Please contact your technical account manager if you need to change this.
      */
-    cookieMatchingNid?: string | null;
+    cookieMatchingNid?: string;
     /**
      * The base URL used in cookie match requests.
      */
-    cookieMatchingUrl?: string | null;
+    cookieMatchingUrl?: string;
     /**
      * Account id.
      */
-    id?: number | null;
+    id?: number;
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The maximum number of active creatives that an account can have, where a creative is active if it was inserted or bid with in the last 30 days. Please contact your technical account manager if you need to change this.
      */
-    maximumActiveCreatives?: number | null;
+    maximumActiveCreatives?: number;
     /**
      * The sum of all bidderLocation.maximumQps values cannot exceed this. Please contact your technical account manager if you need to change this.
      */
-    maximumTotalQps?: number | null;
+    maximumTotalQps?: number;
     /**
      * The number of creatives that this account inserted or bid with in the last 30 days.
      */
-    numberActiveCreatives?: number | null;
+    numberActiveCreatives?: number;
   }
   /**
    * An account feed lists Ad Exchange buyer accounts that the user has access to. Each entry in the feed corresponds to a single buyer account.
@@ -153,7 +155,7 @@ export namespace adexchangebuyer_v1_2 {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * A creative and its classification data.
@@ -162,98 +164,98 @@ export namespace adexchangebuyer_v1_2 {
     /**
      * Account id.
      */
-    accountId?: number | null;
+    accountId?: number;
     /**
      * Detected advertiser id, if any. Read-only. This field should not be set in requests.
      */
-    advertiserId?: string[] | null;
+    advertiserId?: string[];
     /**
      * The name of the company being advertised in the creative.
      */
-    advertiserName?: string | null;
+    advertiserName?: string;
     /**
      * The agency id for this creative.
      */
-    agencyId?: string | null;
+    agencyId?: string;
     /**
      * The last upload timestamp of this creative if it was uploaded via API. Read-only. The value of this field is generated, and will be ignored for uploads. (formatted RFC 3339 timestamp).
      */
-    apiUploadTimestamp?: string | null;
+    apiUploadTimestamp?: string;
     /**
      * All attributes for the ads that may be shown from this snippet.
      */
-    attribute?: number[] | null;
+    attribute?: number[];
     /**
      * A buyer-specific id identifying the creative in this ad.
      */
-    buyerCreativeId?: string | null;
+    buyerCreativeId?: string;
     /**
      * The set of destination urls for the snippet.
      */
-    clickThroughUrl?: string[] | null;
+    clickThroughUrl?: string[];
     /**
      * Shows any corrections that were applied to this creative. Read-only. This field should not be set in requests.
      */
-    corrections?: Array<{details?: string[]; reason?: string}> | null;
+    corrections?: Array<{details?: string[]; reason?: string}>;
     /**
      * The reasons for disapproval, if any. Note that not all disapproval reasons may be categorized, so it is possible for the creative to have a status of DISAPPROVED with an empty list for disapproval_reasons. In this case, please reach out to your TAM to help debug the issue. Read-only. This field should not be set in requests.
      */
-    disapprovalReasons?: Array<{details?: string[]; reason?: string}> | null;
+    disapprovalReasons?: Array<{details?: string[]; reason?: string}>;
     /**
      * The filtering reasons for the creative. Read-only. This field should not be set in requests.
      */
     filteringReasons?: {
       date?: string;
       reasons?: Array<{filteringCount?: string; filteringStatus?: number}>;
-    } | null;
+    };
     /**
      * Ad height.
      */
-    height?: number | null;
+    height?: number;
     /**
      * The HTML snippet that displays the ad when inserted in the web page. If set, videoURL should not be set.
      */
-    HTMLSnippet?: string | null;
+    HTMLSnippet?: string;
     /**
      * The set of urls to be called to record an impression.
      */
-    impressionTrackingUrl?: string[] | null;
+    impressionTrackingUrl?: string[];
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Detected product categories, if any. Read-only. This field should not be set in requests.
      */
-    productCategories?: number[] | null;
+    productCategories?: number[];
     /**
      * All restricted categories for the ads that may be shown from this snippet.
      */
-    restrictedCategories?: number[] | null;
+    restrictedCategories?: number[];
     /**
      * Detected sensitive categories, if any. Read-only. This field should not be set in requests.
      */
-    sensitiveCategories?: number[] | null;
+    sensitiveCategories?: number[];
     /**
      * Creative serving status. Read-only. This field should not be set in requests.
      */
-    status?: string | null;
+    status?: string;
     /**
      * All vendor types for the ads that may be shown from this snippet.
      */
-    vendorType?: number[] | null;
+    vendorType?: number[];
     /**
      * The version for this creative. Read-only. This field should not be set in requests.
      */
-    version?: number | null;
+    version?: number;
     /**
      * The url to fetch a video ad. If set, HTMLSnippet should not be set.
      */
-    videoURL?: string | null;
+    videoURL?: string;
     /**
      * Ad width.
      */
-    width?: number | null;
+    width?: number;
   }
   /**
    * The creatives feed lists the active creatives for the Ad Exchange buyer accounts that the user has access to. Each entry in the feed corresponds to a single creative.
@@ -266,11 +268,11 @@ export namespace adexchangebuyer_v1_2 {
     /**
      * Resource type.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Continuation token used to page through creatives. To retrieve the next page of results, set the next request&#39;s &quot;pageToken&quot; value to this.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
 
   export class Resource$Accounts {
@@ -430,7 +432,7 @@ export namespace adexchangebuyer_v1_2 {
      *
      * @param {object} params Parameters for request
      * @param {integer} params.id The account id
-     * @param {().Account} params.requestBody Request body data
+     * @param {().Account} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -502,7 +504,7 @@ export namespace adexchangebuyer_v1_2 {
      *
      * @param {object} params Parameters for request
      * @param {integer} params.id The account id
-     * @param {().Account} params.requestBody Request body data
+     * @param {().Account} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -702,7 +704,7 @@ export namespace adexchangebuyer_v1_2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Creative} params.requestBody Request body data
+     * @param {().Creative} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -124,27 +126,27 @@ export namespace people_v1 {
     /**
      * The city of the address.
      */
-    city?: string | null;
+    city?: string;
     /**
      * The country of the address.
      */
-    country?: string | null;
+    country?: string;
     /**
      * The [ISO 3166-1 alpha-2](http://www.iso.org/iso/country_codes.htm) country code of the address.
      */
-    countryCode?: string | null;
+    countryCode?: string;
     /**
      * The extended address of the address; for example, the apartment number.
      */
-    extendedAddress?: string | null;
+    extendedAddress?: string;
     /**
-     * Output only. The type of the address translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only type of the address translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedType?: string | null;
+    formattedType?: string;
     /**
      * The unstructured value of the address. If this is not set by the user it will be automatically constructed from structured values.
      */
-    formattedValue?: string | null;
+    formattedValue?: string;
     /**
      * Metadata about the address.
      */
@@ -152,23 +154,23 @@ export namespace people_v1 {
     /**
      * The P.O. box of the address.
      */
-    poBox?: string | null;
+    poBox?: string;
     /**
      * The postal code of the address.
      */
-    postalCode?: string | null;
+    postalCode?: string;
     /**
      * The region of the address; for example, the state or province.
      */
-    region?: string | null;
+    region?: string;
     /**
      * The street address.
      */
-    streetAddress?: string | null;
+    streetAddress?: string;
     /**
      * The type of the address. The type can be custom or one of these predefined values:  * `home` * `work` * `other`
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * A person&#39;s age range.
@@ -177,7 +179,7 @@ export namespace people_v1 {
     /**
      * The age range.
      */
-    ageRange?: string | null;
+    ageRange?: string;
     /**
      * Metadata about the age range.
      */
@@ -199,7 +201,7 @@ export namespace people_v1 {
     /**
      * The content type of the biography.
      */
-    contentType?: string | null;
+    contentType?: string;
     /**
      * Metadata about the biography.
      */
@@ -207,7 +209,7 @@ export namespace people_v1 {
     /**
      * The short biography.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A person&#39;s birthday. At least one of the `date` and `text` fields are specified. The `date` and `text` fields typically represent the same date, but are not guaranteed to.
@@ -224,7 +226,7 @@ export namespace people_v1 {
     /**
      * A free-form string representing the user&#39;s birthday.
      */
-    text?: string | null;
+    text?: string;
   }
   /**
    * A person&#39;s bragging rights.
@@ -237,7 +239,7 @@ export namespace people_v1 {
     /**
      * The bragging rights; for example, `climbed mount everest`.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A contact group.
@@ -246,61 +248,61 @@ export namespace people_v1 {
     /**
      * The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the resource. Used for web cache validation.
      */
-    etag?: string | null;
+    etag?: string;
     /**
-     * Output only. The name translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale for system groups names. Group names set by the owner are the same as name.
+     * The read-only name translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale for system groups names. Group names set by the owner are the same as name.
      */
-    formattedName?: string | null;
+    formattedName?: string;
     /**
-     * Output only. The contact group type.
+     * The read-only contact group type.
      */
-    groupType?: string | null;
+    groupType?: string;
     /**
-     * Output only. The total number of contacts in the group irrespective of max members in specified in the request.
+     * The total number of contacts in the group irrespective of max members in specified in the request.
      */
-    memberCount?: number | null;
+    memberCount?: number;
     /**
-     * Output only. The list of contact person resource names that are members of the contact group. The field is not populated for LIST requests and can only be updated through the [ModifyContactGroupMembers](/people/api/rest/v1/contactgroups/members/modify).
+     * The list of contact person resource names that are members of the contact group. The field is not populated for LIST requests and can only be updated through the [ModifyContactGroupMembers](/people/api/rest/v1/contactgroups/members/modify).
      */
-    memberResourceNames?: string[] | null;
+    memberResourceNames?: string[];
     /**
-     * Output only. Metadata about the contact group.
+     * Metadata about the contact group.
      */
     metadata?: Schema$ContactGroupMetadata;
     /**
      * The contact group name set by the group owner or a system provided name for system groups.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The resource name for the contact group, assigned by the server. An ASCII string, in the form of `contactGroups/`&lt;var&gt;contact_group_id&lt;/var&gt;.
      */
-    resourceName?: string | null;
+    resourceName?: string;
   }
   /**
    * A Google contact group membership.
    */
   export interface Schema$ContactGroupMembership {
     /**
-     * Output only. The contact group ID for the contact group membership.
+     * The read-only contact group ID for the contact group membership.
      */
-    contactGroupId?: string | null;
+    contactGroupId?: string;
     /**
      * The resource name for the contact group, assigned by the server. An ASCII string, in the form of `contactGroups/`&lt;var&gt;contact_group_id&lt;/var&gt;. Only contact_group_resource_name can be used for modifying memberships. Any contact group membership can be removed, but only user group or &quot;myContacts&quot; or &quot;starred&quot; system groups memberships can be added. A contact must always have at least one contact group membership.
      */
-    contactGroupResourceName?: string | null;
+    contactGroupResourceName?: string;
   }
   /**
-   * The metadata about a contact group.
+   * The read-only metadata about a contact group.
    */
   export interface Schema$ContactGroupMetadata {
     /**
-     * Output only. True if the contact group resource has been deleted. Populated only for [`ListContactGroups`](/people/api/rest/v1/contactgroups/list) requests that include a sync token.
+     * True if the contact group resource has been deleted. Populated only for [`ListContactGroups`](/people/api/rest/v1/contactgroups/list) requests that include a sync token.
      */
-    deleted?: boolean | null;
+    deleted?: boolean;
     /**
-     * Output only. The time the group was last updated.
+     * The time the group was last updated.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
    * The response for a specific contact group.
@@ -313,20 +315,20 @@ export namespace people_v1 {
     /**
      * The original requested resource name.
      */
-    requestedResourceName?: string | null;
+    requestedResourceName?: string;
     /**
      * The status of the response.
      */
     status?: Schema$Status;
   }
   /**
-   * A person&#39;s cover photo. A large image shown on the person&#39;s profile page that represents who they are or what they care about.
+   * A person&#39;s read-only cover photo. A large image shown on the person&#39;s profile page that represents who they are or what they care about.
    */
   export interface Schema$CoverPhoto {
     /**
      * True if the cover photo is the default cover photo; false if the cover photo is a user-provided cover photo.
      */
-    default?: boolean | null;
+    default?: boolean;
     /**
      * Metadata about the cover photo.
      */
@@ -334,51 +336,42 @@ export namespace people_v1 {
     /**
      * The URL of the cover photo.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * A request to create a new contact group.
    */
   export interface Schema$CreateContactGroupRequest {
     /**
-     * Required. The contact group to create.
+     * The contact group to create.
      */
     contactGroup?: Schema$ContactGroup;
   }
   /**
-   * Represents a whole or partial calendar date, e.g. a birthday. The time of day and time zone are either specified elsewhere or are not significant. The date is relative to the Proleptic Gregorian Calendar. This can represent:  * A full date, with non-zero year, month and day values * A month and day value, with a zero year, e.g. an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, e.g. a credit card expiration date  Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`.
+   * Represents a whole calendar date, for example a date of birth. The time of day and time zone are either specified elsewhere or are not significant. The date is relative to the [Proleptic Gregorian Calendar](https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar). The day may be 0 to represent a year and month where the day is not significant. The year may be 0 to represent a month and day independent of year; for example, anniversary date.
    */
   export interface Schema$Date {
     /**
      * Day of month. Must be from 1 to 31 and valid for the year and month, or 0 if specifying a year by itself or a year and month where the day is not significant.
      */
-    day?: number | null;
+    day?: number;
     /**
      * Month of year. Must be from 1 to 12, or 0 if specifying a year without a month and day.
      */
-    month?: number | null;
+    month?: number;
     /**
      * Year of date. Must be from 1 to 9999, or 0 if specifying a date without a year.
      */
-    year?: number | null;
+    year?: number;
   }
   /**
-   * The response for deleteing a contact&#39;s photo.
-   */
-  export interface Schema$DeleteContactPhotoResponse {
-    /**
-     * The updated person, if person_fields is set in the DeleteContactPhotoRequest; otherwise this will be unset.
-     */
-    person?: Schema$Person;
-  }
-  /**
-   * A G Suite Domain membership.
+   * A read-only G Suite Domain membership.
    */
   export interface Schema$DomainMembership {
     /**
      * True if the person is in the viewer&#39;s G Suite domain.
      */
-    inViewerDomain?: boolean | null;
+    inViewerDomain?: boolean;
   }
   /**
    * A person&#39;s email address.
@@ -387,11 +380,11 @@ export namespace people_v1 {
     /**
      * The display name of the email.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
-     * Output only. The type of the email address translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only type of the email address translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedType?: string | null;
+    formattedType?: string;
     /**
      * Metadata about the email address.
      */
@@ -399,11 +392,11 @@ export namespace people_v1 {
     /**
      * The type of the email address. The type can be custom or one of these predefined values:  * `home` * `work` * `other`
      */
-    type?: string | null;
+    type?: string;
     /**
      * The email address.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -418,9 +411,9 @@ export namespace people_v1 {
      */
     date?: Schema$Date;
     /**
-     * Output only. The type of the event translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only type of the event translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedType?: string | null;
+    formattedType?: string;
     /**
      * Metadata about the event.
      */
@@ -428,7 +421,7 @@ export namespace people_v1 {
     /**
      * The type of the event. The type can be custom or one of these predefined values:  * `anniversary` * `other`
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Metadata about a field.
@@ -437,24 +430,24 @@ export namespace people_v1 {
     /**
      * True if the field is the primary field; false if the field is a secondary field.
      */
-    primary?: boolean | null;
+    primary?: boolean;
     /**
      * The source of the field.
      */
     source?: Schema$Source;
     /**
-     * Output only. True if the field is verified; false if the field is unverified. A verified field is typically a name, email address, phone number, or website that has been confirmed to be owned by the person.
+     * True if the field is verified; false if the field is unverified. A verified field is typically a name, email address, phone number, or website that has been confirmed to be owned by the person.
      */
-    verified?: boolean | null;
+    verified?: boolean;
   }
   /**
    * A person&#39;s gender.
    */
   export interface Schema$Gender {
     /**
-     * Output only. The value of the gender translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only value of the gender translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedValue?: string | null;
+    formattedValue?: string;
     /**
      * Metadata about the gender.
      */
@@ -462,7 +455,7 @@ export namespace people_v1 {
     /**
      * The gender for the person. The gender can be custom or one of these predefined values:  * `male` * `female` * `other` * `unknown`
      */
-    value?: string | null;
+    value?: string;
   }
   export interface Schema$GetPeopleResponse {
     /**
@@ -475,13 +468,13 @@ export namespace people_v1 {
    */
   export interface Schema$ImClient {
     /**
-     * Output only. The protocol of the IM client formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only protocol of the IM client formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedProtocol?: string | null;
+    formattedProtocol?: string;
     /**
-     * Output only. The type of the IM client translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only type of the IM client translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedType?: string | null;
+    formattedType?: string;
     /**
      * Metadata about the IM client.
      */
@@ -489,15 +482,15 @@ export namespace people_v1 {
     /**
      * The protocol of the IM client. The protocol can be custom or one of these predefined values:  * `aim` * `msn` * `yahoo` * `skype` * `qq` * `googleTalk` * `icq` * `jabber` * `netMeeting`
      */
-    protocol?: string | null;
+    protocol?: string;
     /**
      * The type of the IM client. The type can be custom or one of these predefined values:  * `home` * `work` * `other`
      */
-    type?: string | null;
+    type?: string;
     /**
      * The user name used in the IM client.
      */
-    username?: string | null;
+    username?: string;
   }
   /**
    * One of the person&#39;s interests.
@@ -510,7 +503,7 @@ export namespace people_v1 {
     /**
      * The interest; for example, `stargazing`.
      */
-    value?: string | null;
+    value?: string;
   }
   export interface Schema$ListConnectionsResponse {
     /**
@@ -520,19 +513,19 @@ export namespace people_v1 {
     /**
      * The token that can be used to retrieve the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The token that can be used to retrieve changes since the last request.
      */
-    nextSyncToken?: string | null;
+    nextSyncToken?: string;
     /**
      * The total number of items in the list without pagination.
      */
-    totalItems?: number | null;
+    totalItems?: number;
     /**
      * **DEPRECATED** (Please use totalItems) The total number of people in the list without pagination.
      */
-    totalPeople?: number | null;
+    totalPeople?: number;
   }
   /**
    * The response to a list contact groups request.
@@ -545,15 +538,15 @@ export namespace people_v1 {
     /**
      * The token that can be used to retrieve the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The token that can be used to retrieve changes since the last request.
      */
-    nextSyncToken?: string | null;
+    nextSyncToken?: string;
     /**
      * The total number of items in the list without pagination.
      */
-    totalItems?: number | null;
+    totalItems?: number;
   }
   /**
    * A person&#39;s locale preference.
@@ -566,7 +559,7 @@ export namespace people_v1 {
     /**
      * The well-formed [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag representing the locale.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A person&#39;s membership in a group. Only contact group memberships can be modified.
@@ -577,7 +570,7 @@ export namespace people_v1 {
      */
     contactGroupMembership?: Schema$ContactGroupMembership;
     /**
-     * Output only. The domain membership.
+     * The read-only domain membership.
      */
     domainMembership?: Schema$DomainMembership;
     /**
@@ -590,55 +583,51 @@ export namespace people_v1 {
    */
   export interface Schema$ModifyContactGroupMembersRequest {
     /**
-     * The resource names of the contact people to add in the form of `people/`&lt;var&gt;person_id&lt;/var&gt;.
+     * The resource names of the contact people to add in the form of in the form `people/`&lt;var&gt;person_id&lt;/var&gt;.
      */
-    resourceNamesToAdd?: string[] | null;
+    resourceNamesToAdd?: string[];
     /**
-     * The resource names of the contact people to remove in the form of `people/`&lt;var&gt;person_id&lt;/var&gt;.
+     * The resource names of the contact people to remove in the form of in the form of `people/`&lt;var&gt;person_id&lt;/var&gt;.
      */
-    resourceNamesToRemove?: string[] | null;
+    resourceNamesToRemove?: string[];
   }
   /**
    * The response to a modify contact group members request.
    */
   export interface Schema$ModifyContactGroupMembersResponse {
     /**
-     * The contact people resource names that cannot be removed from their last contact group.
-     */
-    canNotRemoveLastContactGroupResourceNames?: string[] | null;
-    /**
      * The contact people resource names that were not found.
      */
-    notFoundResourceNames?: string[] | null;
+    notFoundResourceNames?: string[];
   }
   /**
    * A person&#39;s name. If the name is a mononym, the family name is empty.
    */
   export interface Schema$Name {
     /**
-     * Output only. The display name formatted according to the locale specified by the viewer&#39;s account or the `Accept-Language` HTTP header.
+     * The read-only display name formatted according to the locale specified by the viewer&#39;s account or the `Accept-Language` HTTP header.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
-     * Output only. The display name with the last name first formatted according to the locale specified by the viewer&#39;s account or the `Accept-Language` HTTP header.
+     * The read-only display name with the last name first formatted according to the locale specified by the viewer&#39;s account or the `Accept-Language` HTTP header.
      */
-    displayNameLastFirst?: string | null;
+    displayNameLastFirst?: string;
     /**
      * The family name.
      */
-    familyName?: string | null;
+    familyName?: string;
     /**
      * The given name.
      */
-    givenName?: string | null;
+    givenName?: string;
     /**
      * The honorific prefixes, such as `Mrs.` or `Dr.`
      */
-    honorificPrefix?: string | null;
+    honorificPrefix?: string;
     /**
      * The honorific suffixes, such as `Jr.`
      */
-    honorificSuffix?: string | null;
+    honorificSuffix?: string;
     /**
      * Metadata about the name.
      */
@@ -646,31 +635,31 @@ export namespace people_v1 {
     /**
      * The middle name(s).
      */
-    middleName?: string | null;
+    middleName?: string;
     /**
      * The family name spelled as it sounds.
      */
-    phoneticFamilyName?: string | null;
+    phoneticFamilyName?: string;
     /**
      * The full name spelled as it sounds.
      */
-    phoneticFullName?: string | null;
+    phoneticFullName?: string;
     /**
      * The given name spelled as it sounds.
      */
-    phoneticGivenName?: string | null;
+    phoneticGivenName?: string;
     /**
      * The honorific prefixes spelled as they sound.
      */
-    phoneticHonorificPrefix?: string | null;
+    phoneticHonorificPrefix?: string;
     /**
      * The honorific suffixes spelled as they sound.
      */
-    phoneticHonorificSuffix?: string | null;
+    phoneticHonorificSuffix?: string;
     /**
      * The middle name(s) spelled as they sound.
      */
-    phoneticMiddleName?: string | null;
+    phoneticMiddleName?: string;
   }
   /**
    * A person&#39;s nickname.
@@ -683,11 +672,11 @@ export namespace people_v1 {
     /**
      * The type of the nickname.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The nickname.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A person&#39;s occupation.
@@ -700,7 +689,7 @@ export namespace people_v1 {
     /**
      * The occupation; for example, `carpenter`.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A person&#39;s past or current organization. Overlapping date ranges are permitted.
@@ -709,31 +698,31 @@ export namespace people_v1 {
     /**
      * True if the organization is the person&#39;s current organization; false if the organization is a past organization.
      */
-    current?: boolean | null;
+    current?: boolean;
     /**
      * The person&#39;s department at the organization.
      */
-    department?: string | null;
+    department?: string;
     /**
      * The domain name associated with the organization; for example, `google.com`.
      */
-    domain?: string | null;
+    domain?: string;
     /**
      * The end date when the person left the organization.
      */
     endDate?: Schema$Date;
     /**
-     * Output only. The type of the organization translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only type of the organization translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedType?: string | null;
+    formattedType?: string;
     /**
      * The person&#39;s job description at the organization.
      */
-    jobDescription?: string | null;
+    jobDescription?: string;
     /**
      * The location of the organization office the person works at.
      */
-    location?: string | null;
+    location?: string;
     /**
      * Metadata about the organization.
      */
@@ -741,11 +730,11 @@ export namespace people_v1 {
     /**
      * The name of the organization.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The phonetic name of the organization.
      */
-    phoneticName?: string | null;
+    phoneticName?: string;
     /**
      * The start date when the person joined the organization.
      */
@@ -753,15 +742,15 @@ export namespace people_v1 {
     /**
      * The symbol associated with the organization; for example, a stock ticker symbol, abbreviation, or acronym.
      */
-    symbol?: string | null;
+    symbol?: string;
     /**
      * The person&#39;s job title at the organization.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The type of the organization. The type can be custom or  one of these predefined values:  * `work` * `school`
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * Information about a person merged from various data sources such as the authenticated user&#39;s contacts and profile data.  Most fields can have multiple items. The items in a field have no guaranteed order, but each non-empty field is guaranteed to have exactly one field with `metadata.primary` set to true.
@@ -772,11 +761,11 @@ export namespace people_v1 {
      */
     addresses?: Schema$Address[];
     /**
-     * Output only. **DEPRECATED** (Please use `person.ageRanges` instead)**  The person&#39;s age range.
+     * **DEPRECATED** (Please use `person.ageRanges` instead)**  The person&#39;s read-only age range.
      */
-    ageRange?: string | null;
+    ageRange?: string;
     /**
-     * Output only. The person&#39;s age ranges.
+     * The person&#39;s read-only age ranges.
      */
     ageRanges?: Schema$AgeRangeType[];
     /**
@@ -792,7 +781,7 @@ export namespace people_v1 {
      */
     braggingRights?: Schema$BraggingRights[];
     /**
-     * Output only. The person&#39;s cover photos.
+     * The person&#39;s read-only cover photos.
      */
     coverPhotos?: Schema$CoverPhoto[];
     /**
@@ -802,7 +791,7 @@ export namespace people_v1 {
     /**
      * The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the resource. Used for web cache validation.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The person&#39;s events.
      */
@@ -828,7 +817,7 @@ export namespace people_v1 {
      */
     memberships?: Schema$Membership[];
     /**
-     * Output only. Metadata about the person.
+     * Read-only metadata about the person.
      */
     metadata?: Schema$PersonMetadata;
     /**
@@ -852,7 +841,7 @@ export namespace people_v1 {
      */
     phoneNumbers?: Schema$PhoneNumber[];
     /**
-     * Output only. The person&#39;s photos.
+     * The person&#39;s read-only photos.
      */
     photos?: Schema$Photo[];
     /**
@@ -860,11 +849,11 @@ export namespace people_v1 {
      */
     relations?: Schema$Relation[];
     /**
-     * Output only. The person&#39;s relationship interests.
+     * The person&#39;s read-only relationship interests.
      */
     relationshipInterests?: Schema$RelationshipInterest[];
     /**
-     * Output only. The person&#39;s relationship statuses.
+     * The person&#39;s read-only relationship statuses.
      */
     relationshipStatuses?: Schema$RelationshipStatus[];
     /**
@@ -874,7 +863,7 @@ export namespace people_v1 {
     /**
      * The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters, in the form of `people/`&lt;var&gt;person_id&lt;/var&gt;.
      */
-    resourceName?: string | null;
+    resourceName?: string;
     /**
      * The person&#39;s SIP addresses.
      */
@@ -884,7 +873,7 @@ export namespace people_v1 {
      */
     skills?: Schema$Skill[];
     /**
-     * Output only. The person&#39;s taglines.
+     * The person&#39;s read-only taglines.
      */
     taglines?: Schema$Tagline[];
     /**
@@ -897,25 +886,25 @@ export namespace people_v1 {
     userDefined?: Schema$UserDefined[];
   }
   /**
-   * The metadata about a person.
+   * The read-only metadata about a person.
    */
   export interface Schema$PersonMetadata {
     /**
-     * Output only. True if the person resource has been deleted. Populated only for [`connections.list`](/people/api/rest/v1/people.connections/list) requests that include a sync token.
+     * True if the person resource has been deleted. Populated only for [`connections.list`](/people/api/rest/v1/people.connections/list) requests that include a sync token.
      */
-    deleted?: boolean | null;
+    deleted?: boolean;
     /**
-     * Output only. Resource names of people linked to this resource.
+     * Resource names of people linked to this resource.
      */
-    linkedPeopleResourceNames?: string[] | null;
+    linkedPeopleResourceNames?: string[];
     /**
-     * Output only. **DEPRECATED** (Please use `person.metadata.sources.profileMetadata.objectType` instead)  The type of the person object.
+     * **DEPRECATED** (Please use `person.metadata.sources.profileMetadata.objectType` instead)  The type of the person object.
      */
-    objectType?: string | null;
+    objectType?: string;
     /**
-     * Output only. Any former resource names this person has had. Populated only for [`connections.list`](/people/api/rest/v1/people.connections/list) requests that include a sync token.  The resource name may change when adding or removing fields that link a contact and profile such as a verified email, verified phone number, or profile URL.
+     * Any former resource names this person has had. Populated only for [`connections.list`](/people/api/rest/v1/people.connections/list) requests that include a sync token.  The resource name may change when adding or removing fields that link a contact and profile such as a verified email, verified phone number, or profile URL.
      */
-    previousResourceNames?: string[] | null;
+    previousResourceNames?: string[];
     /**
      * The sources of data for the person.
      */
@@ -928,7 +917,7 @@ export namespace people_v1 {
     /**
      * **DEPRECATED** (Please use status instead)  [HTTP 1.1 status code] (http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
      */
-    httpStatusCode?: number | null;
+    httpStatusCode?: number;
     /**
      * The person.
      */
@@ -936,7 +925,7 @@ export namespace people_v1 {
     /**
      * The original requested resource name. May be different than the resource name on the returned person.  The resource name can change when adding or removing fields that link a contact and profile such as a verified email, verified phone number, or a profile URL.
      */
-    requestedResourceName?: string | null;
+    requestedResourceName?: string;
     /**
      * The status of the response.
      */
@@ -947,13 +936,13 @@ export namespace people_v1 {
    */
   export interface Schema$PhoneNumber {
     /**
-     * Output only. The canonicalized [ITU-T E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf) form of the phone number.
+     * The read-only canonicalized [ITU-T E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf) form of the phone number.
      */
-    canonicalForm?: string | null;
+    canonicalForm?: string;
     /**
-     * Output only. The type of the phone number translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only type of the phone number translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedType?: string | null;
+    formattedType?: string;
     /**
      * Metadata about the phone number.
      */
@@ -961,20 +950,20 @@ export namespace people_v1 {
     /**
      * The type of the phone number. The type can be custom or one of these predefined values:  * `home` * `work` * `mobile` * `homeFax` * `workFax` * `otherFax` * `pager` * `workMobile` * `workPager` * `main` * `googleVoice` * `other`
      */
-    type?: string | null;
+    type?: string;
     /**
      * The phone number.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
-   * A person&#39;s photo. A picture shown next to the person&#39;s name to help others recognize the person.
+   * A person&#39;s read-only photo. A picture shown next to the person&#39;s name to help others recognize the person.
    */
   export interface Schema$Photo {
     /**
      * True if the photo is a default photo; false if the photo is a user-provided photo.
      */
-    default?: boolean | null;
+    default?: boolean;
     /**
      * Metadata about the photo.
      */
@@ -982,29 +971,29 @@ export namespace people_v1 {
     /**
      * The URL of the photo. You can change the desired size by appending a query parameter `sz=`&lt;var&gt;size&lt;/var&gt; at the end of the url. Example: `https://lh3.googleusercontent.com/-T_wVWLlmg7w/AAAAAAAAAAI/AAAAAAAABa8/00gzXvDBYqw/s100/photo.jpg?sz=50`
      */
-    url?: string | null;
+    url?: string;
   }
   /**
-   * The metadata about a profile.
+   * The read-only metadata about a profile.
    */
   export interface Schema$ProfileMetadata {
     /**
-     * Output only. The profile object type.
+     * The profile object type.
      */
-    objectType?: string | null;
+    objectType?: string;
     /**
-     * Output only. The user types.
+     * The user types.
      */
-    userTypes?: string[] | null;
+    userTypes?: string[];
   }
   /**
    * A person&#39;s relation to another person.
    */
   export interface Schema$Relation {
     /**
-     * Output only. The type of the relation translated and formatted in the viewer&#39;s account locale or the locale specified in the Accept-Language HTTP header.
+     * The type of the relation translated and formatted in the viewer&#39;s account locale or the locale specified in the Accept-Language HTTP header.
      */
-    formattedType?: string | null;
+    formattedType?: string;
     /**
      * Metadata about the relation.
      */
@@ -1012,20 +1001,20 @@ export namespace people_v1 {
     /**
      * The name of the other person this relation refers to.
      */
-    person?: string | null;
+    person?: string;
     /**
      * The person&#39;s relation to the other person. The type can be custom or one of these predefined values:  * `spouse` * `child` * `mother` * `father` * `parent` * `brother` * `sister` * `friend` * `relative` * `domesticPartner` * `manager` * `assistant` * `referredBy` * `partner`
      */
-    type?: string | null;
+    type?: string;
   }
   /**
-   * A person&#39;s relationship interest .
+   * A person&#39;s read-only relationship interest .
    */
   export interface Schema$RelationshipInterest {
     /**
-     * Output only. The value of the relationship interest translated and formatted in the viewer&#39;s account locale or the locale specified in the Accept-Language HTTP header.
+     * The value of the relationship interest translated and formatted in the viewer&#39;s account locale or the locale specified in the Accept-Language HTTP header.
      */
-    formattedValue?: string | null;
+    formattedValue?: string;
     /**
      * Metadata about the relationship interest.
      */
@@ -1033,16 +1022,16 @@ export namespace people_v1 {
     /**
      * The kind of relationship the person is looking for. The value can be custom or one of these predefined values:  * `friend` * `date` * `relationship` * `networking`
      */
-    value?: string | null;
+    value?: string;
   }
   /**
-   * A person&#39;s relationship status.
+   * A person&#39;s read-only relationship status.
    */
   export interface Schema$RelationshipStatus {
     /**
-     * Output only. The value of the relationship status translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only value of the relationship status translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedValue?: string | null;
+    formattedValue?: string;
     /**
      * Metadata about the relationship status.
      */
@@ -1050,7 +1039,7 @@ export namespace people_v1 {
     /**
      * The relationship status. The value can be custom or one of these predefined values:  * `single` * `inARelationship` * `engaged` * `married` * `itsComplicated` * `openRelationship` * `widowed` * `inDomesticPartnership` * `inCivilUnion`
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A person&#39;s past or current residence.
@@ -1059,7 +1048,7 @@ export namespace people_v1 {
     /**
      * True if the residence is the person&#39;s current residence; false if the residence is a past residence.
      */
-    current?: boolean | null;
+    current?: boolean;
     /**
      * Metadata about the residence.
      */
@@ -1067,16 +1056,16 @@ export namespace people_v1 {
     /**
      * The address of the residence.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A person&#39;s SIP address. Session Initial Protocol addresses are used for VoIP communications to make voice or video calls over the internet.
    */
   export interface Schema$SipAddress {
     /**
-     * Output only. The type of the SIP address translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only type of the SIP address translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedType?: string | null;
+    formattedType?: string;
     /**
      * Metadata about the SIP address.
      */
@@ -1084,11 +1073,11 @@ export namespace people_v1 {
     /**
      * The type of the SIP address. The type can be custom or or one of these predefined values:  * `home` * `work` * `mobile` * `other`
      */
-    type?: string | null;
+    type?: string;
     /**
      * The SIP address in the [RFC 3261 19.1](https://tools.ietf.org/html/rfc3261#section-19.1) SIP URI format.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A skill that the person has.
@@ -1101,7 +1090,7 @@ export namespace people_v1 {
     /**
      * The skill; for example, `underwater basket weaving`.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * The source of a field.
@@ -1110,43 +1099,43 @@ export namespace people_v1 {
     /**
      * **Only populated in `person.metadata.sources`.**  The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the source. Used for web cache validation.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The unique identifier within the source type generated by the server.
      */
-    id?: string | null;
+    id?: string;
     /**
-     * Output only. **Only populated in `person.metadata.sources`.**  Metadata about a source of type PROFILE.
+     * **Only populated in `person.metadata.sources`.**  Metadata about a source of type PROFILE.
      */
     profileMetadata?: Schema$ProfileMetadata;
     /**
      * The source type.
      */
-    type?: string | null;
+    type?: string;
     /**
-     * Output only. **Only populated in `person.metadata.sources`.**  Last update timestamp of this source.
+     * **Only populated in `person.metadata.sources`.**  Last update timestamp of this source.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
-   * A brief one-line description of the person.
+   * A read-only brief one-line description of the person.
    */
   export interface Schema$Tagline {
     /**
@@ -1156,47 +1145,25 @@ export namespace people_v1 {
     /**
      * The tagline.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * A request to update an existing user contact group. All updated fields will be replaced.
    */
   export interface Schema$UpdateContactGroupRequest {
     /**
-     * Required. The contact group to update.
+     * The contact group to update.
      */
     contactGroup?: Schema$ContactGroup;
-  }
-  /**
-   * A request to update an existing contact&#39;s photo. All requests must have a valid photo format: JPEG or PNG.
-   */
-  export interface Schema$UpdateContactPhotoRequest {
-    /**
-     * Optional. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Defaults to empty if not set, which will skip the post mutate get. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
-     */
-    personFields?: string | null;
-    /**
-     * Required. Raw photo bytes
-     */
-    photoBytes?: string | null;
-  }
-  /**
-   * The response for updating a contact&#39;s photo.
-   */
-  export interface Schema$UpdateContactPhotoResponse {
-    /**
-     * The updated person, if person_fields is set in the UpdateContactPhotoRequest; otherwise this will be unset.
-     */
-    person?: Schema$Person;
   }
   /**
    * A person&#39;s associated URLs.
    */
   export interface Schema$Url {
     /**
-     * Output only. The type of the URL translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
+     * The read-only type of the URL translated and formatted in the viewer&#39;s account locale or the `Accept-Language` HTTP header locale.
      */
-    formattedType?: string | null;
+    formattedType?: string;
     /**
      * Metadata about the URL.
      */
@@ -1204,11 +1171,11 @@ export namespace people_v1 {
     /**
      * The type of the URL. The type can be custom or one of these predefined values:  * `home` * `work` * `blog` * `profile` * `homePage` * `ftp` * `reservations` * `appInstallPage`: website for a Google+ application. * `other`
      */
-    type?: string | null;
+    type?: string;
     /**
      * The URL.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * Arbitrary user data that is populated by the end users.
@@ -1217,7 +1184,7 @@ export namespace people_v1 {
     /**
      * The end user specified key of the user defined data.
      */
-    key?: string | null;
+    key?: string;
     /**
      * Metadata about the user defined data.
      */
@@ -1225,7 +1192,7 @@ export namespace people_v1 {
     /**
      * The end user specified value of the user defined data.
      */
-    value?: string | null;
+    value?: string;
   }
 
   export class Resource$Contactgroups {
@@ -1243,8 +1210,8 @@ export namespace people_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.maxMembers Optional. Specifies the maximum number of members to return for each group. Defaults to 0 if not set, which will return zero members.
-     * @param {string=} params.resourceNames Required. The resource names of the contact groups to get.
+     * @param {integer=} params.maxMembers Specifies the maximum number of members to return for each group.
+     * @param {string=} params.resourceNames The resource names of the contact groups to get.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1327,7 +1294,7 @@ export namespace people_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().CreateContactGroupRequest} params.requestBody Request body data
+     * @param {().CreateContactGroupRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1398,8 +1365,8 @@ export namespace people_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.deleteContacts Optional. Set to true to also delete the contacts in the specified group.
-     * @param {string} params.resourceName Required. The resource name of the contact group to delete.
+     * @param {boolean=} params.deleteContacts Set to true to also delete the contacts in the specified group.
+     * @param {string} params.resourceName The resource name of the contact group to delete.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1471,8 +1438,8 @@ export namespace people_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.maxMembers Optional. Specifies the maximum number of members to return. Defaults to 0 if not set, which will return zero members.
-     * @param {string} params.resourceName Required. The resource name of the contact group to get.
+     * @param {integer=} params.maxMembers Specifies the maximum number of members to return.
+     * @param {string} params.resourceName The resource name of the contact group to get.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1546,7 +1513,7 @@ export namespace people_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.pageSize Optional. The maximum number of resources to return. Valid values are between 1 and 1000, inclusive. Defaults to 30 if not set or set to 0.
+     * @param {integer=} params.pageSize The maximum number of resources to return.
      * @param {string=} params.pageToken The next_page_token value returned from a previous call to [ListContactGroups](/people/api/rest/v1/contactgroups/list). Requests the next page of resources.
      * @param {string=} params.syncToken A sync token, returned by a previous call to `contactgroups.list`. Only resources changed since the sync token was created will be returned.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -1627,7 +1594,7 @@ export namespace people_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.resourceName The resource name for the contact group, assigned by the server. An ASCII string, in the form of `contactGroups/`<var>contact_group_id</var>.
-     * @param {().UpdateContactGroupRequest} params.requestBody Request body data
+     * @param {().UpdateContactGroupRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1703,11 +1670,11 @@ export namespace people_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. Specifies the maximum number of members to return for each group. Defaults to 0 if not set, which will return zero members.
+     * Specifies the maximum number of members to return for each group.
      */
     maxMembers?: number;
     /**
-     * Required. The resource names of the contact groups to get.
+     * The resource names of the contact groups to get.
      */
     resourceNames?: string[];
   }
@@ -1731,11 +1698,11 @@ export namespace people_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. Set to true to also delete the contacts in the specified group.
+     * Set to true to also delete the contacts in the specified group.
      */
     deleteContacts?: boolean;
     /**
-     * Required. The resource name of the contact group to delete.
+     * The resource name of the contact group to delete.
      */
     resourceName?: string;
   }
@@ -1747,11 +1714,11 @@ export namespace people_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. Specifies the maximum number of members to return. Defaults to 0 if not set, which will return zero members.
+     * Specifies the maximum number of members to return.
      */
     maxMembers?: number;
     /**
-     * Required. The resource name of the contact group to get.
+     * The resource name of the contact group to get.
      */
     resourceName?: string;
   }
@@ -1763,7 +1730,7 @@ export namespace people_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. The maximum number of resources to return. Valid values are between 1 and 1000, inclusive. Defaults to 30 if not set or set to 0.
+     * The maximum number of resources to return.
      */
     pageSize?: number;
     /**
@@ -1806,8 +1773,8 @@ export namespace people_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.resourceName Required. The resource name of the contact group to modify.
-     * @param {().ModifyContactGroupMembersRequest} params.requestBody Request body data
+     * @param {string} params.resourceName The resource name of the contact group to modify.
+     * @param {().ModifyContactGroupMembersRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1892,7 +1859,7 @@ export namespace people_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The resource name of the contact group to modify.
+     * The resource name of the contact group to modify.
      */
     resourceName?: string;
 
@@ -1917,7 +1884,8 @@ export namespace people_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Person} params.requestBody Request body data
+     * @param {string=} params.parent The resource name of the owning person resource.
+     * @param {().Person} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1989,7 +1957,7 @@ export namespace people_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.resourceName Required. The resource name of the contact to delete.
+     * @param {string} params.resourceName The resource name of the contact to delete.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2055,97 +2023,15 @@ export namespace people_v1 {
     }
 
     /**
-     * people.people.deleteContactPhoto
-     * @desc Delete a contact's photo.
-     * @alias people.people.deleteContactPhoto
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string=} params.personFields Optional. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Defaults to empty if not set, which will skip the post mutate get. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
-     * @param {string} params.resourceName Required. The resource name of the contact whose photo will be deleted.
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    deleteContactPhoto(
-      params?: Params$Resource$People$Deletecontactphoto,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$DeleteContactPhotoResponse>;
-    deleteContactPhoto(
-      params: Params$Resource$People$Deletecontactphoto,
-      options:
-        | MethodOptions
-        | BodyResponseCallback<Schema$DeleteContactPhotoResponse>,
-      callback: BodyResponseCallback<Schema$DeleteContactPhotoResponse>
-    ): void;
-    deleteContactPhoto(
-      params: Params$Resource$People$Deletecontactphoto,
-      callback: BodyResponseCallback<Schema$DeleteContactPhotoResponse>
-    ): void;
-    deleteContactPhoto(
-      callback: BodyResponseCallback<Schema$DeleteContactPhotoResponse>
-    ): void;
-    deleteContactPhoto(
-      paramsOrCallback?:
-        | Params$Resource$People$Deletecontactphoto
-        | BodyResponseCallback<Schema$DeleteContactPhotoResponse>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$DeleteContactPhotoResponse>,
-      callback?: BodyResponseCallback<Schema$DeleteContactPhotoResponse>
-    ): void | GaxiosPromise<Schema$DeleteContactPhotoResponse> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$People$Deletecontactphoto;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$People$Deletecontactphoto;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://people.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1/{+resourceName}:deleteContactPhoto').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'DELETE',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['resourceName'],
-        pathParams: ['resourceName'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$DeleteContactPhotoResponse>(
-          parameters,
-          callback
-        );
-      } else {
-        return createAPIRequest<Schema$DeleteContactPhotoResponse>(parameters);
-      }
-    }
-
-    /**
      * people.people.get
      * @desc Provides information about a person by specifying a resource name. Use `people/me` to indicate the authenticated user. <br> The request throws a 400 error if 'personFields' is not specified.
      * @alias people.people.get
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.personFields Required. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
-     * @param {string=} params.requestMask.includeField Required. Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
-     * @param {string} params.resourceName Required. The resource name of the person to provide information about.  - To get information about the authenticated user, specify `people/me`. - To get information about a google account, specify  `people/`<var>account_id</var>. - To get information about a contact, specify the resource name that   identifies the contact as returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).
+     * @param {string=} params.personFields **Required.** A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
+     * @param {string=} params.requestMask.includeField **Required.** Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
+     * @param {string} params.resourceName The resource name of the person to provide information about.  - To get information about the authenticated user, specify `people/me`. - To get information about a google account, specify  `people/`<var>account_id</var>. - To get information about a contact, specify the resource name that   identifies the contact as returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2216,9 +2102,9 @@ export namespace people_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.personFields Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
-     * @param {string=} params.requestMask.includeField Required. Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
-     * @param {string=} params.resourceNames Required. The resource names of the people to provide information about.  - To get information about the authenticated user, specify `people/me`. - To get information about a google account, specify   `people/`<var>account_id</var>. - To get information about a contact, specify the resource name that   identifies the contact as returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).  You can include up to 50 resource names in one request.
+     * @param {string=} params.personFields **Required.** A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
+     * @param {string=} params.requestMask.includeField **Required.** Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
+     * @param {string=} params.resourceNames The resource names of the people to provide information about.  - To get information about the authenticated user, specify `people/me`. - To get information about a google account, specify   `people/`<var>account_id</var>. - To get information about a contact, specify the resource name that   identifies the contact as returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).  You can include up to 50 resource names in one request.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2287,14 +2173,14 @@ export namespace people_v1 {
 
     /**
      * people.people.updateContact
-     * @desc Update contact data for an existing contact person. Any non-contact data will not be modified.  The request throws a 400 error if `updatePersonFields` is not specified. <br> The request throws a 400 error if `person.metadata.sources` is not specified for the contact to be updated. <br> The request throws a 400 error with an error with reason `"failedPrecondition"` if `person.metadata.sources.etag` is different than the contact's etag, which indicates the contact has changed since its data was read. Clients should get the latest person and re-apply their updates to the latest person.
+     * @desc Update contact data for an existing contact person. Any non-contact data will not be modified.  The request throws a 400 error if `updatePersonFields` is not specified. <br> The request throws a 400 error if `person.metadata.sources` is not specified for the contact to be updated. <br> The request throws a 412 error if `person.metadata.sources.etag` is different than the contact's etag, which indicates the contact has changed since its data was read. Clients should get the latest person and re-apply their updates to the latest person.
      * @alias people.people.updateContact
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
      * @param {string} params.resourceName The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters, in the form of `people/`<var>person_id</var>.
-     * @param {string=} params.updatePersonFields Required. A field mask to restrict which fields on the person are updated. Multiple fields can be specified by separating them with commas. All updated fields will be replaced. Valid values are:  * addresses * biographies * birthdays * emailAddresses * events * genders * imClients * interests * locales * memberships * names * nicknames * occupations * organizations * phoneNumbers * relations * residences * sipAddresses * urls * userDefined
-     * @param {().Person} params.requestBody Request body data
+     * @param {string=} params.updatePersonFields **Required.** A field mask to restrict which fields on the person are updated. Multiple fields can be specified by separating them with commas. All updated fields will be replaced. Valid values are:  * addresses * biographies * birthdays * emailAddresses * events * genders * imClients * interests * locales * memberships * names * nicknames * occupations * organizations * phoneNumbers * relations * residences * sipAddresses * urls * userDefined
+     * @param {().Person} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2358,88 +2244,6 @@ export namespace people_v1 {
         return createAPIRequest<Schema$Person>(parameters);
       }
     }
-
-    /**
-     * people.people.updateContactPhoto
-     * @desc Update a contact's photo.
-     * @alias people.people.updateContactPhoto
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.resourceName Required. Person resource name
-     * @param {().UpdateContactPhotoRequest} params.requestBody Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    updateContactPhoto(
-      params?: Params$Resource$People$Updatecontactphoto,
-      options?: MethodOptions
-    ): GaxiosPromise<Schema$UpdateContactPhotoResponse>;
-    updateContactPhoto(
-      params: Params$Resource$People$Updatecontactphoto,
-      options:
-        | MethodOptions
-        | BodyResponseCallback<Schema$UpdateContactPhotoResponse>,
-      callback: BodyResponseCallback<Schema$UpdateContactPhotoResponse>
-    ): void;
-    updateContactPhoto(
-      params: Params$Resource$People$Updatecontactphoto,
-      callback: BodyResponseCallback<Schema$UpdateContactPhotoResponse>
-    ): void;
-    updateContactPhoto(
-      callback: BodyResponseCallback<Schema$UpdateContactPhotoResponse>
-    ): void;
-    updateContactPhoto(
-      paramsOrCallback?:
-        | Params$Resource$People$Updatecontactphoto
-        | BodyResponseCallback<Schema$UpdateContactPhotoResponse>,
-      optionsOrCallback?:
-        | MethodOptions
-        | BodyResponseCallback<Schema$UpdateContactPhotoResponse>,
-      callback?: BodyResponseCallback<Schema$UpdateContactPhotoResponse>
-    ): void | GaxiosPromise<Schema$UpdateContactPhotoResponse> {
-      let params = (paramsOrCallback ||
-        {}) as Params$Resource$People$Updatecontactphoto;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$People$Updatecontactphoto;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://people.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-          {
-            url: (rootUrl + '/v1/{+resourceName}:updateContactPhoto').replace(
-              /([^:]\/)\/+/g,
-              '$1'
-            ),
-            method: 'PATCH',
-          },
-          options
-        ),
-        params,
-        requiredParams: ['resourceName'],
-        pathParams: ['resourceName'],
-        context: this.context,
-      };
-      if (callback) {
-        createAPIRequest<Schema$UpdateContactPhotoResponse>(
-          parameters,
-          callback
-        );
-      } else {
-        return createAPIRequest<Schema$UpdateContactPhotoResponse>(parameters);
-      }
-    }
   }
 
   export interface Params$Resource$People$Createcontact
@@ -2448,6 +2252,11 @@ export namespace people_v1 {
      * Auth client or API Key for the request
      */
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+
+    /**
+     * The resource name of the owning person resource.
+     */
+    parent?: string;
 
     /**
      * Request body metadata
@@ -2462,23 +2271,7 @@ export namespace people_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The resource name of the contact to delete.
-     */
-    resourceName?: string;
-  }
-  export interface Params$Resource$People$Deletecontactphoto
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Optional. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Defaults to empty if not set, which will skip the post mutate get. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
-     */
-    personFields?: string;
-    /**
-     * Required. The resource name of the contact whose photo will be deleted.
+     * The resource name of the contact to delete.
      */
     resourceName?: string;
   }
@@ -2489,15 +2282,15 @@ export namespace people_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
+     * **Required.** A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
      */
     personFields?: string;
     /**
-     * Required. Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
+     * **Required.** Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
      */
     'requestMask.includeField'?: string;
     /**
-     * Required. The resource name of the person to provide information about.  - To get information about the authenticated user, specify `people/me`. - To get information about a google account, specify  `people/`<var>account_id</var>. - To get information about a contact, specify the resource name that   identifies the contact as returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).
+     * The resource name of the person to provide information about.  - To get information about the authenticated user, specify `people/me`. - To get information about a google account, specify  `people/`<var>account_id</var>. - To get information about a contact, specify the resource name that   identifies the contact as returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).
      */
     resourceName?: string;
   }
@@ -2509,15 +2302,15 @@ export namespace people_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
+     * **Required.** A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
      */
     personFields?: string;
     /**
-     * Required. Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
+     * **Required.** Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
      */
     'requestMask.includeField'?: string;
     /**
-     * Required. The resource names of the people to provide information about.  - To get information about the authenticated user, specify `people/me`. - To get information about a google account, specify   `people/`<var>account_id</var>. - To get information about a contact, specify the resource name that   identifies the contact as returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).  You can include up to 50 resource names in one request.
+     * The resource names of the people to provide information about.  - To get information about the authenticated user, specify `people/me`. - To get information about a google account, specify   `people/`<var>account_id</var>. - To get information about a contact, specify the resource name that   identifies the contact as returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).  You can include up to 50 resource names in one request.
      */
     resourceNames?: string[];
   }
@@ -2533,7 +2326,7 @@ export namespace people_v1 {
      */
     resourceName?: string;
     /**
-     * Required. A field mask to restrict which fields on the person are updated. Multiple fields can be specified by separating them with commas. All updated fields will be replaced. Valid values are:  * addresses * biographies * birthdays * emailAddresses * events * genders * imClients * interests * locales * memberships * names * nicknames * occupations * organizations * phoneNumbers * relations * residences * sipAddresses * urls * userDefined
+     * **Required.** A field mask to restrict which fields on the person are updated. Multiple fields can be specified by separating them with commas. All updated fields will be replaced. Valid values are:  * addresses * biographies * birthdays * emailAddresses * events * genders * imClients * interests * locales * memberships * names * nicknames * occupations * organizations * phoneNumbers * relations * residences * sipAddresses * urls * userDefined
      */
     updatePersonFields?: string;
 
@@ -2541,23 +2334,6 @@ export namespace people_v1 {
      * Request body metadata
      */
     requestBody?: Schema$Person;
-  }
-  export interface Params$Resource$People$Updatecontactphoto
-    extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
-
-    /**
-     * Required. Person resource name
-     */
-    resourceName?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$UpdateContactPhotoRequest;
   }
 
   export class Resource$People$Connections {
@@ -2573,12 +2349,12 @@ export namespace people_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {integer=} params.pageSize Optional. The number of connections to include in the response. Valid values are between 1 and 2000, inclusive. Defaults to 100 if not set or set to 0.
+     * @param {integer=} params.pageSize The number of connections to include in the response. Valid values are between 1 and 2000, inclusive. Defaults to 100.
      * @param {string=} params.pageToken The token of the page to be returned.
-     * @param {string=} params.personFields Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
-     * @param {string=} params.requestMask.includeField Required. Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
+     * @param {string=} params.personFields **Required.** A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
+     * @param {string=} params.requestMask.includeField **Required.** Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
      * @param {boolean=} params.requestSyncToken Whether the response should include a sync token, which can be used to get all changes since the last request. For subsequent sync requests use the `sync_token` param instead. Initial sync requests that specify `request_sync_token` have an additional rate limit.
-     * @param {string} params.resourceName Required. The resource name to return connections for. Only `people/me` is valid.
+     * @param {string} params.resourceName The resource name to return connections for. Only `people/me` is valid.
      * @param {string=} params.sortOrder The order in which the connections should be sorted. Defaults to `LAST_MODIFIED_ASCENDING`.
      * @param {string=} params.syncToken A sync token returned by a previous call to `people.connections.list`. Only resources changed since the sync token was created will be returned. Sync requests that specify `sync_token` have an additional rate limit.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -2658,7 +2434,7 @@ export namespace people_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. The number of connections to include in the response. Valid values are between 1 and 2000, inclusive. Defaults to 100 if not set or set to 0.
+     * The number of connections to include in the response. Valid values are between 1 and 2000, inclusive. Defaults to 100.
      */
     pageSize?: number;
     /**
@@ -2666,11 +2442,11 @@ export namespace people_v1 {
      */
     pageToken?: string;
     /**
-     * Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
+     * **Required.** A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are:  * addresses * ageRanges * biographies * birthdays * braggingRights * coverPhotos * emailAddresses * events * genders * imClients * interests * locales * memberships * metadata * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * relationshipInterests * relationshipStatuses * residences * sipAddresses * skills * taglines * urls * userDefined
      */
     personFields?: string;
     /**
-     * Required. Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
+     * **Required.** Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`.
      */
     'requestMask.includeField'?: string;
     /**
@@ -2678,7 +2454,7 @@ export namespace people_v1 {
      */
     requestSyncToken?: boolean;
     /**
-     * Required. The resource name to return connections for. Only `people/me` is valid.
+     * The resource name to return connections for. Only `people/me` is valid.
      */
     resourceName?: string;
     /**

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -124,7 +126,7 @@ export namespace streetviewpublish_v1 {
     /**
      * Required. IDs of the Photos. HTTP GET requests require the following syntax for the URL query parameter: `photoIds=&lt;id1&gt;&amp;photoIds=&lt;id2&gt;&amp;...`.
      */
-    photoIds?: string[] | null;
+    photoIds?: string[];
   }
   /**
    * Response to batch delete of one or more Photos.
@@ -182,11 +184,11 @@ export namespace streetviewpublish_v1 {
     /**
      * The latitude in degrees. It must be in the range [-90.0, +90.0].
      */
-    latitude?: number | null;
+    latitude?: number;
     /**
      * The longitude in degrees. It must be in the range [-180.0, +180.0].
      */
-    longitude?: number | null;
+    longitude?: number;
   }
   /**
    * Level information containing level number and its corresponding name.
@@ -195,11 +197,11 @@ export namespace streetviewpublish_v1 {
     /**
      * Required. A name assigned to this Level, restricted to 3 characters. Consider how the elevator buttons would be labeled for this level if there was an elevator.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Floor number, used for ordering. 0 indicates the ground level, 1 indicates the first level above ground level, -1 indicates the first level under ground level. Non-integer values are OK.
      */
-    number?: number | null;
+    number?: number;
   }
   /**
    * Response to list all photos that belong to a user.
@@ -208,7 +210,7 @@ export namespace streetviewpublish_v1 {
     /**
      * Token to retrieve the next page of results, or empty if there are no more results in the list.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * List of photos. The pageSize field in the request determines the number of items returned.
      */
@@ -221,7 +223,7 @@ export namespace streetviewpublish_v1 {
     /**
      * If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
      */
-    done?: boolean | null;
+    done?: boolean;
     /**
      * The error result of the operation in case of failure or cancellation.
      */
@@ -229,15 +231,15 @@ export namespace streetviewpublish_v1 {
     /**
      * Service-specific metadata associated with the operation.  It typically contains progress information and common metadata such as create time. Some services might not provide such metadata.  Any method that returns a long-running operation should document the metadata type, if any.
      */
-    metadata?: {[key: string]: any} | null;
+    metadata?: {[key: string]: any};
     /**
      * The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The normal response of the operation in case of success.  If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`.  If the original method is standard `Get`/`Create`/`Update`, the response should be the resource.  For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name.  For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
      */
-    response?: {[key: string]: any} | null;
+    response?: {[key: string]: any};
   }
   /**
    * Photo is used to store 360 photos along with photo metadata.
@@ -246,7 +248,7 @@ export namespace streetviewpublish_v1 {
     /**
      * Absolute time when the photo was captured. When the photo has no exif timestamp, this is used to set a timestamp in the photo metadata.
      */
-    captureTime?: string | null;
+    captureTime?: string;
     /**
      * Connections to other photos. A connection represents the link from this photo to another photo.
      */
@@ -254,11 +256,11 @@ export namespace streetviewpublish_v1 {
     /**
      * Output only. The download URL for the photo bytes. This field is set only when GetPhotoRequest.view is set to PhotoView.INCLUDE_DOWNLOAD_URL.
      */
-    downloadUrl?: string | null;
+    downloadUrl?: string;
     /**
-     * Output only. Status in Google Maps, whether this photo was published or rejected. Not currently populated.
+     * Output only. Status in Google Maps, whether this photo was published or rejected.
      */
-    mapsPublishStatus?: string | null;
+    mapsPublishStatus?: string;
     /**
      * Required when updating a photo. Output only when creating a photo. Identifier for the photo, which is unique among all photos in Google.
      */
@@ -274,15 +276,15 @@ export namespace streetviewpublish_v1 {
     /**
      * Output only. The share link for the photo.
      */
-    shareLink?: string | null;
+    shareLink?: string;
     /**
      * Output only. The thumbnail URL for showing a preview of the given photo.
      */
-    thumbnailUrl?: string | null;
+    thumbnailUrl?: string;
     /**
      * Output only. Status of rights transfer on this photo.
      */
-    transferStatus?: string | null;
+    transferStatus?: string;
     /**
      * Required when creating a photo. Input only. The resource URL where the photo bytes are uploaded to.
      */
@@ -290,7 +292,7 @@ export namespace streetviewpublish_v1 {
     /**
      * Output only. View count of the photo.
      */
-    viewCount?: string | null;
+    viewCount?: string;
   }
   /**
    * Identifier for a Photo.
@@ -299,7 +301,7 @@ export namespace streetviewpublish_v1 {
     /**
      * Required. A unique identifier for a photo.
      */
-    id?: string | null;
+    id?: string;
   }
   /**
    * Response payload for a single Photo in batch operations including BatchGetPhotos and BatchUpdatePhotos.
@@ -321,15 +323,15 @@ export namespace streetviewpublish_v1 {
     /**
      * Output-only. The language_code that the name is localized with. This should be the language_code specified in the request, but may be a fallback.
      */
-    languageCode?: string | null;
+    languageCode?: string;
     /**
      * Output-only. The name of the place, localized to the language_code.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Place identifier, as described in https://developers.google.com/places/place-id.
      */
-    placeId?: string | null;
+    placeId?: string;
   }
   /**
    * Raw pose measurement for an entity.
@@ -338,15 +340,15 @@ export namespace streetviewpublish_v1 {
     /**
      * The estimated horizontal accuracy of this pose in meters with 68% confidence (one standard deviation). For example, on Android, this value is available from this method: https://developer.android.com/reference/android/location/Location#getAccuracy(). Other platforms have different methods of obtaining similar accuracy estimations.
      */
-    accuracyMeters?: number | null;
+    accuracyMeters?: number;
     /**
      * Altitude of the pose in meters above WGS84 ellipsoid. NaN indicates an unmeasured quantity.
      */
-    altitude?: number | null;
+    altitude?: number;
     /**
      * Compass heading, measured at the center of the photo in degrees clockwise from North. Value must be &gt;=0 and &lt;360. NaN indicates an unmeasured quantity.
      */
-    heading?: number | null;
+    heading?: number;
     /**
      * Latitude and longitude pair of the pose, as explained here: https://cloud.google.com/datastore/docs/reference/rest/Shared.Types/LatLng When creating a Photo, if the latitude and longitude pair are not provided, the geolocation from the exif header is used. A latitude and longitude pair not provided in the photo or exif header causes the photo process to fail.
      */
@@ -358,28 +360,28 @@ export namespace streetviewpublish_v1 {
     /**
      * Pitch, measured at the center of the photo in degrees. Value must be &gt;=-90 and &lt;= 90. A value of -90 means looking directly down, and a value of 90 means looking directly up. NaN indicates an unmeasured quantity.
      */
-    pitch?: number | null;
+    pitch?: number;
     /**
      * Roll, measured in degrees. Value must be &gt;= 0 and &lt;360. A value of 0 means level with the horizon. NaN indicates an unmeasured quantity.
      */
-    roll?: number | null;
+    roll?: number;
   }
   /**
-   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+   * The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:  - Simple to use and understand for most users - Flexible enough to meet unexpected needs  # Overview  The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed.  The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` that can be used for common error conditions.  # Language mapping  The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.  # Other uses  The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.  Example uses of this error model include:  - Partial errors. If a service needs to return partial errors to the client,     it may embed the `Status` in the normal response to indicate the partial     errors.  - Workflow errors. A typical workflow has multiple steps. Each step may     have a `Status` message for error reporting.  - Batch operations. If a client uses batch request and batch response, the     `Status` message should be used directly inside batch response, one for     each error sub-response.  - Asynchronous operations. If an API call embeds asynchronous operation     results in its response, the status of those operations should be     represented directly using the `Status` message.  - Logging. If some API errors are stored in logs, the message `Status` could     be used directly after any stripping needed for security/privacy reasons.
    */
   export interface Schema$Status {
     /**
      * The status code, which should be an enum value of google.rpc.Code.
      */
-    code?: number | null;
+    code?: number;
     /**
      * A list of messages that carry the error details.  There is a common set of message types for APIs to use.
      */
-    details?: Array<{[key: string]: any}> | null;
+    details?: Array<{[key: string]: any}>;
     /**
      * A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
      */
-    message?: string | null;
+    message?: string;
   }
   /**
    * Request to update the metadata of a Photo. Updating the pixels of a photo is not supported.
@@ -390,9 +392,9 @@ export namespace streetviewpublish_v1 {
      */
     photo?: Schema$Photo;
     /**
-     * Required. Mask that identifies fields on the photo metadata to update. If not present, the old Photo metadata is entirely replaced with the new Photo metadata in this request. The update fails if invalid fields are specified. Multiple fields can be specified in a comma-delimited list.  The following fields are valid:  * `pose.heading` * `pose.latLngPair` * `pose.pitch` * `pose.roll` * `pose.level` * `pose.altitude` * `connections` * `places`   &lt;aside class=&quot;note&quot;&gt;&lt;b&gt;Note:&lt;/b&gt; When updateMask contains repeated fields, the entire set of repeated values get replaced with the new contents. For example, if updateMask contains `connections` and `UpdatePhotoRequest.photo.connections` is empty, all connections are removed.&lt;/aside&gt;
+     * Mask that identifies fields on the photo metadata to update. If not present, the old Photo metadata is entirely replaced with the new Photo metadata in this request. The update fails if invalid fields are specified. Multiple fields can be specified in a comma-delimited list.  The following fields are valid:  * `pose.heading` * `pose.latLngPair` * `pose.pitch` * `pose.roll` * `pose.level` * `pose.altitude` * `connections` * `places`   &lt;aside class=&quot;note&quot;&gt;&lt;b&gt;Note:&lt;/b&gt; When updateMask contains repeated fields, the entire set of repeated values get replaced with the new contents. For example, if updateMask contains `connections` and `UpdatePhotoRequest.photo.connections` is empty, all connections are removed.&lt;/aside&gt;
      */
-    updateMask?: string | null;
+    updateMask?: string;
   }
   /**
    * Upload reference for media files.
@@ -401,7 +403,7 @@ export namespace streetviewpublish_v1 {
     /**
      * Required. An upload reference should be unique for each user. It follows the form: &quot;https://streetviewpublish.googleapis.com/media/user/{account_id}/photo/{upload_reference}&quot;
      */
-    uploadUrl?: string | null;
+    uploadUrl?: string;
   }
 
   export class Resource$Photo {
@@ -417,7 +419,7 @@ export namespace streetviewpublish_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Photo} params.requestBody Request body data
+     * @param {().Photo} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -560,7 +562,7 @@ export namespace streetviewpublish_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.languageCode The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier. If language_code is unspecified, the user's language preference for Google services is used.
      * @param {string} params.photoId Required. ID of the Photo.
-     * @param {string=} params.view Required. Specifies if a download URL for the photo bytes should be returned in the Photo response.
+     * @param {string=} params.view Specifies if a download URL for the photo bytes should be returned in the Photo response.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -632,7 +634,7 @@ export namespace streetviewpublish_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Empty} params.requestBody Request body data
+     * @param {().Empty} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -708,8 +710,8 @@ export namespace streetviewpublish_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.id Required. A unique identifier for a photo.
-     * @param {string=} params.updateMask Required. Mask that identifies fields on the photo metadata to update. If not present, the old Photo metadata is entirely replaced with the new Photo metadata in this request. The update fails if invalid fields are specified. Multiple fields can be specified in a comma-delimited list.  The following fields are valid:  * `pose.heading` * `pose.latLngPair` * `pose.pitch` * `pose.roll` * `pose.level` * `pose.altitude` * `connections` * `places`   <aside class="note"><b>Note:</b> When updateMask contains repeated fields, the entire set of repeated values get replaced with the new contents. For example, if updateMask contains `connections` and `UpdatePhotoRequest.photo.connections` is empty, all connections are removed.</aside>
-     * @param {().Photo} params.requestBody Request body data
+     * @param {string=} params.updateMask Mask that identifies fields on the photo metadata to update. If not present, the old Photo metadata is entirely replaced with the new Photo metadata in this request. The update fails if invalid fields are specified. Multiple fields can be specified in a comma-delimited list.  The following fields are valid:  * `pose.heading` * `pose.latLngPair` * `pose.pitch` * `pose.roll` * `pose.level` * `pose.altitude` * `connections` * `places`   <aside class="note"><b>Note:</b> When updateMask contains repeated fields, the entire set of repeated values get replaced with the new contents. For example, if updateMask contains `connections` and `UpdatePhotoRequest.photo.connections` is empty, all connections are removed.</aside>
+     * @param {().Photo} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -809,7 +811,7 @@ export namespace streetviewpublish_v1 {
      */
     photoId?: string;
     /**
-     * Required. Specifies if a download URL for the photo bytes should be returned in the Photo response.
+     * Specifies if a download URL for the photo bytes should be returned in the Photo response.
      */
     view?: string;
   }
@@ -836,7 +838,7 @@ export namespace streetviewpublish_v1 {
      */
     id?: string;
     /**
-     * Required. Mask that identifies fields on the photo metadata to update. If not present, the old Photo metadata is entirely replaced with the new Photo metadata in this request. The update fails if invalid fields are specified. Multiple fields can be specified in a comma-delimited list.  The following fields are valid:  * `pose.heading` * `pose.latLngPair` * `pose.pitch` * `pose.roll` * `pose.level` * `pose.altitude` * `connections` * `places`   <aside class="note"><b>Note:</b> When updateMask contains repeated fields, the entire set of repeated values get replaced with the new contents. For example, if updateMask contains `connections` and `UpdatePhotoRequest.photo.connections` is empty, all connections are removed.</aside>
+     * Mask that identifies fields on the photo metadata to update. If not present, the old Photo metadata is entirely replaced with the new Photo metadata in this request. The update fails if invalid fields are specified. Multiple fields can be specified in a comma-delimited list.  The following fields are valid:  * `pose.heading` * `pose.latLngPair` * `pose.pitch` * `pose.roll` * `pose.level` * `pose.altitude` * `connections` * `places`   <aside class="note"><b>Note:</b> When updateMask contains repeated fields, the entire set of repeated values get replaced with the new contents. For example, if updateMask contains `connections` and `UpdatePhotoRequest.photo.connections` is empty, all connections are removed.</aside>
      */
     updateMask?: string;
 
@@ -859,7 +861,7 @@ export namespace streetviewpublish_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().BatchDeletePhotosRequest} params.requestBody Request body data
+     * @param {().BatchDeletePhotosRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -943,7 +945,7 @@ export namespace streetviewpublish_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.languageCode The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier. If language_code is unspecified, the user's language preference for Google services is used.
      * @param {string=} params.photoIds Required. IDs of the Photos. For HTTP GET requests, the URL query parameter should be `photoIds=<id1>&photoIds=<id2>&...`.
-     * @param {string=} params.view Required. Specifies if a download URL for the photo bytes should be returned in the Photo response.
+     * @param {string=} params.view Specifies if a download URL for the photo bytes should be returned in the Photo response.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1021,7 +1023,7 @@ export namespace streetviewpublish_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().BatchUpdatePhotosRequest} params.requestBody Request body data
+     * @param {().BatchUpdatePhotosRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1103,11 +1105,11 @@ export namespace streetviewpublish_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.filter Required. The filter expression. For example: `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.  The only filter supported at the moment is `placeId`.
+     * @param {string=} params.filter The filter expression. For example: `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.  The only filter supported at the moment is `placeId`.
      * @param {string=} params.languageCode The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see http://www.unicode.org/reports/tr35/#Unicode_locale_identifier. If language_code is unspecified, the user's language preference for Google services is used.
      * @param {integer=} params.pageSize The maximum number of photos to return. `pageSize` must be non-negative. If `pageSize` is zero or is not provided, the default page size of 100 is used. The number of photos returned in the response may be less than `pageSize` if the number of photos that belong to the user is less than `pageSize`.
      * @param {string=} params.pageToken The nextPageToken value returned from a previous ListPhotos request, if any.
-     * @param {string=} params.view Required. Specifies if a download URL for the photos bytes should be returned in the Photos response.
+     * @param {string=} params.view Specifies if a download URL for the photos bytes should be returned in the Photos response.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1199,7 +1201,7 @@ export namespace streetviewpublish_v1 {
      */
     photoIds?: string[];
     /**
-     * Required. Specifies if a download URL for the photo bytes should be returned in the Photo response.
+     * Specifies if a download URL for the photo bytes should be returned in the Photo response.
      */
     view?: string;
   }
@@ -1222,7 +1224,7 @@ export namespace streetviewpublish_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The filter expression. For example: `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.  The only filter supported at the moment is `placeId`.
+     * The filter expression. For example: `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.  The only filter supported at the moment is `placeId`.
      */
     filter?: string;
     /**
@@ -1238,7 +1240,7 @@ export namespace streetviewpublish_v1 {
      */
     pageToken?: string;
     /**
-     * Required. Specifies if a download URL for the photos bytes should be returned in the Photos response.
+     * Specifies if a download URL for the photos bytes should be returned in the Photos response.
      */
     view?: string;
   }

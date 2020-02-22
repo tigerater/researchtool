@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -122,29 +124,29 @@ export namespace texttospeech_v1beta1 {
    */
   export interface Schema$AudioConfig {
     /**
-     * Required. The format of the audio byte stream.
+     * Required. The format of the requested audio byte stream.
      */
-    audioEncoding?: string | null;
+    audioEncoding?: string;
     /**
-     * Optional. Input only. An identifier which selects &#39;audio effects&#39; profiles that are applied on (post synthesized) text to speech. Effects are applied on top of each other in the order they are given. See [audio profiles](https://cloud.google.com/text-to-speech/docs/audio-profiles) for current supported profile ids.
+     * An identifier which selects &#39;audio effects&#39; profiles that are applied on (post synthesized) text to speech. Effects are applied on top of each other in the order they are given. See  [audio-profiles](https: //cloud.google.com/text-to-speech/docs/audio-profiles) for current supported profile ids.
      */
-    effectsProfileId?: string[] | null;
+    effectsProfileId?: string[];
     /**
-     * Optional. Input only. Speaking pitch, in the range [-20.0, 20.0]. 20 means increase 20 semitones from the original pitch. -20 means decrease 20 semitones from the original pitch.
+     * Optional speaking pitch, in the range [-20.0, 20.0]. 20 means increase 20 semitones from the original pitch. -20 means decrease 20 semitones from the original pitch.
      */
-    pitch?: number | null;
+    pitch?: number;
     /**
-     * Optional. The synthesis sample rate (in hertz) for this audio. When this is specified in SynthesizeSpeechRequest, if this is different from the voice&#39;s natural sample rate, then the synthesizer will honor this request by converting to the desired sample rate (which might result in worse audio quality), unless the specified sample rate is not supported for the encoding chosen, in which case it will fail the request and return google.rpc.Code.INVALID_ARGUMENT.
+     * The synthesis sample rate (in hertz) for this audio. Optional.  If this is different from the voice&#39;s natural sample rate, then the synthesizer will honor this request by converting to the desired sample rate (which might result in worse audio quality), unless the specified sample rate is not supported for the encoding chosen, in which case it will fail the request and return google.rpc.Code.INVALID_ARGUMENT.
      */
-    sampleRateHertz?: number | null;
+    sampleRateHertz?: number;
     /**
-     * Optional. Input only. Speaking rate/speed, in the range [0.25, 4.0]. 1.0 is the normal native speed supported by the specific voice. 2.0 is twice as fast, and 0.5 is half as fast. If unset(0.0), defaults to the native 1.0 speed. Any other values &lt; 0.25 or &gt; 4.0 will return an error.
+     * Optional speaking rate/speed, in the range [0.25, 4.0]. 1.0 is the normal native speed supported by the specific voice. 2.0 is twice as fast, and 0.5 is half as fast. If unset(0.0), defaults to the native 1.0 speed. Any other values &lt; 0.25 or &gt; 4.0 will return an error.
      */
-    speakingRate?: number | null;
+    speakingRate?: number;
     /**
-     * Optional. Input only. Volume gain (in dB) of the normal native volume supported by the specific voice, in the range [-96.0, 16.0]. If unset, or set to a value of 0.0 (dB), will play at normal native signal amplitude. A value of -6.0 (dB) will play at approximately half the amplitude of the normal native signal amplitude. A value of +6.0 (dB) will play at approximately twice the amplitude of the normal native signal amplitude. Strongly recommend not to exceed +10 (dB) as there&#39;s usually no effective increase in loudness for any value greater than that.
+     * Optional volume gain (in dB) of the normal native volume supported by the specific voice, in the range [-96.0, 16.0]. If unset, or set to a value of 0.0 (dB), will play at normal native signal amplitude. A value of -6.0 (dB) will play at approximately half the amplitude of the normal native signal amplitude. A value of +6.0 (dB) will play at approximately twice the amplitude of the normal native signal amplitude. Strongly recommend not to exceed +10 (dB) as there&#39;s usually no effective increase in loudness for any value greater than that.
      */
-    volumeGainDb?: number | null;
+    volumeGainDb?: number;
   }
   /**
    * The message returned to the client by the `ListVoices` method.
@@ -162,11 +164,11 @@ export namespace texttospeech_v1beta1 {
     /**
      * The SSML document to be synthesized. The SSML document must be valid and well-formed. Otherwise the RPC will fail and return google.rpc.Code.INVALID_ARGUMENT. For more information, see [SSML](/speech/text-to-speech/docs/ssml).
      */
-    ssml?: string | null;
+    ssml?: string;
     /**
      * The raw text to be synthesized.
      */
-    text?: string | null;
+    text?: string;
   }
   /**
    * The top-level message sent by the client for the `SynthesizeSpeech` method.
@@ -190,9 +192,9 @@ export namespace texttospeech_v1beta1 {
    */
   export interface Schema$SynthesizeSpeechResponse {
     /**
-     * The audio data bytes encoded as specified in the request, including the header for encodings that are wrapped in containers (e.g. MP3, OGG_OPUS). For LINEAR16 audio, we include the WAV header. Note: as with all bytes fields, protobuffers use a pure binary representation, whereas JSON representations use base64.
+     * The audio data bytes encoded as specified in the request, including the header (For LINEAR16 audio, we include the WAV header). Note: as with all bytes fields, protobuffers use a pure binary representation, whereas JSON representations use base64.
      */
-    audioContent?: string | null;
+    audioContent?: string;
   }
   /**
    * Description of a voice supported by the TTS service.
@@ -201,36 +203,36 @@ export namespace texttospeech_v1beta1 {
     /**
      * The languages that this voice supports, expressed as [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tags (e.g. &quot;en-US&quot;, &quot;es-419&quot;, &quot;cmn-tw&quot;).
      */
-    languageCodes?: string[] | null;
+    languageCodes?: string[];
     /**
      * The name of this voice.  Each distinct voice has a unique name.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The natural sample rate (in hertz) for this voice.
      */
-    naturalSampleRateHertz?: number | null;
+    naturalSampleRateHertz?: number;
     /**
      * The gender of this voice.
      */
-    ssmlGender?: string | null;
+    ssmlGender?: string;
   }
   /**
    * Description of which voice to use for a synthesis request.
    */
   export interface Schema$VoiceSelectionParams {
     /**
-     * Required. The language (and potentially also the region) of the voice expressed as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag, e.g. &quot;en-US&quot;. This should not include a script tag (e.g. use &quot;cmn-cn&quot; rather than &quot;cmn-Hant-cn&quot;), because the script will be inferred from the input provided in the SynthesisInput.  The TTS service will use this parameter to help choose an appropriate voice.  Note that the TTS service may choose a voice with a slightly different language code than the one selected; it may substitute a different region (e.g. using en-US rather than en-CA if there isn&#39;t a Canadian voice available), or even a different language, e.g. using &quot;nb&quot; (Norwegian Bokmal) instead of &quot;no&quot; (Norwegian)&quot;.
+     * The language (and optionally also the region) of the voice expressed as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag, e.g. &quot;en-US&quot;. Required. This should not include a script tag (e.g. use &quot;cmn-cn&quot; rather than &quot;cmn-Hant-cn&quot;), because the script will be inferred from the input provided in the SynthesisInput.  The TTS service will use this parameter to help choose an appropriate voice.  Note that the TTS service may choose a voice with a slightly different language code than the one selected; it may substitute a different region (e.g. using en-US rather than en-CA if there isn&#39;t a Canadian voice available), or even a different language, e.g. using &quot;nb&quot; (Norwegian Bokmal) instead of &quot;no&quot; (Norwegian)&quot;.
      */
-    languageCode?: string | null;
+    languageCode?: string;
     /**
-     * The name of the voice. If not set, the service will choose a voice based on the other parameters such as language_code and gender.
+     * The name of the voice. Optional; if not set, the service will choose a voice based on the other parameters such as language_code and gender.
      */
-    name?: string | null;
+    name?: string;
     /**
-     * The preferred gender of the voice. If not set, the service will choose a voice based on the other parameters such as language_code and name. Note that this is only a preference, not requirement; if a voice of the appropriate gender is not available, the synthesizer should substitute a voice with a different gender rather than failing the request.
+     * The preferred gender of the voice. Optional; if not set, the service will choose a voice based on the other parameters such as language_code and name. Note that this is only a preference, not requirement; if a voice of the appropriate gender is not available, the synthesizer should substitute a voice with a different gender rather than failing the request.
      */
-    ssmlGender?: string | null;
+    ssmlGender?: string;
   }
 
   export class Resource$Text {
@@ -246,7 +248,7 @@ export namespace texttospeech_v1beta1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().SynthesizeSpeechRequest} params.requestBody Request body data
+     * @param {().SynthesizeSpeechRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -342,7 +344,7 @@ export namespace texttospeech_v1beta1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string=} params.languageCode Optional. Recommended. [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If specified, the ListVoices call will only return voices that can be used to synthesize this language_code. E.g. when specifying "en-NZ", you will get supported "en-*" voices; when specifying "no", you will get supported "no-*" (Norwegian) and "nb-*" (Norwegian Bokmal) voices; specifying "zh" will also get supported "cmn-*" voices; specifying "zh-hk" will also get supported "yue-*" voices.
+     * @param {string=} params.languageCode Optional (but recommended) [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If specified, the ListVoices call will only return voices that can be used to synthesize this language_code. E.g. when specifying "en-NZ", you will get supported "en-*" voices; when specifying "no", you will get supported "no-*" (Norwegian) and "nb-*" (Norwegian Bokmal) voices; specifying "zh" will also get supported "cmn-*" voices; specifying "zh-hk" will also get supported "yue-*" voices.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -413,7 +415,7 @@ export namespace texttospeech_v1beta1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Optional. Recommended. [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If specified, the ListVoices call will only return voices that can be used to synthesize this language_code. E.g. when specifying "en-NZ", you will get supported "en-*" voices; when specifying "no", you will get supported "no-*" (Norwegian) and "nb-*" (Norwegian Bokmal) voices; specifying "zh" will also get supported "cmn-*" voices; specifying "zh-hk" will also get supported "yue-*" voices.
+     * Optional (but recommended) [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If specified, the ListVoices call will only return voices that can be used to synthesize this language_code. E.g. when specifying "en-NZ", you will get supported "en-*" voices; when specifying "no", you will get supported "no-*" (Norwegian) and "nb-*" (Norwegian Bokmal) voices; specifying "zh" will also get supported "cmn-*" voices; specifying "zh-hk" will also get supported "yue-*" voices.
      */
     languageCode?: string;
   }

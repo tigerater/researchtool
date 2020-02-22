@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -103,35 +105,35 @@ export namespace webfonts_v1 {
     /**
      * The category of the font.
      */
-    category?: string | null;
+    category?: string;
     /**
      * The name of the font.
      */
-    family?: string | null;
+    family?: string;
     /**
      * The font files (with all supported scripts) for each one of the available variants, as a key : value map.
      */
-    files?: {[key: string]: string} | null;
+    files?: {[key: string]: string};
     /**
      * This kind represents a webfont object in the webfonts service.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The date (format &quot;yyyy-MM-dd&quot;) the font was modified for the last time.
      */
-    lastModified?: string | null;
+    lastModified?: string;
     /**
      * The scripts supported by the font.
      */
-    subsets?: string[] | null;
+    subsets?: string[];
     /**
      * The available variants for the font.
      */
-    variants?: string[] | null;
+    variants?: string[];
     /**
      * The font version.
      */
-    version?: string | null;
+    version?: string;
   }
   export interface Schema$WebfontList {
     /**
@@ -141,7 +143,7 @@ export namespace webfonts_v1 {
     /**
      * This kind represents a list of webfont objects in the webfonts service.
      */
-    kind?: string | null;
+    kind?: string;
   }
 
   export class Resource$Webfonts {

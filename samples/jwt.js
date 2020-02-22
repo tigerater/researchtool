@@ -1,4 +1,4 @@
-// Copyright 2014 Google LLC
+// Copyright 2014-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -27,11 +27,10 @@ const path = require('path');
  */
 async function runSample() {
   // Create a new JWT client using the key file downloaded from the Google Developer Console
-  const auth = new google.auth.GoogleAuth({
+  const client = await google.auth.getClient({
     keyFile: path.join(__dirname, 'jwt.keys.json'),
     scopes: 'https://www.googleapis.com/auth/drive.readonly',
   });
-  const client = await auth.getClient();
 
   // Obtain a new drive client, making sure you pass along the auth client
   const drive = google.drive({

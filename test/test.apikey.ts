@@ -1,4 +1,4 @@
-// Copyright 2014 Google LLC
+// Copyright 2014-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,12 +12,11 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
 import {OAuth2Client} from 'google-auth-library';
 import {APIEndpoint} from 'googleapis-common';
 import * as nock from 'nock';
 
-import {drive_v2, GoogleApis, blogger_v3} from '../src';
+import {drive_v2, GoogleApis, urlshortener_v1} from '../src';
 
 import {Utils} from './utils';
 
@@ -49,14 +48,11 @@ async function testKeyParam(drive: APIEndpoint) {
   assert.strictEqual(Utils.getQs(res), 'key=abc123');
 }
 
-async function testAuthKey(blogger: APIEndpoint) {
+async function testAuthKey(urlshortener: APIEndpoint) {
   nock(Utils.baseUrl)
-    .get('/blogger/v3/blogs/abc123/pages?key=YOUR%20API%20KEY')
+    .get('/urlshortener/v1/url/history?key=YOUR%20API%20KEY')
     .reply(200);
-  const res = await blogger.pages.list({
-    auth: 'YOUR API KEY',
-    blogId: 'abc123',
-  });
+  const res = await urlshortener.url.list({auth: 'YOUR API KEY'});
   assert.strictEqual(
     Utils.getQs(res)!.indexOf('key=YOUR%20API%20KEY') > -1,
     true
@@ -66,17 +62,17 @@ async function testAuthKey(blogger: APIEndpoint) {
 describe('API key', () => {
   let localDrive: drive_v2.Drive;
   let remoteDrive: APIEndpoint;
-  let localBlogger: blogger_v3.Blogger;
-  let remoteBlogger: APIEndpoint;
+  let localUrlshortener: urlshortener_v1.Urlshortener;
+  let remoteUrlshortener: APIEndpoint;
   let authClient: OAuth2Client;
 
   before(async () => {
     nock.cleanAll();
     const google = new GoogleApis();
     nock.enableNetConnect();
-    [remoteDrive, remoteBlogger] = await Promise.all([
+    [remoteDrive, remoteUrlshortener] = await Promise.all([
       Utils.loadApi(google, 'drive', 'v2'),
-      Utils.loadApi(google, 'blogger', 'v3'),
+      Utils.loadApi(google, 'urlshortener', 'v1'),
     ]);
     nock.disableNetConnect();
   });
@@ -89,7 +85,7 @@ describe('API key', () => {
     authClient = new OAuth2('CLIENT_ID', 'CLIENT_SECRET', 'REDIRECT_URL');
     authClient.credentials = {access_token: 'abc123'};
     localDrive = google.drive('v2');
-    localBlogger = google.blogger('v3');
+    localUrlshortener = google.urlshortener('v1');
   });
 
   it('should include auth APIKEY as key=<APIKEY>', async () => {
@@ -108,8 +104,8 @@ describe('API key', () => {
   });
 
   it('should set API key parameter if it is present', async () => {
-    await testAuthKey(localBlogger);
-    await testAuthKey(remoteBlogger);
+    await testAuthKey(localUrlshortener);
+    await testAuthKey(remoteUrlshortener);
   });
 
   after(() => {

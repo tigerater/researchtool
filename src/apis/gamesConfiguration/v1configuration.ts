@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -114,7 +116,7 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * The type of the achievement. Possible values are:   - &quot;STANDARD&quot; - Achievement is either locked or unlocked.  - &quot;INCREMENTAL&quot; - Achievement is incremental.
      */
-    achievementType?: string | null;
+    achievementType?: string;
     /**
      * The draft data of the achievement.
      */
@@ -122,15 +124,15 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * The ID of the achievement.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The initial state of the achievement. Possible values are:   - &quot;HIDDEN&quot; - Achievement is hidden.  - &quot;REVEALED&quot; - Achievement is revealed.  - &quot;UNLOCKED&quot; - Achievement is unlocked.
      */
-    initialState?: string | null;
+    initialState?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#achievementConfiguration.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The read-only published data of the achievement.
      */
@@ -138,11 +140,11 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * Steps to unlock. Only applicable to incremental achievements.
      */
-    stepsToUnlock?: number | null;
+    stepsToUnlock?: number;
     /**
      * The token for this resource.
      */
-    token?: string | null;
+    token?: string;
   }
   /**
    * This is a JSON template for an achievement configuration detail.
@@ -155,11 +157,11 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * The icon url of this achievement. Writes to this field are ignored.
      */
-    iconUrl?: string | null;
+    iconUrl?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#achievementConfigurationDetail.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Localized strings for the achievement name.
      */
@@ -167,11 +169,11 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * Point value for the achievement.
      */
-    pointValue?: number | null;
+    pointValue?: number;
     /**
      * The sort rank of this achievement. Writes to this field are ignored.
      */
-    sortRank?: number | null;
+    sortRank?: number;
   }
   /**
    * This is a JSON template for a ListConfigurations response.
@@ -184,11 +186,11 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#achievementConfigurationListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The pagination token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for a number affix resource.
@@ -226,15 +228,15 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * The curreny code string. Only used for CURRENCY format type.
      */
-    currencyCode?: string | null;
+    currencyCode?: string;
     /**
      * The formatting for the number. Possible values are:   - &quot;NUMERIC&quot; - Numbers are formatted to have no digits or a fixed number of digits after the decimal point according to locale. An optional custom unit can be added. - &quot;TIME_DURATION&quot; - Numbers are formatted to hours, minutes and seconds. - &quot;CURRENCY&quot; - Numbers are formatted to currency according to locale.
      */
-    numberFormatType?: string | null;
+    numberFormatType?: string;
     /**
      * The number of decimal places for number. Only used for NUMERIC format type.
      */
-    numDecimalPlaces?: number | null;
+    numDecimalPlaces?: number;
     /**
      * An optional suffix for the NUMERIC format type. These strings follow the same  plural rules as all Android string resources.
      */
@@ -247,19 +249,19 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * The image type for the image.
      */
-    imageType?: string | null;
+    imageType?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#imageConfiguration.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The resource ID of resource which the image belongs to.
      */
-    resourceId?: string | null;
+    resourceId?: string;
     /**
      * The url for this image.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * This is a JSON template for an leaderboard configuration resource.
@@ -272,11 +274,11 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * The ID of the leaderboard.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#leaderboardConfiguration.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The read-only published data of the leaderboard.
      */
@@ -284,19 +286,19 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * Maximum score that can be posted to this leaderboard.
      */
-    scoreMax?: string | null;
+    scoreMax?: string;
     /**
      * Minimum score that can be posted to this leaderboard.
      */
-    scoreMin?: string | null;
+    scoreMin?: string;
     /**
      * The type of the leaderboard. Possible values are:   - &quot;LARGER_IS_BETTER&quot; - Larger scores posted are ranked higher.  - &quot;SMALLER_IS_BETTER&quot; - Smaller scores posted are ranked higher.
      */
-    scoreOrder?: string | null;
+    scoreOrder?: string;
     /**
      * The token for this resource.
      */
-    token?: string | null;
+    token?: string;
   }
   /**
    * This is a JSON template for a leaderboard configuration detail.
@@ -305,11 +307,11 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * The icon url of this leaderboard. Writes to this field are ignored.
      */
-    iconUrl?: string | null;
+    iconUrl?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#leaderboardConfigurationDetail.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Localized strings for the leaderboard name.
      */
@@ -321,7 +323,7 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * The sort rank of this leaderboard. Writes to this field are ignored.
      */
-    sortRank?: number | null;
+    sortRank?: number;
   }
   /**
    * This is a JSON template for a ListConfigurations response.
@@ -334,11 +336,11 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string games#leaderboardConfigurationListResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The pagination token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for a localized string resource.
@@ -347,15 +349,15 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#localizedString.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The locale string.
      */
-    locale?: string | null;
+    locale?: string;
     /**
      * The string value.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * This is a JSON template for a localized string bundle resource.
@@ -364,7 +366,7 @@ export namespace gamesConfiguration_v1configuration {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#localizedStringBundle.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The locale strings.
      */
@@ -531,7 +533,7 @@ export namespace gamesConfiguration_v1configuration {
      *
      * @param {object} params Parameters for request
      * @param {string} params.applicationId The application ID from the Google Play developer console.
-     * @param {().AchievementConfiguration} params.requestBody Request body data
+     * @param {().AchievementConfiguration} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -703,7 +705,7 @@ export namespace gamesConfiguration_v1configuration {
      *
      * @param {object} params Parameters for request
      * @param {string} params.achievementId The ID of the achievement used by this method.
-     * @param {().AchievementConfiguration} params.requestBody Request body data
+     * @param {().AchievementConfiguration} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -781,7 +783,7 @@ export namespace gamesConfiguration_v1configuration {
      *
      * @param {object} params Parameters for request
      * @param {string} params.achievementId The ID of the achievement used by this method.
-     * @param {().AchievementConfiguration} params.requestBody Request body data
+     * @param {().AchievementConfiguration} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1229,7 +1231,7 @@ export namespace gamesConfiguration_v1configuration {
      *
      * @param {object} params Parameters for request
      * @param {string} params.applicationId The application ID from the Google Play developer console.
-     * @param {().LeaderboardConfiguration} params.requestBody Request body data
+     * @param {().LeaderboardConfiguration} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1401,7 +1403,7 @@ export namespace gamesConfiguration_v1configuration {
      *
      * @param {object} params Parameters for request
      * @param {string} params.leaderboardId The ID of the leaderboard.
-     * @param {().LeaderboardConfiguration} params.requestBody Request body data
+     * @param {().LeaderboardConfiguration} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1479,7 +1481,7 @@ export namespace gamesConfiguration_v1configuration {
      *
      * @param {object} params Parameters for request
      * @param {string} params.leaderboardId The ID of the leaderboard.
-     * @param {().LeaderboardConfiguration} params.requestBody Request body data
+     * @param {().LeaderboardConfiguration} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

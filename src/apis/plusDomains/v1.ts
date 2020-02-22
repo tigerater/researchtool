@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -113,11 +115,11 @@ export namespace plusDomains_v1 {
     /**
      * Description of the access granted, suitable for display.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Whether access is restricted to the domain.
      */
-    domainRestricted?: boolean | null;
+    domainRestricted?: boolean;
     /**
      * The list of access entries.
      */
@@ -125,7 +127,7 @@ export namespace plusDomains_v1 {
     /**
      * Identifies this resource as a collection of access controls. Value: &quot;plus#acl&quot;.
      */
-    kind?: string | null;
+    kind?: string;
   }
   export interface Schema$Activity {
     /**
@@ -143,35 +145,35 @@ export namespace plusDomains_v1 {
       name?: {familyName?: string; givenName?: string};
       url?: string;
       verification?: {adHocVerified?: string};
-    } | null;
+    };
     /**
      * Street address where this activity occurred.
      */
-    address?: string | null;
+    address?: string;
     /**
      * Additional content added by the person who shared this activity, applicable only when resharing an activity.
      */
-    annotation?: string | null;
+    annotation?: string;
     /**
      * If this activity is a crosspost from another system, this property specifies the ID of the original activity.
      */
-    crosspostSource?: string | null;
+    crosspostSource?: string;
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Latitude and longitude where this activity occurred. Format is latitude followed by longitude, space separated.
      */
-    geocode?: string | null;
+    geocode?: string;
     /**
      * The ID of this activity.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies this resource as an activity. Value: &quot;plus#activity&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The location where this activity occurred.
      */
@@ -229,53 +231,53 @@ export namespace plusDomains_v1 {
         resharingDisabled?: boolean;
       };
       url?: string;
-    } | null;
+    };
     /**
      * ID of the place where this activity occurred.
      */
-    placeId?: string | null;
+    placeId?: string;
     /**
      * Name of the place where this activity occurred.
      */
-    placeName?: string | null;
+    placeName?: string;
     /**
      * The service provider that initially published this activity.
      */
-    provider?: {title?: string} | null;
+    provider?: {title?: string};
     /**
      * The time at which this activity was initially published. Formatted as an RFC 3339 timestamp.
      */
-    published?: string | null;
+    published?: string;
     /**
      * Radius, in meters, of the region where this activity occurred, centered at the latitude and longitude identified in geocode.
      */
-    radius?: string | null;
+    radius?: string;
     /**
      * Title of this activity.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The time at which this activity was last updated. Formatted as an RFC 3339 timestamp.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The link to this activity.
      */
-    url?: string | null;
+    url?: string;
     /**
      * This activity&#39;s verb, which indicates the action that was performed. Possible values include, but are not limited to, the following values:   - &quot;post&quot; - Publish content to the stream.  - &quot;share&quot; - Reshare an activity.
      */
-    verb?: string | null;
+    verb?: string;
   }
   export interface Schema$ActivityFeed {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID of this collection of activities. Deprecated.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The activities in this page of results.
      */
@@ -283,33 +285,33 @@ export namespace plusDomains_v1 {
     /**
      * Identifies this resource as a collection of activities. Value: &quot;plus#activityFeed&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Link to the next page of activities.
      */
-    nextLink?: string | null;
+    nextLink?: string;
     /**
      * The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Link to this activity resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The title of this collection of activities, which is a truncated portion of the content.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The time at which this collection of activities was last updated. Formatted as an RFC 3339 timestamp.
      */
-    updated?: string | null;
+    updated?: string;
   }
   export interface Schema$Audience {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The access control list entry.
      */
@@ -317,21 +319,21 @@ export namespace plusDomains_v1 {
     /**
      * Identifies this resource as an audience. Value: &quot;plus#audience&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The number of people in this circle. This only applies if entity_type is CIRCLE.
      */
-    memberCount?: number | null;
+    memberCount?: number;
     /**
      * The circle members&#39; visibility as chosen by the owner of the circle. This only applies for items with &quot;item.type&quot; equals &quot;circle&quot;. Possible values are:   - &quot;public&quot; - Members are visible to the public.  - &quot;limited&quot; - Members are visible to a limited audience.  - &quot;private&quot; - Members are visible to the owner only.
      */
-    visibility?: string | null;
+    visibility?: string;
   }
   export interface Schema$AudiencesFeed {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The audiences in this result.
      */
@@ -339,51 +341,51 @@ export namespace plusDomains_v1 {
     /**
      * Identifies this resource as a collection of audiences. Value: &quot;plus#audienceFeed&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The total number of ACL entries. The number of entries in this response may be smaller due to paging.
      */
-    totalItems?: number | null;
+    totalItems?: number;
   }
   export interface Schema$Circle {
     /**
      * The description of this circle.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The circle name.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID of the circle.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies this resource as a circle. Value: &quot;plus#circle&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The people in this circle.
      */
-    people?: {totalItems?: number} | null;
+    people?: {totalItems?: number};
     /**
      * Link to this circle resource
      */
-    selfLink?: string | null;
+    selfLink?: string;
   }
   export interface Schema$CircleFeed {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The circles in this page of results.
      */
@@ -391,27 +393,27 @@ export namespace plusDomains_v1 {
     /**
      * Identifies this resource as a collection of circles. Value: &quot;plus#circleFeed&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Link to the next page of circles.
      */
-    nextLink?: string | null;
+    nextLink?: string;
     /**
      * The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Link to this page of circles.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The title of this list of resources.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The total number of circles. The number of circles in this response may be smaller due to paging.
      */
-    totalItems?: number | null;
+    totalItems?: number;
   }
   export interface Schema$Comment {
     /**
@@ -424,61 +426,57 @@ export namespace plusDomains_v1 {
       image?: {url?: string};
       url?: string;
       verification?: {adHocVerified?: string};
-    } | null;
+    };
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID of this comment.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The activity this comment replied to.
      */
-    inReplyTo?: Array<{id?: string; url?: string}> | null;
+    inReplyTo?: Array<{id?: string; url?: string}>;
     /**
      * Identifies this resource as a comment. Value: &quot;plus#comment&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The object of this comment.
      */
-    object?: {
-      content?: string;
-      objectType?: string;
-      originalContent?: string;
-    } | null;
+    object?: {content?: string; objectType?: string; originalContent?: string};
     /**
      * People who +1&#39;d this comment.
      */
-    plusoners?: {totalItems?: number} | null;
+    plusoners?: {totalItems?: number};
     /**
      * The time at which this comment was initially published. Formatted as an RFC 3339 timestamp.
      */
-    published?: string | null;
+    published?: string;
     /**
      * Link to this comment resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The time at which this comment was last updated. Formatted as an RFC 3339 timestamp.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * This comment&#39;s verb, indicating what action was performed. Possible values are:   - &quot;post&quot; - Publish content to the stream.
      */
-    verb?: string | null;
+    verb?: string;
   }
   export interface Schema$CommentFeed {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The ID of this collection of comments.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The comments in this page of results.
      */
@@ -486,23 +484,23 @@ export namespace plusDomains_v1 {
     /**
      * Identifies this resource as a collection of comments. Value: &quot;plus#commentFeed&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Link to the next page of activities.
      */
-    nextLink?: string | null;
+    nextLink?: string;
     /**
      * The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The title of this collection of comments.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The time at which this collection of comments was last updated. Formatted as an RFC 3339 timestamp.
      */
-    updated?: string | null;
+    updated?: string;
   }
   export interface Schema$Media {
     /**
@@ -513,47 +511,47 @@ export namespace plusDomains_v1 {
       id?: string;
       image?: {url?: string};
       url?: string;
-    } | null;
+    };
     /**
      * The display name for this media.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Exif information of the media item.
      */
-    exif?: {time?: string} | null;
+    exif?: {time?: string};
     /**
      * The height in pixels of the original image.
      */
-    height?: number | null;
+    height?: number;
     /**
      * ID of this media, which is generated by the API.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The type of resource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The time at which this media was originally created in UTC. Formatted as an RFC 3339 timestamp that matches this example: 2010-11-25T14:30:27.655Z
      */
-    mediaCreatedTime?: string | null;
+    mediaCreatedTime?: string;
     /**
      * The URL of this photo or video&#39;s still image.
      */
-    mediaUrl?: string | null;
+    mediaUrl?: string;
     /**
      * The time at which this media was uploaded. Formatted as an RFC 3339 timestamp.
      */
-    published?: string | null;
+    published?: string;
     /**
      * The size in bytes of this video.
      */
-    sizeBytes?: string | null;
+    sizeBytes?: string;
     /**
      * The list of video streams for this video. There might be several different streams available for a single video, either Flash or MPEG, of various sizes
      */
@@ -561,33 +559,33 @@ export namespace plusDomains_v1 {
     /**
      * A description, or caption, for this media.
      */
-    summary?: string | null;
+    summary?: string;
     /**
      * The time at which this media was last updated. This includes changes to media metadata. Formatted as an RFC 3339 timestamp.
      */
-    updated?: string | null;
+    updated?: string;
     /**
      * The URL for the page that hosts this media.
      */
-    url?: string | null;
+    url?: string;
     /**
      * The duration in milliseconds of this video.
      */
-    videoDuration?: string | null;
+    videoDuration?: string;
     /**
      * The encoding status of this video. Possible values are:   - &quot;UPLOADING&quot; - Not all the video bytes have been received.  - &quot;PENDING&quot; - Video not yet processed.  - &quot;FAILED&quot; - Video processing failed.  - &quot;READY&quot; - A single video stream is playable.  - &quot;FINAL&quot; - All video streams are playable.
      */
-    videoStatus?: string | null;
+    videoStatus?: string;
     /**
      * The width in pixels of the original image.
      */
-    width?: number | null;
+    width?: number;
   }
   export interface Schema$PeopleFeed {
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The people in this page of results. Each item includes the id, displayName, image, and url for the person. To retrieve additional profile data, see the people.get method.
      */
@@ -595,41 +593,41 @@ export namespace plusDomains_v1 {
     /**
      * Identifies this resource as a collection of people. Value: &quot;plus#peopleFeed&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Link to this resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * The title of this collection of people.
      */
-    title?: string | null;
+    title?: string;
     /**
      * The total number of people available in this list. The number of people in a response might be smaller due to paging. This might not be set for all collections.
      */
-    totalItems?: number | null;
+    totalItems?: number;
   }
   export interface Schema$Person {
     /**
      * A short biography for this person.
      */
-    aboutMe?: string | null;
+    aboutMe?: string;
     /**
      * The person&#39;s date of birth, represented as YYYY-MM-DD.
      */
-    birthday?: string | null;
+    birthday?: string;
     /**
      * The &quot;bragging rights&quot; line of this person.
      */
-    braggingRights?: string | null;
+    braggingRights?: string;
     /**
      * For followers who are visible, the number of people who have added this person or page to a circle.
      */
-    circledByCount?: number | null;
+    circledByCount?: number;
     /**
      * The cover photo content.
      */
@@ -637,47 +635,47 @@ export namespace plusDomains_v1 {
       coverInfo?: {leftImageOffset?: number; topImageOffset?: number};
       coverPhoto?: {height?: number; url?: string; width?: number};
       layout?: string;
-    } | null;
+    };
     /**
      * (this field is not currently used)
      */
-    currentLocation?: string | null;
+    currentLocation?: string;
     /**
      * The name of this person, which is suitable for display.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The hosted domain name for the user&#39;s Google Apps account. For instance, example.com. The plus.profile.emails.read or email scope is needed to get this domain name.
      */
-    domain?: string | null;
+    domain?: string;
     /**
      * A list of email addresses that this person has, including their Google account email address, and the public verified email addresses on their Google+ profile. The plus.profile.emails.read scope is needed to retrieve these email addresses, or the email scope can be used to retrieve just the Google account email address.
      */
-    emails?: Array<{type?: string; value?: string}> | null;
+    emails?: Array<{type?: string; value?: string}>;
     /**
      * ETag of this response for caching purposes.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The person&#39;s gender. Possible values include, but are not limited to, the following values:   - &quot;male&quot; - Male gender.  - &quot;female&quot; - Female gender.  - &quot;other&quot; - Other.
      */
-    gender?: string | null;
+    gender?: string;
     /**
      * The ID of this person.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The representation of the person&#39;s profile photo.
      */
-    image?: {isDefault?: boolean; url?: string} | null;
+    image?: {isDefault?: boolean; url?: string};
     /**
      * Whether this user has signed up for Google+.
      */
-    isPlusUser?: boolean | null;
+    isPlusUser?: boolean;
     /**
      * Identifies this resource as a person. Value: &quot;plus#person&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * An object representation of the individual components of a person&#39;s name.
      */
@@ -688,19 +686,19 @@ export namespace plusDomains_v1 {
       honorificPrefix?: string;
       honorificSuffix?: string;
       middleName?: string;
-    } | null;
+    };
     /**
      * The nickname of this person.
      */
-    nickname?: string | null;
+    nickname?: string;
     /**
      * Type of person within Google+. Possible values include, but are not limited to, the following values:   - &quot;person&quot; - represents an actual person.  - &quot;page&quot; - represents a page.
      */
-    objectType?: string | null;
+    objectType?: string;
     /**
      * The occupation of this person.
      */
-    occupation?: string | null;
+    occupation?: string;
     /**
      * A list of current or past organizations with which this person is associated.
      */
@@ -714,93 +712,93 @@ export namespace plusDomains_v1 {
       startDate?: string;
       title?: string;
       type?: string;
-    }> | null;
+    }>;
     /**
      * A list of places where this person has lived.
      */
-    placesLived?: Array<{primary?: boolean; value?: string}> | null;
+    placesLived?: Array<{primary?: boolean; value?: string}>;
     /**
      * If a Google+ Page, the number of people who have +1&#39;d this page.
      */
-    plusOneCount?: number | null;
+    plusOneCount?: number;
     /**
      * The person&#39;s relationship status. Possible values include, but are not limited to, the following values:   - &quot;single&quot; - Person is single.  - &quot;in_a_relationship&quot; - Person is in a relationship.  - &quot;engaged&quot; - Person is engaged.  - &quot;married&quot; - Person is married.  - &quot;its_complicated&quot; - The relationship is complicated.  - &quot;open_relationship&quot; - Person is in an open relationship.  - &quot;widowed&quot; - Person is widowed.  - &quot;in_domestic_partnership&quot; - Person is in a domestic partnership.  - &quot;in_civil_union&quot; - Person is in a civil union.
      */
-    relationshipStatus?: string | null;
+    relationshipStatus?: string;
     /**
      * The person&#39;s skills.
      */
-    skills?: string | null;
+    skills?: string;
     /**
      * The brief description (tagline) of this person.
      */
-    tagline?: string | null;
+    tagline?: string;
     /**
      * The URL of this person&#39;s profile.
      */
-    url?: string | null;
+    url?: string;
     /**
      * A list of URLs for this person.
      */
-    urls?: Array<{label?: string; type?: string; value?: string}> | null;
+    urls?: Array<{label?: string; type?: string; value?: string}>;
     /**
      * Whether the person or Google+ Page has been verified.
      */
-    verified?: boolean | null;
+    verified?: boolean;
   }
   export interface Schema$Place {
     /**
      * The physical address of the place.
      */
-    address?: {formatted?: string} | null;
+    address?: {formatted?: string};
     /**
      * The display name of the place.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The id of the place.
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies this resource as a place. Value: &quot;plus#place&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The position of the place.
      */
-    position?: {latitude?: number; longitude?: number} | null;
+    position?: {latitude?: number; longitude?: number};
   }
   export interface Schema$PlusDomainsAclentryResource {
     /**
      * A descriptive name for this entry. Suitable for display.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * The ID of the entry. For entries of type &quot;person&quot; or &quot;circle&quot;, this is the ID of the resource. For other types, this property is not set.
      */
-    id?: string | null;
+    id?: string;
     /**
      * The type of entry describing to whom access is granted. Possible values are:   - &quot;person&quot; - Access to an individual.  - &quot;circle&quot; - Access to members of a circle.  - &quot;myCircles&quot; - Access to members of all the person&#39;s circles.  - &quot;extendedCircles&quot; - Access to members of all the person&#39;s circles, plus all of the people in their circles.  - &quot;domain&quot; - Access to members of the person&#39;s Google Apps domain.  - &quot;public&quot; - Access to anyone on the web.
      */
-    type?: string | null;
+    type?: string;
   }
   export interface Schema$Videostream {
     /**
      * The height, in pixels, of the video resource.
      */
-    height?: number | null;
+    height?: number;
     /**
      * MIME type of the video stream.
      */
-    type?: string | null;
+    type?: string;
     /**
      * URL of the video stream.
      */
-    url?: string | null;
+    url?: string;
     /**
      * The width, in pixels, of the video resource.
      */
-    width?: number | null;
+    width?: number;
   }
 
   export class Resource$Activities {
@@ -1398,7 +1396,7 @@ export namespace plusDomains_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.collection
      * @param {string} params.userId The ID of the user to create the activity on behalf of.
-     * @param  {object} params.requestBody Media resource metadata
+     * @param  {object} params.resource Media resource metadata
      * @param {object} params.media Media object
      * @param {string} params.media.mimeType Media mime-type
      * @param {string|object} params.media.body Media body contents

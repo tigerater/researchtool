@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -110,43 +112,43 @@ export namespace reseller_v1 {
     /**
      * A customer&#39;s physical address. An address can be composed of one to three lines. The addressline2 and addressLine3 are optional.
      */
-    addressLine1?: string | null;
+    addressLine1?: string;
     /**
      * Line 2 of the address.
      */
-    addressLine2?: string | null;
+    addressLine2?: string;
     /**
      * Line 3 of the address.
      */
-    addressLine3?: string | null;
+    addressLine3?: string;
     /**
      * The customer contact&#39;s name. This is required.
      */
-    contactName?: string | null;
+    contactName?: string;
     /**
      * For countryCode information, see the ISO 3166 country code elements. Verify that country is approved for resale of Google products. This property is required when creating a new customer.
      */
-    countryCode?: string | null;
+    countryCode?: string;
     /**
      * Identifies the resource as a customer address. Value: customers#address
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * An example of a locality value is the city of San Francisco.
      */
-    locality?: string | null;
+    locality?: string;
     /**
      * The company or company division name. This is required.
      */
-    organizationName?: string | null;
+    organizationName?: string;
     /**
      * A postalCode example is a postal zip code such as 94043. This property is required when creating a new customer.
      */
-    postalCode?: string | null;
+    postalCode?: string;
     /**
      * An example of a region value is CA for the state of California.
      */
-    region?: string | null;
+    region?: string;
   }
   /**
    * JSON template for the ChangePlan rpc request.
@@ -155,19 +157,19 @@ export namespace reseller_v1 {
     /**
      * Google-issued code (100 char max) for discounted pricing on subscription plans. Deal code must be included in changePlan request in order to receive discounted rate. This property is optional. If a deal code has already been added to a subscription, this property may be left empty and the existing discounted rate will still apply (if not empty, only provide the deal code that is already present on the subscription). If a deal code has never been added to a subscription and this property is left blank, regular pricing will apply.
      */
-    dealCode?: string | null;
+    dealCode?: string;
     /**
      * Identifies the resource as a subscription change plan request. Value: subscriptions#changePlanRequest
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The planName property is required. This is the name of the subscription&#39;s payment plan. For more information about the Google payment plans, see API concepts.  Possible values are:   - ANNUAL_MONTHLY_PAY - The annual commitment plan with monthly payments  Caution: ANNUAL_MONTHLY_PAY is returned as ANNUAL in all API responses.   - ANNUAL_YEARLY_PAY - The annual commitment plan with yearly payments   - FLEXIBLE - The flexible plan   - TRIAL - The 30-day free trial plan
      */
-    planName?: string | null;
+    planName?: string;
     /**
      * This is an optional property. This purchase order (PO) information is for resellers to use for their company tracking usage. If a purchaseOrderId value is given it appears in the API responses and shows up in the invoice. The property accepts up to 80 plain text characters.
      */
-    purchaseOrderId?: string | null;
+    purchaseOrderId?: string;
     /**
      * This is a required property. The seats property is the number of user seat licenses.
      */
@@ -180,27 +182,27 @@ export namespace reseller_v1 {
     /**
      * Like the &quot;Customer email&quot; in the reseller tools, this email is the secondary contact used if something happens to the customer&#39;s service such as service outage or a security issue. This property is required when creating a new customer and should not use the same domain as customerDomain.
      */
-    alternateEmail?: string | null;
+    alternateEmail?: string;
     /**
      * The customer&#39;s primary domain name string. customerDomain is required when creating a new customer. Do not include the www prefix in the domain when adding a customer.
      */
-    customerDomain?: string | null;
+    customerDomain?: string;
     /**
      * Whether the customer&#39;s primary domain has been verified.
      */
-    customerDomainVerified?: boolean | null;
+    customerDomainVerified?: boolean;
     /**
      * This property will always be returned in a response as the unique identifier generated by Google. In a request, this property can be either the primary domain or the unique identifier generated by Google.
      */
-    customerId?: string | null;
+    customerId?: string;
     /**
      * Identifies the resource as a customer. Value: reseller#customer
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Customer contact phone number. Must start with &quot;+&quot; followed by the country code. The rest of the number can be contiguous numbers or respect the phone local format conventions, but it must be a real phone number and not, for example, &quot;123&quot;. This field is silently ignored if invalid.
      */
-    phoneNumber?: string | null;
+    phoneNumber?: string;
     /**
      * A customer&#39;s address information. Each field has a limit of 255 charcters.
      */
@@ -208,7 +210,7 @@ export namespace reseller_v1 {
     /**
      * URL to customer&#39;s Admin console dashboard. The read-only URL is generated by the API service. This is used if your client application requires the customer to complete a task in the Admin console.
      */
-    resourceUiUrl?: string | null;
+    resourceUiUrl?: string;
   }
   /**
    * JSON template for a subscription renewal settings.
@@ -217,11 +219,11 @@ export namespace reseller_v1 {
     /**
      * Identifies the resource as a subscription renewal setting. Value: subscriptions#renewalSettings
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Renewal settings for the annual commitment plan. For more detailed information, see renewal options in the administrator help center. When renewing a subscription, the renewalType is a required property.
      */
-    renewalType?: string | null;
+    renewalType?: string;
   }
   /**
    * JSON template for resellernotify getwatchdetails response.
@@ -230,11 +232,11 @@ export namespace reseller_v1 {
     /**
      * List of registered service accounts.
      */
-    serviceAccountEmailAddresses?: string[] | null;
+    serviceAccountEmailAddresses?: string[];
     /**
      * Topic name of the PubSub
      */
-    topicName?: string | null;
+    topicName?: string;
   }
   /**
    * JSON template for resellernotify response.
@@ -243,7 +245,7 @@ export namespace reseller_v1 {
     /**
      * Topic name of the PubSub
      */
-    topicName?: string | null;
+    topicName?: string;
   }
   /**
    * JSON template for subscription seats.
@@ -252,19 +254,19 @@ export namespace reseller_v1 {
     /**
      * Identifies the resource as a subscription seat setting. Value: subscriptions#seats
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Read-only field containing the current number of users that are assigned a license for the product defined in skuId. This field&#39;s value is equivalent to the numerical count of users returned by the Enterprise License Manager API method: listForProductAndSku
      */
-    licensedNumberOfSeats?: number | null;
+    licensedNumberOfSeats?: number;
     /**
      * This is a required property and is exclusive to subscriptions with FLEXIBLE or TRIAL plans. This property sets the maximum number of licensed users allowed on a subscription. This quantity can be increased up to the maximum limit defined in the reseller&#39;s contract. The minimum quantity is the current number of users in the customer account. Note: G Suite subscriptions automatically assign a license to every user.
      */
-    maximumNumberOfSeats?: number | null;
+    maximumNumberOfSeats?: number;
     /**
      * This is a required property and is exclusive to subscriptions with ANNUAL_MONTHLY_PAY and ANNUAL_YEARLY_PAY plans. This property sets the maximum number of licenses assignable to users on a subscription. The reseller can add more licenses, but once set, the numberOfSeats cannot be reduced until renewal. The reseller is invoiced based on the numberOfSeats value regardless of how many of these user licenses are assigned. Note: G Suite subscriptions automatically assign a license to every user.
      */
-    numberOfSeats?: number | null;
+    numberOfSeats?: number;
   }
   /**
    * JSON template for a subscription.
@@ -273,27 +275,27 @@ export namespace reseller_v1 {
     /**
      * Read-only field that returns the current billing method for a subscription.
      */
-    billingMethod?: string | null;
+    billingMethod?: string;
     /**
      * The creationTime property is the date when subscription was created. It is in milliseconds using the Epoch format. See an example Epoch converter.
      */
-    creationTime?: string | null;
+    creationTime?: string;
     /**
      * Primary domain name of the customer
      */
-    customerDomain?: string | null;
+    customerDomain?: string;
     /**
      * This property will always be returned in a response as the unique identifier generated by Google. In a request, this property can be either the primary domain or the unique identifier generated by Google.
      */
-    customerId?: string | null;
+    customerId?: string;
     /**
      * Google-issued code (100 char max) for discounted pricing on subscription plans. Deal code must be included in insert requests in order to receive discounted rate. This property is optional, regular pricing applies if left empty.
      */
-    dealCode?: string | null;
+    dealCode?: string;
     /**
      * Identifies the resource as a Subscription. Value: reseller#subscription
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The plan property is required. In this version of the API, the G Suite plans are the flexible plan, annual commitment plan, and the 30-day free trial plan. For more information about the API&quot;s payment plans, see the API concepts.
      */
@@ -301,11 +303,11 @@ export namespace reseller_v1 {
       commitmentInterval?: {endTime?: string; startTime?: string};
       isCommitmentPlan?: boolean;
       planName?: string;
-    } | null;
+    };
     /**
      * This is an optional property. This purchase order (PO) information is for resellers to use for their company tracking usage. If a purchaseOrderId value is given it appears in the API responses and shows up in the invoice. The property accepts up to 80 plain text characters.
      */
-    purchaseOrderId?: string | null;
+    purchaseOrderId?: string;
     /**
      * Renewal settings for the annual commitment plan. For more detailed information, see renewal options in the administrator help center.
      */
@@ -313,7 +315,7 @@ export namespace reseller_v1 {
     /**
      * URL to customer&#39;s Subscriptions page in the Admin console. The read-only URL is generated by the API service. This is used if your client application requires the customer to complete a task using the Subscriptions page in the Admin console.
      */
-    resourceUiUrl?: string | null;
+    resourceUiUrl?: string;
     /**
      * This is a required property. The number and limit of user seat licenses in the plan.
      */
@@ -321,34 +323,34 @@ export namespace reseller_v1 {
     /**
      * A required property. The skuId is a unique system identifier for a product&#39;s SKU assigned to a customer in the subscription. For products and SKUs available in this version of the API, see  Product and SKU IDs.
      */
-    skuId?: string | null;
+    skuId?: string;
     /**
      * Read-only external display name for a product&#39;s SKU assigned to a customer in the subscription. SKU names are subject to change at Google&#39;s discretion. For products and SKUs available in this version of the API, see  Product and SKU IDs.
      */
-    skuName?: string | null;
+    skuName?: string;
     /**
      * This is an optional property.
      */
-    status?: string | null;
+    status?: string;
     /**
      * The subscriptionId is the subscription identifier and is unique for each customer. This is a required property. Since a subscriptionId changes when a subscription is updated, we recommend not using this ID as a key for persistent data. Use the subscriptionId as described in retrieve all reseller subscriptions.
      */
-    subscriptionId?: string | null;
+    subscriptionId?: string;
     /**
      * Read-only field containing an enumerable of all the current suspension reasons for a subscription. It is possible for a subscription to have many concurrent, overlapping suspension reasons. A subscription&#39;s STATUS is SUSPENDED until all pending suspensions are removed.  Possible options include:   - PENDING_TOS_ACCEPTANCE - The customer has not logged in and accepted the G Suite Resold Terms of Services.   - RENEWAL_WITH_TYPE_CANCEL - The customer&#39;s commitment ended and their service was cancelled at the end of their term.   - RESELLER_INITIATED - A manual suspension invoked by a Reseller.   - TRIAL_ENDED - The customer&#39;s trial expired without a plan selected.   - OTHER - The customer is suspended for an internal Google reason (e.g. abuse or otherwise).
      */
-    suspensionReasons?: string[] | null;
+    suspensionReasons?: string[];
     /**
      * Read-only transfer related information for the subscription. For more information, see retrieve transferable subscriptions for a customer.
      */
     transferInfo?: {
       minimumTransferableSeats?: number;
       transferabilityExpirationTime?: string;
-    } | null;
+    };
     /**
      * The G Suite annual commitment and flexible payment plans can be in a 30-day free trial. For more information, see the API concepts.
      */
-    trialSettings?: {isInTrial?: boolean; trialEndTime?: string} | null;
+    trialSettings?: {isInTrial?: boolean; trialEndTime?: string};
   }
   /**
    * JSON template for a subscription list.
@@ -357,11 +359,11 @@ export namespace reseller_v1 {
     /**
      * Identifies the resource as a collection of subscriptions. Value: reseller#subscriptions
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The subscriptions in this page of results.
      */
@@ -453,7 +455,7 @@ export namespace reseller_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.customerAuthToken The customerAuthToken query string is required when creating a resold account that transfers a direct customer's subscription or transfers another reseller customer's subscription to your reseller management. This is a hexadecimal authentication token needed to complete the subscription transfer. For more information, see the administrator help center.
-     * @param {().Customer} params.requestBody Request body data
+     * @param {().Customer} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -525,7 +527,7 @@ export namespace reseller_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customerId Either the customer's primary domain name or the customer's unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.
-     * @param {().Customer} params.requestBody Request body data
+     * @param {().Customer} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -597,7 +599,7 @@ export namespace reseller_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customerId Either the customer's primary domain name or the customer's unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.
-     * @param {().Customer} params.requestBody Request body data
+     * @param {().Customer} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1094,7 +1096,7 @@ export namespace reseller_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customerId Either the customer's primary domain name or the customer's unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.
      * @param {string} params.subscriptionId This is a required property. The subscriptionId is the subscription identifier and is unique for each customer. Since a subscriptionId changes when a subscription is updated, we recommend to not use this ID as a key for persistent data. And the subscriptionId can be found using the retrieve all reseller subscriptions method.
-     * @param {().ChangePlanRequest} params.requestBody Request body data
+     * @param {().ChangePlanRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1170,7 +1172,7 @@ export namespace reseller_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customerId Either the customer's primary domain name or the customer's unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.
      * @param {string} params.subscriptionId This is a required property. The subscriptionId is the subscription identifier and is unique for each customer. Since a subscriptionId changes when a subscription is updated, we recommend to not use this ID as a key for persistent data. And the subscriptionId can be found using the retrieve all reseller subscriptions method.
-     * @param {().RenewalSettings} params.requestBody Request body data
+     * @param {().RenewalSettings} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1248,7 +1250,7 @@ export namespace reseller_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customerId Either the customer's primary domain name or the customer's unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.
      * @param {string} params.subscriptionId This is a required property. The subscriptionId is the subscription identifier and is unique for each customer. Since a subscriptionId changes when a subscription is updated, we recommend to not use this ID as a key for persistent data. And the subscriptionId can be found using the retrieve all reseller subscriptions method.
-     * @param {().Seats} params.requestBody Request body data
+     * @param {().Seats} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1317,7 +1319,7 @@ export namespace reseller_v1 {
 
     /**
      * reseller.subscriptions.delete
-     * @desc Cancel, suspend, or transfer a subscription to direct.
+     * @desc Cancel or transfer a subscription to direct.
      * @alias reseller.subscriptions.delete
      * @memberOf! ()
      *
@@ -1473,7 +1475,7 @@ export namespace reseller_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.customerAuthToken The customerAuthToken query string is required when creating a resold account that transfers a direct customer's subscription or transfers another reseller customer's subscription to your reseller management. This is a hexadecimal authentication token needed to complete the subscription transfer. For more information, see the administrator help center.
      * @param {string} params.customerId Either the customer's primary domain name or the customer's unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.
-     * @param {().Subscription} params.requestBody Request body data
+     * @param {().Subscription} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

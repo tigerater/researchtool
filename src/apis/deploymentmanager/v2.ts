@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -115,11 +117,11 @@ export namespace deploymentmanager_v2 {
      * The configuration for logging of each type of permission.
      */
     auditLogConfigs?: Schema$AuditLogConfig[];
-    exemptedMembers?: string[] | null;
+    exemptedMembers?: string[];
     /**
      * Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    service?: string | null;
+    service?: string;
   }
   /**
    * Provides the configuration for logging a type of permissions. Example:  { &quot;audit_log_configs&quot;: [ { &quot;log_type&quot;: &quot;DATA_READ&quot;, &quot;exempted_members&quot;: [ &quot;user:foo@gmail.com&quot; ] }, { &quot;log_type&quot;: &quot;DATA_WRITE&quot;, } ] }  This enables &#39;DATA_READ&#39; and &#39;DATA_WRITE&#39; logging, while exempting foo@gmail.com from DATA_READ logging.
@@ -128,11 +130,11 @@ export namespace deploymentmanager_v2 {
     /**
      * Specifies the identities that do not cause logging for this type of permission. Follows the same format of [Binding.members][].
      */
-    exemptedMembers?: string[] | null;
+    exemptedMembers?: string[];
     /**
      * The log type that this config enables.
      */
-    logType?: string | null;
+    logType?: string;
   }
   /**
    * Authorization-related information used by Cloud Audit Logging.
@@ -141,7 +143,7 @@ export namespace deploymentmanager_v2 {
     /**
      * The type of the permission that was checked.
      */
-    permissionType?: string | null;
+    permissionType?: string;
   }
   /**
    * Associates `members` with a `role`.
@@ -154,11 +156,11 @@ export namespace deploymentmanager_v2 {
     /**
      * Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:  * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account.  * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.  * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` .    * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`.  * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`.    * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.
      */
-    members?: string[] | null;
+    members?: string[];
     /**
      * Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
      */
-    role?: string | null;
+    role?: string;
   }
   /**
    * A condition to be met.
@@ -167,48 +169,48 @@ export namespace deploymentmanager_v2 {
     /**
      * Trusted attributes supplied by the IAM system.
      */
-    iam?: string | null;
+    iam?: string;
     /**
      * An operator to apply the subject with.
      */
-    op?: string | null;
+    op?: string;
     /**
      * Trusted attributes discharged by the service.
      */
-    svc?: string | null;
+    svc?: string;
     /**
      * Trusted attributes supplied by any service that owns resources and uses the IAM system for access control.
      */
-    sys?: string | null;
+    sys?: string;
     /**
      * DEPRECATED. Use &#39;values&#39; instead.
      */
-    value?: string | null;
+    value?: string;
     /**
      * The objects of the condition. This is mutually exclusive with &#39;value&#39;.
      */
-    values?: string[] | null;
+    values?: string[];
   }
   export interface Schema$ConfigFile {
     /**
      * The contents of the file.
      */
-    content?: string | null;
+    content?: string;
   }
   export interface Schema$Deployment {
     /**
      * An optional user-provided description of the deployment.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Provides a fingerprint to use in requests to modify a deployment, such as update(), stop(), and cancelPreview() requests. A fingerprint is a randomly generated value that must be provided with update(), stop(), and cancelPreview() requests to perform optimistic locking. This ensures optimistic concurrency so that only one request happens at a time.  The fingerprint is initially generated by Deployment Manager and changes after every request to modify data. To get the latest fingerprint value, perform a get() request to a deployment.
      */
-    fingerprint?: string | null;
-    id?: string | null;
+    fingerprint?: string;
+    id?: string;
     /**
      * Output only. Creation timestamp in RFC3339 text format.
      */
-    insertTime?: string | null;
+    insertTime?: string;
     /**
      * Map of labels; provided by the client when the resource is created or updated. Specifically: Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?
      */
@@ -216,11 +218,11 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. URL of the manifest representing the last manifest that was successfully deployed.
      */
-    manifest?: string | null;
+    manifest?: string;
     /**
      * Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The Operation that most recently ran, or is currently running, on this deployment.
      */
@@ -228,7 +230,7 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. Server defined URL for the resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * [Input Only] The parameters that define your deployment, including the deployment configuration and relevant templates.
      */
@@ -240,17 +242,17 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. Update timestamp in RFC3339 text format.
      */
-    updateTime?: string | null;
+    updateTime?: string;
   }
   export interface Schema$DeploymentLabelEntry {
-    key?: string | null;
-    value?: string | null;
+    key?: string;
+    value?: string;
   }
   export interface Schema$DeploymentsCancelPreviewRequest {
     /**
      * Specifies a fingerprint for cancelPreview() requests. A fingerprint is a randomly generated value that must be provided in cancelPreview() requests to perform optimistic locking. This ensures optimistic concurrency so that the deployment does not have conflicting requests (e.g. if someone attempts to make a new update request while another user attempts to cancel a preview, this would prevent one of the requests).  The fingerprint is initially generated by Deployment Manager and changes after every request to modify a deployment. To get the latest fingerprint value, perform a get() request on the deployment.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
   }
   /**
    * A response containing a partial list of deployments and a page token used to build the next request if the request has been truncated.
@@ -263,19 +265,19 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. A token used to continue a truncated list request.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   export interface Schema$DeploymentsStopRequest {
     /**
      * Specifies a fingerprint for stop() requests. A fingerprint is a randomly generated value that must be provided in stop() requests to perform optimistic locking. This ensures optimistic concurrency so that the deployment does not have conflicting requests (e.g. if someone attempts to make a new update request while another user attempts to stop an ongoing update request, this would prevent a collision).  The fingerprint is initially generated by Deployment Manager and changes after every request to modify a deployment. To get the latest fingerprint value, perform a get() request on the deployment.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
   }
   export interface Schema$DeploymentUpdate {
     /**
      * Output only. An optional user-provided description of the deployment after the current update has been applied.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Output only. Map of labels; provided by the client when the resource is created or updated. Specifically: Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?
      */
@@ -283,11 +285,11 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. URL of the manifest representing the update configuration of this deployment.
      */
-    manifest?: string | null;
+    manifest?: string;
   }
   export interface Schema$DeploymentUpdateLabelEntry {
-    key?: string | null;
-    value?: string | null;
+    key?: string;
+    value?: string;
   }
   /**
    * Represents an expression text. Example:  title: &quot;User account presence&quot; description: &quot;Determines whether the request has a user account&quot; expression: &quot;size(request.user) &gt; 0&quot;
@@ -296,19 +298,19 @@ export namespace deploymentmanager_v2 {
     /**
      * An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
      */
-    description?: string | null;
+    description?: string;
     /**
      * Textual representation of an expression in Common Expression Language syntax.  The application context of the containing message determines which well-known feature set of CEL is supported.
      */
-    expression?: string | null;
+    expression?: string;
     /**
      * An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
      */
-    location?: string | null;
+    location?: string;
     /**
      * An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
      */
-    title?: string | null;
+    title?: string;
   }
   export interface Schema$GlobalSetPolicyRequest {
     /**
@@ -318,7 +320,7 @@ export namespace deploymentmanager_v2 {
     /**
      * Flatten Policy to create a backward compatible wire-format. Deprecated. Use &#39;policy&#39; to specify the etag.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * REQUIRED: The complete policy to be applied to the &#39;resource&#39;. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them.
      */
@@ -328,11 +330,11 @@ export namespace deploymentmanager_v2 {
     /**
      * The contents of the file.
      */
-    content?: string | null;
+    content?: string;
     /**
      * The name of the file.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * Specifies what kind of log the caller must write
@@ -362,7 +364,7 @@ export namespace deploymentmanager_v2 {
     /**
      * The log_name to populate in the Cloud Audit Record.
      */
-    logName?: string | null;
+    logName?: string;
   }
   /**
    * Increment a streamz counter with the specified metric and field names.  Metric names should start with a &#39;/&#39;, generally be lowercase-only, and end in &quot;_count&quot;. Field names should not contain an initial slash. The actual exported metric names will have &quot;/iam/policy&quot; prepended.  Field names correspond to IAM request parameters and field values are their respective values.  Supported field names: - &quot;authority&quot;, which is &quot;[token]&quot; if IAMContext.token is present, otherwise the value of IAMContext.authority_selector if present, and otherwise a representation of IAMContext.principal; or - &quot;iam_principal&quot;, a representation of IAMContext.principal even if a token or authority selector is present; or - &quot;&quot; (empty string), resulting in a counter with no fields.  Examples: counter { metric: &quot;/debug_access_count&quot; field: &quot;iam_principal&quot; } ==&gt; increment counter /iam/policy/backend_debug_access_count {iam_principal=[value of IAMContext.principal]}  At this time we do not support multiple field names (though this may be supported in the future).
@@ -371,11 +373,11 @@ export namespace deploymentmanager_v2 {
     /**
      * The field value to attribute.
      */
-    field?: string | null;
+    field?: string;
     /**
      * The metric to update.
      */
-    metric?: string | null;
+    metric?: string;
   }
   /**
    * Write a Data Access (Gin) log
@@ -384,7 +386,7 @@ export namespace deploymentmanager_v2 {
     /**
      * Whether Gin logging should happen in a fail-closed manner at the caller. This is relevant only in the LocalIAM implementation, for now.  NOTE: Logging to Gin in a fail-closed manner is currently unsupported while work is being done to satisfy the requirements of go/345. Currently, setting LOG_FAIL_CLOSED mode will have no effect, but still exists because there is active work being done to support it (b/115874152).
      */
-    logMode?: string | null;
+    logMode?: string;
   }
   export interface Schema$Manifest {
     /**
@@ -394,8 +396,8 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. The fully-expanded configuration file, including any templates and references.
      */
-    expandedConfig?: string | null;
-    id?: string | null;
+    expandedConfig?: string;
+    id?: string;
     /**
      * Output only. The imported files for this manifest.
      */
@@ -403,19 +405,19 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. Creation timestamp in RFC3339 text format.
      */
-    insertTime?: string | null;
+    insertTime?: string;
     /**
      * Output only. The YAML layout for this manifest.
      */
-    layout?: string | null;
+    layout?: string;
     /**
      * Output only.  The name of the manifest.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. Self link for the manifest.
      */
-    selfLink?: string | null;
+    selfLink?: string;
   }
   /**
    * A response containing a partial list of manifests and a page token used to build the next request if the request has been truncated.
@@ -428,7 +430,7 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. A token used to continue a truncated list request.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * An Operation resource, used to manage asynchronous API requests. (== resource_for v1.globalOperations ==) (== resource_for beta.globalOperations ==) (== resource_for v1.regionOperations ==) (== resource_for beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)
@@ -437,89 +439,89 @@ export namespace deploymentmanager_v2 {
     /**
      * [Output Only] The value of `requestId` if you provided it in the request. Not present otherwise.
      */
-    clientOperationId?: string | null;
+    clientOperationId?: string;
     /**
      * [Deprecated] This field is deprecated.
      */
-    creationTimestamp?: string | null;
+    creationTimestamp?: string;
     /**
      * [Output Only] A textual description of the operation, which is set when the operation is created.
      */
-    description?: string | null;
+    description?: string;
     /**
      * [Output Only] The time that this operation was completed. This value is in RFC3339 text format.
      */
-    endTime?: string | null;
+    endTime?: string;
     /**
      * [Output Only] If errors are generated during processing of the operation, this field will be populated.
      */
     error?: {
       errors?: Array<{code?: string; location?: string; message?: string}>;
-    } | null;
+    };
     /**
      * [Output Only] If the operation fails, this field contains the HTTP error message that was returned, such as NOT FOUND.
      */
-    httpErrorMessage?: string | null;
+    httpErrorMessage?: string;
     /**
      * [Output Only] If the operation fails, this field contains the HTTP error status code that was returned. For example, a 404 means the resource was not found.
      */
-    httpErrorStatusCode?: number | null;
+    httpErrorStatusCode?: number;
     /**
      * [Output Only] The unique identifier for the resource. This identifier is defined by the server.
      */
-    id?: string | null;
+    id?: string;
     /**
      * [Output Only] The time that this operation was requested. This value is in RFC3339 text format.
      */
-    insertTime?: string | null;
+    insertTime?: string;
     /**
      * [Output Only] Type of the resource. Always compute#operation for Operation resources.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * [Output Only] Name of the resource.
      */
-    name?: string | null;
+    name?: string;
     /**
      * [Output Only] The type of operation, such as insert, update, or delete, and so on.
      */
-    operationType?: string | null;
+    operationType?: string;
     /**
      * [Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess when the operation will be complete. This number should monotonically increase as the operation progresses.
      */
-    progress?: number | null;
+    progress?: number;
     /**
      * [Output Only] The URL of the region where the operation resides. Only available when performing regional operations. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
      */
-    region?: string | null;
+    region?: string;
     /**
      * [Output Only] Server-defined URL for the resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
     /**
      * [Output Only] The time that this operation was started by the server. This value is in RFC3339 text format.
      */
-    startTime?: string | null;
+    startTime?: string;
     /**
      * [Output Only] The status of the operation, which can be one of the following: PENDING, RUNNING, or DONE.
      */
-    status?: string | null;
+    status?: string;
     /**
      * [Output Only] An optional textual description of the current status of the operation.
      */
-    statusMessage?: string | null;
+    statusMessage?: string;
     /**
      * [Output Only] The unique target ID, which identifies a specific incarnation of the target resource.
      */
-    targetId?: string | null;
+    targetId?: string;
     /**
      * [Output Only] The URL of the resource that the operation modifies. For operations related to creating a snapshot, this points to the persistent disk that the snapshot was created from.
      */
-    targetLink?: string | null;
+    targetLink?: string;
     /**
      * [Output Only] User who requested the operation, for example: user@example.com.
      */
-    user?: string | null;
+    user?: string;
     /**
      * [Output Only] If warning messages are generated during processing of the operation, this field will be populated.
      */
@@ -527,11 +529,11 @@ export namespace deploymentmanager_v2 {
       code?: string;
       data?: Array<{key?: string; value?: string}>;
       message?: string;
-    }> | null;
+    }>;
     /**
      * [Output Only] The URL of the zone where the operation resides. Only available when performing per-zone operations. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
      */
-    zone?: string | null;
+    zone?: string;
   }
   /**
    * A response containing a partial list of operations and a page token used to build the next request if the request has been truncated.
@@ -540,7 +542,7 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. A token used to continue a truncated list request.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Output only. Operations contained in this list response.
      */
@@ -561,8 +563,8 @@ export namespace deploymentmanager_v2 {
     /**
      * `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy.  If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.
      */
-    etag?: string | null;
-    iamOwned?: boolean | null;
+    etag?: string;
+    iamOwned?: boolean;
     /**
      * If more than one rule is specified, the rules are applied in the following manner: - All matching LOG rules are always applied. - If any DENY/DENY_WITH_LOG rule matches, permission is denied. Logging will be applied if one or more matching rule requires logging. - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is granted. Logging will be applied if one or more matching rule requires logging. - Otherwise, if no rule applies, permission is denied.
      */
@@ -570,7 +572,7 @@ export namespace deploymentmanager_v2 {
     /**
      * Deprecated.
      */
-    version?: number | null;
+    version?: number;
   }
   export interface Schema$Resource {
     /**
@@ -580,28 +582,28 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. The evaluated properties of the resource with references expanded. Returned as serialized YAML.
      */
-    finalProperties?: string | null;
-    id?: string | null;
+    finalProperties?: string;
+    id?: string;
     /**
      * Output only. Creation timestamp in RFC3339 text format.
      */
-    insertTime?: string | null;
+    insertTime?: string;
     /**
      * Output only. URL of the manifest representing the current configuration of this resource.
      */
-    manifest?: string | null;
+    manifest?: string;
     /**
      * Output only. The name of the resource as it appears in the YAML config.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The current properties of the resource before any references have been filled in. Returned as serialized YAML.
      */
-    properties?: string | null;
+    properties?: string;
     /**
      * Output only. The type of the resource, for example compute.v1.instance, or cloudfunctions.v1beta1.function.
      */
-    type?: string | null;
+    type?: string;
     /**
      * Output only. If Deployment Manager is currently updating or previewing an update to this resource, the updated configuration appears here.
      */
@@ -609,11 +611,11 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. Update timestamp in RFC3339 text format.
      */
-    updateTime?: string | null;
+    updateTime?: string;
     /**
      * Output only. The URL of the actual resource.
      */
-    url?: string | null;
+    url?: string;
     /**
      * Output only. If warning messages are generated during processing of this resource, this field will be populated.
      */
@@ -621,7 +623,7 @@ export namespace deploymentmanager_v2 {
       code?: string;
       data?: Array<{key?: string; value?: string}>;
       message?: string;
-    }> | null;
+    }>;
   }
   /**
    * The access controls set on the resource.
@@ -630,7 +632,7 @@ export namespace deploymentmanager_v2 {
     /**
      * The GCP IAM Policy to set on the resource.
      */
-    gcpIamPolicy?: string | null;
+    gcpIamPolicy?: string;
   }
   /**
    * A response containing a partial list of resources and a page token used to build the next request if the request has been truncated.
@@ -639,7 +641,7 @@ export namespace deploymentmanager_v2 {
     /**
      * A token used to continue a truncated list request.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Resources contained in this list response.
      */
@@ -655,27 +657,27 @@ export namespace deploymentmanager_v2 {
      */
     error?: {
       errors?: Array<{code?: string; location?: string; message?: string}>;
-    } | null;
+    };
     /**
      * Output only. The expanded properties of the resource with reference values expanded. Returned as serialized YAML.
      */
-    finalProperties?: string | null;
+    finalProperties?: string;
     /**
      * Output only. The intent of the resource: PREVIEW, UPDATE, or CANCEL.
      */
-    intent?: string | null;
+    intent?: string;
     /**
      * Output only. URL of the manifest representing the update configuration of this resource.
      */
-    manifest?: string | null;
+    manifest?: string;
     /**
      * Output only. The set of updated properties for this resource, before references are expanded. Returned as serialized YAML.
      */
-    properties?: string | null;
+    properties?: string;
     /**
      * Output only. The state of the resource.
      */
-    state?: string | null;
+    state?: string;
     /**
      * Output only. If warning messages are generated during processing of this resource, this field will be populated.
      */
@@ -683,7 +685,7 @@ export namespace deploymentmanager_v2 {
       code?: string;
       data?: Array<{key?: string; value?: string}>;
       message?: string;
-    }> | null;
+    }>;
   }
   /**
    * A rule to be applied in a Policy.
@@ -692,7 +694,7 @@ export namespace deploymentmanager_v2 {
     /**
      * Required
      */
-    action?: string | null;
+    action?: string;
     /**
      * Additional restrictions that must be met. All conditions must pass for the rule to match.
      */
@@ -700,11 +702,11 @@ export namespace deploymentmanager_v2 {
     /**
      * Human-readable description of the rule.
      */
-    description?: string | null;
+    description?: string;
     /**
      * If one or more &#39;in&#39; clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
      */
-    ins?: string[] | null;
+    ins?: string[];
     /**
      * The config returned to callers of tech.iam.IAM.CheckPolicy for any entries that match the LOG action.
      */
@@ -712,11 +714,11 @@ export namespace deploymentmanager_v2 {
     /**
      * If one or more &#39;not_in&#39; clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
      */
-    notIns?: string[] | null;
+    notIns?: string[];
     /**
      * A permission is a string of form &#39;..&#39; (e.g., &#39;storage.buckets.list&#39;). A value of &#39;*&#39; matches all permissions, and a verb part of &#39;*&#39; (e.g., &#39;storage.buckets.*&#39;) matches all verbs.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   export interface Schema$TargetConfiguration {
     /**
@@ -732,27 +734,27 @@ export namespace deploymentmanager_v2 {
     /**
      * The set of permissions to check for the &#39;resource&#39;. Permissions with wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   export interface Schema$TestPermissionsResponse {
     /**
      * A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
      */
-    permissions?: string[] | null;
+    permissions?: string[];
   }
   /**
    * A resource type supported by Deployment Manager.
    */
   export interface Schema$Type {
-    id?: string | null;
+    id?: string;
     /**
      * Output only. Creation timestamp in RFC3339 text format.
      */
-    insertTime?: string | null;
+    insertTime?: string;
     /**
      * Name of the type.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Output only. The Operation that most recently ran, or is currently running, on this type.
      */
@@ -760,7 +762,7 @@ export namespace deploymentmanager_v2 {
     /**
      * Output only. Server defined URL for the resource.
      */
-    selfLink?: string | null;
+    selfLink?: string;
   }
   /**
    * A response that returns all Types supported by Deployment Manager
@@ -769,7 +771,7 @@ export namespace deploymentmanager_v2 {
     /**
      * A token used to continue a truncated list request.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Output only. A list of resource types supported by Deployment Manager.
      */
@@ -848,7 +850,7 @@ export namespace deploymentmanager_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.deployment The name of the deployment for this request.
      * @param {string} params.project The project ID for this request.
-     * @param {().DeploymentsCancelPreviewRequest} params.requestBody Request body data
+     * @param {().DeploymentsCancelPreviewRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1361,7 +1363,7 @@ export namespace deploymentmanager_v2 {
      * @param {string=} params.createPolicy Sets the policy to use for creating new resources.
      * @param {boolean=} params.preview If set to true, creates a deployment and creates "shell" resources but does not actually instantiate these resources. This allows you to preview what your deployment looks like. After previewing a deployment, you can deploy your resources by making a request with the update() method or you can use the cancelPreview() method to cancel the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.
      * @param {string} params.project The project ID for this request.
-     * @param {().Deployment} params.requestBody Request body data
+     * @param {().Deployment} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1640,7 +1642,7 @@ export namespace deploymentmanager_v2 {
      * @param {string} params.deployment The name of the deployment for this request.
      * @param {boolean=} params.preview If set to true, updates the deployment and creates and updates the "shell" resources but does not actually alter or instantiate these resources. This allows you to preview what your deployment will look like. You can use this intent to preview how an update would affect your deployment. You must provide a target.config with a configuration if this is set to true. After previewing a deployment, you can deploy your resources by making a request with the update() or you can cancelPreview() to remove the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.
      * @param {string} params.project The project ID for this request.
-     * @param {().Deployment} params.requestBody Request body data
+     * @param {().Deployment} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1773,7 +1775,7 @@ export namespace deploymentmanager_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.project Project ID for this request.
      * @param {string} params.resource_ Name or id of the resource for this request.
-     * @param {().GlobalSetPolicyRequest} params.requestBody Request body data
+     * @param {().GlobalSetPolicyRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1904,7 +1906,7 @@ export namespace deploymentmanager_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.deployment The name of the deployment for this request.
      * @param {string} params.project The project ID for this request.
-     * @param {().DeploymentsStopRequest} params.requestBody Request body data
+     * @param {().DeploymentsStopRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2036,7 +2038,7 @@ export namespace deploymentmanager_v2 {
      * @param {object} params Parameters for request
      * @param {string} params.project Project ID for this request.
      * @param {string} params.resource_ Name or id of the resource for this request.
-     * @param {().TestPermissionsRequest} params.requestBody Request body data
+     * @param {().TestPermissionsRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2177,7 +2179,7 @@ export namespace deploymentmanager_v2 {
      * @param {string} params.deployment The name of the deployment for this request.
      * @param {boolean=} params.preview If set to true, updates the deployment and creates and updates the "shell" resources but does not actually alter or instantiate these resources. This allows you to preview what your deployment will look like. You can use this intent to preview how an update would affect your deployment. You must provide a target.config with a configuration if this is set to true. After previewing a deployment, you can deploy your resources by making a request with the update() or you can cancelPreview() to remove the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.
      * @param {string} params.project The project ID for this request.
-     * @param {().Deployment} params.requestBody Request body data
+     * @param {().Deployment} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

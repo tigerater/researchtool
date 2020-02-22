@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -146,23 +148,23 @@ export namespace admin_directory_v1 {
     /**
      * A alias email
      */
-    alias?: string | null;
+    alias?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Unique id of the group (Read-only) Unique id of the user (Read-only)
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Group&#39;s primary email (Read-only) User&#39;s primary email (Read-only)
      */
-    primaryEmail?: string | null;
+    primaryEmail?: string;
   }
   /**
    * JSON response template to list aliases in Directory API.
@@ -171,15 +173,15 @@ export namespace admin_directory_v1 {
     /**
      * List of alias objects.
      */
-    aliases?: any[] | null;
+    aliases?: any[];
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * JSON template for App Access Collections Resource object in Directory API.
@@ -188,35 +190,35 @@ export namespace admin_directory_v1 {
     /**
      * List of blocked api access buckets.
      */
-    blockedApiAccessBuckets?: string[] | null;
+    blockedApiAccessBuckets?: string[];
     /**
      * Boolean to indicate whether to enforce app access settings on Android Drive or not.
      */
-    enforceSettingsForAndroidDrive?: boolean | null;
+    enforceSettingsForAndroidDrive?: boolean;
     /**
      * Error message provided by the Admin that will be shown to the user when an app is blocked.
      */
-    errorMessage?: string | null;
+    errorMessage?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Identifies the resource as an app access collection. Value: admin#directory#appaccesscollection
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Unique ID of app access collection. (Readonly)
      */
-    resourceId?: string | null;
+    resourceId?: string;
     /**
      * Resource name given by the customer while creating/updating. Should be unique under given customer.
      */
-    resourceName?: string | null;
+    resourceName?: string;
     /**
      * Boolean that indicates whether to trust domain owned apps.
      */
-    trustDomainOwnedApps?: boolean | null;
+    trustDomainOwnedApps?: boolean;
   }
   /**
    * The template that returns individual ASP (Access Code) data.
@@ -225,37 +227,37 @@ export namespace admin_directory_v1 {
     /**
      * The unique ID of the ASP.
      */
-    codeId?: number | null;
+    codeId?: number;
     /**
      * The time when the ASP was created. Expressed in Unix time format.
      */
-    creationTime?: string | null;
+    creationTime?: string;
     /**
      * ETag of the ASP.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The type of the API resource. This is always admin#directory#asp.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The time when the ASP was last used. Expressed in Unix time format.
      */
-    lastTimeUsed?: string | null;
+    lastTimeUsed?: string;
     /**
      * The name of the application that the user, represented by their userId, entered when the ASP was created.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The unique ID of the user who issued the ASP.
      */
-    userKey?: string | null;
+    userKey?: string;
   }
   export interface Schema$Asps {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * A list of ASP resources.
      */
@@ -263,7 +265,7 @@ export namespace admin_directory_v1 {
     /**
      * The type of the API resource. This is always admin#directory#aspList.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * JSON template for Building object in Directory API.
@@ -276,11 +278,11 @@ export namespace admin_directory_v1 {
     /**
      * Unique identifier for the building. The maximum length is 100 characters.
      */
-    buildingId?: string | null;
+    buildingId?: string;
     /**
      * The building name as seen by users in Calendar. Must be unique for the customer. For example, &quot;NYC-CHEL&quot;. The maximum length is 100 characters.
      */
-    buildingName?: string | null;
+    buildingName?: string;
     /**
      * The geographic coordinates of the center of the building, expressed as latitude and longitude in decimal degrees.
      */
@@ -288,19 +290,19 @@ export namespace admin_directory_v1 {
     /**
      * A brief description of the building. For example, &quot;Chelsea Market&quot;.
      */
-    description?: string | null;
+    description?: string;
     /**
      * ETag of the resource.
      */
-    etags?: string | null;
+    etags?: string;
     /**
      * The display names for all floors in this building. The floors are expected to be sorted in ascending order, from lowest floor to highest floor. For example, [&quot;B2&quot;, &quot;B1&quot;, &quot;L&quot;, &quot;1&quot;, &quot;2&quot;, &quot;2M&quot;, &quot;3&quot;, &quot;PH&quot;] Must contain at least one entry.
      */
-    floorNames?: string[] | null;
+    floorNames?: string[];
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * JSON template for the postal address of a building in Directory API.
@@ -309,31 +311,31 @@ export namespace admin_directory_v1 {
     /**
      * Unstructured address lines describing the lower levels of an address.
      */
-    addressLines?: string[] | null;
+    addressLines?: string[];
     /**
      * Optional. Highest administrative subdivision which is used for postal addresses of a country or region.
      */
-    administrativeArea?: string | null;
+    administrativeArea?: string;
     /**
      * Optional. BCP-47 language code of the contents of this address (if known).
      */
-    languageCode?: string | null;
+    languageCode?: string;
     /**
      * Optional. Generally refers to the city/town portion of the address. Examples: US city, IT comune, UK post town. In regions of the world where localities are not well defined or do not fit into this structure well, leave locality empty and use addressLines.
      */
-    locality?: string | null;
+    locality?: string;
     /**
      * Optional. Postal code of the address.
      */
-    postalCode?: string | null;
+    postalCode?: string;
     /**
      * Required. CLDR region code of the country/region of the address.
      */
-    regionCode?: string | null;
+    regionCode?: string;
     /**
      * Optional. Sublocality of the address.
      */
-    sublocality?: string | null;
+    sublocality?: string;
   }
   /**
    * JSON template for coordinates of a building in Directory API.
@@ -342,11 +344,11 @@ export namespace admin_directory_v1 {
     /**
      * Latitude in decimal degrees.
      */
-    latitude?: number | null;
+    latitude?: number;
     /**
      * Longitude in decimal degrees.
      */
-    longitude?: number | null;
+    longitude?: number;
   }
   /**
    * JSON template for Building List Response object in Directory API.
@@ -359,15 +361,15 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * JSON template for Calendar Resource object in Directory API.
@@ -376,60 +378,60 @@ export namespace admin_directory_v1 {
     /**
      * Unique ID for the building a resource is located in.
      */
-    buildingId?: string | null;
+    buildingId?: string;
     /**
      * Capacity of a resource, number of seats in a room.
      */
-    capacity?: number | null;
+    capacity?: number;
     /**
      * ETag of the resource.
      */
-    etags?: string | null;
-    featureInstances?: any | null;
+    etags?: string;
+    featureInstances?: any;
     /**
      * Name of the floor a resource is located on.
      */
-    floorName?: string | null;
+    floorName?: string;
     /**
      * Name of the section within a floor a resource is located in.
      */
-    floorSection?: string | null;
+    floorSection?: string;
     /**
      * The read-only auto-generated name of the calendar resource which includes metadata about the resource such as building name, floor, capacity, etc. For example, &quot;NYC-2-Training Room 1A (16)&quot;.
      */
-    generatedResourceName?: string | null;
+    generatedResourceName?: string;
     /**
      * The type of the resource. For calendar resources, the value is admin#directory#resources#calendars#CalendarResource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The category of the calendar resource. Either CONFERENCE_ROOM or OTHER. Legacy data is set to CATEGORY_UNKNOWN.
      */
-    resourceCategory?: string | null;
+    resourceCategory?: string;
     /**
      * Description of the resource, visible only to admins.
      */
-    resourceDescription?: string | null;
+    resourceDescription?: string;
     /**
      * The read-only email for the calendar resource. Generated as part of creating a new calendar resource.
      */
-    resourceEmail?: string | null;
+    resourceEmail?: string;
     /**
      * The unique ID for the calendar resource.
      */
-    resourceId?: string | null;
+    resourceId?: string;
     /**
      * The name of the calendar resource. For example, &quot;Training Room 1A&quot;.
      */
-    resourceName?: string | null;
+    resourceName?: string;
     /**
      * The type of the calendar resource, intended for non-room resources.
      */
-    resourceType?: string | null;
+    resourceType?: string;
     /**
      * Description of the resource, visible to users and admins.
      */
-    userVisibleDescription?: string | null;
+    userVisibleDescription?: string;
   }
   /**
    * JSON template for Calendar Resource List Response object in Directory API.
@@ -438,7 +440,7 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The CalendarResources in this page of results.
      */
@@ -446,11 +448,11 @@ export namespace admin_directory_v1 {
     /**
      * Identifies this as a collection of CalendarResources. This is always admin#directory#resources#calendars#calendarResourcesList.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * An notification channel used to watch for resource changes.
@@ -459,43 +461,43 @@ export namespace admin_directory_v1 {
     /**
      * The address where notifications are delivered for this channel.
      */
-    address?: string | null;
+    address?: string;
     /**
      * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
      */
-    expiration?: string | null;
+    expiration?: string;
     /**
      * A UUID or similar unique string that identifies this channel.
      */
-    id?: string | null;
+    id?: string;
     /**
-     * Identifies this as a notification channel used to watch for changes to a resource, which is &quot;api#channel&quot;.
+     * Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string &quot;api#channel&quot;.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Additional parameters controlling delivery channel behavior. Optional.
      */
-    params?: {[key: string]: string} | null;
+    params?: {[key: string]: string};
     /**
      * A Boolean value to indicate whether payload is wanted. Optional.
      */
-    payload?: boolean | null;
+    payload?: boolean;
     /**
      * An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
      */
-    resourceId?: string | null;
+    resourceId?: string;
     /**
      * A version-specific identifier for the watched resource.
      */
-    resourceUri?: string | null;
+    resourceUri?: string;
     /**
      * An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
      */
-    token?: string | null;
+    token?: string;
     /**
      * The type of delivery mechanism used for this channel.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * JSON template for Chrome Os Device resource in Directory API.
@@ -504,27 +506,23 @@ export namespace admin_directory_v1 {
     /**
      * List of active time ranges (Read-only)
      */
-    activeTimeRanges?: Array<{activeTime?: number; date?: string}> | null;
+    activeTimeRanges?: Array<{activeTime?: number; date?: string}>;
     /**
      * AssetId specified during enrollment or through later annotation
      */
-    annotatedAssetId?: string | null;
+    annotatedAssetId?: string;
     /**
      * Address or location of the device as noted by the administrator
      */
-    annotatedLocation?: string | null;
+    annotatedLocation?: string;
     /**
      * User of the device
      */
-    annotatedUser?: string | null;
-    /**
-     * (Read-only) The timestamp after which the device will stop receiving Chrome updates or support
-     */
-    autoUpdateExpiration?: string | null;
+    annotatedUser?: string;
     /**
      * Chromebook boot mode (Read-only)
      */
-    bootMode?: string | null;
+    bootMode?: string;
     /**
      * Reports of CPU utilization and temperature (Read-only)
      */
@@ -532,7 +530,7 @@ export namespace admin_directory_v1 {
       cpuTemperatureInfo?: Array<{label?: string; temperature?: number}>;
       cpuUtilizationPercentageInfo?: number[];
       reportTime?: string;
-    }> | null;
+    }>;
     /**
      * List of device files to download (Read-only)
      */
@@ -541,11 +539,11 @@ export namespace admin_directory_v1 {
       downloadUrl?: string;
       name?: string;
       type?: string;
-    }> | null;
+    }>;
     /**
      * Unique identifier of Chrome OS Device (Read-only)
      */
-    deviceId?: string | null;
+    deviceId?: string;
     /**
      * Reports of disk space and other info about mounted/connected volumes.
      */
@@ -555,102 +553,90 @@ export namespace admin_directory_v1 {
         storageTotal?: string;
         volumeId?: string;
       }>;
-    }> | null;
-    /**
-     * (Read-only) Built-in MAC address for the docking station that the device connected to. Factory sets Media access control address (MAC address) assigned for use by a dock. Currently this is only supported on the Dell Arcada / Sarien devices and the Dell WD19 / WD19TB Docking Station. It is reserved specifically for MAC pass through device policy. The format is twelve (12) hexadecimal digits without any delimiter (uppercase letters). This is only relevant for Dell devices.
-     */
-    dockMacAddress?: string | null;
+    }>;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Chromebook Mac Address on ethernet network interface (Read-only)
      */
-    ethernetMacAddress?: string | null;
-    /**
-     * (Read-only) MAC address used by the Chromebook’s internal ethernet port, and for onboard network (ethernet) interface. The format is twelve (12) hexadecimal digits without any delimiter (uppercase letters). This is only relevant for some devices.
-     */
-    ethernetMacAddress0?: string | null;
+    ethernetMacAddress?: string;
     /**
      * Chromebook firmware version (Read-only)
      */
-    firmwareVersion?: string | null;
+    firmwareVersion?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Date and time the device was last enrolled (Read-only)
      */
-    lastEnrollmentTime?: string | null;
+    lastEnrollmentTime?: string;
     /**
      * Date and time the device was last synchronized with the policy settings in the G Suite administrator control panel (Read-only)
      */
-    lastSync?: string | null;
+    lastSync?: string;
     /**
      * Chromebook Mac Address on wifi network interface (Read-only)
      */
-    macAddress?: string | null;
+    macAddress?: string;
     /**
-     * (Read-only) The date the device was manufactured in yyyy-mm-dd format.
+     * Mobile Equipment identifier for the 3G mobile card in the Chromebook (Read-only)
      */
-    manufactureDate?: string | null;
-    /**
-     * Contains either the Mobile Equipment identifier (MEID) or the International Mobile Equipment Identity (IMEI) for the 3G mobile card in the Chromebook (Read-only)
-     */
-    meid?: string | null;
+    meid?: string;
     /**
      * Chromebook Model (Read-only)
      */
-    model?: string | null;
+    model?: string;
     /**
      * Notes added by the administrator
      */
-    notes?: string | null;
+    notes?: string;
     /**
      * Chromebook order number (Read-only)
      */
-    orderNumber?: string | null;
+    orderNumber?: string;
     /**
      * OrgUnit of the device
      */
-    orgUnitPath?: string | null;
+    orgUnitPath?: string;
     /**
      * Chromebook Os Version (Read-only)
      */
-    osVersion?: string | null;
+    osVersion?: string;
     /**
      * Chromebook platform version (Read-only)
      */
-    platformVersion?: string | null;
+    platformVersion?: string;
     /**
      * List of recent device users, in descending order by last login time (Read-only)
      */
-    recentUsers?: Array<{email?: string; type?: string}> | null;
+    recentUsers?: Array<{email?: string; type?: string}>;
     /**
      * Chromebook serial number (Read-only)
      */
-    serialNumber?: string | null;
+    serialNumber?: string;
     /**
      * status of the device (Read-only)
      */
-    status?: string | null;
+    status?: string;
     /**
      * Final date the device will be supported (Read-only)
      */
-    supportEndDate?: string | null;
+    supportEndDate?: string;
     /**
      * Reports of amounts of available RAM memory (Read-only)
      */
     systemRamFreeReports?: Array<{
       reportTime?: string;
       systemRamFreeInfo?: string[];
-    }> | null;
+    }>;
     /**
      * Total RAM on the device [in bytes] (Read-only)
      */
-    systemRamTotal?: string | null;
+    systemRamTotal?: string;
     /**
      * Trusted Platform Module (TPM) (Read-only)
      */
@@ -661,11 +647,11 @@ export namespace admin_directory_v1 {
       specLevel?: string;
       tpmModel?: string;
       vendorSpecific?: string;
-    } | null;
+    };
     /**
      * Will Chromebook auto renew after support end date (Read-only)
      */
-    willAutoRenew?: boolean | null;
+    willAutoRenew?: boolean;
   }
   /**
    * JSON request template for firing actions on ChromeOs Device in Directory Devices API.
@@ -674,8 +660,8 @@ export namespace admin_directory_v1 {
     /**
      * Action to be taken on the ChromeOs Device
      */
-    action?: string | null;
-    deprovisionReason?: string | null;
+    action?: string;
+    deprovisionReason?: string;
   }
   /**
    * JSON response template for List Chrome OS Devices operation in Directory API.
@@ -688,15 +674,15 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token used to access next page of this result.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * JSON request template for moving ChromeOs Device to given OU in Directory Devices API.
@@ -705,7 +691,7 @@ export namespace admin_directory_v1 {
     /**
      * ChromeOs Devices to be moved to OU
      */
-    deviceIds?: string[] | null;
+    deviceIds?: string[];
   }
   /**
    * JSON template for Customer Resource object in Directory API.
@@ -714,35 +700,35 @@ export namespace admin_directory_v1 {
     /**
      * The customer&#39;s secondary contact email address. This email address cannot be on the same domain as the customerDomain
      */
-    alternateEmail?: string | null;
+    alternateEmail?: string;
     /**
      * The customer&#39;s creation time (Readonly)
      */
-    customerCreationTime?: string | null;
+    customerCreationTime?: string;
     /**
      * The customer&#39;s primary domain name string. Do not include the www prefix when creating a new customer.
      */
-    customerDomain?: string | null;
+    customerDomain?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The unique ID for the customer&#39;s G Suite account. (Readonly)
      */
-    id?: string | null;
+    id?: string;
     /**
      * Identifies the resource as a customer. Value: admin#directory#customer
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The customer&#39;s ISO 639-2 language code. The default value is en-US
      */
-    language?: string | null;
+    language?: string;
     /**
      * The customer&#39;s contact phone number in E.164 format.
      */
-    phoneNumber?: string | null;
+    phoneNumber?: string;
     /**
      * The customer&#39;s postal address information.
      */
@@ -755,39 +741,39 @@ export namespace admin_directory_v1 {
     /**
      * A customer&#39;s physical address. The address can be composed of one to three lines.
      */
-    addressLine1?: string | null;
+    addressLine1?: string;
     /**
      * Address line 2 of the address.
      */
-    addressLine2?: string | null;
+    addressLine2?: string;
     /**
      * Address line 3 of the address.
      */
-    addressLine3?: string | null;
+    addressLine3?: string;
     /**
      * The customer contact&#39;s name.
      */
-    contactName?: string | null;
+    contactName?: string;
     /**
      * This is a required property. For countryCode information see the ISO 3166 country code elements.
      */
-    countryCode?: string | null;
+    countryCode?: string;
     /**
      * Name of the locality. An example of a locality value is the city of San Francisco.
      */
-    locality?: string | null;
+    locality?: string;
     /**
      * The company or company division name.
      */
-    organizationName?: string | null;
+    organizationName?: string;
     /**
      * The postal code. A postalCode example is a postal zip code such as 10009. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.
      */
-    postalCode?: string | null;
+    postalCode?: string;
     /**
      * Name of the region. An example of a region value is NY for the state of New York.
      */
-    region?: string | null;
+    region?: string;
   }
   /**
    * JSON template for Domain Alias object in Directory API.
@@ -796,27 +782,27 @@ export namespace admin_directory_v1 {
     /**
      * The creation time of the domain alias. (Read-only).
      */
-    creationTime?: string | null;
+    creationTime?: string;
     /**
      * The domain alias name.
      */
-    domainAliasName?: string | null;
+    domainAliasName?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The parent domain name that the domain alias is associated with. This can either be a primary or secondary domain name within a customer.
      */
-    parentDomainName?: string | null;
+    parentDomainName?: string;
     /**
      * Indicates the verification state of a domain alias. (Read-only)
      */
-    verified?: boolean | null;
+    verified?: boolean;
   }
   /**
    * JSON response template to list domain aliases in Directory API.
@@ -829,11 +815,11 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * JSON template for Domain object in Directory API.
@@ -842,7 +828,7 @@ export namespace admin_directory_v1 {
     /**
      * Creation time of the domain. (Read-only).
      */
-    creationTime?: string | null;
+    creationTime?: string;
     /**
      * List of domain alias objects. (Read-only)
      */
@@ -850,23 +836,23 @@ export namespace admin_directory_v1 {
     /**
      * The domain name of the customer.
      */
-    domainName?: string | null;
+    domainName?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Indicates if the domain is a primary domain (Read-only).
      */
-    isPrimary?: boolean | null;
+    isPrimary?: boolean;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Indicates the verification state of a domain. (Read-only).
      */
-    verified?: boolean | null;
+    verified?: boolean;
   }
   /**
    * JSON response template to list Domains in Directory API.
@@ -879,11 +865,11 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * JSON template for Feature object in Directory API.
@@ -892,15 +878,15 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etags?: string | null;
+    etags?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The name of the feature.
      */
-    name?: string | null;
+    name?: string;
   }
   /**
    * JSON template for a &quot;feature instance&quot;.
@@ -918,7 +904,7 @@ export namespace admin_directory_v1 {
     /**
      * New name of the feature.
      */
-    newName?: string | null;
+    newName?: string;
   }
   /**
    * JSON template for Feature List Response object in Directory API.
@@ -927,7 +913,7 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The Features in this page of results.
      */
@@ -935,11 +921,11 @@ export namespace admin_directory_v1 {
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * JSON template for Group resource in Directory API.
@@ -948,43 +934,43 @@ export namespace admin_directory_v1 {
     /**
      * Is the group created by admin (Read-only) *
      */
-    adminCreated?: boolean | null;
+    adminCreated?: boolean;
     /**
      * List of aliases (Read-only)
      */
-    aliases?: string[] | null;
+    aliases?: string[];
     /**
      * Description of the group
      */
-    description?: string | null;
+    description?: string;
     /**
      * Group direct members count
      */
-    directMembersCount?: string | null;
+    directMembersCount?: string;
     /**
      * Email of Group
      */
-    email?: string | null;
+    email?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Unique identifier of Group (Read-only)
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Group name
      */
-    name?: string | null;
+    name?: string;
     /**
      * List of non editable aliases (Read-only)
      */
-    nonEditableAliases?: string[] | null;
+    nonEditableAliases?: string[];
   }
   /**
    * JSON response template for List Groups operation in Directory API.
@@ -993,7 +979,7 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * List of group objects.
      */
@@ -1001,11 +987,11 @@ export namespace admin_directory_v1 {
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token used to access next page of this result.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * JSON template for Member resource in Directory API.
@@ -1014,35 +1000,35 @@ export namespace admin_directory_v1 {
     /**
      * Delivery settings of member
      */
-    delivery_settings?: string | null;
+    delivery_settings?: string;
     /**
      * Email of member (Read-only)
      */
-    email?: string | null;
+    email?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
-     * The unique ID of the group member. A member id can be used as a member request URI&#39;s memberKey. Unique identifier of group (Read-only) Unique identifier of member (Read-only)
+     * Unique identifier of customer member (Read-only) Unique identifier of group (Read-only) Unique identifier of member (Read-only)
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Role of member
      */
-    role?: string | null;
+    role?: string;
     /**
      * Status of member (Immutable)
      */
-    status?: string | null;
+    status?: string;
     /**
      * Type of member (Immutable)
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * JSON response template for List Members operation in Directory API.
@@ -1051,11 +1037,11 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * List of member objects.
      */
@@ -1063,7 +1049,7 @@ export namespace admin_directory_v1 {
     /**
      * Token used to access next page of this result.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * JSON template for Has Member response in Directory API.
@@ -1072,7 +1058,7 @@ export namespace admin_directory_v1 {
     /**
      * Identifies whether the given user is a member of the group. Membership can be direct or nested.
      */
-    isMember?: boolean | null;
+    isMember?: boolean;
   }
   /**
    * JSON template for Mobile Device resource in Directory API.
@@ -1081,7 +1067,7 @@ export namespace admin_directory_v1 {
     /**
      * Adb (USB debugging) enabled or disabled on device (Read-only)
      */
-    adbStatus?: boolean | null;
+    adbStatus?: boolean;
     /**
      * List of applications installed on Mobile Device
      */
@@ -1091,159 +1077,159 @@ export namespace admin_directory_v1 {
       permission?: string[];
       versionCode?: number;
       versionName?: string;
-    }> | null;
+    }>;
     /**
      * Mobile Device Baseband version (Read-only)
      */
-    basebandVersion?: string | null;
+    basebandVersion?: string;
     /**
      * Mobile Device Bootloader version (Read-only)
      */
-    bootloaderVersion?: string | null;
+    bootloaderVersion?: string;
     /**
      * Mobile Device Brand (Read-only)
      */
-    brand?: string | null;
+    brand?: string;
     /**
      * Mobile Device Build number (Read-only)
      */
-    buildNumber?: string | null;
+    buildNumber?: string;
     /**
      * The default locale used on the Mobile Device (Read-only)
      */
-    defaultLanguage?: string | null;
+    defaultLanguage?: string;
     /**
      * Developer options enabled or disabled on device (Read-only)
      */
-    developerOptionsStatus?: boolean | null;
+    developerOptionsStatus?: boolean;
     /**
      * Mobile Device compromised status (Read-only)
      */
-    deviceCompromisedStatus?: string | null;
+    deviceCompromisedStatus?: string;
     /**
      * Mobile Device serial number (Read-only)
      */
-    deviceId?: string | null;
+    deviceId?: string;
     /**
      * DevicePasswordStatus (Read-only)
      */
-    devicePasswordStatus?: string | null;
+    devicePasswordStatus?: string;
     /**
      * List of owner user&#39;s email addresses (Read-only)
      */
-    email?: string[] | null;
+    email?: string[];
     /**
      * Mobile Device Encryption Status (Read-only)
      */
-    encryptionStatus?: string | null;
+    encryptionStatus?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Date and time the device was first synchronized with the policy settings in the G Suite administrator control panel (Read-only)
      */
-    firstSync?: string | null;
+    firstSync?: string;
     /**
      * Mobile Device Hardware (Read-only)
      */
-    hardware?: string | null;
+    hardware?: string;
     /**
      * Mobile Device Hardware Id (Read-only)
      */
-    hardwareId?: string | null;
+    hardwareId?: string;
     /**
      * Mobile Device IMEI number (Read-only)
      */
-    imei?: string | null;
+    imei?: string;
     /**
      * Mobile Device Kernel version (Read-only)
      */
-    kernelVersion?: string | null;
+    kernelVersion?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Date and time the device was last synchronized with the policy settings in the G Suite administrator control panel (Read-only)
      */
-    lastSync?: string | null;
+    lastSync?: string;
     /**
      * Boolean indicating if this account is on owner/primary profile or not (Read-only)
      */
-    managedAccountIsOnOwnerProfile?: boolean | null;
+    managedAccountIsOnOwnerProfile?: boolean;
     /**
      * Mobile Device manufacturer (Read-only)
      */
-    manufacturer?: string | null;
+    manufacturer?: string;
     /**
      * Mobile Device MEID number (Read-only)
      */
-    meid?: string | null;
+    meid?: string;
     /**
      * Name of the model of the device
      */
-    model?: string | null;
+    model?: string;
     /**
      * List of owner user&#39;s names (Read-only)
      */
-    name?: string[] | null;
+    name?: string[];
     /**
      * Mobile Device mobile or network operator (if available) (Read-only)
      */
-    networkOperator?: string | null;
+    networkOperator?: string;
     /**
      * Name of the mobile operating system
      */
-    os?: string | null;
+    os?: string;
     /**
      * List of accounts added on device (Read-only)
      */
-    otherAccountsInfo?: string[] | null;
+    otherAccountsInfo?: string[];
     /**
      * DMAgentPermission (Read-only)
      */
-    privilege?: string | null;
+    privilege?: string;
     /**
      * Mobile Device release version version (Read-only)
      */
-    releaseVersion?: string | null;
+    releaseVersion?: string;
     /**
      * Unique identifier of Mobile Device (Read-only)
      */
-    resourceId?: string | null;
+    resourceId?: string;
     /**
      * Mobile Device Security patch level (Read-only)
      */
-    securityPatchLevel?: string | null;
+    securityPatchLevel?: string;
     /**
      * Mobile Device SSN or Serial Number (Read-only)
      */
-    serialNumber?: string | null;
+    serialNumber?: string;
     /**
      * Status of the device (Read-only)
      */
-    status?: string | null;
+    status?: string;
     /**
      * Work profile supported on device (Read-only)
      */
-    supportsWorkProfile?: boolean | null;
+    supportsWorkProfile?: boolean;
     /**
      * The type of device (Read-only)
      */
-    type?: string | null;
+    type?: string;
     /**
      * Unknown sources enabled or disabled on device (Read-only)
      */
-    unknownSourcesStatus?: boolean | null;
+    unknownSourcesStatus?: boolean;
     /**
      * Mobile Device user agent
      */
-    userAgent?: string | null;
+    userAgent?: string;
     /**
      * Mobile Device WiFi MAC address (Read-only)
      */
-    wifiMacAddress?: string | null;
+    wifiMacAddress?: string;
   }
   /**
    * JSON request template for firing commands on Mobile Device in Directory Devices API.
@@ -1252,7 +1238,7 @@ export namespace admin_directory_v1 {
     /**
      * Action to be taken on the Mobile Device
      */
-    action?: string | null;
+    action?: string;
   }
   /**
    * JSON response template for List Mobile Devices operation in Directory API.
@@ -1261,11 +1247,11 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * List of Mobile Device objects.
      */
@@ -1273,7 +1259,7 @@ export namespace admin_directory_v1 {
     /**
      * Token used to access next page of this result.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Template for a notification resource.
@@ -1282,32 +1268,32 @@ export namespace admin_directory_v1 {
     /**
      * Body of the notification (Read-only)
      */
-    body?: string | null;
+    body?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Address from which the notification is received (Read-only)
      */
-    fromAddress?: string | null;
+    fromAddress?: string;
     /**
      * Boolean indicating whether the notification is unread or not.
      */
-    isUnread?: boolean | null;
+    isUnread?: boolean;
     /**
      * The type of the resource.
      */
-    kind?: string | null;
-    notificationId?: string | null;
+    kind?: string;
+    notificationId?: string;
     /**
      * Time at which notification was sent (Read-only)
      */
-    sendTime?: string | null;
+    sendTime?: string;
     /**
      * Subject of the notification (Read-only)
      */
-    subject?: string | null;
+    subject?: string;
   }
   /**
    * Template for notifications list response.
@@ -1316,7 +1302,7 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * List of notifications in this page.
      */
@@ -1324,15 +1310,15 @@ export namespace admin_directory_v1 {
     /**
      * The type of the resource.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token for fetching the next page of notifications.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Number of unread notification for the domain.
      */
-    unreadNotificationsCount?: number | null;
+    unreadNotificationsCount?: number;
   }
   /**
    * JSON template for Org Unit resource in Directory API.
@@ -1341,39 +1327,39 @@ export namespace admin_directory_v1 {
     /**
      * Should block inheritance
      */
-    blockInheritance?: boolean | null;
+    blockInheritance?: boolean;
     /**
      * Description of OrgUnit
      */
-    description?: string | null;
+    description?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Name of OrgUnit
      */
-    name?: string | null;
+    name?: string;
     /**
      * Id of OrgUnit
      */
-    orgUnitId?: string | null;
+    orgUnitId?: string;
     /**
      * Path of OrgUnit
      */
-    orgUnitPath?: string | null;
+    orgUnitPath?: string;
     /**
      * Id of parent OrgUnit
      */
-    parentOrgUnitId?: string | null;
+    parentOrgUnitId?: string;
     /**
      * Path of parent OrgUnit
      */
-    parentOrgUnitPath?: string | null;
+    parentOrgUnitPath?: string;
   }
   /**
    * JSON response template for List Organization Units operation in Directory API.
@@ -1382,11 +1368,11 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * List of user objects.
      */
@@ -1403,27 +1389,27 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * If the privilege can be restricted to an organization unit.
      */
-    isOuScopable?: boolean | null;
+    isOuScopable?: boolean;
     /**
      * The type of the API resource. This is always admin#directory#privilege.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The name of the privilege.
      */
-    privilegeName?: string | null;
+    privilegeName?: string;
     /**
-     * The obfuscated ID of the service this privilege is for. This value is returned with Privileges.list().
+     * The obfuscated ID of the service this privilege is for.
      */
-    serviceId?: string | null;
+    serviceId?: string;
     /**
      * The name of the service this privilege is for.
      */
-    serviceName?: string | null;
+    serviceName?: string;
   }
   /**
    * JSON response template for List privileges operation in Directory API.
@@ -1432,7 +1418,7 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * A list of Privilege resources.
      */
@@ -1440,7 +1426,7 @@ export namespace admin_directory_v1 {
     /**
      * The type of the API resource. This is always admin#directory#privileges.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * JSON template for role resource in Directory API.
@@ -1449,35 +1435,35 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Returns true if the role is a super admin role.
      */
-    isSuperAdminRole?: boolean | null;
+    isSuperAdminRole?: boolean;
     /**
      * Returns true if this is a pre-defined system role.
      */
-    isSystemRole?: boolean | null;
+    isSystemRole?: boolean;
     /**
      * The type of the API resource. This is always admin#directory#role.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * A short description of the role.
      */
-    roleDescription?: string | null;
+    roleDescription?: string;
     /**
      * ID of the role.
      */
-    roleId?: string | null;
+    roleId?: string;
     /**
      * Name of the role.
      */
-    roleName?: string | null;
+    roleName?: string;
     /**
      * The set of privileges that are granted to this role.
      */
-    rolePrivileges?: Array<{privilegeName?: string; serviceId?: string}> | null;
+    rolePrivileges?: Array<{privilegeName?: string; serviceId?: string}>;
   }
   /**
    * JSON template for roleAssignment resource in Directory API.
@@ -1486,31 +1472,31 @@ export namespace admin_directory_v1 {
     /**
      * The unique ID of the user this role is assigned to.
      */
-    assignedTo?: string | null;
+    assignedTo?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The type of the API resource. This is always admin#directory#roleAssignment.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * If the role is restricted to an organization unit, this contains the ID for the organization unit the exercise of this role is restricted to.
      */
-    orgUnitId?: string | null;
+    orgUnitId?: string;
     /**
      * ID of this roleAssignment.
      */
-    roleAssignmentId?: string | null;
+    roleAssignmentId?: string;
     /**
      * The ID of the role that is assigned.
      */
-    roleId?: string | null;
+    roleId?: string;
     /**
      * The scope in which this role is assigned. Possible values are:  - CUSTOMER - ORG_UNIT
      */
-    scopeType?: string | null;
+    scopeType?: string;
   }
   /**
    * JSON response template for List roleAssignments operation in Directory API.
@@ -1519,7 +1505,7 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * A list of RoleAssignment resources.
      */
@@ -1527,8 +1513,8 @@ export namespace admin_directory_v1 {
     /**
      * The type of the API resource. This is always admin#directory#roleAssignments.
      */
-    kind?: string | null;
-    nextPageToken?: string | null;
+    kind?: string;
+    nextPageToken?: string;
   }
   /**
    * JSON response template for List roles operation in Directory API.
@@ -1537,7 +1523,7 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * A list of Role resources.
      */
@@ -1545,8 +1531,8 @@ export namespace admin_directory_v1 {
     /**
      * The type of the API resource. This is always admin#directory#roles.
      */
-    kind?: string | null;
-    nextPageToken?: string | null;
+    kind?: string;
+    nextPageToken?: string;
   }
   /**
    * JSON template for Schema resource in Directory API.
@@ -1555,11 +1541,11 @@ export namespace admin_directory_v1 {
     /**
      * Display name for the schema.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Fields of Schema
      */
@@ -1567,15 +1553,15 @@ export namespace admin_directory_v1 {
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Unique identifier of Schema (Read-only)
      */
-    schemaId?: string | null;
+    schemaId?: string;
     /**
      * Schema name
      */
-    schemaName?: string | null;
+    schemaName?: string;
   }
   /**
    * JSON template for FieldSpec resource for Schemas in Directory API.
@@ -1584,43 +1570,43 @@ export namespace admin_directory_v1 {
     /**
      * Display Name of the field.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Unique identifier of Field (Read-only)
      */
-    fieldId?: string | null;
+    fieldId?: string;
     /**
      * Name of the field.
      */
-    fieldName?: string | null;
+    fieldName?: string;
     /**
      * Type of the field.
      */
-    fieldType?: string | null;
+    fieldType?: string;
     /**
      * Boolean specifying whether the field is indexed or not.
      */
-    indexed?: boolean | null;
+    indexed?: boolean;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Boolean specifying whether this is a multi-valued field or not.
      */
-    multiValued?: boolean | null;
+    multiValued?: boolean;
     /**
      * Indexing spec for a numeric field. By default, only exact match queries will be supported for numeric fields. Setting the numericIndexingSpec allows range queries to be supported.
      */
-    numericIndexingSpec?: {maxValue?: number; minValue?: number} | null;
+    numericIndexingSpec?: {maxValue?: number; minValue?: number};
     /**
      * Read ACLs on the field specifying who can view values of this field. Valid values are &quot;ALL_DOMAIN_USERS&quot; and &quot;ADMINS_AND_SELF&quot;.
      */
-    readAccessType?: string | null;
+    readAccessType?: string;
   }
   /**
    * JSON response template for List Schema operation in Directory API.
@@ -1629,11 +1615,11 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * List of UserSchema objects.
      */
@@ -1646,35 +1632,35 @@ export namespace admin_directory_v1 {
     /**
      * Whether the application is registered with Google. The value is true if the application has an anonymous Client ID.
      */
-    anonymous?: boolean | null;
+    anonymous?: boolean;
     /**
      * The Client ID of the application the token is issued to.
      */
-    clientId?: string | null;
+    clientId?: string;
     /**
      * The displayable name of the application the token is issued to.
      */
-    displayText?: string | null;
+    displayText?: string;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The type of the API resource. This is always admin#directory#token.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Whether the token is issued to an installed application. The value is true if the application is installed to a desktop or mobile device.
      */
-    nativeApp?: boolean | null;
+    nativeApp?: boolean;
     /**
      * A list of authorization scopes the application is granted.
      */
-    scopes?: string[] | null;
+    scopes?: string[];
     /**
      * The unique ID of the user that issued the token.
      */
-    userKey?: string | null;
+    userKey?: string;
   }
   /**
    * JSON response template for List tokens operation in Directory API.
@@ -1683,7 +1669,7 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * A list of Token resources.
      */
@@ -1691,7 +1677,7 @@ export namespace admin_directory_v1 {
     /**
      * The type of the API resource. This is always admin#directory#tokenList.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * JSON template for Trusted App Ids Resource object in Directory API.
@@ -1700,20 +1686,20 @@ export namespace admin_directory_v1 {
     /**
      * Android package name.
      */
-    androidPackageName?: string | null;
+    androidPackageName?: string;
     /**
      * SHA1 signature of the app certificate.
      */
-    certificateHashSHA1?: string | null;
+    certificateHashSHA1?: string;
     /**
      * SHA256 signature of the app certificate.
      */
-    certificateHashSHA256?: string | null;
-    etag?: string | null;
+    certificateHashSHA256?: string;
+    etag?: string;
     /**
      * Identifies the resource as a trusted AppId.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * JSON template for Trusted Apps response object of a user in Directory API.
@@ -1722,12 +1708,12 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Identifies the resource as trusted apps response.
      */
-    kind?: string | null;
-    nextPageToken?: string | null;
+    kind?: string;
+    nextPageToken?: string;
     /**
      * Trusted Apps list.
      */
@@ -1737,91 +1723,91 @@ export namespace admin_directory_v1 {
    * JSON template for User object in Directory API.
    */
   export interface Schema$User {
-    addresses?: any | null;
+    addresses?: any;
     /**
      * Indicates if user has agreed to terms (Read-only)
      */
-    agreedToTerms?: boolean | null;
+    agreedToTerms?: boolean;
     /**
      * List of aliases (Read-only)
      */
-    aliases?: string[] | null;
+    aliases?: string[];
     /**
      * Indicates if user is archived.
      */
-    archived?: boolean | null;
+    archived?: boolean;
     /**
      * Boolean indicating if the user should change password in next login
      */
-    changePasswordAtNextLogin?: boolean | null;
+    changePasswordAtNextLogin?: boolean;
     /**
      * User&#39;s G Suite account creation time. (Read-only)
      */
-    creationTime?: string | null;
+    creationTime?: string;
     /**
      * CustomerId of User (Read-only)
      */
-    customerId?: string | null;
+    customerId?: string;
     /**
      * Custom fields of the user.
      */
-    customSchemas?: {[key: string]: Schema$UserCustomProperties} | null;
-    deletionTime?: string | null;
-    emails?: any | null;
+    customSchemas?: {[key: string]: Schema$UserCustomProperties};
+    deletionTime?: string;
+    emails?: any;
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
-    externalIds?: any | null;
-    gender?: any | null;
+    etag?: string;
+    externalIds?: any;
+    gender?: any;
     /**
      * Hash function name for password. Supported are MD5, SHA-1 and crypt
      */
-    hashFunction?: string | null;
+    hashFunction?: string;
     /**
      * Unique identifier of User (Read-only)
      */
-    id?: string | null;
-    ims?: any | null;
+    id?: string;
+    ims?: any;
     /**
      * Boolean indicating if user is included in Global Address List
      */
-    includeInGlobalAddressList?: boolean | null;
+    includeInGlobalAddressList?: boolean;
     /**
      * Boolean indicating if ip is whitelisted
      */
-    ipWhitelisted?: boolean | null;
+    ipWhitelisted?: boolean;
     /**
      * Boolean indicating if the user is admin (Read-only)
      */
-    isAdmin?: boolean | null;
+    isAdmin?: boolean;
     /**
      * Boolean indicating if the user is delegated admin (Read-only)
      */
-    isDelegatedAdmin?: boolean | null;
+    isDelegatedAdmin?: boolean;
     /**
      * Is 2-step verification enforced (Read-only)
      */
-    isEnforcedIn2Sv?: boolean | null;
+    isEnforcedIn2Sv?: boolean;
     /**
      * Is enrolled in 2-step verification (Read-only)
      */
-    isEnrolledIn2Sv?: boolean | null;
+    isEnrolledIn2Sv?: boolean;
     /**
      * Is mailbox setup (Read-only)
      */
-    isMailboxSetup?: boolean | null;
-    keywords?: any | null;
+    isMailboxSetup?: boolean;
+    keywords?: any;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
-    languages?: any | null;
+    kind?: string;
+    languages?: any;
     /**
      * User&#39;s last login time. (Read-only)
      */
-    lastLoginTime?: string | null;
-    locations?: any | null;
+    lastLoginTime?: string;
+    locations?: any;
     /**
      * User&#39;s name
      */
@@ -1829,50 +1815,42 @@ export namespace admin_directory_v1 {
     /**
      * List of non editable aliases (Read-only)
      */
-    nonEditableAliases?: string[] | null;
-    notes?: any | null;
-    organizations?: any | null;
+    nonEditableAliases?: string[];
+    notes?: any;
+    organizations?: any;
     /**
      * OrgUnit of User
      */
-    orgUnitPath?: string | null;
+    orgUnitPath?: string;
     /**
      * User&#39;s password
      */
-    password?: string | null;
-    phones?: any | null;
-    posixAccounts?: any | null;
+    password?: string;
+    phones?: any;
+    posixAccounts?: any;
     /**
      * username of User
      */
-    primaryEmail?: string | null;
-    /**
-     * Recovery email of the user.
-     */
-    recoveryEmail?: string | null;
-    /**
-     * Recovery phone of the user. The phone number must be in the E.164 format, starting with the plus sign (+). Example: +16506661212.
-     */
-    recoveryPhone?: string | null;
-    relations?: any | null;
-    sshPublicKeys?: any | null;
+    primaryEmail?: string;
+    relations?: any;
+    sshPublicKeys?: any;
     /**
      * Indicates if user is suspended.
      */
-    suspended?: boolean | null;
+    suspended?: boolean;
     /**
      * Suspension reason if user is suspended (Read-only)
      */
-    suspensionReason?: string | null;
+    suspensionReason?: string;
     /**
      * ETag of the user&#39;s photo (Read-only)
      */
-    thumbnailPhotoEtag?: string | null;
+    thumbnailPhotoEtag?: string;
     /**
      * Photo Url of the user (Read-only)
      */
-    thumbnailPhotoUrl?: string | null;
-    websites?: any | null;
+    thumbnailPhotoUrl?: string;
+    websites?: any;
   }
   /**
    * JSON template for About (notes) of a user in Directory API.
@@ -1881,11 +1859,11 @@ export namespace admin_directory_v1 {
     /**
      * About entry can have a type which indicates the content type. It can either be plain or html. By default, notes contents are assumed to contain plain text.
      */
-    contentType?: string | null;
+    contentType?: string;
     /**
      * Actual value of notes.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * JSON template for address.
@@ -1894,55 +1872,55 @@ export namespace admin_directory_v1 {
     /**
      * Country.
      */
-    country?: string | null;
+    country?: string;
     /**
      * Country code.
      */
-    countryCode?: string | null;
+    countryCode?: string;
     /**
      * Custom type.
      */
-    customType?: string | null;
+    customType?: string;
     /**
      * Extended Address.
      */
-    extendedAddress?: string | null;
+    extendedAddress?: string;
     /**
      * Formatted address.
      */
-    formatted?: string | null;
+    formatted?: string;
     /**
      * Locality.
      */
-    locality?: string | null;
+    locality?: string;
     /**
      * Other parts of address.
      */
-    poBox?: string | null;
+    poBox?: string;
     /**
      * Postal code.
      */
-    postalCode?: string | null;
+    postalCode?: string;
     /**
      * If this is user&#39;s primary address. Only one entry could be marked as primary.
      */
-    primary?: boolean | null;
+    primary?: boolean;
     /**
      * Region.
      */
-    region?: string | null;
+    region?: string;
     /**
      * User supplied address was structured. Structured addresses are NOT supported at this time. You might be able to write structured addresses, but any values will eventually be clobbered.
      */
-    sourceIsStructured?: boolean | null;
+    sourceIsStructured?: boolean;
     /**
      * Street.
      */
-    streetAddress?: string | null;
+    streetAddress?: string;
     /**
      * Each entry can have a type which indicates standard values of that entry. For example address could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value. Such type should have the CUSTOM value as type and also have a customType value.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * JSON template for a set of custom properties (i.e. all fields in a particular schema)
@@ -1955,19 +1933,19 @@ export namespace admin_directory_v1 {
     /**
      * Email id of the user.
      */
-    address?: string | null;
+    address?: string;
     /**
      * Custom Type.
      */
-    customType?: string | null;
+    customType?: string;
     /**
      * If this is user&#39;s primary email. Only one entry could be marked as primary.
      */
-    primary?: boolean | null;
+    primary?: boolean;
     /**
      * Each entry can have a type which indicates standard types of that entry. For example email could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value Such types should have the CUSTOM value as type and also have a customType value.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * JSON template for an externalId entry.
@@ -1976,29 +1954,29 @@ export namespace admin_directory_v1 {
     /**
      * Custom type.
      */
-    customType?: string | null;
+    customType?: string;
     /**
      * The type of the Id.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The value of the id.
      */
-    value?: string | null;
+    value?: string;
   }
   export interface Schema$UserGender {
     /**
      * AddressMeAs. A human-readable string containing the proper way to refer to the profile owner by humans, for example &quot;he/him/his&quot; or &quot;they/them/their&quot;.
      */
-    addressMeAs?: string | null;
+    addressMeAs?: string;
     /**
      * Custom gender.
      */
-    customGender?: string | null;
+    customGender?: string;
     /**
      * Gender.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * JSON template for instant messenger of an user.
@@ -2007,27 +1985,27 @@ export namespace admin_directory_v1 {
     /**
      * Custom protocol.
      */
-    customProtocol?: string | null;
+    customProtocol?: string;
     /**
      * Custom type.
      */
-    customType?: string | null;
+    customType?: string;
     /**
      * Instant messenger id.
      */
-    im?: string | null;
+    im?: string;
     /**
      * If this is user&#39;s primary im. Only one entry could be marked as primary.
      */
-    primary?: boolean | null;
+    primary?: boolean;
     /**
      * Protocol used in the instant messenger. It should be one of the values from ImProtocolTypes map. Similar to type, it can take a CUSTOM value and specify the custom name in customProtocol field.
      */
-    protocol?: string | null;
+    protocol?: string;
     /**
      * Each entry can have a type which indicates standard types of that entry. For example instant messengers could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value. Such types should have the CUSTOM value as type and also have a customType value.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * JSON template for a keyword entry.
@@ -2036,15 +2014,15 @@ export namespace admin_directory_v1 {
     /**
      * Custom Type.
      */
-    customType?: string | null;
+    customType?: string;
     /**
      * Each entry can have a type which indicates standard type of that entry. For example, keyword could be of type occupation or outlook. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
      */
-    type?: string | null;
+    type?: string;
     /**
      * Keyword.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * JSON template for a language entry.
@@ -2053,11 +2031,11 @@ export namespace admin_directory_v1 {
     /**
      * Other language. User can provide own language name if there is no corresponding Google III language code. If this is set LanguageCode can&#39;t be set
      */
-    customLanguage?: string | null;
+    customLanguage?: string;
     /**
      * Language Code. Should be used for storing Google III LanguageCode string representation for language. Illegal values cause SchemaException.
      */
-    languageCode?: string | null;
+    languageCode?: string;
   }
   /**
    * JSON template for a location entry.
@@ -2066,31 +2044,31 @@ export namespace admin_directory_v1 {
     /**
      * Textual location. This is most useful for display purposes to concisely describe the location. For example, &quot;Mountain View, CA&quot;, &quot;Near Seattle&quot;, &quot;US-NYC-9TH 9A209A&quot;.
      */
-    area?: string | null;
+    area?: string;
     /**
      * Building Identifier.
      */
-    buildingId?: string | null;
+    buildingId?: string;
     /**
      * Custom Type.
      */
-    customType?: string | null;
+    customType?: string;
     /**
      * Most specific textual code of individual desk location.
      */
-    deskCode?: string | null;
+    deskCode?: string;
     /**
      * Floor name/number.
      */
-    floorName?: string | null;
+    floorName?: string;
     /**
      * Floor section. More specific location within the floor. For example, if a floor is divided into sections &quot;A&quot;, &quot;B&quot;, and &quot;C&quot;, this field would identify one of those values.
      */
-    floorSection?: string | null;
+    floorSection?: string;
     /**
      * Each entry can have a type which indicates standard types of that entry. For example location could be of types default and desk. In addition to standard type, an entry can have a custom type and can give it any name. Such types should have &quot;custom&quot; as type and also have a customType value.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * JSON request template for setting/revoking admin status of a user in Directory API.
@@ -2099,7 +2077,7 @@ export namespace admin_directory_v1 {
     /**
      * Boolean indicating new admin status of the user
      */
-    status?: boolean | null;
+    status?: boolean;
   }
   /**
    * JSON template for name of a user in Directory API.
@@ -2108,15 +2086,15 @@ export namespace admin_directory_v1 {
     /**
      * Last Name
      */
-    familyName?: string | null;
+    familyName?: string;
     /**
      * Full Name
      */
-    fullName?: string | null;
+    fullName?: string;
     /**
      * First Name
      */
-    givenName?: string | null;
+    givenName?: string;
   }
   /**
    * JSON template for an organization entry.
@@ -2125,51 +2103,51 @@ export namespace admin_directory_v1 {
     /**
      * The cost center of the users department.
      */
-    costCenter?: string | null;
+    costCenter?: string;
     /**
      * Custom type.
      */
-    customType?: string | null;
+    customType?: string;
     /**
      * Department within the organization.
      */
-    department?: string | null;
+    department?: string;
     /**
      * Description of the organization.
      */
-    description?: string | null;
+    description?: string;
     /**
      * The domain to which the organization belongs to.
      */
-    domain?: string | null;
+    domain?: string;
     /**
-     * The full-time equivalent millipercent within the organization (100000 = 100%).
+     * The full-time equivalent percent within the organization (100000 = 100%).
      */
-    fullTimeEquivalent?: number | null;
+    fullTimeEquivalent?: number;
     /**
      * Location of the organization. This need not be fully qualified address.
      */
-    location?: string | null;
+    location?: string;
     /**
      * Name of the organization
      */
-    name?: string | null;
+    name?: string;
     /**
      * If it user&#39;s primary organization.
      */
-    primary?: boolean | null;
+    primary?: boolean;
     /**
      * Symbol of the organization.
      */
-    symbol?: string | null;
+    symbol?: string;
     /**
      * Title (designation) of the user in the organization.
      */
-    title?: string | null;
+    title?: string;
     /**
      * Each entry can have a type which indicates standard types of that entry. For example organization could be of school, work etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a CustomType value.
      */
-    type?: string | null;
+    type?: string;
   }
   /**
    * JSON template for a phone entry.
@@ -2178,19 +2156,19 @@ export namespace admin_directory_v1 {
     /**
      * Custom Type.
      */
-    customType?: string | null;
+    customType?: string;
     /**
      * If this is user&#39;s primary phone or not.
      */
-    primary?: boolean | null;
+    primary?: boolean;
     /**
      * Each entry can have a type which indicates standard types of that entry. For example phone could be of home_fax, work, mobile etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
      */
-    type?: string | null;
+    type?: string;
     /**
      * Phone number.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * JSON template for Photo object in Directory API.
@@ -2199,35 +2177,35 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Height in pixels of the photo
      */
-    height?: number | null;
+    height?: number;
     /**
      * Unique identifier of User (Read-only)
      */
-    id?: string | null;
+    id?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Mime Type of the photo
      */
-    mimeType?: string | null;
+    mimeType?: string;
     /**
      * Base64 encoded photo data
      */
-    photoData?: string | null;
+    photoData?: string;
     /**
      * Primary email of User (Read-only)
      */
-    primaryEmail?: string | null;
+    primaryEmail?: string;
     /**
      * Width in pixels of the photo
      */
-    width?: number | null;
+    width?: number;
   }
   /**
    * JSON template for a POSIX account entry. Description of the field family: go/fbs-posix.
@@ -2236,43 +2214,43 @@ export namespace admin_directory_v1 {
     /**
      * A POSIX account field identifier.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * The GECOS (user information) for this account.
      */
-    gecos?: string | null;
+    gecos?: string;
     /**
      * The default group ID.
      */
-    gid?: string | null;
+    gid?: string;
     /**
      * The path to the home directory for this account.
      */
-    homeDirectory?: string | null;
+    homeDirectory?: string;
     /**
      * The operating system type for this account.
      */
-    operatingSystemType?: string | null;
+    operatingSystemType?: string;
     /**
      * If this is user&#39;s primary account within the SystemId.
      */
-    primary?: boolean | null;
+    primary?: boolean;
     /**
      * The path to the login shell for this account.
      */
-    shell?: string | null;
+    shell?: string;
     /**
      * System identifier for which account Username or Uid apply to.
      */
-    systemId?: string | null;
+    systemId?: string;
     /**
      * The POSIX compliant user ID.
      */
-    uid?: string | null;
+    uid?: string;
     /**
      * The username of the account.
      */
-    username?: string | null;
+    username?: string;
   }
   /**
    * JSON template for a relation entry.
@@ -2281,15 +2259,15 @@ export namespace admin_directory_v1 {
     /**
      * Custom Type.
      */
-    customType?: string | null;
+    customType?: string;
     /**
      * The relation of the user. Some of the possible values are mother, father, sister, brother, manager, assistant, partner.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The name of the relation.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * JSON response template for List Users operation in Apps Directory API.
@@ -2298,19 +2276,19 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * Kind of resource this is.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Token used to access next page of this result.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * Event that triggered this response (only used in case of Push Response)
      */
-    trigger_event?: string | null;
+    trigger_event?: string;
     /**
      * List of user objects.
      */
@@ -2323,15 +2301,15 @@ export namespace admin_directory_v1 {
     /**
      * An expiration time in microseconds since epoch.
      */
-    expirationTimeUsec?: string | null;
+    expirationTimeUsec?: string;
     /**
      * A SHA-256 fingerprint of the SSH public key. (Read-only)
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
      * An SSH public key.
      */
-    key?: string | null;
+    key?: string;
   }
   /**
    * JSON request template to undelete a user in Directory API.
@@ -2340,7 +2318,7 @@ export namespace admin_directory_v1 {
     /**
      * OrgUnit of User
      */
-    orgUnitPath?: string | null;
+    orgUnitPath?: string;
   }
   /**
    * JSON template for a website entry.
@@ -2349,19 +2327,19 @@ export namespace admin_directory_v1 {
     /**
      * Custom Type.
      */
-    customType?: string | null;
+    customType?: string;
     /**
      * If this is user&#39;s primary website or not.
      */
-    primary?: boolean | null;
+    primary?: boolean;
     /**
      * Each entry can have a type which indicates standard types of that entry. For example website could be of home, work, blog etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.
      */
-    type?: string | null;
+    type?: string;
     /**
      * Website.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * JSON template for verification codes in Directory API.
@@ -2370,19 +2348,19 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * The type of the resource. This is always admin#directory#verificationCode.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The obfuscated unique ID of the user.
      */
-    userId?: string | null;
+    userId?: string;
     /**
      * A current verification code for the user. Invalidated or used verification codes are not returned as part of the result.
      */
-    verificationCode?: string | null;
+    verificationCode?: string;
   }
   /**
    * JSON response template for List verification codes operation in Directory API.
@@ -2391,7 +2369,7 @@ export namespace admin_directory_v1 {
     /**
      * ETag of the resource.
      */
-    etag?: string | null;
+    etag?: string;
     /**
      * A list of verification code resources.
      */
@@ -2399,7 +2377,7 @@ export namespace admin_directory_v1 {
     /**
      * The type of the resource. This is always admin#directory#verificationCodesList.
      */
-    kind?: string | null;
+    kind?: string;
   }
 
   export class Resource$Asps {
@@ -2677,7 +2655,7 @@ export namespace admin_directory_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Channel} params.requestBody Request body data
+     * @param {().Channel} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2768,7 +2746,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
      * @param {string} params.resourceId Immutable ID of Chrome OS Device
-     * @param {().ChromeOsDeviceAction} params.requestBody Request body data
+     * @param {().ChromeOsDeviceAction} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -2917,7 +2895,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
-     * @param {integer=} params.maxResults Maximum number of results to return. Max allowed value is 200.
+     * @param {integer=} params.maxResults Maximum number of results to return. Default is 100
      * @param {string=} params.orderBy Column to use for sorting results
      * @param {string=} params.orgUnitPath Full path of the organizational unit or its ID
      * @param {string=} params.pageToken Token to specify next page in the list
@@ -2999,7 +2977,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
      * @param {string} params.orgUnitPath Full path of the target organizational unit or its ID
-     * @param {().ChromeOsMoveDevicesToOu} params.requestBody Request body data
+     * @param {().ChromeOsMoveDevicesToOu} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3074,7 +3052,7 @@ export namespace admin_directory_v1 {
      * @param {string} params.customerId Immutable ID of the G Suite account
      * @param {string} params.deviceId Immutable ID of Chrome OS Device
      * @param {string=} params.projection Restrict information returned to a set of selected fields.
-     * @param {().ChromeOsDevice} params.requestBody Request body data
+     * @param {().ChromeOsDevice} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3151,7 +3129,7 @@ export namespace admin_directory_v1 {
      * @param {string} params.customerId Immutable ID of the G Suite account
      * @param {string} params.deviceId Immutable ID of Chrome OS Device
      * @param {string=} params.projection Restrict information returned to a set of selected fields.
-     * @param {().ChromeOsDevice} params.requestBody Request body data
+     * @param {().ChromeOsDevice} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3272,7 +3250,7 @@ export namespace admin_directory_v1 {
      */
     customerId?: string;
     /**
-     * Maximum number of results to return. Max allowed value is 200.
+     * Maximum number of results to return. Default is 100
      */
     maxResults?: number;
     /**
@@ -3456,7 +3434,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customerKey Id of the customer to be updated
-     * @param {().Customer} params.requestBody Request body data
+     * @param {().Customer} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3527,7 +3505,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customerKey Id of the customer to be updated
-     * @param {().Customer} params.requestBody Request body data
+     * @param {().Customer} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -3797,7 +3775,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customer Immutable ID of the G Suite account.
-     * @param {().DomainAlias} params.requestBody Request body data
+     * @param {().DomainAlias} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4162,7 +4140,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customer Immutable ID of the G Suite account.
-     * @param {().Domains} params.requestBody Request body data
+     * @param {().Domains} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4511,7 +4489,7 @@ export namespace admin_directory_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().Group} params.requestBody Request body data
+     * @param {().Group} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4584,12 +4562,12 @@ export namespace admin_directory_v1 {
      * @param {object=} params Parameters for request
      * @param {string=} params.customer Immutable ID of the G Suite account. In case of multi-domain, to fetch all groups for a customer, fill this field instead of domain.
      * @param {string=} params.domain Name of the domain. Fill this field to get groups from only this domain. To return all groups in a multi-domain fill customer field instead.
-     * @param {integer=} params.maxResults Maximum number of results to return. Max allowed value is 200.
+     * @param {integer=} params.maxResults Maximum number of results to return. Default is 200
      * @param {string=} params.orderBy Column to use for sorting results
      * @param {string=} params.pageToken Token to specify next page in the list
      * @param {string=} params.query Query string search. Should be of the form "". Complete documentation is at https://developers.google.com/admin-sdk/directory/v1/guides/search-groups
      * @param {string=} params.sortOrder Whether to return results in ascending or descending order. Only of use when orderBy is also used
-     * @param {string=} params.userKey Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If it's an ID, it should match with the ID of the user object.
+     * @param {string=} params.userKey Email or immutable Id of the user if only those groups are to be listed, the given user is a member of. If Id, it should match with id of user object
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4661,7 +4639,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.groupKey Email or immutable ID of the group. If ID, it should match with id of group object
-     * @param {().Group} params.requestBody Request body data
+     * @param {().Group} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4733,7 +4711,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.groupKey Email or immutable ID of the group. If ID, it should match with id of group object
-     * @param {().Group} params.requestBody Request body data
+     * @param {().Group} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -4846,7 +4824,7 @@ export namespace admin_directory_v1 {
      */
     domain?: string;
     /**
-     * Maximum number of results to return. Max allowed value is 200.
+     * Maximum number of results to return. Default is 200
      */
     maxResults?: number;
     /**
@@ -4866,7 +4844,7 @@ export namespace admin_directory_v1 {
      */
     sortOrder?: string;
     /**
-     * Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If it's an ID, it should match with the ID of the user object.
+     * Email or immutable Id of the user if only those groups are to be listed, the given user is a member of. If Id, it should match with id of user object
      */
     userKey?: string;
   }
@@ -4989,7 +4967,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.groupKey Email or immutable ID of the group
-     * @param {().Alias} params.requestBody Request body data
+     * @param {().Alias} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5404,7 +5382,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.groupKey Email or immutable ID of the group
-     * @param {().Member} params.requestBody Request body data
+     * @param {().Member} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5476,7 +5454,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.groupKey Email or immutable ID of the group
      * @param {boolean=} params.includeDerivedMembership Whether to list indirect memberships. Default: false.
-     * @param {integer=} params.maxResults Maximum number of results to return. Max allowed value is 200.
+     * @param {integer=} params.maxResults Maximum number of results to return. Default is 200
      * @param {string=} params.pageToken Token to specify next page in the list
      * @param {string=} params.roles Comma separated role values to filter list results on.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -5550,7 +5528,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.groupKey Email or immutable ID of the group. If ID, it should match with id of group object
      * @param {string} params.memberKey Email or immutable ID of the user. If ID, it should match with id of member object
-     * @param {().Member} params.requestBody Request body data
+     * @param {().Member} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5623,7 +5601,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.groupKey Email or immutable ID of the group. If ID, it should match with id of group object
      * @param {string} params.memberKey Email or immutable ID of the user. If ID, it should match with id of member object
-     * @param {().Member} params.requestBody Request body data
+     * @param {().Member} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -5765,7 +5743,7 @@ export namespace admin_directory_v1 {
      */
     includeDerivedMembership?: boolean;
     /**
-     * Maximum number of results to return. Max allowed value is 200.
+     * Maximum number of results to return. Default is 200
      */
     maxResults?: number;
     /**
@@ -5833,7 +5811,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
      * @param {string} params.resourceId Immutable ID of Mobile Device
-     * @param {().MobileDeviceAction} params.requestBody Request body data
+     * @param {().MobileDeviceAction} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6055,7 +6033,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
-     * @param {integer=} params.maxResults Maximum number of results to return. Max allowed value is 100.
+     * @param {integer=} params.maxResults Maximum number of results to return. Default is 100
      * @param {string=} params.orderBy Column to use for sorting results
      * @param {string=} params.pageToken Token to specify next page in the list
      * @param {string=} params.projection Restrict information returned to a set of selected fields.
@@ -6197,7 +6175,7 @@ export namespace admin_directory_v1 {
      */
     customerId?: string;
     /**
-     * Maximum number of results to return. Max allowed value is 100.
+     * Maximum number of results to return. Default is 100
      */
     maxResults?: number;
     /**
@@ -6461,7 +6439,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customer The unique ID for the customer's G Suite account.
      * @param {string} params.notificationId The unique ID of the notification.
-     * @param {().Notification} params.requestBody Request body data
+     * @param {().Notification} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6537,7 +6515,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customer The unique ID for the customer's G Suite account.
      * @param {string} params.notificationId The unique ID of the notification.
-     * @param {().Notification} params.requestBody Request body data
+     * @param {().Notification} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -6862,7 +6840,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
-     * @param {().OrgUnit} params.requestBody Request body data
+     * @param {().OrgUnit} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7006,7 +6984,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
      * @param {string} params.orgUnitPath Full path of the organizational unit or its ID
-     * @param {().OrgUnit} params.requestBody Request body data
+     * @param {().OrgUnit} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7079,7 +7057,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
      * @param {string} params.orgUnitPath Full path of the organizational unit or its ID
-     * @param {().OrgUnit} params.requestBody Request body data
+     * @param {().OrgUnit} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7687,7 +7665,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.coordinatesSource Source from which Building.coordinates are derived.
      * @param {string} params.customer The unique ID for the customer's G Suite account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID.
-     * @param {().Building} params.requestBody Request body data
+     * @param {().Building} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7838,7 +7816,7 @@ export namespace admin_directory_v1 {
      * @param {string} params.buildingId The ID of the building to update.
      * @param {string=} params.coordinatesSource Source from which Building.coordinates are derived.
      * @param {string} params.customer The unique ID for the customer's G Suite account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID.
-     * @param {().Building} params.requestBody Request body data
+     * @param {().Building} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -7913,7 +7891,7 @@ export namespace admin_directory_v1 {
      * @param {string} params.buildingId The ID of the building to update.
      * @param {string=} params.coordinatesSource Source from which Building.coordinates are derived.
      * @param {string} params.customer The unique ID for the customer's G Suite account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID.
-     * @param {().Building} params.requestBody Request body data
+     * @param {().Building} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8265,7 +8243,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customer The unique ID for the customer's G Suite account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID.
-     * @param {().CalendarResource} params.requestBody Request body data
+     * @param {().CalendarResource} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8419,7 +8397,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.calendarResourceId The unique ID of the calendar resource to update.
      * @param {string} params.customer The unique ID for the customer's G Suite account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID.
-     * @param {().CalendarResource} params.requestBody Request body data
+     * @param {().CalendarResource} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8495,7 +8473,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.calendarResourceId The unique ID of the calendar resource to update.
      * @param {string} params.customer The unique ID for the customer's G Suite account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID.
-     * @param {().CalendarResource} params.requestBody Request body data
+     * @param {().CalendarResource} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8843,7 +8821,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customer The unique ID for the customer's G Suite account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID.
-     * @param {().Feature} params.requestBody Request body data
+     * @param {().Feature} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -8991,7 +8969,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customer The unique ID for the customer's G Suite account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID.
      * @param {string} params.featureKey The unique ID of the feature to update.
-     * @param {().Feature} params.requestBody Request body data
+     * @param {().Feature} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9065,7 +9043,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customer The unique ID for the customer's G Suite account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID.
      * @param {string} params.oldName The unique ID of the feature to rename.
-     * @param {().FeatureRename} params.requestBody Request body data
+     * @param {().FeatureRename} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9139,7 +9117,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customer The unique ID for the customer's G Suite account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID.
      * @param {string} params.featureKey The unique ID of the feature to update.
-     * @param {().Feature} params.requestBody Request body data
+     * @param {().Feature} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9500,7 +9478,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customer Immutable ID of the G Suite account.
-     * @param {().RoleAssignment} params.requestBody Request body data
+     * @param {().RoleAssignment} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -9880,7 +9858,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customer Immutable ID of the G Suite account.
-     * @param {().Role} params.requestBody Request body data
+     * @param {().Role} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10024,7 +10002,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customer Immutable ID of the G Suite account.
      * @param {string} params.roleId Immutable ID of the role.
-     * @param {().Role} params.requestBody Request body data
+     * @param {().Role} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10096,7 +10074,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customer Immutable ID of the G Suite account.
      * @param {string} params.roleId Immutable ID of the role.
-     * @param {().Role} params.requestBody Request body data
+     * @param {().Role} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10424,7 +10402,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
-     * @param {().Schema} params.requestBody Request body data
+     * @param {().Schema} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10566,7 +10544,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
      * @param {string} params.schemaKey Name or immutable ID of the schema.
-     * @param {().Schema} params.requestBody Request body data
+     * @param {().Schema} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -10639,7 +10617,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string} params.customerId Immutable ID of the G Suite account
      * @param {string} params.schemaKey Name or immutable ID of the schema.
-     * @param {().Schema} params.requestBody Request body data
+     * @param {().Schema} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11225,7 +11203,7 @@ export namespace admin_directory_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().User} params.requestBody Request body data
+     * @param {().User} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11300,12 +11278,12 @@ export namespace admin_directory_v1 {
      * @param {string=} params.customFieldMask Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
      * @param {string=} params.domain Name of the domain. Fill this field to get users from only this domain. To return all users in a multi-domain fill customer field instead.
      * @param {string=} params.event Event on which subscription is intended (if subscribing)
-     * @param {integer=} params.maxResults Maximum number of results to return.
+     * @param {integer=} params.maxResults Maximum number of results to return. Default is 100. Max allowed is 500
      * @param {string=} params.orderBy Column to use for sorting results
      * @param {string=} params.pageToken Token to specify next page in the list
      * @param {string=} params.projection What subset of fields to fetch for this user.
      * @param {string=} params.query Query string search. Should be of the form "". Complete documentation is at https://developers.google.com/admin-sdk/directory/v1/guides/search-users
-     * @param {string=} params.showDeleted If set to true, retrieves the list of deleted users. (Default: false)
+     * @param {string=} params.showDeleted If set to true retrieves the list of deleted users. Default is false
      * @param {string=} params.sortOrder Whether to return results in ascending or descending order.
      * @param {string=} params.viewType Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -11379,7 +11357,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.userKey Email or immutable ID of the user as admin
-     * @param {().UserMakeAdmin} params.requestBody Request body data
+     * @param {().UserMakeAdmin} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11450,7 +11428,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.userKey Email or immutable ID of the user. If ID, it should match with id of user object
-     * @param {().User} params.requestBody Request body data
+     * @param {().User} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11522,7 +11500,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.userKey The immutable id of the user
-     * @param {().UserUndelete} params.requestBody Request body data
+     * @param {().UserUndelete} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11593,7 +11571,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.userKey Email or immutable ID of the user. If ID, it should match with id of user object
-     * @param {().User} params.requestBody Request body data
+     * @param {().User} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11668,15 +11646,15 @@ export namespace admin_directory_v1 {
      * @param {string=} params.customFieldMask Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
      * @param {string=} params.domain Name of the domain. Fill this field to get users from only this domain. To return all users in a multi-domain fill customer field instead.
      * @param {string=} params.event Event on which subscription is intended (if subscribing)
-     * @param {integer=} params.maxResults Maximum number of results to return.
+     * @param {integer=} params.maxResults Maximum number of results to return. Default is 100. Max allowed is 500
      * @param {string=} params.orderBy Column to use for sorting results
      * @param {string=} params.pageToken Token to specify next page in the list
      * @param {string=} params.projection What subset of fields to fetch for this user.
      * @param {string=} params.query Query string search. Should be of the form "". Complete documentation is at https://developers.google.com/admin-sdk/directory/v1/guides/search-users
-     * @param {string=} params.showDeleted If set to true, retrieves the list of deleted users. (Default: false)
+     * @param {string=} params.showDeleted If set to true retrieves the list of deleted users. Default is false
      * @param {string=} params.sortOrder Whether to return results in ascending or descending order.
      * @param {string=} params.viewType Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
-     * @param {().Channel} params.requestBody Request body data
+     * @param {().Channel} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -11809,7 +11787,7 @@ export namespace admin_directory_v1 {
      */
     event?: string;
     /**
-     * Maximum number of results to return.
+     * Maximum number of results to return. Default is 100. Max allowed is 500
      */
     maxResults?: number;
     /**
@@ -11829,7 +11807,7 @@ export namespace admin_directory_v1 {
      */
     query?: string;
     /**
-     * If set to true, retrieves the list of deleted users. (Default: false)
+     * If set to true retrieves the list of deleted users. Default is false
      */
     showDeleted?: string;
     /**
@@ -11928,7 +11906,7 @@ export namespace admin_directory_v1 {
      */
     event?: string;
     /**
-     * Maximum number of results to return.
+     * Maximum number of results to return. Default is 100. Max allowed is 500
      */
     maxResults?: number;
     /**
@@ -11948,7 +11926,7 @@ export namespace admin_directory_v1 {
      */
     query?: string;
     /**
-     * If set to true, retrieves the list of deleted users. (Default: false)
+     * If set to true retrieves the list of deleted users. Default is false
      */
     showDeleted?: string;
     /**
@@ -12052,7 +12030,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.userKey Email or immutable ID of the user
-     * @param {().Alias} params.requestBody Request body data
+     * @param {().Alias} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -12197,7 +12175,7 @@ export namespace admin_directory_v1 {
      * @param {object} params Parameters for request
      * @param {string=} params.event Event on which subscription is intended (if subscribing)
      * @param {string} params.userKey Email or immutable ID of the user
-     * @param {().Channel} params.requestBody Request body data
+     * @param {().Channel} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -12490,7 +12468,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.userKey Email or immutable ID of the user
-     * @param {().UserPhoto} params.requestBody Request body data
+     * @param {().UserPhoto} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -12564,7 +12542,7 @@ export namespace admin_directory_v1 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.userKey Email or immutable ID of the user
-     * @param {().UserPhoto} params.requestBody Request body data
+     * @param {().UserPhoto} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -177,97 +179,97 @@ export namespace oauth2_v1 {
     /**
      * The access type granted with this token. It can be offline or online.
      */
-    access_type?: string | null;
+    access_type?: string;
     /**
      * Who is the intended audience for this token. In general the same as issued_to.
      */
-    audience?: string | null;
+    audience?: string;
     /**
      * The email address of the user. Present only if the email scope is present in the request.
      */
-    email?: string | null;
+    email?: string;
     /**
      * Boolean flag which is true if the email address is verified. Present only if the email scope is present in the request.
      */
-    email_verified?: boolean | null;
+    email_verified?: boolean;
     /**
      * The expiry time of the token, as number of seconds left until expiry.
      */
-    expires_in?: number | null;
+    expires_in?: number;
     /**
      * The issue time of the token, as number of seconds.
      */
-    issued_at?: number | null;
+    issued_at?: number;
     /**
      * To whom was the token issued to. In general the same as audience.
      */
-    issued_to?: string | null;
+    issued_to?: string;
     /**
      * Who issued the token.
      */
-    issuer?: string | null;
+    issuer?: string;
     /**
      * Nonce of the id token.
      */
-    nonce?: string | null;
+    nonce?: string;
     /**
      * The space separated list of scopes granted to this token.
      */
-    scope?: string | null;
+    scope?: string;
     /**
      * The obfuscated user id.
      */
-    user_id?: string | null;
+    user_id?: string;
     /**
      * Boolean flag which is true if the email address is verified. Present only if the email scope is present in the request.
      */
-    verified_email?: boolean | null;
+    verified_email?: boolean;
   }
   export interface Schema$Userinfoplus {
     /**
      * The user&#39;s email address.
      */
-    email?: string | null;
+    email?: string;
     /**
      * The user&#39;s last name.
      */
-    family_name?: string | null;
+    family_name?: string;
     /**
      * The user&#39;s gender.
      */
-    gender?: string | null;
+    gender?: string;
     /**
      * The user&#39;s first name.
      */
-    given_name?: string | null;
+    given_name?: string;
     /**
      * The hosted domain e.g. example.com if the user is Google apps user.
      */
-    hd?: string | null;
+    hd?: string;
     /**
      * The obfuscated ID of the user.
      */
-    id?: string | null;
+    id?: string;
     /**
      * URL of the profile page.
      */
-    link?: string | null;
+    link?: string;
     /**
      * The user&#39;s preferred locale.
      */
-    locale?: string | null;
+    locale?: string;
     /**
      * The user&#39;s full name.
      */
-    name?: string | null;
+    name?: string;
     /**
      * URL of the user&#39;s picture image.
      */
-    picture?: string | null;
+    picture?: string;
     /**
      * Boolean flag which is true if the email address is verified. Always verified because we only return the user&#39;s primary email address.
      */
-    verified_email?: boolean | null;
+    verified_email?: boolean;
   }
 
   export interface Params$$Tokeninfo extends StandardParameters {

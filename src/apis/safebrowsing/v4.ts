@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -89,7 +91,7 @@ export namespace safebrowsing_v4 {
   /**
    * Safe Browsing API
    *
-   * Enables client applications to check web resources (most commonly URLs) against Google-generated lists of unsafe web resources. The Safe Browsing APIs are for non-commercial use only. If you need to use APIs to detect malicious URLs for commercial purposes – meaning “for sale or revenue-generating purposes” – please refer to the Web Risk API.
+   * Enables client applications to check web resources (most commonly URLs) against Google-generated lists of unsafe web resources.
    *
    * @example
    * const {google} = require('googleapis');
@@ -134,7 +136,7 @@ export namespace safebrowsing_v4 {
     /**
      * The SHA256 hash of the client state; that is, of the sorted list of all hashes present in the database.
      */
-    sha256?: string | null;
+    sha256?: string;
   }
   /**
    * The client metadata associated with Safe Browsing API requests.
@@ -143,11 +145,11 @@ export namespace safebrowsing_v4 {
     /**
      * A client ID that (hopefully) uniquely identifies the client implementation of the Safe Browsing API.
      */
-    clientId?: string | null;
+    clientId?: string;
     /**
      * The version of the client implementation.
      */
-    clientVersion?: string | null;
+    clientVersion?: string;
   }
   /**
    * The constraints for this update.
@@ -156,27 +158,27 @@ export namespace safebrowsing_v4 {
     /**
      * A client&#39;s physical location, expressed as a ISO 31166-1 alpha-2 region code.
      */
-    deviceLocation?: string | null;
+    deviceLocation?: string;
     /**
      * Requests the lists for a specific language. Expects ISO 639 alpha-2 format.
      */
-    language?: string | null;
+    language?: string;
     /**
      * Sets the maximum number of entries that the client is willing to have in the local database. This should be a power of 2 between 2**10 and 2**20. If zero, no database size limit is set.
      */
-    maxDatabaseEntries?: number | null;
+    maxDatabaseEntries?: number;
     /**
      * The maximum size in number of entries. The update will not contain more entries than this value.  This should be a power of 2 between 2**10 and 2**20.  If zero, no update size limit is set.
      */
-    maxUpdateEntries?: number | null;
+    maxUpdateEntries?: number;
     /**
      * Requests the list for a specific geographic location. If not set the server may pick that value based on the user&#39;s IP address. Expects ISO 3166-1 alpha-2 format.
      */
-    region?: string | null;
+    region?: string;
     /**
      * The compression types supported by the client.
      */
-    supportedCompressions?: string[] | null;
+    supportedCompressions?: string[];
   }
   /**
    * A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:      service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     }  The JSON representation for `Empty` is empty JSON object `{}`.
@@ -203,7 +205,7 @@ export namespace safebrowsing_v4 {
     /**
      * The minimum duration the client must wait before issuing any update request. If this field is not set clients may update as soon as they want.
      */
-    minimumWaitDuration?: string | null;
+    minimumWaitDuration?: string;
   }
   /**
    * Request to return full hashes matched by the provided hash prefixes.
@@ -220,7 +222,7 @@ export namespace safebrowsing_v4 {
     /**
      * The current client states for each of the client&#39;s local threat lists.
      */
-    clientStates?: string[] | null;
+    clientStates?: string[];
     /**
      * The lists and hashes to be checked.
      */
@@ -234,11 +236,11 @@ export namespace safebrowsing_v4 {
     /**
      * The minimum duration the client must wait before issuing any find hashes request. If this field is not set, clients can issue a request as soon as they want.
      */
-    minimumWaitDuration?: string | null;
+    minimumWaitDuration?: string;
     /**
      * For requested entities that did not match the threat list, how long to cache the response.
      */
-    negativeCacheDuration?: string | null;
+    negativeCacheDuration?: string;
   }
   /**
    * Request to check entries against lists.
@@ -276,19 +278,19 @@ export namespace safebrowsing_v4 {
     /**
      * The type of platform at risk by entries present in the list.
      */
-    platformType?: string | null;
+    platformType?: string;
     /**
      * The current state of the client for the requested list (the encrypted client state that was received from the last successful list update).
      */
-    state?: string | null;
+    state?: string;
     /**
      * The types of entries present in the list.
      */
-    threatEntryType?: string | null;
+    threatEntryType?: string;
     /**
      * The type of threat posed by entries present in the list.
      */
-    threatType?: string | null;
+    threatType?: string;
   }
   /**
    * An update to an individual list.
@@ -305,11 +307,11 @@ export namespace safebrowsing_v4 {
     /**
      * The new client state, in encrypted format. Opaque to clients.
      */
-    newClientState?: string | null;
+    newClientState?: string;
     /**
      * The platform type for which data is returned.
      */
-    platformType?: string | null;
+    platformType?: string;
     /**
      * A set of entries to remove from a local threat type&#39;s list. In practice, this field is empty or contains exactly one ThreatEntrySet.
      */
@@ -317,15 +319,15 @@ export namespace safebrowsing_v4 {
     /**
      * The type of response. This may indicate that an action is required by the client when the response is received.
      */
-    responseType?: string | null;
+    responseType?: string;
     /**
      * The format of the threats.
      */
-    threatEntryType?: string | null;
+    threatEntryType?: string;
     /**
      * The threat type for which data is returned.
      */
-    threatType?: string | null;
+    threatType?: string;
   }
   /**
    * A single metadata entry.
@@ -334,11 +336,11 @@ export namespace safebrowsing_v4 {
     /**
      * The metadata entry key. For JSON requests, the key is base64-encoded.
      */
-    key?: string | null;
+    key?: string;
     /**
      * The metadata entry value. For JSON requests, the value is base64-encoded.
      */
-    value?: string | null;
+    value?: string;
   }
   /**
    * The uncompressed threat entries in hash format of a particular prefix length. Hashes can be anywhere from 4 to 32 bytes in size. A large majority are 4 bytes, but some hashes are lengthened if they collide with the hash of a popular URL.  Used for sending ThreatEntrySet to clients that do not support compression, or when sending non-4-byte hashes to clients that do support compression.
@@ -347,11 +349,11 @@ export namespace safebrowsing_v4 {
     /**
      * The number of bytes for each prefix encoded below.  This field can be anywhere from 4 (shortest prefix) to 32 (full SHA256 hash).
      */
-    prefixSize?: number | null;
+    prefixSize?: number;
     /**
      * The hashes, in binary format, concatenated into one long string. Hashes are sorted in lexicographic order. For JSON API users, hashes are base64-encoded.
      */
-    rawHashes?: string | null;
+    rawHashes?: string;
   }
   /**
    * A set of raw indices to remove from a local list.
@@ -360,7 +362,7 @@ export namespace safebrowsing_v4 {
     /**
      * The indices to remove from a lexicographically-sorted local list.
      */
-    indices?: number[] | null;
+    indices?: number[];
   }
   /**
    * The Rice-Golomb encoded data. Used for sending compressed 4-byte hashes or compressed removal indices.
@@ -369,19 +371,19 @@ export namespace safebrowsing_v4 {
     /**
      * The encoded deltas that are encoded using the Golomb-Rice coder.
      */
-    encodedData?: string | null;
+    encodedData?: string;
     /**
      * The offset of the first entry in the encoded data, or, if only a single integer was encoded, that single integer&#39;s value. If the field is empty or missing, assume zero.
      */
-    firstValue?: string | null;
+    firstValue?: string;
     /**
      * The number of entries that are delta encoded in the encoded data. If only a single integer was encoded, this will be zero and the single value will be stored in `first_value`.
      */
-    numEntries?: number | null;
+    numEntries?: number;
     /**
      * The Golomb-Rice parameter, which is a number between 2 and 28. This field is missing (that is, zero) if `num_entries` is zero.
      */
-    riceParameter?: number | null;
+    riceParameter?: number;
   }
   /**
    * An individual threat; for example, a malicious URL or its hash representation. Only one of these fields should be set.
@@ -390,15 +392,15 @@ export namespace safebrowsing_v4 {
     /**
      * The digest of an executable in SHA256 format. The API supports both binary and hex digests. For JSON requests, digests are base64-encoded.
      */
-    digest?: string | null;
+    digest?: string;
     /**
      * A hash prefix, consisting of the most significant 4-32 bytes of a SHA256 hash. This field is in binary format. For JSON requests, hashes are base64-encoded.
      */
-    hash?: string | null;
+    hash?: string;
     /**
      * A URL.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * The metadata associated with a specific threat entry. The client is expected to know the metadata key/value pairs associated with each threat type.
@@ -416,7 +418,7 @@ export namespace safebrowsing_v4 {
     /**
      * The compression type for the entries in this set.
      */
-    compressionType?: string | null;
+    compressionType?: string;
     /**
      * The raw SHA256-formatted entries.
      */
@@ -446,7 +448,7 @@ export namespace safebrowsing_v4 {
     /**
      * The platform type reported.
      */
-    platformType?: string | null;
+    platformType?: string;
     /**
      * The resources related to the threat hit.
      */
@@ -454,7 +456,7 @@ export namespace safebrowsing_v4 {
     /**
      * The threat type reported.
      */
-    threatType?: string | null;
+    threatType?: string;
     /**
      * Details about the user that encountered the threat.
      */
@@ -467,7 +469,7 @@ export namespace safebrowsing_v4 {
     /**
      * The platform types to be checked.
      */
-    platformTypes?: string[] | null;
+    platformTypes?: string[];
     /**
      * The threat entries to be checked.
      */
@@ -475,11 +477,11 @@ export namespace safebrowsing_v4 {
     /**
      * The entry types to be checked.
      */
-    threatEntryTypes?: string[] | null;
+    threatEntryTypes?: string[];
     /**
      * The threat types to be checked.
      */
-    threatTypes?: string[] | null;
+    threatTypes?: string[];
   }
   /**
    * Describes an individual threat list. A list is defined by three parameters: the type of threat posed, the type of platform targeted by the threat, and the type of entries in the list.
@@ -488,15 +490,15 @@ export namespace safebrowsing_v4 {
     /**
      * The platform type targeted by the list&#39;s entries.
      */
-    platformType?: string | null;
+    platformType?: string;
     /**
      * The entry types contained in the list.
      */
-    threatEntryType?: string | null;
+    threatEntryType?: string;
     /**
      * The threat type posed by the list&#39;s entries.
      */
-    threatType?: string | null;
+    threatType?: string;
   }
   /**
    * A match when checking a threat entry in the Safe Browsing threat lists.
@@ -505,11 +507,11 @@ export namespace safebrowsing_v4 {
     /**
      * The cache lifetime for the returned match. Clients must not cache this response for more than this duration to avoid false positives.
      */
-    cacheDuration?: string | null;
+    cacheDuration?: string;
     /**
      * The platform type matching this threat.
      */
-    platformType?: string | null;
+    platformType?: string;
     /**
      * The threat matching this threat.
      */
@@ -521,11 +523,11 @@ export namespace safebrowsing_v4 {
     /**
      * The threat entry type matching this threat.
      */
-    threatEntryType?: string | null;
+    threatEntryType?: string;
     /**
      * The threat type matching this threat.
      */
-    threatType?: string | null;
+    threatType?: string;
   }
   /**
    * A single resource related to a threat hit.
@@ -534,19 +536,19 @@ export namespace safebrowsing_v4 {
     /**
      * Referrer of the resource. Only set if the referrer is available.
      */
-    referrer?: string | null;
+    referrer?: string;
     /**
      * The remote IP of the resource in ASCII format. Either IPv4 or IPv6.
      */
-    remoteIp?: string | null;
+    remoteIp?: string;
     /**
      * The type of source reported.
      */
-    type?: string | null;
+    type?: string;
     /**
      * The URL of the resource.
      */
-    url?: string | null;
+    url?: string;
   }
   /**
    * Details about the user that encountered the threat.
@@ -555,11 +557,11 @@ export namespace safebrowsing_v4 {
     /**
      * The UN M.49 region code associated with the user&#39;s location.
      */
-    regionCode?: string | null;
+    regionCode?: string;
     /**
      * Unique user identifier defined by the client.
      */
-    userId?: string | null;
+    userId?: string;
   }
 
   export class Resource$Encodedfullhashes {
@@ -792,7 +794,7 @@ export namespace safebrowsing_v4 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().FindFullHashesRequest} params.requestBody Request body data
+     * @param {().FindFullHashesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -886,7 +888,7 @@ export namespace safebrowsing_v4 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().ThreatHit} params.requestBody Request body data
+     * @param {().ThreatHit} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1060,7 +1062,7 @@ export namespace safebrowsing_v4 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().FetchThreatListUpdatesRequest} params.requestBody Request body data
+     * @param {().FetchThreatListUpdatesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1163,7 +1165,7 @@ export namespace safebrowsing_v4 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().FindThreatMatchesRequest} params.requestBody Request body data
+     * @param {().FindThreatMatchesRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

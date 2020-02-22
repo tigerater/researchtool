@@ -1,4 +1,4 @@
-// Copyright 2016 Google LLC
+// Copyright 2014-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,7 +12,6 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
 import {APIEndpoint} from 'googleapis-common';
 import * as nock from 'nock';
 import {google, GoogleApis} from '../src';
@@ -141,8 +140,7 @@ describe('Query params', () => {
   });
 
   it('should be set if params passed are falsy', async () => {
-    const computeRemoteUrl = 'https://compute.googleapis.com';
-    const r1 = nock(computeRemoteUrl)
+    nock(Utils.baseUrl)
       .post(
         '/compute/v1/projects//zones//instances//setDiskAutoDelete?autoDelete=false&deviceName='
       )
@@ -155,7 +153,7 @@ describe('Query params', () => {
       deviceName: '',
     });
     assert.strictEqual(Utils.getQs(res), 'autoDelete=false&deviceName=');
-    const r2 = nock(computeRemoteUrl)
+    nock(Utils.baseUrl)
       .post(
         '/compute/v1/projects//zones//instances//setDiskAutoDelete?autoDelete=false&deviceName='
       )
@@ -169,7 +167,7 @@ describe('Query params', () => {
     });
     assert.strictEqual(Utils.getQs(res2), 'autoDelete=false&deviceName=');
 
-    const r3 = nock(computeRemoteUrl)
+    nock(Utils.baseUrl)
       .post('/compute/v1/projects//zones//instanceGroupManagers//resize?size=0')
       .reply(200);
     const res3 = await localCompute.instanceGroupManagers.resize({
@@ -180,7 +178,7 @@ describe('Query params', () => {
     });
     assert.strictEqual(Utils.getQs(res3), 'size=0');
 
-    const r4 = nock(computeRemoteUrl)
+    nock(Utils.baseUrl)
       .post('/compute/v1/projects//zones//instanceGroupManagers//resize?size=0')
       .reply(200);
     const res4 = await remoteCompute.instanceGroupManagers.resize({
@@ -189,10 +187,6 @@ describe('Query params', () => {
       instanceGroupManager: '',
       size: 0,
     });
-    r1.done();
-    r2.done();
-    r3.done();
-    r4.done();
     assert.strictEqual(Utils.getQs(res4), 'size=0');
   });
 

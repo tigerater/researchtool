@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -91,6 +93,7 @@ export namespace gamesManagement_v1management {
     applications: Resource$Applications;
     events: Resource$Events;
     players: Resource$Players;
+    quests: Resource$Quests;
     rooms: Resource$Rooms;
     scores: Resource$Scores;
     turnBasedMatches: Resource$Turnbasedmatches;
@@ -105,6 +108,7 @@ export namespace gamesManagement_v1management {
       this.applications = new Resource$Applications(this.context);
       this.events = new Resource$Events(this.context);
       this.players = new Resource$Players(this.context);
+      this.quests = new Resource$Quests(this.context);
       this.rooms = new Resource$Rooms(this.context);
       this.scores = new Resource$Scores(this.context);
       this.turnBasedMatches = new Resource$Turnbasedmatches(this.context);
@@ -118,7 +122,7 @@ export namespace gamesManagement_v1management {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#achievementResetAllResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The achievement reset results.
      */
@@ -131,11 +135,11 @@ export namespace gamesManagement_v1management {
     /**
      * The IDs of achievements to reset.
      */
-    achievement_ids?: string[] | null;
+    achievement_ids?: string[];
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#achievementResetMultipleForAllRequest.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * This is a JSON template for an achievement reset response.
@@ -144,19 +148,19 @@ export namespace gamesManagement_v1management {
     /**
      * The current state of the achievement. This is the same as the initial state of the achievement. Possible values are:   - &quot;HIDDEN&quot;- Achievement is hidden.  - &quot;REVEALED&quot; - Achievement is revealed.  - &quot;UNLOCKED&quot; - Achievement is unlocked.
      */
-    currentState?: string | null;
+    currentState?: string;
     /**
      * The ID of an achievement for which player state has been updated.
      */
-    definitionId?: string | null;
+    definitionId?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#achievementResetResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Flag to indicate if the requested update actually occurred.
      */
-    updateOccurred?: boolean | null;
+    updateOccurred?: boolean;
   }
   /**
    * This is a JSON template for multiple events reset all request.
@@ -165,11 +169,11 @@ export namespace gamesManagement_v1management {
     /**
      * The IDs of events to reset.
      */
-    event_ids?: string[] | null;
+    event_ids?: string[];
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#eventsResetMultipleForAllRequest.
      */
-    kind?: string | null;
+    kind?: string;
   }
   /**
    * This is a JSON template for metadata about a player playing a game with the currently authenticated user.
@@ -178,11 +182,11 @@ export namespace gamesManagement_v1management {
     /**
      * True if the player was auto-matched with the currently authenticated user.
      */
-    autoMatched?: boolean | null;
+    autoMatched?: boolean;
     /**
      * The last time the player played the game in milliseconds since the epoch in UTC.
      */
-    timeMillis?: string | null;
+    timeMillis?: string;
   }
   /**
    * This is a JSON template for 1P/3P metadata about the player&#39;s experience.
@@ -191,7 +195,7 @@ export namespace gamesManagement_v1management {
     /**
      * The current number of experience points for the player.
      */
-    currentExperiencePoints?: string | null;
+    currentExperiencePoints?: string;
     /**
      * The current level of the player.
      */
@@ -199,7 +203,7 @@ export namespace gamesManagement_v1management {
     /**
      * The timestamp when the player was leveled up, in millis since Unix epoch UTC.
      */
-    lastLevelUpTimestampMillis?: string | null;
+    lastLevelUpTimestampMillis?: string;
     /**
      * The next level of the player. If the current level is the maximum level, this should be same as the current level.
      */
@@ -212,15 +216,15 @@ export namespace gamesManagement_v1management {
     /**
      * The level for the user.
      */
-    level?: number | null;
+    level?: number;
     /**
      * The maximum experience points for this level.
      */
-    maxExperiencePoints?: string | null;
+    maxExperiencePoints?: string;
     /**
      * The minimum experience points for this level.
      */
-    minExperiencePoints?: string | null;
+    minExperiencePoints?: string;
   }
   /**
    * This is a JSON template for the HiddenPlayer resource.
@@ -229,11 +233,11 @@ export namespace gamesManagement_v1management {
     /**
      * The time this player was hidden.
      */
-    hiddenTimeMillis?: string | null;
+    hiddenTimeMillis?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#hiddenPlayer.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The player information.
      */
@@ -250,11 +254,11 @@ export namespace gamesManagement_v1management {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#hiddenPlayerList.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The pagination token for the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * This is a JSON template for a Player resource.
@@ -263,19 +267,19 @@ export namespace gamesManagement_v1management {
     /**
      * The base URL for the image that represents the player.
      */
-    avatarImageUrl?: string | null;
+    avatarImageUrl?: string;
     /**
      * The url to the landscape mode player banner image.
      */
-    bannerUrlLandscape?: string | null;
+    bannerUrlLandscape?: string;
     /**
      * The url to the portrait mode player banner image.
      */
-    bannerUrlPortrait?: string | null;
+    bannerUrlPortrait?: string;
     /**
      * The name to display for the player.
      */
-    displayName?: string | null;
+    displayName?: string;
     /**
      * An object to represent Play Game experience information for the player.
      */
@@ -283,7 +287,7 @@ export namespace gamesManagement_v1management {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#player.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * Details about the last time this player played a multiplayer game with the currently authenticated player. Populated for PLAYED_WITH player collection members.
      */
@@ -291,16 +295,15 @@ export namespace gamesManagement_v1management {
     /**
      * An object representation of the individual components of the player&#39;s name. For some players, these fields may not be present.
      */
-    name?: {familyName?: string; givenName?: string} | null;
+    name?: {familyName?: string; givenName?: string};
     /**
      * The player ID that was used for this player the first time they signed into the game in question. This is only populated for calls to player.get for the requesting player, only if the player ID has subsequently changed, and only to clients that support remapping player IDs.
      */
-    originalPlayerId?: string | null;
+    originalPlayerId?: string;
     /**
      * The ID of the player.
      */
-    playerId?: string | null;
-    playerStattus?: string | null;
+    playerId?: string;
     /**
      * The player&#39;s profile settings. Controls whether or not the player&#39;s profile is visible to other players.
      */
@@ -308,7 +311,7 @@ export namespace gamesManagement_v1management {
     /**
      * The player&#39;s title rewarded for their game activities.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * This is a JSON template for a list of leaderboard reset resources.
@@ -317,7 +320,7 @@ export namespace gamesManagement_v1management {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#playerScoreResetResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The leaderboard reset results.
      */
@@ -330,15 +333,15 @@ export namespace gamesManagement_v1management {
     /**
      * The ID of an leaderboard for which player state has been updated.
      */
-    definitionId?: string | null;
+    definitionId?: string;
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#playerScoreResetResponse.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The time spans of the updated score. Possible values are:   - &quot;ALL_TIME&quot; - The score is an all-time score.  - &quot;WEEKLY&quot; - The score is a weekly score.  - &quot;DAILY&quot; - The score is a daily score.
      */
-    resetScoreTimeSpans?: string[] | null;
+    resetScoreTimeSpans?: string[];
   }
   /**
    * This is a JSON template for profile settings
@@ -347,8 +350,24 @@ export namespace gamesManagement_v1management {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#profileSettings.
      */
-    kind?: string | null;
-    profileVisible?: boolean | null;
+    kind?: string;
+    /**
+     * The player&#39;s current profile visibility. This field is visible to both 1P and 3P APIs.
+     */
+    profileVisible?: boolean;
+  }
+  /**
+   * This is a JSON template for multiple quests reset all request.
+   */
+  export interface Schema$QuestsResetMultipleForAllRequest {
+    /**
+     * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#questsResetMultipleForAllRequest.
+     */
+    kind?: string;
+    /**
+     * The IDs of quests to reset.
+     */
+    quest_ids?: string[];
   }
   /**
    * This is a JSON template for multiple scores reset all request.
@@ -357,11 +376,11 @@ export namespace gamesManagement_v1management {
     /**
      * Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#scoresResetMultipleForAllRequest.
      */
-    kind?: string | null;
+    kind?: string;
     /**
      * The IDs of leaderboards to reset.
      */
-    leaderboard_ids?: string[] | null;
+    leaderboard_ids?: string[];
   }
 
   export class Resource$Achievements {
@@ -676,7 +695,7 @@ export namespace gamesManagement_v1management {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().AchievementResetMultipleForAllRequest} params.requestBody Request body data
+     * @param {().AchievementResetMultipleForAllRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -905,7 +924,7 @@ export namespace gamesManagement_v1management {
 
     /**
      * gamesManagement.events.reset
-     * @desc Resets all player progress on the event with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+     * @desc Resets all player progress on the event with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application. All quests for this player that use the event will also be reset.
      * @alias gamesManagement.events.reset
      * @memberOf! ()
      *
@@ -975,7 +994,7 @@ export namespace gamesManagement_v1management {
 
     /**
      * gamesManagement.events.resetAll
-     * @desc Resets all player progress on all events for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+     * @desc Resets all player progress on all events for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application. All quests for this player will also be reset.
      * @alias gamesManagement.events.resetAll
      * @memberOf! ()
      *
@@ -1045,7 +1064,7 @@ export namespace gamesManagement_v1management {
 
     /**
      * gamesManagement.events.resetAllForAllPlayers
-     * @desc Resets all draft events for all players. This method is only available to user accounts for your developer console.
+     * @desc Resets all draft events for all players. This method is only available to user accounts for your developer console. All quests that use any of these events will also be reset.
      * @alias gamesManagement.events.resetAllForAllPlayers
      * @memberOf! ()
      *
@@ -1115,7 +1134,7 @@ export namespace gamesManagement_v1management {
 
     /**
      * gamesManagement.events.resetForAllPlayers
-     * @desc Resets the event with the given ID for all players. This method is only available to user accounts for your developer console. Only draft events can be reset.
+     * @desc Resets the event with the given ID for all players. This method is only available to user accounts for your developer console. Only draft events can be reset. All quests that use the event will also be reset.
      * @alias gamesManagement.events.resetForAllPlayers
      * @memberOf! ()
      *
@@ -1187,12 +1206,12 @@ export namespace gamesManagement_v1management {
 
     /**
      * gamesManagement.events.resetMultipleForAllPlayers
-     * @desc Resets events with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft events may be reset.
+     * @desc Resets events with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft events may be reset. All quests that use any of the events will also be reset.
      * @alias gamesManagement.events.resetMultipleForAllPlayers
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().EventsResetMultipleForAllRequest} params.requestBody Request body data
+     * @param {().EventsResetMultipleForAllRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -1486,6 +1505,415 @@ export namespace gamesManagement_v1management {
      * A player ID. A value of me may be used in place of the authenticated player's ID.
      */
     playerId?: string;
+  }
+
+  export class Resource$Quests {
+    context: APIRequestContext;
+    constructor(context: APIRequestContext) {
+      this.context = context;
+    }
+
+    /**
+     * gamesManagement.quests.reset
+     * @desc Resets all player progress on the quest with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+     * @alias gamesManagement.quests.reset
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string} params.questId The ID of the quest.
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    reset(
+      params?: Params$Resource$Quests$Reset,
+      options?: MethodOptions
+    ): GaxiosPromise<void>;
+    reset(
+      params: Params$Resource$Quests$Reset,
+      options: MethodOptions | BodyResponseCallback<void>,
+      callback: BodyResponseCallback<void>
+    ): void;
+    reset(
+      params: Params$Resource$Quests$Reset,
+      callback: BodyResponseCallback<void>
+    ): void;
+    reset(callback: BodyResponseCallback<void>): void;
+    reset(
+      paramsOrCallback?:
+        | Params$Resource$Quests$Reset
+        | BodyResponseCallback<void>,
+      optionsOrCallback?: MethodOptions | BodyResponseCallback<void>,
+      callback?: BodyResponseCallback<void>
+    ): void | GaxiosPromise<void> {
+      let params = (paramsOrCallback || {}) as Params$Resource$Quests$Reset;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Quests$Reset;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+          {
+            url: (
+              rootUrl + '/games/v1management/quests/{questId}/reset'
+            ).replace(/([^:]\/)\/+/g, '$1'),
+            method: 'POST',
+          },
+          options
+        ),
+        params,
+        requiredParams: ['questId'],
+        pathParams: ['questId'],
+        context: this.context,
+      };
+      if (callback) {
+        createAPIRequest<void>(parameters, callback);
+      } else {
+        return createAPIRequest<void>(parameters);
+      }
+    }
+
+    /**
+     * gamesManagement.quests.resetAll
+     * @desc Resets all player progress on all quests for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
+     * @alias gamesManagement.quests.resetAll
+     * @memberOf! ()
+     *
+     * @param {object=} params Parameters for request
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    resetAll(
+      params?: Params$Resource$Quests$Resetall,
+      options?: MethodOptions
+    ): GaxiosPromise<void>;
+    resetAll(
+      params: Params$Resource$Quests$Resetall,
+      options: MethodOptions | BodyResponseCallback<void>,
+      callback: BodyResponseCallback<void>
+    ): void;
+    resetAll(
+      params: Params$Resource$Quests$Resetall,
+      callback: BodyResponseCallback<void>
+    ): void;
+    resetAll(callback: BodyResponseCallback<void>): void;
+    resetAll(
+      paramsOrCallback?:
+        | Params$Resource$Quests$Resetall
+        | BodyResponseCallback<void>,
+      optionsOrCallback?: MethodOptions | BodyResponseCallback<void>,
+      callback?: BodyResponseCallback<void>
+    ): void | GaxiosPromise<void> {
+      let params = (paramsOrCallback || {}) as Params$Resource$Quests$Resetall;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Quests$Resetall;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+          {
+            url: (rootUrl + '/games/v1management/quests/reset').replace(
+              /([^:]\/)\/+/g,
+              '$1'
+            ),
+            method: 'POST',
+          },
+          options
+        ),
+        params,
+        requiredParams: [],
+        pathParams: [],
+        context: this.context,
+      };
+      if (callback) {
+        createAPIRequest<void>(parameters, callback);
+      } else {
+        return createAPIRequest<void>(parameters);
+      }
+    }
+
+    /**
+     * gamesManagement.quests.resetAllForAllPlayers
+     * @desc Resets all draft quests for all players. This method is only available to user accounts for your developer console.
+     * @alias gamesManagement.quests.resetAllForAllPlayers
+     * @memberOf! ()
+     *
+     * @param {object=} params Parameters for request
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    resetAllForAllPlayers(
+      params?: Params$Resource$Quests$Resetallforallplayers,
+      options?: MethodOptions
+    ): GaxiosPromise<void>;
+    resetAllForAllPlayers(
+      params: Params$Resource$Quests$Resetallforallplayers,
+      options: MethodOptions | BodyResponseCallback<void>,
+      callback: BodyResponseCallback<void>
+    ): void;
+    resetAllForAllPlayers(
+      params: Params$Resource$Quests$Resetallforallplayers,
+      callback: BodyResponseCallback<void>
+    ): void;
+    resetAllForAllPlayers(callback: BodyResponseCallback<void>): void;
+    resetAllForAllPlayers(
+      paramsOrCallback?:
+        | Params$Resource$Quests$Resetallforallplayers
+        | BodyResponseCallback<void>,
+      optionsOrCallback?: MethodOptions | BodyResponseCallback<void>,
+      callback?: BodyResponseCallback<void>
+    ): void | GaxiosPromise<void> {
+      let params = (paramsOrCallback ||
+        {}) as Params$Resource$Quests$Resetallforallplayers;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Quests$Resetallforallplayers;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+          {
+            url: (
+              rootUrl + '/games/v1management/quests/resetAllForAllPlayers'
+            ).replace(/([^:]\/)\/+/g, '$1'),
+            method: 'POST',
+          },
+          options
+        ),
+        params,
+        requiredParams: [],
+        pathParams: [],
+        context: this.context,
+      };
+      if (callback) {
+        createAPIRequest<void>(parameters, callback);
+      } else {
+        return createAPIRequest<void>(parameters);
+      }
+    }
+
+    /**
+     * gamesManagement.quests.resetForAllPlayers
+     * @desc Resets all player progress on the quest with the given ID for all players. This method is only available to user accounts for your developer console. Only draft quests can be reset.
+     * @alias gamesManagement.quests.resetForAllPlayers
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {string} params.questId The ID of the quest.
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    resetForAllPlayers(
+      params?: Params$Resource$Quests$Resetforallplayers,
+      options?: MethodOptions
+    ): GaxiosPromise<void>;
+    resetForAllPlayers(
+      params: Params$Resource$Quests$Resetforallplayers,
+      options: MethodOptions | BodyResponseCallback<void>,
+      callback: BodyResponseCallback<void>
+    ): void;
+    resetForAllPlayers(
+      params: Params$Resource$Quests$Resetforallplayers,
+      callback: BodyResponseCallback<void>
+    ): void;
+    resetForAllPlayers(callback: BodyResponseCallback<void>): void;
+    resetForAllPlayers(
+      paramsOrCallback?:
+        | Params$Resource$Quests$Resetforallplayers
+        | BodyResponseCallback<void>,
+      optionsOrCallback?: MethodOptions | BodyResponseCallback<void>,
+      callback?: BodyResponseCallback<void>
+    ): void | GaxiosPromise<void> {
+      let params = (paramsOrCallback ||
+        {}) as Params$Resource$Quests$Resetforallplayers;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Quests$Resetforallplayers;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+          {
+            url: (
+              rootUrl +
+              '/games/v1management/quests/{questId}/resetForAllPlayers'
+            ).replace(/([^:]\/)\/+/g, '$1'),
+            method: 'POST',
+          },
+          options
+        ),
+        params,
+        requiredParams: ['questId'],
+        pathParams: ['questId'],
+        context: this.context,
+      };
+      if (callback) {
+        createAPIRequest<void>(parameters, callback);
+      } else {
+        return createAPIRequest<void>(parameters);
+      }
+    }
+
+    /**
+     * gamesManagement.quests.resetMultipleForAllPlayers
+     * @desc Resets quests with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft quests may be reset.
+     * @alias gamesManagement.quests.resetMultipleForAllPlayers
+     * @memberOf! ()
+     *
+     * @param {object} params Parameters for request
+     * @param {().QuestsResetMultipleForAllRequest} params.resource Request body data
+     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
+     * @param {callback} callback The callback that handles the response.
+     * @return {object} Request object
+     */
+    resetMultipleForAllPlayers(
+      params?: Params$Resource$Quests$Resetmultipleforallplayers,
+      options?: MethodOptions
+    ): GaxiosPromise<void>;
+    resetMultipleForAllPlayers(
+      params: Params$Resource$Quests$Resetmultipleforallplayers,
+      options: MethodOptions | BodyResponseCallback<void>,
+      callback: BodyResponseCallback<void>
+    ): void;
+    resetMultipleForAllPlayers(
+      params: Params$Resource$Quests$Resetmultipleforallplayers,
+      callback: BodyResponseCallback<void>
+    ): void;
+    resetMultipleForAllPlayers(callback: BodyResponseCallback<void>): void;
+    resetMultipleForAllPlayers(
+      paramsOrCallback?:
+        | Params$Resource$Quests$Resetmultipleforallplayers
+        | BodyResponseCallback<void>,
+      optionsOrCallback?: MethodOptions | BodyResponseCallback<void>,
+      callback?: BodyResponseCallback<void>
+    ): void | GaxiosPromise<void> {
+      let params = (paramsOrCallback ||
+        {}) as Params$Resource$Quests$Resetmultipleforallplayers;
+      let options = (optionsOrCallback || {}) as MethodOptions;
+
+      if (typeof paramsOrCallback === 'function') {
+        callback = paramsOrCallback;
+        params = {} as Params$Resource$Quests$Resetmultipleforallplayers;
+        options = {};
+      }
+
+      if (typeof optionsOrCallback === 'function') {
+        callback = optionsOrCallback;
+        options = {};
+      }
+
+      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
+      const parameters = {
+        options: Object.assign(
+          {
+            url: (
+              rootUrl + '/games/v1management/quests/resetMultipleForAllPlayers'
+            ).replace(/([^:]\/)\/+/g, '$1'),
+            method: 'POST',
+          },
+          options
+        ),
+        params,
+        requiredParams: [],
+        pathParams: [],
+        context: this.context,
+      };
+      if (callback) {
+        createAPIRequest<void>(parameters, callback);
+      } else {
+        return createAPIRequest<void>(parameters);
+      }
+    }
+  }
+
+  export interface Params$Resource$Quests$Reset extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+
+    /**
+     * The ID of the quest.
+     */
+    questId?: string;
+  }
+  export interface Params$Resource$Quests$Resetall extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+  }
+  export interface Params$Resource$Quests$Resetallforallplayers
+    extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+  }
+  export interface Params$Resource$Quests$Resetforallplayers
+    extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+
+    /**
+     * The ID of the quest.
+     */
+    questId?: string;
+  }
+  export interface Params$Resource$Quests$Resetmultipleforallplayers
+    extends StandardParameters {
+    /**
+     * Auth client or API Key for the request
+     */
+    auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
+
+    /**
+     * Request body metadata
+     */
+    requestBody?: Schema$QuestsResetMultipleForAllRequest;
   }
 
   export class Resource$Rooms {
@@ -1960,7 +2388,7 @@ export namespace gamesManagement_v1management {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {().ScoresResetMultipleForAllRequest} params.requestBody Request body data
+     * @param {().ScoresResetMultipleForAllRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

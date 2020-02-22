@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -135,7 +137,7 @@ export namespace oslogin_v1alpha {
     /**
      * A unique user ID.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The list of POSIX accounts associated with the user.
      */
@@ -143,7 +145,7 @@ export namespace oslogin_v1alpha {
     /**
      * A map from SSH public key fingerprint to the associated key object.
      */
-    sshPublicKeys?: {[key: string]: Schema$SshPublicKey} | null;
+    sshPublicKeys?: {[key: string]: Schema$SshPublicKey};
   }
   /**
    * The POSIX account information associated with a Google account.
@@ -152,47 +154,43 @@ export namespace oslogin_v1alpha {
     /**
      * Output only. A POSIX account identifier.
      */
-    accountId?: string | null;
+    accountId?: string;
     /**
      * The GECOS (user information) entry for this account.
      */
-    gecos?: string | null;
+    gecos?: string;
     /**
      * The default group ID.
      */
-    gid?: string | null;
+    gid?: string;
     /**
      * The path to the home directory for this account.
      */
-    homeDirectory?: string | null;
-    /**
-     * Output only. The canonical resource name.
-     */
-    name?: string | null;
+    homeDirectory?: string;
     /**
      * The operating system type where this account applies.
      */
-    operatingSystemType?: string | null;
+    operatingSystemType?: string;
     /**
      * Only one POSIX account can be marked as primary.
      */
-    primary?: boolean | null;
+    primary?: boolean;
     /**
      * The path to the logic shell for this account.
      */
-    shell?: string | null;
+    shell?: string;
     /**
      * System identifier for which account the username or uid applies to. By default, the empty value is used.
      */
-    systemId?: string | null;
+    systemId?: string;
     /**
      * The user ID.
      */
-    uid?: string | null;
+    uid?: string;
     /**
      * The username of the POSIX account.
      */
-    username?: string | null;
+    username?: string;
   }
   /**
    * The SSH public key information associated with a Google account.
@@ -201,19 +199,15 @@ export namespace oslogin_v1alpha {
     /**
      * An expiration time in microseconds since epoch.
      */
-    expirationTimeUsec?: string | null;
+    expirationTimeUsec?: string;
     /**
      * Output only. The SHA-256 fingerprint of the SSH public key.
      */
-    fingerprint?: string | null;
+    fingerprint?: string;
     /**
      * Public key text in SSH format, defined by &lt;a href=&quot;https://www.ietf.org/rfc/rfc4253.txt&quot; target=&quot;_blank&quot;&gt;RFC4253&lt;/a&gt; section 6.6.
      */
-    key?: string | null;
-    /**
-     * Output only. The canonical resource name.
-     */
-    name?: string | null;
+    key?: string;
   }
 
   export class Resource$Users {
@@ -312,7 +306,7 @@ export namespace oslogin_v1alpha {
      * @param {object} params Parameters for request
      * @param {string} params.parent The unique ID for the user in format `users/{user}`.
      * @param {string=} params.projectId The project ID of the Google Cloud Platform project.
-     * @param {().SshPublicKey} params.requestBody Request body data
+     * @param {().SshPublicKey} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -682,7 +676,7 @@ export namespace oslogin_v1alpha {
      * @param {object} params Parameters for request
      * @param {string} params.name The fingerprint of the public key to update. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format `users/{user}/sshPublicKeys/{fingerprint}`.
      * @param {string=} params.updateMask Mask to control which fields get updated. Updates all if not present.
-     * @param {().SshPublicKey} params.requestBody Request body data
+     * @param {().SshPublicKey} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object

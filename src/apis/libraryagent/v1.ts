@@ -1,16 +1,18 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
   OAuth2Client,
@@ -122,19 +124,19 @@ export namespace libraryagent_v1 {
     /**
      * The name of the book author.
      */
-    author?: string | null;
+    author?: string;
     /**
      * The resource name of the book. Book names have the form `shelves/{shelf_id}/books/{book_id}`. The name is ignored when creating a book.
      */
-    name?: string | null;
+    name?: string;
     /**
      * Value indicating whether the book has been read.
      */
-    read?: boolean | null;
+    read?: boolean;
     /**
      * The title of the book.
      */
-    title?: string | null;
+    title?: string;
   }
   /**
    * Response message for LibraryAgent.ListBooks.
@@ -147,7 +149,7 @@ export namespace libraryagent_v1 {
     /**
      * A token to retrieve next page of results. Pass this value in the ListBooksRequest.page_token field in the subsequent call to `ListBooks` method to retrieve the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
   }
   /**
    * Response message for LibraryAgent.ListShelves.
@@ -156,7 +158,7 @@ export namespace libraryagent_v1 {
     /**
      * A token to retrieve next page of results. Pass this value in the ListShelvesRequest.page_token field in the subsequent call to `ListShelves` method to retrieve the next page of results.
      */
-    nextPageToken?: string | null;
+    nextPageToken?: string;
     /**
      * The list of shelves.
      */
@@ -169,11 +171,11 @@ export namespace libraryagent_v1 {
     /**
      * Output only. The resource name of the shelf. Shelf names have the form `shelves/{shelf_id}`. The name is ignored when creating a shelf.
      */
-    name?: string | null;
+    name?: string;
     /**
      * The theme of the shelf
      */
-    theme?: string | null;
+    theme?: string;
   }
 
   export class Resource$Shelves {
@@ -191,7 +193,7 @@ export namespace libraryagent_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the shelf to retrieve.
+     * @param {string} params.name The name of the shelf to retrieve.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -367,7 +369,7 @@ export namespace libraryagent_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the shelf to retrieve.
+     * The name of the shelf to retrieve.
      */
     name?: string;
   }
@@ -400,7 +402,7 @@ export namespace libraryagent_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the book to borrow.
+     * @param {string} params.name The name of the book to borrow.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -480,7 +482,7 @@ export namespace libraryagent_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the book to retrieve.
+     * @param {string} params.name The name of the book to retrieve.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -562,7 +564,7 @@ export namespace libraryagent_v1 {
      * @param {object} params Parameters for request
      * @param {integer=} params.pageSize Requested page size. Server may return fewer books than requested. If unspecified, server will pick an appropriate default.
      * @param {string=} params.pageToken A token identifying a page of results the server should return. Typically, this is the value of ListBooksResponse.next_page_token. returned from the previous call to `ListBooks` method.
-     * @param {string} params.parent Required. The name of the shelf whose books we'd like to list.
+     * @param {string} params.parent The name of the shelf whose books we'd like to list.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -661,7 +663,7 @@ export namespace libraryagent_v1 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {string} params.name Required. The name of the book to return.
+     * @param {string} params.name The name of the book to return.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
      * @return {object} Request object
@@ -743,7 +745,7 @@ export namespace libraryagent_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the book to borrow.
+     * The name of the book to borrow.
      */
     name?: string;
   }
@@ -755,7 +757,7 @@ export namespace libraryagent_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the book to retrieve.
+     * The name of the book to retrieve.
      */
     name?: string;
   }
@@ -775,7 +777,7 @@ export namespace libraryagent_v1 {
      */
     pageToken?: string;
     /**
-     * Required. The name of the shelf whose books we'd like to list.
+     * The name of the shelf whose books we'd like to list.
      */
     parent?: string;
   }
@@ -787,7 +789,7 @@ export namespace libraryagent_v1 {
     auth?: string | OAuth2Client | JWT | Compute | UserRefreshClient;
 
     /**
-     * Required. The name of the book to return.
+     * The name of the book to return.
      */
     name?: string;
   }

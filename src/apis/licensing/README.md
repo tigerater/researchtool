@@ -2,7 +2,7 @@
 
 # licensing
 
-> Licensing API to view and manage licenses for your domain
+> Views and manages licenses for your domain.
 
 ## Installation
 
