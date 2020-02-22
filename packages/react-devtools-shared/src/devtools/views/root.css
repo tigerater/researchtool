@@ -182,3 +182,9 @@
   --interaction-commit-size: 10px;
   --interaction-label-width: 200px;
 }
+
+* {
+  box-sizing: border-box;
+
+  -webkit-font-smoothing: var(--font-smoothing);
+}
