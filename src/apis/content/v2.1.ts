@@ -24,9 +24,9 @@ import {APIRequestContext, BodyResponseCallback, createAPIRequest, GlobalOptions
 // tslint:disable: jsdoc-format
 // tslint:disable: no-namespace
 
-export namespace content_v2 {
+export namespace content_v2_1 {
   export interface Options extends GlobalOptions {
-    version: 'v2';
+    version: 'v2_1';
   }
 
   let context: APIRequestContext;
@@ -73,12 +73,12 @@ export namespace content_v2 {
    *
    * @example
    * const {google} = require('googleapis');
-   * const content = google.content('v2');
+   * const content = google.content('v2.1');
    *
    * @namespace content
    * @type {Function}
-   * @version v2
-   * @variation v2
+   * @version v2.1
+   * @variation v2.1
    * @param {object=} options Options for Content
    */
   export class Content {
@@ -87,7 +87,6 @@ export namespace content_v2 {
     accounttax: Resource$Accounttax;
     datafeeds: Resource$Datafeeds;
     datafeedstatuses: Resource$Datafeedstatuses;
-    inventory: Resource$Inventory;
     liasettings: Resource$Liasettings;
     orderinvoices: Resource$Orderinvoices;
     orderpayments: Resource$Orderpayments;
@@ -107,7 +106,6 @@ export namespace content_v2 {
       this.accounttax = new Resource$Accounttax();
       this.datafeeds = new Resource$Datafeeds();
       this.datafeedstatuses = new Resource$Datafeedstatuses();
-      this.inventory = new Resource$Inventory();
       this.liasettings = new Resource$Liasettings();
       this.orderinvoices = new Resource$Orderinvoices();
       this.orderpayments = new Resource$Orderpayments();
@@ -128,17 +126,17 @@ export namespace content_v2 {
    */
   export interface Schema$Account {
     /**
+     * List of linked Ads accounts that are active or pending approval. To
+     * create a new link request, add a new link with status active to the list.
+     * It will remain in a pending state until approved or rejected either in
+     * the Ads interface or through the AdWords API. To delete an active link,
+     * or to cancel a link request, remove it from the list.
+     */
+    adsLinks?: Schema$AccountAdsLink[];
+    /**
      * Indicates whether the merchant sells adult content.
      */
     adultContent?: boolean;
-    /**
-     * List of linked AdWords accounts that are active or pending approval. To
-     * create a new link request, add a new link with status active to the list.
-     * It will remain in a pending state until approved or rejected either in
-     * the AdWords interface or through the  AdWords API. To delete an active
-     * link, or to cancel a link request, remove it from the list.
-     */
-    adwordsLinks?: Schema$AccountAdwordsLink[];
     /**
      * The business information of the account.
      */
@@ -161,11 +159,6 @@ export namespace content_v2 {
      * Display name for the account.
      */
     name?: string;
-    /**
-     * [DEPRECATED] This field is never returned and will be ignored if
-     * provided.
-     */
-    reviewsUrl?: string;
     /**
      * Client-specific, locally-unique, internal ID for the child account.
      */
@@ -213,15 +206,15 @@ export namespace content_v2 {
      */
     streetAddress?: string;
   }
-  export interface Schema$AccountAdwordsLink {
+  export interface Schema$AccountAdsLink {
     /**
-     * Customer ID of the AdWords account.
+     * Customer ID of the Ads account.
      */
-    adwordsId?: string;
+    adsId?: string;
     /**
-     * Status of the link between this Merchant Center account and the AdWords
+     * Status of the link between this Merchant Center account and the Ads
      * account. Upon retrieval, it represents the actual status of the link and
-     * can be either active if it was approved in Google AdWords or pending if
+     * can be either active if it was approved in Google Ads or pending if
      * it&#39;s pending approval. Upon insertion, it represents the intended
      * status of the link. Re-uploading a link with status active when it&#39;s
      * still pending or with status pending when it&#39;s already active will
@@ -399,10 +392,6 @@ export namespace content_v2 {
      * &quot;content#accountsCustomBatchResponseEntry&quot;.
      */
     kind?: string;
-    /**
-     * Deprecated. This field is never set.
-     */
-    linkStatus?: string;
   }
   export interface Schema$AccountsLinkRequest {
     /**
@@ -452,10 +441,6 @@ export namespace content_v2 {
      */
     accountLevelIssues?: Schema$AccountStatusAccountLevelIssue[];
     /**
-     * A list of data quality issues.
-     */
-    dataQualityIssues?: Schema$AccountStatusDataQualityIssue[];
-    /**
      * Identifies what kind of resource this is. Value: the fixed string
      * &quot;content#accountStatus&quot;.
      */
@@ -499,52 +484,6 @@ export namespace content_v2 {
      * Short description of the issue.
      */
     title?: string;
-  }
-  export interface Schema$AccountStatusDataQualityIssue {
-    /**
-     * Country for which this issue is reported.
-     */
-    country?: string;
-    /**
-     * The destination the issue applies to.
-     */
-    destination?: string;
-    /**
-     * A more detailed description of the issue.
-     */
-    detail?: string;
-    /**
-     * Actual value displayed on the landing page.
-     */
-    displayedValue?: string;
-    /**
-     * Example items featuring the issue.
-     */
-    exampleItems?: Schema$AccountStatusExampleItem[];
-    /**
-     * Issue identifier.
-     */
-    id?: string;
-    /**
-     * Last time the account was checked for this issue.
-     */
-    lastChecked?: string;
-    /**
-     * The attribute name that is relevant for the issue.
-     */
-    location?: string;
-    /**
-     * Number of items in the account found to have the said issue.
-     */
-    numItems?: number;
-    /**
-     * Severity of the problem.
-     */
-    severity?: string;
-    /**
-     * Submitted value that causes the issue.
-     */
-    submittedValue?: string;
   }
   export interface Schema$AccountstatusesCustomBatchRequest {
     /**
@@ -618,32 +557,6 @@ export namespace content_v2 {
      */
     nextPageToken?: string;
     resources?: Schema$AccountStatus[];
-  }
-  /**
-   * An example of an item that has poor data quality. An item value on the
-   * landing page differs from what is submitted, or conflicts with a policy.
-   */
-  export interface Schema$AccountStatusExampleItem {
-    /**
-     * Unique item ID as specified in the uploaded product data.
-     */
-    itemId?: string;
-    /**
-     * Landing page of the item.
-     */
-    link?: string;
-    /**
-     * The item value that was submitted.
-     */
-    submittedValue?: string;
-    /**
-     * Title of the item.
-     */
-    title?: string;
-    /**
-     * The actual value on the landing page.
-     */
-    valueOnLandingPage?: string;
   }
   export interface Schema$AccountStatusItemLevelIssue {
     /**
@@ -882,13 +795,14 @@ export namespace content_v2 {
   }
   export interface Schema$Amount {
     /**
-     * [required] Value before taxes.
+     * [required] The pre-tax or post-tax price depending on the location of the
+     * order.
      */
-    pretax?: Schema$Price;
+    priceAmount?: Schema$Price;
     /**
      * [required] Tax value.
      */
-    tax?: Schema$Price;
+    taxAmount?: Schema$Price;
   }
   export interface Schema$CarrierRate {
     /**
@@ -944,19 +858,15 @@ export namespace content_v2 {
   }
   export interface Schema$CustomAttribute {
     /**
+     * Subattributes within this attribute group. Exactly one of value or
+     * groupValues must be provided.
+     */
+    groupValues?: Schema$CustomAttribute[];
+    /**
      * The name of the attribute. Underscores will be replaced by spaces upon
      * insertion.
      */
     name?: string;
-    /**
-     * The type of the attribute.
-     */
-    type?: string;
-    /**
-     * Free-form unit of the attribute. Unit can only be used for values of type
-     * int, float, or price.
-     */
-    unit?: string;
     /**
      * The value of the attribute.
      */
@@ -965,17 +875,6 @@ export namespace content_v2 {
   export interface Schema$CustomerReturnReason {
     description?: string;
     reasonCode?: string;
-  }
-  export interface Schema$CustomGroup {
-    /**
-     * The sub-attributes.
-     */
-    attributes?: Schema$CustomAttribute[];
-    /**
-     * The name of the group. Underscores will be replaced by spaces upon
-     * insertion.
-     */
-    name?: string;
   }
   export interface Schema$CutoffTime {
     /**
@@ -1005,12 +904,6 @@ export namespace content_v2 {
      */
     attributeLanguage?: string;
     /**
-     * [DEPRECATED] Please use targets[].language instead. The two-letter ISO
-     * 639-1 language of the items in the feed. Must be a valid language for
-     * targetCountry.
-     */
-    contentLanguage?: string;
-    /**
      * The type of data feed. For product inventory feeds, only feeds for local
      * stores, not online stores, are supported.
      */
@@ -1032,12 +925,6 @@ export namespace content_v2 {
      */
     id?: string;
     /**
-     * [DEPRECATED] Please use targets[].includedDestinations instead. The list
-     * of intended destinations (corresponds to checked check boxes in Merchant
-     * Center).
-     */
-    intendedDestinations?: string[];
-    /**
      * Identifies what kind of resource this is. Value: the fixed string
      * &quot;content#datafeed&quot;.
      */
@@ -1046,12 +933,6 @@ export namespace content_v2 {
      * A descriptive name of the data feed.
      */
     name?: string;
-    /**
-     * [DEPRECATED] Please use targets[].country instead. The country where the
-     * items in the feed will be included in the search index, represented as a
-     * CLDR territory code.
-     */
-    targetCountry?: string;
     /**
      * The targets this feed should apply to (country, language, destinations).
      */
@@ -1605,246 +1486,6 @@ export namespace content_v2 {
      */
     months?: string;
   }
-  export interface Schema$Inventory {
-    /**
-     * The availability of the product.
-     */
-    availability?: string;
-    /**
-     * Custom label 0 for custom grouping of items in a Shopping campaign. Only
-     * supported for online products.
-     */
-    customLabel0?: string;
-    /**
-     * Custom label 1 for custom grouping of items in a Shopping campaign. Only
-     * supported for online products.
-     */
-    customLabel1?: string;
-    /**
-     * Custom label 2 for custom grouping of items in a Shopping campaign. Only
-     * supported for online products.
-     */
-    customLabel2?: string;
-    /**
-     * Custom label 3 for custom grouping of items in a Shopping campaign. Only
-     * supported for online products.
-     */
-    customLabel3?: string;
-    /**
-     * Custom label 3 for custom grouping of items in a Shopping campaign. Only
-     * supported for online products.
-     */
-    customLabel4?: string;
-    /**
-     * Number and amount of installments to pay for an item. Brazil only.
-     */
-    installment?: Schema$Installment;
-    /**
-     * The instore product location. Supported only for local products.
-     */
-    instoreProductLocation?: string;
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string
-     * &quot;content#inventory&quot;.
-     */
-    kind?: string;
-    /**
-     * Loyalty points that users receive after purchasing the item. Japan only.
-     */
-    loyaltyPoints?: Schema$LoyaltyPoints;
-    /**
-     * Store pickup information. Only supported for local inventory. Not setting
-     * pickup means &quot;don&#39;t update&quot; while setting it to the empty
-     * value ({} in JSON) means &quot;delete&quot;. Otherwise, pickupMethod and
-     * pickupSla must be set together, unless pickupMethod is &quot;not
-     * supported&quot;.
-     */
-    pickup?: Schema$InventoryPickup;
-    /**
-     * The price of the product.
-     */
-    price?: Schema$Price;
-    /**
-     * The quantity of the product. Must be equal to or greater than zero.
-     * Supported only for local products.
-     */
-    quantity?: number;
-    /**
-     * The sale price of the product. Mandatory if sale_price_effective_date is
-     * defined.
-     */
-    salePrice?: Schema$Price;
-    /**
-     * A date range represented by a pair of ISO 8601 dates separated by a
-     * space, comma, or slash. Both dates might be specified as &#39;null&#39;
-     * if undecided.
-     */
-    salePriceEffectiveDate?: string;
-    /**
-     * The quantity of the product that is available for selling on Google.
-     * Supported only for online products.
-     */
-    sellOnGoogleQuantity?: number;
-  }
-  export interface Schema$InventoryCustomBatchRequest {
-    /**
-     * The request entries to be processed in the batch.
-     */
-    entries?: Schema$InventoryCustomBatchRequestEntry[];
-  }
-  /**
-   * A batch entry encoding a single non-batch inventory request.
-   */
-  export interface Schema$InventoryCustomBatchRequestEntry {
-    /**
-     * An entry ID, unique within the batch request.
-     */
-    batchId?: number;
-    /**
-     * Price and availability of the product.
-     */
-    inventory?: Schema$Inventory;
-    /**
-     * The ID of the managing account.
-     */
-    merchantId?: string;
-    /**
-     * The ID of the product for which to update price and availability.
-     */
-    productId?: string;
-    /**
-     * The code of the store for which to update price and availability. Use
-     * online to update price and availability of an online product.
-     */
-    storeCode?: string;
-  }
-  export interface Schema$InventoryCustomBatchResponse {
-    /**
-     * The result of the execution of the batch requests.
-     */
-    entries?: Schema$InventoryCustomBatchResponseEntry[];
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string
-     * &quot;content#inventoryCustomBatchResponse&quot;.
-     */
-    kind?: string;
-  }
-  /**
-   * A batch entry encoding a single non-batch inventory response.
-   */
-  export interface Schema$InventoryCustomBatchResponseEntry {
-    /**
-     * The ID of the request entry this entry responds to.
-     */
-    batchId?: number;
-    /**
-     * A list of errors defined if and only if the request failed.
-     */
-    errors?: Schema$Errors;
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string
-     * &quot;content#inventoryCustomBatchResponseEntry&quot;.
-     */
-    kind?: string;
-  }
-  export interface Schema$InventoryPickup {
-    /**
-     * Whether store pickup is available for this offer and whether the pickup
-     * option should be shown as buy, reserve, or not supported. Only supported
-     * for local inventory. Unless the value is &quot;not supported&quot;, must
-     * be submitted together with pickupSla.
-     */
-    pickupMethod?: string;
-    /**
-     * The expected date that an order will be ready for pickup, relative to
-     * when the order is placed. Only supported for local inventory. Must be
-     * submitted together with pickupMethod.
-     */
-    pickupSla?: string;
-  }
-  export interface Schema$InventorySetRequest {
-    /**
-     * The availability of the product.
-     */
-    availability?: string;
-    /**
-     * Custom label 0 for custom grouping of items in a Shopping campaign. Only
-     * supported for online products.
-     */
-    customLabel0?: string;
-    /**
-     * Custom label 1 for custom grouping of items in a Shopping campaign. Only
-     * supported for online products.
-     */
-    customLabel1?: string;
-    /**
-     * Custom label 2 for custom grouping of items in a Shopping campaign. Only
-     * supported for online products.
-     */
-    customLabel2?: string;
-    /**
-     * Custom label 3 for custom grouping of items in a Shopping campaign. Only
-     * supported for online products.
-     */
-    customLabel3?: string;
-    /**
-     * Custom label 3 for custom grouping of items in a Shopping campaign. Only
-     * supported for online products.
-     */
-    customLabel4?: string;
-    /**
-     * Number and amount of installments to pay for an item. Brazil only.
-     */
-    installment?: Schema$Installment;
-    /**
-     * The instore product location. Supported only for local products.
-     */
-    instoreProductLocation?: string;
-    /**
-     * Loyalty points that users receive after purchasing the item. Japan only.
-     */
-    loyaltyPoints?: Schema$LoyaltyPoints;
-    /**
-     * Store pickup information. Only supported for local inventory. Not setting
-     * pickup means &quot;don&#39;t update&quot; while setting it to the empty
-     * value ({} in JSON) means &quot;delete&quot;. Otherwise, pickupMethod and
-     * pickupSla must be set together, unless pickupMethod is &quot;not
-     * supported&quot;.
-     */
-    pickup?: Schema$InventoryPickup;
-    /**
-     * The price of the product.
-     */
-    price?: Schema$Price;
-    /**
-     * The quantity of the product. Must be equal to or greater than zero.
-     * Supported only for local products.
-     */
-    quantity?: number;
-    /**
-     * The sale price of the product. Mandatory if sale_price_effective_date is
-     * defined.
-     */
-    salePrice?: Schema$Price;
-    /**
-     * A date range represented by a pair of ISO 8601 dates separated by a
-     * space, comma, or slash. Both dates might be specified as &#39;null&#39;
-     * if undecided.
-     */
-    salePriceEffectiveDate?: string;
-    /**
-     * The quantity of the product that is available for selling on Google.
-     * Supported only for online products.
-     */
-    sellOnGoogleQuantity?: number;
-  }
-  export interface Schema$InventorySetResponse {
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string
-     * &quot;content#inventorySetResponse&quot;.
-     */
-    kind?: string;
-  }
   export interface Schema$InvoiceSummary {
     /**
      * Summary of the total amounts of the additional charges.
@@ -2194,6 +1835,10 @@ export namespace content_v2 {
      */
     acknowledged?: boolean;
     /**
+     * The billing address.
+     */
+    billingAddress?: Schema$OrderAddress;
+    /**
      * The channel type of the order: &quot;purchaseOnGoogle&quot; or
      * &quot;googleExpress&quot;.
      */
@@ -2231,10 +1876,6 @@ export namespace content_v2 {
      */
     netAmount?: Schema$Price;
     /**
-     * The details of the payment method.
-     */
-    paymentMethod?: Schema$OrderPaymentMethod;
-    /**
      * The status of the payment.
      */
     paymentStatus?: string;
@@ -2243,10 +1884,9 @@ export namespace content_v2 {
      */
     placedDate?: string;
     /**
-     * Deprecated. The details of the merchant provided promotions applied to
-     * the order. More details about the program are here.
+     * Promotions associated with the order.
      */
-    promotions?: Schema$OrderLegacyPromotion[];
+    promotions?: Schema$OrderPromotion[];
     /**
      * Refunds for the order.
      */
@@ -2345,10 +1985,6 @@ export namespace content_v2 {
      * Deprecated.
      */
     email?: string;
-    /**
-     * Deprecated. Please use marketingRightsInfo instead.
-     */
-    explicitMarketingPreference?: boolean;
     /**
      * Full name of the customer.
      */
@@ -2477,66 +2113,6 @@ export namespace content_v2 {
      * [required] Reason for the return.
      */
     reason?: string;
-  }
-  export interface Schema$OrderLegacyPromotion {
-    benefits?: Schema$OrderLegacyPromotionBenefit[];
-    /**
-     * The date and time frame when the promotion is active and ready for
-     * validation review. Note that the promotion live time may be delayed for a
-     * few hours due to the validation review. Start date and end date are
-     * separated by a forward slash (/). The start date is specified by the
-     * format (YYYY-MM-DD), followed by the letter ?T?, the time of the day when
-     * the sale starts (in Greenwich Mean Time, GMT), followed by an expression
-     * of the time zone for the sale. The end date is in the same format.
-     */
-    effectiveDates?: string;
-    /**
-     * Optional. The text code that corresponds to the promotion when applied on
-     * the retailer?s website.
-     */
-    genericRedemptionCode?: string;
-    /**
-     * The unique ID of the promotion.
-     */
-    id?: string;
-    /**
-     * The full title of the promotion.
-     */
-    longTitle?: string;
-    /**
-     * Whether the promotion is applicable to all products or only specific
-     * products.
-     */
-    productApplicability?: string;
-    /**
-     * Indicates that the promotion is valid online.
-     */
-    redemptionChannel?: string;
-  }
-  export interface Schema$OrderLegacyPromotionBenefit {
-    /**
-     * The discount in the order price when the promotion is applied.
-     */
-    discount?: Schema$Price;
-    /**
-     * The OfferId(s) that were purchased in this order and map to this specific
-     * benefit of the promotion.
-     */
-    offerIds?: string[];
-    /**
-     * Further describes the benefit of the promotion. Note that we will expand
-     * on this enumeration as we support new promotion sub-types.
-     */
-    subType?: string;
-    /**
-     * The impact on tax when the promotion is applied.
-     */
-    taxImpact?: Schema$Price;
-    /**
-     * Describes whether the promotion applies to products (e.g. 20% off) or to
-     * shipping (e.g. Free Shipping).
-     */
-    type?: string;
   }
   export interface Schema$OrderLineItem {
     /**
@@ -2752,34 +2328,6 @@ export namespace content_v2 {
      */
     value?: string;
   }
-  export interface Schema$OrderPaymentMethod {
-    /**
-     * The billing address.
-     */
-    billingAddress?: Schema$OrderAddress;
-    /**
-     * The card expiration month (January = 1, February = 2 etc.).
-     */
-    expirationMonth?: number;
-    /**
-     * The card expiration year (4-digit, e.g. 2015).
-     */
-    expirationYear?: number;
-    /**
-     * The last four digits of the card number.
-     */
-    lastFourDigits?: string;
-    /**
-     * The billing phone number.
-     */
-    phoneNumber?: string;
-    /**
-     * The type of instrument.  Acceptable values are:   - &quot;AMEX&quot;  -
-     * &quot;DISCOVER&quot;  - &quot;JCB&quot;  - &quot;MASTERCARD&quot;  -
-     * &quot;UNIONPAY&quot;  - &quot;VISA&quot;  - &quot;&quot;
-     */
-    type?: string;
-  }
   export interface Schema$OrderpaymentsNotifyAuthApprovedRequest {
     authAmountPretax?: Schema$Price;
     authAmountTax?: Schema$Price;
@@ -2818,10 +2366,6 @@ export namespace content_v2 {
      */
     chargeState?: string;
     /**
-     * Deprecated. Please use invoiceIds instead.
-     */
-    invoiceId?: string;
-    /**
      * Invoice IDs from the orderinvoices service that correspond to the charge.
      */
     invoiceIds?: string[];
@@ -2838,10 +2382,6 @@ export namespace content_v2 {
     kind?: string;
   }
   export interface Schema$OrderpaymentsNotifyRefundRequest {
-    /**
-     * Deprecated. Please use invoiceIds instead.
-     */
-    invoiceId?: string;
     /**
      * Invoice IDs from the orderinvoices service that correspond to the refund.
      */
@@ -2861,6 +2401,58 @@ export namespace content_v2 {
      * &quot;content#orderpaymentsNotifyRefundResponse&quot;.
      */
     kind?: string;
+  }
+  export interface Schema$OrderPromotion {
+    /**
+     * Items which this promotion may be applied to. If empty, there are no
+     * restrictions on applicable items and quantity.
+     */
+    applicableItems?: Schema$OrderPromotionItem[];
+    /**
+     * Items which this promotion have been applied to.
+     */
+    appliedItems?: Schema$OrderPromotionItem[];
+    /**
+     * The party funding the promotion.
+     */
+    funder?: string;
+    /**
+     * This field is used to identify promotions within merchants&#39; own
+     * systems.
+     */
+    merchantPromotionId?: string;
+    /**
+     * Estimated discount applied to pre-tax amount.
+     */
+    pretaxValue?: Schema$Price;
+    /**
+     * A short title of the promotion to be shown on the checkout page.
+     */
+    shortTitle?: string;
+    /**
+     * The category of the promotion.
+     */
+    subtype?: string;
+    /**
+     * Estimated discount applied to tax (if allowed by law).
+     */
+    taxValue?: Schema$Price;
+    /**
+     * The title of the promotion.
+     */
+    title?: string;
+    /**
+     * The scope of the promotion.
+     */
+    type?: string;
+  }
+  export interface Schema$OrderPromotionItem {
+    lineItemId?: string;
+    productId?: string;
+    /**
+     * The quantity of the associated product.
+     */
+    quantity?: number;
   }
   export interface Schema$OrderRefund {
     /**
@@ -2971,11 +2563,7 @@ export namespace content_v2 {
     /**
      * Total amount for the items.
      */
-    productAmount?: Schema$Amount;
-    /**
-     * Total amount with remitted tax for the items.
-     */
-    productAmountWithRemittedTax?: Schema$ProductAmount;
+    productAmount?: Schema$ProductAmount;
     /**
      * The date of the transaction, in ISO 8601 format.
      */
@@ -3040,22 +2628,6 @@ export namespace content_v2 {
     kind?: string;
   }
   export interface Schema$OrdersCancelLineItemRequest {
-    /**
-     * Deprecated. Please use amountPretax and amountTax instead.
-     */
-    amount?: Schema$Price;
-    /**
-     * Amount to refund for the cancelation. Optional. If not set, Google will
-     * calculate the default based on the price and tax of the items involved.
-     * The amount must not be larger than the net amount left on the order.
-     */
-    amountPretax?: Schema$Price;
-    /**
-     * Tax amount that corresponds to cancellation amount in amountPretax.
-     * Optional, but if filled, then amountPretax must be set. Calculated
-     * automatically if not provided.
-     */
-    amountTax?: Schema$Price;
     /**
      * The ID of the line item to cancel. Either lineItemId or productId is
      * required.
@@ -3179,140 +2751,6 @@ export namespace content_v2 {
      */
     returnId?: string;
   }
-  export interface Schema$OrdersCustomBatchRequest {
-    /**
-     * The request entries to be processed in the batch.
-     */
-    entries?: Schema$OrdersCustomBatchRequestEntry[];
-  }
-  export interface Schema$OrdersCustomBatchRequestEntry {
-    /**
-     * An entry ID, unique within the batch request.
-     */
-    batchId?: number;
-    /**
-     * Required for cancel method.
-     */
-    cancel?: Schema$OrdersCustomBatchRequestEntryCancel;
-    /**
-     * Required for cancelLineItem method.
-     */
-    cancelLineItem?: Schema$OrdersCustomBatchRequestEntryCancelLineItem;
-    /**
-     * Required for inStoreReturnLineItem method.
-     */
-    inStoreRefundLineItem?:
-        Schema$OrdersCustomBatchRequestEntryInStoreRefundLineItem;
-    /**
-     * The ID of the managing account.
-     */
-    merchantId?: string;
-    /**
-     * The merchant order id. Required for updateMerchantOrderId and
-     * getByMerchantOrderId methods.
-     */
-    merchantOrderId?: string;
-    /**
-     * The method to apply.
-     */
-    method?: string;
-    /**
-     * The ID of the operation. Unique across all operations for a given order.
-     * Required for all methods beside get and getByMerchantOrderId.
-     */
-    operationId?: string;
-    /**
-     * The ID of the order. Required for all methods beside
-     * getByMerchantOrderId.
-     */
-    orderId?: string;
-    /**
-     * Required for refund method.
-     */
-    refund?: Schema$OrdersCustomBatchRequestEntryRefund;
-    /**
-     * Required for rejectReturnLineItem method.
-     */
-    rejectReturnLineItem?:
-        Schema$OrdersCustomBatchRequestEntryRejectReturnLineItem;
-    /**
-     * Required for returnLineItem method.
-     */
-    returnLineItem?: Schema$OrdersCustomBatchRequestEntryReturnLineItem;
-    /**
-     * Required for returnRefundLineItem method.
-     */
-    returnRefundLineItem?:
-        Schema$OrdersCustomBatchRequestEntryReturnRefundLineItem;
-    /**
-     * Required for setLineItemMetadata method.
-     */
-    setLineItemMetadata?:
-        Schema$OrdersCustomBatchRequestEntrySetLineItemMetadata;
-    /**
-     * Required for shipLineItems method.
-     */
-    shipLineItems?: Schema$OrdersCustomBatchRequestEntryShipLineItems;
-    /**
-     * Required for updateLineItemShippingDate method.
-     */
-    updateLineItemShippingDetails?:
-        Schema$OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails;
-    /**
-     * Required for updateShipment method.
-     */
-    updateShipment?: Schema$OrdersCustomBatchRequestEntryUpdateShipment;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntryCancel {
-    /**
-     * The reason for the cancellation.
-     */
-    reason?: string;
-    /**
-     * The explanation of the reason.
-     */
-    reasonText?: string;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntryCancelLineItem {
-    /**
-     * Deprecated. Please use amountPretax and amountTax instead.
-     */
-    amount?: Schema$Price;
-    /**
-     * Amount to refund for the cancelation. Optional. If not set, Google will
-     * calculate the default based on the price and tax of the items involved.
-     * The amount must not be larger than the net amount left on the order.
-     */
-    amountPretax?: Schema$Price;
-    /**
-     * Tax amount that corresponds to cancellation amount in amountPretax.
-     * Optional, but if filled, then amountPretax must be set. Calculated
-     * automatically if not provided.
-     */
-    amountTax?: Schema$Price;
-    /**
-     * The ID of the line item to cancel. Either lineItemId or productId is
-     * required.
-     */
-    lineItemId?: string;
-    /**
-     * The ID of the product to cancel. This is the REST ID used in the products
-     * service. Either lineItemId or productId is required.
-     */
-    productId?: string;
-    /**
-     * The quantity to cancel.
-     */
-    quantity?: number;
-    /**
-     * The reason for the cancellation.
-     */
-    reason?: string;
-    /**
-     * The explanation of the reason.
-     */
-    reasonText?: string;
-  }
   export interface Schema$OrdersCustomBatchRequestEntryCreateTestReturnReturnItem {
     /**
      * The ID of the line item to return.
@@ -3322,191 +2760,6 @@ export namespace content_v2 {
      * Quantity that is returned.
      */
     quantity?: number;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntryInStoreRefundLineItem {
-    /**
-     * The amount that is refunded. Required.
-     */
-    amountPretax?: Schema$Price;
-    /**
-     * Tax amount that correspond to refund amount in amountPretax. Required.
-     */
-    amountTax?: Schema$Price;
-    /**
-     * The ID of the line item to return. Either lineItemId or productId is
-     * required.
-     */
-    lineItemId?: string;
-    /**
-     * The ID of the product to return. This is the REST ID used in the products
-     * service. Either lineItemId or productId is required.
-     */
-    productId?: string;
-    /**
-     * The quantity to return and refund.
-     */
-    quantity?: number;
-    /**
-     * The reason for the return.
-     */
-    reason?: string;
-    /**
-     * The explanation of the reason.
-     */
-    reasonText?: string;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntryRefund {
-    /**
-     * Deprecated. Please use amountPretax and amountTax instead.
-     */
-    amount?: Schema$Price;
-    /**
-     * The amount that is refunded. Either amount or amountPretax should be
-     * filled.
-     */
-    amountPretax?: Schema$Price;
-    /**
-     * Tax amount that corresponds to refund amount in amountPretax. Optional,
-     * but if filled, amountPretax must be set. Calculated automatically if not
-     * provided.
-     */
-    amountTax?: Schema$Price;
-    /**
-     * The reason for the refund.
-     */
-    reason?: string;
-    /**
-     * The explanation of the reason.
-     */
-    reasonText?: string;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntryRejectReturnLineItem {
-    /**
-     * The ID of the line item to return. Either lineItemId or productId is
-     * required.
-     */
-    lineItemId?: string;
-    /**
-     * The ID of the product to return. This is the REST ID used in the products
-     * service. Either lineItemId or productId is required.
-     */
-    productId?: string;
-    /**
-     * The quantity to return and refund.
-     */
-    quantity?: number;
-    /**
-     * The reason for the return.
-     */
-    reason?: string;
-    /**
-     * The explanation of the reason.
-     */
-    reasonText?: string;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntryReturnLineItem {
-    /**
-     * The ID of the line item to return. Either lineItemId or productId is
-     * required.
-     */
-    lineItemId?: string;
-    /**
-     * The ID of the product to return. This is the REST ID used in the products
-     * service. Either lineItemId or productId is required.
-     */
-    productId?: string;
-    /**
-     * The quantity to return.
-     */
-    quantity?: number;
-    /**
-     * The reason for the return.
-     */
-    reason?: string;
-    /**
-     * The explanation of the reason.
-     */
-    reasonText?: string;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntryReturnRefundLineItem {
-    /**
-     * The amount that is refunded. If omitted, refundless return is assumed
-     * (same as calling returnLineItem method).
-     */
-    amountPretax?: Schema$Price;
-    /**
-     * Tax amount that corresponds to refund amount in amountPretax. Optional,
-     * but if filled, then amountPretax must be set. Calculated automatically if
-     * not provided.
-     */
-    amountTax?: Schema$Price;
-    /**
-     * The ID of the line item to return. Either lineItemId or productId is
-     * required.
-     */
-    lineItemId?: string;
-    /**
-     * The ID of the product to return. This is the REST ID used in the products
-     * service. Either lineItemId or productId is required.
-     */
-    productId?: string;
-    /**
-     * The quantity to return and refund.
-     */
-    quantity?: number;
-    /**
-     * The reason for the return.
-     */
-    reason?: string;
-    /**
-     * The explanation of the reason.
-     */
-    reasonText?: string;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntrySetLineItemMetadata {
-    annotations?: Schema$OrderMerchantProvidedAnnotation[];
-    /**
-     * The ID of the line item to set metadata. Either lineItemId or productId
-     * is required.
-     */
-    lineItemId?: string;
-    /**
-     * The ID of the product to set metadata. This is the REST ID used in the
-     * products service. Either lineItemId or productId is required.
-     */
-    productId?: string;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntryShipLineItems {
-    /**
-     * Deprecated. Please use shipmentInfo instead. The carrier handling the
-     * shipment. See shipments[].carrier in the  Orders resource representation
-     * for a list of acceptable values.
-     */
-    carrier?: string;
-    /**
-     * Line items to ship.
-     */
-    lineItems?: Schema$OrderShipmentLineItemShipment[];
-    /**
-     * ID of the shipment group. Required for orders that use the orderinvoices
-     * service.
-     */
-    shipmentGroupId?: string;
-    /**
-     * Deprecated. Please use shipmentInfo instead. The ID of the shipment.
-     */
-    shipmentId?: string;
-    /**
-     * Shipment information. This field is repeated because a single line item
-     * can be shipped in several packages (and have several tracking IDs).
-     */
-    shipmentInfos?:
-        Schema$OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo[];
-    /**
-     * Deprecated. Please use shipmentInfo instead. The tracking id for the
-     * shipment.
-     */
-    trackingId?: string;
   }
   export interface Schema$OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo {
     /**
@@ -3522,90 +2775,6 @@ export namespace content_v2 {
      * The tracking id for the shipment.
      */
     trackingId?: string;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails {
-    /**
-     * Updated delivery by date, in ISO 8601 format. If not specified only ship
-     * by date is updated.
-     */
-    deliverByDate?: string;
-    /**
-     * The ID of the line item to set metadata. Either lineItemId or productId
-     * is required.
-     */
-    lineItemId?: string;
-    /**
-     * The ID of the product to set metadata. This is the REST ID used in the
-     * products service. Either lineItemId or productId is required.
-     */
-    productId?: string;
-    /**
-     * Updated ship by date, in ISO 8601 format. If not specified only deliver
-     * by date is updated.
-     */
-    shipByDate?: string;
-  }
-  export interface Schema$OrdersCustomBatchRequestEntryUpdateShipment {
-    /**
-     * The carrier handling the shipment. Not updated if missing. See
-     * shipments[].carrier in the  Orders resource representation for a list of
-     * acceptable values.
-     */
-    carrier?: string;
-    /**
-     * Date on which the shipment has been delivered, in ISO 8601 format.
-     * Optional and can be provided only if status is delivered.
-     */
-    deliveryDate?: string;
-    /**
-     * The ID of the shipment.
-     */
-    shipmentId?: string;
-    /**
-     * New status for the shipment. Not updated if missing.
-     */
-    status?: string;
-    /**
-     * The tracking id for the shipment. Not updated if missing.
-     */
-    trackingId?: string;
-  }
-  export interface Schema$OrdersCustomBatchResponse {
-    /**
-     * The result of the execution of the batch requests.
-     */
-    entries?: Schema$OrdersCustomBatchResponseEntry[];
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string
-     * &quot;content#ordersCustomBatchResponse&quot;.
-     */
-    kind?: string;
-  }
-  export interface Schema$OrdersCustomBatchResponseEntry {
-    /**
-     * The ID of the request entry this entry responds to.
-     */
-    batchId?: number;
-    /**
-     * A list of errors defined if and only if the request failed.
-     */
-    errors?: Schema$Errors;
-    /**
-     * The status of the execution. Only defined if   - the request was
-     * successful; and  - the method is not get, getByMerchantOrderId, or one of
-     * the test methods.
-     */
-    executionStatus?: string;
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string
-     * &quot;content#ordersCustomBatchResponseEntry&quot;.
-     */
-    kind?: string;
-    /**
-     * The retrieved order. Only defined if the method is get and if the request
-     * was successful.
-     */
-    order?: Schema$Order;
   }
   export interface Schema$OrdersGetByMerchantOrderIdResponse {
     /**
@@ -3685,14 +2854,6 @@ export namespace content_v2 {
   }
   export interface Schema$OrdersInStoreRefundLineItemRequest {
     /**
-     * The amount that is refunded. Required.
-     */
-    amountPretax?: Schema$Price;
-    /**
-     * Tax amount that correspond to refund amount in amountPretax. Required.
-     */
-    amountTax?: Schema$Price;
-    /**
      * The ID of the line item to return. Either lineItemId or productId is
      * required.
      */
@@ -3701,6 +2862,11 @@ export namespace content_v2 {
      * The ID of the operation. Unique across all operations for a given order.
      */
     operationId?: string;
+    /**
+     * The amount to be refunded. This may be pre-tax or post-tax depending on
+     * the location of the order. Required.
+     */
+    priceAmount?: Schema$Price;
     /**
      * The ID of the product to return. This is the REST ID used in the products
      * service. Either lineItemId or productId is required.
@@ -3718,6 +2884,10 @@ export namespace content_v2 {
      * The explanation of the reason.
      */
     reasonText?: string;
+    /**
+     * The amount of tax to be refunded. Required.
+     */
+    taxAmount?: Schema$Price;
   }
   export interface Schema$OrdersInStoreRefundLineItemResponse {
     /**
@@ -3741,46 +2911,6 @@ export namespace content_v2 {
      */
     nextPageToken?: string;
     resources?: Schema$Order[];
-  }
-  export interface Schema$OrdersRefundRequest {
-    /**
-     * Deprecated. Please use amountPretax and amountTax instead.
-     */
-    amount?: Schema$Price;
-    /**
-     * The amount that is refunded. Either amount or amountPretax should be
-     * filled.
-     */
-    amountPretax?: Schema$Price;
-    /**
-     * Tax amount that corresponds to refund amount in amountPretax. Optional,
-     * but if filled, amountPretax must be set. Calculated automatically if not
-     * provided.
-     */
-    amountTax?: Schema$Price;
-    /**
-     * The ID of the operation. Unique across all operations for a given order.
-     */
-    operationId?: string;
-    /**
-     * The reason for the refund.
-     */
-    reason?: string;
-    /**
-     * The explanation of the reason.
-     */
-    reasonText?: string;
-  }
-  export interface Schema$OrdersRefundResponse {
-    /**
-     * The status of the execution.
-     */
-    executionStatus?: string;
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string
-     * &quot;content#ordersRefundResponse&quot;.
-     */
-    kind?: string;
   }
   export interface Schema$OrdersRejectReturnLineItemRequest {
     /**
@@ -3821,58 +2951,8 @@ export namespace content_v2 {
      */
     kind?: string;
   }
-  export interface Schema$OrdersReturnLineItemRequest {
-    /**
-     * The ID of the line item to return. Either lineItemId or productId is
-     * required.
-     */
-    lineItemId?: string;
-    /**
-     * The ID of the operation. Unique across all operations for a given order.
-     */
-    operationId?: string;
-    /**
-     * The ID of the product to return. This is the REST ID used in the products
-     * service. Either lineItemId or productId is required.
-     */
-    productId?: string;
-    /**
-     * The quantity to return.
-     */
-    quantity?: number;
-    /**
-     * The reason for the return.
-     */
-    reason?: string;
-    /**
-     * The explanation of the reason.
-     */
-    reasonText?: string;
-  }
-  export interface Schema$OrdersReturnLineItemResponse {
-    /**
-     * The status of the execution.
-     */
-    executionStatus?: string;
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string
-     * &quot;content#ordersReturnLineItemResponse&quot;.
-     */
-    kind?: string;
-  }
   export interface Schema$OrdersReturnRefundLineItemRequest {
     /**
-     * The amount that is refunded. If omitted, refundless return is assumed
-     * (same as calling returnLineItem method).
-     */
-    amountPretax?: Schema$Price;
-    /**
-     * Tax amount that corresponds to refund amount in amountPretax. Optional,
-     * but if filled, then amountPretax must be set. Calculated automatically if
-     * not provided.
-     */
-    amountTax?: Schema$Price;
-    /**
      * The ID of the line item to return. Either lineItemId or productId is
      * required.
      */
@@ -3881,6 +2961,11 @@ export namespace content_v2 {
      * The ID of the operation. Unique across all operations for a given order.
      */
     operationId?: string;
+    /**
+     * The amount to be refunded. This may be pre-tax or post-tax depending on
+     * the location of the order. If omitted, refundless return is assumed.
+     */
+    priceAmount?: Schema$Price;
     /**
      * The ID of the product to return. This is the REST ID used in the products
      * service. Either lineItemId or productId is required.
@@ -3898,6 +2983,11 @@ export namespace content_v2 {
      * The explanation of the reason.
      */
     reasonText?: string;
+    /**
+     * The amount of tax to be refunded. Optional, but if filled, then
+     * priceAmount must be set. Calculated automatically if not provided.
+     */
+    taxAmount?: Schema$Price;
   }
   export interface Schema$OrdersReturnRefundLineItemResponse {
     /**
@@ -3940,12 +3030,6 @@ export namespace content_v2 {
   }
   export interface Schema$OrdersShipLineItemsRequest {
     /**
-     * Deprecated. Please use shipmentInfo instead. The carrier handling the
-     * shipment. See shipments[].carrier in the  Orders resource representation
-     * for a list of acceptable values.
-     */
-    carrier?: string;
-    /**
      * Line items to ship.
      */
     lineItems?: Schema$OrderShipmentLineItemShipment[];
@@ -3959,20 +3043,11 @@ export namespace content_v2 {
      */
     shipmentGroupId?: string;
     /**
-     * Deprecated. Please use shipmentInfo instead. The ID of the shipment.
-     */
-    shipmentId?: string;
-    /**
      * Shipment information. This field is repeated because a single line item
      * can be shipped in several packages (and have several tracking IDs).
      */
     shipmentInfos?:
         Schema$OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo[];
-    /**
-     * Deprecated. Please use shipmentInfo instead. The tracking id for the
-     * shipment.
-     */
-    trackingId?: string;
   }
   export interface Schema$OrdersShipLineItemsResponse {
     /**
@@ -4513,36 +3588,27 @@ export namespace content_v2 {
      */
     additionalImageLinks?: string[];
     /**
-     * Additional categories of the item (formatted as in products feed
-     * specification).
+     * Used to group items in an arbitrary way. Only for CPA%, discouraged
+     * otherwise.
      */
-    additionalProductTypes?: string[];
+    adsGrouping?: string;
+    /**
+     * Similar to ads_grouping, but only works on CPC.
+     */
+    adsLabels?: string[];
+    /**
+     * Allows advertisers to override the item URL when the product is shown
+     * within the context of Product Ads.
+     */
+    adsRedirect?: string;
     /**
      * Set to true if the item is targeted towards adults.
      */
     adult?: boolean;
     /**
-     * Used to group items in an arbitrary way. Only for CPA%, discouraged
-     * otherwise.
-     */
-    adwordsGrouping?: string;
-    /**
-     * Similar to adwords_grouping, but only works on CPC.
-     */
-    adwordsLabels?: string[];
-    /**
-     * Allows advertisers to override the item URL when the product is shown
-     * within the context of Product Ads.
-     */
-    adwordsRedirect?: string;
-    /**
      * Target age group of the item.
      */
     ageGroup?: string;
-    /**
-     * Deprecated. Do not use.
-     */
-    aspects?: Schema$ProductAspect[];
     /**
      * Availability status of the item.
      */
@@ -4585,10 +3651,6 @@ export namespace content_v2 {
      */
     customAttributes?: Schema$CustomAttribute[];
     /**
-     * A list of custom (merchant-provided) custom attribute groups.
-     */
-    customGroups?: Schema$CustomGroup[];
-    /**
      * Custom label 0 for custom grouping of items in a Shopping campaign.
      */
     customLabel0?: string;
@@ -4612,10 +3674,6 @@ export namespace content_v2 {
      * Description of the item.
      */
     description?: string;
-    /**
-     * Specifies the intended destinations for the product.
-     */
-    destinations?: Schema$ProductDestination[];
     /**
      * An identifier for an item for dynamic remarketing campaigns.
      */
@@ -4641,6 +3699,11 @@ export namespace content_v2 {
      * The energy efficiency class as defined in EU directive 2010/30/EU.
      */
     energyEfficiencyClass?: string;
+    /**
+     * The list of destinations to exclude for this target (corresponds to
+     * unchecked check boxes in Merchant Center).
+     */
+    excludedDestinations?: string[];
     /**
      * Date on which the item should expire, as specified upon insertion, in ISO
      * 8601 format. The actual expiration date in Google Shopping is exposed in
@@ -4677,6 +3740,12 @@ export namespace content_v2 {
      * URL of an image of the item.
      */
     imageLink?: string;
+    /**
+     * The list of destinations to include for this target (corresponds to
+     * checked check boxes in Merchant Center). Default destinations are always
+     * included unless provided in the excluded_destination field.
+     */
+    includedDestinations?: string[];
     /**
      * Number and amount of installments to pay for an item. Brazil only.
      */
@@ -4744,10 +3813,6 @@ export namespace content_v2 {
      */
     offerId?: string;
     /**
-     * Deprecated. Whether an item is available for purchase only online.
-     */
-    onlineOnly?: boolean;
-    /**
      * The item&#39;s pattern (e.g. polka dots).
      */
     pattern?: string;
@@ -4756,9 +3821,9 @@ export namespace content_v2 {
      */
     price?: Schema$Price;
     /**
-     * Your category of the item (formatted as in products feed specification).
+     * Categories of the item (formatted as in products feed specification).
      */
-    productType?: string;
+    productTypes?: string[];
     /**
      * The unique ID of a promotion.
      */
@@ -4838,15 +3903,6 @@ export namespace content_v2 {
      * The measure and dimension of an item.
      */
     unitPricingMeasure?: Schema$ProductUnitPricingMeasure;
-    /**
-     * Deprecated. The read-only list of intended destinations which passed
-     * validation.
-     */
-    validatedDestinations?: string[];
-    /**
-     * Read-only warnings.
-     */
-    warnings?: Schema$Error[];
   }
   export interface Schema$ProductAmount {
     /**
@@ -4861,30 +3917,6 @@ export namespace content_v2 {
      * Tax value.
      */
     taxAmount?: Schema$Price;
-  }
-  export interface Schema$ProductAspect {
-    /**
-     * The name of the aspect.
-     */
-    aspectName?: string;
-    /**
-     * The name of the destination. Leave out to apply to all destinations.
-     */
-    destinationName?: string;
-    /**
-     * Whether the aspect is required, excluded or should be validated.
-     */
-    intention?: string;
-  }
-  export interface Schema$ProductDestination {
-    /**
-     * The name of the destination.
-     */
-    destinationName?: string;
-    /**
-     * Whether the destination is required, excluded or should be validated.
-     */
-    intention?: string;
   }
   export interface Schema$ProductsCustomBatchRequest {
     /**
@@ -5027,10 +4059,6 @@ export namespace content_v2 {
      */
     creationDate?: string;
     /**
-     * A list of data quality issues associated with the product.
-     */
-    dataQualityIssues?: Schema$ProductStatusDataQualityIssue[];
-    /**
      * The intended destinations for the product.
      */
     destinationStatuses?: Schema$ProductStatusDestinationStatus[];
@@ -5056,10 +4084,6 @@ export namespace content_v2 {
      */
     link?: string;
     /**
-     * Product data after applying all the join inputs.
-     */
-    product?: Schema$Product;
-    /**
      * The id of the product for which status is reported.
      */
     productId?: string;
@@ -5068,62 +4092,12 @@ export namespace content_v2 {
      */
     title?: string;
   }
-  export interface Schema$ProductStatusDataQualityIssue {
-    /**
-     * The destination the issue applies to.
-     */
-    destination?: string;
-    /**
-     * A more detailed error string.
-     */
-    detail?: string;
-    /**
-     * The fetch status for landing_page_errors.
-     */
-    fetchStatus?: string;
-    /**
-     * The id of the data quality issue.
-     */
-    id?: string;
-    /**
-     * The attribute name that is relevant for the issue.
-     */
-    location?: string;
-    /**
-     * The severity of the data quality issue.
-     */
-    severity?: string;
-    /**
-     * The time stamp of the data quality issue.
-     */
-    timestamp?: string;
-    /**
-     * The value of that attribute that was found on the landing page
-     */
-    valueOnLandingPage?: string;
-    /**
-     * The value the attribute had at time of evaluation.
-     */
-    valueProvided?: string;
-  }
   export interface Schema$ProductStatusDestinationStatus {
-    /**
-     * Whether the approval status might change due to further processing.
-     */
-    approvalPending?: boolean;
-    /**
-     * The destination&#39;s approval status.
-     */
-    approvalStatus?: string;
     /**
      * The name of the destination
      */
     destination?: string;
-    /**
-     * Provided for backward compatibility only. Always set to
-     * &quot;required&quot;.
-     */
-    intention?: string;
+    status?: string;
   }
   export interface Schema$ProductstatusesCustomBatchRequest {
     /**
@@ -5587,18 +4561,17 @@ export namespace content_v2 {
      */
     notificationMode?: string;
     /**
-     * The details of the payment method.
+     * The billing address.
      */
-    paymentMethod?: Schema$TestOrderPaymentMethod;
+    predefinedBillingAddress?: string;
     /**
      * Identifier of one of the predefined delivery addresses for the delivery.
      */
     predefinedDeliveryAddress?: string;
     /**
-     * Deprecated. The details of the merchant provided promotions applied to
-     * the order. More details about the program are here.
+     * Promotions associated with the order.
      */
-    promotions?: Schema$OrderLegacyPromotion[];
+    promotions?: Schema$OrderPromotion[];
     /**
      * The total cost of shipping for all items.
      */
@@ -5617,10 +4590,6 @@ export namespace content_v2 {
      * Deprecated.
      */
     email?: string;
-    /**
-     * Deprecated. Please use marketingRightsInfo instead.
-     */
-    explicitMarketingPreference?: boolean;
     /**
      * Full name of the customer.
      */
@@ -5717,29 +4686,6 @@ export namespace content_v2 {
      * Variant attributes for the item. Optional.
      */
     variantAttributes?: Schema$OrderLineItemProductVariantAttribute[];
-  }
-  export interface Schema$TestOrderPaymentMethod {
-    /**
-     * The card expiration month (January = 1, February = 2 etc.).
-     */
-    expirationMonth?: number;
-    /**
-     * The card expiration year (4-digit, e.g. 2015).
-     */
-    expirationYear?: number;
-    /**
-     * The last four digits of the card number.
-     */
-    lastFourDigits?: string;
-    /**
-     * The billing address.
-     */
-    predefinedBillingAddress?: string;
-    /**
-     * The type of instrument. Note that real orders might have different values
-     * than the four values accepted by createTestOrder.
-     */
-    type?: string;
   }
   export interface Schema$UnitInvoice {
     /**
@@ -5885,7 +4831,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/accounts/authinfo')
+              url: (rootUrl + '/content/v2.1/accounts/authinfo')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -5962,7 +4908,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/accounts/{accountId}/claimwebsite')
+                   '/content/v2.1/{merchantId}/accounts/{accountId}/claimwebsite')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -5990,7 +4936,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {().AccountsCustomBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -6038,7 +4983,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/accounts/batch')
+              url: (rootUrl + '/content/v2.1/accounts/batch')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -6065,7 +5010,6 @@ export namespace content_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.accountId The ID of the account.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {boolean=} params.force Flag to delete sub-accounts with products. The default value is false.
      * @param {string} params.merchantId The ID of the managing account. This must be a multi-client account, and accountId must be the ID of a sub-account of this account.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -6105,7 +5049,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/accounts/{accountId}')
+              url: (rootUrl + '/content/v2.1/{merchantId}/accounts/{accountId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -6167,7 +5111,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/accounts/{accountId}')
+              url: (rootUrl + '/content/v2.1/{merchantId}/accounts/{accountId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -6192,7 +5136,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the managing account. This must be a multi-client account.
      * @param {().Account} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -6233,7 +5176,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/accounts')
+              url: (rootUrl + '/content/v2.1/{merchantId}/accounts')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -6303,7 +5246,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/accounts/{accountId}/link')
+                    '/content/v2.1/{merchantId}/accounts/{accountId}/link')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -6371,7 +5314,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/accounts')
+              url: (rootUrl + '/content/v2.1/{merchantId}/accounts')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -6390,74 +5333,6 @@ export namespace content_v2 {
 
 
     /**
-     * content.accounts.patch
-     * @desc Updates a Merchant Center account. This method supports patch
-     * semantics.
-     * @alias content.accounts.patch
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.accountId The ID of the account.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
-     * @param {string} params.merchantId The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.
-     * @param {().Account} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    patch(params?: Params$Resource$Accounts$Patch, options?: MethodOptions):
-        AxiosPromise<Schema$Account>;
-    patch(
-        params: Params$Resource$Accounts$Patch,
-        options: MethodOptions|BodyResponseCallback<Schema$Account>,
-        callback: BodyResponseCallback<Schema$Account>): void;
-    patch(
-        params: Params$Resource$Accounts$Patch,
-        callback: BodyResponseCallback<Schema$Account>): void;
-    patch(callback: BodyResponseCallback<Schema$Account>): void;
-    patch(
-        paramsOrCallback?: Params$Resource$Accounts$Patch|
-        BodyResponseCallback<Schema$Account>,
-        optionsOrCallback?: MethodOptions|BodyResponseCallback<Schema$Account>,
-        callback?: BodyResponseCallback<Schema$Account>):
-        void|AxiosPromise<Schema$Account> {
-      let params = (paramsOrCallback || {}) as Params$Resource$Accounts$Patch;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Accounts$Patch;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url: (rootUrl + '/content/v2/{merchantId}/accounts/{accountId}')
-                       .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'PATCH'
-            },
-            options),
-        params,
-        requiredParams: ['merchantId', 'accountId'],
-        pathParams: ['accountId', 'merchantId'],
-        context
-      };
-      if (callback) {
-        createAPIRequest<Schema$Account>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$Account>(parameters);
-      }
-    }
-
-
-    /**
      * content.accounts.update
      * @desc Updates a Merchant Center account.
      * @alias content.accounts.update
@@ -6465,7 +5340,6 @@ export namespace content_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.accountId The ID of the account.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.
      * @param {().Account} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -6506,7 +5380,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/accounts/{accountId}')
+              url: (rootUrl + '/content/v2.1/{merchantId}/accounts/{accountId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -6562,10 +5436,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
 
     /**
      * Request body metadata
@@ -6582,10 +5452,6 @@ export namespace content_v2 {
      * The ID of the account.
      */
     accountId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * Flag to delete sub-accounts with products. The default value is false.
      */
@@ -6619,10 +5485,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * The ID of the managing account. This must be a multi-client account.
      */
@@ -6675,32 +5537,6 @@ export namespace content_v2 {
      */
     pageToken?: string;
   }
-  export interface Params$Resource$Accounts$Patch extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The ID of the account.
-     */
-    accountId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
-     * The ID of the managing account. If this parameter is not the same as
-     * accountId, then this account must be a multi-client account and accountId
-     * must be the ID of a sub-account of this account.
-     */
-    merchantId?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$Account;
-  }
   export interface Params$Resource$Accounts$Update extends StandardParameters {
     /**
      * Auth client or API Key for the request
@@ -6711,10 +5547,6 @@ export namespace content_v2 {
      * The ID of the account.
      */
     accountId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * The ID of the managing account. If this parameter is not the same as
      * accountId, then this account must be a multi-client account and accountId
@@ -6791,7 +5623,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/accountstatuses/batch')
+              url: (rootUrl + '/content/v2.1/accountstatuses/batch')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -6860,7 +5692,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/accountstatuses/{accountId}')
+                    '/content/v2.1/{merchantId}/accountstatuses/{accountId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -6935,7 +5767,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/accountstatuses')
+              url: (rootUrl + '/content/v2.1/{merchantId}/accountstatuses')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -7030,7 +5862,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {().AccounttaxCustomBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -7079,7 +5910,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/accounttax/batch')
+              url: (rootUrl + '/content/v2.1/accounttax/batch')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -7144,7 +5975,8 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/accounttax/{accountId}')
+              url: (rootUrl +
+                    '/content/v2.1/{merchantId}/accounttax/{accountId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -7213,7 +6045,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/accounttax')
+              url: (rootUrl + '/content/v2.1/{merchantId}/accounttax')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -7232,75 +6064,6 @@ export namespace content_v2 {
 
 
     /**
-     * content.accounttax.patch
-     * @desc Updates the tax settings of the account. This method supports patch
-     * semantics.
-     * @alias content.accounttax.patch
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.accountId The ID of the account for which to get/update account tax settings.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
-     * @param {string} params.merchantId The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.
-     * @param {().AccountTax} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    patch(params?: Params$Resource$Accounttax$Patch, options?: MethodOptions):
-        AxiosPromise<Schema$AccountTax>;
-    patch(
-        params: Params$Resource$Accounttax$Patch,
-        options: MethodOptions|BodyResponseCallback<Schema$AccountTax>,
-        callback: BodyResponseCallback<Schema$AccountTax>): void;
-    patch(
-        params: Params$Resource$Accounttax$Patch,
-        callback: BodyResponseCallback<Schema$AccountTax>): void;
-    patch(callback: BodyResponseCallback<Schema$AccountTax>): void;
-    patch(
-        paramsOrCallback?: Params$Resource$Accounttax$Patch|
-        BodyResponseCallback<Schema$AccountTax>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$AccountTax>,
-        callback?: BodyResponseCallback<Schema$AccountTax>):
-        void|AxiosPromise<Schema$AccountTax> {
-      let params = (paramsOrCallback || {}) as Params$Resource$Accounttax$Patch;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Accounttax$Patch;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url: (rootUrl + '/content/v2/{merchantId}/accounttax/{accountId}')
-                       .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'PATCH'
-            },
-            options),
-        params,
-        requiredParams: ['merchantId', 'accountId'],
-        pathParams: ['accountId', 'merchantId'],
-        context
-      };
-      if (callback) {
-        createAPIRequest<Schema$AccountTax>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$AccountTax>(parameters);
-      }
-    }
-
-
-    /**
      * content.accounttax.update
      * @desc Updates the tax settings of the account.
      * @alias content.accounttax.update
@@ -7308,7 +6071,6 @@ export namespace content_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.accountId The ID of the account for which to get/update account tax settings.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.
      * @param {().AccountTax} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -7351,7 +6113,8 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/accounttax/{accountId}')
+              url: (rootUrl +
+                    '/content/v2.1/{merchantId}/accounttax/{accountId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -7376,10 +6139,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
 
     /**
      * Request body metadata
@@ -7423,32 +6182,6 @@ export namespace content_v2 {
      */
     pageToken?: string;
   }
-  export interface Params$Resource$Accounttax$Patch extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The ID of the account for which to get/update account tax settings.
-     */
-    accountId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
-     * The ID of the managing account. If this parameter is not the same as
-     * accountId, then this account must be a multi-client account and accountId
-     * must be the ID of a sub-account of this account.
-     */
-    merchantId?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$AccountTax;
-  }
   export interface Params$Resource$Accounttax$Update extends
       StandardParameters {
     /**
@@ -7460,10 +6193,6 @@ export namespace content_v2 {
      * The ID of the account for which to get/update account tax settings.
      */
     accountId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * The ID of the managing account. If this parameter is not the same as
      * accountId, then this account must be a multi-client account and accountId
@@ -7488,7 +6217,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {().DatafeedsCustomBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -7537,7 +6265,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/datafeeds/batch')
+              url: (rootUrl + '/content/v2.1/datafeeds/batch')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -7565,7 +6293,6 @@ export namespace content_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.datafeedId The ID of the datafeed.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the account that manages the datafeed. This account cannot be a multi-client account.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -7604,7 +6331,8 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/datafeeds/{datafeedId}')
+              url: (rootUrl +
+                    '/content/v2.1/{merchantId}/datafeeds/{datafeedId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -7630,7 +6358,6 @@ export namespace content_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.datafeedId The ID of the datafeed to be fetched.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the account that manages the datafeed. This account cannot be a multi-client account.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -7675,9 +6402,10 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl +
-                    '/content/v2/{merchantId}/datafeeds/{datafeedId}/fetchNow')
-                       .replace(/([^:]\/)\/+/g, '$1'),
+              url:
+                  (rootUrl +
+                   '/content/v2.1/{merchantId}/datafeeds/{datafeedId}/fetchNow')
+                      .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
             options),
@@ -7740,7 +6468,8 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/datafeeds/{datafeedId}')
+              url: (rootUrl +
+                    '/content/v2.1/{merchantId}/datafeeds/{datafeedId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -7766,7 +6495,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the account that manages the datafeed. This account cannot be a multi-client account.
      * @param {().Datafeed} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -7807,7 +6535,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/datafeeds')
+              url: (rootUrl + '/content/v2.1/{merchantId}/datafeeds')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -7876,7 +6604,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/datafeeds')
+              url: (rootUrl + '/content/v2.1/{merchantId}/datafeeds')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -7895,74 +6623,6 @@ export namespace content_v2 {
 
 
     /**
-     * content.datafeeds.patch
-     * @desc Updates a datafeed configuration of your Merchant Center account.
-     * This method supports patch semantics.
-     * @alias content.datafeeds.patch
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.datafeedId The ID of the datafeed.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
-     * @param {string} params.merchantId The ID of the account that manages the datafeed. This account cannot be a multi-client account.
-     * @param {().Datafeed} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    patch(params?: Params$Resource$Datafeeds$Patch, options?: MethodOptions):
-        AxiosPromise<Schema$Datafeed>;
-    patch(
-        params: Params$Resource$Datafeeds$Patch,
-        options: MethodOptions|BodyResponseCallback<Schema$Datafeed>,
-        callback: BodyResponseCallback<Schema$Datafeed>): void;
-    patch(
-        params: Params$Resource$Datafeeds$Patch,
-        callback: BodyResponseCallback<Schema$Datafeed>): void;
-    patch(callback: BodyResponseCallback<Schema$Datafeed>): void;
-    patch(
-        paramsOrCallback?: Params$Resource$Datafeeds$Patch|
-        BodyResponseCallback<Schema$Datafeed>,
-        optionsOrCallback?: MethodOptions|BodyResponseCallback<Schema$Datafeed>,
-        callback?: BodyResponseCallback<Schema$Datafeed>):
-        void|AxiosPromise<Schema$Datafeed> {
-      let params = (paramsOrCallback || {}) as Params$Resource$Datafeeds$Patch;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Datafeeds$Patch;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url: (rootUrl + '/content/v2/{merchantId}/datafeeds/{datafeedId}')
-                       .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'PATCH'
-            },
-            options),
-        params,
-        requiredParams: ['merchantId', 'datafeedId'],
-        pathParams: ['datafeedId', 'merchantId'],
-        context
-      };
-      if (callback) {
-        createAPIRequest<Schema$Datafeed>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$Datafeed>(parameters);
-      }
-    }
-
-
-    /**
      * content.datafeeds.update
      * @desc Updates a datafeed configuration of your Merchant Center account.
      * @alias content.datafeeds.update
@@ -7970,7 +6630,6 @@ export namespace content_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.datafeedId The ID of the datafeed.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the account that manages the datafeed. This account cannot be a multi-client account.
      * @param {().Datafeed} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -8011,7 +6670,8 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/datafeeds/{datafeedId}')
+              url: (rootUrl +
+                    '/content/v2.1/{merchantId}/datafeeds/{datafeedId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -8036,10 +6696,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
 
     /**
      * Request body metadata
@@ -8057,10 +6713,6 @@ export namespace content_v2 {
      */
     datafeedId?: string;
     /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
      * The ID of the account that manages the datafeed. This account cannot be a
      * multi-client account.
      */
@@ -8077,10 +6729,6 @@ export namespace content_v2 {
      * The ID of the datafeed to be fetched.
      */
     datafeedId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * The ID of the account that manages the datafeed. This account cannot be a
      * multi-client account.
@@ -8109,10 +6757,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * The ID of the account that manages the datafeed. This account cannot be a
      * multi-client account.
@@ -8145,31 +6789,6 @@ export namespace content_v2 {
      */
     pageToken?: string;
   }
-  export interface Params$Resource$Datafeeds$Patch extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The ID of the datafeed.
-     */
-    datafeedId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
-     * The ID of the account that manages the datafeed. This account cannot be a
-     * multi-client account.
-     */
-    merchantId?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$Datafeed;
-  }
   export interface Params$Resource$Datafeeds$Update extends StandardParameters {
     /**
      * Auth client or API Key for the request
@@ -8180,10 +6799,6 @@ export namespace content_v2 {
      * The ID of the datafeed.
      */
     datafeedId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * The ID of the account that manages the datafeed. This account cannot be a
      * multi-client account.
@@ -8259,7 +6874,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/datafeedstatuses/batch')
+              url: (rootUrl + '/content/v2.1/datafeedstatuses/batch')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -8329,7 +6944,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/datafeedstatuses/{datafeedId}')
+                    '/content/v2.1/{merchantId}/datafeedstatuses/{datafeedId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -8404,7 +7019,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/datafeedstatuses')
+              url: (rootUrl + '/content/v2.1/{merchantId}/datafeedstatuses')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -8492,207 +7107,6 @@ export namespace content_v2 {
   }
 
 
-  export class Resource$Inventory {
-    constructor() {}
-
-
-    /**
-     * content.inventory.custombatch
-     * @desc Updates price and availability for multiple products or stores in a
-     * single request. This operation does not update the expiration date of the
-     * products.
-     * @alias content.inventory.custombatch
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
-     * @param {().InventoryCustomBatchRequest} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    custombatch(
-        params?: Params$Resource$Inventory$Custombatch,
-        options?: MethodOptions):
-        AxiosPromise<Schema$InventoryCustomBatchResponse>;
-    custombatch(
-        params: Params$Resource$Inventory$Custombatch,
-        options: MethodOptions|
-        BodyResponseCallback<Schema$InventoryCustomBatchResponse>,
-        callback: BodyResponseCallback<Schema$InventoryCustomBatchResponse>):
-        void;
-    custombatch(
-        params: Params$Resource$Inventory$Custombatch,
-        callback: BodyResponseCallback<Schema$InventoryCustomBatchResponse>):
-        void;
-    custombatch(callback:
-                    BodyResponseCallback<Schema$InventoryCustomBatchResponse>):
-        void;
-    custombatch(
-        paramsOrCallback?: Params$Resource$Inventory$Custombatch|
-        BodyResponseCallback<Schema$InventoryCustomBatchResponse>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$InventoryCustomBatchResponse>,
-        callback?: BodyResponseCallback<Schema$InventoryCustomBatchResponse>):
-        void|AxiosPromise<Schema$InventoryCustomBatchResponse> {
-      let params =
-          (paramsOrCallback || {}) as Params$Resource$Inventory$Custombatch;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Inventory$Custombatch;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url: (rootUrl + '/content/v2/inventory/batch')
-                       .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'POST'
-            },
-            options),
-        params,
-        requiredParams: [],
-        pathParams: [],
-        context
-      };
-      if (callback) {
-        createAPIRequest<Schema$InventoryCustomBatchResponse>(
-            parameters, callback);
-      } else {
-        return createAPIRequest<Schema$InventoryCustomBatchResponse>(
-            parameters);
-      }
-    }
-
-
-    /**
-     * content.inventory.set
-     * @desc Updates price and availability of a product in your Merchant Center
-     * account.
-     * @alias content.inventory.set
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
-     * @param {string} params.merchantId The ID of the account that contains the product. This account cannot be a multi-client account.
-     * @param {string} params.productId The REST id of the product for which to update price and availability.
-     * @param {string} params.storeCode The code of the store for which to update price and availability. Use online to update price and availability of an online product.
-     * @param {().InventorySetRequest} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    set(params?: Params$Resource$Inventory$Set,
-        options?: MethodOptions): AxiosPromise<Schema$InventorySetResponse>;
-    set(params: Params$Resource$Inventory$Set,
-        options: MethodOptions|
-        BodyResponseCallback<Schema$InventorySetResponse>,
-        callback: BodyResponseCallback<Schema$InventorySetResponse>): void;
-    set(params: Params$Resource$Inventory$Set,
-        callback: BodyResponseCallback<Schema$InventorySetResponse>): void;
-    set(callback: BodyResponseCallback<Schema$InventorySetResponse>): void;
-    set(paramsOrCallback?: Params$Resource$Inventory$Set|
-        BodyResponseCallback<Schema$InventorySetResponse>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$InventorySetResponse>,
-        callback?: BodyResponseCallback<Schema$InventorySetResponse>):
-        void|AxiosPromise<Schema$InventorySetResponse> {
-      let params = (paramsOrCallback || {}) as Params$Resource$Inventory$Set;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Inventory$Set;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url:
-                  (rootUrl +
-                   '/content/v2/{merchantId}/inventory/{storeCode}/products/{productId}')
-                      .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'POST'
-            },
-            options),
-        params,
-        requiredParams: ['merchantId', 'storeCode', 'productId'],
-        pathParams: ['merchantId', 'productId', 'storeCode'],
-        context
-      };
-      if (callback) {
-        createAPIRequest<Schema$InventorySetResponse>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$InventorySetResponse>(parameters);
-      }
-    }
-  }
-
-  export interface Params$Resource$Inventory$Custombatch extends
-      StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$InventoryCustomBatchRequest;
-  }
-  export interface Params$Resource$Inventory$Set extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
-     * The ID of the account that contains the product. This account cannot be a
-     * multi-client account.
-     */
-    merchantId?: string;
-    /**
-     * The REST id of the product for which to update price and availability.
-     */
-    productId?: string;
-    /**
-     * The code of the store for which to update price and availability. Use
-     * online to update price and availability of an online product.
-     */
-    storeCode?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$InventorySetRequest;
-  }
-
-
   export class Resource$Liasettings {
     constructor() {}
 
@@ -8705,7 +7119,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {().LiasettingsCustomBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -8754,7 +7167,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/liasettings/batch')
+              url: (rootUrl + '/content/v2.1/liasettings/batch')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -8819,9 +7232,9 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url:
-                  (rootUrl + '/content/v2/{merchantId}/liasettings/{accountId}')
-                      .replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl +
+                    '/content/v2.1/{merchantId}/liasettings/{accountId}')
+                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -8898,7 +7311,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/liasettings/{accountId}/accessiblegmbaccounts')
+                   '/content/v2.1/{merchantId}/liasettings/{accountId}/accessiblegmbaccounts')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -8969,7 +7382,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/liasettings')
+              url: (rootUrl + '/content/v2.1/{merchantId}/liasettings')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -9042,7 +7455,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/liasettings/posdataproviders')
+              url: (rootUrl + '/content/v2.1/liasettings/posdataproviders')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -9058,77 +7471,6 @@ export namespace content_v2 {
       } else {
         return createAPIRequest<Schema$LiasettingsListPosDataProvidersResponse>(
             parameters);
-      }
-    }
-
-
-    /**
-     * content.liasettings.patch
-     * @desc Updates the LIA settings of the account. This method supports patch
-     * semantics.
-     * @alias content.liasettings.patch
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.accountId The ID of the account for which to get or update LIA settings.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
-     * @param {string} params.merchantId The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.
-     * @param {().LiaSettings} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    patch(params?: Params$Resource$Liasettings$Patch, options?: MethodOptions):
-        AxiosPromise<Schema$LiaSettings>;
-    patch(
-        params: Params$Resource$Liasettings$Patch,
-        options: MethodOptions|BodyResponseCallback<Schema$LiaSettings>,
-        callback: BodyResponseCallback<Schema$LiaSettings>): void;
-    patch(
-        params: Params$Resource$Liasettings$Patch,
-        callback: BodyResponseCallback<Schema$LiaSettings>): void;
-    patch(callback: BodyResponseCallback<Schema$LiaSettings>): void;
-    patch(
-        paramsOrCallback?: Params$Resource$Liasettings$Patch|
-        BodyResponseCallback<Schema$LiaSettings>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$LiaSettings>,
-        callback?: BodyResponseCallback<Schema$LiaSettings>):
-        void|AxiosPromise<Schema$LiaSettings> {
-      let params =
-          (paramsOrCallback || {}) as Params$Resource$Liasettings$Patch;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Liasettings$Patch;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url:
-                  (rootUrl + '/content/v2/{merchantId}/liasettings/{accountId}')
-                      .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'PATCH'
-            },
-            options),
-        params,
-        requiredParams: ['merchantId', 'accountId'],
-        pathParams: ['accountId', 'merchantId'],
-        context
-      };
-      if (callback) {
-        createAPIRequest<Schema$LiaSettings>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$LiaSettings>(parameters);
       }
     }
 
@@ -9196,7 +7538,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/liasettings/{accountId}/requestgmbaccess')
+                   '/content/v2.1/{merchantId}/liasettings/{accountId}/requestgmbaccess')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -9278,7 +7620,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/liasettings/{accountId}/requestinventoryverification/{country}')
+                   '/content/v2.1/{merchantId}/liasettings/{accountId}/requestinventoryverification/{country}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -9366,7 +7708,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/liasettings/{accountId}/setinventoryverificationcontact')
+                   '/content/v2.1/{merchantId}/liasettings/{accountId}/setinventoryverificationcontact')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -9456,7 +7798,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/liasettings/{accountId}/setposdataprovider')
+                   '/content/v2.1/{merchantId}/liasettings/{accountId}/setposdataprovider')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -9484,7 +7826,6 @@ export namespace content_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.accountId The ID of the account for which to get or update LIA settings.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.
      * @param {().LiaSettings} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -9528,9 +7869,9 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url:
-                  (rootUrl + '/content/v2/{merchantId}/liasettings/{accountId}')
-                      .replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl +
+                    '/content/v2.1/{merchantId}/liasettings/{accountId}')
+                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
             options),
@@ -9554,10 +7895,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
 
     /**
      * Request body metadata
@@ -9626,33 +7963,6 @@ export namespace content_v2 {
      * Auth client or API Key for the request
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-  }
-  export interface Params$Resource$Liasettings$Patch extends
-      StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The ID of the account for which to get or update LIA settings.
-     */
-    accountId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
-     * The ID of the managing account. If this parameter is not the same as
-     * accountId, then this account must be a multi-client account and accountId
-     * must be the ID of a sub-account of this account.
-     */
-    merchantId?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$LiaSettings;
   }
   export interface Params$Resource$Liasettings$Requestgmbaccess extends
       StandardParameters {
@@ -9777,10 +8087,6 @@ export namespace content_v2 {
      */
     accountId?: string;
     /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
      * The ID of the managing account. If this parameter is not the same as
      * accountId, then this account must be a multi-client account and accountId
      * must be the ID of a sub-account of this account.
@@ -9858,7 +8164,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orderinvoices/{orderId}/createChargeInvoice')
+                   '/content/v2.1/{merchantId}/orderinvoices/{orderId}/createChargeInvoice')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -9941,7 +8247,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orderinvoices/{orderId}/createRefundInvoice')
+                   '/content/v2.1/{merchantId}/orderinvoices/{orderId}/createRefundInvoice')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -10071,7 +8377,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orderpayments/{orderId}/notifyAuthApproved')
+                   '/content/v2.1/{merchantId}/orderpayments/{orderId}/notifyAuthApproved')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -10150,7 +8456,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orderpayments/{orderId}/notifyAuthDeclined')
+                   '/content/v2.1/{merchantId}/orderpayments/{orderId}/notifyAuthDeclined')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -10233,7 +8539,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orderpayments/{orderId}/notifyCharge')
+                   '/content/v2.1/{merchantId}/orderpayments/{orderId}/notifyCharge')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -10316,7 +8622,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orderpayments/{orderId}/notifyRefund')
+                   '/content/v2.1/{merchantId}/orderpayments/{orderId}/notifyRefund')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -10495,7 +8801,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/orderreports/disbursements')
+                    '/content/v2.1/{merchantId}/orderreports/disbursements')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -10582,7 +8888,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orderreports/disbursements/{disbursementId}/transactions')
+                   '/content/v2.1/{merchantId}/orderreports/disbursements/{disbursementId}/transactions')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -10720,9 +9026,9 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url:
-                  (rootUrl + '/content/v2/{merchantId}/orderreturns/{returnId}')
-                      .replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl +
+                    '/content/v2.1/{merchantId}/orderreturns/{returnId}')
+                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
             options),
@@ -10793,7 +9099,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/orderreturns')
+              url: (rootUrl + '/content/v2.1/{merchantId}/orderreturns')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -10924,7 +9230,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/orders/{orderId}/acknowledge')
+                    '/content/v2.1/{merchantId}/orders/{orderId}/acknowledge')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -11001,7 +9307,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/testorders/{orderId}/advance')
+                    '/content/v2.1/{merchantId}/testorders/{orderId}/advance')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -11071,9 +9377,9 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url:
-                  (rootUrl + '/content/v2/{merchantId}/orders/{orderId}/cancel')
-                      .replace(/([^:]\/)\/+/g, '$1'),
+              url: (rootUrl +
+                    '/content/v2.1/{merchantId}/orders/{orderId}/cancel')
+                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
             options),
@@ -11147,9 +9453,10 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl +
-                    '/content/v2/{merchantId}/orders/{orderId}/cancelLineItem')
-                       .replace(/([^:]\/)\/+/g, '$1'),
+              url:
+                  (rootUrl +
+                   '/content/v2.1/{merchantId}/orders/{orderId}/cancelLineItem')
+                      .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
             options),
@@ -11229,7 +9536,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/testorders/{orderId}/cancelByCustomer')
+                   '/content/v2.1/{merchantId}/testorders/{orderId}/cancelByCustomer')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -11305,7 +9612,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/testorders')
+              url: (rootUrl + '/content/v2.1/{merchantId}/testorders')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -11383,7 +9690,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/orders/{orderId}/testreturn')
+                    '/content/v2.1/{merchantId}/orders/{orderId}/testreturn')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -11399,76 +9706,6 @@ export namespace content_v2 {
       } else {
         return createAPIRequest<Schema$OrdersCreateTestReturnResponse>(
             parameters);
-      }
-    }
-
-
-    /**
-     * content.orders.custombatch
-     * @desc Retrieves or modifies multiple orders in a single request.
-     * @alias content.orders.custombatch
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {().OrdersCustomBatchRequest} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    custombatch(
-        params?: Params$Resource$Orders$Custombatch, options?: MethodOptions):
-        AxiosPromise<Schema$OrdersCustomBatchResponse>;
-    custombatch(
-        params: Params$Resource$Orders$Custombatch,
-        options: MethodOptions|
-        BodyResponseCallback<Schema$OrdersCustomBatchResponse>,
-        callback: BodyResponseCallback<Schema$OrdersCustomBatchResponse>): void;
-    custombatch(
-        params: Params$Resource$Orders$Custombatch,
-        callback: BodyResponseCallback<Schema$OrdersCustomBatchResponse>): void;
-    custombatch(
-        callback: BodyResponseCallback<Schema$OrdersCustomBatchResponse>): void;
-    custombatch(
-        paramsOrCallback?: Params$Resource$Orders$Custombatch|
-        BodyResponseCallback<Schema$OrdersCustomBatchResponse>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$OrdersCustomBatchResponse>,
-        callback?: BodyResponseCallback<Schema$OrdersCustomBatchResponse>):
-        void|AxiosPromise<Schema$OrdersCustomBatchResponse> {
-      let params =
-          (paramsOrCallback || {}) as Params$Resource$Orders$Custombatch;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Orders$Custombatch;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url: (rootUrl + '/content/v2/orders/batch')
-                       .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'POST'
-            },
-            options),
-        params,
-        requiredParams: [],
-        pathParams: [],
-        context
-      };
-      if (callback) {
-        createAPIRequest<Schema$OrdersCustomBatchResponse>(
-            parameters, callback);
-      } else {
-        return createAPIRequest<Schema$OrdersCustomBatchResponse>(parameters);
       }
     }
 
@@ -11517,7 +9754,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/orders/{orderId}')
+              url: (rootUrl + '/content/v2.1/{merchantId}/orders/{orderId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -11597,7 +9834,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/ordersbymerchantid/{merchantOrderId}')
+                   '/content/v2.1/{merchantId}/ordersbymerchantid/{merchantOrderId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -11681,7 +9918,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/testordertemplates/{templateName}')
+                   '/content/v2.1/{merchantId}/testordertemplates/{templateName}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -11766,7 +10003,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orders/{orderId}/inStoreRefundLineItem')
+                   '/content/v2.1/{merchantId}/orders/{orderId}/inStoreRefundLineItem')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -11840,7 +10077,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/orders')
+              url: (rootUrl + '/content/v2.1/{merchantId}/orders')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -11854,75 +10091,6 @@ export namespace content_v2 {
         createAPIRequest<Schema$OrdersListResponse>(parameters, callback);
       } else {
         return createAPIRequest<Schema$OrdersListResponse>(parameters);
-      }
-    }
-
-
-    /**
-     * content.orders.refund
-     * @desc Deprecated, please use returnRefundLineItem instead.
-     * @alias content.orders.refund
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.merchantId The ID of the account that manages the order. This cannot be a multi-client account.
-     * @param {string} params.orderId The ID of the order to refund.
-     * @param {().OrdersRefundRequest} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    refund(params?: Params$Resource$Orders$Refund, options?: MethodOptions):
-        AxiosPromise<Schema$OrdersRefundResponse>;
-    refund(
-        params: Params$Resource$Orders$Refund,
-        options: MethodOptions|
-        BodyResponseCallback<Schema$OrdersRefundResponse>,
-        callback: BodyResponseCallback<Schema$OrdersRefundResponse>): void;
-    refund(
-        params: Params$Resource$Orders$Refund,
-        callback: BodyResponseCallback<Schema$OrdersRefundResponse>): void;
-    refund(callback: BodyResponseCallback<Schema$OrdersRefundResponse>): void;
-    refund(
-        paramsOrCallback?: Params$Resource$Orders$Refund|
-        BodyResponseCallback<Schema$OrdersRefundResponse>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$OrdersRefundResponse>,
-        callback?: BodyResponseCallback<Schema$OrdersRefundResponse>):
-        void|AxiosPromise<Schema$OrdersRefundResponse> {
-      let params = (paramsOrCallback || {}) as Params$Resource$Orders$Refund;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Orders$Refund;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url:
-                  (rootUrl + '/content/v2/{merchantId}/orders/{orderId}/refund')
-                      .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'POST'
-            },
-            options),
-        params,
-        requiredParams: ['merchantId', 'orderId'],
-        pathParams: ['merchantId', 'orderId'],
-        context
-      };
-      if (callback) {
-        createAPIRequest<Schema$OrdersRefundResponse>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$OrdersRefundResponse>(parameters);
       }
     }
 
@@ -11990,7 +10158,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orders/{orderId}/rejectReturnLineItem')
+                   '/content/v2.1/{merchantId}/orders/{orderId}/rejectReturnLineItem')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -12005,84 +10173,6 @@ export namespace content_v2 {
             parameters, callback);
       } else {
         return createAPIRequest<Schema$OrdersRejectReturnLineItemResponse>(
-            parameters);
-      }
-    }
-
-
-    /**
-     * content.orders.returnlineitem
-     * @desc Returns a line item.
-     * @alias content.orders.returnlineitem
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.merchantId The ID of the account that manages the order. This cannot be a multi-client account.
-     * @param {string} params.orderId The ID of the order.
-     * @param {().OrdersReturnLineItemRequest} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    returnlineitem(
-        params?: Params$Resource$Orders$Returnlineitem,
-        options?: MethodOptions):
-        AxiosPromise<Schema$OrdersReturnLineItemResponse>;
-    returnlineitem(
-        params: Params$Resource$Orders$Returnlineitem,
-        options: MethodOptions|
-        BodyResponseCallback<Schema$OrdersReturnLineItemResponse>,
-        callback: BodyResponseCallback<Schema$OrdersReturnLineItemResponse>):
-        void;
-    returnlineitem(
-        params: Params$Resource$Orders$Returnlineitem,
-        callback: BodyResponseCallback<Schema$OrdersReturnLineItemResponse>):
-        void;
-    returnlineitem(
-        callback: BodyResponseCallback<Schema$OrdersReturnLineItemResponse>):
-        void;
-    returnlineitem(
-        paramsOrCallback?: Params$Resource$Orders$Returnlineitem|
-        BodyResponseCallback<Schema$OrdersReturnLineItemResponse>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$OrdersReturnLineItemResponse>,
-        callback?: BodyResponseCallback<Schema$OrdersReturnLineItemResponse>):
-        void|AxiosPromise<Schema$OrdersReturnLineItemResponse> {
-      let params =
-          (paramsOrCallback || {}) as Params$Resource$Orders$Returnlineitem;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Orders$Returnlineitem;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url: (rootUrl +
-                    '/content/v2/{merchantId}/orders/{orderId}/returnLineItem')
-                       .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'POST'
-            },
-            options),
-        params,
-        requiredParams: ['merchantId', 'orderId'],
-        pathParams: ['merchantId', 'orderId'],
-        context
-      };
-      if (callback) {
-        createAPIRequest<Schema$OrdersReturnLineItemResponse>(
-            parameters, callback);
-      } else {
-        return createAPIRequest<Schema$OrdersReturnLineItemResponse>(
             parameters);
       }
     }
@@ -12152,7 +10242,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orders/{orderId}/returnRefundLineItem')
+                   '/content/v2.1/{merchantId}/orders/{orderId}/returnRefundLineItem')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -12235,7 +10325,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orders/{orderId}/setLineItemMetadata')
+                   '/content/v2.1/{merchantId}/orders/{orderId}/setLineItemMetadata')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -12312,7 +10402,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/orders/{orderId}/shipLineItems')
+                    '/content/v2.1/{merchantId}/orders/{orderId}/shipLineItems')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -12392,7 +10482,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orders/{orderId}/updateLineItemShippingDetails')
+                   '/content/v2.1/{merchantId}/orders/{orderId}/updateLineItemShippingDetails')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -12475,7 +10565,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/orders/{orderId}/updateMerchantOrderId')
+                   '/content/v2.1/{merchantId}/orders/{orderId}/updateMerchantOrderId')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -12552,9 +10642,10 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl +
-                    '/content/v2/{merchantId}/orders/{orderId}/updateShipment')
-                       .replace(/([^:]\/)\/+/g, '$1'),
+              url:
+                  (rootUrl +
+                   '/content/v2.1/{merchantId}/orders/{orderId}/updateShipment')
+                      .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
             options),
@@ -12717,19 +10808,6 @@ export namespace content_v2 {
      */
     requestBody?: Schema$OrdersCreateTestReturnRequest;
   }
-  export interface Params$Resource$Orders$Custombatch extends
-      StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$OrdersCustomBatchRequest;
-  }
   export interface Params$Resource$Orders$Get extends StandardParameters {
     /**
      * Auth client or API Key for the request
@@ -12862,27 +10940,6 @@ export namespace content_v2 {
      */
     statuses?: string[];
   }
-  export interface Params$Resource$Orders$Refund extends StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The ID of the account that manages the order. This cannot be a
-     * multi-client account.
-     */
-    merchantId?: string;
-    /**
-     * The ID of the order to refund.
-     */
-    orderId?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$OrdersRefundRequest;
-  }
   export interface Params$Resource$Orders$Rejectreturnlineitem extends
       StandardParameters {
     /**
@@ -12904,28 +10961,6 @@ export namespace content_v2 {
      * Request body metadata
      */
     requestBody?: Schema$OrdersRejectReturnLineItemRequest;
-  }
-  export interface Params$Resource$Orders$Returnlineitem extends
-      StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The ID of the account that manages the order. This cannot be a
-     * multi-client account.
-     */
-    merchantId?: string;
-    /**
-     * The ID of the order.
-     */
-    orderId?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$OrdersReturnLineItemRequest;
   }
   export interface Params$Resource$Orders$Returnrefundlineitem extends
       StandardParameters {
@@ -13072,7 +11107,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {().PosCustomBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -13116,7 +11150,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/pos/batch')
+              url: (rootUrl + '/content/v2.1/pos/batch')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -13141,7 +11175,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the POS or inventory data provider.
      * @param {string} params.storeCode A store code that is unique per merchant.
      * @param {string} params.targetMerchantId The ID of the target merchant.
@@ -13184,7 +11217,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/pos/{targetMerchantId}/store/{storeCode}')
+                   '/content/v2.1/{merchantId}/pos/{targetMerchantId}/store/{storeCode}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -13249,7 +11282,7 @@ export namespace content_v2 {
             {
               url:
                   (rootUrl +
-                   '/content/v2/{merchantId}/pos/{targetMerchantId}/store/{storeCode}')
+                   '/content/v2.1/{merchantId}/pos/{targetMerchantId}/store/{storeCode}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -13274,7 +11307,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the POS or inventory data provider.
      * @param {string} params.targetMerchantId The ID of the target merchant.
      * @param {().PosStore} params.resource Request body data
@@ -13317,7 +11349,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/pos/{targetMerchantId}/store')
+                    '/content/v2.1/{merchantId}/pos/{targetMerchantId}/store')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -13342,7 +11374,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the POS or inventory data provider.
      * @param {string} params.targetMerchantId The ID of the target merchant.
      * @param {().PosInventoryRequest} params.resource Request body data
@@ -13387,9 +11418,10 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl +
-                    '/content/v2/{merchantId}/pos/{targetMerchantId}/inventory')
-                       .replace(/([^:]\/)\/+/g, '$1'),
+              url:
+                  (rootUrl +
+                   '/content/v2.1/{merchantId}/pos/{targetMerchantId}/inventory')
+                      .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
             options),
@@ -13455,7 +11487,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/pos/{targetMerchantId}/store')
+                    '/content/v2.1/{merchantId}/pos/{targetMerchantId}/store')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -13480,7 +11512,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the POS or inventory data provider.
      * @param {string} params.targetMerchantId The ID of the target merchant.
      * @param {().PosSaleRequest} params.resource Request body data
@@ -13524,7 +11555,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/pos/{targetMerchantId}/sale')
+                    '/content/v2.1/{merchantId}/pos/{targetMerchantId}/sale')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -13548,10 +11579,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
 
     /**
      * Request body metadata
@@ -13564,10 +11591,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * The ID of the POS or inventory data provider.
      */
@@ -13607,10 +11630,6 @@ export namespace content_v2 {
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
     /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
      * The ID of the POS or inventory data provider.
      */
     merchantId?: string;
@@ -13630,10 +11649,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * The ID of the POS or inventory data provider.
      */
@@ -13670,10 +11685,6 @@ export namespace content_v2 {
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
     /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
      * The ID of the POS or inventory data provider.
      */
     merchantId?: string;
@@ -13701,7 +11712,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {().ProductsCustomBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -13749,7 +11759,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/products/batch')
+              url: (rootUrl + '/content/v2.1/products/batch')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -13775,7 +11785,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the account that contains the product. This account cannot be a multi-client account.
      * @param {string} params.productId The REST id of the product.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -13815,7 +11824,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/products/{productId}')
+              url: (rootUrl + '/content/v2.1/{merchantId}/products/{productId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -13877,7 +11886,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/products/{productId}')
+              url: (rootUrl + '/content/v2.1/{merchantId}/products/{productId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -13904,7 +11913,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the account that contains the product. This account cannot be a multi-client account.
      * @param {().Product} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -13945,7 +11953,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/products')
+              url: (rootUrl + '/content/v2.1/{merchantId}/products')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -13970,7 +11978,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.includeInvalidInsertedItems Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).
      * @param {integer=} params.maxResults The maximum number of products to return in the response, used for paging.
      * @param {string} params.merchantId The ID of the account that contains the products. This account cannot be a multi-client account.
      * @param {string=} params.pageToken The token returned by the previous request.
@@ -14014,7 +12021,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/products')
+              url: (rootUrl + '/content/v2.1/{merchantId}/products')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14039,10 +12046,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
 
     /**
      * Request body metadata
@@ -14055,10 +12058,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * The ID of the account that contains the product. This account cannot be a
      * multi-client account.
@@ -14092,10 +12091,6 @@ export namespace content_v2 {
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
     /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
      * The ID of the account that contains the product. This account cannot be a
      * multi-client account.
      */
@@ -14112,12 +12107,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to include the invalid inserted items in the result of the list
-     * request. By default the invalid items are not shown (the default value is
-     * false).
-     */
-    includeInvalidInsertedItems?: boolean;
     /**
      * The maximum number of products to return in the response, used for
      * paging.
@@ -14146,7 +12135,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.includeAttributes Flag to include full product data in the results of this request. The default value is false.
      * @param {().ProductstatusesCustomBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -14199,7 +12187,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/productstatuses/batch')
+              url: (rootUrl + '/content/v2.1/productstatuses/batch')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -14227,7 +12215,6 @@ export namespace content_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.destinations If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.
-     * @param {boolean=} params.includeAttributes Flag to include full product data in the result of this get request. The default value is false.
      * @param {string} params.merchantId The ID of the account that contains the product. This account cannot be a multi-client account.
      * @param {string} params.productId The REST id of the product.
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -14268,7 +12255,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/productstatuses/{productId}')
+                    '/content/v2.1/{merchantId}/productstatuses/{productId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14294,8 +12281,6 @@ export namespace content_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string=} params.destinations If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.
-     * @param {boolean=} params.includeAttributes Flag to include full product data in the results of the list request. The default value is false.
-     * @param {boolean=} params.includeInvalidInsertedItems Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).
      * @param {integer=} params.maxResults The maximum number of product statuses to return in the response, used for paging.
      * @param {string} params.merchantId The ID of the account that contains the products. This account cannot be a multi-client account.
      * @param {string=} params.pageToken The token returned by the previous request.
@@ -14344,7 +12329,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/productstatuses')
+              url: (rootUrl + '/content/v2.1/{merchantId}/productstatuses')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14370,11 +12355,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to include full product data in the results of this request. The
-     * default value is false.
-     */
-    includeAttributes?: boolean;
 
     /**
      * Request body metadata
@@ -14393,11 +12373,6 @@ export namespace content_v2 {
      * otherwise only issues for the Shopping destination.
      */
     destinations?: string[];
-    /**
-     * Flag to include full product data in the result of this get request. The
-     * default value is false.
-     */
-    includeAttributes?: boolean;
     /**
      * The ID of the account that contains the product. This account cannot be a
      * multi-client account.
@@ -14420,17 +12395,6 @@ export namespace content_v2 {
      * otherwise only issues for the Shopping destination.
      */
     destinations?: string[];
-    /**
-     * Flag to include full product data in the results of the list request. The
-     * default value is false.
-     */
-    includeAttributes?: boolean;
-    /**
-     * Flag to include the invalid inserted items in the result of the list
-     * request. By default the invalid items are not shown (the default value is
-     * false).
-     */
-    includeInvalidInsertedItems?: boolean;
     /**
      * The maximum number of product statuses to return in the response, used
      * for paging.
@@ -14460,7 +12424,6 @@ export namespace content_v2 {
      * @memberOf! ()
      *
      * @param {object} params Parameters for request
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {().ShippingsettingsCustomBatchRequest} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
      * @param {callback} callback The callback that handles the response.
@@ -14513,7 +12476,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/shippingsettings/batch')
+              url: (rootUrl + '/content/v2.1/shippingsettings/batch')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -14580,7 +12543,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/shippingsettings/{accountId}')
+                    '/content/v2.1/{merchantId}/shippingsettings/{accountId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14656,7 +12619,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/supportedCarriers')
+              url: (rootUrl + '/content/v2.1/{merchantId}/supportedCarriers')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14734,7 +12697,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/supportedHolidays')
+              url: (rootUrl + '/content/v2.1/{merchantId}/supportedHolidays')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14811,7 +12774,7 @@ export namespace content_v2 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/content/v2/{merchantId}/shippingsettings')
+              url: (rootUrl + '/content/v2.1/{merchantId}/shippingsettings')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -14832,78 +12795,6 @@ export namespace content_v2 {
 
 
     /**
-     * content.shippingsettings.patch
-     * @desc Updates the shipping settings of the account. This method supports
-     * patch semantics.
-     * @alias content.shippingsettings.patch
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {string} params.accountId The ID of the account for which to get/update shipping settings.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
-     * @param {string} params.merchantId The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.
-     * @param {().ShippingSettings} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    patch(
-        params?: Params$Resource$Shippingsettings$Patch,
-        options?: MethodOptions): AxiosPromise<Schema$ShippingSettings>;
-    patch(
-        params: Params$Resource$Shippingsettings$Patch,
-        options: MethodOptions|BodyResponseCallback<Schema$ShippingSettings>,
-        callback: BodyResponseCallback<Schema$ShippingSettings>): void;
-    patch(
-        params: Params$Resource$Shippingsettings$Patch,
-        callback: BodyResponseCallback<Schema$ShippingSettings>): void;
-    patch(callback: BodyResponseCallback<Schema$ShippingSettings>): void;
-    patch(
-        paramsOrCallback?: Params$Resource$Shippingsettings$Patch|
-        BodyResponseCallback<Schema$ShippingSettings>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$ShippingSettings>,
-        callback?: BodyResponseCallback<Schema$ShippingSettings>):
-        void|AxiosPromise<Schema$ShippingSettings> {
-      let params =
-          (paramsOrCallback || {}) as Params$Resource$Shippingsettings$Patch;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Shippingsettings$Patch;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url: (rootUrl +
-                    '/content/v2/{merchantId}/shippingsettings/{accountId}')
-                       .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'PATCH'
-            },
-            options),
-        params,
-        requiredParams: ['merchantId', 'accountId'],
-        pathParams: ['accountId', 'merchantId'],
-        context
-      };
-      if (callback) {
-        createAPIRequest<Schema$ShippingSettings>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$ShippingSettings>(parameters);
-      }
-    }
-
-
-    /**
      * content.shippingsettings.update
      * @desc Updates the shipping settings of the account.
      * @alias content.shippingsettings.update
@@ -14911,7 +12802,6 @@ export namespace content_v2 {
      *
      * @param {object} params Parameters for request
      * @param {string} params.accountId The ID of the account for which to get/update shipping settings.
-     * @param {boolean=} params.dryRun Flag to run the request in dry-run mode.
      * @param {string} params.merchantId The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.
      * @param {().ShippingSettings} params.resource Request body data
      * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
@@ -14956,7 +12846,7 @@ export namespace content_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/content/v2/{merchantId}/shippingsettings/{accountId}')
+                    '/content/v2.1/{merchantId}/shippingsettings/{accountId}')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -14981,10 +12871,6 @@ export namespace content_v2 {
      */
     auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
 
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
 
     /**
      * Request body metadata
@@ -15054,33 +12940,6 @@ export namespace content_v2 {
      */
     pageToken?: string;
   }
-  export interface Params$Resource$Shippingsettings$Patch extends
-      StandardParameters {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The ID of the account for which to get/update shipping settings.
-     */
-    accountId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
-    /**
-     * The ID of the managing account. If this parameter is not the same as
-     * accountId, then this account must be a multi-client account and accountId
-     * must be the ID of a sub-account of this account.
-     */
-    merchantId?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$ShippingSettings;
-  }
   export interface Params$Resource$Shippingsettings$Update extends
       StandardParameters {
     /**
@@ -15092,10 +12951,6 @@ export namespace content_v2 {
      * The ID of the account for which to get/update shipping settings.
      */
     accountId?: string;
-    /**
-     * Flag to run the request in dry-run mode.
-     */
-    dryRun?: boolean;
     /**
      * The ID of the managing account. If this parameter is not the same as
      * accountId, then this account must be a multi-client account and accountId

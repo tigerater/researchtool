@@ -24,9 +24,9 @@ import {APIRequestContext, BodyResponseCallback, createAPIRequest, GlobalOptions
 // tslint:disable: jsdoc-format
 // tslint:disable: no-namespace
 
-export namespace iap_v1beta1 {
+export namespace iap_v1 {
   export interface Options extends GlobalOptions {
-    version: 'v1beta1';
+    version: 'v1';
   }
 
   let context: APIRequestContext;
@@ -89,12 +89,12 @@ export namespace iap_v1beta1 {
    *
    * @example
    * const {google} = require('googleapis');
-   * const iap = google.iap('v1beta1');
+   * const iap = google.iap('v1');
    *
    * @namespace iap
    * @type {Function}
-   * @version v1beta1
-   * @variation v1beta1
+   * @version v1
+   * @variation v1
    * @param {object=} options Options for Iap
    */
   export class Iap {
@@ -321,7 +321,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:getIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:getIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -391,7 +391,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:setIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:setIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -412,10 +412,8 @@ export namespace iap_v1beta1 {
     /**
      * iap.projects.iap_tunnel.testIamPermissions
      * @desc Returns permissions that a caller has on the Identity-Aware Proxy
-     * protected resource. If the resource does not exist or the caller does not
-     * have Identity-Aware Proxy permissions a
-     * [google.rpc.Code.PERMISSION_DENIED] will be returned. More information
-     * about managing access via IAP can be found at:
+     * protected resource. More information about managing access via IAP can be
+     * found at:
      * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
      * @alias iap.projects.iap_tunnel.testIamPermissions
      * @memberOf! ()
@@ -471,7 +469,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:testIamPermissions')
+              url: (rootUrl + '/v1/{+resource}:testIamPermissions')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -605,7 +603,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:getIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:getIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -676,7 +674,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:setIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:setIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -697,10 +695,8 @@ export namespace iap_v1beta1 {
     /**
      * iap.projects.iap_tunnel.zones.testIamPermissions
      * @desc Returns permissions that a caller has on the Identity-Aware Proxy
-     * protected resource. If the resource does not exist or the caller does not
-     * have Identity-Aware Proxy permissions a
-     * [google.rpc.Code.PERMISSION_DENIED] will be returned. More information
-     * about managing access via IAP can be found at:
+     * protected resource. More information about managing access via IAP can be
+     * found at:
      * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
      * @alias iap.projects.iap_tunnel.zones.testIamPermissions
      * @memberOf! ()
@@ -757,7 +753,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:testIamPermissions')
+              url: (rootUrl + '/v1/{+resource}:testIamPermissions')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -892,7 +888,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:getIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:getIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -967,7 +963,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:setIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:setIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -988,10 +984,8 @@ export namespace iap_v1beta1 {
     /**
      * iap.projects.iap_tunnel.zones.instances.testIamPermissions
      * @desc Returns permissions that a caller has on the Identity-Aware Proxy
-     * protected resource. If the resource does not exist or the caller does not
-     * have Identity-Aware Proxy permissions a
-     * [google.rpc.Code.PERMISSION_DENIED] will be returned. More information
-     * about managing access via IAP can be found at:
+     * protected resource. More information about managing access via IAP can be
+     * found at:
      * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
      * @alias iap.projects.iap_tunnel.zones.instances.testIamPermissions
      * @memberOf! ()
@@ -1051,7 +1045,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:testIamPermissions')
+              url: (rootUrl + '/v1/{+resource}:testIamPermissions')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1186,7 +1180,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:getIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:getIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1256,7 +1250,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:setIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:setIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1277,10 +1271,8 @@ export namespace iap_v1beta1 {
     /**
      * iap.projects.iap_web.testIamPermissions
      * @desc Returns permissions that a caller has on the Identity-Aware Proxy
-     * protected resource. If the resource does not exist or the caller does not
-     * have Identity-Aware Proxy permissions a
-     * [google.rpc.Code.PERMISSION_DENIED] will be returned. More information
-     * about managing access via IAP can be found at:
+     * protected resource. More information about managing access via IAP can be
+     * found at:
      * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
      * @alias iap.projects.iap_web.testIamPermissions
      * @memberOf! ()
@@ -1335,7 +1327,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:testIamPermissions')
+              url: (rootUrl + '/v1/{+resource}:testIamPermissions')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1469,7 +1461,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:getIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:getIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1540,7 +1532,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:setIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:setIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1561,10 +1553,8 @@ export namespace iap_v1beta1 {
     /**
      * iap.projects.iap_web.services.testIamPermissions
      * @desc Returns permissions that a caller has on the Identity-Aware Proxy
-     * protected resource. If the resource does not exist or the caller does not
-     * have Identity-Aware Proxy permissions a
-     * [google.rpc.Code.PERMISSION_DENIED] will be returned. More information
-     * about managing access via IAP can be found at:
+     * protected resource. More information about managing access via IAP can be
+     * found at:
      * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
      * @alias iap.projects.iap_web.services.testIamPermissions
      * @memberOf! ()
@@ -1621,7 +1611,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:testIamPermissions')
+              url: (rootUrl + '/v1/{+resource}:testIamPermissions')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1754,7 +1744,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:getIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:getIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1827,7 +1817,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:setIamPolicy')
+              url: (rootUrl + '/v1/{+resource}:setIamPolicy')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1848,10 +1838,8 @@ export namespace iap_v1beta1 {
     /**
      * iap.projects.iap_web.services.versions.testIamPermissions
      * @desc Returns permissions that a caller has on the Identity-Aware Proxy
-     * protected resource. If the resource does not exist or the caller does not
-     * have Identity-Aware Proxy permissions a
-     * [google.rpc.Code.PERMISSION_DENIED] will be returned. More information
-     * about managing access via IAP can be found at:
+     * protected resource. More information about managing access via IAP can be
+     * found at:
      * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
      * @alias iap.projects.iap_web.services.versions.testIamPermissions
      * @memberOf! ()
@@ -1911,7 +1899,7 @@ export namespace iap_v1beta1 {
       const parameters = {
         options: Object.assign(
             {
-              url: (rootUrl + '/v1beta1/{+resource}:testIamPermissions')
+              url: (rootUrl + '/v1/{+resource}:testIamPermissions')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
