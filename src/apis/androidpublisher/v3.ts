@@ -30,9 +30,9 @@ import {createAPIRequest} from '../../shared/apirequest';
 // tslint:disable: jsdoc-format
 // tslint:disable: no-namespace
 
-export namespace androidpublisher_v2 {
+export namespace androidpublisher_v3 {
   export interface Options extends GlobalOptions {
-    version: 'v2';
+    version: 'v3';
   }
 
   /**
@@ -42,12 +42,12 @@ export namespace androidpublisher_v2 {
    *
    * @example
    * const google = require('googleapis');
-   * const androidpublisher = google.androidpublisher('v2');
+   * const androidpublisher = google.androidpublisher('v3');
    *
    * @namespace androidpublisher
    * @type {Function}
-   * @version v2
-   * @variation v2
+   * @version v3
+   * @variation v3
    * @param {object=} options Options for Androidpublisher
    */
   export class Androidpublisher {
@@ -100,24 +100,6 @@ export namespace androidpublisher_v2 {
      * the output of the sha256sum command.
      */
     sha256?: string;
-  }
-  export interface Schema$ApkListing {
-    /**
-     * The language code, in BCP 47 format (eg &quot;en-US&quot;).
-     */
-    language?: string;
-    /**
-     * Describe what&#39;s new in your APK.
-     */
-    recentChanges?: string;
-  }
-  export interface Schema$ApkListingsListResponse {
-    /**
-     * Identifies what kind of resource this is. Value: the fixed string
-     * &quot;androidpublisher#apkListingsListResponse&quot;.
-     */
-    kind?: string;
-    listings?: Schema$ApkListing[];
   }
   export interface Schema$ApksAddExternallyHostedRequest {
     /**
@@ -497,6 +479,16 @@ export namespace androidpublisher_v2 {
     kind?: string;
     listings?: Schema$Listing[];
   }
+  export interface Schema$LocalizedText {
+    /**
+     * The language code, in BCP 47 format (eg &quot;en-US&quot;).
+     */
+    language?: string;
+    /**
+     * The text in the given `language`.
+     */
+    text?: string;
+  }
   export interface Schema$MonthDay {
     /**
      * Day of a month, value in [1, 31] range. Valid range depends on the
@@ -817,17 +809,44 @@ export namespace androidpublisher_v2 {
   }
   export interface Schema$Track {
     /**
+     * A list of all active releases in this track during a read request. On an
+     * update request, it represents desired changes.
+     */
+    releases?: Schema$TrackRelease[];
+    /**
      * Identifier for this track. One of &quot;alpha&quot;, &quot;beta&quot;,
      * &quot;production&quot;, &quot;rollout&quot; or &quot;internal&quot;.
      */
     track?: string;
+  }
+  export interface Schema$TrackRelease {
+    /**
+     * The release name, used to identify this release in the Play Console UI.
+     * Not required to be unique. This is optional, if not set it will be
+     * generated from the version_name in the APKs.
+     */
+    name?: string;
+    /**
+     * The description of what is new in the app in this release.
+     */
+    releaseNotes?: Schema$LocalizedText[];
+    /**
+     * The desired status of this release.
+     */
+    status?: string;
+    /**
+     * Fraction of users who are eligible to receive the release. 0 &lt;=
+     * fraction &lt; 1. To be set, release status must be &quot;inProgress&quot;
+     * or &quot;halted&quot;.
+     */
     userFraction?: number;
     /**
-     * Version codes to make active on this track. Note that this list should
+     * A list of all version codes of APKs that will be exposed to the users of
+     * this track when this release is rolled out. Note that this list should
      * contain all versions you wish to be active, including those you wish to
      * retain from previous releases.
      */
-    versionCodes?: number[];
+    versionCodes?: string[];
   }
   export interface Schema$TracksListResponse {
     /**
@@ -931,7 +950,6 @@ export namespace androidpublisher_v2 {
 
   export class Resource$Edits {
     root: Androidpublisher;
-    apklistings: Resource$Edits$Apklistings;
     apks: Resource$Edits$Apks;
     bundles: Resource$Edits$Bundles;
     deobfuscationfiles: Resource$Edits$Deobfuscationfiles;
@@ -944,7 +962,6 @@ export namespace androidpublisher_v2 {
     constructor(root: Androidpublisher) {
       this.root = root;
       this.getRoot.bind(this);
-      this.apklistings = new Resource$Edits$Apklistings(root);
       this.apks = new Resource$Edits$Apks(root);
       this.bundles = new Resource$Edits$Bundles(root);
       this.deobfuscationfiles = new Resource$Edits$Deobfuscationfiles(root);
@@ -1010,7 +1027,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}:commit')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}:commit')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1078,7 +1095,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -1144,7 +1161,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -1211,7 +1228,7 @@ export namespace androidpublisher_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/androidpublisher/v2/applications/{packageName}/edits')
+                    '/androidpublisher/v3/applications/{packageName}/edits')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1279,7 +1296,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}:validate')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}:validate')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -1379,610 +1396,6 @@ export namespace androidpublisher_v2 {
     packageName?: string;
   }
 
-  export class Resource$Edits$Apklistings {
-    root: Androidpublisher;
-    constructor(root: Androidpublisher) {
-      this.root = root;
-      this.getRoot.bind(this);
-    }
-
-    getRoot() {
-      return this.root;
-    }
-
-
-    /**
-     * androidpublisher.edits.apklistings.delete
-     * @desc Deletes the APK-specific localized listing for a specified APK and
-     * language code.
-     * @alias androidpublisher.edits.apklistings.delete
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {integer} params.apkVersionCode The APK version code whose APK-specific listings should be read or modified.
-     * @param {string} params.editId Unique identifier for this edit.
-     * @param {string} params.language The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass "de-AT".
-     * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    delete(
-        params?: Params$Resource$Edits$Apklistings$Delete,
-        options?: MethodOptions): AxiosPromise<void>;
-    delete(
-        params: Params$Resource$Edits$Apklistings$Delete,
-        options: MethodOptions|BodyResponseCallback<void>,
-        callback: BodyResponseCallback<void>): void;
-    delete(
-        params: Params$Resource$Edits$Apklistings$Delete,
-        callback: BodyResponseCallback<void>): void;
-    delete(callback: BodyResponseCallback<void>): void;
-    delete(
-        paramsOrCallback?: Params$Resource$Edits$Apklistings$Delete|
-        BodyResponseCallback<void>,
-        optionsOrCallback?: MethodOptions|BodyResponseCallback<void>,
-        callback?: BodyResponseCallback<void>): void|AxiosPromise<void> {
-      let params =
-          (paramsOrCallback || {}) as Params$Resource$Edits$Apklistings$Delete;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Edits$Apklistings$Delete;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url:
-                  (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings/{language}')
-                      .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'DELETE'
-            },
-            options),
-        params,
-        requiredParams: ['packageName', 'editId', 'apkVersionCode', 'language'],
-        pathParams: ['apkVersionCode', 'editId', 'language', 'packageName'],
-        context: this.getRoot()
-      };
-      if (callback) {
-        createAPIRequest<void>(parameters, callback);
-      } else {
-        return createAPIRequest<void>(parameters);
-      }
-    }
-
-
-    /**
-     * androidpublisher.edits.apklistings.deleteall
-     * @desc Deletes all the APK-specific localized listings for a specified
-     * APK.
-     * @alias androidpublisher.edits.apklistings.deleteall
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {integer} params.apkVersionCode The APK version code whose APK-specific listings should be read or modified.
-     * @param {string} params.editId Unique identifier for this edit.
-     * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    deleteall(
-        params?: Params$Resource$Edits$Apklistings$Deleteall,
-        options?: MethodOptions): AxiosPromise<void>;
-    deleteall(
-        params: Params$Resource$Edits$Apklistings$Deleteall,
-        options: MethodOptions|BodyResponseCallback<void>,
-        callback: BodyResponseCallback<void>): void;
-    deleteall(
-        params: Params$Resource$Edits$Apklistings$Deleteall,
-        callback: BodyResponseCallback<void>): void;
-    deleteall(callback: BodyResponseCallback<void>): void;
-    deleteall(
-        paramsOrCallback?: Params$Resource$Edits$Apklistings$Deleteall|
-        BodyResponseCallback<void>,
-        optionsOrCallback?: MethodOptions|BodyResponseCallback<void>,
-        callback?: BodyResponseCallback<void>): void|AxiosPromise<void> {
-      let params = (paramsOrCallback || {}) as
-          Params$Resource$Edits$Apklistings$Deleteall;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Edits$Apklistings$Deleteall;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url:
-                  (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings')
-                      .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'DELETE'
-            },
-            options),
-        params,
-        requiredParams: ['packageName', 'editId', 'apkVersionCode'],
-        pathParams: ['apkVersionCode', 'editId', 'packageName'],
-        context: this.getRoot()
-      };
-      if (callback) {
-        createAPIRequest<void>(parameters, callback);
-      } else {
-        return createAPIRequest<void>(parameters);
-      }
-    }
-
-
-    /**
-     * androidpublisher.edits.apklistings.get
-     * @desc Fetches the APK-specific localized listing for a specified APK and
-     * language code.
-     * @alias androidpublisher.edits.apklistings.get
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {integer} params.apkVersionCode The APK version code whose APK-specific listings should be read or modified.
-     * @param {string} params.editId Unique identifier for this edit.
-     * @param {string} params.language The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass "de-AT".
-     * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    get(params?: Params$Resource$Edits$Apklistings$Get,
-        options?: MethodOptions): AxiosPromise<Schema$ApkListing>;
-    get(params: Params$Resource$Edits$Apklistings$Get,
-        options: MethodOptions|BodyResponseCallback<Schema$ApkListing>,
-        callback: BodyResponseCallback<Schema$ApkListing>): void;
-    get(params: Params$Resource$Edits$Apklistings$Get,
-        callback: BodyResponseCallback<Schema$ApkListing>): void;
-    get(callback: BodyResponseCallback<Schema$ApkListing>): void;
-    get(paramsOrCallback?: Params$Resource$Edits$Apklistings$Get|
-        BodyResponseCallback<Schema$ApkListing>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$ApkListing>,
-        callback?: BodyResponseCallback<Schema$ApkListing>):
-        void|AxiosPromise<Schema$ApkListing> {
-      let params =
-          (paramsOrCallback || {}) as Params$Resource$Edits$Apklistings$Get;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Edits$Apklistings$Get;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url:
-                  (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings/{language}')
-                      .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'GET'
-            },
-            options),
-        params,
-        requiredParams: ['packageName', 'editId', 'apkVersionCode', 'language'],
-        pathParams: ['apkVersionCode', 'editId', 'language', 'packageName'],
-        context: this.getRoot()
-      };
-      if (callback) {
-        createAPIRequest<Schema$ApkListing>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$ApkListing>(parameters);
-      }
-    }
-
-
-    /**
-     * androidpublisher.edits.apklistings.list
-     * @desc Lists all the APK-specific localized listings for a specified APK.
-     * @alias androidpublisher.edits.apklistings.list
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {integer} params.apkVersionCode The APK version code whose APK-specific listings should be read or modified.
-     * @param {string} params.editId Unique identifier for this edit.
-     * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    list(
-        params?: Params$Resource$Edits$Apklistings$List,
-        options?: MethodOptions): AxiosPromise<Schema$ApkListingsListResponse>;
-    list(
-        params: Params$Resource$Edits$Apklistings$List,
-        options: MethodOptions|
-        BodyResponseCallback<Schema$ApkListingsListResponse>,
-        callback: BodyResponseCallback<Schema$ApkListingsListResponse>): void;
-    list(
-        params: Params$Resource$Edits$Apklistings$List,
-        callback: BodyResponseCallback<Schema$ApkListingsListResponse>): void;
-    list(callback: BodyResponseCallback<Schema$ApkListingsListResponse>): void;
-    list(
-        paramsOrCallback?: Params$Resource$Edits$Apklistings$List|
-        BodyResponseCallback<Schema$ApkListingsListResponse>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$ApkListingsListResponse>,
-        callback?: BodyResponseCallback<Schema$ApkListingsListResponse>):
-        void|AxiosPromise<Schema$ApkListingsListResponse> {
-      let params =
-          (paramsOrCallback || {}) as Params$Resource$Edits$Apklistings$List;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Edits$Apklistings$List;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url:
-                  (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings')
-                      .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'GET'
-            },
-            options),
-        params,
-        requiredParams: ['packageName', 'editId', 'apkVersionCode'],
-        pathParams: ['apkVersionCode', 'editId', 'packageName'],
-        context: this.getRoot()
-      };
-      if (callback) {
-        createAPIRequest<Schema$ApkListingsListResponse>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$ApkListingsListResponse>(parameters);
-      }
-    }
-
-
-    /**
-     * androidpublisher.edits.apklistings.patch
-     * @desc Updates or creates the APK-specific localized listing for a
-     * specified APK and language code. This method supports patch semantics.
-     * @alias androidpublisher.edits.apklistings.patch
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {integer} params.apkVersionCode The APK version code whose APK-specific listings should be read or modified.
-     * @param {string} params.editId Unique identifier for this edit.
-     * @param {string} params.language The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass "de-AT".
-     * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().ApkListing} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    patch(
-        params?: Params$Resource$Edits$Apklistings$Patch,
-        options?: MethodOptions): AxiosPromise<Schema$ApkListing>;
-    patch(
-        params: Params$Resource$Edits$Apklistings$Patch,
-        options: MethodOptions|BodyResponseCallback<Schema$ApkListing>,
-        callback: BodyResponseCallback<Schema$ApkListing>): void;
-    patch(
-        params: Params$Resource$Edits$Apklistings$Patch,
-        callback: BodyResponseCallback<Schema$ApkListing>): void;
-    patch(callback: BodyResponseCallback<Schema$ApkListing>): void;
-    patch(
-        paramsOrCallback?: Params$Resource$Edits$Apklistings$Patch|
-        BodyResponseCallback<Schema$ApkListing>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$ApkListing>,
-        callback?: BodyResponseCallback<Schema$ApkListing>):
-        void|AxiosPromise<Schema$ApkListing> {
-      let params =
-          (paramsOrCallback || {}) as Params$Resource$Edits$Apklistings$Patch;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Edits$Apklistings$Patch;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url:
-                  (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings/{language}')
-                      .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'PATCH'
-            },
-            options),
-        params,
-        requiredParams: ['packageName', 'editId', 'apkVersionCode', 'language'],
-        pathParams: ['apkVersionCode', 'editId', 'language', 'packageName'],
-        context: this.getRoot()
-      };
-      if (callback) {
-        createAPIRequest<Schema$ApkListing>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$ApkListing>(parameters);
-      }
-    }
-
-
-    /**
-     * androidpublisher.edits.apklistings.update
-     * @desc Updates or creates the APK-specific localized listing for a
-     * specified APK and language code.
-     * @alias androidpublisher.edits.apklistings.update
-     * @memberOf! ()
-     *
-     * @param {object} params Parameters for request
-     * @param {integer} params.apkVersionCode The APK version code whose APK-specific listings should be read or modified.
-     * @param {string} params.editId Unique identifier for this edit.
-     * @param {string} params.language The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass "de-AT".
-     * @param {string} params.packageName Unique identifier for the Android app that is being updated; for example, "com.spiffygame".
-     * @param {().ApkListing} params.resource Request body data
-     * @param {object} [options] Optionally override request options, such as `url`, `method`, and `encoding`.
-     * @param {callback} callback The callback that handles the response.
-     * @return {object} Request object
-     */
-    update(
-        params?: Params$Resource$Edits$Apklistings$Update,
-        options?: MethodOptions): AxiosPromise<Schema$ApkListing>;
-    update(
-        params: Params$Resource$Edits$Apklistings$Update,
-        options: MethodOptions|BodyResponseCallback<Schema$ApkListing>,
-        callback: BodyResponseCallback<Schema$ApkListing>): void;
-    update(
-        params: Params$Resource$Edits$Apklistings$Update,
-        callback: BodyResponseCallback<Schema$ApkListing>): void;
-    update(callback: BodyResponseCallback<Schema$ApkListing>): void;
-    update(
-        paramsOrCallback?: Params$Resource$Edits$Apklistings$Update|
-        BodyResponseCallback<Schema$ApkListing>,
-        optionsOrCallback?: MethodOptions|
-        BodyResponseCallback<Schema$ApkListing>,
-        callback?: BodyResponseCallback<Schema$ApkListing>):
-        void|AxiosPromise<Schema$ApkListing> {
-      let params =
-          (paramsOrCallback || {}) as Params$Resource$Edits$Apklistings$Update;
-      let options = (optionsOrCallback || {}) as MethodOptions;
-
-      if (typeof paramsOrCallback === 'function') {
-        callback = paramsOrCallback;
-        params = {} as Params$Resource$Edits$Apklistings$Update;
-        options = {};
-      }
-
-      if (typeof optionsOrCallback === 'function') {
-        callback = optionsOrCallback;
-        options = {};
-      }
-
-      const rootUrl = options.rootUrl || 'https://www.googleapis.com/';
-      const parameters = {
-        options: Object.assign(
-            {
-              url:
-                  (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings/{language}')
-                      .replace(/([^:]\/)\/+/g, '$1'),
-              method: 'PUT'
-            },
-            options),
-        params,
-        requiredParams: ['packageName', 'editId', 'apkVersionCode', 'language'],
-        pathParams: ['apkVersionCode', 'editId', 'language', 'packageName'],
-        context: this.getRoot()
-      };
-      if (callback) {
-        createAPIRequest<Schema$ApkListing>(parameters, callback);
-      } else {
-        return createAPIRequest<Schema$ApkListing>(parameters);
-      }
-    }
-  }
-
-  export interface Params$Resource$Edits$Apklistings$Delete {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The APK version code whose APK-specific listings should be read or
-     * modified.
-     */
-    apkVersionCode?: number;
-    /**
-     * Unique identifier for this edit.
-     */
-    editId?: string;
-    /**
-     * The language code (a BCP-47 language tag) of the APK-specific localized
-     * listing to read or modify. For example, to select Austrian German, pass
-     * "de-AT".
-     */
-    language?: string;
-    /**
-     * Unique identifier for the Android app that is being updated; for example,
-     * "com.spiffygame".
-     */
-    packageName?: string;
-  }
-  export interface Params$Resource$Edits$Apklistings$Deleteall {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The APK version code whose APK-specific listings should be read or
-     * modified.
-     */
-    apkVersionCode?: number;
-    /**
-     * Unique identifier for this edit.
-     */
-    editId?: string;
-    /**
-     * Unique identifier for the Android app that is being updated; for example,
-     * "com.spiffygame".
-     */
-    packageName?: string;
-  }
-  export interface Params$Resource$Edits$Apklistings$Get {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The APK version code whose APK-specific listings should be read or
-     * modified.
-     */
-    apkVersionCode?: number;
-    /**
-     * Unique identifier for this edit.
-     */
-    editId?: string;
-    /**
-     * The language code (a BCP-47 language tag) of the APK-specific localized
-     * listing to read or modify. For example, to select Austrian German, pass
-     * "de-AT".
-     */
-    language?: string;
-    /**
-     * Unique identifier for the Android app that is being updated; for example,
-     * "com.spiffygame".
-     */
-    packageName?: string;
-  }
-  export interface Params$Resource$Edits$Apklistings$List {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The APK version code whose APK-specific listings should be read or
-     * modified.
-     */
-    apkVersionCode?: number;
-    /**
-     * Unique identifier for this edit.
-     */
-    editId?: string;
-    /**
-     * Unique identifier for the Android app that is being updated; for example,
-     * "com.spiffygame".
-     */
-    packageName?: string;
-  }
-  export interface Params$Resource$Edits$Apklistings$Patch {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The APK version code whose APK-specific listings should be read or
-     * modified.
-     */
-    apkVersionCode?: number;
-    /**
-     * Unique identifier for this edit.
-     */
-    editId?: string;
-    /**
-     * The language code (a BCP-47 language tag) of the APK-specific localized
-     * listing to read or modify. For example, to select Austrian German, pass
-     * "de-AT".
-     */
-    language?: string;
-    /**
-     * Unique identifier for the Android app that is being updated; for example,
-     * "com.spiffygame".
-     */
-    packageName?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$ApkListing;
-  }
-  export interface Params$Resource$Edits$Apklistings$Update {
-    /**
-     * Auth client or API Key for the request
-     */
-    auth?: string|OAuth2Client|JWT|Compute|UserRefreshClient;
-
-    /**
-     * The APK version code whose APK-specific listings should be read or
-     * modified.
-     */
-    apkVersionCode?: number;
-    /**
-     * Unique identifier for this edit.
-     */
-    editId?: string;
-    /**
-     * The language code (a BCP-47 language tag) of the APK-specific localized
-     * listing to read or modify. For example, to select Austrian German, pass
-     * "de-AT".
-     */
-    language?: string;
-    /**
-     * Unique identifier for the Android app that is being updated; for example,
-     * "com.spiffygame".
-     */
-    packageName?: string;
-
-    /**
-     * Request body metadata
-     */
-    requestBody?: Schema$ApkListing;
-  }
-
-
   export class Resource$Edits$Apks {
     root: Androidpublisher;
     constructor(root: Androidpublisher) {
@@ -2058,7 +1471,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/externallyHosted')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/externallyHosted')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -2127,7 +1540,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -2197,7 +1610,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -2205,7 +1618,7 @@ export namespace androidpublisher_v2 {
         params,
         mediaUrl:
             (rootUrl +
-             '/upload/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks')
+             '/upload/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks')
                 .replace(/([^:]\/)\/+/g, '$1'),
         requiredParams: ['packageName', 'editId'],
         pathParams: ['editId', 'packageName'],
@@ -2352,7 +1765,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/bundles')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/bundles')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -2423,7 +1836,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/bundles')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/bundles')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -2431,7 +1844,7 @@ export namespace androidpublisher_v2 {
         params,
         mediaUrl:
             (rootUrl +
-             '/upload/androidpublisher/v2/applications/{packageName}/edits/{editId}/bundles')
+             '/upload/androidpublisher/v3/applications/{packageName}/edits/{editId}/bundles')
                 .replace(/([^:]\/)\/+/g, '$1'),
         requiredParams: ['packageName', 'editId'],
         pathParams: ['editId', 'packageName'],
@@ -2574,7 +1987,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/deobfuscationFiles/{deobfuscationFileType}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/deobfuscationFiles/{deobfuscationFileType}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -2582,7 +1995,7 @@ export namespace androidpublisher_v2 {
         params,
         mediaUrl:
             (rootUrl +
-             '/upload/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/deobfuscationFiles/{deobfuscationFileType}')
+             '/upload/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/deobfuscationFiles/{deobfuscationFileType}')
                 .replace(/([^:]\/)\/+/g, '$1'),
         requiredParams: [
           'packageName', 'editId', 'apkVersionCode', 'deobfuscationFileType'
@@ -2705,7 +2118,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/details')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/details')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -2777,7 +2190,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/details')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/details')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -2848,7 +2261,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/details')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/details')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -2988,7 +2401,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -3065,7 +2478,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -3141,7 +2554,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -3223,7 +2636,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -3231,7 +2644,7 @@ export namespace androidpublisher_v2 {
         params,
         mediaUrl:
             (rootUrl +
-             '/upload/androidpublisher/v2/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}')
+             '/upload/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}')
                 .replace(/([^:]\/)\/+/g, '$1'),
         requiredParams:
             ['packageName', 'editId', 'apkVersionCode', 'expansionFileType'],
@@ -3442,7 +2855,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}/{imageId}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}/{imageId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -3518,7 +2931,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -3589,7 +3002,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -3666,7 +3079,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -3674,7 +3087,7 @@ export namespace androidpublisher_v2 {
         params,
         mediaUrl:
             (rootUrl +
-             '/upload/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}')
+             '/upload/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}')
                 .replace(/([^:]\/)\/+/g, '$1'),
         requiredParams: ['packageName', 'editId', 'language', 'imageType'],
         pathParams: ['editId', 'imageType', 'language', 'packageName'],
@@ -3878,7 +3291,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings/{language}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -3946,7 +3359,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -4012,7 +3425,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings/{language}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -4082,7 +3495,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -4154,7 +3567,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings/{language}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -4225,7 +3638,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/listings/{language}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -4430,7 +3843,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/testers/{track}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/testers/{track}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -4500,7 +3913,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/testers/{track}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/testers/{track}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -4570,7 +3983,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/testers/{track}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/testers/{track}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -4723,7 +4136,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/tracks/{track}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks/{track}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -4792,7 +4205,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/tracks')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -4865,7 +4278,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/tracks/{track}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks/{track}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -4938,7 +4351,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/edits/{editId}/tracks/{track}')
+                   '/androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks/{track}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -5107,7 +4520,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/inappproducts/{sku}')
+                   '/androidpublisher/v3/applications/{packageName}/inappproducts/{sku}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'DELETE'
             },
@@ -5173,7 +4586,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/inappproducts/{sku}')
+                   '/androidpublisher/v3/applications/{packageName}/inappproducts/{sku}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -5244,7 +4657,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/inappproducts')
+                   '/androidpublisher/v3/applications/{packageName}/inappproducts')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -5318,7 +4731,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/inappproducts')
+                   '/androidpublisher/v3/applications/{packageName}/inappproducts')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -5392,7 +4805,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/inappproducts/{sku}')
+                   '/androidpublisher/v3/applications/{packageName}/inappproducts/{sku}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PATCH'
             },
@@ -5464,7 +4877,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/inappproducts/{sku}')
+                   '/androidpublisher/v3/applications/{packageName}/inappproducts/{sku}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'PUT'
             },
@@ -5695,7 +5108,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/purchases/products/{productId}/tokens/{token}')
+                   '/androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -5800,7 +5213,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:cancel')
+                   '/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:cancel')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -5882,7 +5295,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:defer')
+                   '/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:defer')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -5953,7 +5366,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}')
+                   '/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -6023,7 +5436,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund')
+                   '/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -6094,7 +5507,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:revoke')
+                   '/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:revoke')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
@@ -6297,7 +5710,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/purchases/voidedpurchases')
+                   '/androidpublisher/v3/applications/{packageName}/purchases/voidedpurchases')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -6420,7 +5833,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/reviews/{reviewId}')
+                   '/androidpublisher/v3/applications/{packageName}/reviews/{reviewId}')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -6491,7 +5904,7 @@ export namespace androidpublisher_v2 {
         options: Object.assign(
             {
               url: (rootUrl +
-                    '/androidpublisher/v2/applications/{packageName}/reviews')
+                    '/androidpublisher/v3/applications/{packageName}/reviews')
                        .replace(/([^:]\/)\/+/g, '$1'),
               method: 'GET'
             },
@@ -6561,7 +5974,7 @@ export namespace androidpublisher_v2 {
             {
               url:
                   (rootUrl +
-                   '/androidpublisher/v2/applications/{packageName}/reviews/{reviewId}:reply')
+                   '/androidpublisher/v3/applications/{packageName}/reviews/{reviewId}:reply')
                       .replace(/([^:]\/)\/+/g, '$1'),
               method: 'POST'
             },
