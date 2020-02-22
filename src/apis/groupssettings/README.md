@@ -2,7 +2,7 @@
 
 # groupssettings
 
-> Lets you manage permission levels and related settings of a group.
+> Manages permission levels and related settings of a group.
 
 ## Installation
 
