@@ -1,10 +1,7 @@
-cask 'sdrdx' do
-  version :latest
+class Sdrdx < Cask
+  url 'http://fyngyrz.com/SdrDx-AA7AS-Light.zip'
+  homepage 'http://fyngyrz.com/?p=915'
+  version 'latest'
   sha256 :no_check
-
-  url 'https://fyngyrz.com/SdrDx-AA7AS-Light.zip'
-  name 'SdrDx'
-  homepage 'https://fyngyrz.com/?p=915'
-
-  app 'SdrDx.app'
+  link 'SdrDx.app'
 end

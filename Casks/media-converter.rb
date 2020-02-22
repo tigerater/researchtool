@@ -1,12 +1,7 @@
-cask 'media-converter' do
-  version '2.0.10'
-  sha256 'd5a7db000e8106e5892daad84ee7dea82651aa9662df5b4c6da0b943afae03c1'
-
-  # downloads.sourceforge.net/media-converter was verified as official when first introduced to the cask
-  url "https://downloads.sourceforge.net/media-converter/media-converter/#{version}/media-converter-#{version}.zip"
-  appcast 'https://sourceforge.net/projects/media-converter/rss?path=/media-converter'
-  name 'Media Converter'
-  homepage 'https://media-converter.sourceforge.io/'
-
-  app 'Media Converter.localized/Media Converter.app'
+class MediaConverter < Cask
+  url 'https://downloads.sourceforge.net/project/media-converter/media-converter/1.2/media-converter-1.2.zip'
+  homepage 'http://media-converter.sourceforge.net/'
+  version '1.2'
+  sha256 '4893e6e5bc18b9cb0f0d8e1bcb861f92595314e4f9768ef638affdfc866f37e1'
+  link 'Media Converter.localized/Media Converter.app'
 end

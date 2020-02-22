@@ -1,10 +1,8 @@
-cask 'flow' do
-  version :latest
+class Flow < Cask
+  url 'http://fivedetails.com/flow/download'
+  appcast 'http://extendmac.com/flow/updates/update.php'
+  homepage 'http://fivedetails.com'
+  version 'latest'
   sha256 :no_check
-
-  url 'https://cdn.getflow.com/darwin_x64/Flow.zip'
-  name 'Flow'
-  homepage 'https://www.getflow.com/'
-
-  app 'Flow.app'
+  link 'Flow.app'
 end

@@ -1,20 +1,8 @@
-cask 'geektool' do
-  version '331.014,1470733752'
-  sha256 '73cbb2361601048c7f4d05a6717e53e83b088d49ac75309b2f8e4dccc17df63c'
-
-  # dl.devmate.com/org.tynsoe.GeekTool was verified as official when first introduced to the cask
-  url "https://dl.devmate.com/org.tynsoe.GeekTool/#{version.before_comma}/#{version.after_comma}/GeekTool-#{version.before_comma}.zip"
-  appcast 'https://updates.devmate.com/org.tynsoe.GeekTool.xml'
-  name 'GeekTool'
-  homepage 'https://www.tynsoe.org/v2/geektool/'
-
-  app 'GeekTool.app'
-
-  zap trash: [
-               '~/Library/Preferences/org.tynsoe.GeekTool.plist',
-               '~/Library/Preferences/org.tynsoe.geeklet.file.plist',
-               '~/Library/Preferences/org.tynsoe.geeklet.image.plist',
-               '~/Library/Preferences/org.tynsoe.geeklet.shell.plist',
-               '~/Library/Preferences/org.tynsoe.geektool3.plist',
-             ]
+class Geektool < Cask
+    url 'http://download.tynsoe.org/GeekTool-3.1.1-311.zip'
+  appcast 'http://dl.dropboxusercontent.com/u/1760713/appcast/appcast.xml'
+    homepage 'http://projects.tynsoe.org/en/geektool/'
+    version '3.1.1-311'
+    sha256 'ef1a7439d91f0de9e459a4677c6f95fe35bd7e02c300adc9ce315b5590cbbfc9'
+    link 'GeekTool.app'
 end

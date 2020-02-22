@@ -1,19 +1,8 @@
-cask 'stay' do
-  version '1.2.8'
-  sha256 '754b02b07af6da1383f59751448cab76d18b1ffc9c7dca8047f7fccc37650076'
-
-  url "https://cordlessdog.com/stay/versions/Stay%20#{version}.dmg"
-  appcast 'https://cordlessdog.com/stay/appcast.xml'
-  name 'Stay'
-  homepage 'https://cordlessdog.com/stay/'
-
-  depends_on macos: '>= :high_sierra'
-
-  app 'Stay.app'
-
-  zap trash: [
-               '~/Library/Application Support/Stay',
-               '~/Library/Application Support/com.cordlessdog.Stay',
-               '~/Library/Preferences/com.cordlessdog.Stay.plist',
-             ]
+class Stay < Cask
+  url 'https://cordlessdog.com/stay/versions/Stay%201.2.3.zip'
+  appcast 'http://cordlessdog.com/stay/appcast.xml'
+  homepage 'http://cordlessdog.com/stay/'
+  version '1.2.3'
+  sha256 'afe5abc2757bcee547a0d9ad8ebae55744ac197bc28c9fa28fc7987b9b512464'
+  link 'Stay.app'
 end

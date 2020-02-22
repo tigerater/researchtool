@@ -1,11 +1,8 @@
-cask 'irip' do
-  version '2.1.8'
-  sha256 '378130c09ed0b42eec738f755c9c29e3f26aa2f8f37d27cae2e95146038b468c'
-
-  url "http://files.thelittleappfactory.com/iRip#{version.major}/iRip.zip"
-  appcast "http://files.thelittleappfactory.com/iRip#{version.major}/appcast.xml"
-  name 'iRip'
+class Irip < Cask
+  url 'http://files.thelittleappfactory.com/iRip2/iRip.zip'
+  appcast 'https://files.thelittleappfactory.com/iRip2/appcast.xml'
+  version 'latest'
   homepage 'http://thelittleappfactory.com/irip/'
-
-  app 'iRip.app'
+  sha256 :no_check
+  link 'iRip.app'
 end

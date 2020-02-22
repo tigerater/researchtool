@@ -1,13 +1,9 @@
-cask 'acorn' do
-  version '6.5.3'
-  sha256 '11dd7f576c20becd12bd15392e1805b7862b15803aac0933ed69b2a315b923c0'
+class Acorn < Cask
+  version 'latest'
+  sha256 :no_check
 
-  url "https://flyingmeat.com/download/Acorn-#{version}.zip"
-  appcast "https://www.flyingmeat.com/download/acorn#{version.major}update.xml"
-  name 'Acorn'
-  homepage 'https://flyingmeat.com/acorn/'
+  url 'http://flyingmeat.com/download/Acorn.zip'
+  homepage 'http://flyingmeat.com/acorn/'
 
-  auto_updates true
-
-  app 'Acorn.app'
+  link 'Acorn.app'
 end

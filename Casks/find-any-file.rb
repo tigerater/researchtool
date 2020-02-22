@@ -1,14 +1,7 @@
-cask 'find-any-file' do
-  version '2.1.1'
-  sha256 '5e444bcb16f89bbb44ded8da6f84d494d081ef07d8949ac2287ac80d1cc2a585'
-
-  # s3.amazonaws.com was verified as official when first introduced to the cask
-  url "https://s3.amazonaws.com/files.tempel.org/FindAnyFile_#{version}.zip"
-  appcast 'https://findanyfile.app/appcast2.php'
-  name 'Find Any File'
-  homepage 'https://apps.tempel.org/FindAnyFile/'
-
-  app 'Find Any File.app'
-
-  zap trash: '~/Library/Application Support/Find Any File'
+class FindAnyFile < Cask
+  url 'http://files.tempel.org.s3.amazonaws.com/FindAnyFile_1.8.8.zip'
+  homepage 'http://apps.tempel.org/FindAnyFile/'
+  version '1.8.8'
+  sha256 '3ef7b2a0f5373ac904198fb574d61d39316a0c4f6cb6740742b719bd7c842255'
+  link 'Find Any File.app'
 end

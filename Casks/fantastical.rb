@@ -1,24 +1,13 @@
-cask 'fantastical' do
-  version '3.0.4'
-  sha256 'e3c09c7bfad1b815128dd4aedd186ae03ef9ae3e240b191d5ac47da145c61786'
+class Fantastical < Cask
+  url 'http://cdn.flexibits.com/Fantastical_1.3.15.zip'
+  appcast 'https://flexibits.com/fantastical/appcast.php'
+  homepage 'http://flexibits.com/fantastical'
+  version '1.3.15'
+  sha256 'df76970ba48d831e99f1d1564f4076271ca48476ed8af5b8996341481e8bfb74'
+  link 'Fantastical.app'
 
-  url "http://cdn.flexibits.com/Fantastical_#{version}.zip"
-  appcast 'https://flexibits.com/fantastical/appcast2.php'
-  name 'Fantastical'
-  homepage 'https://flexibits.com/fantastical'
-
-  auto_updates true
-
-  app 'Fantastical.app'
-
-  uninstall launchctl: "com.flexibits.fantastical#{version.major}.mac.launcher",
-            quit:      "com.flexibits.fantastical#{version.major}.mac"
-
-  zap trash: [
-               '~/Library/Preferences/com.flexibits.fantastical.plist',
-               '~/Library/Application Scripts/com.flexibits.fbcaldav.*',
-               "~/Library/Application Scripts/com.flexibits.fantastical#{version.major}.*",
-               '~/Library/Containers/com.flexibits.fbcaldav.*',
-               "~/Library/Containers/com.flexibits.fantastical#{version.major}.*",
-             ]
+  after_install do
+    # Don't ask to move the app bundle to /Applications
+    system '/usr/bin/defaults', 'write', 'com.flexibits.fantastical', 'moveToApplicationsFolderAlertSuppress', '-bool', 'true'
+  end
 end

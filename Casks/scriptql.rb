@@ -1,10 +1,7 @@
-cask 'scriptql' do
-  version :latest
+class Scriptql < Cask
+  url 'http://www.kainjow.com/downloads/ScriptQL_qlgenerator.zip'
+  homepage 'http://www.kainjow.com/'
+  version 'latest'
   sha256 :no_check
-
-  url 'https://www.kainjow.com/downloads/ScriptQL_qlgenerator.zip'
-  name 'ScriptQL'
-  homepage 'https://www.kainjow.com/'
-
   qlplugin 'ScriptQL.qlgenerator'
 end

@@ -1,12 +1,13 @@
-cask 'opensesame' do
-  version '3.2.8'
-  sha256 '1f660ce97518c904153ce8a50a57102166c8991f3ed65fb24f87ff69fb2cc0e8'
-
-  # github.com/smathot/OpenSesame was verified as official when first introduced to the cask
-  url "https://github.com/smathot/OpenSesame/releases/download/release/#{version}/opensesame_#{version}-py2.7-macos-1.dmg"
-  appcast 'https://github.com/smathot/OpenSesame/releases.atom'
-  name 'OpenSesame'
-  homepage 'https://osdoc.cogsci.nl/'
-
-  app 'opensesame.app'
+class Opensesame < Cask
+  if MacOS.version == :snow_leopard
+    url 'http://files.cogsci.nl/software/opensesame/opensesame_0.26-macos-2.zip'
+    version '0.26'
+    sha256 'b2a37cfd1c514b2ae8ddd0be09a274844420bfa432318ef87df308fdd3b6a770'
+  else
+    url 'http://www.cogsci.nl/dschreij/opensesame-mac/opensesame-0.27.4-macos-x86_64-1.dmg'
+    version '0.27.4'
+    sha256 '8814da8fe5e638cb7db18b4e8188fc97028bd98f1603ceae006aff13745fc739'
+  end
+  homepage 'http://osdoc.cogsci.nl/'
+  link 'opensesame.app'
 end

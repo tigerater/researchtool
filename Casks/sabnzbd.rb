@@ -1,16 +1,7 @@
-cask 'sabnzbd' do
-  version '2.3.9'
-  sha256 'dfe5eee0f94b1db79ecbe759ce9c38cec7d9b4357fd58258628e01f46d3ca3ea'
-
-  # github.com/sabnzbd/sabnzbd was verified as official when first introduced to the cask
-  url "https://github.com/sabnzbd/sabnzbd/releases/download/#{version}/SABnzbd-#{version}-osx.dmg"
-  appcast 'https://github.com/sabnzbd/sabnzbd/releases.atom'
-  name 'SABnzbd'
-  homepage 'https://sabnzbd.org/'
-
-  depends_on macos: '>= :yosemite'
-
-  app 'SABnzbd.app'
-
-  zap trash: '~/Library/Application Support/SABnzbd'
+class Sabnzbd < Cask
+  url 'https://downloads.sourceforge.net/project/sabnzbdplus/sabnzbdplus/0.7.17/SABnzbd-0.7.17-osx.dmg'
+  homepage 'http://sabnzbd.org/'
+  version '0.7.17'
+  sha256 '31cf257d951afbd0527f13969ba673808594f2b883c1aa8f532296db7b26d5e1'
+  link '10.8(M-Lion) 10.9(Mavericks)/SABnzbd.app'
 end

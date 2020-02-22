@@ -1,19 +1,10 @@
-cask 'chromium' do
-  version '740669'
-  sha256 '36fcd1e9f595598e2c76f45662396032856adfdeec8714cea9fee4c87051bc87'
+class Chromium < Cask
+  version '35.0.1916.153'
+  sha256 '9445b16e9814575d1194d60197aad2c20e89110fd2aaf1e8120a41637768ff92'
+  
+  url 'https://downloads.sourceforge.net/sourceforge/osxportableapps/ChromiumOSX_35.0.1916.153.dmg'
+  appcast 'http://osxportableapps.sourceforge.net/chromium/chrcast.xml'
+  homepage 'http://www.freesmug.org/chromium'
 
-  # commondatastorage.googleapis.com/chromium-browser-snapshots/Mac was verified as official when first introduced to the cask
-  url "https://commondatastorage.googleapis.com/chromium-browser-snapshots/Mac/#{version}/chrome-mac.zip"
-  appcast 'https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Mac%2FLAST_CHANGE?alt=media'
-  name 'Chromium'
-  homepage 'https://www.chromium.org/Home'
-
-  app 'chrome-mac/Chromium.app'
-
-  zap trash: [
-               '~/Library/Preferences/org.chromium.Chromium.plist',
-               '~/Library/Caches/Chromium',
-               '~/Library/Application Support/Chromium',
-               '~/Library/Saved Application State/org.chromium.Chromium.savedState',
-             ]
+  link 'Chromium.app'
 end

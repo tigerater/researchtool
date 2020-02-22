@@ -1,10 +1,7 @@
-cask 'mauve' do
-  version '2015.02.25'
-  sha256 '7a9586ef3b83aa7678424a3f17ac15a257ff520b3968d78e1345b3c69b23c171'
-
-  url "https://darlinglab.org/mauve/snapshots/#{version.major}/#{version.dots_to_hyphens}/MacOS/Mauve-snapshot_#{version.dots_to_hyphens}.dmg"
-  name 'Mauve'
-  homepage 'https://darlinglab.org/mauve/mauve.html'
-
-  app 'Mauve.app'
+class Mauve < Cask
+  url 'http://gel.ahabs.wisc.edu/mauve/downloads/Mauve-2.3.1.dmg'
+  homepage 'http://gel.ahabs.wisc.edu/mauve/'
+  version '2.3.1'
+  sha256 '586fe214eb6c430f2a98fd865856111b79502ff526ab2f6268dab1d99b337907'
+  link 'Mauve.app'
 end

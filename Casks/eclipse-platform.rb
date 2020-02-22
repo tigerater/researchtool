@@ -1,11 +1,12 @@
-cask 'eclipse-platform' do
-  version '4.14,201912100610'
-  sha256 '94bb5066a346de86f6ded0e762f7518ed82950b0dcb31a34493a1e7c58f749ef'
-
-  url "https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops#{version.major}/R-#{version.before_comma}-#{version.after_comma}/eclipse-SDK-#{version.before_comma}-macosx-cocoa-x86_64.dmg&r=1"
-  name 'Eclipse SDK'
-  homepage 'https://eclipse.org/'
-
-  # Renamed to avoid conflict with other Eclipse.
-  app 'Eclipse.app', target: 'Eclipse Platform.app'
+class EclipsePlatform < Cask
+  if Hardware::CPU.is_64_bit?
+    url 'http://download.eclipse.org/eclipse/downloads/drops4/R-4.4-201406061215/eclipse-SDK-4.4-macosx-cocoa-x86_64.tar.gz'
+    sha256 '09e127b85b136f60bec18c4c823596c145dbc5fbcfe6af0e4fe2a27590ffa5a0'
+  else
+    url 'http://download.eclipse.org/eclipse/downloads/drops4/R-4.4-201406061215/eclipse-SDK-4.4-macosx-cocoa.tar.gz'
+    sha256 '28e873cc4e575bbf3abb364ccd7dec59394891f5ca80ee7b591a7982345d0ab9'
+  end
+  version '4.4.0'
+  homepage 'http://eclipse.org'
+  link 'eclipse/Eclipse.app'
 end

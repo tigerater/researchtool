@@ -1,13 +1,7 @@
-cask 'ngrok' do
-  version :latest
-  sha256 :no_check
-
-  # bin.equinox.io was verified as official when first introduced to the cask
-  url 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-darwin-amd64.zip'
-  name 'ngrok'
+class Ngrok < Cask
+  url 'https://dl.ngrok.com/darwin_amd64/ngrok.zip'
   homepage 'https://ngrok.com/'
-
+  version 'latest'
+  sha256 :no_check
   binary 'ngrok'
-
-  zap trash: '~/.ngrok2'
 end

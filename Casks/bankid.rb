@@ -1,14 +1,10 @@
-cask 'bankid' do
-  version '7.9.0'
-  sha256 'f1475b4998889374a96dae1e713babc16a898c3c0263041d27cd3af68f8daa00'
+class Bankid < Cask
+  version '4.19.4'
+  sha256 'b646b0d37ab7e5fa606ece299c6b8fba861dbd5a5cf99fd5fd39eeaba5ff807c'
 
-  url "https://install.bankid.com/Repository/BankID_installation_#{version.dots_to_underscores}.pkg"
-  appcast 'https://macupdater.net/cgi-bin/check_urls/check_url_redirect.cgi?url=https://install.bankid.com/FileDownloader?fileId=Mac',
-          configuration: version.dots_to_underscores
-  name 'BankID'
-  homepage 'https://install.bankid.com/'
+  url 'https://install.bankid.com/Repository/BankID_installation_4.19.4.pkg'
+  homepage 'http://www.bankid.com/'
 
-  pkg "BankID_installation_#{version.dots_to_underscores}.pkg"
-
-  uninstall pkgutil: 'com.bankid.BankID'
+  install 'BankID_installation_4.19.4.pkg'
+  uninstall :pkgutil => 'com.bankid.bankid.BankID.pkg'
 end

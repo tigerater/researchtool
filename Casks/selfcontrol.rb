@@ -1,15 +1,8 @@
-cask 'selfcontrol' do
-  version '2.3.2'
-  sha256 '199b4375c4930edf6136ec415b6fc15069243bc201210d9aab532e9a6e625241'
-
-  url "https://downloads.selfcontrolapp.com/SelfControl-#{version}.zip"
-  appcast 'https://selfcontrolapp.com/SelfControlAppcast.xml'
-  name 'SelfControl'
-  homepage 'https://selfcontrolapp.com/'
-
-  auto_updates true
-
-  app 'SelfControl.app'
-
-  zap trash: '~/Library/Preferences/org.eyebeam.SelfControl.plist'
+class Selfcontrol < Cask
+  url 'http://downloads.selfcontrolapp.com/SelfControl-1.5.1.zip'
+  appcast 'http://selfcontrolapp.com/SelfControlAppcast.xml'
+  homepage 'http://selfcontrolapp.com/'
+  version '1.5.1'
+  sha256 'd3823a1e9ba0b47dc2cb39c93cd51837c2dafc7d5a5a564825f4a440fd2ab9ad'
+  link 'SelfControl.app'
 end

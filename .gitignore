@@ -1,7 +1,5 @@
 # toplevel
 /.bundle/
-/bin/
-/vendor/
 
 # anywhere in the tree
 *~

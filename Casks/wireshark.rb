@@ -1,27 +1,44 @@
-cask 'wireshark' do
-  version '3.2.1'
-  sha256 'a1b08841676b626e3dee42274ad321b90c31eccda6808c59ee5ea644e3782cb4'
+class Wireshark < Cask
+  url 'https://www.wireshark.org/download/osx/Wireshark%201.10.8%20Intel%2064.dmg'
+  homepage 'http://www.wireshark.org'
+  version '1.10.8'
+  sha256 'dad35fa72d763b19cbd11ae9d339144d3b205c1b3575d51368d9b81c43f1b527'
+  install 'Wireshark 1.10.8 Intel 64.pkg'
 
-  url "https://1.na.dl.wireshark.org/osx/all-versions/Wireshark%20#{version}%20Intel%2064.dmg"
-  appcast 'https://www.wireshark.org/update/0/Wireshark/0.0.0/macOS/x86-64/en-US/stable.xml'
-  name 'Wireshark'
-  homepage 'https://www.wireshark.org/'
-
-  auto_updates true
-  conflicts_with cask: 'wireshark-chmodbpf'
-  depends_on macos: '>= :sierra'
-
-  app 'Wireshark.app'
-  pkg 'Install ChmodBPF.pkg'
-  pkg 'Add Wireshark to the system path.pkg'
-
-  uninstall_preflight do
-    set_ownership '/Library/Application Support/Wireshark'
-    system_command '/usr/sbin/dseditgroup', args: ['-o', 'delete', 'access_bpf'], sudo: true
+  caveats do
+    x11_required
   end
 
-  uninstall pkgutil:   'org.wireshark.*',
-            launchctl: 'org.wireshark.ChmodBPF'
+  after_install do
+    if Process.euid == 0 then
+      ohai "Note:"
+      puts <<-EOS.undent
+              You executed 'brew cask' as the superuser.
 
-  zap trash: '~/Library/Saved Application State/org.wireshark.Wireshark.savedState'
+              You must manually add users to group 'access_bpf' in order to use Wireshark
+
+              EOS
+    else
+      system '/usr/bin/sudo', '-E', '--',
+             '/usr/sbin/dseditgroup', '-o', 'edit', '-a', Etc.getpwuid(Process.euid).name, '-t', 'user', '--', 'access_bpf'
+    end
+  end
+
+  uninstall :script => {
+                        :executable => '/usr/sbin/dseditgroup',
+                        :args => ['-o', 'delete', 'access_bpf'],
+                       },
+            :pkgutil => 'org.wireshark.*',
+            :files => [
+                        '/usr/local/bin/capinfos',
+                        '/usr/local/bin/dftest',
+                        '/usr/local/bin/dumpcap',
+                        '/usr/local/bin/editcap',
+                        '/usr/local/bin/mergecap',
+                        '/usr/local/bin/randpkt',
+                        '/usr/local/bin/rawshark',
+                        '/usr/local/bin/text2pcap',
+                        '/usr/local/bin/tshark',
+                        '/usr/local/bin/wireshark',
+                      ]
 end

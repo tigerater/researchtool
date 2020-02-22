@@ -1,14 +1,9 @@
-cask 'crushftp' do
-  version '9'
-  sha256 :no_check # required as upstream package is updated in-place
+class Crushftp < Cask
+  version 'latest'
+  sha256 :no_check
 
-  url "https://www.crushftp.com/CrushFTP#{version}_OSX.zip"
-  name 'CrushFTP'
-  homepage 'https://www.crushftp.com/'
+  url 'https://www.crushftp.com/early6/CrushFTP6_OSX.zip'
+  homepage 'https://www.crushftp.com'
 
-  app "CrushFTP#{version}_OSX/CrushFTP#{version}.app"
-
-  caveats do
-    depends_on_java
-  end
+  link 'CrushFTP6_OSX/CrushFTP6.app'
 end

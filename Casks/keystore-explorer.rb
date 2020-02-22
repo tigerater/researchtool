@@ -1,12 +1,7 @@
-cask 'keystore-explorer' do
-  version '5.4.2'
-  sha256 '8f9b9b6c1d84f07772261778af37d69ab8e16defabe924a33472e4e10b743eb5'
-
-  # github.com/kaikramer/keystore-explorer was verified as official when first introduced to the cask
-  url "https://github.com/kaikramer/keystore-explorer/releases/download/v#{version}/kse-#{version.no_dots}.dmg"
-  appcast 'https://github.com/kaikramer/keystore-explorer/releases.atom'
-  name 'KeyStore Explorer'
-  homepage 'https://keystore-explorer.org/'
-
-  app 'KeyStore Explorer.app'
+class KeystoreExplorer < Cask
+  url 'https://downloads.sourceforge.net/project/keystore-explorer/KSE%205.0.1/kse-501.dmg?r=&ts=1393234297&use_mirror=heanet'
+  homepage 'http://keystore-explorer.sourceforge.net/index.php'
+  version '5.0.1'
+  sha256 '64932fc5a26bd4de32d952b73431307c9a7c3100c1b11e76ab9f55e2a2cf7d49'
+  link 'KeyStore Explorer 5.0.1.app'
 end

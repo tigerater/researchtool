@@ -1,12 +1,7 @@
-cask 'shotcut' do
-  version '19.12.31'
-  sha256 '7184cc16aa9a681f95f410188ba52f26699b6ad10ad4d4727249b961c0d8e155'
-
-  # github.com/mltframework/shotcut was verified as official when first introduced to the cask
-  url "https://github.com/mltframework/shotcut/releases/download/v#{version}/shotcut-macos-signed-#{version.no_dots}.dmg"
-  appcast 'https://github.com/mltframework/shotcut/releases.atom'
-  name 'Shotcut'
-  homepage 'https://www.shotcut.org/'
-
-  app 'Shotcut.app'
+class Shotcut < Cask
+  url 'https://github.com/mltframework/shotcut/releases/download/v14.05/shotcut-osx-x86_64-140502.dmg'
+  homepage 'http://www.shotcut.org/'
+  version '140502'
+  sha256 '03043382d374a6657692bf05ff864eb0aab588a080f499a72eca6347240cd81d'
+  link 'Shotcut.app'
 end

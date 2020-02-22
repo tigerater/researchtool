@@ -1,18 +1,9 @@
-cask 'sloth' do
-  version '2.8.1'
-  sha256 '3596507018a6321226863862bd4377ac388dffdf54ebce1ace50d87869114c0e'
+class Sloth < Cask
+  version '1.5'
+  sha256 '01f8f9fec88d5bc0cb0edcf7391d5ed0ac085f7fa8dcb6682059a238d7786165'
 
-  url "https://sveinbjorn.org/files/software/sloth/sloth-#{version}.zip"
-  appcast 'https://sveinbjorn.org/files/appcasts/SlothAppcast.xml'
-  name 'Sloth'
-  homepage 'https://sveinbjorn.org/sloth'
+  url 'http://sveinbjorn.org/files/software/sloth.zip'
+  homepage 'http://sveinbjorn.org/sloth'
 
-  auto_updates true
-
-  app 'Sloth.app'
-
-  zap trash: [
-               '~/Library/Preferences/org.sveinbjorn.Sloth.plist',
-               '~/Library/Saved Application State/org.sveinbjorn.Sloth.savedState',
-             ]
+  link "Sloth-#{version}/Sloth.app"
 end

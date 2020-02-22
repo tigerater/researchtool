@@ -1,17 +1,7 @@
-cask 'xmind' do
-  version '3.7.9.201912052356,8-update9'
-  sha256 '120745d98a6122af56f944f666c59a6c3e06099be3838c365e6554e82db19211'
-
-  url "https://dl3.xmind.net/xmind-#{version.after_comma}-macosx.dmg"
-  appcast 'https://www.xmind.net/download/xmind8/',
-          configuration: version.after_comma
-  name 'XMind'
-  homepage 'https://www.xmind.net/'
-
-  app 'XMind.app'
-
-  zap trash: [
-               '~/Library/XMind',
-               '~/Library/Saved Application State/org.xmind.cathy.application.savedState',
-             ]
+class Xmind < Cask
+  url 'http://dl2.xmind.net/xmind-downloads/xmind-macosx-3.4.1.201401221918.dmg'
+  homepage 'http://www.xmind.net'
+  version '3.4.1'
+  sha256 '0a1b9f833c117ced046a7ccee854cf4efcc9d489c12a126cb269b7dbefcd309a'
+  link 'XMind.app'
 end

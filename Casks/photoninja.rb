@@ -1,12 +1,7 @@
-cask 'photoninja' do
-  version '1.3.8b'
-  sha256 '40709d2711ab780054efccc5550941e4f31240311ed62fdf418378eb558a48cb'
-
-  # picturecode.cachefly.net was verified as official when first introduced to the cask
-  url "https://picturecode.cachefly.net/photoninja/downloads/Install_PhotoNinja_#{version}.dmg"
-  appcast 'https://www.picturecode.com/download.php'
-  name 'Photo Ninja'
-  homepage 'https://www.picturecode.com/index.php'
-
-  app "PhotoNinja_#{version}.app"
+class Photoninja < Cask
+  url 'https://picturecode.cachefly.net/photoninja/downloads/Install_PhotoNinja_1.2.1.dmg'
+  homepage 'http://www.picturecode.com/index.php'
+  version '1.2.1'
+  sha256 '81f62282865c53d2ed653ea2494f44d9e4d82cce623e85c651bb9aa8ccb26794'
+  link 'PhotoNinja.app'
 end

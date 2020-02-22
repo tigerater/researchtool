@@ -1,10 +1,7 @@
-cask 'sixtyforce' do
-  version :latest
+class Sixtyforce < Cask
+  url 'http://sixtyforce.com/download/sixtyforce.zip'
+  homepage 'http://sixtyforce.com/'
+  version 'latest'
   sha256 :no_check
-
-  url 'https://sixtyforce.com/download/sixtyforce.zip'
-  name 'sixtyforce'
-  homepage 'https://sixtyforce.com/'
-
-  app 'sixtyforce.app'
+  link 'sixtyforce.app'
 end

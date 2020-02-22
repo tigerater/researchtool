@@ -1,23 +1,8 @@
-cask 'macpass' do
-  version '0.7.11'
-  sha256 '1ad6eda44db56efe2d83dc2eee658eead6a34cc885cd0d92c457abe1c46d9f23'
-
-  # github.com/MacPass/MacPass was verified as official when first introduced to the cask
-  url "https://github.com/MacPass/MacPass/releases/download/#{version}/MacPass-#{version}.zip"
-  appcast 'https://github.com/MacPass/MacPass/releases.atom'
-  name 'MacPass'
-  homepage 'https://macpass.github.io/'
-
-  auto_updates true
-  depends_on macos: '>= :yosemite'
-
-  app 'MacPass.app'
-
-  zap delete: [
-                '~/Library/Application Support/MacPass',
-                '~/Library/Caches/com.hicknhacksoftware.MacPass',
-                '~/Library/Cookies/com.hicknhacksoftware.MacPass.binarycookies',
-                '~/Library/Preferences/com.hicknhacksoftware.MacPass.plist',
-                '~/Library/Saved Application State/com.hicknhacksoftware.MacPass.savedState',
-              ]
+class Macpass < Cask
+  url 'https://github.com/mstarke/MacPass/releases/download/0.4.1-alpha/MacPass-0.4.1-alpha.zip'
+  appcast 'http://www.nomadsland.de/macpass_appcast.xml'
+  homepage 'http://mstarke.github.io/MacPass/'
+  version '0.4.1-alpha'
+  sha256 '1beaec4f0f8e33e5bf2575a4706befe6ef513f46ddc49f7662b6af3721680039'
+  link 'MacPass.app'
 end

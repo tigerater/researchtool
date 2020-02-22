@@ -1,12 +1,8 @@
-cask 'epic' do
-  version '79.0.3946.130'
-  sha256 '70c99216e73fc0e3bc1051cf45b3d3b40b47a86f4da3a1b33c9a5622edfcbae5'
-
-  # macepic-cbe.kxcdn.com was verified as official when first introduced to the cask
-  url "https://cdn.epicbrowser.com/mac/epic_#{version}.dmg"
-  appcast 'https://epicbrowser.com/thank_you.php'
-  name 'Epic Privacy Browser'
-  homepage 'https://www.epicbrowser.com/'
-
-  app 'Epic.app'
+class Epic < Cask
+  url 'https://ed5b681d56298a85550d-7d665255a6e48f36b11ee3cfeece77e0.ssl.cf1.rackcdn.com/epic_mac_33_alternate/Epic.dmg'
+  appcast 'https://updates.epicbrowser.com/mac_updates/appcast.xml'
+  homepage 'http://www.epicbrowser.com'
+  version 'latest'
+  sha256 :no_check
+  link 'Epic.app'
 end

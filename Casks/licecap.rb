@@ -1,16 +1,7 @@
-cask 'licecap' do
-  version '1.29'
-  sha256 '9d12df4946d3247483a1e050279b032320799ee96918f44628b92d862866250f'
-
-  url "https://www.cockos.com/licecap/licecap#{version.no_dots}.dmg"
-  appcast 'https://www.cockos.com/licecap/'
-  name 'LICEcap'
-  homepage 'https://www.cockos.com/licecap/'
-
-  app 'LICEcap.app'
-
-  zap trash: [
-               '~/Library/Application Support/LICEcap',
-               '~/Library/Preferences/com.cockos.LICEcap.plist',
-             ]
+class Licecap < Cask
+  url 'http://www.cockos.com/licecap/licecap124.dmg'
+  homepage 'http://www.cockos.com/licecap/'
+  version '1.24'
+  sha256 '0aae74885097731048b7e2111db9afbe77c30eb10779898bf9ea817de845bcbb'
+  link 'LICEcap.app'
 end

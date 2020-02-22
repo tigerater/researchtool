@@ -1,25 +1,10 @@
-cask 'blender' do
-  version '2.81a'
-  sha256 '435b8bde06a14db0f21144f6277e1c70dafc6ea844c434854460c7456b44c251'
+class Blender < Cask
+  version '2.70a'
+  sha256 '590461502fe257883c78be3d6cf0eb329bced07c9aeea499bb812e2d55c3e8ba'
 
-  url "https://download.blender.org/release/Blender#{version.major_minor.delete('a-z')}/blender-#{version}-macOS.dmg"
-  appcast 'https://download.blender.org/release/',
-          configuration: version.delete('a-z')
-  name 'Blender'
-  homepage 'https://www.blender.org/'
+  url 'http://download.blender.org/release/Blender2.70/blender-2.70a-OSX_10.6-x86_64.zip'
+  homepage 'http://www.blender.org/'
 
-  app 'Blender.app'
-  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
-  shimscript = "#{staged_path}/blender.wrapper.sh"
-  binary shimscript, target: 'blender'
-
-  preflight do
-    # make __pycache__ directories writable, otherwise uninstall fails
-    FileUtils.chmod 'u+w', Dir.glob("#{staged_path}/*.app/**/__pycache__")
-
-    IO.write shimscript, <<~EOS
-      #!/bin/bash
-      '#{appdir}/Blender.app/Contents/MacOS/Blender' "$@"
-    EOS
-  end
+  link 'Blender/blender.app'
+  link 'Blender/blenderplayer.app'
 end

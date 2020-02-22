@@ -1,23 +1,17 @@
-cask 'kaleidoscope' do
-  version '2.2.2-1376'
-  sha256 '318ce7f2a32cb3330ada05f8099492e1ca5fe41d7b73ecbfd977845ebb5bc016'
-
-  url "https://cdn.kaleidoscopeapp.com/releases/Kaleidoscope-#{version}.zip"
+class Kaleidoscope < Cask
+  url 'http://cdn.kaleidoscopeapp.com/releases/Kaleidoscope-2.1.0-134.zip'
   appcast 'https://updates.blackpixel.com/updates?app=ks'
-  name 'Kaleidoscope'
-  homepage 'https://www.kaleidoscopeapp.com/'
+  homepage 'http://www.kaleidoscopeapp.com/'
+  version '2.1.0_134'
+  sha256 'e16360273fb6d37560c7974b95728d82a0482268641753c49f903bf36445d35b'
+  link 'Kaleidoscope.app'
+  binary 'Kaleidoscope.app/Contents/Resources/bin/ksdiff'
 
-  auto_updates true
-  depends_on macos: '>= :sierra'
-
-  app 'Kaleidoscope.app'
-  binary "#{appdir}/Kaleidoscope.app/Contents/Resources/bin/ksdiff"
-
-  zap trash: [
-               '~/Library/Application Support/com.blackpixel.kaleidoscope',
-               '~/Library/Caches/com.blackpixel.kaleidoscope',
-               '~/Library/Caches/com.plausiblelabs.crashreporter.data/com.blackpixel.kaleidoscope',
-               '~/Library/Preferences/com.blackpixel.kaleidoscope.plist',
-               '~/Library/Saved Application State/com.blackpixel.kaleidoscope.savedState',
-             ]
+  after_install do
+    # Don't ask to move the app bundle to /Applications
+    system '/usr/bin/defaults', 'write', 'com.blackpixel.kaleidoscope', 'moveToApplicationsFolderAlertSuppress', '-bool', 'true'
+  end
+  caveats do
+    files_in_usr_local
+  end
 end

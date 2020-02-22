@@ -1,17 +1,9 @@
-cask 'steermouse' do
-  version '5.4.3'
-  sha256 '8eab10757566dbd2276628575d6a7e7a1ee3e56a65ee7e5752a9023914202c27'
-
-  url "https://plentycom.jp/ctrl/files_sm/SteerMouse#{version}.dmg"
-  appcast 'https://plentycom.jp/en/steermouse/download.php'
-  name 'SteerMouse'
-  homepage 'https://plentycom.jp/en/steermouse/'
-
-  prefpane 'SteerMouse.prefPane'
-
-  zap trash: '~/Library/Application Support/SteerMouse & CursorSense/Device.smsetting',
-      rmdir: [
-               '~/Library/Application Support/SteerMouse & CursorSense/Device Definitions/',
-               '~/Library/Application Support/SteerMouse & CursorSense/',
-             ]
+class Steermouse < Cask
+  url 'http://plentycom.jp/ctrl/files_sm/SteerMouse4.1.9.dmg'
+  homepage 'http://plentycom.jp/en/steermouse/'
+  version '4.1.9'
+  sha256 '4704aa8b01842c2e619db546fa045e515ee7e3a94d9d339f4650f2f8684b1280'
+  install 'SteerMouse Installer.app/Contents/Resources/SteerMouse.pkg'
+  uninstall :pkgutil => 'jp.plentycom.SteerMouse.pkg.*',
+            :kext    => 'com.cyberic.SmoothMouse'
 end

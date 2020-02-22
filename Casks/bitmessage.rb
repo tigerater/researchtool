@@ -1,12 +1,9 @@
-cask 'bitmessage' do
-  version '0.6.3.2'
-  sha256 '40a78384a7a0613333dd76aaafc8ebeb08eb1ef02fceb0925763ce289ec5888b'
+class Bitmessage < Cask
+  version '0.4.2'
+  sha256 'aa109705406d9ab86761d03e2cb6387a5a05a51d7a68747f6284ba32ef2aa445'
 
-  # github.com/Bitmessage/PyBitmessage was verified as official when first introduced to the cask
-  url "https://github.com/Bitmessage/PyBitmessage/releases/download/#{version}/bitmessage-v#{version}.dmg"
-  appcast 'https://github.com/Bitmessage/PyBitmessage/releases.atom'
-  name 'Bitmessage'
+  url 'https://bitmessage.org/download/osx/Archive/bitmessage-v0.4.2.dmg'
   homepage 'https://bitmessage.org/'
 
-  app 'Bitmessage.app'
+  link 'Bitmessage.app'
 end

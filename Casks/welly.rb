@@ -1,21 +1,8 @@
-cask 'welly' do
-  version '3.1.1.1'
-  sha256 'f17aa74d8668d02ff7c6eee81ae7e0c06d76a51d4aa50624ffe757c95f498ecf'
-
-  url "https://github.com/clyang/welly/releases/download/#{version}/Welly.v#{version}.zip"
-  appcast 'https://github.com/clyang/welly/releases.atom'
-  name 'Welly'
-  homepage 'https://github.com/clyang/welly'
-
-  auto_updates true
-
-  app 'Welly.app'
-
-  zap trash: [
-               '~/Library/Application Support/Welly',
-               '~/Library/Caches/Welly',
-               '~/Library/Caches/org.net9.Welly',
-               '~/Library/Cookies/org.net9.Welly.binarycookies',
-               '~/Library/Preferences/org.net9.Welly.plist',
-             ]
+class Welly < Cask
+  url 'https://welly.googlecode.com/files/Welly.v2.7.fix.zip'
+  appcast 'http://welly.googlecode.com/svn/wiki/WellyUpdate.xml'
+  homepage 'https://code.google.com/p/welly/'
+  version '2.7+'
+  sha256 'cb24a26432d8927b1159a1865602c3f30b5190f628167c954e4d6cc723cfcb0f'
+  link 'Welly.app'
 end

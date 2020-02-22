@@ -1,17 +1,10 @@
-cask 'adobe-digital-editions' do
-  version '4.5.11'
-  sha256 '4bfdb9fdefb7a65bc5227518531ffba2cd2d547a1293265709a526a153800e7e'
+class AdobeDigitalEditions < Cask
+  version '3.0'
+  sha256 '540d0fdeeddd1aea5cf31a105b5f31b1c838219c4cf9baddfc02d729c098bb45'
 
-  url "https://adedownload.adobe.com/pub/adobe/digitaleditions/ADE_#{version.major_minor}_Installer.dmg"
-  appcast 'https://www.adobe.com/solutions/ebook/digital-editions/download.html'
-  name 'Adobe Digital Editions'
-  homepage 'https://www.adobe.com/solutions/ebook/digital-editions.html'
+  url 'http://download.adobe.com/pub/adobe/digitaleditions/ADE_3.0_Installer.dmg'
+  homepage 'http://www.adobe.com/pt/products/digital-editions.html'
 
-  pkg "Digital Editions #{version.major_minor} Installer.pkg"
-
-  uninstall quit:    'com.adobe.adobedigitaleditions.app',
-            pkgutil: 'com.adobe.adobedigitaleditions.app',
-            delete:  '/Applications/Adobe Digital Editions.app'
-
-  zap trash: '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.adobe.adobedigitaleditions.app.sfl*'
+  install 'Digital Editions 3.0 Installer.pkg'
+  uninstall :pkgutil => 'com.adobe.adobedigitaleditions.app'
 end

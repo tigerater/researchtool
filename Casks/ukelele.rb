@@ -1,18 +1,8 @@
-cask 'ukelele' do
-  version '3.4.0'
-  sha256 'c5611dde072ef9472b117ec1c006cb4e85e521d8ebbc63dcdb631cfe0b960a31'
-
-  url "https://software.sil.org/downloads/r/ukelele/Ukelele_#{version}.dmg"
-  appcast 'https://software.sil.org/downloads/r/ukelele/Ukelele_appcast.xml'
-  name 'Ukelele'
-  homepage 'https://software.sil.org/ukelele/'
-
-  app 'Ukelele.app'
-
-  zap trash: [
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.sil.ukelele.sfl*',
-               '~/Library/Preferences/org.sil.ukelele.plist',
-               '~/Library/Preferences/Ukelele',
-               '~/Library/Caches/org.sil.Ukelele',
-             ]
+class Ukelele < Cask
+  url 'https://scripts.sil.org/cms/scripts/render_download.php?format=file&media_id=Ukelele_2.2.8&filename=Ukelele_2.2.8.dmg'
+  appcast 'http://scripts.sil.org/cms/scripts/render_download.php?site_id=nrsi&format=file&media_id=ukelele_su_feed&filename=ukelele_su_feed.xml'
+  homepage 'http://scripts.sil.org/ukelele'
+  version '2.2.8'
+  sha256 'e6200f418dee4ad10fa126536218086273ef8e896b95ede8ba73ddb42ed02ec3'
+  link 'Ukelele.app'
 end

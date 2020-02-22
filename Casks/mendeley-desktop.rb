@@ -1,11 +1,7 @@
-cask 'mendeley-desktop' do
-  version '1.19.4'
-  sha256 'bd9584152eb0bd375ce98b874981a44d87435d0e7b5a411734d9db63f48f7260'
-
-  url "https://desktop-download.mendeley.com/download/Mendeley-Desktop-#{version}-OSX-Universal.dmg"
-  appcast 'https://macupdater.net/cgi-bin/check_urls/check_url_redirect.cgi?url=https://www.mendeley.com/autoupdates/installer/Mac-x64/stable-incoming'
-  name 'Mendeley Desktop'
-  homepage 'https://www.mendeley.com/reference-management/mendeley-desktop'
-
-  app 'Mendeley Desktop.app'
+class MendeleyDesktop < Cask
+  url 'http://download.mendeley.com/Mendeley-Desktop-1.11-OSX-Universal.dmg'
+  homepage 'http://www.mendeley.com/'
+  version '1.11'
+  sha256 '07d4444485df1916defd4719aa1c5561aa59fe6a66ea3476ab796f8196a147a5'
+  link 'Mendeley Desktop.app'
 end

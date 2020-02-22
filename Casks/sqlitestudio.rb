@@ -1,19 +1,7 @@
-cask 'sqlitestudio' do
-  version '3.2.1'
-  sha256 'b66ce10747ca734c7f0dacf19fc773936756db1ab5441ec29b9b5ba23308844c'
-
-  # github.com/pawelsalawa/sqlitestudio/releases/download/ was verified as official when first introduced to the cask
-  url "https://github.com/pawelsalawa/sqlitestudio/releases/download/#{version}/SQLiteStudio-#{version}.dmg"
-  appcast 'https://github.com/pawelsalawa/sqlitestudio/releases.atom'
-  name 'SQLiteStudio'
-  homepage 'https://sqlitestudio.pl/'
-
-  auto_updates true
-
-  app 'SQLiteStudio.app'
-
-  zap trash: [
-               '~/.config/sqlitestudio',
-               '~/Library/Saved Application State/com.yourcompany.SQLiteStudio.savedState',
-             ]
+class Sqlitestudio < Cask
+  url 'http://sqlitestudio.pl/files/free/stable/macosx/sqlitestudio-2.1.5.zip'
+  homepage 'http://sqlitestudio.pl'
+  version '2.1.5'
+  sha256 '7df2d3bc8a4aafac738b7b412f2bde82f2b1114dc30f173363ec28ae5514f882'
+  link 'SQLiteStudio.app'
 end

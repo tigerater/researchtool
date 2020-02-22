@@ -1,17 +1,8 @@
-cask 'textexpander' do
-  version '6.5.3'
-  sha256 'e828e50ac3f700b4c3af9f35e69996c70ce2fbfc28c54d10b10f7a21ff4ef023'
-
-  # cdn.textexpander.com/mac was verified as official when first introduced to the cask
-  url "https://cdn.textexpander.com/mac/TextExpander_#{version}.zip"
-  appcast "https://smilesoftware.com/appcast/TextExpander#{version.major}.xml"
-  name 'TextExpander'
-  homepage 'https://smilesoftware.com/TextExpander'
-
-  auto_updates true
-  depends_on macos: '>= :sierra'
-
-  app 'TextExpander.app'
-
-  zap trash: '~/Library/Application Support/TextExpander/'
+class Textexpander < Cask
+  url 'http://cdn.smilesoftware.com/TextExpander_4.3.1.zip'
+  appcast 'http://www.smilesoftware.com/appcast/update.php'
+  homepage 'http://www.smilesoftware.com/TextExpander/index.html'
+  version '4.3.1'
+  sha256 '1ab9bcdec7354cdf94da33ad12956799b8982eb3c544c8c89e57800dca8ff5cd'
+  link 'TextExpander.app'
 end

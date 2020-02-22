@@ -1,11 +1,10 @@
-cask 'cloudytabs' do
-  version '1.9.1'
-  sha256 'acbccf2172242b6cd5e702ad06293e616932889e75e1dbfdb3b6229a0dbf87e0'
-
-  url "https://github.com/josh-/CloudyTabs/releases/download/v#{version}/CloudyTabs.zip"
-  appcast 'https://github.com/josh-/CloudyTabs/releases.atom'
-  name 'CloudyTabs'
+class Cloudytabs < Cask
+  version '1.2'
+  sha256 '7409dcce88355799a65060bdd3c957c4a3146886f4fb489d41208d4d9ed7d905'
+  
+  url 'https://github.com/josh-/CloudyTabs/releases/download/v1.2/CloudyTabs.zip'
+  appcast 'http://joshparnham.com/projects/cloudytabs/appcast.xml'
   homepage 'https://github.com/josh-/CloudyTabs/'
 
-  app 'CloudyTabs.app'
+  link 'CloudyTabs.app'
 end

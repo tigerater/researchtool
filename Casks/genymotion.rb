@@ -1,15 +1,8 @@
-cask 'genymotion' do
-  version '3.0.4'
-  sha256 '03c1643b72a6f11d0848ef8bbdd0ec7c642917619f7440033c9b4303147a9abe'
-
-  url "https://dl.genymotion.com/releases/genymotion-#{version}/genymotion-#{version}.dmg"
-  appcast 'https://www.genymotion.com/product-release-note/desktop/'
-  name 'Genymotion'
-  homepage 'https://www.genymotion.com/'
-
-  depends_on cask: 'virtualbox'
-
-  app 'Genymotion.app'
-  app 'Genymotion Shell.app'
-  binary "#{appdir}/Genymotion Shell.app/Contents/MacOS/genyshell"
+class Genymotion < Cask
+  url 'http://files2.genymotion.com/genymotion/genymotion-2.2.2/genymotion-2.2.2.dmg'
+  homepage 'http://www.genymotion.com/'
+  version '2.2.2'
+  sha256 '216e05f20ce198324a5aabae737369b185e6284b449af372eba0abbf3525183d'
+  link 'Genymotion.app'
+  link 'Genymotion Shell.app'
 end

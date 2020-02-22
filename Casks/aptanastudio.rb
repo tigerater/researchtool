@@ -1,12 +1,9 @@
-cask 'aptanastudio' do
-  version '3.7.2.201807301111'
-  sha256 '02d0dccd808d1dd7a16ef1aab199e472726b8476cb65728f1f1ad06f6eca2363'
+class Aptanastudio < Cask
+  version '3.4.2'
+  sha256 '26d40abf9152f16d8190a1968f16c0158a4992d28333351db6fa455af68958f4'
 
-  # github.com/aptana/studio3 was verified as official when first introduced to the cask
-  url "https://github.com/aptana/studio3/releases/download/#{version}/Aptana_Studio_#{version.major}.dmg"
-  appcast "https://github.com/aptana/studio#{version.major}/releases.atom"
-  name 'Aptana Studio'
+  url 'http://download.aptana.com/studio3/standalone/3.4.2/mac/Aptana_Studio_3_Setup_3.4.2.dmg'
   homepage 'http://www.aptana.com/'
 
-  app 'AptanaStudio.app'
+  link 'Aptana Studio 3/AptanaStudio3.app'
 end

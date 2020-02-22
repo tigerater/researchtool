@@ -1,31 +1,10 @@
-cask 'amethyst' do
-  if MacOS.version <= :mavericks
-    version '0.9.10'
-    sha256 '82adf42ce6031ab59a3072e607788e73f594ad5f21c7118aabc6c5dafe3d0b47'
-    url "https://ianyh.com/amethyst/versions/Amethyst-#{version}.zip"
-  elsif MacOS.version <= :el_capitan
-    version '0.10.1'
-    sha256 '9fd1ac2cfb8159b2945a4482046ee6d365353df617f4edbabc4e8cadc448c1e7'
-    url "https://ianyh.com/amethyst/versions/Amethyst-#{version}.zip"
-  else
-    version '0.14.4'
-    sha256 '06c8c1a9f489eed43be765d800b8415f44c3fd19965b4998d1d1406fa1e0b1bb'
-    # github.com/ianyh/Amethyst was verified as official when first introduced to the cask
-    url "https://github.com/ianyh/Amethyst/releases/download/v#{version}/Amethyst.zip"
-  end
+class Amethyst < Cask
+  version '0.8.6'
+  sha256 '498e16ee2cb3686fc9bb94d77711283b1fcf14c2d13ff3a9d2c365c914996257'
+  
+  url 'http://ianyh.com/amethyst/versions/Amethyst-0.8.6.zip'
+  appcast 'http://ianyh.github.io/Amethyst/appcast.xml'
+  homepage 'http://ianyh.com/amethyst'
 
-  appcast 'https://github.com/ianyh/Amethyst/releases.atom'
-  name 'Amethyst'
-  homepage 'https://ianyh.com/amethyst/'
-
-  auto_updates true
-
-  app 'Amethyst.app'
-
-  zap trash: [
-               '~/Library/Caches/com.amethyst.Amethyst',
-               '~/Library/Preferences/com.amethyst.Amethyst.plist',
-               '~/Library/Cookies/com.amethyst.Amethyst.binarycookies',
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.amethyst.amethyst.sfl*',
-             ]
+  link 'Amethyst.app'
 end

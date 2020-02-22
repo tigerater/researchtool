@@ -1,34 +1,17 @@
-cask 'cocoaspell' do
-  version '2.5'
-  sha256 'd8dd01e6471df86f55d5f272a33fdb421f49a2fb923a9858a8772ec4367d333c'
+class Cocoaspell < Cask
+  version '2.1'
+  sha256 '06d6cd7f2b04c47f553c5a3a33ebe6bc5651457521cbe7e3ead84a6cb218053c'
 
-  url "http://people.ict.usc.edu/~leuski/cocoaspell/cocoAspell.#{version}.dmg",
-      user_agent: :fake
-  appcast 'http://people.ict.usc.edu/~leuski/cocoaspell/'
-  name 'cocoAspell'
-  homepage 'http://people.ict.usc.edu/~leuski/cocoaspell/'
+  url 'http://people.ict.usc.edu/~leuski/cocoaspell/cocoAspell.2.1.dmg'
+  homepage 'http://cocoaspell.leuski.net/'
 
-  depends_on macos: '>= :el_capitan'
-
-  pkg 'cocoAspell.pkg'
-
-  uninstall pkgutil: 'net.leuski.cocoaspell.*',
-            delete:  [
-                       '/Application Support/cocoAspell/aspell6-en-6.0-0',
-                       '/Library/Application Support/cocoAspell',
-                       '/Library/PreferencePanes/Spelling.prefPane',
-                     ]
-
-  zap trash: [
-               '~/.aspell.conf',
-               '~/.aspell.en.prepl',
-               '~/.aspell.en.pws',
-               '~/Library/Preferences/cocoAspell',
-             ]
-
-  caveats <<~EOS
-    Non-English dictionaries must be installed separately. For more information, see
-
-      http://people.ict.usc.edu/~leuski/cocoaspell/install_dict.php
-  EOS
+  install 'cocoAspell.pkg'
+  uninstall :pkgutil => 'net.leuski.cocoaspell.*', :files => [
+    '/Application Support/cocoAspell/aspell6-en-6.0-0',
+    '/Library/PreferencePanes/Spelling.prefPane'
+  ]
+  caveats <<-EOS.undent
+    Non-English dictionaries must be installed separately.  For more information,
+    see http://people.ict.usc.edu/~leuski/cocoaspell/install_dict.php .
+    EOS
 end

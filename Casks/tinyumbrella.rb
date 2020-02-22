@@ -1,16 +1,7 @@
-cask 'tinyumbrella' do
-  version '9.3.4'
-  sha256 '2d04d6503c6e130a43615d6f59be0092fb2d5300b4f414c5c36f0c60bffee3ff'
-
-  # tinydev.space was verified as official when first introduced to the cask
-  url "https://tinydev.space/downloads/#{version.dots_to_underscores}/tinyumbrella_macos_#{version.dots_to_underscores}_AppOnly_InstalledJRE.dmg"
-  appcast 'https://www.firmwareumbrella.com/'
-  name 'TinyUmbrella'
-  homepage 'https://www.firmwareumbrella.com/'
-
-  app 'TinyUmbrella.app'
-
-  caveats do
-    depends_on_java
-  end
+class Tinyumbrella < Cask
+  url 'http://cache.firmwareumbrella.com/downloads/TinyUmbrella-7.04.00.app.zip'
+  homepage 'http://blog.firmwareumbrella.com/'
+  version '7.04'
+  sha256 '2ce5ea70bbdf216aaff9fc30c1a33a58a6fc19a5ad5e4f0029aafae61c622db1'
+  link 'TinyUmbrella.app'
 end

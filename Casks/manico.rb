@@ -1,17 +1,8 @@
-cask 'manico' do
-  version '2.6.1'
-  sha256 '78b6a79357a5a505d564654ccdf43b51332ac0427d61ef5485b0004430ac6f78'
-
-  url "https://manico.im/static/Manico_#{version}.dmg"
-  appcast 'https://manico.im/static/manico-official-appcast.xml'
-  name 'Manico'
-  homepage 'https://manico.im/'
-
-  depends_on macos: '>= :sierra'
-
-  app 'Manico.app'
-
-  zap trash: [
-               '~/Library/Containers/im.manico.Manico',
-             ]
+class Manico < Cask
+  url 'http://manico.im/static/Manico_1.2.1.dmg'
+  appcast 'http://manico.im/static/manico-appcast.xml'
+  homepage 'http://manico.im/'
+  version '1.2.1'
+  sha256 'e671efbc13693f51bc55606b9e0f44370dad306dbd5a197abfda8c62961d0008'
+  link 'Manico.app'
 end

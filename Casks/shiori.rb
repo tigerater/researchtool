@@ -1,11 +1,8 @@
-cask 'shiori' do
-  version '1.1.0'
-  sha256 '0496885a3f738681184c28e61fe134621a831af3c8f457784e9da72e43eae94d'
-
-  url "https://aki-null.net/shiori/release/Shiori_#{version}.zip"
-  appcast 'https://aki-null.net/shiori/appcast.xml'
-  name 'Shiori'
-  homepage 'https://aki-null.net/shiori/'
-
-  app 'Shiori.app'
+class Shiori < Cask
+  url 'http://aki-null.net/shiori/release/Shiori_1.0.1.zip'
+  appcast 'http://aki-null.net/shiori/appcast.xml'
+  homepage 'http://aki-null.net/shiori/'
+  version '1.0.1'
+  sha256 'e6ca6cbd9502de280303cb46deade6a6b938da7bae3ecd99bf7b23c539747c26'
+  link 'Shiori.app'
 end

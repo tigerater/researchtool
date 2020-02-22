@@ -1,74 +1,73 @@
-# Homebrew Cask
+# NOTICE: Homebrew-cask has moved!
 
-_“To install, drag this icon…” no more!_
+The original repo at https://github.com/phinze/homebrew-cask has moved
+under the organizational umbrella at https://github.com/caskroom/homebrew-cask .
 
-Homebrew Cask extends [Homebrew](https://brew.sh) and brings its elegance, simplicity, and speed to the installation and management of GUI macOS applications such as Atom and Google Chrome.
+Web redirection happens automatically.
 
-We do this by providing a friendly CLI workflow for the administration of macOS applications distributed as binaries.
+The location of the Cask Tap on disk has also changed, which should be
+handled automatically upon upgrading.  If you have technical difficulties,
+please see [TAP_MIGRATION.md](doc/TAP_MIGRATION.md).
 
-[![Join us on https://discourse.brew.sh](https://img.shields.io/badge/Discourse-forum-blue.svg)](https://discourse.brew.sh)
+# "To install, drag this icon..." no more!
 
-## Let’s try it!
+[![Build Status](https://travis-ci.org/caskroom/homebrew-cask.png?branch=master)](https://travis-ci.org/caskroom/homebrew-cask)
+[![Code Climate](https://codeclimate.com/github/caskroom/homebrew-cask.png)](https://codeclimate.com/github/caskroom/homebrew-cask)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/caskroom/homebrew-cask/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
-To start using Homebrew Cask, you just need [Homebrew](https://brew.sh/) installed.
 
-<img src="https://i.imgur.com/bjr8UxZ.gif" width="547" alt="Installing and uninstalling Atom (animated gif)">
+Let's see if we can get the elegance, simplicity, and speed of Homebrew for the
+installation and management of GUI Mac applications such as Google Chrome and Adium.
 
-Slower, now:
+Homebrew-cask provides a friendly homebrew-style CLI workflow for the
+administration of Mac applications distributed as binaries.
 
+It's implemented as a `homebrew` "[external
+command](https://github.com/mxcl/homebrew/wiki/External-Commands)" called
+`cask`.
+
+## Let's try it!
+```sh
+$ brew tap caskroom/cask
+$ brew install brew-cask
+$ brew cask install google-chrome
+=> Downloading https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg
+=> Success! google-chrome installed to /opt/homebrew-cask/Caskroom/google-chrome/stable-channel
+=> Linking Google Chrome.app to /Users/phinze/Applications/Google Chrome.app
 ```
-$ brew cask install atom
-==> Satisfying dependencies
-==> Downloading https://github.com/atom/atom/releases/download/v1.35.1/atom-mac.zip
-==> Downloading from https://github-production-release-asset-2e65be.s3.amazonaws.co
-######################################################################## 100.0%
-==> Verifying SHA-256 checksum for Cask 'atom'.
-==> Installing Cask atom
-==> Moving App 'Atom.app' to '/Applications/Atom.app'.
-==> Linking Binary 'apm' to '/usr/local/bin/apm'.
-==> Linking Binary 'atom.sh' to '/usr/local/bin/atom'.
-🍺  atom was successfully installed!
+And there we have it. Google Chrome installed with a few quick commands: no clicking, no dragging, no dropping.
+```sh
+open ~/Applications/"Google Chrome.app"
 ```
-
-And there we have it. Atom installed with one quick command: no clicking, no dragging, no dropping.
-
 ## Learn More
 
-* Find basic documentation on using Homebrew Cask in [USAGE.md](USAGE.md)
-* Want to contribute a Cask? Awesome! See [CONTRIBUTING.md](CONTRIBUTING.md)
-* Want to hack on our code? Also awesome! See [hacking.md](doc/development/hacking.md)
-* More project-related details and discussion are available in the [documentation](doc)
-
-## Reporting bugs
-
-[**If you ignore this guide, your issue may be closed without review**](doc/faq/closing_issues_without_review.md).
-
-Before reporting a bug, run `brew update-reset && brew update` and try your command again. This is a fix-all that will reset the state of all your taps, ensuring the problem isn’t an outdated setup on your side.
-
-If your issue persists, [search for it](https://github.com/Homebrew/homebrew-cask/search?type=Issues) before opening a new one. If you find an open issue and have any new information, add it in a comment. If you find a closed issue, try the solutions there.
-
-If the issue is still not solved, see the guides for common problems:
-
-* [Examples of common errors and their solutions](doc/reporting_bugs/error_examples.md)
-* [`curl` error](doc/reporting_bugs/curl_error.md)
-* [`Permission denied` error](doc/reporting_bugs/permission_denied_error.md)
-* [`Checksum does not match` error](doc/reporting_bugs/checksum_does_not_match_error.md)
-* [`source is not there` error](doc/reporting_bugs/source_is_not_there_error.md)
-* [`wrong number of arguments` error](doc/reporting_bugs/wrong_number_of_arguments_error.md)
-* [The app can’t be opened because it is from an unidentified developer](doc/faq/the_app_cant_be_opened.md)
-* [My problem isn’t listed](https://github.com/Homebrew/homebrew-cask/issues/new?template=01_bug_report.md)
-
-## Requests
-
-* Cask requests will be automatically closed. If you want a cask added, [submit a pull request](https://github.com/Homebrew/homebrew-cask/blob/master/CONTRIBUTING.md#adding-a-cask).
-* For a feature request, [use this template](https://github.com/Homebrew/homebrew-cask/issues/new?template=02_feature_request.md).
+ * Find basic documentation on using homebrew-cask in [USAGE.md](USAGE.md)
+ * Want to contribute a Cask? Awesome! See [CONTRIBUTING.md](CONTRIBUTING.md)
+ * Want to hack on our code? Also awesome! See [HACKING.md](doc/HACKING.md)
+ * More project-related details and discussion are available in [FAQ.md](doc/FAQ.md) and [CASK_LANGUAGE_REFERENCE.md](doc/CASK_LANGUAGE_REFERENCE.md)
 
 ## Questions? Wanna chat?
 
-We’re really rather friendly! Here are the best places to talk about the project:
+We're really rather friendly! Here are the best places to talk about the project:
 
-* [Open an issue](https://github.com/Homebrew/homebrew-cask/issues/new/choose).
-* Join us on [discourse.brew.sh (forum)](https://discourse.brew.sh)
+ * Start an [issue on GitHub](https://github.com/caskroom/homebrew-cask/issues/new)
+ * Join us on IRC, we're at `#homebrew-cask` on Freenode
 
-## License
+## Reporting Bugs
+
+We still have bugs -- and we are busy fixing them!  If you have a problem, don't
+be shy about reporting it on our [GitHub issues page](https://github.com/caskroom/homebrew-cask/issues?state=open).
+
+When reporting bugs, remember that homebrew-cask is an independent project from
+Homebrew.  Do your best to direct bug reports to the appropriate project.  If
+your command-line started with `brew cask`, bring the bug to us first!
+
+Before reporting a bug, make sure you have the latest versions of Homebrew,
+homebrew-cask, and all Taps by running the following command:
+
+```bash
+$ brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
+```
+
+## License:
 Code is under the [BSD 2 Clause (NetBSD) license](LICENSE)

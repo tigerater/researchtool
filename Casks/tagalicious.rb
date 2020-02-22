@@ -1,11 +1,8 @@
-cask 'tagalicious' do
-  version '1.5.5'
-  sha256 'dc3f3bbdc986f9b5b3dc698a466155273eb85483ed7708a9b2a1db898d053ba0'
-
+class Tagalicious < Cask
   url 'http://files.thelittleappfactory.com/tagalicious/Tagalicious.zip'
-  appcast 'http://files.thelittleappfactory.com/tagalicious/appcast.xml'
-  name 'Tagalicious'
+  appcast 'https://files.thelittleappfactory.com/tagalicious/appcast.xml'
   homepage 'http://thelittleappfactory.com/tagalicious/'
-
-  app 'Tagalicious.app'
+  version 'latest'
+  sha256 :no_check
+  link 'Tagalicious.app'
 end

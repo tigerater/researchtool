@@ -1,16 +1,13 @@
-cask 'middleclick' do
-  version '2.4.7'
-  sha256 '0e04b3a8b76549befd468a16f225f905c339df2ce8b59aee7ecbab249e5b3dbe'
-
-  url "https://github.com/DaFuqtor/MiddleClick/releases/download/#{version}/MiddleClick.zip"
-  appcast 'https://github.com/DaFuqtor/MiddleClick/releases.atom'
-  name 'MiddleClick'
-  homepage 'https://github.com/DaFuqtor/MiddleClick'
-
-  app 'MiddleClick.app'
-
-  uninstall login_item: 'MiddleClick',
-            quit:       'com.rouge41.middleClick'
-
-  zap trash: '~/Library/Preferences/com.rouge41.middleClick.plist'
+class Middleclick < Cask
+  if MacOS.version == :snow_leopard or MacOS.version == :lion
+    url 'http://clement.beffa.org/labs/downloads/MiddleClick.zip'
+  elsif MacOS.version == :mountain_lion
+    url 'http://clement.beffa.org/labs/downloads/MiddleClick_ml.zip'
+  else
+    url 'http://clement.beffa.org/labs/downloads/MiddleClick-maverick.zip'
+  end
+  homepage 'http://clement.beffa.org/labs/projects/middleclick'
+  version 'latest'
+  sha256 :no_check
+  link 'MiddleClick.app'
 end

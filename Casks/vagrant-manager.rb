@@ -1,19 +1,8 @@
-cask 'vagrant-manager' do
-  version '2.7.1'
-  sha256 'ad10795f36a2c0977ec8e278082f1f66624cc3b16f837dc72c0f1c063fefb4de'
-
-  # github.com/lanayotech/vagrant-manager was verified as official when first introduced to the cask
-  url "https://github.com/lanayotech/vagrant-manager/releases/download/#{version}/vagrant-manager-#{version}.dmg"
-  appcast 'https://github.com/lanayotech/vagrant-manager/releases.atom'
-  name 'Vagrant Manager'
+class VagrantManager < Cask
+  url 'https://github.com/lanayotech/vagrant-manager/releases/download/1.5.2/vagrant-manager-1.5.2.dmg'
+  appcast 'http://api.lanayo.com/appcast/vagrant_manager.xml'
   homepage 'http://vagrantmanager.com/'
-
-  app 'Vagrant Manager.app'
-
-  uninstall quit: 'lanayo.Vagrant-Manager'
-
-  zap trash: [
-               '~/Library/Caches/lanayo.Vagrant-Manager',
-               '~/Library/Preferences/lanayo.Vagrant-Manager.plist',
-             ]
+  version '1.5.2'
+  sha256 '8b694afb8774e83088d317e18e679199ddb17bace499d519ba81d6ef4c7d7be3'
+  link 'Vagrant Manager.app'
 end

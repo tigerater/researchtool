@@ -1,22 +1,10 @@
-cask 'a-better-finder-rename' do
-  version '11.11'
-  sha256 :no_check # required as upstream package is updated in-place
+class ABetterFinderRename < Cask
+  version 'latest'
+  sha256 :no_check
+  
+  url 'http://www.publicspace.net/download/ABFRX.dmg'
+  appcast 'http://www.publicspace.net/app/signed_abfr9.xml'
+  homepage 'http://www.publicspace.net/ABetterFinderRename/'
 
-  url "https://www.publicspace.net/download/ABFRX#{version.major}.dmg"
-  appcast "https://www.publicspace.net/app/signed_abfr#{version.major}.xml"
-  name 'A Better Finder Rename'
-  homepage 'https://www.publicspace.net/ABetterFinderRename/'
-
-  auto_updates true
-
-  app "A Better Finder Rename #{version.major}.app"
-
-  zap trash: [
-               "~/Library/Application Support/A Better Finder Rename #{version.major}",
-               "~/Library/Caches/com.apple.helpd/Generated/net.publicspace.abfr#{version.major}.help*",
-               "~/Library/Caches/net.publicspace.abfr#{version.major}",
-               "~/Library/Cookies/net.publicspace.abfr#{version.major}.binarycookies",
-               "~/Library/Preferences/net.publicspace.abfr#{version.major}.plist",
-               "~/Library/Saved Application State/net.publicspace.abfr#{version.major}.savedState",
-             ]
+  link 'A Better Finder Rename 9.app'
 end

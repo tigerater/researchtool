@@ -1,13 +1,8 @@
-cask 'pester' do
-  version '1.1b24'
-  sha256 '1a05282c1de4cde91048bac86a17e39bdf18990be98d43758ce248f67a124e46'
-
-  url "https://sabi.net/nriley/software/Pester-#{version}.dmg"
-  appcast 'https://sabi.net/nriley/software/Pester/updates.xml'
-  name 'Pester'
-  homepage 'https://sabi.net/nriley/software/index.html#pester'
-
-  depends_on macos: '>= :sierra'
-
-  app 'Pester.app'
+class Pester < Cask
+  url 'http://sabi.net/nriley/software/Pester-1.1b18.dmg'
+  appcast 'http://sabi.net/nriley/software/Pester/updates.xml'
+  homepage 'http://sabi.net/nriley/software/index.html#pester'
+  version '1.1b18'
+  sha256 '50cddd6fa813e5e2935e0e66ea13ee0605ada711c0141498a4d19c93eb554c86'
+  link 'Pester.app'
 end

@@ -1,10 +1,61 @@
-cask 'java' do
-  version '13.0.2,8:d4173c853231432d94f001e99d882ca7'
-  sha256 '08fd2db3a3ab6fb82bb9091a035f9ffe8ae56c31725f4e17d573e48c39ca10dd'
+class Java < Cask
+  url 'http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-macosx-x64.dmg',
+      :cookies => {
+                    'oraclelicense' => 'accept-securebackup-cookie'
+                  }
+  homepage 'http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html'
+  version '1.8.0_05'
+  sha256 '3dd1047340c2487f7c32c4ae633ba9a9a9e1dee49f6084d7df3846091faece48'
+  install 'JDK 8 Update 05.pkg'
+  after_install do
+    system '/usr/bin/sudo', '-E', '--',
+      '/usr/libexec/PlistBuddy', '-c', 'Add :JavaVM:JVMCapabilities: string BundledApp', "/Library/Java/JavaVirtualMachines/jdk#{version}.jdk/Contents/Info.plist"
+    system '/usr/bin/sudo', '-E', '--',
+      '/usr/libexec/PlistBuddy', '-c', 'Add :JavaVM:JVMCapabilities: string JNI',        "/Library/Java/JavaVirtualMachines/jdk#{version}.jdk/Contents/Info.plist"
+    system '/usr/bin/sudo', '-E', '--',
+      '/usr/libexec/PlistBuddy', '-c', 'Add :JavaVM:JVMCapabilities: string WebStart',   "/Library/Java/JavaVirtualMachines/jdk#{version}.jdk/Contents/Info.plist"
+    system '/usr/bin/sudo', '-E', '--',
+      '/usr/libexec/PlistBuddy', '-c', 'Add :JavaVM:JVMCapabilities: string Applets',    "/Library/Java/JavaVirtualMachines/jdk#{version}.jdk/Contents/Info.plist"
+    system '/usr/bin/sudo', '-E', '--',
+      '/bin/rm', '-rf', '--', '/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK'
+    system '/usr/bin/sudo', '-E', '--',
+      '/bin/ln', '-nsf', '--', "/Library/Java/JavaVirtualMachines/jdk#{version}.jdk/Contents", '/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK'
+    system '/usr/bin/sudo', '-E', '--',
+      '/bin/ln', '-nsf', '--', "/Library/Java/JavaVirtualMachines/jdk#{version}.jdk/Contents/Home", '/Library/Java/Home'
+  end
+  uninstall :pkgutil => [
+                         'com.oracle.jdk8u5',         # manually update this for each version
+                         'com.oracle.jre',
+                        ],
+            :launchctl => [
+                           'com.oracle.java.Helper-Tool',
+                           'com.oracle.java.Java-Updater',
+                          ],
+            :quit => [
+                      'com.oracle.java.Java-Updater',
+                      'net.java.openjdk.cmd',         # Java Control Panel
+                     ],
+            :files => [
+                       '/Library/Internet Plug-Ins/JavaAppletPlugin.plugin',
+                       "/Library/Java/JavaVirtualMachines/jdk#{version}.jdk/Contents",
+                       '/Library/PreferencePanes/JavaControlPanel.prefPane',
+                       '/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK',
+                       '/Library/Java/Home',
+                       '/usr/lib/java/libjdns_sd.jnilib',
+                      ]
+  caveats <<-EOS.undent
+    This Cask makes minor modifications to the JRE to prevent issues with
+    packaged applications, as discussed here:
 
-  url "https://download.java.net/java/GA/jdk#{version.before_comma}/#{version.after_colon}/#{version.after_comma.before_colon}/GPL/openjdk-#{version.before_comma}_osx-x64_bin.tar.gz"
-  name 'OpenJDK Java Development Kit'
-  homepage 'https://openjdk.java.net/'
+        https://bugs.eclipse.org/bugs/show_bug.cgi?id=411361
 
-  artifact "jdk-#{version.before_comma}.jdk", target: "/Library/Java/JavaVirtualMachines/openjdk-#{version.before_comma}.jdk"
+    If your Java application still asks for JRE installation, you might need
+    to reboot or logout/login.
+
+    Installing this Cask means you have AGREED to the Oracle Binary Code
+    License Agreement for Java SE at
+
+        http://www.oracle.com/technetwork/java/javase/terms/license/index.html
+
+    EOS
 end

@@ -1,10 +1,7 @@
-cask 'window-switch' do
-  version :latest
-  sha256 :no_check
-
+class WindowSwitch < Cask
   url 'https://xpra.org/dists/osx/x86/Window-Switch.dmg'
-  name 'Window Switch'
-  homepage 'https://xpra.org/'
-
-  app 'Window-Switch.app'
+  homepage 'http://xpra.org/'
+  version 'latest'
+  sha256 :no_check
+  link 'Window-Switch.app'
 end
